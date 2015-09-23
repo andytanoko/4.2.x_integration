@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head id="xhtml_head">
+    <title id="title">lbGridTalk</title>
+    <base href="file:///C:\views\i00054_GT_2.0_I8_2\GTAS\GridTalk\web/gt.css" id="base_tag"/>
+    <link id="xhtml_stylesheet" rel="stylesheet" href="gt.css" type="text/css"/>
+    <script type="text/javascript" src="scripts/stdFormMethods.js"><!-- --></script>
+  </head>
+
+  <body topmargin="0" leftmargin="0" rightmargin="0" background="images/backgrounds/cube.gif" onload="setFocusField('securityPassword');">
+    <table border="0" cellspacing="0" cellpadding="0"
+            style="margin: 0px; background-image: URL(images/backgrounds/gridtalk.gif); background-position: right top; background-repeat: no-repeat;"
+            width="100%">
+      <tr>
+        <td>
+          <img src="images/backgrounds/vertSpacer72.gif"/>
+        </td>
+      </tr>
+      <tr id="insert_error_parent">
+        <td align="left" valign="top" colspan="2">
+          <br/>
+          <br/>
+          <div id="insert_error" class="errortext">
+            lbError
+          </div>
+        </td>
+      </tr>
+      <tr id="processing_request_parent" style="display: none;">
+        <td align="center" valign="top" colspan="2">
+          <h3 id="processing_request_message">
+            lbProcessing...
+          </h3>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <br/>
+          <br/>
+          <form id="getCertPw_form" name="entityForm" method="post">
+            <input type="hidden" name="method" value="unused"/>
+            <input type="hidden" name="gmtOffset" value="0"/>
+            <table border="0" width="300" style="border: solid windowtext .5pt; border-color:7B94B7; background-color: #b7c5d8">
+              <tr>
+                <td align="center" colspan="3" style="background-color: #7b94b7">
+                  <br/>
+                    <span id="getCertPw_heading" class="loginheading">
+                      lbPlease enter security password
+                    </span>
+                  <br/>&nbsp;
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <table border="0">
+                    <tr>
+                      <td colspan="3">
+                        <br/>
+                        <center>
+                          <span id="getCertPw_message">lbExplanatory</span>
+                        </center>
+                        <br/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span id="securityPassword_label" class="fieldlabel">lbPassword</span>
+                      </td>
+                      <td>
+                        <input id="securityPassword" name="securityPassword" type="password" length="25" class="login"/>
+                      </td>
+                      <td>
+                        <span id="securityPassword_error" class="errortext">&nbsp;</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" align="right">
+                        <br/>
+                        <input id="getCertPw" type="submit" onclick="submitWithMethod('getCertPw');" name="getCertPw" value="lbStart" class="loginbutton"/>
+                      </td>
+                      <td>
+                        <span id="getCertPw_error" class="errortext">&nbsp;</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="3">
+                        <br/>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

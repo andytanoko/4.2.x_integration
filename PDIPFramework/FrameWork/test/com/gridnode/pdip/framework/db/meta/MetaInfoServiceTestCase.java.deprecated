@@ -1,0 +1,86 @@
+package com.gridnode.pdip.framework.db.meta;
+
+import com.gridnode.pdip.framework.util.ServiceLocator;
+import com.gridnode.pdip.framework.j2ee.ServiceLookup;
+import com.gridnode.pdip.framework.log.*;
+import com.gridnode.pdip.framework.db.meta.*;
+import junit.framework.*;
+/**
+ * <p>Title: PDIP</p>
+ * <p>Description: </p>
+ * <p>Copyright: Copyright (c) 2001</p>
+ * <p>Company: GridNode</p>
+ * @author Mahesh
+ * @version 1.0
+ */
+
+public class MetaInfoServiceTestCase  extends TestCase
+{
+  IEntityMetaServiceHome home;
+  IEntityMetaServiceObj remote;
+  IMetaInfoFactory metaFactory;
+
+  public MetaInfoServiceTestCase(String name)
+  {
+    super(name);
+  }
+
+  public static Test suite()
+  {
+    return new TestSuite(MetaInfoServiceTestCase.class);
+  }
+
+  protected void setUp() throws Exception
+  {
+    //MetaInfoTestCase metaInfoTestCase=new MetaInfoTestCase("test");
+    //metaInfoTestCase.setUp();
+    //metaInfoTestCase.testCreate();
+    home=(IEntityMetaServiceHome)ServiceLookup.getInstance(ServiceLookup.CLIENT_CONTEXT).getHome(IEntityMetaServiceHome.class);
+    //home=(IEntityMetaServiceHome)ServiceLocator.instance(ServiceLocator.CLIENT_CONTEXT).getHome(
+    //      IEntityMetaServiceHome.class.getName(),
+    //      IEntityMetaServiceHome.class);
+    remote=home.create();
+    getMetaInfoFactory();
+  }
+
+  public void getMetaInfoFactory() throws Exception
+  {
+    assertNotNull("remote [IEntityMetaService] is null in testCreate",remote);
+    metaFactory=remote.getMetaInfoFactory();
+    assertNotNull(" IMetaInfoFactory retutned by remote.getMetaInfoFactory() is null in getMetaInfoFactory",metaFactory);
+  }
+
+  /*public void testGetMetaInfoFor() throws Exception
+  {
+    EntityMetaInfo entityMetaInfo=metaFactory.getMetaInfoFor("com.gridnode.pdip.framework.db.meta.FileType");
+    assertNotNull(" EntityMetaInfo retutned by metaFactory.getMetaInfoFor is null in testGetMetaInfoFor",entityMetaInfo);
+  }
+
+  public void testGetEntityMetaInfo() throws Exception
+  {
+    EntityMetaInfo entityMetaInfo=metaFactory.getEntityMetaInfo("com.gridnode.pdip.framework.db.meta.FileType");
+    assertNotNull(" EntityMetaInfo retutned by metaFactory.getEntityMetaInfo is null in testGetEntityMetaInfo",entityMetaInfo);
+  }*/
+
+  public void testGetAllMetaInfo() throws Exception
+  {
+    EntityMetaInfo entityMetaInfo[]=metaFactory.getAllMetaInfo();
+    assertNotNull(" EntityMetaInfo retutned by metaFactory.getAllMetaInfo is null in testGetAllMetaInfo",entityMetaInfo);
+
+    Log.log("TEST", "********** Retrieved EntityMetaInfo ***********");
+    for (int i=0; i<entityMetaInfo.length; i++)
+    {
+      Log.log("TEST", "\n" +entityMetaInfo[i]);
+      FieldMetaInfo[] fmi = entityMetaInfo[i].getFieldMetaInfo();
+      assertNotNull("FieldMetaInfo returned by entityMetaInfo.getFieldMetaInfo() is null", fmi);
+      for (int j=0; j<fmi.length; j++)
+        Log.log("TEST", "\n"+fmi[j]);
+    }
+  }
+
+  public static void main(String args[])
+  {
+    junit.textui.TestRunner.run (suite());
+  }
+
+}

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for HousekeepingInfo  -->
+	<class name="com.gridnode.gtas.server.rnif.model.RNProfile">
+		<map-to xml="RNProfile"/>
+	<field name="UId" type="long">
+	   <xml name="UId" node="element"/>
+	</field> 
+    <field name="DocumentUid" type="long">
+      <xml name="DocumentUid" node="element"/>
+    </field>
+    <field name="ProcessInstanceId" type="string">
+      <xml name="ProcessInstanceId" node="element"/>
+    </field>
+    <field name="ProcessOriginatorId" type="string">
+      <xml name="ProcessOriginatorId" node="element"/>
+    </field>
+    <field name="ProcessResponderId" type="string">
+      <xml name="ProcessResponderId" node="element"/>
+    </field>
+    <field name="ProcessDefName" type="string">
+      <xml name="ProcessDefName" node="element"/>
+    </field>
+    <field name="ReceiverDomain" type="string">
+      <xml name="ReceiverDomain" node="element"/>
+    </field>
+    <field name="ReceiverGlobalBusIdentifier" type="string">
+      <xml name="ReceiverGlobalBusIdentifier" node="element"/>
+    </field>
+    <field name="ReceiverLocationId" type="string">
+      <xml name="ReceiverLocationId" node="element"/>
+    </field>
+    <field name="RNIFVersion" type="string">
+      <xml name="RNIFVersion" node="element"/>
+    </field>
+    <field name="SenderDomain" type="string">
+      <xml name="SenderDomain" node="element"/>
+    </field>
+    <field name="SenderGlobalBusIdentifier" type="string">
+      <xml name="SenderGlobalBusIdentifier" node="element"/>
+    </field>
+    <field name="SenderLocationId" type="string">
+      <xml name="SenderLocationId" node="element"/>
+    </field>
+    <field name="DeliveryMessageTrackingId" type="string">
+      <xml name="DeliveryMessageTrackingId" node="element"/>
+    </field>
+    <field name="BusActivityIdentifier" type="string">
+      <xml name="BusActivityIdentifier" node="element"/>
+    </field>
+    <field name="FromGlobalPartnerRoleClassCode" type="string">
+      <xml name="FromGlobalPartnerRoleClassCode" node="element"/>
+    </field>
+    <field name="FromGlobalBusServiceCode" type="string">
+      <xml name="FromGlobalBusServiceCode" node="element"/>
+    </field>
+    <field name="InReplyToGlobalBusActionCode" type="string">
+      <xml name="InReplyToGlobalBusActionCode" node="element"/>
+    </field>
+    <field name="InReplyToMessageStandard" type="string">
+      <xml name="InReplyToMessageStandard" node="element"/>
+    </field>
+    <field name="InReplyToStandardVersion" type="string">
+      <xml name="InReplyToStandardVersion" node="element"/>
+    </field>
+    <field name="InReplyToVersionIdentifier" type="string">
+      <xml name="InReplyToVersionIdentifier" node="element"/>
+    </field>
+    <field name="InResponseToActionID" type="string">
+      <xml name="InResponseToActionID" node="element"/>
+    </field>
+    <field name="ServiceMessageTrackingId" type="string">
+      <xml name="ServiceMessageTrackingId" node="element"/>
+    </field>
+    <field name="ActionIdentityGlobalBusActionCode" type="string">
+      <xml name="ActionIdentityGlobalBusActionCode" node="element"/>
+    </field>
+    <field name="ActionIdentityToMessageStandard" type="string">
+      <xml name="ActionIdentityToMessageStandard" node="element"/>
+    </field>
+    <field name="ActionIdentityStandardVersion" type="string">
+      <xml name="ActionIdentityStandardVersion" node="element"/>
+    </field>
+    <field name="ActionIdentityVersionIdentifier" type="string">
+      <xml name="ActionIdentityVersionIdentifier" node="element"/>
+    </field>
+    <field name="SignalIdentityGlobalBusSignalCode" type="string">
+      <xml name="SignalIdentityGlobalBusSignalCode" node="element"/>
+    </field>
+    <field name="SignalIdentityVersionIdentifier" type="string">
+      <xml name="SignalIdentityVersionIdentifier" node="element"/>
+    </field>
+    <field name="ToGlobalPartnerRoleClassCode" type="string">
+      <xml name="ToGlobalPartnerRoleClassCode" node="element"/>
+    </field>
+    <field name="ToGlobalBusServiceCode" type="string">
+      <xml name="ToGlobalBusServiceCode" node="element"/>
+    </field>
+    <field name="GlobalUsageCode" type="string">
+      <xml name="GlobalUsageCode" node="element"/>
+    </field>
+    <field name="PartnerGlobalBusIdentifier" type="string">
+      <xml name="PartnerGlobalBusIdentifier" node="element"/>
+    </field>
+    <field name="PIPGlobalProcessCode" type="string">
+      <xml name="PIPGlobalProcessCode" node="element"/>
+    </field>
+    <field name="PIPInstanceIdentifier" type="string">
+      <xml name="PIPInstanceIdentifier" node="element"/>
+    </field>
+    <field name="PIPVersionIdentifier" type="string">
+      <xml name="PIPVersionIdentifier" node="element"/>
+    </field>
+    <field name="ProcessTransactionId" type="string">
+      <xml name="ProcessTransactionId" node="element"/>
+    </field>
+    <field name="ProcessActionId" type="string">
+      <xml name="ProcessActionId" node="element"/>
+    </field>
+    <field name="FromGlobalPartnerClassCode" type="string">
+      <xml name="FromGlobalPartnerClassCode" node="element"/>
+    </field>
+    <field name="ToGlobalPartnerClassCode" type="string">
+      <xml name="ToGlobalPartnerClassCode" node="element"/>
+    </field>
+    <field name="UserTrackingID" type="string">
+      <xml name="UserTrackingID" node="element"/>
+    </field>
+    <field name="NumberOfAttas" type="integer">
+      <xml name="NumberOfAttas" node="element"/>
+    </field>
+    <field name="IsSignalDoc" type="boolean">
+      <xml name="IsSignalDoc" node="element"/>
+    </field>
+    <field name="IsRequestMsg" type="boolean">
+      <xml name="IsRequestMsg" node="element"/>
+    </field>
+    <field name="UniqueValue" type="string">
+      <xml name="UniqueValue" node="element"/>
+    </field>
+    <field name="GnMsgId" type="string">
+      <xml name="GnMsgId" node="element"/>
+    </field>
+    <field name="AttemptCount" type="integer">
+      <xml name="AttemptCount" node="element"/>
+    </field>
+    <field name="MsgDigest" type="string">
+      <xml name="MsgDigest" node="element"/>
+    </field>
+	</class>
+</mapping>

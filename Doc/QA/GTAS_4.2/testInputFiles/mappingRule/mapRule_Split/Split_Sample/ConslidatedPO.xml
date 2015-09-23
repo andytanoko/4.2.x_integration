@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by GridNode (GridNode Pte Ltd) -->
+<ConsolidatedPO>
+	<PO>
+		<PO_DocID>A</PO_DocID>
+		<PO_Line>
+			<LineID>000010</LineID>
+			<ProductID>A</ProductID>
+			<ProductDesc>Description A</ProductDesc>
+			<Qty>7</Qty>
+			<UnitPrice>11.00</UnitPrice>
+			<Currency>SGD</Currency>
+		</PO_Line>
+	</PO>
+	<PO>
+		<PO_DocID>B</PO_DocID>
+		<PO_Line>
+			<LineID>000010</LineID>S
+			<ProductID>A</ProductID>
+			<ProductDesc>Description A</ProductDesc>
+			<Qty>7</Qty>
+			<UnitPrice>11.00</UnitPrice>
+			<Currency>SGD</Currency>
+		</PO_Line>
+	</PO>
+	<PO>
+		<PO_DocID>C</PO_DocID>
+		<PO_Line>
+			<LineID>000010</LineID>
+			<ProductID>A</ProductID>
+			<ProductDesc>Description A</ProductDesc>
+			<Qty>7</Qty>
+			<UnitPrice>11.00</UnitPrice>
+			<Currency>SGD</Currency>
+		</PO_Line>
+	</PO>
+	<PO>
+		<PO_DocID>S</PO_DocID>
+		<PO_Line>
+			<LineID>000010</LineID>
+			<ProductID>A</ProductID>
+			<ProductDesc>Description A</ProductDesc>
+			<Qty>7</Qty>
+			<UnitPrice>11.00</UnitPrice>
+			<Currency>SGD</Currency>
+		</PO_Line>
+	</PO>
+</ConsolidatedPO>

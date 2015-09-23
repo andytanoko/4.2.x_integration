@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<jboss-web>  
+  <ejb-ref>
+    <ejb-ref-name>ejb/GridTalkClientController</ejb-ref-name>
+    <jndi-name>com.gridnode.gtas.server.rdm.ejb.IGridTalkClientControllerHome</jndi-name>
+  </ejb-ref>    
+</jboss-web>
+    

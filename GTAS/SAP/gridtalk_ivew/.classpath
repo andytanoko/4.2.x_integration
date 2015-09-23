@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+    <classpathentry kind="src" path="src.api"/>
+    <classpathentry kind="var" path="JRE_LIB" sourcepath="JRE_SRC"/>
+    <classpathentry kind="src" path="src.core"/>
+    <classpathentry kind="var" path="ECLIPSE_HOME/plugins/com.sap.ep.applicationDevelopment/prtapi.jar"/>
+    <classpathentry kind="var" path="ECLIPSE_HOME/plugins/com.sap.ep.applicationDevelopment/prttest.jar"/>
+    <classpathentry kind="var" path="ECLIPSE_HOME/plugins/com.sap.ep.applicationDevelopment/com.sap.portal.runtime.application.soap_api.jar"/>
+    <classpathentry kind="var" path="ECLIPSE_HOME/plugins/com.tssap.ext.libs.j2ee_1.3/lib/activation.jar"/>
+    <classpathentry kind="var" path="ECLIPSE_HOME/plugins/com.sap.security/lib/com.sap.security.api.jar"/>
+    <classpathentry kind="var" path="ECLIPSE_HOME/plugins/com.sap.ext.libs.webservices/lib/jaxm-api.jar"/>
+    <classpathentry kind="var" path="ECLIPSE_HOME/plugins/com.tssap.ext.libs.j2ee_1.3/lib/mail.jar"/>
+    <classpathentry kind="var" path="ECLIPSE_HOME/plugins/com.sap.ext.libs.webservices/lib/saaj-api.jar"/>
+    <classpathentry kind="var" path="ECLIPSE_HOME/plugins/com.tssap.sap.libs.xmltoolkit/lib/sapxmltoolkit.jar"/>
+    <classpathentry kind="var" path="ECLIPSE_HOME/plugins/com.sap.engine.webservices/lib/webservices_lib.jar"/>
+    <classpathentry kind="var" path="ECLIPSE_HOME/plugins/com.sap.tc.ap/comp/SAP_JTECHS/DCs/sap.com/com.sapportals.htmlb/_comp/gen/default/public/default/lib/java/htmlb.jar"/>
+    <classpathentry kind="var" path="ECLIPSE_HOME/plugins/com.sap.ep.applicationDevelopment/com.sap.portal.htmlb_api.jar"/>
+    <classpathentry kind="var" path="ECLIPSE_HOME/plugins/com.tssap.ext.libs.j2ee_1.3/lib/servlet.jar"/>
+    <classpathentry kind="lib" path="C:/usr/sap/J2E/JC00/j2ee/cluster/dispatcher/bin/system/logging.jar"/>
+    <classpathentry kind="lib" path="C:/usr/sap/J2E/JC00/j2ee/cluster/server0/apps/sap.com/irj/servlet_jsp/irj/root/WEB-INF/portal/portalapps/com.sap.portal.usermapping/lib/com.sap.portal.usermapping_api.jar"/>
+    <classpathentry kind="output" path="classes.api"/>
+</classpath>

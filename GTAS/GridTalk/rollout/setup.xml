@@ -1,0 +1,347 @@
+<!--15 Jan 2009    Tam Wei Xiang     Populate to Postgres DB. Mysql no longer support -->
+
+<project name="setup" default="setup.env" basedir=".">
+  <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+
+  <!-- =================================================================== -->
+  <!-- Set global properties for this build                                -->
+  <!-- =================================================================== -->
+  <property environment="env"></property>
+
+  <!-- =================================================================== -->
+  <!-- Setting up and deploying the application runtime environment        -->
+  <!-- =================================================================== -->
+  <target name="setup.env">
+    <echo message="Executing target:setup.env"/>
+    <!-- Added 040812NSL Set the os family name into platform property -->
+    <osfamily property="platform"/>
+    <echo message="platform is ${platform}"/>
+    <if>
+      <isset property="setup.properties"/>
+      <!--equals arg1="${platform}" arg2="unix" /-->
+      <then>
+        <property file="${setup.properties}"/>
+      </then>
+    </if>
+     
+    <antcall target="setup.app.db"/>
+    <antcall target="setup.app.conf"/>       
+    <antcall target="setup.app.data"/>
+	  <antcall target="setup.app.bin"/>
+    <antcall target="setup.app.docs"/>
+	  <antcall target="setup.app.backend"/>
+
+    <available file="./appserver/${appserver.name}-${appserver.version}" 
+	           type="dir" property="appserver.present"/>
+    <antcall target="setup.appserver.conf"/>
+    <!--available file="./webserver/${webserver.name}-${webserver.version}" 
+	           type="dir" property="webserver.present"/>
+    <antcall target="setup.webserver.conf"/-->	
+	  <antcall target="deploy.app.dist"/>	
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Setting up the database                                             -->
+  <!-- =================================================================== -->
+  <target name="setup.app.db" if="setup.db">
+    <echo message="Executing target:setup.app.db"/>
+    <antcall target="cleanup.db"/>
+    <parallel>
+      <antcall target="start.db"/>
+      <sequential>
+        <sleep seconds="5"/>
+        <antcall target="check.db.status"/>
+        <antcall target="exec.setup.db"/>
+        <antcall target="stop.db"/>
+      </sequential>
+    </parallel>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Cleanup the database                                                  -->
+  <!-- =================================================================== -->
+  <target name="cleanup.db">
+    <!--delete dir="${db.home}/data/appdb"/>
+    <delete dir="${db.home}/data/userdb"/-->
+	<exec dir="." executable="${db.clean.cmd}">
+	   <arg value="${db.home}"/>
+	</exec>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Start the database                                                  -->
+  <!-- =================================================================== -->
+  <target name="start.db">
+    <exec dir="." executable="${db.start.cmd}"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Stop the database                                                   -->
+  <!-- =================================================================== -->
+  <target name="stop.db">
+    <exec dir="." executable="${db.stop.cmd}"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Check the database alive status                                     -->
+  <!-- =================================================================== -->
+  <target name="check.db.status">
+    <exec dir="." executable="${db.check.cmd}">
+	</exec>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Execute the database scripts                                        -->
+  <!-- =================================================================== -->
+  <target name="exec.setup.db"
+          depends="exec.dbscripts.create,
+                   exec.dbscripts.setup,
+                   exec.dbscripts.update,
+                   exec.dbscripts.populate"/>
+
+  <target name="exec.dbscripts.create">
+    <echo message="creating db"/>
+    <antcall target="exec.dbscripts">
+      <param name="dbscript.dir" value="./application/db/postgres"/>
+      <param name="includes" value="create-db.sql"/>
+	  <param name="default.db" value="true"/> <!-- to create a new database in the DB system-->
+    </antcall>
+    <echo message="executing other dbscripts under db/postgres"/>
+    <antcall target="exec.dbscripts">
+      <param name="dbscript.dir" value="./application/db/postgres"/>
+      <param name="includes" value="*.sql"/>
+      <param name="excludes" value="create-db.sql"/>
+	  <param name="default.db" value="false"/>
+    </antcall>
+  </target>
+
+  <target name="exec.dbscripts.setup">
+    <echo message="executing dbscripts under setup - base"/>
+    <antcall target="exec.dbscripts">
+      <param name="dbscript.dir" value="./application/db/postgres"/>
+      <param name="includes" value="base/**/setup/**/*.sql"/>
+	  <param name="default.db" value="false"/>
+    </antcall>
+    <echo message="executing dbscripts under setup - app"/>
+    <antcall target="exec.dbscripts">
+      <param name="dbscript.dir" value="./application/db/postgres"/>
+      <param name="includes" value="app/**/setup/**/*.sql"/>
+	  <param name="default.db" value="false"/>
+    </antcall>
+    <echo message="executing dbscripts under setup - gtas"/>
+    <antcall target="exec.dbscripts">
+      <param name="dbscript.dir" value="./application/db/postgres"/>
+      <param name="includes" value="gtas/**/setup/**/*.sql"/>
+	  <param name="default.db" value="false"/>
+    </antcall>
+  </target>
+
+  <!-- Added by NSL 24/11/03 -->
+  <target name="exec.dbscripts.update">
+    <echo message="executing dbscripts under update"/>
+    <antcall target="exec.dbscripts">
+      <param name="dbscript.dir" value="./application/db/postgres"/>
+      <param name="includes" value="**/update/**/*.sql"/>
+	  <param name="default.db" value="false"/>
+    </antcall>
+  </target>
+  <!-- End Added by NSL 24/11/03 -->
+
+  <target name="exec.dbscripts.populate">
+    <echo message="executing dbscripts under populate"/>
+    <antcall target="exec.dbscripts">
+      <param name="dbscript.dir" value="./application/db/postgres"/>
+      <param name="includes" value="**/populate/**/*.sql"/>
+	  <param name="default.db" value="false"/>
+    </antcall>
+  </target>
+
+  <target name="exec.dbscripts">
+    <apply executable="${db.script.cmd}">
+      <arg value="${db.home}/${db.exec.cmd}"/>
+	  <arg value="${default.db}" />	
+      <fileset dir="${dbscript.dir}"
+               includes="${includes}"
+               excludes="${excludes}"/>
+    </apply>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Setting the application configuration properties files              -->
+  <!-- =================================================================== -->
+  <target name="setup.app.conf">
+    <echo message="Executing target:setup.app.conf"/>
+    <!-- copy configuration files to application server conf. directory -->
+    <delete dir="${application.conf.dir}"/>
+    <mkdir dir="${application.conf.dir}"/>
+    <copy todir="${application.conf.dir}" overwrite="yes" includeEmptyDirs="yes">
+      <fileset dir="./application/conf/server" includes="**"/>
+    </copy>
+
+    <!-- Added 040812NSL resolve path differences for unix in object mapping files -->
+    <!--if>
+      <equals arg1="${platform}" arg2="unix" />
+      <then>
+        <replace
+            dir="${application.conf.dir}"
+            token="include href=&quot;conf"
+            value="include href=&quot;../../../../conf"
+            includes="**/*.map"/>
+      </then>
+    </if--> <!-- 20060525NSL No required anymore -->
+    <!-- End Added 040812NSL -->
+
+    <!-- copy configuration files to web server conf. directory -->
+	  <!--antcall target="setup.webserver.app.conf.dir"/-->
+  </target>
+
+  <target name="setup.webserver.app.conf.dir" if="webserver.app.conf.dir">
+	<delete dir="${webserver.app.conf.dir}"/>
+    <mkdir dir="${webserver.app.conf.dir}"/>
+    <copy todir="${webserver.app.conf.dir}" overwrite="yes">
+      <fileset dir="./application/conf/client" includes="**"/>
+    </copy>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Setting the application data files		                           -->
+  <!-- =================================================================== -->
+  <target name="setup.app.data">
+    <echo message="Executing target:setup.app.data"/>
+    <!-- copy system files to application file system -->
+    <delete dir="${application.data.dir}"/>
+    <mkdir dir="${application.data.dir}"/>
+    <copy todir="${application.data.dir}"
+	      overwrite="yes">
+      <fileset dir="./application/data" includes="**"/>
+    </copy>
+    <antcall target="setup.gtvan.data"/>
+    <delete dir="${application.temp.dir}"/>
+    <mkdir dir="${application.temp.dir}"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Setting the gtvan data files		                           -->
+  <!-- =================================================================== -->
+  <target name="setup.gtvan.data" if="setup.gtvan">
+    <echo message="Executing target:setup.gtvan.data"/>
+    <!-- copy system files to application file system -->
+    <delete dir="${application.gtvan.dir}"/>
+    <mkdir dir="${application.gtvan.dir}"/>
+    <copy todir="${application.gtvan.dir}"
+	      overwrite="yes" includeEmptyDirs="yes">
+      <fileset dir="./application/gtvan" includes="**"/>
+    </copy>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Setting the application admin files		                           -->
+  <!-- =================================================================== -->
+  <target name="setup.app.bin">
+    <echo message="Executing target:setup.app.bin"/>
+    <!-- copy system files to application file system -->
+    <mkdir dir="${application.bin.dir}"/>
+    <copy todir="${application.bin.dir}" flatten="false"
+	      overwrite="yes" includeEmptyDirs="yes">
+      <fileset dir="./application/bin/${platform}"/>
+	  <fileset dir="./application/bin/" excludes="${platform}/**"/>
+    </copy>
+    <fixcrlf srcdir="${application.bin.dir}" excludes="*.exe,*.com,*.jar,admin/*.exe,admin/*.jar"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Setting the application document files		                       -->
+  <!-- =================================================================== -->
+  <target name="setup.app.docs">
+    <echo message="Executing target:setup.app.docs"/>
+    <!-- copy system files to application file system -->
+    <mkdir dir="${application.docs.dir}"/>
+    <copy todir="${application.docs.dir}"
+	      overwrite="yes" includeEmptyDirs="yes">
+      <fileset dir="./application/docs" includes="**"/>
+    </copy>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Setting the application backend module                              -->
+  <!-- =================================================================== -->
+  <target name="setup.app.backend">
+    <echo message="Executing target:setup.app.backend"/>
+    <!-- copy backend files to application backend folder -->
+    <mkdir dir="${application.backend.dir}"/>
+    <copy todir="${application.backend.dir}" 
+	      overwrite="yes" includeEmptyDirs="yes">
+      <fileset dir="./application/backend" includes="**"/>
+    </copy>
+    <fixcrlf srcdir="${application.backend.dir}" includes="**/*.sh"/>
+  </target>
+
+
+  <!-- =================================================================== -->
+  <!-- Setting the application server                                      -->
+  <!-- =================================================================== -->
+  <target name="setup.appserver.conf" if="appserver.present">
+    <echo message="Executing target:setup.appserver.conf"/>
+    <!-- copy configuration files to targeted application server -->
+    <copy todir="${appserver.home}" overwrite="yes">
+      <fileset dir="./appserver/${appserver.name}-${appserver.version}" 
+	           includes="**"/>
+    </copy> 
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Setting the web server                                              -->
+  <!-- =================================================================== -->
+  <target name="setup.webserver.conf" if="webserver.present">
+    <echo message="Executing target:setup.webserver.conf"/>
+    <!-- copy configuration files to targeted web server -->
+    <copy todir="${webserver.home}" overwrite="yes">
+      <fileset dir="./webserver/${webserver.name}-${webserver.version}" 
+	           includes="**"/>
+    </copy> 
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Deploys bridge specific files                                       -->
+  <!-- =================================================================== -->
+  <target name="setup.bridge">
+    <echo message="Executing target:setup.bridge"/>
+    <copy todir="${appserver.bin.dir}" overwrite="yes">
+      <fileset dir="." includes="bridge/**/*.*"/>
+      <fileset dir="." includes="setup.properties,run-bridge.*"/>
+    </copy>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Deploying the application distribution files		                   -->
+  <!-- =================================================================== -->
+  <target name="deploy.app.dist">
+    <echo message="Executing target:deploy.app.dist"/>
+	
+	<if>
+	  <isset property="appserver.home"/>
+	  <then>
+        <copy todir="${appserver.deploy.dir}" overwrite="yes">
+          <fileset dir="./application/dist/${appserver.name}-${appserver.version}" 
+	               includes="*.ear,*.war,*.war/**"/>
+        </copy>
+	  </then>
+	</if>
+
+  <!-- 040812NSL temporary comment since not in use
+	<if>
+	  <isset property="webserver.home"/>
+	  <then>
+	    <delete includeEmptyDirs="true">		  
+          <fileset dir="${webserver.app.dir}" includes="${application.name}*/**"/>
+  	    </delete>
+        <copy todir="${webserver.deploy.dir}" overwrite="yes">
+          <fileset dir="./application/dist/${webserver.name}-${webserver.version}" 
+	               includes="*.war"/>
+        </copy>
+	  </then>
+	</if>
+  -->
+
+  </target>
+</project>

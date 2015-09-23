@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>4 Entity Dependency Check </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h1>4 Entity Dependency Check </h1>
+<p><span></span>
+</p>
+<p><span>This entity dependency check is implemented in the GridTalk system for all manageable entities during deletion to ensure that entity relationships are not damaged without the user’s knowledge. Currently, the deletion of an entity is prohibitive if it is detected that there are dependencies to that entity. That is, the system will not allow the user to delete the entity.</span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span>The figure below shows an example of deletion of three Document Types which are not allowed for some reasons:</span>
+</p>
+<p align='center'><img border='0' src='../images/image008.jpg' height='352' width='578'></p>
+<p></p>
+<p><span>When deletion is not allowed, either one of the following reasons must be true:</span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' cellpadding='0' border='1'><tr><td valign='top' width='295'><p><b><span>Error</span>
+</b>
+</p>
+</td>
+<td valign='top' width='295'><p><b><span>Meaning</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td valign='top' width='295'><p><span>[10060] Record does not exist</span>
+</p>
+</td>
+<td valign='top' width='295'><p><span>The selected entity for deletion no longer exists in the database</span>
+</p>
+</td>
+</tr>
+<tr><td valign='top' width='295'><p><span>[10061] This record may not be deleted</span>
+</p>
+</td>
+<td valign='top' width='295'><p><span>The selected entity for deletion is a system default record and user is not allowed to delete it. </span>
+</p>
+</td>
+</tr>
+<tr><td valign='top' width='295'><p><span>[10062] Other records make reference to this record</span>
+</p>
+</td>
+<td valign='top' width='295'><p><span>The selected entity for deletion has dependent references from other entities.</span>
+</p>
+</td>
+</tr>
+<tr><td valign='top' width='295'><p><span>[10063] Unexpected error deleting record</span>
+</p>
+</td>
+<td valign='top' width='295'><p><span>Unexpected system error occurred when deleting the record.</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><span>For error 10062, the UI will display to the user what are those entities that have references to the entity that is attempted for deletion. In order to successfully delete the entity, the user would need to delete those dependent entities or remove the dependencies first.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Take note of the following relationships are not checked during deletion:</span>
+</p>
+<p>1.<span> </span>
+<span>User and Role references for email recipients</span>
+</p>
+<p>a.<span> </span>
+<span>Alert Trigger may contain a recipient list that has User or Role references. Deleting of User does not perform dependency check on Alert Trigger.</span>
+</p>
+<p>b.<span> </span>
+<span>Message Template may contain User or Role references in the OFRT-capable fields, such as To, Cc, Subject, and Location. Deleting of User does not perform dependency check on Message Template.</span>
+</p>
+<p>c.<span> </span>
+<span>Email Code Reference File may contain User references. Deleting of User does not perform dependency check on the Email Code Reference File.</span>
+</p>
+<p><b><span></span>
+</b>
+</p>
+<p>2.<span> </span>
+<span>Channel Info-Business Entity associations</span>
+</p>
+<p>a.<span> </span>
+<span>“Send Channel” field in Process Mapping references one of the Channel Info(s) associated with a Business Entity. Changing the Channel Info-Business Entity associations may affect the Process Mapping in the sense that the Send Channel previously selected may not be associable the next time the user edit the Process Mapping. It also means that the “Send Channel” is no longer valid for the business process.</span>
+</p>
+<p>b.<span> </span>
+<span>Channel field in Partner references one of the Channel Info(s) associated with a Business Entity. Changing the Channe lnfo-Business Entity associations may affect the default channel to use for the Partner in the sense that no default channel may be found when sending non-process document to the Partner. This would cause send to fail.</span>
+</p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

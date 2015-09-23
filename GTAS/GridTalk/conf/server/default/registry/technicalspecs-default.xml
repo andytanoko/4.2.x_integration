@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TechnicalSpecifications>
+	<Namespace type="MessagingStandards" value="gridnode-com:messagingStandards">
+		<description>Messaging Standards supported in GridTalk</description>
+		<Taxonomy key="UUID:C1ACF26D-9672-4404-9D70-39B756E62AB4" value="namespace" name="technical namespace"/>
+		<Fingerprint type="RNIF2" value="gridnode-com:rnif-2">
+			<overviewDescription>This tModel is used for transacting RNIF 2.0 messages</overviewDescription>
+			<overviewUrl>http://www.rosettanet.org/rosettanet/Doc/0/TAO5O8VV3E7KLCRIDD1BMU6N38/RNIF2.1.pdf</overviewUrl>
+			<Taxonomy key="UUID:C1ACF26D-9672-4404-9D70-39B756E62AB4" value="protocol" name="messaging protocol"/>
+		</Fingerprint>
+		<Fingerprint type="RNIF1" value="gridnode-com:rnif-1.1">
+			<overviewDescription>This tModel is used for transacting RNIF 1.1 messages</overviewDescription>
+			<overviewUrl>http://www.rosettanet.org/rosettanet/Doc/0/TAO5O8VV3E7KLCRIDD1BMU6N38/RNIF2.1.pdf</overviewUrl>
+			<Taxonomy key="UUID:C1ACF26D-9672-4404-9D70-39B756E62AB4" value="protocol" name="messaging protocol"/>
+		</Fingerprint>
+		<Fingerprint type="SOAP-HTTP" value="gridnode-com:soap-http" isTransportProtocol="true" isZipPayload="true">
+			<overviewDescription>This tModel is used for transacting SOAP messages over HTTP</overviewDescription>
+			<overviewUrl>http://www.w3.org/TR/SOAP/</overviewUrl>
+			<Taxonomy key="UUID:C1ACF26D-9672-4404-9D70-39B756E62AB4" value="protocol" name="messaging/transport protocol"/>
+		</Fingerprint>
+	</Namespace>
+	<Namespace type="BusinessIdentifiers" value="gridnode-com:businessIdentifiers">
+		<description>Proprietary Business Identifiers used in GridTalk</description>
+		<Taxonomy key="UUID:C1ACF26D-9672-4404-9D70-39B756E62AB4" value="identifier" name="identification"/>
+	</Namespace>
+</TechnicalSpecifications>

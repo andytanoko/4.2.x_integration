@@ -1,0 +1,11 @@
+Author: Mahesh
+Data: 04-10-2002
+Title: Framework
+
+	
+    1) 	UtilString: This allows converting the List or Map to String and vice versa.
+    2)	KeyConverter: This allows to create and parse the key which will be used in the workflow engine.
+    3)  UtilXml: This is the wrapper to parse the xml file.
+
+
+

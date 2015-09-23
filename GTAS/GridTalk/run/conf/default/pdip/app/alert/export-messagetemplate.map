@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for ExportEntityList  -->
+	<class name="com.gridnode.pdip.base.exportconfig.model.ExportEntityList">
+		<map-to xml="Entities"/>
+		<field name="Entities" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection">
+		</field>
+	</class>
+	<!--  Mapping for MessageTemplate  -->
+	<class name="com.gridnode.pdip.app.alert.model.MessageTemplate">
+		<map-to xml="MessageTemplate"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="Name" type="string">
+			<xml name="Name" node="element"/>
+		</field>
+		<field name="ContentType" type="string">
+			<xml name="ContentType" node="element"/>
+		</field>
+		<field name="MessageType" type="string">
+			<xml name="MessageType" node="element"/>
+		</field>
+		<field name="FromAddr" type="string">
+			<xml name="FromAddr" node="element"/>
+		</field>
+		<field name="ToAddr" type="string">
+			<xml name="ToAddr" node="element"/>
+		</field>
+		<field name="CcAddr" type="string">
+			<xml name="CcAddr" node="element"/>
+		</field>
+		<field name="Subject" type="string">
+			<xml name="Subject" node="element"/>
+		</field>
+		<field name="Message" type="string">
+			<xml name="Message" node="element"/>
+		</field>
+		<field name="Location" type="string">
+			<xml name="Location" node="element"/>
+		</field>
+		<field name="Append" type="boolean">
+			<xml name="Append" node="element"/>
+		</field>
+		<field name="JmsDestinationUIDByCastor" type="long">
+			<xml name="JmsDestinationUID" node="element"/>
+		</field>
+		<field name="MessageProperties" type="com.gridnode.pdip.app.alert.model.MessageProperty" collection="collection">
+			<xml name="MessageProperty"/>
+		</field>
+	</class>
+	<include href="message-property.map"/>
+</mapping>

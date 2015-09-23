@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+  <enterprise-beans>
+    <entity>
+      <display-name>PartnerType</display-name>
+      <ejb-name>PartnerType</ejb-name>
+      <local-home>com.gridnode.pdip.app.partner.entities.ejb.IPartnerTypeLocalHome</local-home>
+      <local>com.gridnode.pdip.app.partner.entities.ejb.IPartnerTypeLocalObj</local>
+      <ejb-class>com.gridnode.pdip.app.partner.entities.ejb.PartnerTypeBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+    <entity>
+      <display-name>PartnerGroup</display-name>
+      <ejb-name>PartnerGroup</ejb-name>
+      <local-home>com.gridnode.pdip.app.partner.entities.ejb.IPartnerGroupLocalHome</local-home>
+      <local>com.gridnode.pdip.app.partner.entities.ejb.IPartnerGroupLocalObj</local>
+      <ejb-class>com.gridnode.pdip.app.partner.entities.ejb.PartnerGroupBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+    <entity>
+      <display-name>Partner</display-name>
+      <ejb-name>Partner</ejb-name>
+      <local-home>com.gridnode.pdip.app.partner.entities.ejb.IPartnerLocalHome</local-home>
+      <local>com.gridnode.pdip.app.partner.entities.ejb.IPartnerLocalObj</local>
+      <ejb-class>com.gridnode.pdip.app.partner.entities.ejb.PartnerBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+
+     <!-- insert other entity beans here -->
+  </enterprise-beans>
+
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+        <ejb-name>PartnerType</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <method>
+        <ejb-name>PartnerGroup</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <method>
+        <ejb-name>Partner</ejb-name>
+        <method-name>*</method-name>
+      </method>
+
+      <!-- insert other methods here -->
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+</ejb-jar>

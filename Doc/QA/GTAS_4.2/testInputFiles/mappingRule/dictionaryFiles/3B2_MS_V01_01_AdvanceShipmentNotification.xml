@@ -1,0 +1,1026 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.3 U (http://www.xmlspy.com) by Karen Liauw (GridNode Pte Ltd) -->
+<dictionary>
+	<GlobalPartnerClassificationCode>
+		<value>Broker</value>
+		<value>Carrier</value>
+		<value>Contract Manufacturer</value>
+		<value>Customs Broker</value>
+		<value>Distribution Center</value>
+		<value>Distributor</value>
+		<value>End User</value>
+		<value>End User Government</value>
+		<value>Financier</value>
+		<value>Freight Forwarder</value>
+		<value>Manufacturer</value>
+		<value>Original Equipment Manufacturer</value>
+		<value>Reseller</value>
+		<value>Retailer</value>
+		<value>Service Provider</value>
+		<value>Shopper</value>
+		<value>Warehouser</value>
+	</GlobalPartnerClassificationCode>
+	<GlobalCountryCode>
+		<value>AD</value>
+		<value>AE</value>
+		<value>AF</value>
+		<value>AG</value>
+		<value>AI</value>
+		<value>AL</value>
+		<value>AM</value>
+		<value>AN</value>
+		<value>AO</value>
+		<value>AQ</value>
+		<value>AR</value>
+		<value>AS</value>
+		<value>AT</value>
+		<value>AU</value>
+		<value>AW</value>
+		<value>AZ</value>
+		<value>BA</value>
+		<value>BB</value>
+		<value>BD</value>
+		<value>BE</value>
+		<value>BF</value>
+		<value>BG</value>
+		<value>BH</value>
+		<value>BI</value>
+		<value>BJ</value>
+		<value>BM</value>
+		<value>BN</value>
+		<value>BO</value>
+		<value>BR</value>
+		<value>BS</value>
+		<value>BT</value>
+		<value>BV</value>
+		<value>BW</value>
+		<value>BY</value>
+		<value>BZ</value>
+		<value>CA</value>
+		<value>CC</value>
+		<value>CF</value>
+		<value>CG</value>
+		<value>CH</value>
+		<value>CI</value>
+		<value>CK</value>
+		<value>CL</value>
+		<value>CM</value>
+		<value>CN</value>
+		<value>CO</value>
+		<value>CR</value>
+		<value>CU</value>
+		<value>CV</value>
+		<value>CX</value>
+		<value>CY</value>
+		<value>CZ</value>
+		<value>DE</value>
+		<value>DJ</value>
+		<value>DK</value>
+		<value>DM</value>
+		<value>DO</value>
+		<value>DZ</value>
+		<value>EC</value>
+		<value>EE</value>
+		<value>EG</value>
+		<value>EH</value>
+		<value>ER</value>
+		<value>ES</value>
+		<value>ET</value>
+		<value>FI</value>
+		<value>FJ</value>
+		<value>FK</value>
+		<value>FM</value>
+		<value>FO</value>
+		<value>FR</value>
+		<value>GA</value>
+		<value>GB</value>
+		<value>GD</value>
+		<value>GE</value>
+		<value>GF</value>
+		<value>GH</value>
+		<value>GI</value>
+		<value>GL</value>
+		<value>GM</value>
+		<value>GN</value>
+		<value>GP</value>
+		<value>GQ</value>
+		<value>GR</value>
+		<value>GS</value>
+		<value>GT</value>
+		<value>GU</value>
+		<value>GW</value>
+		<value>GY</value>
+		<value>HK</value>
+		<value>HM</value>
+		<value>HN</value>
+		<value>HR</value>
+		<value>HT</value>
+		<value>HU</value>
+		<value>ID</value>
+		<value>IE</value>
+		<value>IL</value>
+		<value>IN</value>
+		<value>IO</value>
+		<value>IQ</value>
+		<value>IR</value>
+		<value>IS</value>
+		<value>IT</value>
+		<value>JM</value>
+		<value>JO</value>
+		<value>JP</value>
+		<value>KE</value>
+		<value>KG</value>
+		<value>KH</value>
+		<value>KI</value>
+		<value>KM</value>
+		<value>KN</value>
+		<value>KP</value>
+		<value>KR</value>
+		<value>KW</value>
+		<value>KY</value>
+		<value>KZ</value>
+		<value>LA</value>
+		<value>LB</value>
+		<value>LC</value>
+		<value>LI</value>
+		<value>LK</value>
+		<value>LR</value>
+		<value>LS</value>
+		<value>LT</value>
+		<value>LU</value>
+		<value>LV</value>
+		<value>LY</value>
+		<value>MA</value>
+		<value>MC</value>
+		<value>MD</value>
+		<value>MG</value>
+		<value>MH</value>
+		<value>MK</value>
+		<value>ML</value>
+		<value>MM</value>
+		<value>MN</value>
+		<value>MO</value>
+		<value>MP</value>
+		<value>MQ</value>
+		<value>MR</value>
+		<value>MS</value>
+		<value>MT</value>
+		<value>MU</value>
+		<value>MV</value>
+		<value>MW</value>
+		<value>MX</value>
+		<value>MY</value>
+		<value>MZ</value>
+		<value>NA</value>
+		<value>NC</value>
+		<value>NE</value>
+		<value>NF</value>
+		<value>NG</value>
+		<value>NI</value>
+		<value>NL</value>
+		<value>NO</value>
+		<value>NP</value>
+		<value>NR</value>
+		<value>NT</value>
+		<value>NU</value>
+		<value>NZ</value>
+		<value>OM</value>
+		<value>PA</value>
+		<value>PE</value>
+		<value>PF</value>
+		<value>PG</value>
+		<value>PH</value>
+		<value>PK</value>
+		<value>PL</value>
+		<value>PM</value>
+		<value>PN</value>
+		<value>PR</value>
+		<value>PT</value>
+		<value>PW</value>
+		<value>PY</value>
+		<value>QA</value>
+		<value>RE</value>
+		<value>RO</value>
+		<value>RU</value>
+		<value>RW</value>
+		<value>SA</value>
+		<value>SB</value>
+		<value>SC</value>
+		<value>SD</value>
+		<value>SE</value>
+		<value>SG</value>
+		<value>SH</value>
+		<value>SI</value>
+		<value>SJ</value>
+		<value>SK</value>
+		<value>SL</value>
+		<value>SM</value>
+		<value>SN</value>
+		<value>SO</value>
+		<value>SR</value>
+		<value>ST</value>
+		<value>SV</value>
+		<value>SY</value>
+		<value>SZ</value>
+		<value>TC</value>
+		<value>TD</value>
+		<value>TF</value>
+		<value>TG</value>
+		<value>TH</value>
+		<value>TJ</value>
+		<value>TK</value>
+		<value>TM</value>
+		<value>TN</value>
+		<value>TO</value>
+		<value>TP</value>
+		<value>TR</value>
+		<value>TT</value>
+		<value>TV</value>
+		<value>TW</value>
+		<value>TZ</value>
+		<value>UA</value>
+		<value>UG</value>
+		<value>UM</value>
+		<value>US</value>
+		<value>UY</value>
+		<value>UZ</value>
+		<value>VA</value>
+		<value>VC</value>
+		<value>VE</value>
+		<value>VG</value>
+		<value>VI</value>
+		<value>VN</value>
+		<value>VU</value>
+		<value>WF</value>
+		<value>WS</value>
+		<value>YE</value>
+		<value>YT</value>
+		<value>YU</value>
+		<value>ZA</value>
+		<value>ZM</value>
+		<value>ZR</value>
+		<value>ZW</value>
+	</GlobalCountryCode>
+	<GlobalIncotermsCode>
+		<value>CFR</value>
+		<value>CIF</value>
+		<value>CIP</value>
+		<value>CPT</value>
+		<value>DAF</value>
+		<value>DDP</value>
+		<value>DDU</value>
+		<value>DEQ</value>
+		<value>DES</value>
+		<value>EXW</value>
+		<value>FAS</value>
+		<value>FCA</value>
+		<value>FOB</value>
+	</GlobalIncotermsCode>
+	<GlobalShipmentChangeDispositionCode>
+		<value>Abandon shipment</value>
+		<value>Cancel shipment</value>
+		<value>Destroy shipment</value>
+		<value>Reassignment of carrier</value>
+		<value>Release shipment</value>
+		<value>Return Shipment</value>
+		<value>Stop shipment until further notice</value>
+	</GlobalShipmentChangeDispositionCode>
+	<GlobalShipmentModeCode>
+		<value>Air</value>
+		<value>Air Express</value>
+		<value>Air Freight</value>
+		<value>Containerized Ocean</value>
+		<value>Contract Carrier</value>
+		<value>Customer Pickup</value>
+		<value>Expedited Truck</value>
+		<value>Intermodal</value>
+		<value>Motor</value>
+		<value>Ocean</value>
+		<value>Private Carrier</value>
+		<value>Rail</value>
+	</GlobalShipmentModeCode>
+	<GlobalShippingServiceLevelCode>
+		<value>1BD</value>
+		<value>5BD</value>
+		<value>9 A.M.</value>
+		<value>A.M.</value>
+		<value>Air Cargo</value>
+		<value>Air Charter</value>
+		<value>Air Economy</value>
+		<value>Authorized Return Service</value>
+		<value>Bulk Commodity Train</value>
+		<value>Business Class</value>
+		<value>Consignee Billing Service</value>
+		<value>Courier Express</value>
+		<value>Deferred Service</value>
+		<value>Delivery Confirmation</value>
+		<value>Delivery Confirmation Return</value>
+		<value>Delivery Notification Only</value>
+		<value>Delivery scheduled next day by cartage agent</value>
+		<value>Delivery scheduled second day by cartage agent</value>
+		<value>Delivery scheduled third day by cartage agent</value>
+		<value>Door Service</value>
+		<value>Expedited Service</value>
+		<value>Expedited Service - Worldwide</value>
+		<value>Express Service</value>
+		<value>Express Service - Worldwide</value>
+		<value>Express Service Plus</value>
+		<value>First Class</value>
+		<value>Ground</value>
+		<value>Manifest Freight</value>
+		<value>Metro</value>
+		<value>Multiweight</value>
+		<value>NBD</value>
+		<value>Next Day Air</value>
+		<value>Next Day Hundred Weight</value>
+		<value>Next Flight Out</value>
+		<value>Next Morning</value>
+		<value>NORMAL</value>
+		<value>Not Served</value>
+		<value>Other Intermodal and Stack Service</value>
+		<value>Overnight</value>
+		<value>P.O. Box/Zip Code</value>
+		<value>Passenger Service</value>
+		<value>Pickup</value>
+		<value>PM</value>
+		<value>Premium Surface</value>
+		<value>Primary Service Area - Next Day by 10:30 A.M.</value>
+		<value>Primary Service Area - Next Day by 5:00 P.M.</value>
+		<value>Primary Service Area - Next Day By 9:30 AM</value>
+		<value>Primary Service Area - Next Day by Noon</value>
+		<value>Primary Service Area - Second Day by Noon</value>
+		<value>Priority Mail</value>
+		<value>Priority Mail Insured</value>
+		<value>Proof of Delivery (POD) with Signature</value>
+		<value>Regular</value>
+		<value>Same Day</value>
+		<value>Saturday</value>
+		<value>Saturday Pickup</value>
+		<value>SBD</value>
+		<value>Scheduled</value>
+		<value>Second Day</value>
+		<value>Second Day Air</value>
+		<value>Second Day Hundred Weight</value>
+		<value>Second Morning</value>
+		<value>Standard Class</value>
+		<value>Standard Ground</value>
+		<value>Standard Ground Hundred Weight</value>
+		<value>Standard Ocean</value>
+		<value>Standard Service</value>
+		<value>Sunday and Holidays</value>
+		<value>Three Day Service</value>
+		<value>Time Critical</value>
+		<value>Tracking - Ground</value>
+	</GlobalShippingServiceLevelCode>
+	<GlobalShipDateCode>
+		<value>Acceptance</value>
+		<value>Accrual End Date</value>
+		<value>Accrual Start Date</value>
+		<value>Action</value>
+		<value>Actual Free Time Expiration Date</value>
+		<value>Actual Pickup Date</value>
+		<value>Actual Placement</value>
+		<value>Arrival at Destination Yard</value>
+		<value>Backorder Release Date</value>
+		<value>Beginning Date of Customer Plant Shutdown</value>
+		<value>Bill of Lading</value>
+		<value>Bill of Lading Initiated Date</value>
+		<value>Buy Period Date - End</value>
+		<value>Buy Period Date - Start</value>
+		<value>Cancel After This Date</value>
+		<value>Charge Back Date</value>
+		<value>Charged From</value>
+		<value>Charged To</value>
+		<value>Check Date</value>
+		<value>Contract Closed</value>
+		<value>Contract Final Payment</value>
+		<value>Contract Physically Completed</value>
+		<value>Customs Release</value>
+		<value>Cutoff Date</value>
+		<value>Date Available/Constructive Replacement</value>
+		<value>Date Delivery Commenced</value>
+		<value>Date Invoice Created</value>
+		<value>Date Issued</value>
+		<value>Date Loading Commenced</value>
+		<value>Date Loading Completed</value>
+		<value>Date Shipped to Port of Embarkation (POE)</value>
+		<value>Date Unloaded</value>
+		<value>Deliver No Later Than Date</value>
+		<value>Deliver Not Before Date</value>
+		<value>Deliver Week Of</value>
+		<value>Delivered By This Date</value>
+		<value>Delivered on This Date</value>
+		<value>Delivery Appointment Granted Date</value>
+		<value>Delivery Appointment Scheduled Date</value>
+		<value>Delivery Requested on This Date</value>
+		<value>Delivery Requested Scheduled Date</value>
+		<value>Demand Receipt Date</value>
+		<value>Duty Paid</value>
+		<value>Earliest Pickup Date</value>
+		<value>Effective Date</value>
+		<value>Ending Date of Customer Plant Shutdown</value>
+		<value>Equipment Furnished Date</value>
+		<value>Est. Next Promo. Date End</value>
+		<value>Est. Next Promo. Date Start</value>
+		<value>Est. Next Promo. Ship Date End</value>
+		<value>Est. Next Promo. Ship Date Start</value>
+		<value>Estimated Contract Completion</value>
+		<value>Estimated Delivery Date</value>
+		<value>Expected Reply</value>
+		<value>Expiration Date</value>
+		<value>Extended Closeout</value>
+		<value>First Order Date</value>
+		<value>First Ship Date</value>
+		<value>Freight Bill Date</value>
+		<value>Guarantee Expiration Date</value>
+		<value>Inspection</value>
+		<value>Invoice Date</value>
+		<value>Last Acquisition</value>
+		<value>Last Demand</value>
+		<value>Latest Pickup Date</value>
+		<value>Manufacture</value>
+		<value>Must Respond By</value>
+		<value>Notified</value>
+		<value>Offered for Delivery</value>
+		<value>Ordered</value>
+		<value>Original Purchase Order Date</value>
+		<value>Original Transaction</value>
+		<value>Pack Date</value>
+		<value>Period End</value>
+		<value>Pickup Appointment Granted Date</value>
+		<value>Pickup Appointment Scheduled Date</value>
+		<value>Pickup Requested Scheduled Date</value>
+		<value>Preferred Payment Date</value>
+		<value>Price Change Effective Date</value>
+		<value>Price Change Last Arrival Date</value>
+		<value>Price Change Last Order Date</value>
+		<value>Price Change Last Ship Date</value>
+		<value>Process Date</value>
+		<value>Product Receipt Date</value>
+		<value>Promotion End</value>
+		<value>Promotion Floor Stock Protect - End</value>
+		<value>Promotion Floor Stock Protect - Start</value>
+		<value>Promotion Invoice Protection Date - End</value>
+		<value>Promotion Invoice Protection Date - Start</value>
+		<value>Promotion Order Date - End</value>
+		<value>Promotion Order Date - Start</value>
+		<value>Promotion Performance Date - End</value>
+		<value>Promotion Performance Date - Start</value>
+		<value>Promotion Requested Delivery Date - End</value>
+		<value>Promotion Requested Delivery Date - Start</value>
+		<value>Promotion Ship Date - End</value>
+		<value>Promotion Ship Date - Start</value>
+		<value>Promotion Start</value>
+		<value>Publication Date</value>
+		<value>Purchase Order Date</value>
+		<value>Purchase Order Received</value>
+		<value>Recorded</value>
+		<value>Rejection</value>
+		<value>Released</value>
+		<value>Requested Delivery Date</value>
+		<value>Requested Pack Date</value>
+		<value>Requested Ship Date/Pick-up Date</value>
+		<value>Required By</value>
+		<value>Sailing Date</value>
+		<value>Scheduled Delivery Date</value>
+		<value>Scheduled Delivery Date, Appointment Confirmed</value>
+		<value>Scheduled Delivery Date, Needs Confirmation</value>
+		<value>Scheduled Pick-Up Date</value>
+		<value>Scheduled Pick-up Date, Appointment Confirmed</value>
+		<value>Scheduled Pick-up Date, Needs Confirmation</value>
+		<value>Scheduled Service Completion</value>
+		<value>Shelf-Life Expiration</value>
+		<value>Ship Not Before Date</value>
+		<value>Ship Not Later Than Date</value>
+		<value>Ship Week Of Date</value>
+		<value>Shipped on This Date</value>
+		<value>Signature</value>
+		<value>Sold Date</value>
+		<value>Spot for Load Date</value>
+		<value>Spot for Load Exchange Date (Export)</value>
+		<value>Spot for Storage Date (No Shipment)</value>
+		<value>Spot for Unload Date</value>
+		<value>Store Inventory Stock</value>
+		<value>Superseded Date</value>
+		<value>Terms Discount Due Date</value>
+		<value>Terms Net Due Date</value>
+		<value>Transaction Control Date</value>
+		<value>Transfer</value>
+		<value>Validated</value>
+		<value>Warehouse Inventory Stock</value>
+		<value>Warranty Expiration</value>
+	</GlobalShipDateCode>
+	<GlobalPackageTypeCode>
+		<value>Box</value>
+		<value>Carton</value>
+		<value>Pallet</value>
+		<value>PBGA</value>
+		<value>PLCC</value>
+		<value>Reel</value>
+		<value>Tape</value>
+		<value>TQFP</value>
+		<value>Tray</value>
+		<value>Tube</value>
+	</GlobalPackageTypeCode>
+	<GlobalPhysicalUnitOfMeasureCode>
+		<value>Ampere</value>
+		<value>Angstrom</value>
+		<value>Bit</value>
+		<value>Bytes</value>
+		<value>Centigram</value>
+		<value>Coulomb</value>
+		<value>Decagram</value>
+		<value>Decibels</value>
+		<value>Decigram</value>
+		<value>Deciliter</value>
+		<value>Decimeter</value>
+		<value>Farad</value>
+		<value>Gram</value>
+		<value>Henry</value>
+		<value>Hertz</value>
+		<value>Hour</value>
+		<value>Inch</value>
+		<value>Kilobyte</value>
+		<value>Kilogram</value>
+		<value>Kilometer</value>
+		<value>Kilowatt</value>
+		<value>Megabyte</value>
+		<value>Megagram</value>
+		<value>Megahertz</value>
+		<value>Meter</value>
+		<value>Microgram</value>
+		<value>Micrometer</value>
+		<value>Miles</value>
+		<value>Milliamperes</value>
+		<value>Milligram</value>
+		<value>Millimeter</value>
+		<value>Millivolts</value>
+		<value>Ohm</value>
+		<value>Picofarad</value>
+		<value>Pound</value>
+		<value>Volt</value>
+		<value>Volts (Alternating Current)</value>
+		<value>Volts (Direct Current)</value>
+		<value>Volts Per Meter</value>
+		<value>Watt</value>
+	</GlobalPhysicalUnitOfMeasureCode>
+	<GlobalDocumentReferenceTypeCode>
+		<value>ASP Claim</value>
+		<value>ASP Part Return</value>
+		<value>ASP PartOrder</value>
+		<value>ASP Requisition</value>
+		<value>Catalog</value>
+		<value>Commercial Invoice</value>
+		<value>Component Failure Analysis Request Number</value>
+		<value>Consumption Reference</value>
+		<value>Contract</value>
+		<value>Credit Memo</value>
+		<value>Customer Batch Number</value>
+		<value>Customer Order Number</value>
+		<value>Customs Number</value>
+		<value>Debit Memo</value>
+		<value>Delivery Note</value>
+		<value>Discontinuation</value>
+		<value>Drawing #</value>
+		<value>Fulfillment Order</value>
+		<value>Invoice</value>
+		<value>Master Event Number</value>
+		<value>Model Number</value>
+		<value>OEM Claim</value>
+		<value>OEM Part Order</value>
+		<value>OEM Part Return</value>
+		<value>Original Invoice</value>
+		<value>Original SBI Invoice</value>
+		<value>Packing List/Packing Slip</value>
+		<value>Product Failure Analysis Request Number</value>
+		<value>Productuion Order Number</value>
+		<value>Purchase Order</value>
+		<value>Purchase Order IN</value>
+		<value>Purchase Order OUT</value>
+		<value>Quote</value>
+		<value>Receipt</value>
+		<value>Replenishment Order</value>
+		<value>Requisition</value>
+		<value>Rework Purchase Order</value>
+		<value>RMA - Returned Material Authorization</value>
+		<value>Sales Order</value>
+		<value>Scheduling Agreement</value>
+		<value>Self Billing Credit Memo</value>
+		<value>Self Billing Debit Memo</value>
+		<value>Self Billing Invoice</value>
+		<value>Serial Number</value>
+		<value>Service Order</value>
+		<value>Shipping Reference Identifier</value>
+		<value>SNCL</value>
+		<value>Spec #</value>
+		<value>Supplier Batch Number</value>
+		<value>Transfer Order</value>
+		<value>Warranty Claim</value>
+		<value>Waybill</value>
+		<value>Work Order</value>
+	</GlobalDocumentReferenceTypeCode>
+	<GlobalLotQuantityClassificationCode>
+		<value>Acceptable</value>
+		<value>Bin Test</value>
+		<value>Bonus</value>
+		<value>Change Quantity</value>
+		<value>Current</value>
+		<value>Gross</value>
+		<value>Lot probe</value>
+		<value>Merge</value>
+		<value>Net</value>
+		<value>Previous lot</value>
+		<value>Projected final</value>
+		<value>Receipt</value>
+		<value>Reject</value>
+		<value>Schedule</value>
+		<value>Scrap</value>
+		<value>Ship</value>
+		<value>Split</value>
+		<value>Start</value>
+	</GlobalLotQuantityClassificationCode>
+	<GlobalProductUnitOfMeasureCode>
+		<value>10 Kilogram Drum</value>
+		<value>10,000 Gallon Tankcar</value>
+		<value>100 Board Feet</value>
+		<value>100 Pound Drum</value>
+		<value>1000-pack</value>
+		<value>100-Pack</value>
+		<value>10-pack</value>
+		<value>115 Kilogram Drum</value>
+		<value>15 Kilogram Drum</value>
+		<value>20 Foot Container</value>
+		<value>20,000 Gallon Tankcar</value>
+		<value>20-Pack</value>
+		<value>25 Kilogram Bulk Bag</value>
+		<value>300 Kilogram Bulk Bag</value>
+		<value>40 Foot Container</value>
+		<value>50 Pound Bag</value>
+		<value>500 Kilogram Bulk Bag</value>
+		<value>50-pack</value>
+		<value>55 Gallon Drum</value>
+		<value>Acre</value>
+		<value>Actual Pounds</value>
+		<value>Aluminum Pounds Only</value>
+		<value>Ampere</value>
+		<value>Bag</value>
+		<value>Bale</value>
+		<value>Ball</value>
+		<value>Band</value>
+		<value>Bar</value>
+		<value>Barrel</value>
+		<value>Barrel, Imperial</value>
+		<value>Barrels Per Day</value>
+		<value>Barrels Per Minute</value>
+		<value>Base Box</value>
+		<value>Base Weight</value>
+		<value>Basket</value>
+		<value>Batch</value>
+		<value>Batt</value>
+		<value>Batting Pound</value>
+		<value>Beam</value>
+		<value>Becquerel/kilogram</value>
+		<value>Belt</value>
+		<value>Billet</value>
+		<value>Bin</value>
+		<value>Block</value>
+		<value>Board</value>
+		<value>Board Feet</value>
+		<value>Bolt</value>
+		<value>Bottle</value>
+		<value>Box</value>
+		<value>British Thermal Unit (BTU)</value>
+		<value>British Thermal Units (BTUs) Per Cubic Foot</value>
+		<value>British Thermal Units (BTUs) Per Pound</value>
+		<value>Bucket</value>
+		<value>Bulk</value>
+		<value>Bulk Car Load</value>
+		<value>Bulk Pack</value>
+		<value>Bundle</value>
+		<value>Bunks</value>
+		<value>Bushel</value>
+		<value>Bushel, Dry Imperial</value>
+		<value>Calorie</value>
+		<value>Can</value>
+		<value>Candela</value>
+		<value>Canister</value>
+		<value>Car</value>
+		<value>Carat</value>
+		<value>Carboy</value>
+		<value>Card</value>
+		<value>Carload</value>
+		<value>Carton</value>
+		<value>Cartridge</value>
+		<value>Case</value>
+		<value>Cask</value>
+		<value>Cassette</value>
+		<value>Catchweight</value>
+		<value>Cell</value>
+		<value>Centiliter</value>
+		<value>Centimeter</value>
+		<value>Centipoise (CPS)</value>
+		<value>Chains (Land Survey)</value>
+		<value>Chest</value>
+		<value>Coil</value>
+		<value>Coil Group</value>
+		<value>Composite Product Pounds (Total Weight)</value>
+		<value>Cone</value>
+		<value>Connector</value>
+		<value>Container</value>
+		<value>Cover</value>
+		<value>Crate</value>
+		<value>Cubic centimeter</value>
+		<value>Cubic centimeter/second</value>
+		<value>Cubic Foot</value>
+		<value>Cubic inch</value>
+		<value>Cubic yard</value>
+		<value>Cubicmeter</value>
+		<value>Cup</value>
+		<value>Cycles</value>
+		<value>Cylinder</value>
+		<value>Day</value>
+		<value>Deal</value>
+		<value>Decimeter</value>
+		<value>Degree Celsius</value>
+		<value>Degree Fahrenheit</value>
+		<value>Dep. Factor</value>
+		<value>Die</value>
+		<value>Disk (Disc)</value>
+		<value>Dispenser</value>
+		<value>Display</value>
+		<value>Dozen</value>
+		<value>Dram</value>
+		<value>Drum</value>
+		<value>Dry Pounds</value>
+		<value>Each</value>
+		<value>Electrical Capacitance</value>
+		<value>Fluid Ounce</value>
+		<value>Fluid Ounce (Imperial)</value>
+		<value>Fluid Ounce US</value>
+		<value>Foot</value>
+		<value>Fuel Usage (Gallons)</value>
+		<value>Gage Systems</value>
+		<value>Gallon</value>
+		<value>Gigajoules</value>
+		<value>Gill (Imperial)</value>
+		<value>Grain</value>
+		<value>Gram</value>
+		<value>Gram/Cubic Centimeter</value>
+		<value>Gram/square meter</value>
+		<value>Grams Per 100 Centimeters</value>
+		<value>Grams Per 100 Grams</value>
+		<value>Grams Per Cubic Centimeter</value>
+		<value>Grams Per Kilogram</value>
+		<value>Grams Per Liter</value>
+		<value>Grams Per Milliliter</value>
+		<value>Grams Per Square Centimeter</value>
+		<value>Grams Per Square Meter</value>
+		<value>Great Gross (Dozen Gross)</value>
+		<value>Gross</value>
+		<value>Gross Barrels</value>
+		<value>Gross Gallons</value>
+		<value>Gross Kilogram</value>
+		<value>Gross Ton</value>
+		<value>Gross Yard</value>
+		<value>Group</value>
+		<value>Half Gallon</value>
+		<value>Half Hour</value>
+		<value>Half Liter</value>
+		<value>Hank</value>
+		<value>Heat lots</value>
+		<value>Hectare</value>
+		<value>Hectoliter</value>
+		<value>Hectopascal</value>
+		<value>Hertz</value>
+		<value>Hour</value>
+		<value>Hours</value>
+		<value>Hundred Boxes</value>
+		<value>Hundred Count</value>
+		<value>Hundred Sheets</value>
+		<value>Hundredth of a Carat</value>
+		<value>Imperial Gallons</value>
+		<value>Inch</value>
+		<value>Jar</value>
+		<value>Joint</value>
+		<value>Joule</value>
+		<value>Keg</value>
+		<value>Kelvin</value>
+		<value>Kiloampere</value>
+		<value>Kilobecquerel/Kilogram</value>
+		<value>Kilogram</value>
+		<value>Kilogram per cubic meter</value>
+		<value>Kilogram/Kilogram</value>
+		<value>Kilogram/square meter</value>
+		<value>Kilogramm pro Sekunde</value>
+		<value>Kilohertz</value>
+		<value>Kilojoule</value>
+		<value>Kilometer</value>
+		<value>Kilometer/hour</value>
+		<value>Kiloohm</value>
+		<value>Kilovolt</value>
+		<value>Kilowatt</value>
+		<value>Kilowatt-hour</value>
+		<value>Kit</value>
+		<value>Kubikdezimeter</value>
+		<value>Kubikmeter pro Sekunde</value>
+		<value>Lifts</value>
+		<value>Link</value>
+		<value>Liquid Pounds</value>
+		<value>Liter</value>
+		<value>Load</value>
+		<value>Lot</value>
+		<value>Lug</value>
+		<value>Mat</value>
+		<value>Megagram</value>
+		<value>Megagrams Per Hour</value>
+		<value>Megahertz</value>
+		<value>Megapascal</value>
+		<value>Megawatt</value>
+		<value>Meter</value>
+		<value>Meter pro Quadratsekunde</value>
+		<value>Meters per second</value>
+		<value>Micrograms Per Cubic Meter</value>
+		<value>Micrometer</value>
+		<value>Microsecond</value>
+		<value>Mikrogram/cubic meter</value>
+		<value>Mile</value>
+		<value>Milliampere</value>
+		<value>Millibar</value>
+		<value>Milligram/cubic meter</value>
+		<value>Milligram/kilogram</value>
+		<value>Milligram/Liter</value>
+		<value>Milligrams Per Cubic Meter</value>
+		<value>Milligrams Per Square Meter</value>
+		<value>Millijoule</value>
+		<value>Milliliter</value>
+		<value>Millimeter</value>
+		<value>Millimeter H20</value>
+		<value>Millimol</value>
+		<value>Millimol/kilogram</value>
+		<value>Million BTU's</value>
+		<value>Millipascal seconds</value>
+		<value>Millisecond</value>
+		<value>Millitesla</value>
+		<value>Millivolt</value>
+		<value>Milliwatt</value>
+		<value>Minute</value>
+		<value>Miter</value>
+		<value>Mol</value>
+		<value>Mol/kilogram</value>
+		<value>Month</value>
+		<value>Multichip</value>
+		<value>Nanometer</value>
+		<value>Nanosecond</value>
+		<value>Net Barrels</value>
+		<value>Net Gallons</value>
+		<value>Net Imperial Gallons</value>
+		<value>Net Liters</value>
+		<value>Newton</value>
+		<value>Ohm</value>
+		<value>One</value>
+		<value>One Thousand Pieces</value>
+		<value>Ounce</value>
+		<value>Pack (PAK)</value>
+		<value>Package</value>
+		<value>Packet</value>
+		<value>Pad</value>
+		<value>Pail</value>
+		<value>Pair</value>
+		<value>Pallet</value>
+		<value>Pallet (Lift)</value>
+		<value>Pallet/Unit Load</value>
+		<value>Pallete</value>
+		<value>Panel</value>
+		<value>Parcel</value>
+		<value>Parts per billion (US)</value>
+		<value>Parts per million</value>
+		<value>Pascal</value>
+		<value>Pascal second</value>
+		<value>Pennyweight</value>
+		<value>Per Hundred Pieces</value>
+		<value>Percent</value>
+		<value>Percent Per 1000 Hours</value>
+		<value>Percent Weight</value>
+		<value>Percentage</value>
+		<value>Piece</value>
+		<value>Pint - US liquid</value>
+		<value>Pint U.S. Dry</value>
+		<value>Plate</value>
+		<value>Pound</value>
+		<value>Pounds Per 1000 Square Feet</value>
+		<value>Pounds Per Foot</value>
+		<value>Pounds Per Gallon</value>
+		<value>Pounds Per Piece of Product</value>
+		<value>Pounds Per Pound of Product</value>
+		<value>Pounds Per Thousand</value>
+		<value>Quart - US liquid</value>
+		<value>Rack</value>
+		<value>Ream of 500 Sheets</value>
+		<value>Reel</value>
+		<value>Ring</value>
+		<value>Rod</value>
+		<value>Roll</value>
+		<value>Sack</value>
+		<value>Second</value>
+		<value>SET</value>
+		<value>Sheet</value>
+		<value>Sheet-Metric measure</value>
+		<value>Shipment</value>
+		<value>Shot</value>
+		<value>Skein</value>
+		<value>Skid</value>
+		<value>Sleeve</value>
+		<value>Slip Sheet</value>
+		<value>Spool</value>
+		<value>Square</value>
+		<value>Square foot</value>
+		<value>Square inch</value>
+		<value>Square kilometer</value>
+		<value>Square meter</value>
+		<value>Square meter/second</value>
+		<value>Square mile</value>
+		<value>Square millimeter</value>
+		<value>Square Yard</value>
+		<value>Statute Mile</value>
+		<value>Stick</value>
+		<value>Strip</value>
+		<value>Super Bulk Bag</value>
+		<value>Tablet</value>
+		<value>Tank</value>
+		<value>Tank Truck</value>
+		<value>Tesla</value>
+		<value>Thousand</value>
+		<value>Ton</value>
+		<value>Tonne</value>
+		<value>Torr</value>
+		<value>Tote</value>
+		<value>Track Foot</value>
+		<value>Trailer</value>
+		<value>Train</value>
+		<value>Tray</value>
+		<value>Troy</value>
+		<value>Troy OZ</value>
+		<value>Truckload</value>
+		<value>Tube</value>
+		<value>Unitless Unit of Measure</value>
+		<value>US gallon</value>
+		<value>US pound</value>
+		<value>US ton</value>
+		<value>Vial</value>
+		<value>Volt</value>
+		<value>Wafer</value>
+		<value>Watt</value>
+		<value>Week</value>
+		<value>WF</value>
+		<value>Wrap</value>
+		<value>Yard</value>
+		<value>Year</value>
+	</GlobalProductUnitOfMeasureCode>
+	<NationalExportControlClassificationCode>
+		<value>Already customs cleared in the importing country</value>
+		<value>Clearance</value>
+		<value>Detention</value>
+		<value>Documents required</value>
+		<value>Documents requirements completed</value>
+		<value>Fumigation</value>
+		<value>Inspection</value>
+		<value>Inspection arrangements completed</value>
+		<value>Inspection arrangements required</value>
+		<value>No customs procedure</value>
+		<value>Safety arrangements completed</value>
+		<value>Safety arrangements required</value>
+		<value>Security</value>
+		<value>Security arrangements required</value>
+		<value>Storage arrangements completed</value>
+		<value>Storage arrangements required</value>
+		<value>Transport arrangements completed</value>
+		<value>Transport arrangements required</value>
+	</NationalExportControlClassificationCode>
+	<GlobalTrackingReferenceTypeCode>
+		<value>Bill of Lading Number</value>
+		<value>Booking Number</value>
+		<value>Carrier Reference Number</value>
+		<value>Commercial Invoice</value>
+		<value>House Airwaybill Number</value>
+		<value>Master Airwaybill Number</value>
+		<value>Ocean Bill of Lading Number</value>
+		<value>Packing Slip Number</value>
+		<value>Pro Number</value>
+		<value>Sales Order Number</value>
+		<value>Seal Identifier</value>
+		<value>Shipper Reference Number</value>
+		<value>Trailer Number</value>
+	</GlobalTrackingReferenceTypeCode>
+	<GlobalPartnerRoleClassificationCode>
+		<value>Receiver</value>
+		<value>Shipper</value>
+	</GlobalPartnerRoleClassificationCode>
+	<GlobalSupplyChainCode>
+		<value>Electronic Components</value>
+		<value>Information Technology</value>
+		<value>Semiconductor Manufacturing</value>
+	</GlobalSupplyChainCode>
+	<GlobalDocumentFunctionCode>
+		<value>Request</value>
+	</GlobalDocumentFunctionCode>
+</dictionary>

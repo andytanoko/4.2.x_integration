@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDependency name="ProcessDef">
+  <Checker class-name="com.gridnode.gtas.server.partnerprocess.helpers.EntityDependencyChecker"
+           method-name="checkDependentProcessMappingsForProcessDef">
+    <Param type="java.lang.String" getter-method="getDefName"/>
+  </Checker>
+  <Checker class-name="com.gridnode.gtas.server.partnerprocess.helpers.EntityDependencyChecker"
+           method-name="checkDependentTriggersForProcessDef">
+    <Param type="java.lang.String" getter-method="getDefName"/>
+  </Checker>
+  <Checker class-name="com.gridnode.gtas.server.rnif.helpers.EntityDependencyChecker"
+           method-name="checkDependentProcessInstancesForProcessDef">
+    <Param type="java.lang.String" getter-method="getDefName"/>
+    <EntityDescriptorCreator class-name="com.gridnode.gtas.server.rnif.helpers.ProcessInstanceDescriptorCreator"
+                             method-name="createDescriptorList"/>
+  </Checker>
+</EntityDependency>

@@ -1,0 +1,371 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2002 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: DefaultMessageSender.java
+ *
+ ****************************************************************************
+ * Date           Author                  Changes
+ ****************************************************************************
+ * July 17 2003    Jagadeesh             Created.
+ */
+
+package com.gridnode.pdip.app.channel.handler.message;
+
+import com.gridnode.pdip.app.channel.helpers.PackagingServiceHandler;
+import com.gridnode.pdip.app.channel.helpers.FlowControlServiceHandler;
+import com.gridnode.pdip.app.channel.helpers.SecurityServiceHandler;
+
+import com.gridnode.pdip.app.channel.helpers.ChannelLogger;
+
+import com.gridnode.pdip.app.channel.handler.SendMessageHandler;
+
+import com.gridnode.pdip.app.channel.helpers.ChannelUtil;
+
+import com.gridnode.pdip.app.channel.helpers.Package;
+import com.gridnode.pdip.app.channel.model.CommInfo;
+import com.gridnode.pdip.app.channel.model.PackagingInfo;
+import com.gridnode.pdip.app.channel.model.SecurityInfo;
+import com.gridnode.pdip.app.channel.model.FlowControlInfo;
+import com.gridnode.pdip.base.transport.helpers.FeedbackMsg;
+import com.gridnode.pdip.base.transport.comminfo.ICommInfo;
+import com.gridnode.pdip.base.transport.comminfo.CommInfoFactory;
+
+import com.gridnode.pdip.app.channel.exceptions.FlowControlException;
+
+import com.gridnode.pdip.base.packaging.exceptions.PackagingException;
+import com.gridnode.pdip.base.transport.exceptions.GNTransportException;
+import com.gridnode.pdip.base.transport.exceptions.InvalidCommInfoException;
+import com.gridnode.pdip.framework.exceptions.ApplicationException;
+
+import java.util.Hashtable;
+
+import java.io.File;
+import java.io.InputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+/**
+ * This class is essentialy responsible to preProcess Outgoing Messages from
+ * GTAS.
+ *
+ */
+
+public class DefaultMessageSender extends AbstractMessageSender
+{
+
+  private static final String CLASS_NAME = "DefaultMessageSender";
+
+  public DefaultMessageSender()
+  {
+  }
+
+  public Hashtable getEnvelopeHeader(
+    String[] defaultHeader,
+    String channelName)
+    throws Exception
+  {
+    return PackagingServiceHandler.getEnvelopeHeader(
+      defaultHeader,
+      channelName);
+  }
+
+  public Package performPackaging(
+    PackagingInfo packagingInfo,
+    Package packageData)
+    throws PackagingException
+  {
+    return PackagingServiceHandler.envelope(
+      packagingInfo.getEnvelope(),
+      packageData);
+  }
+
+  public Package[] performPackageFlowControl(
+    FlowControlInfo flowControlInfo,
+    Package packageEnvlData)
+    throws FlowControlException
+  {
+    Package[] packageFlowData =
+      FlowControlServiceHandler.performPackageFlowControl(
+        flowControlInfo,
+        packageEnvlData);
+    return packageFlowData;
+  }
+
+  public Package performEncryptAndSign(
+    SecurityInfo securityInfo,
+    Package packageData)
+    throws SecurityException
+  {
+    debugLog("performEncryptAndSign()", "B4 Performing Encrypt And Sign");
+    try
+    {
+      String[] encdataContent = packageData.getDataContent();
+      byte[] encfileContent = packageData.getUnPackFileContent();
+      if (encdataContent == null)
+        debugLog("performEncryptAndSign()", "DataContent is Null");
+      if (encfileContent == null)
+        debugLog("performEncryptAndSign()", "FileContent is Null");
+
+      encdataContent =
+        performDataEncryption(
+          securityInfo,
+          packageData.getDataContent(),
+          packageData.getHeader());
+      encfileContent =
+        performFileEncryption(
+          securityInfo,
+          packageData.getUnPackFileContent(),
+          packageData.getHeader());
+      debugLog("performEncryptAndSign()", "After Performing Encrypt And Sign");
+
+      if (encdataContent == null)
+        debugLog(
+          "performEncryptAndSign()",
+          "After EncryptAndSign DataContent is Null");
+      if (encfileContent == null)
+        debugLog("performEncryptAndSign()", "DataContent is Null");
+
+      return new Package(
+        packageData.getHeader(),
+        encdataContent,
+        encfileContent);
+    } catch (Exception ex)
+    {
+      throw new SecurityException(
+        "["
+          + CLASS_NAME
+          + "][performEncryptAndSign()]"
+          + "[Could Not Perform EncryptAndSign]"
+          + ex.getMessage());
+    }
+
+  }
+
+  public void performChannelSend(CommInfo commInfo, Package packageToSend)
+    throws InvalidCommInfoException, GNTransportException
+  {
+    debugLog("performChannelSend()", "B4 Performing Channel Send");
+    try
+    {
+      if (packageToSend.getDataContent() == null)
+        debugLog(
+          "performChannelSend()",
+          "B4 Performing Channel Send " + "Data Content is Null while Send");
+      if (packageToSend.getUnPackFileContent() == null)
+        debugLog(
+          "performChannelSend()",
+          "B4 Performing Channel Send " + "File Content is Null while Send");
+      performTptSend(
+        commInfo,
+        packageToSend.getHeader(),
+        packageToSend.getDataContent(),
+        packageToSend.getUnPackFileContent());
+    } catch (Exception ex)
+    {
+      ChannelLogger.errorLog(
+        CLASS_NAME,
+        "performChannelSend()",
+        "[" + ex.getMessage() + "]");
+      throw new GNTransportException(
+        "[Cannot perform Channel Send]" + ex.getMessage(),
+        ex);
+    }
+  }
+
+  protected String[] performDataEncryption(
+    SecurityInfo secInfo,
+    String[] dataContent,
+    Hashtable header)
+    throws Exception
+  {
+    return SecurityServiceHandler.encryptData(secInfo, dataContent);
+  }
+
+  protected byte[] performFileEncryption(
+    SecurityInfo secInfo,
+    byte[] fileContent,
+    Hashtable header)
+    throws Exception
+  {
+    return SecurityServiceHandler.encryptData(secInfo, fileContent);
+  }
+
+  protected static void performTptSend(
+    CommInfo commInfo,
+    Hashtable header,
+    String[] dataContent,
+    byte[] fileContent)
+    throws InvalidCommInfoException, Exception
+  {
+    ICommInfo commInfoImpl = getCommInfo(commInfo);
+    ChannelUtil.getInstance().send(
+      commInfoImpl,
+      header,
+      fileContent,
+      dataContent);
+  }
+
+  public void sendFeedback(boolean status, String desc, String[] header)
+  {
+    try
+    {
+      FeedbackMsg msg = new FeedbackMsg(status, desc, header);
+      SendMessageHandler.getSendMessageHandler().sendFeedBackToApp(msg);
+    } catch (Exception ex)
+    {
+      ChannelLogger.errorLog(
+        CLASS_NAME,
+        "sendFeedback",
+        "Cannot Create FeedBack Message ",
+        ex);
+    }
+  }
+
+  private static ICommInfo getCommInfo(CommInfo commInfo)
+    throws InvalidCommInfoException, ApplicationException
+  {
+    ICommInfo commInfoimpl =
+      CommInfoFactory.getCommInfo(
+        commInfo.getProtocolType(),
+        commInfo.getURL(),
+        commInfo.getTptImplVersion());
+    return commInfoimpl;
+  }
+
+  /**
+   * To retrieve the contents from the given file.
+   *
+   * @param           file  the file to be read.
+   * @return          the contents of the file in byte[].
+   *
+   * @exception       IOException if an Exception occurs reading the file.
+   *
+   * @since 2.0
+   * @version 2.0
+   */
+  private static byte[] getBytesFromFile(File file) throws IOException
+  {
+    InputStream is = new FileInputStream(file);
+
+    long length = file.length();
+
+    byte[] bytes = new byte[(int) length];
+    int offset = 0;
+    int numRead = 0;
+
+    while (offset < bytes.length
+      && (numRead = is.read(bytes, offset, bytes.length - offset)) >= 0)
+    {
+      offset += numRead;
+    }
+
+    if (offset < bytes.length)
+    {
+      throw new IOException("Could not completely read file " + file.getName());
+    }
+    is.close();
+    return bytes;
+  }
+
+  private void debugLog(String methodName, String message)
+  {
+    ChannelLogger.debugLog(
+      CLASS_NAME,
+      "[" + methodName + "]",
+      "[" + message + "]");
+  }
+
+}
+
+/*  public void sendMessage(DispatchMessage messageToSend) throws ChannelException, Exception
+  {
+    String[] header = null;
+    try
+    {
+      header = messageToSend.getHeader();
+      String[] dataContent = messageToSend.getData();
+      File[] fileContent = messageToSend.getFile();
+
+      if (header != null)
+      {
+        for (int i = 0; i < header.length; i++)
+          ChannelLogger.debugLog(CLASS_NAME,"messageToSend","Header["+i+"]Value["+header[i]+"]");
+      }
+
+      if (dataContent != null)
+      {
+        for (int i = 0; i < dataContent.length; i++)
+        {
+          ChannelLogger.debugLog(CLASS_NAME,"sendMessage()","DataContent["+i+"]"+
+                                      "Value=["+dataContent[i]+"]");
+        }
+      }
+      else
+        ChannelLogger.debugLog(CLASS_NAME,"sendMessage()",
+                                          "[DataContent is NULL As Send Begin]");
+
+      if (fileContent != null)
+      {
+        for (int i = 0; i < fileContent.length; i++)
+        {
+          ChannelLogger.debugLog(CLASS_NAME,"sendMessage()","FileContent["+i+"]"+
+                                      "Value=["+fileContent[i]+"]");
+        }
+      }
+      else
+        ChannelLogger.debugLog(CLASS_NAME,"sendMessage()",
+                                          "[FileContent is NULL As Send Begin]");
+
+      PackagingInfo packagingInfo = _channelToSend.getPackagingProfile();
+      SecurityInfo securityInfo   = _channelToSend.getSecurityProfile();
+      FlowControlInfo flowControlInfo = _channelToSend.getFlowControlInfo();
+      if (flowControlInfo != null)
+        ChannelLogger.debugLog(CLASS_NAME,"sendMessage()","FlowContrlInfo["+flowControlInfo.toString()+"]");
+      else
+        ChannelLogger.debugLog(CLASS_NAME,"sendMessage()","[FlowControlInfo is Null]");
+      //Get  Default envelope Header
+      Hashtable envelopeHeader = getEnvelopeHeader(header,_channelToSend.getName());
+
+      Package packageData = new Package(envelopeHeader,dataContent,fileContent);
+
+      //Envelop the content according to envelope type.
+      Package packageEnvlData =  performPackaging(packagingInfo,packageData);
+
+      //To perform FlowControl to handle Zip/Split. The percondition is Zip is Always set to true.
+      Package[] packageFlowData = performPackageFlowControl(flowControlInfo,packageEnvlData);
+      if (packageFlowData != null)
+      {
+        for(int i=0;i<packageFlowData.length;i++)
+        {
+          Package packageToSend = packageFlowData[i];
+          if (packageToSend != null)
+          {
+            //Perform Encrypt And Sign.
+            Package encryptedPackage = performEncryptAndSign(securityInfo,packageToSend);
+            ChannelLogger.debugLog(CLASS_NAME,"sendMessage()","Sending Package["+i+"]");
+            ChannelLogger.infoLog(CLASS_NAME,"sendMessage()","PackageHeader["+
+                          encryptedPackage.getHeader()+"]");
+
+            //Do Transport Send.
+            performChannelSend(_channelToSend.getTptCommInfo(),encryptedPackage);
+            encryptedPackage = null;
+            /** @todo Enable this after test */
+//sendFeedback(true,null,header);
+
+/*					}
+          else
+            ChannelLogger.infoLog(CLASS_NAME,"sendMessage()","Package Returened is Null");
+        }
+      }
+    }
+    catch (Exception ex)
+    {
+      ChannelLogger.errorLog(CLASS_NAME,"sendMessage()","Cannot Perform Send ...",ex);
+      sendFeedback(false,ex.getLocalizedMessage(),header);
+      throw new ChannelException(CLASS_NAME+"sendMessage()"+"Cannot Perform Send ...",ex);
+    }
+  }
+*/

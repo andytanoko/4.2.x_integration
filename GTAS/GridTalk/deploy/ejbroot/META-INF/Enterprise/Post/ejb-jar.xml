@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+  <enterprise-beans>
+    <session>
+      <display-name>PostOfficeBean</display-name>
+      <ejb-name>PostOfficeBean</ejb-name>
+      <home>com.gridnode.gtas.server.enterprise.post.ejb.IPostOfficeHome</home>
+      <remote>com.gridnode.gtas.server.enterprise.post.ejb.IPostOfficeObj</remote>
+      <ejb-class>com.gridnode.gtas.server.enterprise.post.ejb.PostOfficeBean</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+    </session>
+    <!-- message-driven>
+      <ejb-name>GridMasterPostmanMDBean</ejb-name>
+      <ejb-class>com.gridnode.gtas.server.enterprise.post.ejb.GridMasterPostmanMDBean</ejb-class>
+      <message-selector/>
+      <transaction-type>Container</transaction-type>
+      <message-driven-destination>
+        <destination-type>javax.jms.Topic</destination-type>
+        <subscription-durability>NonDurable</subscription-durability>
+      </message-driven-destination>
+    </message-driven-->
+    <!-- message-driven>
+      <ejb-name>GridMasterAvailabilityMDBean</ejb-name>
+      <ejb-class>com.gridnode.gtas.server.enterprise.post.ejb.GridMasterAvailabilityMDBean</ejb-class>
+      <message-selector>id='Connection' AND nodeType='1'</message-selector>
+      <message-driven-destination>
+        <destination-type>javax.jms.Topic</destination-type>
+        <subscription-durability>NonDurable</subscription-durability>
+      </message-driven-destination>
+      <transaction-type>Container</transaction-type>
+    </message-driven-->
+  </enterprise-beans>
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+        <ejb-name>PostOfficeBean</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+    <!-- container-transaction>
+      <method>
+        <ejb-name>GridMasterPostmanMDBean</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+    <container-transaction>
+      <method>
+        <ejb-name>GridMasterAvailabilityMDBean</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction-->
+  </assembly-descriptor>
+</ejb-jar>

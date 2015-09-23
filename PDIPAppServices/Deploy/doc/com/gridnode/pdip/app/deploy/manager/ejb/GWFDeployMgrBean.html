@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><!--JBuilder QuickDoc-->
+<HEAD>
+<TITLE>Class com.gridnode.pdip.app.deploy.manager.ejb.GWFDeployMgrBean</TITLE><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+</HEAD>
+<BODY>
+
+<H2>
+<FONT SIZE="-1">com.gridnode.pdip.app.deploy.manager.ejb</FONT>
+<BR>Class GWFDeployMgrBean</H2>
+<DL>
+<DT>public class <B>GWFDeployMgrBean</B><DT>implements SessionBean, IConstants
+</DL>
+<DL><DD>This software is the proprietary information of GridNode Pte Ltd. Use is subjected to license terms. Copyright 2001-2002 (C) GridNode Pte Ltd. All Rights Reserved. File: Date Author Changes Jun 10 2002 Mathew Created Jun 13 2002 Mathew Repackaged<DL><DD></DD></DL></DD>
+</DL>
+<DL></DL>
+<TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+<TR BGCOLOR="#CCCCFF"><TD COLSPAN=1><FONT SIZE="+2">
+<B>Method Detail</B>
+</FONT></TD></TR></TABLE>
+
+<H3>deployXpdl</H3>
+<PRE>
+public void <B>deployXpdl</B>(File&nbsp;processSpec)</PRE>
+<DL><DD>This method will parse XPDL file and deploy into database<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>processSpec</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>undeployXpdl</H3>
+<PRE>
+public void <B>undeployXpdl</B>(File&nbsp;processSpec)</PRE>
+<DL><DD>Removes the xpdl entities from database<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>processSpec</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>undeployXpdl</H3>
+<PRE>
+public void <B>undeployXpdl</B>(String&nbsp;packageId,
+                         String&nbsp;pkgVersionId)</PRE>
+<DL><DD>Removes the xpdl entities from database<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>packageId</CODE> - </DD>
+<DD><CODE>pkgVersionId</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>loadXpdl</H3>
+<PRE>
+public List <B>loadXpdl</B>(File&nbsp;processSpec)</PRE>
+<DL><DD>Loads the xpdl file into xpdl entities<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>processSpec</CODE> - </DD>
+<DT><B>Returns:</B><DD>List of xpdl entities</DD>
+<DT><B>Throws:</B><DD><CODE>DefinitionParserException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>deployBpss</H3>
+<PRE>
+public int <B>deployBpss</B>(File&nbsp;processSpec)</PRE>
+<DL><DD>This method will parse BPSS file and deploy into database<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>processSpec</CODE> - </DD>
+<DT><B>Returns:</B></DL>
+<HR>
+
+<H3>undeployBpss</H3>
+<PRE>
+public int <B>undeployBpss</B>(File&nbsp;processSpec)</PRE>
+<DL><DD>This method removes the bpss entities from database<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>processSpec</CODE> - </DD>
+<DT><B>Returns:</B></DL>
+<HR>
+
+<H3>loadBpss</H3>
+<PRE>
+public ProcessSpecification <B>loadBpss</B>(File&nbsp;processSpec)</PRE>
+<DL><DD>This method loads the bpss file and validates aganist its dtd<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>processSpec</CODE> - </DD>
+<DT><B>Returns:</B><DT><B>Throws:</B><DD><CODE>DefinitionParserException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>synchronize</H3>
+<PRE>
+public void <B>synchronize</B>()</PRE>
+<DL><DD><DL><DD></DD></DL></DD>
+</DL>
+<DL></DL>
+<HR>
+
+<H3>save</H3>
+<PRE>
+public void <B>save</B>()</PRE>
+<DL><DD>DOCUMENT ME!<DL><DD></DD></DL></DD>
+</DL>
+<DL></DL>
+<HR>
+
+</BODY>
+</HTML>

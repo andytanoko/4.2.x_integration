@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jbosscmp-jdbc PUBLIC "-//JBoss//DTD JBOSSCMP-JDBC 4.0//EN" "http://www.jboss.org/j2ee/dtd/jbosscmp-jdbc_4_0.dtd">
+<jbosscmp-jdbc>
+  <defaults>
+    <datasource>java:/appdbdatasource</datasource>
+    <datasource-mapping>PostgreSQL</datasource-mapping>
+    <create-table>false</create-table>
+    <remove-table>false</remove-table>
+    <read-only>false</read-only>
+    <row-locking>true</row-locking>
+    <pk-constraint>true</pk-constraint>
+    <preferred-relation-mapping>foreign-key</preferred-relation-mapping>
+    <read-ahead>
+      <strategy>on-load</strategy>
+       <page-size>500</page-size>
+       <eager-load-group>*</eager-load-group>
+    </read-ahead>
+  </defaults>
+  <enterprise-beans>
+    <entity>
+      <ejb-name>KeyGenerator</ejb-name>
+      <datasource>java:/appdbdatasource</datasource>
+      <datasource-mapping>PostgreSQL</datasource-mapping>
+      <create-table>false</create-table>
+      <remove-table>false</remove-table>
+      <read-only>false</read-only>
+      <row-locking>true</row-locking>
+      <pk-constraint>true</pk-constraint>
+      <read-ahead>
+        <strategy>on-load</strategy>
+         <page-size>500</page-size>
+         <eager-load-group>*</eager-load-group>
+      </read-ahead>
+      <table-name>referencenum</table-name>
+      <cmp-field>
+        <field-name>refName</field-name>
+        <column-name>"RefName"</column-name>
+      </cmp-field>
+      <cmp-field>
+        <field-name>lastRefNum</field-name>
+        <column-name>"LastRefNum"</column-name>
+      </cmp-field>
+    </entity>
+  </enterprise-beans>
+</jbosscmp-jdbc>

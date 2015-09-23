@@ -1,0 +1,58 @@
+Procedure for making minor patch
+--------------------------------
+1. Update integration view
+   - save the clearcase update report for reference.
+   - create a UCMUtility activity for CI/CO for this minor patch.
+
+2. Change c:\my-build.properties
+   - comment off rebuild=true
+   - comment off setenv=true
+
+3. Build gtas
+   - at command prompt> cd GTAS\GridTalk\projects directory
+   - at command prompt> gtas-ant-build
+
+4. Prepare the patch directory, say, GridTalk2.3.4.p2 (Suggest to use a previous minor patch as a base)
+   - Create the readme file for the patch, e.g. GridTalk2.3.4.p2-readme.txt
+     Give details of the defects fixed in this patch and instructions to run the patch.
+   - Place zip.exe and unzip.exe into the directory
+   - From the GTAS\GridTalk\deploy and GTAS\GridTalk\deplib directories, copy the .jar files that have been rebuild
+     since last release (by examining the timestamps).
+   - Sometimes the war files also need to be copied. You will refer to the clearcase update report to find out if
+     any files changed that affect the war files. 
+   - From the clearcase update report, find out what configuration and data files that changed, copy them too.
+   - From the clearcase update report, find out any new db patch scripts and copy them too.
+
+5. Update build number in resource bundle
+   - Create a WEB-INF\classes directory
+   - Copy GTAS\GridTalk\client\web\i18n\ApplicationResources.properties (and _ja.properties) into it.
+   - Edit the properties file to change the build number on "gridtalk.title.window" and "gridtalk.build" properties.
+   - If there are any changes to gtas.war, these files may be placed in the WEB-INF.
+
+6. Create the patch.bat
+   - Create a patch.bat file using the patch.bat from existing patches as a base.
+   - Customize for updating files and dbscripts specific for this patch.
+
+7. Test the patch
+   - Run the patch on a GridTalk with the correct source version e.g. GridTalk2.3.4.p2 must be patch after
+     GridTalk2.3.4.p1.
+   - Start the GridTalk, ensure the build number is correct and test the bug-fixes.
+
+8. Release the patch
+   - If everything is ok, zip up the patch directory contents, e.g. GridTalk2.3.4.p2.zip 
+   - Put the patch on \\raven\sd-build\GridTalk\2.3, for example.
+   - Send email to inform SQA that the patch is ready.
+
+9. Make baseline
+   - Check in all modified files (if any)
+   - at command prompt cd to integration view root folder
+   - at compand prompt> cleartool mkbl -ide -full GT_X.Y_YYMMDD_BX.Y.Z.P#
+     where: X is the major version
+            Y is the minor version
+            Z is the build number
+            # is the minor patch number
+            YYMMDD is the year, month, day of the release
+     For example, GT_2.3_040805_B2.3.4.P2
+   - Complete the CQ activity
+
+   

@@ -1,0 +1,161 @@
+<html>
+<head>
+<title>6.5.1 To create a new response track record </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>6.5.1 To create a new response track record </h3>
+<p><span></span>
+</p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Click Response Track Record. The Response Track Records list view page with the following columns in the table is displayed.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Edit</span>
+</b>
+</p>
+<p><span>This field allows you to update the properties of the document type.</span>
+</p>
+<p><b><span></span>
+</b>
+</p>
+<p><b><span>Sent Document Type</span>
+</b>
+</p>
+<p><span>This field indicates the type of document that you have sent to your partner. </span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Start Track Date XPath</span>
+</b>
+</p>
+<p><span>This field indicates the start date of the record.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Response Document Type</span>
+</b>
+</p>
+<p><span>This field indicates the type of document, which you have received or not received from your partner</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>To create a new response track record, click Create Response Track Record. The Response Track Record detail view page is displayed.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='495' height='339' border='0' src='../images/image032.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>In the Sent Document pane, select Sent Document Type from the list box. For example, 3A4PORequest. If the document type is not listed here, click on the <img width='16' height='16' border='0' src='../images/image011.gif'>icon to create a document type. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>Enter Sent Document Identifier XPath. The user needs to specify the XPath in the requesting document for extracting the document identifier. If not specified, the UDocNum in the GridDoc will be used instead.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 5.<span> </span>
+</span>
+<span>Enter Track Date XPath. The user needs to specify the XPath in the requesting document for extracting a date from which the tracking will start. If not specified, the DT Sent Start in GridDoc will be used. For example, if the start date is 24th Feb 03 in the sent doc, and you define a Reminder Alert with 2 days to reminder, then on the 26th Feb, if the response document is still not received, a document reminder alert will be raised. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 6.<span> </span>
+</span>
+<span>In the Response Document pane, select Response Document Type from the list box. For example, 3A4POConfirmation. If the document type is not listed here, click on the <img width='16' height='16' border='0' src='../images/image011.gif'>icon to create a document type.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 7.<span> </span>
+</span>
+<span>Enter Response Document Identifier XPath. The user needs to specify the XPath in the response document to extract document identifier to match with the sent document identifier.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 8.<span> </span>
+</span>
+<span>Next proceed to the Reminder Alerts pane. The columns in the Reminder Alerts section are:</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Edit</span>
+</b>
+</p>
+<p><span>This field allows you to update the properties of the selected day.</span>
+</p>
+<p><b><span></span>
+</b>
+</p>
+<p><b><span>Days to Reminder</span>
+</b>
+</p>
+<p><span>This field indicates the number of days after the start tracking date when the response document is still not received to raise document reminder alerts. </span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Alert to raise</span>
+</b>
+</p>
+<p><span>The field allows you to configure the document reminder alerts. </span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Document Recipient XPath</span>
+</b>
+</p>
+<p><span>This field is the recipient of the sent document. The XPath will be used to extract an email code from the sent document. The extracted email code will be used for lookup in a </span>
+<a name='OLE_LINK4'><span>emailcode-ref.xml</span>
+</a>
+<span> file (under &lt;GRIDTALK_HOME&gt;/data/GNapps/gtas/data/alert/email) for email addresses of the recipient of the reminder alert. See Chapter 6.5.2The Email Code Reference File.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Document Sender XPath</span>
+</b>
+</p>
+<p><span>This field is the sender of the sent document. The XPath will be used to extract an email code from the sent document. The extracted email codes will be used for lookup in the </span>
+<span>emailcode-ref.xml</span>
+<span> file (under &lt;GRIDTALK_HOME&gt;/j&lt;boss&gt;/bin/gtas/data/alert/email) for recipients of the reminder alert. See Chapter 6.5.2The Email Code Reference File.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 9.<span> </span>
+</span>
+<span>Next go to the Receive Document pane. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 10.<span> </span>
+</span>
+<span>Select Receive Response Alert from the list box. If the alert you want is not listed here, click on the <a name='OLE_LINK22'><img width='16' height='16' border='0' src='../images/image011.gif'></a>
+icon to create a new alert.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Enter Alert Recipient XPath. The user needs to specify the XPath in the response document for extracting email code. The email code will be used for lookup in the emailcode</span>
+<span>-ref.xml</span>
+<span> file for the recipients of the response alert.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 11.<span> </span>
+</span>
+<span>To save the creation, click Save Response Track Response. This record will appear in the Response Track Records list view page. </span>
+</p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

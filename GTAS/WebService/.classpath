@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/reqlib/axis-ant.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/reqlib/commons-discovery.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/reqlib/jaxrpc.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/reqlib/saaj-api-1.2.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/reqlib/soap.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/reqlib/uddi4j.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/reqlib/wsdl4j.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/reqlib/commons-logging.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/GridTalk"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/reqlib/servlet.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Framework"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-Transport"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/reqlib/wss4j-1.5.3.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/reqlib/axis-1.1.jar"/>
+	<classpathentry kind="var" path="J2EE_HOME/lib/j2ee.jar"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>

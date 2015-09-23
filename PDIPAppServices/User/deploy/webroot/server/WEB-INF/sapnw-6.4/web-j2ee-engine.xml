@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-j2ee-engine SYSTEM "web-j2ee-engine.dtd">
+<web-j2ee-engine>
+	<ejb-ref>
+		<ejb-ref-name>ejb/UserManager</ejb-ref-name>
+		<jndi-name>com.gridnode.pdip.app.user.facade.ejb.IUserManagerHome</jndi-name>
+	</ejb-ref>
+	<ejb-ref>
+		<ejb-ref-name>ejb/SessionManager</ejb-ref-name>
+		<jndi-name>com.gridnode.pdip.base.session.facade.ejb.ISessionManagerHome</jndi-name>
+	</ejb-ref>
+</web-j2ee-engine>

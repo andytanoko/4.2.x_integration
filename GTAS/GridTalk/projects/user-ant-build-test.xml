@@ -1,0 +1,240 @@
+<project name="UserManagement" default="all" basedir=".">
+	<!--   set global properties for this build   -->
+	<property environment="env"/>
+	<property file="./pdip.properties"/>
+	<property name="moduleDir" value="./.."/>
+	<property name="requiredLibDir" value="${projectDir}/reqlib"/>
+	<property name="deployDir" value="${moduleDir}/test-deploy"/>
+	<property name="ejbrootDir" value="${deployDir}/ejbroot"/>
+	<property name="webrootDir" value="${deployDir}/webroot"/>
+	<property name="clientrootDir" value="${deployDir}/clientroot"/>
+	<property name="workDir" value="${moduleDir}/work"/>
+	<property name="sourceDir" value="${moduleDir}/src"/>
+  <property name="testSrcDir" value="${moduleDir}/test/User"></property>
+	<property name="webDir" value="${moduleDir}/web"/>
+  <property name="testClassesDir" value="${moduleDir}/test/classes/User"></property>
+	<property name="classesDir" value="${moduleDir}/classes"/>
+	<property name="buildDir" value="${workDir}/build"/>
+	<property name="rebuild" value="false"/>
+	<path id="project.classpath">
+		<pathelement path="${classpath}"/>
+		<pathelement location="${classesDir}"/>
+    <pathelement location="${testClassesDir}"></pathelement>
+		<pathelement location="${sourceDir}"/>
+    <pathelement location="${testSrcDir}"></pathelement>
+		<fileset dir="${appUserDeployDir}">
+			<include name="app-user.jar"/>
+		</fileset>
+		<fileset dir="${frameworkDeployDir}">
+			<include name="framework.jar"/>
+		</fileset>
+		<fileset dir="${requiredLibDir}">
+			<include name="**/*.jar"/>
+		</fileset>
+		<fileset dir="${frameworkReqlibDir}">
+			<include name="**/*.jar"/>
+		</fileset>
+		<fileset dir="${ejbLibDir}">
+			<include name="**/*.jar"/>
+		</fileset>
+		<fileset dir="${ejbClientDir}">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+	<target name="all" depends="init,
+                              framework_depcheck,
+                              appUser_depcheck,
+                              depcheck,
+                              build_UserClient,
+                              earcheck,
+                              setupDeployment"/>
+	<target name="init">
+		<!--   Create the time stamp   -->
+		<tstamp/>
+		<mkdir dir="${testClassesDir}"/>
+	</target>
+	<target name="framework_depcheck">
+		<echo message="frameworkBuild is ${frameworkDir}/projects/ant-build.xml"/>
+		<ant antfile="ant-build.xml" dir="${frameworkDir}/projects" inheritAll="false">
+			<property file="${frameworkDir}/projects/pdip.properties"/>
+			<property name="deploy" value="false"/>
+		</ant>
+		<condition property="framework_uptodate">
+			<and>
+				<available file="${deployDir}/framework.jar" type="file"/>
+				<available file="${deployDir}/framework-db-keygen-ejb.jar" type="file"/>
+				<available file="${deployDir}/framework-db-metainfo-ejb.jar" type="file"/>
+				<available file="${deployDir}/junit.war" type="file"/>
+				<uptodate targetfile="${deployDir}/framework.jar">
+					<srcfiles dir="${frameworkDeployDir}" includes="framework.jar"/>
+				</uptodate>
+				<uptodate targetfile="${deployDir}/framework-db-keygen-ejb.jar">
+					<srcfiles dir="${frameworkDeployDir}" includes="framework-db-keygen-ejb.jar"/>
+				</uptodate>
+				<uptodate targetfile="${deployDir}/framework-db-metainfo-ejb.jar">
+					<srcfiles dir="${frameworkDeployDir}" includes="framework-db-metainfo-ejb.jar"/>
+				</uptodate>
+				<uptodate targetfile="${deployDir}/junit.war">
+					<srcfiles dir="${frameworkDeployDir}" includes="junit.war"/>
+				</uptodate>
+				<equals arg1="${rebuild}" arg2="false"/>
+			</and>
+		</condition>
+		<echo message="framework_uptodate is ${framework_uptodate}"/>
+		<copy todir="${deployDir}">
+			<fileset dir="${frameworkDeployDir}">
+				<include name="framework.jar" unless="framework_uptodate"/>
+				<include name="framework-db-keygen-ejb.jar" unless="framework_uptodate"/>
+				<include name="framework-db-metainfo-ejb.jar" unless="framework_uptodate"/>
+				<include name="junit.war" unless="framework_uptodate"/>
+			</fileset>
+		</copy>
+	</target>
+	<target name="appUser_depcheck">
+		<ant antfile="ant-build.xml" dir="${appUserDir}/projects" inheritAll="false">
+			<property file="${appUserDir}/projects/pdip.properties"/>
+			<property name="deploy" value="false"/>
+		</ant>
+		<condition property="appUser_uptodate">
+			<and>
+				<available file="${deployDir}/app-user.jar" type="file"/>
+				<available file="${deployDir}/app-user-ejb.jar" type="file"/>
+				<uptodate targetfile="${deployDir}/app-user.jar">
+					<srcfiles dir="${appUserDeployDir}" includes="app-user.jar"/>
+				</uptodate>
+				<uptodate targetfile="${deployDir}/app-user-ejb.jar">
+					<srcfiles dir="${appUserDeployDir}" includes="app-user-ejb.jar"/>
+				</uptodate>
+				<equals arg1="${rebuild}" arg2="false"/>
+			</and>
+		</condition>
+		<echo message="appUser_uptodate is ${appUser_uptodate}"/>
+		<copy todir="${deployDir}">
+			<fileset dir="${appUserDeployDir}">
+				<include name="app-user.jar" unless="appUser_uptodate"/>
+				<include name="app-user-ejb.jar" unless="appUser_uptodate"/>
+			</fileset>
+		</copy>
+	</target>
+	<target name="depcheck">
+		<javac destdir="${testClassesDir}"
+           srcdir="${sourceDir}"
+           classpathref="project.classpath"/>
+    <javac destdir="${testClassesDir}"
+           srcdir="${testSrcDir}"
+           classpathref="project.classpath">
+    </javac>
+		<condition property="user_uptodate">
+			<and>
+				<available file="${deployDir}/gtas-user-client.jar" type="file"/>
+				<uptodate targetfile="${deployDir}/gtas-user-client.jar">
+					<srcfiles dir="${testClassesDir}">
+						<include name="**/*.class"/>
+						<exclude name="**/*Bean.class"/>
+					</srcfiles>
+				</uptodate>
+				<uptodate targetfile="${deployDir}/gtas-user-client.jar">
+					<srcfiles dir="${clientrootDir}/META-INF/User/" includes="application-client.xml,${appServer}*.xml,*.MF"/>
+				</uptodate>
+				<equals arg1="${rebuild}" arg2="false"/>
+			</and>
+		</condition>
+		<condition property="all_uptodate">
+			<equals arg1="${user_uptodate}" arg2="true"/>
+		</condition>
+		<echo message="gtas-user-client.jar is not uptodate"/>
+	</target>
+	<target name="build_UserClient" unless="user_uptodate">
+		<mkdir dir="${buildDir}/com/gridnode/gtas/"/>
+		<copy todir="${buildDir}/com/gridnode/gtas/">
+			<fileset dir="${testClassesDir}/com/gridnode/gtas/"/>
+		</copy>
+		<copy todir="${buildDir}/META-INF">
+			<fileset dir="${clientrootDir}/META-INF/User/">
+        <include name="application-client.xml"/>
+				<include name="${appServer}*.xml"/>
+				<include name="*M*.*"/>
+				<exclude name="*.bak"/>
+			</fileset>
+		</copy>
+		<jar jarfile="${deployDir}/gtas-user-client.jar"
+         basedir="${buildDir}"
+         manifest="${buildDir}/META-INF/MANIFEST.MF">
+			<fileset dir="${testClassesDir}" excludes="**/*Bean.class"/>
+		</jar>
+	</target>
+	<target name="jarAndEjbc" unless="bean_uptodate">
+		<echo message="MetaDir in jarAndEjbc is ${MetaDir}"/>
+		<condition property="all_uptodate">
+			<equals arg1="${bean_uptodate}" arg2="true"/>
+		</condition>
+		<echo message="${JarName} is not uptodate "/>
+		<antcall target="cleanBuildDir"/>
+		<mkdir dir="${buildDir}/${PackagePath}"/>
+		<copy todir="${buildDir}/${PackagePath}">
+			<fileset dir="${testClassesDir}/${PackagePath}" includes="${Home},${Remote},${Bean}"/>
+		</copy>
+		<copy todir="${buildDir}/META-INF">
+			<fileset dir="${MetaDir}">
+				<include name="ejb-jar.xml"/>
+				<include name="${appServer}*.xml"/>
+				<include name="*M*.*"/>
+				<exclude name="*.bak"/>
+			</fileset>
+		</copy>
+		<jar jarfile="${deployDir}/${JarName}" basedir="${buildDir}" manifest="${buildDir}/META-INF/MANIFEST.MF"/>
+	</target>
+	<target name="CheckAndJar">
+		<echo message="MetaDir in CheckAndJar is ${MetaDir}"/>
+		<condition property="bean_uptodate">
+			<and>
+				<available file="${deployDir}/${JarName}" type="file"/>
+				<uptodate targetfile="${deployDir}/${JarName}">
+					<srcfiles dir="${testClassesDir}/${PackagePath}" includes="${Home},${Remote},${Bean}"/>
+				</uptodate>
+				<uptodate targetfile="${deployDir}/${JarName}">
+					<srcfiles dir="${MetaDir}" includes="ejb-jar.xml,${appServer}*.xml,*.MF"/>
+				</uptodate>
+				<equals arg1="${rebuild}" arg2="false"/>
+			</and>
+		</condition>
+		<antcall target="jarAndEjbc"/>
+	</target>
+	<target name="earcheck">
+		<condition property="ear_uptodate">
+			<and>
+				<available file="${deployDir}/gtas-user.ear" type="file"/>
+				<uptodate targetfile="${deployDir}/gtas-user.ear">
+					<srcfiles dir="${deployDir}">
+						<include name="**/*application.xml"/>
+						<exclude name="**/*.bak"/>
+					</srcfiles>
+				</uptodate>
+				<equals arg1="${framework_uptodate}" arg2="true"/>
+				<equals arg1="${appUser_uptodate}" arg2="true"/>
+				<equals arg1="${user_uptodate}" arg2="true"/>
+				<equals arg1="${all_uptodate}" arg2="true"/>
+			</and>
+		</condition>
+		<echo message="(${framework_uptodate},${appUser_uptodate},${user_uptodate},${all_uptodate})ear_uptodate is ${ear_uptodate}"/>
+	</target>
+	<target name="setupDeployment" unless="ear_uptodate">
+		<antcall target="cleanBuildDir"/>
+		<copy todir="${buildDir}">
+			<fileset dir="${deployDir}" includes="META-INF/**/*.MF,META-INF/**/*.xml"/>
+			<fileset dir="${deployDir}" includes="*.jar"/>
+			<fileset dir="${deployDir}" includes="*.war"/>
+      <fileset dir="${frameworkDir}/../reqlib" includes="junit*.jar,log*.jar"></fileset>
+		</copy>
+		<ear earfile="${deployDir}/gtas-user.ear" basedir="${buildDir}" appxml="${buildDir}/META-INF/User/application.xml" includes="*.jar,*.war," manifest="${buildDir}/META-INF/User/MANIFEST.MF"/>
+		<delete dir="${workDir}"/>
+	</target>
+	<target name="cleanBuildDir">
+		<!--   Create the build directory structure used by compile
+        and copy the deployment descriptors into it  -->
+		<delete dir="${workDir}"/>
+		<mkdir dir="${workDir}"/>
+		<mkdir dir="${buildDir}"/>
+		<mkdir dir="${buildDir}/META-INF/User"/>
+	</target>
+</project>

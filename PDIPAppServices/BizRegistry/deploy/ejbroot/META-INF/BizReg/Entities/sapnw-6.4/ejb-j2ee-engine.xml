@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-j2ee-engine SYSTEM "ejb-j2ee-engine.dtd">
+<ejb-j2ee-engine>
+	<enterprise-beans>
+		<enterprise-bean>
+			<ejb-name>BusinessEntity</ejb-name>
+			<jndi-name>com.gridnode.pdip.app.bizreg.entities.ejb.IBizEntityLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>RegistryObjectMapping</ejb-name>
+			<jndi-name>com.gridnode.pdip.app.bizreg.entities.ejb.IRegistryObjectMappingLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>RegistryConnectInfo</ejb-name>
+			<jndi-name>com.gridnode.pdip.app.bizreg.entities.ejb.IRegistryConnectInfoLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+	</enterprise-beans>
+</ejb-j2ee-engine>

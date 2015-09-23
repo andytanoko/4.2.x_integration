@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><!--JBuilder QuickDoc-->
+<HEAD>
+<TITLE>Class com.gridnode.pdip.app.workflow.facade.ejb.GWFWorkflowManagerBean</TITLE><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+</HEAD>
+<BODY>
+
+<H2>
+<FONT SIZE="-1">com.gridnode.pdip.app.workflow.facade.ejb</FONT>
+<BR>Class GWFWorkflowManagerBean</H2>
+<DL>
+<DT>public class <B>GWFWorkflowManagerBean</B><DT>implements SessionBean
+</DL>
+<DL><DD>This software is the proprietary information of GridNode Pte Ltd. Use is subjected to license terms. Copyright 2001-2002 (C) GridNode Pte Ltd. All Rights Reserved. Date Author Changes May 24 2002 MAHESH Created<DL><DD></DD></DL></DD>
+</DL>
+<DL></DL>
+<TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+<TR BGCOLOR="#CCCCFF"><TD COLSPAN=1><FONT SIZE="+2">
+<B>Method Detail</B>
+</FONT></TD></TR></TABLE>
+
+<H3>createRtProcess</H3>
+<PRE>
+public Long <B>createRtProcess</B>(Long&nbsp;processUId,
+                            String&nbsp;processType,
+                            Long&nbsp;rtActivityUId,
+                            Long&nbsp;contextUId,
+                            String&nbsp;engineType)</PRE>
+<DL><DD>This method allows to create the runtime process<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>processUId</CODE> - This is the process definition uid</DD>
+<DD><CODE>processType</CODE> - This is the processtype</DD>
+<DD><CODE>rtActivityUId</CODE> - This is the parent activity which started this process</DD>
+<DD><CODE>contextUId</CODE> - This is the context uid for this process</DD>
+<DD><CODE>engineType</CODE> - This is engine type XPDL or BPSS</DD>
+<DT><B>Returns:</B><DD>The contextUId for this process instance</DD>
+<DT><B>Throws:</B><DD><CODE>WorkflowException</CODE> - </DD>
+<DD><CODE>SystemException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>createRtActivity</H3>
+<PRE>
+public void <B>createRtActivity</B>(Long&nbsp;activityUId,
+                             String&nbsp;activityType,
+                             Long&nbsp;rtProcessUId,
+                             String&nbsp;branchName,
+                             Long&nbsp;contextUId,
+                             String&nbsp;engineType)</PRE>
+<DL><DD>This method allows to create the runtime process<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>activityUId</CODE> - This is the activity definition uid</DD>
+<DD><CODE>activityType</CODE> - This is the activity type</DD>
+<DD><CODE>rtProcessUId</CODE> - this is the runtime process uid</DD>
+<DD><CODE>branchName</CODE> - This is the branch name</DD>
+<DD><CODE>contextUId</CODE> - This is the context uid of the process</DD>
+<DD><CODE>engineType</CODE> - This is engine type XPDL or BPSS</DD>
+<DT><B>Throws:</B><DD><CODE>WorkflowException</CODE> - </DD>
+<DD><CODE>SystemException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>changeProcessState</H3>
+<PRE>
+public void <B>changeProcessState</B>(Long&nbsp;rtProcessUId,
+                               int&nbsp;state,
+                               String&nbsp;engineType)</PRE>
+<DL><DD>This method changes the process state<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>rtProcessUId</CODE> - This is the runtime process uid</DD>
+<DD><CODE>state</CODE> - This is the new state for this process</DD>
+<DD><CODE>engineType</CODE> - This is engine type XPDL or BPSS</DD>
+<DT><B>Throws:</B><DD><CODE>WorkflowException</CODE> - </DD>
+<DD><CODE>SystemException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>changeActivityState</H3>
+<PRE>
+public void <B>changeActivityState</B>(Long&nbsp;rtActivityUId,
+                                int&nbsp;state,
+                                String&nbsp;engineType)</PRE>
+<DL><DD>This method changes the activity state<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>rtActivityUId</CODE> - This is the runtime activity uid</DD>
+<DD><CODE>state</CODE> - This is the new state for this activity</DD>
+<DD><CODE>engineType</CODE> - This is engine type XPDL or BPSS</DD>
+<DT><B>Throws:</B><DD><CODE>WorkflowException</CODE> - </DD>
+<DD><CODE>SystemException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>routeProcess</H3>
+<PRE>
+public void <B>routeProcess</B>(Long&nbsp;rtProcessUId,
+                         String&nbsp;engineType)</PRE>
+<DL><DD>This method calls the selectroute of the process engine<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>rtProcessUId</CODE> - This is the runtime process uid</DD>
+<DD><CODE>engineType</CODE> - This is engine type XPDL or BPSS</DD>
+<DT><B>Throws:</B><DD><CODE>WorkflowException</CODE> - </DD>
+<DD><CODE>SystemException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>routeActivity</H3>
+<PRE>
+public void <B>routeActivity</B>(Long&nbsp;rtActivityUId,
+                          String&nbsp;engineType)</PRE>
+<DL><DD>This method calls the selectroute of the activity engine<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>rtActivityUId</CODE> - This is the runtime activity uid</DD>
+<DD><CODE>engineType</CODE> - This is engine type XPDL or BPSS</DD>
+<DT><B>Throws:</B><DD><CODE>WorkflowException</CODE> - </DD>
+<DD><CODE>SystemException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>routeRestriction</H3>
+<PRE>
+public void <B>routeRestriction</B>(Long&nbsp;rtRestrictionUId,
+                             String&nbsp;engineType)</PRE>
+<DL><DD>This method calls the selectroute of the restriction engine<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>rtRestrictionUId</CODE> - This is the runtime restriction uid</DD>
+<DD><CODE>engineType</CODE> - This is engine type XPDL or BPSS</DD>
+<DT><B>Throws:</B><DD><CODE>WorkflowException</CODE> - </DD>
+<DD><CODE>SystemException</CODE> - </DD>
+</DL>
+<HR>
+
+</BODY>
+</HTML>

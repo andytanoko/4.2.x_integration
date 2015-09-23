@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head id="xhtml_head">
+    <title id="title">lbGridTalk</title>
+    <base href="file:///C:\views\i00054_GT_2.1_ExportConfiguration_2\GTAS\GridTalk\web/gt.css" id="base_tag"/>
+    <link id="xhtml_stylesheet" rel="stylesheet" href="gt.css" type="text/css"/>
+  </head>
+  <body>
+    <div id="page_content">
+      <div style="display: none;" id="connect_wait_section">
+        <h4 id="connect_wait_heading">
+          lbConnectWaitHeading
+        </h4>
+        <div id="connect_wait_message">
+          lbConnectWaitMessage
+        </div>
+      </div>
+      <form name="entityForm" id="form" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="save"/>
+        <input type="hidden" name="divertTo"/>
+        <div id="unregistered">
+          <span id="unregistered_message">lbUnregistered</span>
+        </div>
+        <div id="menu" align="left">
+          <div id="certificatePassword_details">
+            <a id="certificatePassword_link" href="javascript:divertToMapping('divertChangeCertificatePassword');">
+              <img id="certificatePassword_icon" src="images/actions/changePassword.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+              lbChangeCertificatePassword
+            </a>
+            <br/>
+            <br/>
+          </div>
+          <div id="connectGridMaster_details">
+	          <a id="connect_link" href="javascript:askForSecurityPassword();">
+	            <img id="connect_icon" src="images/actions/connect.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+	            lbConnect
+	          </a>
+	          <br/>
+	          <a id="disconnect_link" href="javascript:disconnectFromGridMaster();">
+	            <img id="disconnect_icon" src="images/actions/disconnect.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+	            lbDisconnect
+	          </a>
+	          <br/>
+	          <br/>
+          </div>
+          <a id="houseKeeping_link" href="javascript:divertToMapping('divertHouseKeeping');">
+            <img id="houseKeeping_icon" src="images/actions/archiveRestoreDocuments.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+            lbHouseKeeping
+          </a>
+          <br/>
+          <a id="archiveDocument_link" href="javascript:divertToMapping('divertArchiveDocument');">
+            <img id="archiveDocument_icon" src="images/actions/archiveRestoreDocuments.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+            lbArchiveDocument
+          </a>
+		  <br/>
+		  <a id="scheduledArchiveDocument_link" href="javascript:divertToMapping('divertScheduledArchive');">
+            <img id="archiveDocument_icon" src="images/actions/archiveRestoreDocuments.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+            lbScheduledArchiveDocument
+          </a>
+          <br/>
+          <a id="restoreDocument_link" href="javascript:divertToMapping('divertRestoreDocument');">
+            <img id="restoreDocument_icon" src="images/actions/archiveRestoreDocuments.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+            lbRestoreDocument
+          </a>
+          <br/>
+          <br/>
+          <!--<a id="startBackendListener_link" href="javascript:startBackendListener();">
+            <img id="startBackendListener_icon" src="images/actions/start.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+            lbStartBackendListener
+          </a>
+          <br/>-->
+        </div>
+        <div id="menu2">
+          <div id="exportConfig_menu" align="left">
+            <a id="exportConfig_link" href="javascript:divertToMapping('divertExportConfig');">
+              <img id="exportConfig_icon" src="images/actions/importExportConfiguration.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+              lbExportConfig
+            </a>
+            <br/>
+            <a id="importConfig_link" href="javascript:divertToMapping('divertImportConfig');">
+              <img id="importConfig_icon" src="images/actions/importExportConfiguration.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+              lbImportConfig
+            </a>
+            <br/>
+            <br/>
+          </div>
+        </div>
+        <div id="connect" style="display: none;" align="left">
+          <table>
+            <tr>
+              <td>
+                <span id="securityPassword_label" class="fieldlabel">lbSecurityPassword</span>
+              </td>
+              <td>
+                <input id="securityPassword_value"
+                        name="securityPassword"
+                        type="password"
+                        size="25"
+                        class="mandatory"
+                        onkeypress="handleCtgmKeyboard();"/>
+              </td>
+              <td>
+                <span id="securityPassword_error" class="errortext">&nbsp;</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a id="securityPassword_ok" href="javascript:connectToGridMaster();">
+                  <img src="images/actions/connect.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+                  lbOk
+                </a>
+              </td>
+              <td>
+                <a id="securityPassword_cancel" href="javascript:cancelSecurityPassword();">
+                  <img src="images/actions/cancel.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+                  lbCancel
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

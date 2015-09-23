@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.rosettanet.org/RNIF/V02.00" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.rosettanet.org/RNIF/V02.00" elementFormDefault="unqualified">
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+	<xsd:element name="Exception">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ExceptionDescription"/>
+				<xsd:element ref="GlobalExceptionTypeCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ExceptionDescription">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="errorClassification"/>
+				<xsd:element ref="errorDescription"/>
+				<xsd:element ref="offendingMessageComponent" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="FreeFormText">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="nonEmptyString">
+					<xsd:attribute ref="xml:lang"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="nonEmptyString">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="GlobalExceptionTypeCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:enumeration value="General Exception"/>
+				<xsd:enumeration value="Receipt Acknowledgment Exception"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalMessageComponentCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:enumeration value="Preamble"/>
+				<xsd:enumeration value="DeliveryHeader"/>
+				<xsd:enumeration value="ServiceHeader"/>
+				<xsd:enumeration value="ServiceContent"/>
+				<xsd:enumeration value="Attachment"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalMessageExceptionCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:enumeration value="UNP.MESG.SIGNERR"/>
+				<xsd:enumeration value="UNP.PRMB.READERR"/>
+				<xsd:enumeration value="UNP.PRMB.VALERR"/>
+				<xsd:enumeration value="UNP.DHDR.READERR"/>
+				<xsd:enumeration value="UNP.DHDR.VALERR"/>
+				<xsd:enumeration value="UNP.SHDR.READERR"/>
+				<xsd:enumeration value="UNP.SHDR.VALERR"/>
+				<xsd:enumeration value="UNP.SHDR.MNFSTERR"/>
+				<xsd:enumeration value="UNP.MESG.SEQERR"/>
+				<xsd:enumeration value="UNP.MESG.RESPTYPERR"/>
+				<xsd:enumeration value="UNP.MESG.DCRYPTERR"/>
+				<xsd:enumeration value="UNP.MESG.GENERR"/>
+				<xsd:enumeration value="PKG.MESG.GENERR"/>
+				<xsd:enumeration value="PRF.ACTN.GENERR"/>
+				<xsd:enumeration value="PRF.DICT.VALERR"/>
+				<xsd:enumeration value="UNP.SCON.READERR"/>
+				<xsd:enumeration value="UNP.SCON.VALERR"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="errorClassification">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GlobalMessageExceptionCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="errorDescription">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="FreeFormText"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="offendingMessageComponent">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GlobalMessageComponentCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+	<servlet>
+		<servlet-name>ReProcessPIActivityServlet</servlet-name>
+		<display-name>ReProcessPIActivityServlet</display-name>
+		<servlet-class>com.gridnode.gtas.audit.reprocess.ReProcessPIActivityServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ArchiveServlet</servlet-name>
+		<display-name>ArchiveServlet</display-name>
+		<servlet-class>com.gridnode.gtas.audit.archive.ArchiveServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ArchiveSchedulerServlet</servlet-name>
+		<display-name>ArchiveSchedulerServlet</display-name>
+		<servlet-class>com.gridnode.gtas.audit.archive.scheduler.ArchiveSchedulerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ReProcessPIActivityServlet</servlet-name>
+		<url-pattern>/reprocess</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ArchiveServlet</servlet-name>
+		<url-pattern>/archive</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ArchiveSchedulerServlet</servlet-name>
+		<url-pattern>/archiveSchedule</url-pattern>
+	</servlet-mapping>
+	<session-config>
+		<session-timeout>1</session-timeout>
+	</session-config>
+
+</web-app>

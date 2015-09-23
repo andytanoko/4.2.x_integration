@@ -1,0 +1,15 @@
+<!DOCTYPE Root SYSTEM "FileSystem.dtd">      
+<Root>
+    <Domain name="localhost" propertyname="localhost">
+        <Folder name="folder1">
+            <Folder name="folder11">
+                <Folder name="folder111"/>
+            </Folder>
+            <Document name="document111" type="sample" author="system" size="100">
+                <File name="file1111" type="true"/>
+                <File name="file1112" type="false"/>
+            </Document>
+        </Folder>
+        <Folder name="folder2"/>
+    </Domain>
+</Root>

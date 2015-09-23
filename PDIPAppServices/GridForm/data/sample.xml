@@ -1,0 +1,12 @@
+<sample-test>
+  <subject>CS544 - Web Programming and Digital Media</subject>
+  <time>
+    <slot>Monday 6.45pm - 9.45pm</slot>
+    <slot>Wednesday 6.45pm - 9.45pm</slot>
+  </time>
+  <schedule>
+    <lesson date="08 May"/>
+    <lesson date="15 May"/>
+    <lesson date="22 May"/>
+  </schedule>
+</sample-test>

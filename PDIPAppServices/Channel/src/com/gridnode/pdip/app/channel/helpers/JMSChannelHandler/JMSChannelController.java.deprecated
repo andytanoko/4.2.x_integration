@@ -1,0 +1,177 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2002 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: JMSChannelController.java
+ *
+ ****************************************************************************
+ * Date           Author                  Changes
+ ****************************************************************************
+ * Jun 21 2002    Goh Kan Mun             Created
+ * Jul 03 2002    Goh Kan Mun             Modified - Change in CommInfo and ChannelInfo.
+ * Dec 02 2002    Goh Kan Mun             Modified - Add in header for connect and
+ *                                                   connectAndListen methods.
+ */
+package com.gridnode.pdip.app.channel.helpers.JMSChannelHandler;
+
+import com.gridnode.pdip.app.channel.exceptions.*;
+import com.gridnode.pdip.app.channel.model.ChannelInfo;
+import com.gridnode.pdip.app.channel.helpers.IReceiveFeedbackHandler;
+import com.gridnode.pdip.app.channel.helpers.IReceiveMessageHandler;
+
+import com.gridnode.pdip.base.transport.facade.ejb.ITransportControllerHome;
+import com.gridnode.pdip.base.transport.facade.ejb.ITransportControllerObj;
+import com.gridnode.pdip.base.transport.exceptions.GNTransportException;
+
+import com.gridnode.pdip.framework.exceptions.ServiceLookupException;
+import com.gridnode.pdip.framework.util.ServiceLocator;
+
+import java.io.File;
+import java.rmi.RemoteException;
+import java.util.Hashtable;
+import javax.ejb.CreateException;
+
+/**
+ * This class provides the interface for accessing controls and invoke sending to the
+ * JMS of the Transport module.
+ *
+ * @author Goh Kan Mun
+ *
+ * @version 2.0
+ * @since 2.0
+ */
+
+public class JMSChannelController
+{
+/*  private static JMSChannelController self = null;
+  private static Object lock = new Object();
+  private static Object receiveMessageHandlerLock = new Object();
+  private static Object receiveFeedbackHandlerLock = new Object();
+  private static ITransportControllerObj tptCtrl = null;
+  private static Hashtable receiveBLMessageHandlers = new Hashtable();
+  private static Hashtable receiveBLFeedbackHandlers = new Hashtable();
+
+//  private static JMSReceiveFeedbackHandler feedbackHandler = new JMSReceiveFeedbackHandler();
+//  private static JMSReceiveMessageHandler msgHandler = new JMSReceiveMessageHandler();
+
+  private JMSChannelController()
+          throws CreateException, RemoteException, ServiceLookupException, GNTransportException
+  {
+/*    ITransportControllerHome home = (ITransportControllerHome)
+                             ServiceLocator.instance("").getHome("", ITransportControllerHome.class);
+    tptCtrl = (ITransportControllerObj) home.create();
+    tptCtrl.registerFeedback(feedbackHandler);
+    tptCtrl.registerReceive(msgHandler);
+  */
+//  }
+
+/*  protected ITransportControllerObj getTransportController()
+  {
+    return tptCtrl;
+  }
+
+  public static JMSChannelController getInstance()
+         throws CreateException, RemoteException, ServiceLookupException, Exception
+  {
+    if (self == null)
+    {
+      synchronized (lock)
+      {
+        if (self == null)
+           self = new JMSChannelController();
+      }
+    }
+    return self;
+  }
+
+  public void connect(ChannelInfo info, String[] header) throws Exception
+  {
+    tptCtrl.connect(info.getTptCommInfo(), header);
+  }
+
+  public void connectAndListen(ChannelInfo info, String[] header) throws Exception
+  {
+    tptCtrl.connectAndListen(info.getTptCommInfo(), header);
+  }
+
+  public void send(ChannelInfo info, String[] dataToSend, File[] file, String eventId)
+         throws Exception
+  {
+    JMSSendMessageHandler.processSendMessage(info, dataToSend, null, eventId);
+  }
+
+  public void disconnect(ChannelInfo info) throws Exception
+  {
+    tptCtrl.disconnect(info.getTptCommInfo());
+  }
+
+  public void ping(ChannelInfo info)
+  {
+    throw new java.lang.UnsupportedOperationException("Method ping(SwiftMQCommInfo info) not yet implemented.");
+  }
+
+  public void registerReceiveMessageHandler(String eventId, IReceiveMessageHandler handler)
+         throws Exception
+  {
+    synchronized (receiveMessageHandlerLock)
+    {
+      if (receiveBLMessageHandlers.containsKey(eventId))
+        throw new EventIdAlreadyRegisteredException("Message handler of event " + eventId +
+              " is already registered!");
+      receiveBLMessageHandlers.put(eventId, handler);
+    }
+  }
+
+  public synchronized void deregisterReceiveMessageHandler(String eventId) throws Exception
+  {
+    synchronized (receiveMessageHandlerLock)
+    {
+      if (!receiveBLMessageHandlers.containsKey(eventId))
+        throw new EventIdNotRegisteredException("Message handler of event " + eventId +
+              " not found!");
+      receiveBLMessageHandlers.remove(eventId);
+    }
+  }
+
+  public synchronized IReceiveMessageHandler getReceiveMessageHandler(String eventId) throws Exception
+  {
+    synchronized (receiveMessageHandlerLock)
+    {
+      if (!receiveBLMessageHandlers.containsKey(eventId))
+        throw new EventIdNotRegisteredException("Message handler of event " + eventId +
+              " not found!");
+      return (IReceiveMessageHandler) receiveBLMessageHandlers.get(eventId);
+    }
+  }
+
+  public synchronized void registerReceiveFeedbackHandler(String eventId, IReceiveFeedbackHandler handler)
+         throws Exception
+  {
+    synchronized (receiveFeedbackHandlerLock)
+    {
+      if (receiveBLFeedbackHandlers.containsKey(eventId))
+        throw new EventIdAlreadyRegisteredException("Feedback handler of event " + eventId +
+              " is already registered!");
+      receiveBLFeedbackHandlers.put(eventId, handler);
+    }
+  }
+
+  public synchronized void deregisterReceiveFeedbackHandler(String eventId) throws Exception
+  {
+    if (!receiveBLFeedbackHandlers.containsKey(eventId))
+      throw new EventIdNotRegisteredException("Feedback handler of event " + eventId +
+              " not found!");
+    receiveBLFeedbackHandlers.remove(eventId);
+  }
+
+  public synchronized IReceiveFeedbackHandler getReceiveFeedbackHandler(String eventId) throws Exception
+  {
+    if (!receiveBLFeedbackHandlers.containsKey(eventId))
+      throw new EventIdNotRegisteredException("Feedback handler of event " + eventId +
+              " not found!");
+    return (IReceiveFeedbackHandler) receiveBLFeedbackHandlers.get(eventId);
+  }
+*/
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server>
+  <mbean code="org.jboss.invocation.jrmp.server.JRMPProxyFactory" name="jboss.jmx:type=singletonadaptor,name=Invoker,protocol=jrmp,service=proxyFactory">
+    <depends optional-attribute-name="InvokerName">jboss:service=invoker,type=jrmp</depends>
+    <depends optional-attribute-name="TargetName">jboss.jmx:type=adaptor,name=Invoker</depends>
+    <attribute name="JndiName">jmx/invoker/SingletonRMIAdaptor</attribute>
+    <attribute name="ExportedInterfaces">org.jboss.jmx.adaptor.rmi.RMIAdaptor,org.jboss.jmx.adaptor.rmi.RMIAdaptorExt</attribute>
+    <attribute name="ClientInterceptors">
+      <interceptors>
+        <interceptor>org.jboss.proxy.ClientMethodInterceptor</interceptor>
+        <interceptor>org.jboss.proxy.SecurityInterceptor</interceptor>
+        <interceptor>org.jboss.jmx.connector.invoker.client.InvokerAdaptorClientInterceptor</interceptor>
+        <interceptor>org.jboss.invocation.InvokerInterceptor</interceptor>
+      </interceptors>
+    </attribute>
+  </mbean>
+</server>

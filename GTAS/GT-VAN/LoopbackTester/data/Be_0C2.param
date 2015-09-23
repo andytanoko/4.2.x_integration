@@ -1,0 +1,32 @@
+\###_BOUNDARY_###  =  boundary_action
+\###_BIZ_ACT_ID_### = Asynchronous Test Request
+\###_FROM_GPRCC_### = Account Supplier
+\###_FROM_GBSC_### = Supplier Service
+\###_FROM_GPCC_### = Authorized Service Provider
+\###_GBIZ_ACTION_CODE_### = Asynchronous Test Request Action
+\###_TO_GPRCC_### = Account Supplier
+\###_TO_GBSC_### = Seller Service
+\###_TO_GPCC_### = Authorized Service Provider
+\###_GUSAGE_CODE_### = Test
+\###_PIP_CODE_### = 0C2
+\###_PIP_VERSION_### = R01.01
+
+
+# the following will be determined/generated during run time
+
+###_PREAMBLE_CID_### = <33291741.1166520204885.GridNode.i00107@soklayneo>
+###_DELIVERY_CID_### = <26671359.1166520204932.GridNode.i00107@soklayneo>
+###_DELIVERY_TS_### = 20061219T092324.026Z
+###_RECEIVER_DUNS_### = 999999521
+###_SENDER_DUNS_### = 999999522
+###_MSG_TRACKING_ID_### = 10
+###_SERVICEH_CID_### = <7505337.1166520204948.GridNode.i00107@soklayneo>
+###_PIP_INST_ID_### = gwf://96/Notify of Invoice Action
+###_SERVICEC_CID_### = <1901408.1166520204948.GridNode.i00107@soklayneo>
+###_DOC_GEN_TS_### = 20050819T000000
+###_DOC_ID_### = 90199857
+###_REF_DOC_ID_### = 75899109
+###_INITIATOR_DUNS_### = 999999522
+
+
+

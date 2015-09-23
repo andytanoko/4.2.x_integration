@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDependency name="JmsDestination">
+	<Checker class-name="com.gridnode.pdip.app.alert.helpers.EntityDependencyChecker"
+	         method-name="checkDependentMessageTemplatesForJmsDestination">
+			 <Param type="java.lang.Long" getter-method="getUId"/>
+	</Checker>
+</EntityDependency>

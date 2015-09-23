@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDependency name="MappingFile">
+  <Checker class-name="com.gridnode.gtas.server.mapper.helpers.EntityDependencyChecker"
+           method-name="checkDependentGtMappingRulesForMappingFile">
+    <Param type="java.lang.Long" getter-method="getUId"/>
+  </Checker>
+  <Checker class-name="com.gridnode.pdip.app.rnif.helpers.EntityDependencyChecker"
+           method-name="checkDependentProcessDefsForMappingFile">
+    <Param type="java.lang.Long" getter-method="getUId"/>
+  </Checker>
+</EntityDependency>

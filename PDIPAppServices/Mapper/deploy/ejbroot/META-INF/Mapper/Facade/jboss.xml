@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+	<secure>false</secure>
+	<container-configurations/>
+	<resource-managers/>
+	<enterprise-beans>
+		<session>
+			<ejb-name>MappingManager</ejb-name>
+			<jndi-name>com.gridnode.pdip.app.mapper.facade.ejb.IMappingManagerHome</jndi-name>
+		</session>
+	</enterprise-beans>
+</jboss>

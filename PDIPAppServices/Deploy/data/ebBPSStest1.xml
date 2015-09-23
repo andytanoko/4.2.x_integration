@@ -1,0 +1,40 @@
+<!-- edited by Kurt Kanaskie (Lucent Technologies) -->
+<!-- Notes from Kurt Kanaskie on 2001-04-17
+     Differences from 099 DTD:
+	binaryCollaboration attribute in Performs
+	fromBinaryCollaboration attribute in Transition
+	toBinaryCollaboration attribute in Transition
+     Differences from original:
+	guard instead of guardExpression
+     See EBXMLSpecification_2001_04_23.dtd for other changes
+-->
+<!DOCTYPE ProcessSpecification SYSTEM "BPSS1.01.dtd">
+<ProcessSpecification name="Simple" version="1.1" uuid="[1234-5678-901234]">
+	<BusinessTransaction name="Notify of advance shipment">
+		<RequestingBusinessActivity name="Request notification of advance shipment">
+			<DocumentEnvelope isPositiveResponse="true" businessDocument="ASN"/>
+		</RequestingBusinessActivity>
+		<RespondingBusinessActivity name="Notify of advance shipment" timeToAcknowledgeReceipt="P2D"/>
+	</BusinessTransaction>
+
+	<BusinessTransaction name="Create Order">
+		<RequestingBusinessActivity name="Request order creation" isNonRepudiationRequired="true" timeToAcknowledgeReceipt="P2D" timeToAcknowledgeAcceptance="P3D">
+			<DocumentEnvelope isPositiveResponse="true" businessDocument="Purchase Order"/>
+		</RequestingBusinessActivity>
+		<RespondingBusinessActivity name="Respond with order creation result" isNonRepudiationRequired="true" timeToAcknowledgeReceipt="P5D">
+			<DocumentEnvelope isPositiveResponse="true" businessDocument="PO Acknowledgement"/>
+		</RespondingBusinessActivity>
+	</BusinessTransaction>
+
+	<BinaryCollaboration name="Product Fulfillment" timeToPerform="P5D">
+		<Documentation>timeToPerform = Period: 5 days from start of transaction</Documentation>
+		<InitiatingRole name="buyer"/>
+		<RespondingRole name="seller"/>
+		<BusinessTransactionActivity name="Create Order" businessTransaction="Create Order" fromAuthorizedRole="buyer" toAuthorizedRole="seller"/>
+		<BusinessTransactionActivity name="Notify shipment" businessTransaction="Notify of advance shipment" fromAuthorizedRole="buyer" toAuthorizedRole="seller"/>
+		<Start toBusinessState="Create Order"/>
+		<Transition fromBusinessState="Create Order" toBusinessState="Notify shipment"/>
+		<Success fromBusinessState="Notify shipment" conditionGuard="Success"/>
+		<Failure fromBusinessState="Notify shipment" conditionGuard="BusinessFailure"/>
+	</BinaryCollaboration>	
+</ProcessSpecification>

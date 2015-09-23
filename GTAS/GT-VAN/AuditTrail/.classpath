@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="ISAT/src"/>
+	<classpathentry kind="src" path="ATUT/src"/>
+	<classpathentry kind="src" path="test/src"/>
+	<classpathentry kind="src" path="Common/src"/>
+	<classpathentry kind="src" path="GTAT/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/GT-VAN/Util/reqlib/mail-1.4.jar"/>
+	<classpathentry kind="var" path="J2EE_HOME/lib/j2ee.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/GridTalk"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/App-Workflow"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Framework"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Util"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/App-BizRegistry"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/GT-VAN/Util/reqlib/activation-1.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/App-Rnif"/>
+	<classpathentry kind="var" path="JBOSS_HOME/lib/jboss-jmx.jar"/>
+	<classpathentry kind="var" path="JBOSS_HOME/lib/jboss-system.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/GT-VAN/AuditTrail/Common/reqlib/castor-1.1.jar"/>
+	<classpathentry kind="var" path="JBOSS_HOME/server/all/lib/jbossha.jar"/>
+	<classpathentry kind="var" path="JBOSS_HOME/server/all/lib/jmx-adaptor-plugin.jar"/>
+	<classpathentry kind="var" path="JBOSS_HOME/server/default/lib/jbossmq.jar"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>

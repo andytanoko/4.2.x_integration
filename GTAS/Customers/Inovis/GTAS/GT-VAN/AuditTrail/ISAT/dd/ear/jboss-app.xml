@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--!DOCTYPE jboss-app PUBLIC "-//JBoss//DTD J2EE Application 1.4//EN"
+         "http://www.jboss.org/j2ee/dtd/jboss-app_4_0.dtd"-->
+<jboss-app>
+   <module-order>strict</module-order>
+   <loader-repository>
+		com.gridnode:loader=gtvan-at-isat.ear
+		<loader-repository-config>
+			java2ParentDelegation=true
+		</loader-repository-config>
+	</loader-repository>
+   <module>
+      <har>gtvan-at-isat.har</har>
+   </module>
+   	<module>
+		<ejb>gtvan-util-ejb.jar</ejb>
+	</module>
+   <module>
+		<ejb>gtvan-at-isat-ejb.jar</ejb>
+	</module>
+	<module>
+		<ejb>gtvan-at-gtat-ejb.jar</ejb>
+	</module>
+	<module>
+		<ejb>gtvan-at-atut-ejb.jar</ejb>
+	</module>
+	<module>
+		<web>
+			<web-uri>gtvan-at-isat.war</web-uri>
+			<context-root>/gridtalk/van/isat</context-root>
+		</web>
+   </module>
+   <module>
+	  <service>isat-schedule-service.xml</service>
+   </module>
+</jboss-app>

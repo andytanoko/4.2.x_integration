@@ -1,0 +1,60 @@
+<!ELEMENT ValueLiteral EMPTY>
+<!ATTLIST ValueLiteral 
+    value CDATA #REQUIRED>
+
+<!ELEMENT ValueInput EMPTY>
+<!ATTLIST ValueInput 
+    value CDATA #REQUIRED>
+
+<!ELEMENT EntityField EMPTY>
+<!ATTLIST EntityField 
+    entity-name CDATA #REQUIRED
+    field-name CDATA #REQUIRED>
+
+<!ELEMENT ForeignKey EMPTY>
+<!ATTLIST ForeignKey 
+    entity-name CDATA #REQUIRED
+    field-name CDATA #REQUIRED
+    element-ref CDATA #REQUIRED>
+
+<!ELEMENT EntityRef EMPTY>
+<!ATTLIST EntityRef 
+    element-ref CDATA #REQUIRED>
+    
+
+<!ELEMENT DocumentElement (Mappings?, DocumentElement*)>
+<!ATTLIST DocumentElement 
+    name CDATA #REQUIRED>
+
+
+<!ELEMENT Mappings (ContentModel?, Entity*, Text?, Attribute*)>
+
+
+<!-- ContentModel definition -->
+
+<!ELEMENT ContentModel (ChildElement+)>
+
+<!ELEMENT ChildElement EMPTY>
+<!ATTLIST ChildElement 
+    element-name CDATA #REQUIRED
+    required (true | false) "false"
+    multiplicity (true | false) "false">
+    
+
+<!-- Entity definition -->
+    
+<!ELEMENT Entity (EntityFilter*)>
+<!ATTLIST Entity 
+    name CDATA #REQUIRED>
+
+<!ELEMENT EntityFilter (ValueLiteral | ForeignKey | ValueInput)>
+<!ATTLIST EntityFilter
+    field-name CDATA #REQUIRED>
+    
+
+<!ELEMENT Text (ValueLiteral | EntityField | ValueInput)>
+
+
+<!ELEMENT Attribute (ValueLiteral | EntityField | ValueInput)>
+<!ATTLIST Attribute 
+    name CDATA #REQUIRED>

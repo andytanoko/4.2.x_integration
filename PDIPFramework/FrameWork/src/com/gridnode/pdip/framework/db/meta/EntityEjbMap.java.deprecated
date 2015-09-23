@@ -1,0 +1,77 @@
+package com.gridnode.pdip.framework.db.meta;
+
+/**
+ * <p>Title: </p>
+ * <p>Description: </p>
+ * <p>Copyright: Copyright (c) 2002</p>
+ * <p>Company: </p>
+ * @author unascribed
+ * @version 1.0
+ */
+import com.gridnode.pdip.framework.config.*;
+
+import java.io.*;
+import java.util.*;
+
+public class EntityEjbMap {
+
+    public static String ENTITY_EJB_MAP=IFrameworkConfig.FRAMEWORK_ENTITY_EJB_MAP_CONFIG;
+//    "db"+File.separatorChar+"entityEjbMap.properties";
+    private static Properties entityEjbMap;
+
+    static{
+        try{
+            loadEntityEjbMap();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    static public void loadEntityEjbMap(){
+
+          entityEjbMap = ConfigurationManager.getInstance().getConfig(
+                           IFrameworkConfig.FRAMEWORK_ENTITY_EJB_MAP_CONFIG).getProperties();
+
+//        entityEjbMap=ConfigManager.getInstance(ENTITY_EJB_MAP).getProperties();
+    }
+
+    static public String getHomeFor(String entity){
+        return (String)entityEjbMap.get(getShortName(entity)+".home");
+    }
+
+    static public String getRemoteFor(String entity){
+        return (String)entityEjbMap.get(getShortName(entity)+".remote");
+    }
+
+    static public String getEntityForHome(String home){
+        if(entityEjbMap.containsValue(home)){
+            Enumeration keys=entityEjbMap.keys();
+            while(keys.hasMoreElements()){
+                String key=(String)keys.nextElement();
+                String value=entityEjbMap.getProperty(key);
+                if(value!=null && value.equals(home)){
+                    if(key.indexOf(".")>-1)
+                        return entityEjbMap.getProperty(key.substring(0,key.indexOf(".")));
+                    else break;
+                }
+            }
+        }
+        return null;
+    }
+
+    static public String getShortName(String entity){
+        if(entityEjbMap.containsKey(entity))
+            return entity;
+        else if(entityEjbMap.containsValue(entity)){
+            Enumeration keys=entityEjbMap.keys();
+            while(keys.hasMoreElements()){
+                String key=(String)keys.nextElement();
+                String value=entityEjbMap.getProperty(key);
+                if(value!=null && value.equals(entity)){
+                    return key;
+                }
+            }
+        }
+        return null;
+    }
+}

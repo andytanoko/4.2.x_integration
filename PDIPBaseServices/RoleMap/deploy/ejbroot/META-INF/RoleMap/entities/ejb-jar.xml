@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+	<enterprise-beans>
+		<entity>
+			<display-name>RoleMapEntity</display-name>
+			<ejb-name>RoleMapEntity</ejb-name>
+			<home>com.gridnode.pdip.base.rolemap.entities.ejb.IRoleMapEntityHome</home>
+			<remote>com.gridnode.pdip.base.rolemap.entities.ejb.IRoleMapEntityObj</remote>
+			<ejb-class>com.gridnode.pdip.base.rolemap.entities.ejb.RoleMapEntityBean</ejb-class>
+			<persistence-type>Bean</persistence-type>
+			<prim-key-class>java.lang.Long</prim-key-class>
+			<reentrant>False</reentrant>
+		</entity>
+	</enterprise-beans>
+	<assembly-descriptor>
+		<container-transaction>
+			<method>
+				<ejb-name>RoleMapEntity</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
+	</assembly-descriptor>
+</ejb-jar>

@@ -1,0 +1,446 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001-2002 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: ResourceNodeEntityHandler.java
+ *
+ ****************************************************************************
+ * Date           Author              Changes
+ ****************************************************************************
+ * Aug 01 2002    Neo Sok Lay         Created
+ */
+package com.gridnode.gtas.server.enterprise.helpers;
+
+import com.gridnode.gtas.server.enterprise.model.ResourceNode;
+import com.gridnode.gtas.server.enterprise.entities.ejb.IResourceNodeLocalHome;
+import com.gridnode.gtas.server.enterprise.entities.ejb.IResourceNodeLocalObj;
+
+import com.gridnode.pdip.framework.db.LocalEntityHandler;
+import com.gridnode.pdip.framework.db.EntityHandlerFactory;
+import com.gridnode.pdip.framework.db.filter.DataFilterImpl;
+import com.gridnode.pdip.framework.db.filter.IDataFilter;
+import com.gridnode.pdip.framework.db.dao.*;
+import com.gridnode.pdip.framework.util.ServiceLocator;
+import com.gridnode.pdip.framework.exceptions.ApplicationException;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
+/**
+ * This helper class helps to handle the calls to the Home, Local interfaces
+ * of the ResourceNode.
+ *
+ * @author Neo Sok Lay
+ *
+ * @version 2.0 I4
+ * @since 2.0 I4
+ */
+public final class ResourceNodeEntityHandler
+  extends          LocalEntityHandler
+{
+  private ResourceNodeEntityHandler()
+  {
+    super(ResourceNode.ENTITY_NAME);
+  }
+
+  /**
+   * Get an instance of a ResourceNodeEntityHandler.
+   */
+  public static ResourceNodeEntityHandler getInstance()
+  {
+    ResourceNodeEntityHandler handler = null;
+
+    if (EntityHandlerFactory.hasEntityHandlerFor(ResourceNode.ENTITY_NAME, true))
+    {
+      handler = (ResourceNodeEntityHandler)EntityHandlerFactory.getHandlerFor(
+                  ResourceNode.ENTITY_NAME, true);
+    }
+    else
+    {
+      handler = new ResourceNodeEntityHandler();
+      EntityHandlerFactory.putEntityHandler(ResourceNode.ENTITY_NAME,
+         true, handler);
+    }
+
+    return handler;
+  }
+
+
+  // ************** AbstractEntityHandler methods *******************
+  protected Object getHome() throws java.lang.Exception
+  {
+    return ServiceLocator.instance(ServiceLocator.LOCAL_CONTEXT).getHome(
+      IResourceNodeLocalHome.class.getName(),
+      IResourceNodeLocalHome.class);
+  }
+
+  protected Class getProxyInterfaceClass() throws java.lang.Exception
+  {
+    return IResourceNodeLocalObj.class;
+  }
+
+  // ********************** Own methods ******************************
+
+  /**
+   * Add a resource node and its descendant resource nodes into the database.
+   *
+   * @param resourceNode The resource node.
+   * @return The UID of the created resource node.
+   */
+  public Long addResourceNode(ResourceNode resourceNode)
+    throws Throwable
+  {
+    ResourceNode created = (ResourceNode)createEntity(resourceNode);
+    Long key = (Long)created.getKey();
+    addResourceNodes(resourceNode.getChildrenResourceNodes(), key);
+
+    return key;
+  }
+
+  /**
+   * Add a collection of resource nodes (and its descendants) under a parent
+   * resource node.
+   *
+   * @param resourceNodes The collection of resource nodes to add. If <b>null</b>
+   * or empty, returns silently.
+   * @param parentUID The UID of the parent resource node.
+   */
+  protected void addResourceNodes(Collection resourceNodes, Long parentUID)
+    throws Throwable
+  {
+    if (resourceNodes != null && !resourceNodes.isEmpty())
+    {
+      ResourceNode node = null;
+      for (Iterator i=resourceNodes.iterator(); i.hasNext(); )
+      {
+        node = (ResourceNode)i.next();
+        node.setParentNodeUID(parentUID);
+
+        node = (ResourceNode)createEntity(node);
+        addResourceNodes(node.getChildrenResourceNodes(), (Long)node.getKey());
+      }
+    }
+  }
+
+  /**
+   * Update a resource node with an option to update its descendant resource
+   * nodes.
+   *
+   * @param resourceNode The resource node to update.
+   * @param adjustDescendants <b>true</b> to update the descendant nodes underneath
+   * it. That means, existing descendant nodes may be removed or updated, and
+   * new descendant nodes may be added.
+   */
+  public void updateResourceNode(ResourceNode resourceNode, boolean adjustDescendants)
+    throws Throwable
+  {
+    update(resourceNode);
+
+    Collection newChildren = resourceNode.getChildrenResourceNodes();
+    if (adjustDescendants && newChildren != null)
+    {
+      Long parentUID = (Long)resourceNode.getKey();
+      Collection oldChildren = getResourceNodesByParent(parentUID, true);
+
+      Collection toUpdate = new ArrayList();
+      Collection toAdd = new ArrayList();
+
+      //determine those that need updating, adding.
+      for (Iterator i=newChildren.iterator(); i.hasNext(); )
+      {
+        ResourceNode childNode = (ResourceNode)i.next();
+        if (oldChildren.remove(childNode))
+          toUpdate.add(childNode);
+        else
+          toAdd.add(childNode);
+      }
+
+      //add the new nodes
+      for (Iterator i=toAdd.iterator(); i.hasNext(); )
+      {
+        ResourceNode childNode = (ResourceNode)i.next();
+        childNode.setParentNodeUID(parentUID);
+        addResourceNode(childNode);
+      }
+
+      //update existing nodes
+      for (Iterator i=toUpdate.iterator(); i.hasNext(); )
+      {
+        ResourceNode childNode = (ResourceNode)i.next();
+        updateResourceNode(childNode, true);
+      }
+
+      //what's left in oldChildren are the old nodes (to be removed)
+      for (Iterator i=oldChildren.iterator(); i.hasNext(); )
+      {
+        ResourceNode childNode = (ResourceNode)i.next();
+        removeResourceNode(childNode);
+      }
+    }
+  }
+
+  /**
+   * Remove a resource node and its descendant resource nodes from the database.
+   *
+   * @param resourceNode The resource node to remove.
+   *
+   * @exception ApplicationException The resource node or one of its descendant
+   * resource nodes cannot be deleted.
+   */
+  public void removeResourceNode(ResourceNode resourceNode)
+    throws Throwable
+  {
+    ArrayList toDelete = new ArrayList();
+    checkCanDelete(resourceNode, toDelete);
+
+    DataFilterImpl filter = new DataFilterImpl();
+    filter.addDomainFilter(null, ResourceNode.UID, toDelete, false);
+    removeByFilter(filter);
+  }
+
+  /**
+   * Check whether a resource node (and all its descendant resource nodes)
+   * can be deleted from the database.
+   *
+   * @param resourceNode The resource node to check
+   * @param toDeleteList A list to keep track of the UIDs of all the resource nodes
+   * that can be deleted.
+   *
+   * @exception ApplicationException The resource node or one of its descendant
+   * resource nodes cannot be deleted.
+   */
+  private void checkCanDelete(ResourceNode resourceNode, ArrayList toDeleteList)
+    throws Throwable
+  {
+    if (resourceNode.canDelete())
+    {
+      Long key = (Long)resourceNode.getKey();
+      toDeleteList.add(key);
+
+      Collection children = getResourceNodesByParent(key, false);
+      for (Iterator i=children.iterator(); i.hasNext(); )
+      {
+        ResourceNode node = (ResourceNode)i.next();
+        checkCanDelete(node, toDeleteList);
+      }
+    }
+    else
+      throw new ApplicationException("ResourceNode [" +
+        resourceNode.getEntityDescr() + "] not allowed to be deleted!");
+  }
+
+  // *********************** Finder methods ******************************
+
+  /**
+   * Retrieve resource nodes by a filtering condition.
+   *
+   * @param filter The filtering condition.
+   * @param getDescendants <b>true</b> to recursively retrieve all the
+   * descendants of each resource node that matchs the filtering condition. The
+   * descendants will be placed inside the ChildrenResourceNode field of the
+   * resource node.
+   *
+   * @return A collection of the resource nodes retrieved.
+   */
+  public Collection getResourceNodesByFilter(IDataFilter filter, boolean getDescendants)
+    throws Throwable
+  {
+    Collection children = getEntityByFilter(filter);
+    if (getDescendants)
+    {
+      for (Iterator i=children.iterator(); i.hasNext(); )
+      {
+        ResourceNode node = (ResourceNode)i.next();
+        node.setChildrenResourceNodes(
+          getResourceNodesByParent((Long)node.getKey(), true));
+      }
+    }
+
+    return children;
+  }
+
+  /**
+   * Retrieve resource nodes under a particular resource node.
+   *
+   * @param parentUID The UID of the parent resource node.
+   * @param getDescendants <b>true</b> to recursively retrieve all the
+   * descendants of each resource node that matchs the filtering condition. The
+   * descendants will be placed inside the ChildrenResourceNode field of the
+   * resource node.
+   *
+   * @return A collection of the resource nodes retrieved.
+   */
+  public Collection getResourceNodesByParent(Long parentUID, boolean getDescendants)
+    throws Throwable
+  {
+    DataFilterImpl filter = new DataFilterImpl();
+    filter.addSingleFilter(null, ResourceNode.PARENT_UID, filter.getEqualOperator(),
+      parentUID, false);
+
+    return getResourceNodesByFilter(filter, getDescendants);
+  }
+
+  /**
+   * Retrieve resource nodes representing the same resource.
+   *
+   * @param resourceType The type of the resource.
+   * @param resourceUID The UID of the resource each resource node represents.
+   * @param getDescendants <b>true</b> to recursively retrieve all the
+   * descendants of each resource node that matchs the filtering condition. The
+   * descendants will be placed inside the ChildrenResourceNode field of the
+   * resource node.
+   *
+   * @return A collection of the resource nodes retrieved.
+   */
+  public Collection getResourceNodes(
+    String resourceType, Long resourceUID, boolean getDescendants)
+    throws Throwable
+  {
+    DataFilterImpl filter = new DataFilterImpl();
+    filter.addSingleFilter(null, ResourceNode.RESOURCE_TYPE,
+      filter.getEqualOperator(), resourceType, false);
+    filter.addSingleFilter(filter.getAndConnector(), ResourceNode.RESOURCE_UID,
+      filter.getEqualOperator(), resourceUID, false);
+
+    return getResourceNodesByFilter(filter, getDescendants);
+  }
+
+  /**
+   * Retrieve resource nodes of a certain resource type under a particular
+   * resource node.
+   *
+   * @param parentUID The UID of the parent resource node.
+   * @param resourceType The type of the resource the resource node represents.
+   * @param getDescendants <b>true</b> to recursively retrieve all the
+   * descendants of each resource node that matchs the filtering condition. The
+   * descendants will be placed inside the ChildrenResourceNode field of the
+   * resource node.
+   *
+   * @return A collection of the resource nodes retrieved.
+   */
+  public Collection getResourceNodesByResourceType(
+    Long parentUID, String descendantResourceType, boolean getDescendants)
+    throws Throwable
+  {
+    DataFilterImpl filter = new DataFilterImpl();
+    filter.addSingleFilter(null, ResourceNode.PARENT_UID, filter.getEqualOperator(),
+      parentUID, false);
+    filter.addSingleFilter(filter.getAndConnector(), ResourceNode.RESOURCE_TYPE,
+      filter.getEqualOperator(), descendantResourceType, false);
+
+    Collection children = getEntityByFilter(filter);
+    if (getDescendants)
+    {
+      for (Iterator i=children.iterator(); i.hasNext(); )
+      {
+        ResourceNode node = (ResourceNode)i.next();
+        node.setChildrenResourceNodes(
+          getResourceNodesByResourceType((Long)node.getKey(), descendantResourceType, true));
+      }
+    }
+    return children;
+  }
+
+  /**
+   * Retrieve resource nodes representing a certain type of resource.
+   *
+   * @param resourceType The type of resource each resource node represents.
+   * @param getDescendants <b>true</b> to recursively retrieve all the
+   * descendants of each resource node that matchs the filtering condition. The
+   * descendants will be placed inside the ChildrenResourceNode field of the
+   * resource node.
+   *
+   * @return A collection of the resource nodes retrieved.
+   */
+  public Collection getResourceNodesByResourceType(
+    String resourceType, boolean getDescendants)
+    throws Throwable
+  {
+    DataFilterImpl filter = new DataFilterImpl();
+    filter.addSingleFilter(null, ResourceNode.RESOURCE_TYPE,
+      filter.getEqualOperator(), resourceType, false);
+
+    Collection children = getEntityByFilter(filter);
+    if (getDescendants)
+    {
+      for (Iterator i=children.iterator(); i.hasNext(); )
+      {
+        ResourceNode node = (ResourceNode)i.next();
+        node.setChildrenResourceNodes(
+          getResourceNodesByResourceType((Long)node.getKey(), resourceType, true));
+      }
+    }
+    return children;
+  }
+
+  /**
+   * Retrieve a resource node representing a particular resource under a
+   * particular resource node,
+   *
+   * @param parentUID The UID of the parent resource node.
+   * @param resourceType The type of the resource the resource node represents.
+   * @param resourceUID The UID of the resource the resource node represents.
+   * @param getDescendants <b>true</b> to recursively retrieve all the
+   * descendants of each resource node that matchs the filtering condition. The
+   * descendants will be placed inside the ChildrenResourceNode field of the
+   * resource node.
+   *
+   * @return A collection of the resource nodes retrieved.
+   */
+  public ResourceNode getResourceNode(
+    Long parentUID, String resourceType, Long resourceUID, boolean getDescendants)
+    throws Throwable
+  {
+    DataFilterImpl filter = new DataFilterImpl();
+    filter.addSingleFilter(null, ResourceNode.PARENT_UID, filter.getEqualOperator(),
+      parentUID, false);
+    filter.addSingleFilter(filter.getAndConnector(), ResourceNode.RESOURCE_TYPE,
+      filter.getEqualOperator(), resourceType, false);
+    filter.addSingleFilter(filter.getAndConnector(), ResourceNode.RESOURCE_UID,
+      filter.getEqualOperator(), resourceUID, false);
+
+    Collection retrieved = getEntityByFilterForReadOnly(filter);
+
+    ResourceNode result = null;
+    if (!retrieved.isEmpty())
+    {
+      result = (ResourceNode)retrieved.iterator().next();
+      if (getDescendants)
+      {
+        result.setChildrenResourceNodes(
+          getResourceNodesByParent((Long)result.getKey(), true));
+      }
+    }
+
+    return result;
+  }
+
+  /**
+   * Retrieve a resource node via the UID of the resource node.
+   *
+   * @param resourceNodeUID The UID of the resource node.
+   * @param getDescendants <b>true</b> to recursively retrieve all the
+   * descendants of each resource node that matchs the filtering condition. The
+   * descendants will be placed inside the ChildrenResourceNode field of the
+   * resource node.
+   *
+   * @return A collection of the resource nodes retrieved.
+   */
+  public ResourceNode getResourceNode(Long resourceNodeUID, boolean getDescendants)
+    throws Throwable
+  {
+    ResourceNode node = (ResourceNode)getEntityByKeyForReadOnly(resourceNodeUID);
+
+    if (getDescendants)
+    {
+      node.setChildrenResourceNodes(
+        getResourceNodesByParent(resourceNodeUID, true));
+    }
+
+    return node;
+  }
+}

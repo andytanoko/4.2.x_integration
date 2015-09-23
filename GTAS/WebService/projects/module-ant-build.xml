@@ -1,0 +1,901 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="webservice" default="build" basedir=".">
+  <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+
+  <!--  ===================================================================  -->
+  <!--  Set global properties for this build                                 -->
+  <!--  ===================================================================  -->
+  <property environment="env"/>
+  <!--property file="c:/env.properties"/-->
+  <property file="c:/my-build.properties"/>
+
+  <!--  ===================================================================  -->
+  <!--  Define the standard build target sets: build, all, default           -->
+  <!--  ===================================================================  -->
+  <target name="build" depends="init">
+    <echo message="[${layer.module}] Executing target: build"/>
+    <antcall target="rebuild"/>
+    <if>
+      <isset property="build.default"/>
+      <then>
+        <antcall target="build.default"/>
+      </then>
+      <else>
+        <antcall target="build.all"/>
+      </else>
+    </if>
+    <antcall target="timestamping"/>
+  </target>
+
+  <target name="build.all">
+    <echo message="[${layer.module}] Executing target: build.all"/>
+    <property name="application.xml.file" value="${metainf.dir}/application.xml"/>    
+    <antcall target="create.application.xml.header"/>
+    <antcall target="build.default"/>
+    <antcall target="create.application.xml.footer"/>
+    <property name="ear.name" value="${module.name}"/>
+    <antcall target="deploy"/>
+  </target>
+
+  <target name="build.default">
+    <echo message="[${layer.module}] Executing target: build.default"/>
+    <antcall target="build.dep.modules"/>    
+    <antcall target="package"/>
+    <antcall target="create.application.xml.body"/>
+  </target>
+
+  <!--  ===================================================================  -->
+  <!--  Initialise the build environment                                     -->
+  <!--  ===================================================================  -->
+  <target name="init" depends="define.properties, set.timestamp">
+    <echo message="[${layer.module}] Executing target: init"/>
+    <mkdir dir="${class.dir}"/>
+    <mkdir dir="${lib.dir}"/>
+  </target>
+
+  <!--  ===================================================================  -->
+  <!--  Rebuild if necessary                                                 -->
+  <!--  ===================================================================  -->
+  <target name="rebuild" if="rebuild">
+    <echo message="[${layer.module}] Executing target: rebuild"/>
+    <property file="${module.dir}/projects/timestamp.properties"/>
+    <if>
+      <equals arg1="${build.timestamp}" arg2="${timestamp}"/>
+      <then/>
+      <else>
+        <delete dir="${class.dir}" failonerror="false"/>
+        <mkdir dir="${class.dir}"/>
+        <delete dir="${lib.dir}" failonerror="false"/>
+        <mkdir dir="${lib.dir}"/>
+        <delete dir="${deplib.dir}" failonerror="false"/>
+        <mkdir dir="${deplib.dir}"/>
+        <!--delete dir="${depclass.dir}" failonerror="false"/>
+        <mkdir dir="${depclass.dir}"/-->
+      </else>
+    </if>
+  </target>
+
+  <!--  ===================================================================  -->
+  <!--  Set the timestamp info                                               -->
+  <!--  ===================================================================  -->
+  <target name="timestamping">
+    <propertyfile file="timestamp.properties">
+      <entry  key="build.timestamp" value="${timestamp}"/>
+    </propertyfile>  
+  </target>
+
+  <target name="set.timestamp">
+    <if>
+      <not>
+        <isset property="timestamp"/>
+      </not>
+      <then>
+        <tstamp/>
+        <property name="timestamp" value="${DSTAMP}-${TSTAMP}"/>
+        <echo message="[${layer.module}] Timestamp Created: ${timestamp}"/>
+      </then>
+      <else>
+        <echo message="[${layer.module}] Timestamp Exist: ${timestamp}"/>
+      </else>
+    </if>
+  </target>
+
+  <!--  ===================================================================  -->
+  <!--  Define the environment specific properties                           -->
+  <!--  ===================================================================  -->
+  <target name="define.properties">
+    <if>
+	  <isset property="${global.build.path}"/>
+	  <then>
+   	    <property file="${global.build.path}/global-build.properties"/>
+	  </then>
+	  <else>
+   	    <property file="./global-build.properties"/>
+	  </else>
+	</if>
+    <property file="./build.properties"/>
+    <property name="reqlib.dir" value="${layer.dir}/reqlib"/>
+    <property name="lib.dir" value="${module.dir}/lib"/>
+    <property name="deplib.dir" value="${module.dir}/deplib"/>
+    <property name="metainf.dir" value="${module.dir}/meta-inf"/>
+    <property name="ejbroot.dir" value="${metainf.dir}/ejbroot"/>
+    <property name="webroot.dir" value="${metainf.dir}/webroot"/>
+    <property name="non-ejbroot.dir" value="${metainf.dir}/non-ejbroot"/>
+    <property name="source.dir" value="${module.dir}/src"/>
+    <property name="class.dir" value="${module.dir}/classes"/>
+    <property name="test.dir" value="${module.dir}/test"/>
+    <property name="work.dir" value="${module.dir}/work"/>
+    <property name="build.dir" value="${work.dir}/build"/>
+    <property name="conf.dir" value="${module.dir}/conf"/>
+    <property name="web.dir" value="${module.dir}/web"/>
+  	<property name="ws.vendor.binary.dir" value="${module.dir}/vendor" />
+    <property name="sqlscripts.dir" value="${module.dir}/sqlscripts"/>
+    <property name="layer.module" value="${layer.name}-${module.name}"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Build dependent modules                                             -->
+  <!-- =================================================================== -->
+  <target name="build.dep.modules" if="package.dependency">
+    <echo message="[${layer.module}] Executing target: build.dep.modules"/>
+    <mkdir dir="${deplib.dir}"/>
+    <foreach list="${deplib.modules}" target="build.dep.module"
+             param="deplib.module" inheritall="true">
+    </foreach>
+  </target>
+  
+  <!--target name="build.dep.module" if="deplib.modules">
+    <propertycopy name="deplib.module.dir" from="deplib.${deplib.module}.dir"/>
+    <propertycopy name="deplib.classes" from="deplib.${deplib.module}.classes"/>
+
+    <property file="${deplib.module.dir}/projects/timestamp.properties"/>
+
+    <if>
+      <not>
+        <equals arg1="${build.timestamp}" arg2="${timestamp}"/>
+      </not>
+      <then>
+        <delete failonerror="false">
+          <fileset dir="${deplib.module.dir}/projects" includes="build.xml"/>
+        </delete>
+        <copy todir="${deplib.module.dir}/projects" preservelastmodified="yes">
+          <fileset dir="${deplib.module.dir}/.." includes="build.xml"/>
+        </copy>
+
+        <ant antfile="build.xml" target="build"
+             dir="${deplib.module.dir}/projects" inheritAll="false">
+          <property name="build.default" value="true"/>
+          <property name="timestamp" value="${timestamp}"/>
+          <property name="application.xml.file" value="${application.xml.file}"/>
+        </ant>
+      </then>
+    </if>
+
+    <copy todir="${deplib.dir}" preservelastmodified="yes">
+      <fileset dir="${deplib.module.dir}/lib"
+               includes="*.jar, *.war"/>
+      <fileset dir="${deplib.module.dir}/deplib"
+               includes="*.jar,*.war"/>
+    </copy>
+  </target-->
+  
+  <target name="build.dep.module" if="deplib.modules">
+    <propertycopy name="deplib.module.dir" from="deplib.${deplib.module}.dir"/>
+    <propertyfile file="classpath.properties">
+      <entry key="dep.modules.classpath" operation="+" 
+	         value="${deplib.module.dir}/classes;"/>
+  	</propertyfile>
+  </target>
+
+  <!--  ===================================================================  -->
+  <!--  Compile only modified source files                                   -->
+  <!--  ===================================================================  -->
+  <target name="compile" if="package">
+    <echo message="[${layer.module}] Executing target: compile"/>
+    <if>
+      <isset property="reqlibs"/>
+      <then>
+        <copy todir="${deplib.dir}">
+           <fileset dir="${reqlib.dir}" includes="${reqlibs}"/>
+        </copy>
+      </then>
+    </if>
+
+    <if>
+      <isset property="addlibs"/>
+      <then>
+        <copy todir="${deplib.dir}" flatten="true">
+           <fileset dir="${layer.dir}" includes="${addlibs}"/>
+        </copy>
+      </then>
+    </if>
+
+    <property file="classpath.properties"/>
+    <path id="project.classpath">
+      <pathelement path="${classpath}"/>
+	  <pathelement path="${dep.modules.classpath}"/>
+      <pathelement location="${class.dir}"/>
+      <pathelement location="${source.dir}"/>
+      <fileset dir="${deplib.dir}">
+        <include name="**/*.jar"/>
+      </fileset>
+      <fileset dir="${reqlib.dir}">
+        <include name="**/*.jar"/>
+      </fileset>
+      <!--  includes required libs from other components here  -->
+      <fileset dir="${appserver.lib.dir}">
+        <include name="**/*.jar"/>
+      </fileset>
+      <fileset dir="${appserver.client.lib.dir}">
+        <include name="**/*.jar"/>
+      </fileset>
+    </path>
+    <javac classpathref="project.classpath"
+           srcdir="${source.dir}" 
+           destdir="${class.dir}" 
+           debug="${compile.debug}"
+           optimize="${compile.optimize}"
+           deprecation="${compile.deprecation}"/>
+    <delete file="classpath.properties"/>
+  </target>
+
+  <!--  ===================================================================  -->
+  <!--  Packages the application/module for deployment"                      -->
+  <!--  ===================================================================  -->
+  <target name="package" depends="compile" if="package">
+    <echo message="[${layer.module}] Executing target: package"/>
+    <antcall target="package.non-ejbs"/>
+    <antcall target="package.ejbs"/>
+    <antcall target="package.wars"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Package the application non-ejb jar files                           -->
+  <!-- =================================================================== -->
+  <target name="package.non-ejbs" if="non-ejb.names">
+    <echo message="[${layer.module}] Executing target: package.non-ejbs"/>
+    <foreach list="${non-ejb.names}" target="package.non-ejb"
+             param="non-ejb.name" inheritall="true"/>
+  </target>
+
+  <target name="package.non-ejb">
+    <echo message="[${layer.module}] Executing target: package.non-ejb for ${non-ejb.name}"/>
+    <propertycopy name="non-ejb.classes.includes" 
+                  from="non-ejb.${non-ejb.name}.classes.includes"
+                  silent="true"/>
+    <propertycopy name="non-ejb.classes.excludes" 
+                  from="non-ejb.${non-ejb.name}.classes.excludes"
+                  silent="true"/>
+    <propertycopy name="non-ejb.dep.classes" 
+                  from="non-ejb.${non-ejb.name}.dep.classes"
+                  silent="true"/>
+    <propertycopy name="non-ejb.exclude.from.ear" 
+                  from="non-ejb.${non-ejb.name}.exclude.from.ear"
+                  silent="true"/>
+    <if>
+      <isfalse value="${non-ejb.exclude.from.ear}"/>
+      <then>
+        <property name="non-ejb.jar.dir" value="${lib.dir}"/>
+      </then>
+      <else>
+        <mkdir dir="${lib.dir}/client"/>
+        <property name="non-ejb.jar.dir" value="${lib.dir}/client"/>
+      </else>
+    </if>
+
+    <antcall target="do.package.non-ejb">
+      <param name="non-ejb.jar.name"
+             value="${non-ejb.name}"/>
+    </antcall>
+  </target>
+
+  <target name="do.package.non-ejb">
+    <!-- generate name for non-ejb jar file -->
+    <if>
+      <equals arg1="${non-ejb.jar.name}" arg2="default"/>
+      <then>
+        <property name="non-ejb.jar.filename" value="${layer.module}"/>
+      </then>
+      <else>
+        <property name="non-ejb.jar.filename" value="${layer.module}-${non-ejb.jar.name}"/>
+      </else>
+    </if>
+
+    <condition property="jar.uptodate">
+      <and>
+        <available file="${non-ejb.jar.dir}/${non-ejb.jar.filename}.jar" type="file"/>
+        <uptodate targetfile="${non-ejb.jar.dir}/${non-ejb.jar.filename}.jar">
+          <srcfiles dir="${class.dir}"
+                    includes="${non-ejb.classes.includes}"
+                    excludes="${non-ejb.classes.excludes}"/>
+        </uptodate>
+      </and>
+    </condition>
+
+    <if>
+      <equals arg1="${jar.uptodate}" arg2="true"/>
+      <then>
+        <echo message="[${layer.module}] '${non-ejb.jar.name}' is uptodate: true"/>
+      </then>
+      <else>
+        <antcall target="do.jar.non-ejb"/>
+	  </else>
+     </if>
+  </target>
+
+  <target name="do.jar.non-ejb">
+    <echo message="[${layer.module}] Executing target: do.jar.non-ejb"/>
+    <antcall target="clean.build.dir"/>
+    <copy todir="${build.dir}" preservelastmodified="yes">
+      <fileset dir="${class.dir}"
+               includes="${non-ejb.classes.includes}"
+               excludes="${non-ejb.classes.excludes}"/>
+    </copy>
+	<!-- copying dependent modules class files for packing into the jar-->
+    <foreach list="${non-ejb.dep.classes}" target="copy.dep.classes" delimiter=";"
+             param="dep.classes" inheritall="true"/>
+
+
+    <if>
+	  <available file="${non-ejbroot.dir}/${non-ejb.name}/MANIFEST.MF" type="file"/>
+	  <then>
+        <copy todir="${build.dir}/META-INF" preservelastmodified="yes">
+          <fileset dir="${non-ejbroot.dir}/${non-ejb.name}" includes="*.MF"/>
+        </copy>
+	  </then>
+	</if>
+
+    <!-- Jars all files in the build directory -->
+    <if>
+	  <available file="${build.dir}/META-INF/MANIFEST.MF" type="file"/>
+	  <then>
+        <jar jarfile="${non-ejb.jar.dir}/${non-ejb.jar.filename}.jar"
+             basedir="${build.dir}"
+             manifest="${build.dir}/META-INF/MANIFEST.MF"/>
+	  </then>
+	  <else>
+        <jar jarfile="${non-ejb.jar.dir}/${non-ejb.jar.filename}.jar"
+             basedir="${build.dir}"/>
+	  </else>
+    </if>
+  </target>
+
+  <target name="copy.dep.classes">
+    <propertyregex property="dep.classes.dir"
+                   input="${dep.classes}"
+                   regexp="([^.]*)\.([^.]*)\.\[([^\]]*)"
+                   select="\1.\2.dir"
+                   casesensitive="false"/>
+
+    <propertyregex property="dep.classes"
+                   input="${dep.classes}"
+                   regexp="([^.]*)\.([^.]*)\.\[([^\]]*)"
+                   select="\3"
+                   casesensitive="false" />
+
+    <propertycopy name="base.dir" from="${dep.classes.dir}" silent="true"/>
+
+    <if>
+      <isset property="dep.classes"/>
+	  <then>
+        <copy todir="${build.dir}">
+          <fileset dir="${base.dir}/classes" includes="${dep.classes}"/>      
+        </copy>
+	  </then>
+	</if>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Package the application ejb jar files                               -->
+  <!-- =================================================================== -->
+  <target name="package.ejbs" if="ejb.names">
+    <echo message="[${layer.module}] Executing target: package.ejbs"/>
+    <foreach list="${ejb.names}" target="package.ejb"
+             param="ejb.name" inheritall="true"/>
+  </target>
+
+  <target name="package.ejb">
+    <echo message="[${layer.module}] Executing target: package.ejb for ${ejb.name}"/>
+    <propertycopy name="package.path" from="ejb.${ejb.name}.package" />
+    <antcall target="do.package.ejb">
+      <param name="ejb.jar.name"
+             value="${layer.module}-${ejb.name}-ejb.jar"/>
+      <param name="ejb.metainf.dir"
+             value="${ejbroot.dir}/${ejb.name}"/>
+      <param name="ejb.package.path"
+             value="${package.path}"/>
+    </antcall>
+  </target>
+
+  <target name="do.package.ejb">
+    <!-- Clean up the build directory -->
+    <antcall target="clean.build.dir"/>
+
+    <!-- Copy all bean related files to the build directory -->
+    <mkdir dir="${build.dir}/${ejb.package.path}"/>
+    <copy todir="${build.dir}/${ejb.package.path}" preservelastmodified="true">
+      <fileset dir="${class.dir}/${ejb.package.path}"
+               includes="*Home.class,*Obj.class,*Bean.class"/>
+    </copy>
+    <copy todir="${build.dir}/META-INF" preservelastmodified="true">
+      <fileset dir="${ejb.metainf.dir}">
+        <include name="ejb-jar.xml"/>
+        <include name="${appserver.name}*.xml"/>
+        <include name="*.MF"/>
+        <exclude name="*.bak"/>
+      </fileset>
+    </copy>
+
+    <!-- Copy app server specific dd if present -->
+    <available file="${ejb.metainf.dir}/${appserver.name}-${appserver.version}"
+               type="dir" property="has.specific.dd"/>
+
+    <if>
+      <equals arg1="${has.specific.dd}" arg2="true"/>
+      <then>
+        <copy todir="${build.dir}/META-INF" preservelastmodified="true">
+          <fileset dir="${ejb.metainf.dir}/${appserver.name}-${appserver.version}">
+            <include name="${appserver.name}*.xml"/>
+          </fileset>
+        </copy>
+      </then>
+    </if>
+
+    <!-- Set the bean.uptodate property to true if all conditions hold true -->
+    <condition property="bean.uptodate">
+      <and>
+        <available file="${lib.dir}/${ejb.jar.name}"
+                   type="file"/>
+        <uptodate targetfile="${lib.dir}/${ejb.jar.name}">
+          <srcfiles dir="${build.dir}/${ejb.package.path}"
+                    includes="*Home.class,*Obj.class,*Bean.class"/>
+        </uptodate>
+        <uptodate targetfile="${lib.dir}/${ejb.jar.name}">
+          <srcfiles dir="${build.dir}/META-INF"
+                    includes="ejb-jar.xml,${appserver.name}*.xml,*.MF"/>
+        </uptodate>
+      </and>
+    </condition>
+
+    <condition property="all.uptodate">
+      <equals arg1="${bean.uptodate}" arg2="true"/>
+    </condition>
+
+    <if>
+      <equals arg1="${bean.uptodate}" arg2="true"/>
+      <then>
+        <echo message="[${layer.module}] '${ejb.name}' is uptodate: true"/>
+      </then>
+      <else>
+        <echo message="[${layer.module}] '${ejb.name}' is uptodate: false"/>
+        <!-- Jars all files in the build directory -->
+        <jar jarfile="${lib.dir}/${ejb.jar.name}"
+             basedir="${build.dir}"
+             manifest="${build.dir}/META-INF/MANIFEST.MF"/>
+      </else>
+    </if>
+  </target>
+
+  <!--  ===================================================================  -->
+  <!--  Package the application war files                                    -->
+  <!--  ===================================================================  -->
+  <target name="package.wars" if="war.names">
+    <echo message="[${layer.module}] Executing target: package.wars"/>
+    <mkdir dir="${lib.dir}"/>
+    <foreach list="${war.names}" target="package.war"
+             param="war.name" inheritall="true"/>
+  	
+  	
+  	
+  </target>
+	
+  <target name="package.war">
+    <echo message="[${layer.module}] Executing target: package.war for ${war.name}"/>
+    <propertycopy name="war.classes" 
+                  from="war.${war.name}.classes"
+                  silent="true"/>
+    <propertycopy name="war.libs" 
+                  from="war.${war.name}.libs"
+                  silent="true"/>
+    <propertycopy name="war.aar" 
+                  from="war.${war.name}.webservice.aar"
+                  silent="true"/>
+    <propertycopy name="war.deplibs" 
+                  from="war.${war.name}.deplibs"
+                  silent="true"/>
+    <propertycopy name="war.reqlibs" 
+                  from="war.${war.name}.reqlibs"
+                  silent="true"/>
+    <propertycopy name="war.exclude.from.ear" 
+                  from="war.${war.name}.exclude.from.ear"
+                  silent="true"/>
+    <if>
+      <isfalse value="${war.exclude.from.ear}"/>
+      <then>
+        <property name="war.dir" value="${lib.dir}"/>
+      </then>
+      <else>
+        <mkdir dir="${lib.dir}/client"/>
+        <property name="war.dir" value="${lib.dir}/client"/>
+
+        <propertycopy name="war.deploy.to.webserver" 
+                      from="war.${war.name}.deploy.to.webserver"
+                      silent="true"/>
+      </else>
+    </if>
+    <!-- antcall target="do.package.war"/-->  
+  	
+  	<!-- package the aar based on default name gtas-ws.aar, then can have gtas-ws-custom1.aar -->
+  	<antcall target="package.aar"/>
+  	
+  	<!-- based on the vendor webservices release (In this case, we are using axis2.war) and put in the
+  	     .aar file we built previously -->
+  	<antcall target="package.axis2.war"/>
+  	
+  </target>
+	
+	<!--Given the setup of the axis2, we will only have one axis2.war. For individual aar,
+	    they will be packed into the axis2.war -->
+	<target name="package.axis2.war">
+		<echo message="packaging axis2.war" />
+		<property name="ws.binary" value="axis2.war"/>
+		<property name="ws.vendor" value="axis2"/>
+		
+		<echo message="packaging axis2 war ${ws.vendor.binary.dir}/${ws.vendor}/${ws.binary}"/>
+		<copy file="${ws.vendor.binary.dir}/${ws.vendor}/${ws.binary}" todir="${build.dir}"/>
+		<zip basedir="${build.dir}" destfile="${build.dir}/${ws.binary}" includes="WEB-INF/**" update="true"/> <!--we currently support only one aar file -->
+		<zip basedir="${build.dir}" destfile="${build.dir}/${ws.binary}" includes="META-INF/**" update="true"/>
+		
+		    <if>
+		      <and>
+		        <istrue value="${deploy}"/>
+		        <istrue value="${war.deploy.to.webserver}"/>
+		      </and>
+		      <then>
+		        <!-- deploy client war to web server -->
+		        <copy file="${war.dir}/${war.filename}.war" 
+		              tofile="${webserver.deploy.dir}/${war.filename}.war" overwrite="yes"/>
+		      </then>
+			  <else>
+			  	<!-- copy to GTAS\GridTalk\deplib-->
+		        <copy todir="${top.build.dir}/deplib"
+				      file="${build.dir}/${ws.binary}" 
+		              overwrite="yes"/>
+			  </else>
+		    </if>
+		
+	</target>
+	
+	<target name="package.aar">
+	  	<echo message="Building aar file"></echo>
+	  	<echo message="Build dir= ${build.dir}"/>
+		
+		<!-- gtas layer web service pojo, and its dependent jar -->
+		<echo message="aar lib jar is ${war.aar}" />
+	    <copy todir="${build.dir}/lib/" verbose="true">
+		   <fileset dir="${lib.dir}"
+		           includes="${war.aar}"/>
+	    </copy>
+	  	
+		<!--web service pojo jar from other layer -->
+		<!-- copying files from dependent modules lib folder -->
+	    <foreach list="${war.deplibs}" target="copy.deplibs.aar" delimiter=";"
+	             param="deplibs" inheritall="true"/>
+		
+		<!--copy META-INF directory -->
+	  	<copy todir="${build.dir}">
+	  	      <fileset dir="${webroot.dir}/${war.name}"
+	  	               includes="/META-INF/*"/>
+	  	</copy>
+	  	
+		<copy todir="${build.dir}">
+		      <fileset dir="${webroot.dir}/${war.name}" includes="WEB-INF/*"/>
+		</copy>
+		
+	  	<!--TODO: make the exported filename configurable -->
+	    <if>
+	      <equals arg1="${war.name}" arg2="default"/>
+	      <then>
+	        <property name="aar.filename" value="${layer.module}"/>
+	      </then>
+	      <else>
+	        <property name="aar.filename" value="${layer.module}-${war.name}"/>
+	      </else>
+	    </if>
+		
+	    <jar basedir="${build.dir}" destfile="${build.dir}/WEB-INF/services/${aar.filename}.aar" includes="lib/*,META-INF/*">
+	    </jar>
+	  	
+   </target>	
+
+  <target name="do.package.war">
+    <echo message="[${layer.module}] Executing target: do.package.war"/>
+
+    <antcall target="clean.build.dir"/>
+    <!-- copying files to WEB-INF/classes directory -->
+    <copy todir="${build.dir}/WEB-INF/classes">
+      <fileset dir="${class.dir}"
+               includes="${war.classes}"/>
+    </copy>
+
+    <!-- copying files to WEB-INF directory -->
+	<if>
+      <available file="${webroot.dir}/${war.name}" type="dir"/>
+	  <then>
+        <copy todir="${build.dir}">
+          <fileset dir="${webroot.dir}/${war.name}" includes="**/*.*"/>
+        </copy>
+	  </then>
+	</if>
+
+	<if>
+      <available file="${web.dir}/${war.name}" type="dir"/>
+	  <then>
+        <copy todir="${build.dir}">
+          <fileset dir="${webroot.dir}/${war.name}" includes="**/*.*"/>
+        </copy>
+	  </then>
+	</if>
+
+    <!-- copying files to WEB-INF/lib directory -->
+	<!-- copying files from own lib folder >
+    <copy todir="${build.dir}/WEB-INF/lib">
+      <fileset dir="${lib.dir}"
+               includes="${war.libs}"/>
+    </copy-->
+
+	<!-- copying files from dependent modules lib folder >
+    <foreach list="${war.deplibs}" target="copy.deplibs" delimiter=";"
+             param="deplibs" inheritall="true"/-->
+	
+	<!-- copying required 3rd party libraries >
+    <foreach list="${war.reqlibs}" target="copy.reqlibs" delimiter=";"
+             param="reqlibs" inheritall="true"/-->
+
+  	<!--wx: standalone war distribution??? -->
+	<if>
+      <istrue value="${war.exclude.from.ear}"/>
+      <then>
+        <copy todir="${build.dir}/WEB-INF/lib">
+          <fileset dir="${appserver.client.lib.dir}" 
+                   includes="${appserver.client.lib}"/>
+        </copy>
+      </then>
+    </if>
+
+    <!-- generate name for war file>
+    <if>
+      <equals arg1="${war.name}" arg2="default"/>
+      <then>
+        <property name="war.filename" value="${layer.module}"/>
+      </then>
+      <else>
+        <property name="war.filename" value="${layer.module}-${war.name}"/>
+      </else>
+    </if>
+
+    <war warfile="${war.dir}/${war.filename}.war"
+         basedir="${build.dir}"
+         webxml="${build.dir}/WEB-INF/web.xml" includes="**/*.*" excludes="**/log4j*.jar,**/commons-logging*.jar"/-->
+
+  	<!-- wx TODO is the following deploy needed?>
+    <if>
+      <and>
+        <istrue value="${deploy}"/>
+        <istrue value="${war.deploy.to.webserver}"/>
+      </and>
+      <then>
+        <!- - deploy client war to web server - ->
+        <copy file="${war.dir}/${war.filename}.war" 
+              tofile="${webserver.deploy.dir}/${war.filename}.war" overwrite="yes"/>
+      </then>
+	  <else>
+        <copy todir="${top.build.dir}/deplib"
+		      file="${war.dir}/${war.filename}.war" 
+              overwrite="yes"/>
+	  </else>
+    </if-->
+  </target>
+
+  <target name="copy.deplibs">
+    <propertyregex property="deplibdir"
+                   input="${deplibs}"
+                   regexp="([^.]*)\.([^.]*)\.\[([^\]]*)"
+                   select="\1.\2.dir"
+                   casesensitive="false"/>
+
+    <propertyregex property="libs"
+                   input="${deplibs}"
+                   regexp="([^.]*)\.([^.]*)\.\[([^\]]*)"
+                   select="\3"
+                   casesensitive="false" />
+  	
+	<echo message="deplibdir is ${deplibdir}"/>
+    <propertycopy name="base.dir" from="${deplibdir}" silent="true"/>
+	<echo message="base.dir is ${base.dir}"/> 
+  	
+    <if>
+      <isset property="libs"/>
+	  <then>
+        <copy todir="${build.dir}/WEB-INF/lib">
+          <fileset dir="${base.dir}/deploy" includes="${libs}"/>      
+        </copy>
+	  </then>
+	</if>
+  </target>
+
+
+	<target name="copy.deplibs.aar">
+	    <propertyregex property="deplibdir"
+	                   input="${deplibs}"
+	                   regexp="([^.]*)\.([^.]*)\.\[([^\]]*)"
+	                   select="\1.\2.dir"
+	                   casesensitive="false"/>
+
+	    <propertyregex property="libs"
+	                   input="${deplibs}"
+	                   regexp="([^.]*)\.([^.]*)\.\[([^\]]*)"
+	                   select="\3"
+	                   casesensitive="false" />
+	  	
+		<echo message="deplibdir is ${deplibdir}"/>
+	    <propertycopy name="base.dir" from="${deplibdir}" silent="true"/>
+		<echo message="base.dir is ${base.dir}"/> 
+	  	
+	    <if>
+	      <isset property="libs"/>
+		  <then>
+		  	<echo message="copying dependent lib ${libs}" />
+	        <copy todir="${build.dir}/lib">
+	          <fileset dir="${base.dir}/deploy" includes="${libs}"/>      
+	        </copy>
+		  </then>
+		</if>
+		
+		<echo message="after if copying dependent lib ${libs}" />
+	</target>
+	
+	
+  <target name="copy.reqlibs">
+    <propertyregex property="reqlibdir"
+                   input="${reqlibs}"
+                   regexp="([^.]*)\.\[([^\]]*)"
+                   select="\1.layer.dir"
+                   casesensitive="false" />
+
+    <propertyregex property="libs"
+                   input="${reqlibs}"
+                   regexp="([^.]*)\.\[([^\]]*)"
+                   select="\2"
+                   casesensitive="false" />
+
+    <propertycopy name="base.dir" from="${reqlibdir}" silent="true"/>
+    <if>
+      <isset property="libs"/>
+	  <then>
+        <copy todir="${build.dir}/WEB-INF/lib">
+          <fileset dir="${base.dir}/reqlib" includes="${libs}"/>      
+        </copy>
+	  </then>
+	</if>
+  </target>
+  
+  <!-- =================================================================== -->
+  <!-- Deploy the application ear file to the application server           -->
+  <!-- =================================================================== -->
+  <target name="deploy" depends="package.app.ear" if="deploy">
+    <echo message="[${layer.module}] Executing target: deploy"/>
+    <copy file="${lib.dir}/${ear.name}.ear" 
+          tofile="${appserver.deploy.dir}/${ear.name}.ear" overwrite="yes"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Package the application ear file                                    -->
+  <!-- =================================================================== -->
+  <target name="package.app.ear" if="deploy">
+    <echo message="[${layer.module}] Executing target: package.app.ear"/>
+    <copy todir="${build.dir}">
+      <fileset dir="${lib.dir}" includes="*.jar,*.war"/>
+      <fileset dir="${deplib.dir}" includes="*.jar,*.war"/>
+      <!-- fileset dir="${reqlib.dir}" includes="${reqlibs}"/ -->
+    </copy>
+    <copy todir="${build.dir}/META-INF">
+      <fileset dir="${metainf.dir}" includes="*.MF,*.xml"/>
+    </copy>
+    <ear destfile="${lib.dir}/${ear.name}.ear" 
+         basedir="${build.dir}" 
+         appxml="${build.dir}/META-INF/application.xml" 
+         includes="*.jar,*.war," 
+         manifest="${build.dir}/META-INF/MANIFEST.MF"/>
+
+    <delete dir="${work.dir}"/>
+  </target>
+
+
+  <!-- =================================================================== -->
+  <!-- Create the build directory structure used by compile and copy the   -->
+  <!-- deployment descriptors into it                                      -->
+  <!-- =================================================================== -->
+  <target name="clean.build.dir">
+    <delete dir="${work.dir}"/>
+    <mkdir dir="${work.dir}"/>
+  	<mkdir dir="${build.dir}"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Generate and append entries into the application.xml file           -->
+  <!-- =================================================================== -->
+  <target name="create.application.xml.header" if="deploy">   
+    <echo message="[${layer.module}] Executing target: create.application.xml.header"/>
+    <delete file="${application.xml.file}"/>
+    <echo file="${application.xml.file}">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+&lt;application&gt;
+  &lt;display-name&gt;${ear.display.name}&lt;/display-name&gt;
+    </echo>
+  </target>
+
+  <target name="create.application.xml.body" if="deploy">
+    <echo message="[${layer.module}] Executing target: create.application.xml.body"/>
+    <antcall target="create.application.xml.body.ejbs"/>
+    <antcall target="create.application.xml.body.wars"/>
+  </target>
+
+  <target name="create.application.xml.body.ejbs" if="ejb.names">
+    <foreach list="${ejb.names}" target="create.application.xml.body.ejb" 
+             param="ejb.name" inheritall="true"/>
+  </target>
+
+  <target name="create.application.xml.body.ejb">
+    <echo file="${application.xml.file}" append="true">
+  &lt;module&gt;
+    &lt;ejb&gt;${layer.module}-${ejb.name}-ejb.jar&lt;/ejb&gt;
+  &lt;/module&gt;
+    </echo>
+  </target>
+
+  <target name="create.application.xml.body.wars" if="war.names">
+    <foreach list="${war.names}" target="create.application.xml.body.war" 
+             param="war.name" inheritall="true"/>
+  </target>
+  
+  <target name="create.application.xml.body.war">
+    <propertycopy name="war.exclude.from.ear" 
+                  from="war.${war.name}.exclude.from.ear"
+                  silent="true"/>
+
+    <!-- generate name for war file -->
+    <if>
+      <equals arg1="${war.name}" arg2="default"/>
+      <then>
+        <property name="war.filename" value="${layer.module}"/>
+      </then>
+      <else>
+        <property name="war.filename" value="${layer.module}-${war.name}"/>
+      </else>
+    </if>
+
+    <if>
+      <not>
+        <equals arg1="${war.exclude.from.ear}" arg2="true"/>
+      </not>
+      <then>
+        <propertycopy name="war.contextroot" from="war.${war.name}.contextroot"/>
+        <echo file="${application.xml.file}" append="true">
+  &lt;module&gt;
+    &lt;web&gt;
+      &lt;web-uri&gt;${war.filename}.war&lt;/web-uri&gt;
+      &lt;context-root&gt;${war.contextroot}&lt;/context-root&gt;
+    &lt;/web&gt;
+  &lt;/module&gt;
+        </echo>
+      </then>
+    </if>
+  </target>
+
+  <target name="create.application.xml.footer" if="deploy">
+    <echo message="[${layer.module}] Executing target: create.application.xml.footer"/>
+    <echo file="${application.xml.file}" append="true">
+&lt;/application&gt;
+    </echo>
+  </target>
+</project>

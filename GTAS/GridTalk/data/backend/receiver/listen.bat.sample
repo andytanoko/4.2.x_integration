@@ -1,0 +1,11 @@
+@echo off
+REM %PARAM1%=Listener Module Listening Port, mandatory, default 6767
+REM %PARAM2%=GridTalk IP Address, mandatory 
+REM %PARAM3%=GridTalk Backend Listening Port, mandatory, default 6763
+REM %PARAM4%=SMTP Host, optional
+REM %PARAM5%=Notification Email Address, optional
+REM %PARAM6%=-T# where # denotes the number of concurrent processing allowed, optional, default is 10 if not specified
+
+REM Usage: 
+REM CALL %GRIDTALK_HOME%\bin\setenv.bat
+REM %JAVA_HOME%\bin\java -jar receiver.jar %PARAM1% %PARAM2% %PARAM3% %PARAM4% %PARAM5% %PARAM6%

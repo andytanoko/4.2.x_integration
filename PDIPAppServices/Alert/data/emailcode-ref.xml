@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ ****************************************************************************
+ * Date           Author                  Changes
+ ****************************************************************************
+ * Apr 17 2003    Neo Sok Lay             Created.
+-->
+<EmailCodeRef>
+  <!-- Uncomment and replace with actual email code mappings -->   
+
+  <!-- Example: All refs are used -->
+  <!--EmailCode id="code1">
+     <EmailRef>emailone@abc.com</EmailRef>
+     <RoleRef>role1</RoleRef>
+     <UserRef>userid1</UserRef>
+  </EmailCode-->
+  <!-- Example: Only Email refs are used -->
+  <!--EmailCode id="code2">
+     <EmailRef>emailthree@abc.com</EmailRef>
+     <EmailRef>emailfour@abc.com</EmailRef>
+  </EmailCode-->
+  <!-- Example: Only Role refs are used -->
+  <!--EmailCode id="code3">
+     <RoleRef>role2</RoleRef>
+     <RoleRef>role3</RoleRef>
+  </EmailCode-->
+  <!-- Example: Only User refs are used -->
+  <!--EmailCode id="code4">
+     <UserRef>userid3</UserRef>
+     <UserRef>userid4</UserRef>
+  </EmailCode-->
+
+</EmailCodeRef>

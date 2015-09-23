@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>log4j</fullname>
+  <class>
+    <path>[../../../PDIPFramework/reqlib/log4j-1.2.8.jar]</path>
+  </class>
+</library>
+

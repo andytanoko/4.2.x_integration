@@ -1,0 +1,223 @@
+<project name="SecurityServices" default="all" basedir=".">
+  <!--   set global properties for this build   -->
+  <property environment="env"></property>
+  <property file="./pdip.properties"></property>
+  <property name="moduleDir" value="./.."></property>
+  <property name="requiredLibDir" value="${projectDir}/reqlib"></property>
+  <property name="deployDir" value="${moduleDir}/test-deploy"></property>
+  <property name="ejbrootDir" value="${deployDir}/ejbroot"></property>
+  <property name="webrootDir" value="${deployDir}/webroot"></property>
+  <property name="workDir" value="${moduleDir}/work"></property>
+  <property name="sourceDir" value="${moduleDir}/src"></property>
+  <property name="testDir" value="${moduleDir}/test"></property>
+  <property name="webDir" value="${moduleDir}/web"></property>
+  <property name="classesDir" value="${moduleDir}/classes"></property>
+  <property name="testClassesDir" value="${testDir}/classes"></property>
+  <property name="buildDir" value="${workDir}/build"></property>
+  <property name="rebuild" value="false"></property>
+  <path id="project.classpath">
+    <pathelement path="${classpath}"></pathelement>
+    <pathelement location="${classesDir}"></pathelement>
+    <pathelement location="${tetsClassesDir}"></pathelement>
+    <pathelement location="${sourceDir}"></pathelement>
+    <pathelement location="${testDir}"></pathelement>
+    <fileset dir="${frameworkDeployDir}">
+      <include name="framework.jar"></include>
+    </fileset>
+    <fileset dir="${frameworkReqlibDir}">
+      <include name="junit*.jar"></include>
+    </fileset>
+    <fileset dir="${requiredLibDir}">
+      <include name="**/*.jar"></include>
+    </fileset>
+    <fileset dir="${ejbLibDir}">
+      <include name="**/*.jar"></include>
+    </fileset>
+    <fileset dir="${ejbClientDir}">
+      <include name="**/*.jar"></include>
+    </fileset>
+  </path>
+
+  <target name="all" depends="init,
+                              framework_depcheck,
+                              depcheck,
+                              build_User,
+                              build_UserMgmtBean,
+                              earcheck,
+                              setupDeployment">
+  </target>
+
+  <target name="init" ><!--   Create the time stamp   -->
+    <tstamp></tstamp>
+    <mkdir dir="${testClassesDir}"></mkdir>
+  </target>
+
+	<target name="framework_depcheck">
+		<ant antfile="${frameworkDir}/projects/ant-build.xml" dir="${frameworkDir}/projects">
+      <property name="deployDir" value="${frameworkDeployDir}"/>
+      <property name="ejbrootDir" value="${frameworkDeployDir}/ejbroot"></property>
+      <property name="webrootDir" value="${frameworkDeployDir}/webroot"></property>
+    </ant>
+		<condition property="framework_uptodate">
+			<and>
+				<available file="${deployDir}/framework.jar" type="file"/>
+			<!--	<available file="${deployDir}/framework-db-keygen-ejb.jar" type="file"/>
+				<available file="${deployDir}/framework-db-metainfo-ejb.jar" type="file"/> -->
+				<available file="${deployDir}/junit.war" type="file"/>
+				<uptodate targetfile="${deployDir}/framework.jar">
+					<srcfiles dir="${frameworkDeployDir}" includes="framework.jar"/>
+				</uptodate>
+			<!--	<uptodate targetfile="${deployDir}/framework-db-keygen-ejb.jar">
+					<srcfiles dir="${frameworkDeployDir}" includes="framework-db-keygen-ejb.jar"/>
+				</uptodate>
+				<uptodate targetfile="${deployDir}/framework-db-metainfo-ejb.jar">
+					<srcfiles dir="${frameworkDeployDir}" includes="framework-db-metainfo-ejb.jar"/>
+				</uptodate>
+			-->
+				<uptodate targetfile="${deployDir}/junit.war">
+					<srcfiles dir="${frameworkDeployDir}" includes="junit.war"/>
+				</uptodate>
+				<equals arg1="${rebuild}" arg2="false"/>
+			</and>
+		</condition>
+		<echo message="framework_uptodate is ${framework_uptodate}"/>
+		<copy todir="${deployDir}">
+			<fileset dir="${frameworkDeployDir}">
+				<include name="framework.jar" unless="framework_uptodate"/>
+			<!--	<include name="framework-db-keygen-ejb.jar" unless="framework_uptodate"/>
+				<include name="framework-db-metainfo-ejb.jar" unless="framework_uptodate"/> -->
+				<include name="junit.war" unless="framework_uptodate"/>
+			</fileset>
+		</copy>
+	</target>
+
+  <target name="depcheck">
+    <javac  destdir="${testClassesDir}"
+            srcdir="${sourceDir}"
+            classpathref="project.classpath">
+    </javac>
+    <javac  destdir="${testClassesDir}"
+            srcdir="${testDir}"
+            classpathref="project.classpath">
+    </javac>
+    <condition property="user_uptodate">
+      <and>
+        <available file="${deployDir}/security-test.jar" type="file"></available>
+        <uptodate targetfile="${deployDir}/base-security.jar">
+          <srcfiles dir="${testClassesDir}">
+            <include name="**/*.class" />
+            <exclude name="**/*Bean.class" />
+          </srcfiles>
+        </uptodate>
+        <equals arg1="${rebuild}" arg2="false"></equals>
+      </and>
+    </condition>
+    <condition property="all_uptodate" >
+        <equals arg1="${user_uptodate}" arg2="true"></equals>
+    </condition>
+    <echo message="security-test is not uptodate"></echo>
+  </target>
+
+  <target name="build_User" unless="user_uptodate">
+    <jar jarfile="${deployDir}/base-security.jar" >
+      <fileset dir="${testClassesDir}"   excludes="**/*Bean.class" />
+    </jar>
+  </target>
+
+  <target name="jarAndEjbc" unless="bean_uptodate">
+    <echo message="MetaDir in jarAndEjbc is ${MetaDir}" />
+    <condition property="all_uptodate" >
+        <equals arg1="${bean_uptodate}" arg2="true"></equals>
+    </condition>
+
+    <echo message="${JarName} is not uptodate "></echo>
+    <antcall target="cleanBuildDir"></antcall>
+    <mkdir dir="${buildDir}/${PackagePath}"></mkdir>
+    <copy todir="${buildDir}/${PackagePath}" >
+      <fileset dir="${testClassesDir}/${PackagePath}" includes="${Home},${Remote},${Bean},${TestCases}" />
+    </copy>
+
+    <copy todir="${buildDir}/META-INF" >
+      <fileset dir="${MetaDir}">
+        <include name="ejb-jar.xml"></include>
+        <include name="${appServer}*.xml"></include>
+        <include name="*M*.*"></include>
+        <exclude name="*.bak"></exclude>
+      </fileset>
+    </copy>
+
+    <jar jarfile="${deployDir}/${JarName}" basedir="${buildDir}" manifest="${buildDir}/META-INF/MANIFEST.MF" ></jar>
+  </target>
+
+  <target name="CheckAndJar" >
+    <echo message="MetaDir in CheckAndJar is ${MetaDir}" />
+    <condition property="bean_uptodate">
+      <and>
+        <available file="${deployDir}/${JarName}" type="file"></available>
+        <uptodate targetfile="${deployDir}/${JarName}">
+          <srcfiles dir="${testClassesDir}/${PackagePath}"
+                    includes="${Home},${Remote},${Bean},${TestCases}" />
+        </uptodate>
+        <uptodate targetfile="${deployDir}/${JarName}">
+          <srcfiles dir="${MetaDir}"
+                    includes="ejb-jar.xml,${appServer}*.xml,*.MF" />
+        </uptodate>
+        <equals arg1="${rebuild}" arg2="false"></equals>
+      </and>
+    </condition>
+    <antcall target="jarAndEjbc" />
+  </target>
+
+  <!--   Compile ejb classes into the build directory (jar preparation)   -->
+  <target name="build_UserMgmtBean" >
+    <antcall target="CheckAndJar" >
+        <param name="JarName" value="base-security-test-ejb.jar"/>
+        <param name="MetaDir" value="${ejbrootDir}/META-INF/security/"/>
+        <param name="SourcePath" value="${sourceDir}/"/>
+        <param name="PackagePath" value="com/gridnode/pdip/base/security/ejb/"/>
+        <param name="Home" value="ISecurityServiceHome.*"/>
+        <param name="Remote" value="ISecurityServiceObj.*"/>
+        <param name="Bean" value="SecurityServiceBean.*"/>
+        <param name="TestCases" value="*Test.*"/>
+        <param name="depnClasses" value=""/>
+    </antcall>
+  </target>
+
+	<target name="earcheck">
+		<condition property="ear_uptodate">
+			<and>
+				<available file="${deployDir}/base-security-ear.ear" type="file"/>
+				<uptodate targetfile="${deployDir}/base-security-ear.ear">
+					<srcfiles dir="${deployDir}">
+						<include name="**/*application.xml"/>
+						<exclude name="**/*.bak"/>
+					</srcfiles>
+				</uptodate>
+				<equals arg1="${framework_uptodate}" arg2="true"/>
+				<equals arg1="${user_uptodate}" arg2="true"/>
+				<equals arg1="${all_uptodate}" arg2="true"/>
+			</and>
+		</condition>
+		<echo message="(${framework_uptodate},${user_uptodate},${all_uptodate})ear_uptodate is ${ear_uptodate}"/>
+	</target>
+
+	<target name="setupDeployment" unless="ear_uptodate">
+		<antcall target="cleanBuildDir"/>
+		<copy todir="${buildDir}">
+			<fileset dir="${deployDir}" includes="META-INF/**/*.MF,META-INF/**/*.xml"/>
+			<fileset dir="${deployDir}" includes="*.jar"/>
+			<fileset dir="${deployDir}" includes="*.war"/>
+      <fileset dir="${frameworkDir}/../reqlib" includes="junit*.jar"></fileset>
+		</copy>
+		<ear earfile="${deployDir}/base-security-ear.ear" basedir="${buildDir}" appxml="${buildDir}/META-INF/application.xml" includes="*.jar,*.war," manifest="${buildDir}/META-INF/MANIFEST.MF"/>
+		<delete dir="${workDir}"/>
+	</target>
+
+  <target name="cleanBuildDir" ><!--   Create the build directory structure used by compile
+        and copy the deployment descriptors into it  -->
+    <delete dir="${workDir}"></delete>
+    <mkdir dir="${workDir}"></mkdir>
+    <mkdir dir="${buildDir}"></mkdir>
+    <mkdir dir="${buildDir}/META-INF"></mkdir>
+  </target>
+</project>

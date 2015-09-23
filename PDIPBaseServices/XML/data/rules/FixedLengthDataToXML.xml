@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RulesContainer>
+	<ConversionName>FixedLength</ConversionName>
+	<OutputFileExt>xml</OutputFileExt>
+	<Read>
+		<FixedLengthRules>
+			<Separator>$</Separator>
+			<RemovePadding>true</RemovePadding>
+			<RowLength>80</RowLength>
+			<Root NAME="Claims"/>
+			<Element NAME="Level1" LEVEL="1" OCCURRENCE="1"/>
+			<Element NAME="Claim" LEVEL="2" OCCURRENCE="0">
+				<Element NAME="SerialNo" LENGTH="3" PADDING="LEFT" PADDINGCHAR="0"/>
+				<Element NAME="Date" LENGTH="8" PADDING="LEFT"/>
+				<Element NAME="Food" LENGTH="5" PADDING="LEFT" PADDINGCHAR="#"/>
+				<Element NAME="Transport" LENGTH="6" PADDING="LEFT" PADDINGCHAR="#"/>
+				<Element NAME="Total" LENGTH="7" PADDING="LEFT" PADDINGCHAR="#"/>
+			</Element>
+		</FixedLengthRules>
+	</Read>
+	<Write>
+		<XSLTRules>
+			<xsl:transform version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+				<xsl:output indent="yes"/>
+				<xsl:template match="Claims">
+					<xsl:copy-of select="."/>
+				</xsl:template>
+			</xsl:transform>
+		</XSLTRules>
+	</Write>
+</RulesContainer>

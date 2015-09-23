@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<application>
+  <display-name>GridTalk</display-name>
+
+  <!-- framework -->
+  <module>
+    <ejb>framework-db-metainfo-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>framework-db-cursor-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>framework-db-keygen-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>framework-db-code-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>framework-db-jms-ejb.jar</ejb>
+  </module>
+  
+  <module>
+    <ejb>framework-file-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>framework-notification-facade-ejb.jar</ejb>
+  </module>
+  
+  <module>
+    <ejb>framework-jms-facade-ejb.jar</ejb>
+  </module>
+  
+  <!-- entities -->
+  <module>
+    <ejb>base-time-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-session-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-acl-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-certificate-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-gwfbase-bpss-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-gwfbase-xpdl-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-contextdata-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-worklist-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-userprocedure-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-partner-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-coyprofile-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-license-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-user-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-alert-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-mapper-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-bizreg-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-channel-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-rnif-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-searchquery-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-servicemgmt-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-mapper-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-gridnode-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-registration-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-enterprise-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-backend-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-partnerfunction-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-partnerprocess-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-document-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-rnif-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-alert-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-docalert-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-dbarchive-entities-ejb.jar</ejb>
+  </module>
+
+
+  <!-- WARs dependent by SBs or MDBs -->
+  <module>
+    <web>
+      <web-uri>app-user.war</web-uri>
+      <context-root>/signon</context-root>
+    </web>
+  </module>
+
+  <module>
+    <web>
+      <web-uri>base-transport.war</web-uri>
+      <context-root>/gridtalk/b2bi</context-root>
+    </web>
+  </module>
+
+  <module>
+    <web>
+      <web-uri>app-servicemgmt.war</web-uri>
+      <context-root>/gridtalk/wsrouter</context-root>
+    </web>
+  </module>
+
+
+  <!-- most dependent facade ejbs thru reflection -->
+  
+  <module>
+    <ejb>gtas-mapper-facade-ejb.jar</ejb>
+  </module>
+  
+  <module>
+    <ejb>gtas-document-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-userprocedure-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-rnif-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-docalert-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-rnif-facade-ejb.jar</ejb>
+  </module>
+
+  <!-- base level SBs -->
+  <module>
+    <ejb>base-time-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-session-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-acl-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-xml-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-exportconfig-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-transport-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-certificate-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-security-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-packaging-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-contextdata-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-worklist-manager-ejb.jar</ejb>
+  </module>
+  
+  <module>
+    <ejb>base-gwfbase-facade-ejb.jar</ejb>
+  </module>
+
+  <!-- App level SBs -->
+  <module>
+    <ejb>app-partner-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-coyprofile-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-user-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-alert-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-bizreg-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-channel-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-mapper-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-license-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-locale-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-deploy-deploymgr-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-workflow-manager-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-workflow-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-workflow-runtime-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-searchquery-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-servicemgmt-facade-ejb.jar</ejb>
+  </module>
+
+  <!-- GTAS level SBs -->
+  <module>
+    <ejb>gtas-backend-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-partnerfunction-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-partnerprocess-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-registration-product-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-alert-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-dbarchive-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-gridnode-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-enterprise-facade-ejb.jar</ejb>
+  </module>
+
+  <!-- SBs that does reflections to other SBs -->
+  <module>
+    <ejb>base-userprocedure-facade-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-appinterface-facade-ejb.jar</ejb>
+  </module>
+
+  <!-- SFSBs -->
+  <module>
+    <ejb>gtas-common-clientcontroller-ejb.jar</ejb>
+  </module>
+
+  <!-- MDBs -->
+  <module>
+    <ejb>base-session-timer-ejb.jar</ejb>
+  </module>
+
+  <module>
+	<ejb>base-gwfbase-listener-ejb.jar</ejb>
+  </module>
+  
+  <module>
+    <ejb>app-alert-listener-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-channel-listener-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-partner-listener-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-enterprise-listener-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-enterprise-post-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-partnerfunction-listener-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-backend-init-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-rnif-init-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>app-workflow-jms-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-document-listener-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-userprocedure-listener-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-dbarchive-listener-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>gtas-housekeeping-listener-ejb.jar</ejb>
+  </module>
+
+  <!-- WARs dependent on SBs -->
+
+  <module>
+    <web>
+      <web-uri>framework.war</web-uri>
+      <context-root>/initialiser</context-root>
+    </web>
+  </module>
+
+  <module>
+    <web>
+      <web-uri>axis2.war</web-uri>
+      <context-root>/gridtalk/webservice</context-root>
+    </web>
+  </module>
+  
+  <module>
+    <web>
+      <web-uri>gtas.war</web-uri>
+      <context-root>/gridtalk</context-root>
+    </web>
+  </module>
+
+  <module>
+    <web>
+      <web-uri>help.war</web-uri>
+      <context-root>/gridtalk/help</context-root>
+    </web>
+  </module>
+
+</application>

@@ -1,0 +1,56 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<uccnet:envelope communicationVersion="2.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fmcg="http://www.ean-ucc.org/schemas/1.3/fmcg" xmlns:hbc="http://www.uccnet.org/schemas/1.3/hbc" xmlns:hardlines="http://www.uccnet.org/schemas/1.3/hardlines" xmlns:produce="http://www.uccnet.org/schemas/1.3/produce" xmlns:uccnet="http://www.uccnet.org/schemas/2.2/uccnet" xmlns:eanucc="http://www.ean-ucc.org/schemas/1.3/eanucc" xmlns:otc="http://www.uccnet.org/schemas/1.3/otc"  xsi:schemaLocation="http://www.uccnet.org/schemas/2.2/uccnet http://www.testregistry.net/xmlschema/uccnet/2.2/Envelope.xsd ">
+<messageHeader>
+  <messageIdentifier>
+    <value>36373615</value>
+  </messageIdentifier>
+  <userId>UCCNET_SYSTEM</userId>
+  <representingParty>
+    <gln>0614141800001</gln>
+  </representingParty>
+</messageHeader>
+<body>
+<response>
+<acknowledge>
+<acknowledgement>
+<acknowledgementHeader type="PROCESSED" success="TRUE" duplicate="FALSE">
+  <entityIdentification>
+    <uniqueCreatorIdentification>MSG0005</uniqueCreatorIdentification>
+    <globalLocationNumber>
+      <gln>0488222000006</gln>
+    </globalLocationNumber>
+  </entityIdentification>
+  <messageIdentifier>
+    <value>MSG0005</value>
+  </messageIdentifier>
+</acknowledgementHeader>
+<subdocumentValid success="TRUE">
+<documentIdentifier>
+  <typedEntityIdentification type="TRANSACTION">
+    <entityIdentification>
+      <uniqueCreatorIdentification>m3 CIN 001</uniqueCreatorIdentification>
+      <globalLocationNumber>
+        <gln>0488222000006</gln>
+      </globalLocationNumber>
+    </entityIdentification>
+  </typedEntityIdentification>
+</documentIdentifier>
+<subdocumentValid xmlns:uccnet="http://www.uccnet.org/schemas/2.2/uccnet" xmlns:eanucc="http://www.ean-ucc.org/schemas/1.3/eanucc" validationKey="" success="FALSE">
+<documentIdentifier>
+<typedEntityIdentification type="NOTIFY_COMMAND">
+<entityIdentification xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">        <uniqueCreatorIdentification>m3 CIN 002</uniqueCreatorIdentification>        <globalLocationNumber>         <gln>0488222000006</gln>        </globalLocationNumber>       </entityIdentification>
+</typedEntityIdentification>
+</documentIdentifier>
+<subdocumentValid success="FALSE">
+<documentIdentifier>
+<catalogueItemNotificationIdentification xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">         <uniqueCreatorIdentification>MERTON3 SUPPLY2 CIN 082322</uniqueCreatorIdentification>         <contentOwner>          <gln>0488222000006</gln>         </contentOwner>        </catalogueItemNotificationIdentification>
+</documentIdentifier><errorList>
+<errorInfo type='ERROR'><errorCode>IR-060</errorCode><errorMessage><description>No user with the appropriate subscriptions was found at the recipient organization.</description></errorMessage></errorInfo>
+</errorList></subdocumentValid>
+</subdocumentValid>
+</subdocumentValid>
+</acknowledgement>
+</acknowledge>
+</response>
+</body>
+</uccnet:envelope>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Package SYSTEM "data/xpdl.dtd">
+<Package Id="CreateResDocPkg">
+<PackageHeader>
+    <XPDLVersion/>
+    <Vendor/>
+    <Created>2002-05-28 11:11:11</Created>
+</PackageHeader>
+<RedefinableHeader>
+<Author>Workflow</Author>
+<Version>Test001</Version>
+</RedefinableHeader>
+<Applications>
+		<Application Id="InsertDocument">
+			<Description>Adapter to call java procedure to insert document into bpss system</Description>
+			<FormalParameters>
+				<FormalParameter Id="Param1" Index="1" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.lang.String"/>
+					</DataType>
+				</FormalParameter>
+				<FormalParameter Id="Param2" Index="2" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.lang.String"/>
+					</DataType>
+				</FormalParameter>
+				<FormalParameter Id="Param3" Index="3" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.lang.Object"/>
+					</DataType>
+				</FormalParameter>
+				<FormalParameter Id="Param4" Index="4" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.lang.String"/>
+					</DataType>
+				</FormalParameter>
+			</FormalParameters>
+			<ExtendedAttributes>
+				<ExtendedAttribute Name="AdapterClass" Value="com.gridnode.pdip.app.workflow.client.WorkflowClient"/>
+				<ExtendedAttribute Name="AdapterMethod" Value="insertDocument"/>
+			</ExtendedAttributes>
+		</Application>
+	</Applications>
+<WorkflowProcesses>
+<WorkflowProcess Id="CreateResDocProcess">
+<ProcessHeader/>
+<FormalParameters>
+            <FormalParameter Id="documentId" Index="1" Mode="IN">
+                    <DataType>
+                            <DeclaredType Id="java.lang.String"/>
+                    </DataType>
+            </FormalParameter>
+            <FormalParameter Id="requestDocumentType" Index="2" Mode="IN">
+                    <DataType>
+                            <DeclaredType Id="java.lang.String"/>
+                    </DataType>
+            </FormalParameter>
+            <FormalParameter Id="requestDocumentObject" Index="3" Mode="IN">
+                    <DataType>
+                            <DeclaredType Id="java.lang.Object"/>
+                    </DataType>
+            </FormalParameter>
+</FormalParameters>
+<Activities>
+<Activity Id="START">
+					<Description>Start of Process</Description>
+					<Implementation>
+						<No/>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+<Activity Id="END">
+					<Description>End of Process</Description>
+					<Implementation>
+						<No/>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+<Activity Id="CREATE_RESPONSE_DOCUMENT">
+					<Description>To create response document</Description>
+					<Implementation>
+						<No/>
+					</Implementation>
+					<StartMode>
+						<Manual/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+<Activity Id="INSERT_RESPONSE_DOCUMENT">
+					<Description>Insert response document into system</Description>
+					<Implementation>
+						<Tool Id="InsertDocument" Type="APPLICATION">
+							<ActualParameters>
+								<ActualParameter>documentId</ActualParameter>
+								<ActualParameter>responseDocumentType</ActualParameter>
+                                                                <ActualParameter>responseDocumentObject</ActualParameter>
+                                                                <ActualParameter>senderKey</ActualParameter>
+							</ActualParameters>
+                                                        <ExtendedAttributes>
+                                                                <ExtendedAttribute Name="senderKey" Value=""/>
+                                                        </ExtendedAttributes>
+						</Tool>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+</Activities>
+<Transitions>
+<Transition Id="START_CREATE_RESPONSE_DOCUMENT" From="START" To="CREATE_RESPONSE_DOCUMENT">
+					<Condition/>
+				</Transition>
+<Transition Id="CREATE_RESPONSE_INSERT_DOCUMENT" From="CREATE_RESPONSE_DOCUMENT" To="INSERT_RESPONSE_DOCUMENT">
+					<Condition/>
+				</Transition>
+<Transition Id="INSERT_RESPONSE_DOCUMENT_END" From="INSERT_RESPONSE_DOCUMENT" To="END">
+					<Condition/>
+				</Transition>
+</Transitions>
+</WorkflowProcess>
+</WorkflowProcesses>
+</Package>

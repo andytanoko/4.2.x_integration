@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for ExportEntityList  -->
+	<class name="com.gridnode.pdip.base.exportconfig.model.ExportEntityList">
+		<map-to xml="Entities"/>
+		<field name="Entities" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection">
+		</field>
+	</class>
+	<!--  Mapping for ProcessMapping  -->
+	<class name="com.gridnode.gtas.server.partnerprocess.model.ProcessMapping">
+		<map-to xml="ProcessMapping"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="ProcessDef" type="string">
+			<xml name="ProcessDef" node="element"/>
+		</field>
+		<field name="ProcessIndicatorCode" type="string">
+			<xml name="ProcessIndicatorCode" node="element"/>
+		</field>
+		<field name="DocumentType" type="string">
+			<xml name="DocumentType" node="element"/>
+		</field>
+		<field name="PartnerRoleMapping" type="long">
+			<xml name="PartnerRoleMapping" node="element"/>
+		</field>
+		<field name="ProcessVersionID" type="string">
+			<xml name="ProcessVersionID" node="element"/>
+		</field>
+		<field name="PartnerID" type="string">
+			<xml name="PartnerID" node="element"/>
+		</field>
+		<field name="isInitiatingRole" type="boolean" get-method="isInitiatingRole" set-method="setInitiatingRole">
+			<xml name="isInitiatingRole" node="element"/>
+		</field>
+	</class>
+</mapping>

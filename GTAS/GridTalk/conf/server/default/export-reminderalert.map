@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for ExportEntityList  -->
+	<class name="com.gridnode.pdip.base.exportconfig.model.ExportEntityList">
+		<map-to xml="Entities"/>
+		<field name="Entities" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection">
+		</field>
+	</class>
+	<!--  Mapping for ReminderAlert  -->
+	<class name="com.gridnode.gtas.server.docalert.model.ReminderAlert">
+		<map-to xml="ReminderAlert"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="TrackRecordUID" type="long">
+			<xml name="TrackRecordUID" node="element"/>
+		</field>
+		<field name="DaysToReminder" type="integer">
+			<xml name="DaysToReminder" node="element"/>
+		</field>
+		<field name="AlertToRaise" type="string">
+			<xml name="AlertToRaise" node="element"/>
+		</field>
+		<field name="DocRecipientXpath" type="string">
+			<xml name="DocRecipientXpath" node="element"/>
+		</field>
+		<field name="DocSenderXpath" type="string">
+			<xml name="DocSenderXpath" node="element"/>
+		</field>
+	</class>
+</mapping>

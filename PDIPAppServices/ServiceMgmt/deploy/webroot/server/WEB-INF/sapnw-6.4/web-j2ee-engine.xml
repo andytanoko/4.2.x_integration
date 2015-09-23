@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-j2ee-engine SYSTEM "web-j2ee-engine.dtd">
+<web-j2ee-engine>
+	<ejb-ref>
+		<ejb-ref-name>ejb/ServiceMgmtManager</ejb-ref-name>
+		<jndi-name>com.gridnode.pdip.app.servicemgmt.facade.ejb.IServiceMgmtManagerHome</jndi-name>
+	</ejb-ref>
+	<security-policy-domain>gridnode.com/appservices/servicemgmt</security-policy-domain>
+</web-j2ee-engine>

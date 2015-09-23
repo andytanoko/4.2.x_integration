@@ -1,0 +1,150 @@
+<html>
+<head>
+<title>10.1.5 Senderlite.jar </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>10.1.5 Senderlite.jar </h3>
+<p></p>
+<p><span>The </span>
+<span>senderlite.jar</span>
+<span> file is a simplified backend sender for GridTalk. It accepts all the parameters on the command line, and there are no directories or configuration files to set up. It also does not litter the directory with the output log files. The command line options for the senderlite.jar are as follows:</span>
+</p>
+<p><span></span>
+</p>
+<p><span><img width='658' height='84' alt='Text Box: java -jar senderlite.jar -I <gt_listen_ip> -O <gt_listen_port> -N <gt_user> -W <gt_userpass> [-S <smtp_host> -E <email_on_error>] [-D <doc_type>] [-P <partner_id>] –F <files> [-A <attachments>] [-X] [-Y] [-U <uid>] [-PS <procid>] [-Z]
+
+
+' src='../images/image146.gif'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>where</span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' width='660' border='0' cellpadding='0'><tr><td width='144' valign='top'><p><span>-I &lt;gt_listen_ip&gt;</span>
+</p>
+</td>
+<td width='516' valign='top'><p><span>IP address of the Grid Talk server , e.g. 127.0.0.1 for local GridTalk server </span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>-O &lt;gt_listen_port&gt;</span>
+</p>
+</td>
+<td width='516' valign='top'><p><span>Listening port on the Grid Talk server, e.g. 6763 for default </span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>-N &lt;gt_user&gt;</span>
+</p>
+</td>
+<td width='516' valign='top'><p><span>GridTalk user making the connection to GridTalk server, e.g. admin</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>-W &lt;gt_user_pass&gt;</span>
+</p>
+</td>
+<td width='516' valign='top'><p><span>Password of the GridTalk user, </span>
+<i><span>use the Tool “maskedPass.bat” under &lt;GRIDTALK_HOME&gt;/bin/admin to generate the masked password.</span>
+</i>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>-S &lt;smtp_host&gt;</span>
+</p>
+</td>
+<td width='516' valign='top'><p><span>SMTP server to use to send to error notifications (optional)</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>-E &lt;email_on_error&gt;</span>
+</p>
+</td>
+<td width='516' valign='top'><p><span>E-mail to receive error messages (optional)</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>-D &lt;doc_type&gt;</span>
+</p>
+</td>
+<td width='516' valign='top'><p><span>Document type of the import file (optional)</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>-P &lt;partner_id&gt;</span>
+</p>
+</td>
+<td width='516' valign='top'><p><span>Partner ID of the partner to receive the files (optional)</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>-F &lt;files&gt;</span>
+</p>
+<p><span></span>
+</p>
+</td>
+<td width='516' valign='top'><p><span>Full path of the file to be imported to GridTalk. To specify more than one file, use ; to separate them.</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>-A &lt;attachments&gt;</span>
+</p>
+<p><span></span>
+</p>
+</td>
+<td width='516' valign='top'><p><span>Full path of the file to be attached to the import file. To specify more than one, use ; to separate them (optional)</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>-X</span>
+</p>
+</td>
+<td width='516' valign='top'><p><span>Delete the import files after sending to GridTalk (optional)</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>-Y</span>
+</p>
+</td>
+<td width='516' valign='top'><p><span>Delete the attachment files after sending to GridTalk (optional)</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>-U &lt;uid&gt;</span>
+</p>
+</td>
+<td width='516' valign='top'><p><span>Unique identifier for the document to be imported (optional). Used for linking imported files with backend system identifiers.</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>-PS &lt;procid&gt;</span>
+</p>
+</td>
+<td width='516' valign='top'><p><span>Process Instance Id of the request message. Used for linking response message to request message of the same process instance.</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>-Z</span>
+</p>
+</td>
+<td width='516' valign='top'><p><span>Switch on debugging messages (optional)</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><span>Take note that it is not required for the above parameters to appear in any particular order.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>This program allows a simpler backend configuration rather than setting up many configuration files that the sender.jar file requires as earlier described in the sender.ini/directory.file/info files. Both the sender.jar and senderlite.jar files perform the same function though. You can choose to set up the configuration files or use senderlite.jar and modify everything in one batch file. If you intend to dump separate files into many directories and want to send all of them at once, the sender.jar file is appropriate. However, in the case of simple imports, use the senderlite.jar file instead.</span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

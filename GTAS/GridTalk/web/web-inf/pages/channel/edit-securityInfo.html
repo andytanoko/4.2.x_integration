@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Edit SecurityInfo</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="cancel"/>
+        <input type="hidden" name="divertTo"/>
+        <div>
+          <h4 id="heading">
+            lbSecurityInfo
+          </h4>
+          <table border="0">
+            <tr id="name_details">
+              <td id="name_label">
+                lbName
+              </td>
+              <td>
+                <input type="text" id="name_value" name="name"/>
+              </td>
+              <td id="name_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="description_details">
+              <td id="description_label">
+                lbDescription
+              </td>
+              <td>
+                <input type="text" id="description_value" name="name"/>
+              </td>
+              <td id="description_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="partnerCategory_details">
+              <td id="partnerCategory_label">
+                lbPartnerCategory
+              </td>
+              <td>
+                <span id="partnerCategory_value">XXX</span>
+              </td>
+              <td id="partnerCategory_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="isPartner_details">
+              <td id="isPartner_label">
+                lbIsPartner
+              </td>
+              <td>
+                <input type="checkbox" id="isPartner_value" name="isPartner" value="true" onclick="serverRefresh();"/>
+              </td>
+              <td id="isPartner_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="refId_details">
+              <td id="refId_label">
+                lbRefId
+              </td>
+              <td>
+                <span id="refId_value">XXX</span>
+              </td>
+              <td id="refId_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="sequence_details">
+              <td id="sequence_label">
+                lbSequence
+              </td>
+              <td>
+                 <select size="1" id="sequence_value" name="name">
+                  &nbsp;
+                </select>
+              </td>
+              <td id="sequence_error">
+                &nbsp;
+              </td>
+            </tr>
+          </table>
+          <div>
+            <h4 id="encryption_heading">
+              lbEncryption
+            </h4>
+            <table border="0">
+              <tr id="encType_details">
+                <td id="encType_label">
+                  lbEncType
+                </td>
+                <td>
+                  <select size="1" id="encType_value" name="name" onchange="serverRefresh();">
+                    &nbsp;
+                  </select>
+                </td>
+                <td id="encType_error">
+                &nbsp;
+                </td>
+              </tr>
+              <tr id="encryptionAlgorithm_details">
+                <td id="encryptionAlgorithm_label">
+                  lbEncryptionAlgorithm
+                </td>
+                <td>
+                  <select size="1" id="encryptionAlgorithm_value" name="name">
+                    &nbsp;
+                  </select>
+                </td>
+                <td id="encryptionAlgorithm_error">
+                  &nbsp;
+                </td>
+              </tr>
+              <tr id="encLevel_details">
+                <td id="encLevel_label">
+                  lbEncLevel
+                </td>
+                <td>
+                  <select size="1" id="encLevel_value" name="name">
+                    &nbsp;
+                  </select>
+                </td>
+                <td id="encLevel_error">
+                  &nbsp;
+                </td>
+              </tr>
+              <tr id="encCert_details">
+                <td id="encCert_label">
+                  lbEncCert
+                </td>
+                <td>
+                   <select size="1" id="encCert_value" name="name">
+                    &nbsp;
+                  </select>
+                </td>
+                <td id="encCert_error">
+                  &nbsp;
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div id="signature_details">
+            <h4 id="signature_heading">
+              lbSignature
+            </h4>
+            <table border="0">
+              <tr id="sigType_details">
+                <td id="sigType_label">
+                  lbSigType
+                </td>
+                <td>
+                  <select size="1" id="sigType_value" name="name" onchange="serverRefresh();">
+                    &nbsp;
+                  </select>
+                </td>
+                <td id="sigType_error">
+                  &nbsp;
+                </td>
+              </tr>
+              <tr id="digestAlgorithm_details">
+                <td id="digestAlgorithm_label">
+                  lbDigestAlgorithm
+                </td>
+                <td>
+                  <select size="1" id="digestAlgorithm_value" name="name">
+                    &nbsp;
+                  </select>
+                </td>
+                <td id="digestAlgorithm_error">
+                  &nbsp;
+                </td>
+              </tr>
+              <tr id="sigEncCert_details">
+                <td id="sigEncCert_label">
+                  lbSigEncCert
+                </td>
+                <td>
+                  <select size="1" id="sigEncCert_value" name="name">
+                    &nbsp;
+                  </select>
+                </td>
+                <td id="sigEncCert_error">
+                  &nbsp;
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div id="compression_details">
+            <h4 id="compression_heading">
+              lbCompression
+            </h4>
+            <table border="0">
+              <tr id="compressionType_details">
+                <td id="compressionType_label">
+                  lbCompressionType
+                </td>
+                <td>
+                  <select size="1" id="compressionType_value" name="name" onchange="serverRefresh();">
+                    &nbsp;
+                  </select>
+                </td>
+                <td id="compressionType_error">
+                &nbsp;
+                </td>
+              </tr>
+              <tr id="compressionMethod_details">
+                <td id="compressionMethod_label">
+                  lbCompressionMethod
+                </td>
+                <td>
+                  <select size="1" id="compressionMethod_value" name="name">
+                    &nbsp;
+                  </select>
+                </td>
+                <td id="compressionMethod_error">
+                  &nbsp;
+                </td>
+              </tr>
+              <tr id="compressionLevel_details">
+                <td id="compressionLevel_label">
+                  lbCompressionLevel
+                </td>
+                <td>
+                  <select size="1" id="compressionLevel_value" name="name">
+                    &nbsp;
+                  </select>
+                </td>
+                <td id="compressionLevel_error">
+                  &nbsp;
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
+

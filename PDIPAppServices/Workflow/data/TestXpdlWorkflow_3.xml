@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Package SYSTEM "data/xpdl.dtd">
+<Package Id="PF01">
+	<PackageHeader>
+		<XPDLVersion/>
+		<Vendor/>
+		<Created>2002-05-28 11:11:11</Created>
+	</PackageHeader>
+	<RedefinableHeader>
+		<Author>GTAS</Author>
+		<Version>1.0</Version>
+	</RedefinableHeader>
+	<WorkflowProcesses>
+		<WorkflowProcess Id="PF01">
+			<ProcessHeader/>
+			<FormalParameters>
+				<FormalParameter Id="main.gdocs" Index="1" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.util.ArrayList"/>
+					</DataType>
+				</FormalParameter>
+			</FormalParameters>
+			<Activities>
+				<Activity Id="START">
+					<Description>Start of Process</Description>
+					<Implementation>
+						<No/>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+				<Activity Id="END">
+					<Description>End of Process</Description>
+					<Implementation>
+						<No/>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+				<Activity Id="MappingRule1">
+					<Description>Mapping Rule One</Description>
+					<Implementation>
+						<SubFlow Id="http://XPDL/MappingRules/8/XpdlProcess/MappingRules" Execution="ASYNCHR">
+							<ActualParameters>
+								<ActualParameter>uid</ActualParameter>
+								<ActualParameter>main.gdocs</ActualParameter>
+								<ActualParameter>main.gdocs</ActualParameter>
+							</ActualParameters>
+						</SubFlow>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+					<TransitionRestrictions>
+						<TransitionRestriction>
+							<Split Type="AND">
+								<TransitionRefs>
+									<TransitionRef Id="MappingRule1_ExitToOutbound"/>
+									<TransitionRef Id="MappingRule1_MappingRule3"/>
+								</TransitionRefs>
+							</Split>
+						</TransitionRestriction>
+					</TransitionRestrictions>
+					<ExtendedAttributes>
+						<ExtendedAttribute Name="uid" Value="1"/>
+					</ExtendedAttributes>
+				</Activity>
+				<Activity Id="ExitToOutbound">
+					<Description>Exit To Outbound Folder</Description>
+					<Implementation>
+						<SubFlow Id="http://XPDL/Exits/1.0/XpdlProcess/Exits" Execution="ASYNCHR">
+							<ActualParameters>
+								<ActualParameter>exit</ActualParameter>
+								<ActualParameter>main.gdocs</ActualParameter>
+								<ActualParameter>fork1.gdocs</ActualParameter>
+							</ActualParameters>
+						</SubFlow>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+					<ExtendedAttributes>
+						<ExtendedAttribute Name="exit" Value="ExitToOutbound"/>
+					</ExtendedAttributes>
+				</Activity>
+				<Activity Id="MappingRule2">
+					<Description>Mapping Rule Two</Description>
+					<Implementation>
+						<SubFlow Id="http://XPDL/MappingRules/8/XpdlProcess/MappingRules" Execution="ASYNCHR">
+							<ActualParameters>
+								<ActualParameter>uid</ActualParameter>
+								<ActualParameter>fork1.gdocs</ActualParameter>
+								<ActualParameter>fork1.gdocs</ActualParameter>
+							</ActualParameters>
+						</SubFlow>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+					<ExtendedAttributes>
+						<ExtendedAttribute Name="uid" Value="2"/>
+					</ExtendedAttributes>
+				</Activity>
+				<Activity Id="ExitWorkflow1">
+					<Description>Exit Workflow</Description>
+					<Implementation>
+						<SubFlow Id="http://XPDL/Exits/1.0/XpdlProcess/Exits" Execution="ASYNCHR">
+							<ActualParameters>
+								<ActualParameter>exit</ActualParameter>
+								<ActualParameter>fork1.gdocs</ActualParameter>
+								<ActualParameter>fork1.gdocs</ActualParameter>
+							</ActualParameters>
+						</SubFlow>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+					<ExtendedAttributes>
+						<ExtendedAttribute Name="exit" Value="ExitWorkflow"/>
+					</ExtendedAttributes>
+				</Activity>
+				<Activity Id="MappingRule3">
+					<Description>Mapping Rule Three</Description>
+					<Implementation>
+						<SubFlow Id="http://XPDL/MappingRules/8/XpdlProcess/MappingRules" Execution="ASYNCHR">
+							<ActualParameters>
+								<ActualParameter>uid</ActualParameter>
+								<ActualParameter>main.gdocs</ActualParameter>
+								<ActualParameter>fork2.gdocs</ActualParameter>
+							</ActualParameters>
+						</SubFlow>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+					<ExtendedAttributes>
+						<ExtendedAttribute Name="uid" Value="2"/>
+					</ExtendedAttributes>
+				</Activity>
+				<Activity Id="ExitWorkflow2">
+					<Description>Exit Workflow</Description>
+					<Implementation>
+						<SubFlow Id="http://XPDL/Exits/1.0/XpdlProcess/Exits" Execution="ASYNCHR">
+							<ActualParameters>
+								<ActualParameter>exit</ActualParameter>
+								<ActualParameter>fork2.gdocs</ActualParameter>
+								<ActualParameter>fork2.gdocs</ActualParameter>
+							</ActualParameters>
+						</SubFlow>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+					<ExtendedAttributes>
+						<ExtendedAttribute Name="exit" Value="ExitWorkflow"/>
+					</ExtendedAttributes>
+				</Activity>
+			</Activities>
+			<Transitions>
+				<Transition Id="START_MappingRule1" From="START" To="MappingRule1"/>
+				<Transition Id="MappingRule1_ExitToOutbound" From="MappingRule1" To="ExitToOutbound"/>
+				<Transition Id="ExitToOutbound_MappingRule2" From="ExitToOutbound" To="MappingRule2"/>
+				<Transition Id="MappingRule2_ExitWorkflow1" From="MappingRule2" To="ExitWorkflow1"/>
+				<Transition Id="MappingRule1_MappingRule3" From="MappingRule1" To="MappingRule3"/>
+				<Transition Id="MappingRule3_ExitWorkflow2" From="MappingRule3" To="ExitWorkflow2"/>
+				<Transition Id="ExitWorkflow1_END" From="ExitWorkflow1" To="END"/>
+				<Transition Id="ExitWorkflow2_END" From="ExitWorkflow2" To="END"/>
+			</Transitions>
+		</WorkflowProcess>
+	</WorkflowProcesses>
+</Package>

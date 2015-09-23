@@ -1,0 +1,705 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001-2002 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: ResourceNodeManagerBeanTest.java
+ *
+ ****************************************************************************
+ * Date           Author              Changes
+ ****************************************************************************
+ * Aug 01 2002    Neo Sok Lay         Created
+ */
+package com.gridnode.gtas.server.enterprise.facade.ejb;
+
+import com.gridnode.gtas.server.enterprise.model.*;
+
+import com.gridnode.pdip.framework.db.filter.*;
+import com.gridnode.pdip.framework.log.Log;
+import com.gridnode.pdip.framework.util.ServiceLocator;
+
+import junit.framework.*;
+
+import java.io.*;
+import java.util.Date;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.LinkedList;
+import java.sql.Timestamp;
+
+/**
+ * Test case for testing ResourceNodeManagerBean<P>
+ *
+ * This tests the following business methods in the ResourceNodeManagerBean:<P>
+ * <LI>createResourceNode(ResourceNode)</LI>
+ * <LI>updateResourceNode(ResourceNode)</LI>
+ * <LI>markDeleteResourceNode(UID)</LI>
+ * <LI>markDeleteBusinessEntities(EnterpriseID)</LI>
+ * <P>
+ *
+ * The following business methods are implicitly tested by this test case:<P>
+ * <LI>findResourceNode(UID)</LI>
+ * <LI>findBusinessEntities(DataFilter)</LI>
+ * <LI>purgeDeletedEntities(EnterpriseId)</LI>
+ * <P>
+ *
+ * No test cases for the following methods in the ResourceNodeManagerBean:<P>
+ * <LI>findBusinessEntitiesKeys(DataFilter)</LI>
+ * <LI>findBusinessEntities(int state)</LI>
+ * <LI>findBusinessEntitiesByWhitePage(IDataFilter filter)</LI>
+ * <LI>findBusinessEntitiesKeys(IDataFilter filter)</LI>
+ * <LI>findResourceNode(String enterpriseId, String beId)</LI>
+ * <P>
+ * @author Neo Sok Lay
+ *
+ * @version 2.0 I4
+ * @since 2.0 I4
+ */
+public class ResourceNodeManagerBeanTest
+  extends    TestCase
+{
+  private IResourceNodeManagerObj     _resourceNodeMgr;
+  private ResourceNode[] _resourceNodes;
+  private Long[] _uIDs;
+
+  public ResourceNodeManagerBeanTest(String name)
+  {
+    super(name);
+  }
+
+  public static Test suite()
+  {
+    return new TestSuite(ResourceNodeManagerBeanTest.class);
+  }
+
+  protected void setUp() throws java.lang.Exception
+  {
+    try
+    {
+      Log.log("TEST", "[ResourceNodeManagerBeanTest.setUp] Enter");
+
+      _resourceNodeMgr = getResourceNodeMgr();
+      cleanUp();
+    }
+    finally
+    {
+      Log.log("TEST", "[ResourceNodeManagerBeanTest.setUp] Exit");
+    }
+  }
+
+  protected void tearDown() throws java.lang.Exception
+  {
+    Log.log("TEST", "[ResourceNodeManagerBeanTest.tearDown] Enter");
+    cleanUp();
+    Log.log("TEST", "[ResourceNodeManagerBeanTest.tearDown] Exit");
+  }
+
+
+  // *********************** test cases **************************** //
+
+  public void testFunctions() throws Throwable
+  {
+    prepareTestData();
+    managementFunctionsTest();
+    cleanupTestData();
+  }
+
+  private void prepareTestData()
+  {
+    _resourceNodes = new ResourceNode[]
+      {
+        createResourceNode(
+          new Object[] {"Type1", new Long(1), Boolean.TRUE},
+          new Object[][] {
+            {
+              new Object[] {"Type2", new Long(2), Boolean.TRUE},
+              new Object[][] {
+                {
+                  new Object[] {"Type3", new Long(3), Boolean.TRUE},
+                  new Object[][] {
+                  },
+                },
+              }
+            },
+            {
+              new Object[] {"Type2", new Long(4), Boolean.TRUE},
+              new Object[][] {
+              },
+            }
+          }),
+        createResourceNode(
+          new Object[] {"Type1", new Long(5), Boolean.TRUE},
+          new Object[][] {
+            {
+              new Object[] {"Type2", new Long(6), Boolean.TRUE},
+              new Object[][] {
+                {
+                  new Object[] {"Type3", new Long(7), Boolean.TRUE},
+                  new Object[][] {
+                  },
+                },
+              }
+            },
+            {
+              new Object[] {"Type2", new Long(8), Boolean.TRUE},
+              new Object[][] {
+              },
+            }
+          }),
+        createResourceNode(
+          new Object[] {"Type2", new Long(9), Boolean.TRUE},
+          new Object[][] {
+          }),
+        createResourceNode(
+          new Object[] {"Type2", new Long(10), Boolean.TRUE},
+          new Object[][] {
+            {
+              new Object[] {"Type3", new Long(11), Boolean.FALSE},
+              new Object[][] {
+              }
+            },
+            {
+              new Object[] {"Type4", new Long(12), Boolean.TRUE},
+              new Object[][] {
+              },
+            }
+          }),
+
+        createResourceNode(
+          new Object[] {"Type2", new Long(13), Boolean.TRUE},
+          new Object[][] {
+            {
+              new Object[] {"Type3", new Long(11), Boolean.TRUE},
+              new Object[][] {
+              }
+            },
+            {
+              new Object[] {"Type4", new Long(12), Boolean.TRUE},
+              new Object[][] {
+              },
+            }
+          }),
+      };
+  }
+
+  private void cleanupTestData()
+  {
+  }
+
+
+  // *************** Management **********************************
+  private void managementFunctionsTest() throws Throwable
+  {
+
+    _uIDs = new Long[_resourceNodes.length];
+
+    //Add pass
+    for (int i=0; i<_uIDs.length; i++)
+    {
+      _uIDs[i] = checkAddPass(_resourceNodes[i]);
+    }
+
+    //create fail: duplicate [Type1,1]
+    checkAddFail(_resourceNodes[0]);
+
+    caseUpdateSelfPass();
+    caseUpdateDescendantsPass();
+    caseUpdateDescendantsFail();
+
+    //delete fail: canDelete=false for node [Type1,5] (set canDelete=false in updateSelfPass())
+    checkRemoveFail(_uIDs[1]);
+
+    //delete fail: canDelete=false for descendant node [Type3,11] of [Type2,10]
+    checkRemoveFail(_uIDs[3]);
+
+    //delete pass: no descendant node [Type2,9]
+    checkRemovePass(_uIDs[2]);
+
+    //delete pass: have descendants [Type1,1]
+    checkRemovePass(_uIDs[0]);
+
+  }
+
+  private void caseRemoveDescendantPass() throws Throwable
+  {
+    //delete pass: descendant node [Type3,11] of [Type2,13]
+    ResourceNode resourceNode = getResourceNodeByUID(_uIDs[4], true);
+    ResourceNode delete = (ResourceNode)resourceNode.getChildrenResourceNodes().iterator().next();
+    checkRemovePass((Long)delete.getKey());
+  }
+
+  private void caseUpdateSelfPass() throws Throwable
+  {
+    //update pass: no adjustDescendants [Type1,5]
+    ResourceNode resourceNode = getResourceNodeByUID(_uIDs[1], false);
+    resourceNode.setPriority(9);
+    resourceNode.setCanDelete(false);
+
+    ArrayList updatedNodes = new ArrayList();
+    updatedNodes.add(resourceNode.getKey());
+    ArrayList emptyList = new ArrayList();
+
+    checkUpdatePass(resourceNode, emptyList, emptyList, updatedNodes, false);
+  }
+
+  private void caseUpdateDescendantsFail()
+  {
+    //update fail: adjustDescendants
+    //1. get node [Type2,10]
+    ResourceNode resourceNode = getResourceNodeByUID(_uIDs[3], true);
+
+    ArrayList newChildren = new ArrayList(resourceNode.getChildrenResourceNodes());
+
+    //2. remove "canDelete=false" child [Type3,11]
+    newChildren.remove(0);
+
+    //3. duplicate [Type4,12] for new node
+    ResourceNode existNode = (ResourceNode)newChildren.get(0);
+    ResourceNode newNode = new ResourceNode();
+    newNode.setResourceType(existNode.getResourceType());
+    newNode.setResourceUID(existNode.getResourceUID());
+    newNode.setPriority(1);
+    newChildren.add(newNode);
+    resourceNode.setChildrenResourceNodes(newChildren);
+
+    checkUpdateFail(resourceNode);
+  }
+
+  private void caseUpdateDescendantsPass() throws Throwable
+  {
+    ArrayList removedNodes = new ArrayList();
+    ArrayList addedNodes = new ArrayList();
+    ArrayList updatedNodes = new ArrayList();
+
+    //update pass: adjustDescendants
+    //1. get node [Type1,1]
+    ResourceNode resourceNode = getResourceNodeByUID(_uIDs[0], true);
+    Collection children = resourceNode.getChildrenResourceNodes();
+
+    ArrayList newChildren = new ArrayList(children);
+
+    //2. remove node [Type2,4]
+    //3. replace with new node [Type3,13]
+    ResourceNode removeNode = (ResourceNode)newChildren.get(1);
+    ResourceNode addNode = createResourceNode(
+                            new Object[] {"Type3", new Long(13), Boolean.TRUE},
+                            new Object[][] {
+                            });
+    addNode.setParentNodeUID(_uIDs[0]);
+    newChildren.set(1, addNode);
+
+    //4. update node [Type2,2] Priority, add child
+    ResourceNode updateNode = (ResourceNode)newChildren.get(0);
+    updateNode.setPriority(9);
+    ResourceNode newNode = createResourceNode(
+                              new Object[] {"Type4", new Long(14), Boolean.TRUE},
+                              new Object[][] {
+                              });
+    ArrayList newNodeChild = new ArrayList();
+
+    //5. add new node(duplicating from [Type3,3] under [Type2,2]) under the new node
+    ResourceNode dupNode = (ResourceNode)updateNode.getChildrenResourceNodes().iterator().next();
+    dupNode = (ResourceNode)dupNode.clone();
+    dupNode.setParentNodeUID(null);
+    dupNode.setUId(0);
+    newNodeChild.add(dupNode);
+    newNode.setChildrenResourceNodes(newNodeChild);
+    updateNode.getChildrenResourceNodes().add(newNode);
+
+    removedNodes.add(removeNode.getKey());
+    addedNodes.add(addNode.getEntityDescr());
+    addedNodes.add(newNode.getEntityDescr());
+    addedNodes.add(dupNode.getEntityDescr());
+    updatedNodes.add(updateNode.getKey());
+
+    resourceNode.setChildrenResourceNodes(newChildren);
+    checkUpdatePass(resourceNode, removedNodes, addedNodes, updatedNodes, true);
+  }
+
+  private void checkRemovePass(Long uID)
+  {
+    try
+    {
+      Log.debug("TEST", "[ResourceNodeManagerBeanTest.checkRemovePass] Enter");
+      _resourceNodeMgr.removeResourceNode(uID);
+    }
+    catch (Exception ex)
+    {
+      Log.err("TEST", "[ResourceNodeManagerBeanTest.checkRemovePass]", ex);
+      assertTrue("Error in _resourceNodeMgr.removeResourceNode", false);
+    }
+
+    //check that record is removed
+    try
+    {
+      getResourceNodeByUID(uID, false);
+    }
+    catch (Throwable ex)
+    {
+      Log.debug("TEST", "[ResourceNodeManagerBeanTest.checkRemovePass] Caught: " +
+        ex.getMessage());
+    }
+  }
+
+  private void checkRemoveFail(Long uID)
+  {
+    //mark delete
+    try
+    {
+      Log.debug("TEST", "[ResourceNodeManagerBeanTest.checkRemoveFail] Enter");
+      _resourceNodeMgr.removeResourceNode(uID);
+      assertTrue("Remove not fail as expected", false);
+    }
+    catch (AssertionFailedError ex)
+    {
+      throw ex;
+    }
+    catch (Exception ex)
+    {
+      Log.debug("TEST", "[ResourceNodeManagerBeanTest.checkRemoveFail] "+ex.getMessage());
+    }
+  }
+
+  private void checkUpdateFail(ResourceNode mockNode)
+  {
+    try
+    {
+      Log.debug("TEST", "[ResourceNodeManagerBeanTest.checkUpdateFail] Enter");
+      updateToDb(mockNode, true);
+      assertTrue("Update not fail as expected", false);
+    }
+    catch (AssertionFailedError ex)
+    {
+      throw ex;
+    }
+    catch (Throwable ex)
+    {
+      Log.debug("TEST", "[ResourceNodeManagerBeanTest.checkUpdateFail] "+ex.getMessage());
+    }
+  }
+
+  private void checkUpdatePass(
+    ResourceNode mockNode,
+    Collection removedNodes,
+    Collection addedNodes,
+    Collection updatedNodes,
+    boolean adjustDescendants) throws Throwable
+  {
+    Log.debug("TEST", "[ResourceNodeManagerBeanTest.checkUpdatePass] Enter");
+    //updates
+    updateToDb(mockNode, adjustDescendants);
+
+    ResourceNode updated = getResourceNodeByUID((Long)mockNode.getKey(), false);
+
+    checkUpdatedResourceNode(mockNode, null, updated,
+      removedNodes, addedNodes, updatedNodes);
+
+    Log.debug("TEST", "[ResourceNodeManagerBeanTest.checkUpdatePass] Exit");
+  }
+
+  private void checkUpdatedResourceNode(
+    ResourceNode mockNode, Long uID,
+    ResourceNode updated,
+    Collection removedNodes,
+    Collection addedNodes,
+    Collection updatedNodes)
+  {
+    //check node information
+    if (uID != null && uID.intValue() != 0)
+      assertEquals("UID is incorrect", uID, updated.getKey());
+
+    //check UID!=null for new node
+    if (addedNodes.contains(mockNode.getEntityDescr()))
+      assertNotNull("UID is null", updated.getKey());
+
+    assertTrue("Node not removed", !removedNodes.contains(updated.getKey()));
+
+    //check parent and version only for existing node
+    if (updatedNodes.contains(updated.getKey()))
+    {
+      assertEquals("ParentUID incorrect", mockNode.getParentNodeUID(), updated.getParentNodeUID());
+      assertTrue("Version is not incremented", mockNode.getVersion() < updated.getVersion());
+    }
+
+    assertEquals("ResourceType incorrect", mockNode.getResourceType(), updated.getResourceType());
+    assertEquals("ResourceUID is incorrect", mockNode.getResourceUID(), updated.getResourceUID());
+    assertEquals("CanDelete is incorrect", mockNode.canDelete(), updated.canDelete());
+    assertEquals("Priority is incorrect", mockNode.getPriority(), updated.getPriority());
+
+    Collection mockChildren = mockNode.getChildrenResourceNodes();
+    if (mockChildren != null)
+    {
+      for (Iterator i=mockChildren.iterator(); i.hasNext(); )
+      {
+        ResourceNode mockChild = (ResourceNode)i.next();
+        ResourceNode updatedChild = getResourceNode(
+                                      (Long)updated.getKey(), mockChild.getResourceType(),
+                                      mockChild.getResourceUID(), false);
+        checkUpdatedResourceNode(mockChild, (Long)mockChild.getKey(),
+          updatedChild, removedNodes, addedNodes, updatedNodes);
+      }
+    }
+  }
+
+  private void checkAddFail(ResourceNode mockNode)
+  {
+    try
+    {
+      Log.debug("TEST", "[ResourceNodeManagerBeanTest.checkAddFail] Enter");
+      addToDb(mockNode);
+      assertTrue("Add not fail as expected", false);
+    }
+    catch (AssertionFailedError ex)
+    {
+      throw ex;
+    }
+    catch (Throwable ex)
+    {
+      Log.debug("TEST", "[ResourceNodeManagerBeanTest.checkAddFail] "+ex.getMessage());
+    }
+  }
+
+  private Long checkAddPass(ResourceNode mockNode) throws Throwable
+  {
+    Log.debug("TEST", "[ResourceNodeManagerBeanTest.checkAddPass] Enter");
+    Long uID = addToDb(mockNode);
+
+    Collection mockChildren = mockNode.getChildrenResourceNodes();
+
+    //check retrieved record
+    ResourceNode created = getResourceNodeByUID(uID, true);
+
+    assertNotNull("ResourceNode retrieved is null", created);
+    checkCreatedResourceNode(mockNode, uID, created, true);
+
+    return uID;
+  }
+
+  private void checkCreatedResourceNode(
+    ResourceNode mockNode, Long uID, ResourceNode created, boolean checkParent)
+  {
+    //check node information
+    if (uID != null)
+      assertEquals("UID is incorrect", uID, created.getKey());
+    if (checkParent)
+      assertEquals("ParentUID incorrect", mockNode.getParentNodeUID(), created.getParentNodeUID());
+
+    assertEquals("ResourceType incorrect", mockNode.getResourceType(), created.getResourceType());
+    assertEquals("ResourceUID is incorrect", mockNode.getResourceUID(), created.getResourceUID());
+    assertEquals("CanDelete is incorrect", mockNode.canDelete(), created.canDelete());
+    assertEquals("Priority is incorrect", mockNode.getPriority(), created.getPriority());
+
+    Collection mockChildren = mockNode.getChildrenResourceNodes();
+    for (Iterator i=mockChildren.iterator(); i.hasNext(); )
+    {
+      ResourceNode mockChild = (ResourceNode)i.next();
+      ResourceNode createdChild = getResourceNode(
+                                    uID, mockChild.getResourceType(),
+                                    mockChild.getResourceUID(), false);
+      checkCreatedResourceNode(mockChild, (Long)createdChild.getKey(), createdChild, false);
+    }
+
+  }
+
+  // ************** Finders ******************************************
+
+
+
+  // ******************  utility methods ****************************
+  private IResourceNodeManagerObj getResourceNodeMgr() throws Exception
+  {
+    IResourceNodeManagerHome enterpriseHome = (IResourceNodeManagerHome)ServiceLocator.instance(
+                                         ServiceLocator.CLIENT_CONTEXT).getHome(
+                                         IResourceNodeManagerHome.class.getName(),
+                                         IResourceNodeManagerHome.class);
+    return enterpriseHome.create();
+  }
+
+
+  private void cleanUp() throws Exception
+  {
+    undoCannotDeletes();
+    deleteTestData();
+  }
+
+  private void undoCannotDeletes() throws Exception
+  {
+    ArrayList resourceTypes = new ArrayList();
+    resourceTypes.add("Type1");
+    resourceTypes.add("Type2");
+    resourceTypes.add("Type3");
+    resourceTypes.add("Type4");
+
+    DataFilterImpl filter = new DataFilterImpl();
+    filter.addDomainFilter(null, ResourceNode.RESOURCE_TYPE,
+      resourceTypes, false);
+    filter.addSingleFilter(filter.getAndConnector(), ResourceNode.CAN_DELETE,
+      filter.getEqualOperator(), Boolean.FALSE, false);
+
+    Collection cannotDeletes = getResourceNodesByFilter(filter, false);
+    for (Iterator i=cannotDeletes.iterator(); i.hasNext(); )
+    {
+      ResourceNode node = (ResourceNode)i.next();
+      node.setCanDelete(true);
+      _resourceNodeMgr.updateResourceNode(node, false);
+    }
+  }
+
+  private void deleteTestData() throws Exception
+  {
+    ArrayList resourceTypes = new ArrayList();
+    resourceTypes.add("Type1");
+    resourceTypes.add("Type2");
+    resourceTypes.add("Type3");
+    resourceTypes.add("Type4");
+
+    DataFilterImpl filter = new DataFilterImpl();
+    filter.addDomainFilter(null, ResourceNode.RESOURCE_TYPE,
+      resourceTypes, false);
+
+    Collection cannotDeletes = getResourceNodesByFilter(filter, false);
+    for (Iterator i=cannotDeletes.iterator(); i.hasNext(); )
+    {
+      ResourceNode node = (ResourceNode)i.next();
+      try
+      {
+        _resourceNodeMgr.removeResourceNode((Long)node.getKey());
+      }
+      catch (Exception ex)
+      {
+      }
+    }
+  }
+
+  private ResourceNode createResourceNode(
+    Object[] nodeParams, Object[][] childrenParams)
+  {
+    ResourceNode node = new ResourceNode();
+    node.setResourceType((String)nodeParams[0]);
+    node.setResourceUID((Long)nodeParams[1]);
+    node.setCanDelete(((Boolean)nodeParams[2]).booleanValue());
+
+    Collection children = new ArrayList();
+    //for number of next level children
+    for (int i=0; i<childrenParams.length; i++)
+    {
+      if (childrenParams[i].length == 2)
+        children.add(createResourceNode((Object[])childrenParams[i][0], (Object[][])childrenParams[i][1]));
+    }
+    node.setChildrenResourceNodes(children);
+
+    return node;
+  }
+
+  private Long addToDb(ResourceNode resourceNode) throws Throwable
+  {
+    Long uID = null;
+
+    try
+    {
+      Log.log("TEST", "[ResourceNodeManagerBeanTest.addToDb] Enter");
+
+      uID = _resourceNodeMgr.addResourceNode(resourceNode);
+    }
+    finally
+    {
+      Log.log("TEST", "[ResourceNodeManagerBeanTest.addToDb] Exit");
+    }
+
+    return uID;
+  }
+
+  private void updateToDb(ResourceNode resourceNode, boolean adjustDescendants) throws Throwable
+  {
+    try
+    {
+      Log.log("TEST", "[ResourceNodeManagerBeanTest.updateToDb] Enter");
+      _resourceNodeMgr.updateResourceNode(resourceNode, adjustDescendants);
+    }
+    finally
+    {
+      Log.log("TEST", "[ResourceNodeManagerBeanTest.updateToDb] Exit");
+    }
+  }
+
+  private ResourceNode getResourceNodeByUID(Long uId, boolean getDescendants)
+  {
+    ResourceNode resourceNode = null;
+
+    try
+    {
+      Log.log("TEST", "[ResourceNodeManagerBeanTest.getResourceNodeByUID] Enter");
+
+      resourceNode = _resourceNodeMgr.getResourceNodeByUID(uId, getDescendants);
+    }
+    catch (Exception ex)
+    {
+      Log.err("TEST", "[ResourceNodeManagerBeanTest.getResourceNodeByUID]" + ex.getMessage());
+      assertTrue("Error in _resourceNodeMgr.getResourceNodeByUID", false);
+    }
+    finally
+    {
+      Log.log("TEST", "[ResourceNodeManagerBeanTest.getResourceNodeByUID] Exit");
+    }
+
+    return resourceNode;
+  }
+
+  private ResourceNode getResourceNode(
+    Long parentUID, String resourceType, Long resourceUID, boolean getDescendants)
+  {
+    ResourceNode resourceNode = null;
+
+    try
+    {
+      Log.log("TEST", "[ResourceNodeManagerBeanTest.getResourceNode] Enter");
+
+      resourceNode = _resourceNodeMgr.getResourceNode(
+                      parentUID, resourceType, resourceUID, getDescendants);
+    }
+    catch (Exception ex)
+    {
+      Log.err("TEST", "[ResourceNodeManagerBeanTest.getResourceNode]"+ex.getMessage());
+      assertTrue("Error in _resourceNodeMgr.getResourceNode", false);
+    }
+    finally
+    {
+      Log.log("TEST", "[ResourceNodeManagerBeanTest.getResourceNode] Exit");
+    }
+
+    return resourceNode;
+  }
+
+  private Collection getResourceNodesByFilter(IDataFilter filter, boolean getDescendants)
+  {
+    Collection results = null;
+    try
+    {
+      Log.log("TEST", "[ResourceNodeManagerBeanTest.getResourceNodesByFilter] Enter");
+
+      results = _resourceNodeMgr.getResourceNodesByFilter(filter, getDescendants);
+    }
+    catch (Exception ex)
+    {
+      Log.err("TEST", "[ResourceNodeManagerBeanTest.getResourceNodesByFilter]"+ ex.getMessage());
+      assertTrue("Error in _resourceNodeMgr.getResourceNodesByFilter", false);
+    }
+    finally
+    {
+      Log.log("TEST", "[ResourceNodeManagerBeanTest.getResourceNodesByFilter] Exit");
+    }
+    return results;
+  }
+
+  // *********************** Runner *****************************
+
+  public static void main(String args[])
+  {
+    junit.textui.TestRunner.run(suite());
+  }
+
+
+}

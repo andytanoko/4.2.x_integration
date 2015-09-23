@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Package SYSTEM "data/xpdl.dtd">
+<Package Id="Exits">
+	<PackageHeader>
+		<XPDLVersion/>
+		<Vendor/>
+		<Created>2002-05-28 11:11:11</Created>
+	</PackageHeader>
+	<RedefinableHeader>
+		<Author>GTAS</Author>
+		<Version>1.0</Version>
+	</RedefinableHeader>
+	<Applications>
+		<Application Id="FolderAdapter">
+			<Description>Adapter to call java procedure to perform folder exits</Description>
+			<FormalParameters>
+				<FormalParameter Id="Param1" Index="1" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.lang.Object"/>
+					</DataType>
+				</FormalParameter>
+				<FormalParameter Id="Param2" Index="2" Mode="OUT">
+					<DataType>
+						<DeclaredType Id="java.util.ArrayList"/>
+					</DataType>
+				</FormalParameter>
+
+			</FormalParameters>
+			<ExtendedAttributes>
+				<ExtendedAttribute Name="AdapterClass" Value="java.util.Stack"/>
+				<ExtendedAttribute Name="AdapterMethod" Value="push"/>
+			</ExtendedAttributes>
+		</Application>
+	</Applications>
+	<WorkflowProcesses>
+		<WorkflowProcess Id="Exits">
+			<ProcessHeader/>
+			<FormalParameters>
+				<FormalParameter Id="exit" Index="1" Mode="IN">
+					<DataType>
+						<BasicType Type="STRING"/>
+					</DataType>
+				</FormalParameter>
+				<FormalParameter Id="in.gdocs" Index="2" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.util.ArrayList"/>
+					</DataType>
+				</FormalParameter>
+				<FormalParameter Id="out.gdocs" Index="3" Mode="OUT">
+					<DataType>
+						<DeclaredType Id="java.util.ArrayList"/>
+					</DataType>
+				</FormalParameter>
+			</FormalParameters>
+			<Activities>
+				<Activity Id="START">
+					<Description>Start of Process</Description>
+					<Implementation>
+						<No/>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+                            <TransitionRestrictions>
+                                <TransitionRestriction>
+                                  <InlineBlock Begin="NMTOKEN" End="NMTOKEN">
+                                    <BlockName>#PCDATA</BlockName>
+                                    <Description>#PCDATA</Description>
+                                    <Icon>#PCDATA</Icon>
+                                    <Documentation>#PCDATA</Documentation>
+                                  </InlineBlock>
+                                  <Split Type="XOR">
+                                    <TransitionRefs>
+										<TransitionRef Id="START_ExitToOutbound"/>
+										<TransitionRef Id="START_ExitToExport"/>
+										<TransitionRef Id="START_ExitToImport"/>
+										<TransitionRef Id="START_ExitWorkflow"/>
+									</TransitionRefs>
+                                  </Split>
+                                </TransitionRestriction>
+                            </TransitionRestrictions>
+				</Activity>
+				<Activity Id="END">
+					<Description>End of Process</Description>
+					<Implementation>
+						<No/>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+				<Activity Id="ExitToOutbound">
+					<Description>Exit To Outbound Folder</Description>
+					<Implementation>
+						<Tool Id="FolderAdapter" Type="APPLICATION">
+							<ActualParameters>
+								<ActualParameter>in.gdocs</ActualParameter>
+								<ActualParameter>out.gdocs</ActualParameter>
+							</ActualParameters>
+						</Tool>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+				<Activity Id="ExitToImport">
+					<Description>Exit To Import Folder</Description>
+					<Implementation>
+						<Tool Id="FolderAdapter" Type="APPLICATION">
+							<ActualParameters>
+								<ActualParameter>in.gdocs</ActualParameter>
+								<ActualParameter>out.gdocs</ActualParameter>
+							</ActualParameters>
+						</Tool>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+				<Activity Id="ExitToExport">
+					<Description>Exit To Export Folder</Description>
+					<Implementation>
+						<Tool Id="FolderAdapter" Type="APPLICATION">
+							<ActualParameters>
+								<ActualParameter>in.gdocs</ActualParameter>
+								<ActualParameter>out.gdocs</ActualParameter>
+							</ActualParameters>
+						</Tool>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+				<Activity Id="ExitWorkflow">
+					<Description>Exit Workflow</Description>
+					<Implementation>
+						<Tool Id="FolderAdapter" Type="APPLICATION">
+							<ActualParameters>
+								<ActualParameter>in.gdocs</ActualParameter>
+								<ActualParameter>out.gdocs</ActualParameter>
+							</ActualParameters>
+						</Tool>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+			</Activities>
+			<Transitions>
+				<Transition Id="START_ExitToOutbound" From="START" To="ExitToOutbound">
+					<Condition>contextdata[@exit="ExitToOutbound"]</Condition>
+				</Transition>
+				<Transition Id="ExitToOutbound_END" From="ExitToOutbound" To="END">
+					<Condition>contextdata[@exit="ExitToOutbound"]</Condition>
+				</Transition>
+				<Transition Id="START_ExitToExport" From="START" To="ExitToExport">
+					<Condition>contextdata[@exit="ExitToExport"]</Condition>
+				</Transition>
+				<Transition Id="ExitToExport_END" From="ExitToExport" To="END">
+					<Condition>contextdata[@exit="ExitToExport"]</Condition>
+				</Transition>
+				<Transition Id="START_ExitToImport" From="START" To="ExitToImport">
+					<Condition>contextdata[@exit="ExitToImport"]</Condition>
+				</Transition>
+				<Transition Id="ExitToImport_END" From="ExitToImport" To="END">
+					<Condition>contextdata[@exit="ExitToImport"]</Condition>
+				</Transition>
+				<Transition Id="START_ExitWorkflow" From="START" To="ExitWorkflow">
+					<Condition>contextdata[@exit="ExitWorkflow"]</Condition>
+				</Transition>
+				<Transition Id="ExitWorkflow_END" From="ExitWorkflow" To="END">
+					<Condition>contextdata[@exit="ExitWorkflow"]</Condition>
+				</Transition>
+			</Transitions>
+		</WorkflowProcess>
+	</WorkflowProcesses>
+</Package>

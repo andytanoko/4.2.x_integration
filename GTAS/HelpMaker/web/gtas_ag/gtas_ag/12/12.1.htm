@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>12.1 Configuring Scheduled Task </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h2>12.1 Configuring Scheduled Task </h2>
+<p></p>
+<p><span>The scheduled tasks are configured to run jobs at absolute time, thus if a job is missed for its schedule, for example GridTalk is not running at the time when the job is due to run, the missed job will not be run when the GridTalk resumes operation at a later time.</span>
+</p>
+<p></p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Go to Administration.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>Click Scheduled Task under the Administration menu. The Scheduled Task list view page is displayed.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='622' height='308' border='0' src='../images/image157.jpg'></span>
+</p>
+<p align='center'><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>To create a new scheduled task, click the Create Scheduled Task in the list view page. The Scheduled Task detail view page appears like this by default:</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='446' height='171' border='0' src='../images/image158.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>Enter the following fields such as:</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Task Type:</span>
+</b>
+</p>
+<p><span>This field describes the type of task to schedule. The available type is User Procedure which you can select.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Task ID:</span>
+</b>
+</p>
+<p><span>Upon selection of Task Type as User Procedure, you are required to enter this field. This field indicates the User Procedure to execute when the scheduled job runs.</span>
+</p>
+<p><span></span>
+</p>
+<p><a name='OLE_LINK28'><b><span>Disabled:</span>
+</b>
+</a>
+</p>
+<p><span>This field </span>
+<span>allows you to specify whether to disable the task temporarily. If checked, no job will be scheduled to run.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Frequency:</span>
+</b>
+</p>
+<p><span>This field is the schedule frequency, which you can select Once, Minutely, Hourly, Daily, Weekly or Monthly.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Start Date ( YYYY-MM-DD):</span>
+</b>
+</p>
+<p><span>This field is the starting date (in YYYY-MM-DD format) whereby the task configuration takes effect. Depending on the schedule frequency, this might not be the date that the first job is run.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Run Time (HH-MM):</span>
+</b>
+</p>
+<p><span>This field is the time (in 24-hour time format) whereby the first job runs. Depending on the schedule frequency, subsequent jobs might not be run at this time.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Times to Run :</span>
+</b>
+</p>
+<p><span>This field allows you to specify the number of jobs to schedule for running, following the schedule frequency. Take note that if not specified, jobs will be scheduled for the lifetime of schedule setting until the setting is modified, disabled or deleted.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 5.<span> </span>
+</span>
+<span>For Start Date, you may choose a date by clicking the </span>
+<img width='16' height='16' border='0' src='../images/image159.gif'><span>icon next to the field. This will bring up the DateTime Picker window showing a calendar like this:</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='157' height='205' border='0' src='../images/image160.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>A pink-colored box shows that current date, while a yellow-colored box shows the date in the Start Date text field (if any). To choose a date from another month, select the month from the month drop-down list. To choose a date from another year, click on the red arrow keys beside the year.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>To choose a date, use the mouse to click in the box for that date. For example, clicking on box “<u>21</u>
+” will select 2004-05-27. The DateTime Picker window will close upon selecting a date, or clicking on the close window icon (by doing so no date will be chosen).</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 6.<span> </span>
+</span>
+<span>Once you have configured your schedule (refer to Chapters 12.1.1 to 12.1.6), click Save Scheduled Task. The new scheduled task will be added and recorded in the Scheduled Task list view page.</span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+</body>
+</html>

@@ -1,0 +1,103 @@
+Content-Type: multipart/related; type="application/xml";
+	boundary="###_BOUNDARY_###"
+
+--###_BOUNDARY_###
+Content-Type: application/xml
+Content-Transfer-Encoding: 7bit
+Content-ID: ###_PREAMBLE_CID_###
+Content-Location: RN-Preamble
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Preamble SYSTEM "Preamble_MS_V02_00.dtd">
+<Preamble>
+<standardName>
+<GlobalAdministeringAuthorityCode>RosettaNet</GlobalAdministeringAuthorityCode></standardName>
+<standardVersion>
+<VersionIdentifier>V02.00</VersionIdentifier></standardVersion>
+</Preamble>
+
+--###_BOUNDARY_###
+Content-Type: application/xml
+Content-Transfer-Encoding: 7bit
+Content-ID: ###_DELIVERY_CID_###
+Content-Location: RN-Delivery-Header
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE DeliveryHeader SYSTEM "DeliveryHeader_MS_V02_00.dtd">
+<DeliveryHeader>
+<isSecureTransportRequired>
+<AffirmationIndicator>No</AffirmationIndicator>
+</isSecureTransportRequired>
+<messageDateTime>
+<DateTimeStamp>###_DELIVERY_TS_###</DateTimeStamp>
+</messageDateTime>
+<messageReceiverIdentification>
+<PartnerIdentification><GlobalBusinessIdentifier>###_RECEIVER_DUNS_###</GlobalBusinessIdentifier></PartnerIdentification>
+</messageReceiverIdentification>
+<messageSenderIdentification>
+<PartnerIdentification><GlobalBusinessIdentifier>###_SENDER_DUNS_###</GlobalBusinessIdentifier></PartnerIdentification>
+</messageSenderIdentification>
+<messageTrackingID><InstanceIdentifier>###_MSG_TRACKING_ID_###</InstanceIdentifier></messageTrackingID></DeliveryHeader>
+
+--###_BOUNDARY_###
+Content-Type: application/xml
+Content-Transfer-Encoding: 7bit
+Content-ID: ###_SERVICEH_CID_###
+Content-Location: RN-Service-Header
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ServiceHeader SYSTEM "ServiceHeader_MS_V02_00.dtd">
+<ServiceHeader>
+<ProcessControl>
+<ActivityControl>
+<BusinessActivityIdentifier>###_BIZ_ACT_ID_###</BusinessActivityIdentifier><MessageControl>
+<fromRole>
+<GlobalPartnerRoleClassificationCode>###_FROM_GPRCC_###</GlobalPartnerRoleClassificationCode></fromRole>
+<fromService>
+<GlobalBusinessServiceCode>###_FROM_GBSC_###</GlobalBusinessServiceCode></fromService>
+<inReplyTo>
+ <ActionControl>
+ <ActionIdentity>
+<GlobalBusinessActionCode>###_GBIZ_ACTION_CODE_###</GlobalBusinessActionCode></ActionIdentity>
+<messageTrackingID>
+<InstanceIdentifier>###_SRC_MSG_TRACKING_ID_###</InstanceIdentifier></messageTrackingID>
+</ActionControl>
+</inReplyTo>
+<Manifest>
+<numberOfAttachments>
+<CountableAmount>0</CountableAmount></numberOfAttachments>
+<ServiceContentControl>
+<SignalIdentity>
+<GlobalBusinessSignalCode>Receipt Acknowledgment</GlobalBusinessSignalCode><VersionIdentifier>V02.00</VersionIdentifier></SignalIdentity>
+</ServiceContentControl>
+</Manifest>
+<toRole>
+<GlobalPartnerRoleClassificationCode>###_TO_GPRCC_###</GlobalPartnerRoleClassificationCode></toRole>
+<toService>
+<GlobalBusinessServiceCode>###_TO_GBSC_###</GlobalBusinessServiceCode></toService>
+</MessageControl>
+</ActivityControl>
+<GlobalUsageCode>###_GUSAGE_CODE_###</GlobalUsageCode><pipCode>
+<GlobalProcessIndicatorCode>###_PIP_CODE_###</GlobalProcessIndicatorCode></pipCode>
+<pipInstanceId>
+<InstanceIdentifier>###_PIP_INST_ID_###</InstanceIdentifier></pipInstanceId>
+<pipVersion>
+<VersionIdentifier>###_PIP_VERSION_###</VersionIdentifier></pipVersion>
+<KnownInitiatingPartner>
+<PartnerIdentification>
+<GlobalBusinessIdentifier>###_INITIATOR_DUNS_###</GlobalBusinessIdentifier></PartnerIdentification>
+</KnownInitiatingPartner>
+</ProcessControl>
+</ServiceHeader>
+
+--###_BOUNDARY_###
+Content-Type: application/xml
+Content-Transfer-Encoding: 7bit
+Content-ID: ###_SERVICEC_CID_###
+Content-Location: RN-Service-Content
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ReceiptAcknowledgment SYSTEM "AcknowledgmentOfReceipt_MS_V02_00.dtd">
+<ReceiptAcknowledgment />
+
+--###_BOUNDARY_###--

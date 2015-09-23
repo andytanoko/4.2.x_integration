@@ -1,0 +1,83 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001-2005 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: TransactionHandler.java
+ *
+ ****************************************************************************
+ * Date           Author              Changes
+ ****************************************************************************
+ * Nov 6, 2006    i00107              Created
+ * Jan 05 2007    i00107              TxNo is now String.
+ */
+
+package com.gridnode.gridtalk.httpbc.ishb;
+
+import com.gridnode.gridtalk.httpbc.common.model.TransactionDoc;
+import com.gridnode.gridtalk.httpbc.common.util.EventNotifier;
+import com.gridnode.gridtalk.httpbc.common.util.ILogTypes;
+import com.gridnode.gridtalk.httpbc.ishb.model.TransactionDAO;
+import com.gridnode.util.log.Logger;
+import com.gridnode.util.log.LoggerManager;
+
+/**
+ * @author i00107
+ * This class handles the persistence of incoming and outgoing transactions
+ * for processing later on.
+ */
+public class TransactionHandler
+{
+  private Logger _logger = LoggerManager.getInstance().getLogger(ILogTypes.TYPE_HTTPBC_ISHB, "TransactionHandler");
+  
+  public TransactionHandler()
+  {
+    
+  }
+  
+  public void handleIncomingTransaction(TransactionDoc tx) throws Exception
+  {
+    //save 
+    saveTransaction(tx);
+  }
+  
+  public void handleOutgoingTransaction(TransactionDoc tx) throws Exception
+  {
+    //save
+    saveTransaction(tx);
+    //notify doc received
+    notifyTransactionReceived(tx);
+  }
+  
+  private void saveTransaction(TransactionDoc tx) throws Exception
+  {
+    String mtdName = "saveTransaction";
+    Object[] params = {tx};
+    try
+    {
+      TransactionDAO dao = new TransactionDAO();
+      String txNo = dao.insertTx(tx);
+      if (txNo != null)
+      {
+        String msg = "Saved Tx "+txNo+" with tracingId "+tx.getTracingId();
+        _logger.logMessage(mtdName, params, msg);
+      }
+      else
+      {
+        String msg = "Unable to save Tx with tracingId "+tx.getTracingId();
+        _logger.logError(mtdName, params, msg, null);
+      }
+    }
+    catch (Exception ex)
+    {
+      _logger.logError(mtdName, params, "Unable to save transaction doc", ex);
+    }
+  }
+  
+  private void notifyTransactionReceived(TransactionDoc tx)
+  {
+    EventNotifier.getInstance().onDocumentReceived(tx);
+  }
+  
+}

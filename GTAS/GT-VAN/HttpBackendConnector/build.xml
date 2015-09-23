@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="build" name="HTTPBC">
+    <description>This is the HTTP Backend Connector component for GtVan</description>
+    <property environment="env"/>
+	<property file="c:\gtvan-build.properties"/>
+	<property name="dist.dir" value="dist"/>
+
+	<!--path id="gthb.jar.includes">
+		<zipfileset src="deplib/gtvan-util.jar" includes="**/*.class" excludes="**/alert/**,**/config/**,**/db/**,**/io/**,**/mail/**"/>
+		<zipfileset src="deplib/gtvan-httpbc-common.jar" includes="**/model/*.class"/>		
+	</path-->
+
+    <!-- ================================= 
+          target: build
+         ================================= -->
+    <target name="build">
+		<ant antfile="../shared-build.xml" dir="${basedir}" target="build" inheritAll="no">
+			<property name="dist.dir" value="${basedir}/${dist.dir}"/>
+			<property file="project-build.properties"/>
+		</ant>
+    </target>
+
+    <!-- ================================= 
+          target: dist
+         ================================= -->
+	<!-- not yet tested -->	
+	<target name="dist">
+		<ant antfile="../shared-build.xml" dir="${basedir}" target="dist" inheritAll="no">
+			<property name="dist.dir" value="${basedir}/${dist.dir}"/>
+			<property file="project-build.properties"/>
+			<!--reference refid="gthb.jar.includes"/-->
+		</ant>
+	</target>
+</project>

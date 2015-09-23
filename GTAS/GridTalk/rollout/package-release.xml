@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="package.release" default="package" basedir=".">
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+    <property environment="env"></property>
+
+    <target name="package">
+        <antcall target="package.common"/>
+        <antcall target="package.win"/>
+        <antcall target="package.solaris_amd64"/>
+        <antcall target="package.solaris_sparcv9"/>
+    	<antcall target="package.solaris_x86"/>
+        <antcall target="package.linux"/>    	
+    </target>
+
+    <target name="package.common">
+        <delete file="gtas.zip" quiet="true" failonerror="false"/>
+        <zip destfile="gtas.zip">
+            <fileset dir="." includes="appserver/**,application/**" excludes="application/bin/windows/**,application/bin/unix/**, application/bin/admin/**"/>
+			<fileset dir="." includes="application/bin/admin/**" excludes="application/bin/admin/postgres/**, application/bin/admin/unregister.sql"/>
+			<zipfileset dir="application/bin/admin/postgres/" prefix="application/bin/admin"/>
+        </zip>
+    </target>
+
+	<!-- TWX 22012009 include postgres related config file, and exclude the mysql variant -->
+	<!--              Re-organize admin level cmd to admin folder to prevent user accidentedly click on those cmd-->
+    <target name="package.win">
+        <delete file="gtas-win.zip" quiet="true" failonerror="false"/>
+        <zip destfile="gtas-win.zip">
+            <fileset dir="." includes="*.bat,setup.xml,setup-win.properties" excludes="upgrade.bat,rollout*.bat,patch.bat, **mysql**"/>
+            <fileset dir="." includes="application/bin/windows/*.*" excludes="application/bin/windows/my.txt, application/bin/windows/**mysql**"/>
+			<fileset dir="." includes="application/bin/windows/admin/*.*" excludes="application/bin/windows/admin/*mysql*, application/bin/windows/admin/changeDatabasePwd.bat, application/bin/windows/admin/unregister.bat"/>
+			
+			<zipfileset dir="application/bin/windows/admin/postgres/" prefix="application/bin/windows/admin"/>
+			<zipfileset dir="application/bin/windows/postgres/" prefix="application/bin/windows"/>
+			<!--zipfileset dir="application/bin/admin/postgres/" prefix="application/bin/windows/admin"/-->
+			<!--zipfileset dir="application/bin/admin/postgres/" prefix="application/bin/windows/admin"/-->
+			
+            <fileset dir="." includes="jre150_20/**"/>
+        </zip>
+    </target>
+
+    <target name="package.solaris_amd64">
+        <delete file="gtas-solaris-amd64.zip" quiet="true" failonerror="false"/>
+        <zip destfile="gtas-solaris-amd64.zip">
+            <fileset dir="." includes="*.sh,setup.xml,setup.properties"/>
+            <fileset dir="." includes="application/bin/unix/*.*"/>
+            <fileset dir="." includes="jre150_06/**"/>
+        </zip>
+    </target>
+
+    <target name="package.solaris_sparcv9">
+        <delete file="gtas-solaris-sparcv9.zip" quiet="true" failonerror="false"/>
+        <zip destfile="gtas-solaris-sparcv9.zip">
+            <fileset dir="." includes="*.sh,setup.xml,setup.properties" excludes="setenv.sh,setup.sh"/>
+            <fileset dir="." includes="application/bin/unix/*.*" excludes="**/setenv.sh"/>
+            <fileset dir="solaris_sparcv"/>
+            <fileset dir="." includes="jre150_10/**"/>
+        </zip>
+    </target>
+
+	<target name="package.solaris_x86">
+	        <delete file="gtas-solaris-x86.zip" quiet="true" failonerror="false"/>
+	        <zip destfile="gtas-solaris-x86.zip">
+	            <fileset dir="." includes="*.sh,setup.xml,setup.properties" excludes="setenv.sh,setup.sh,**mysql**"/>
+	            <fileset dir="." includes="application/bin/unix/*.*" excludes="**/setenv.sh,application/bin/unix/**mysql**"/>
+				<fileset dir="." includes="application/bin/unix/admin/*.*" excludes="application/bin/unix/admin/*mysql*"/>
+				<zipfileset dir="application/bin/unix/admin/postgres/" prefix="application/bin/unix/admin"/>
+				<zipfileset dir="application/bin/unix/postgres/" prefix="application/bin/unix"/>
+	            <fileset dir="solaris_x86"/>
+	        	<zipfileset dir="jre150_20_solarisX86/" prefix="jre150_20/"/>
+	        </zip>
+	    </target>
+	
+    <target name="package.linux">
+        <delete file="gtas-linux.zip" quiet="true" failonerror="false"/>
+        <zip destfile="gtas-linux.zip">
+            <fileset dir="." includes="*.sh,setup.xml,setup.properties" excludes="setenv.sh,setup.sh,**mysql**"/>
+            <fileset dir="." includes="application/bin/unix/*.*" excludes="**/setenv.sh,application/bin/unix/**mysql**"/>
+			<fileset dir="." includes="application/bin/unix/admin/*.*" excludes="application/bin/unix/admin/*mysql*"/>
+			<zipfileset dir="application/bin/unix/admin/postgres/" prefix="application/bin/unix/admin"/>
+			<zipfileset dir="application/bin/unix/postgres/" prefix="application/bin/unix"/>
+            <fileset dir="linux"/>
+            <zipfileset dir="jre150_20_linux64/" prefix="jre150_20/"/>
+        </zip>
+    </target>
+
+</project>

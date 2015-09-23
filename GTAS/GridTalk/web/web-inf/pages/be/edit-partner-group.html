@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Edit or Create partner group</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="save"/>
+        <input type="hidden" name="divertTo"/>
+        <table>
+        <tr>
+            <td id="name_label">
+              lbName
+            </td>
+            <td>
+              <input id="name_value" type="text" name="name"/>
+            </td>
+            <td id="name_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr>
+            <td id="description_label">
+              lbDescription
+            </td>
+            <td>
+              <input id="description_value" type="text" name="description"/>
+            </td>
+            <td id="description_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr>
+            <td id="partnerType_label">
+              lbPartnerType
+            </td>
+            <td>
+              <select id="partnerType_value" size="1" name="partnerType">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+              <a id="partnerType_create" href="javascript:divertToMapping('divertCreatePartnerType');">
+                lbCreatePartnerType
+              </a>
+            </td>
+            <td id="partnerType_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

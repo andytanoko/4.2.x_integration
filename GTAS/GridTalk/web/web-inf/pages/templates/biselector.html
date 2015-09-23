@@ -1,0 +1,90 @@
+<html>
+  <head>
+  <link rel="stylesheet" href="../../../gt.css" type="text/css"/>
+    <script type="text/javascript"><!--
+      function selectAll(selector, selected)
+      {
+        for(var i=0; i < selector.options.length; i++)
+        {
+          selector.options[i].selected = selected;
+        }
+      }
+
+      function selectInvert(selector, selected)
+      {
+        for(var i=0; i < selector.options.length; i++)
+        {
+          selector.options[i].selected = !selector.options[i].selected;
+        }
+      }
+
+      function addToSelector(selector)
+      {
+        var index = selector.options.length;
+        selector.options[index] = new Option();
+        selector.options[index].text  = 'cvbbdfsdfgsfdgdfsgfdsgdsfgdsfgsgdfgevil bob etc... etc... blah blah';
+        selector.options[index].value = '6474';
+      }
+
+      function removeFromSelector(selector)
+      {
+        for(var i=0; i < selector.options.length; i++)
+        {
+          if(selector.options[i].selected)
+          {
+            selector.options[i--] = null;
+          }
+        }
+      }
+    --></script>
+  
+
+</head>
+	<body>
+	
+<table width="100%" cellpadding="0" cellspacing="0" border="0" height="100%">
+  <tr> 
+    <td align="left" valign="top"> 
+      <form id="biselector_form" name="biselector" action="">
+        <fieldset id="biselector_fieldset" style="width: 520px"> <legend id="biselector_legend">lbBiselector 
+        legend</legend> 
+        <table border="0">
+          <tr> 
+            <td valign="top"> <fieldset> <legend id="legend_options">lbAvailable 
+              Choices</legend> 
+              <select id="biselector_options" size="10" multiple style="width: 200px;" name="biselectorLeft">
+                <option value="0">Role number zero</option>
+                <option value="1">Role number one</option>
+                <option value="2">Role number two</option>
+              </select>
+              </fieldset> </td>
+            <td valign="top" style="width: 80px"> 
+              <center>
+                <br/>
+                <a href="javascript:addToSelector(document.forms.selectTest.mySelector);"> 
+                &gt;lbAdd&gt;&gt; </a> <br/>
+                <a href="javascript:removeFromSelector(document.forms.selectTest.mySelector);"> 
+                &lt;&lt;lbRem&lt; </a> 
+              </center>
+            </td>
+            <td valign="top"> <fieldset> <legend id="legend_choices">lbChoices</legend> 
+              <select id="selector_choices" size="10" multiple style="width: 200px;" name="biselectorRight">
+              </select>
+              </fieldset> </td>
+          </tr>
+        </table>
+        </fieldset> 
+      </form>
+    </td>
+    <td width="10" background="../../../images/lineVert.gif">&nbsp;</td>
+    <td align="left" valign="top">
+      <table width="200" border="0" cellspacing="0" cellpadding="5" height="100%">
+        <tr> 
+          <td align="left" valign="top">msg box or pict box</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+	</body>
+</html>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for ExportEntityList  -->
+	<class name="com.gridnode.pdip.base.exportconfig.model.ExportEntityList">
+		<map-to xml="Entities"/>
+		<field name="Entities" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection">
+		</field>
+	</class>
+	<!--  Mapping for Partner  -->
+	<class name="com.gridnode.pdip.app.partner.model.Partner">
+		<map-to xml="Partner"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="PartnerID" type="string">
+			<xml name="PartnerID" node="element"/>
+		</field>
+		<field name="Name" type="string">
+			<xml name="Name" node="element"/>
+		</field>
+		<field name="Description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="PartnerType" type="com.gridnode.pdip.app.partner.model.PartnerType">
+			<xml name="PartnerType" node="element"/>
+		</field>
+		<field name="PartnerGroup" type="com.gridnode.pdip.app.partner.model.PartnerGroup">
+			<xml name="PartnerGroup" node="element"/>
+		</field>
+		<field name="CreateTime" type="date">
+			<xml name="CreateTime" node="element"/>
+		</field>
+		<field name="CreateBy" type="string">
+			<xml name="CreateBy" node="element"/>
+		</field>
+		<field name="State" type="short">
+			<xml name="State" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for PartnerGroup  -->
+	<class name="com.gridnode.pdip.app.partner.model.PartnerGroup">
+		<map-to xml="PartnerGroup"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for PartnerType  -->
+	<class name="com.gridnode.pdip.app.partner.model.PartnerType">
+		<map-to xml="PartnerType"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+	</class>
+</mapping>

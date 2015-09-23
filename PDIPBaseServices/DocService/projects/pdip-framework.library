@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>pdip-framework</fullname>
+  <class>
+    <path>[../../../PDIPFramework/FrameWork/deploy/FrameWork.jar]</path>
+  </class>
+  <source>
+    <path>../../../PDIPFramework/FrameWork/src</path>
+  </source>
+  <required>log4j</required>
+</library>
+

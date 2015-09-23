@@ -1,0 +1,141 @@
+<html>
+<head>
+<title>8.2.6 To create schema mapping files in batch </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>8.2.6 To create schema mapping files in batch </h3>
+<p><span></span>
+</p>
+<p><span>Some new generation XML Schemas contains sub-schemas that are already well-defined by some other public standards or for re-use. The sub-schemas are themselves XML schema files which in turn may contain sub-schemas too. During XML schema validation, the XML schema and all sub-schemas must be present in order for the schema validation to perform successfully. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Since the usual way of creating Schema Mapping File only handles a single XML schema file, GridTalk provides a function to allow the users to create the Schema Mapping File as well as import the required sub-schema files into the application at the same time. This requires all XML Schema files to be contained within a single ZIP file.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Click Mapping.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>Click Schema under Mapping Files. The Schema Mapping Files list view page is displayed.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><img width='555' height='141' border='0' src='../images/image074.jpg'></p>
+<p><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>Click Batch import Schema Mapping Files. The Batch Import Schema Mapping Files detail view page is displayed.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><img width='516' height='156' border='0' src='../images/image075.jpg'></p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>Click the Browse button to select the ZIP file containing all the XML Schema files to be imported. For example, the set of XML schema files for PIP4E1 Notify of Sales Report is contained in the ZIP file named PIP4E1_R11.00.00A_NotifyOfSalesReport.zip containing such contents as:</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><img width='587' height='321' border='0' src='../images/image076.jpg'></p>
+<p align='center'><span></span>
+</p>
+<p><span>Step 5.<span> </span>
+</span>
+<span>After selecting the ZIP file, click Next. This brings you to the next screen to specify the XML Schema files to create as Schema Mapping Files entries.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><img width='380' height='193' border='0' src='../images/image077.jpg'></p>
+<p><span></span>
+</p>
+<p><span>Step 6.<span> </span>
+</span>
+<span>Specify the Base Directory, if you want the imported XML schema files to be located under additional common directory under the GridTalk schema directory (data/sys/validation/schema). Leave it blank if this is not necessary.</span>
+</p>
+<p><span></span>
+</p>
+<p><a name='_Ref134006593'><span>Step 7.<span> </span>
+</span>
+<span>Next, go to Schema Mapping section. For those XML Schema files that you want a Schema Mapping File record created, click Create Schema Mapping. This displays the Schema Mapping detail view page where the follow fields are mandatory to be entered:</span>
+</a>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Path</span>
+</b>
+</p>
+<p><span>This presents a list of the folder paths found in the selected ZIP file. Select the path that the XML Schema to be created as Schema Mapping File record is located.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Filename</span>
+</b>
+</p>
+<p><span>On selection of Path, this presents a list of the files found under the Path in the selected ZIP file. Select the filename of the XML Schema to be created as Schema Mapping File record.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Mapping Name</span>
+</b>
+</p>
+<p><span>Enter the name of the Schema Mapping File to be created. This must not be the same as any existing Schema Mapping File record.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Description</span>
+</b>
+</p>
+<p><span>Enter a description for the Schema Mapping File to be created.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>For example:</span>
+</p>
+<p align='center'><img width='494' height='157' border='0' src='../images/image078.jpg'></p>
+<p><span></span>
+</p>
+<p><a name='_Ref134006619'><span>Step 8.<span> </span>
+</span>
+<span>Click Save Schema Mapping to confirm the entries. This returns you to the Batch Import Schema Files page showing the Schema Mapping entry that you have just saved.</span>
+</a>
+</p>
+<p><span></span>
+</p>
+<p align='center'><img width='571' height='192' border='0' src='../images/image079.jpg'></p>
+<p align='center'><span></span>
+</p>
+<p><span>Step 9.<span> </span>
+</span>
+<span>To add more Schema Mapping entries, repeat Step 7 through Step 8. To modify information of a created Schema Mapping entry, click Edit button</span>
+<img width='16' height='16' border='0' src='../images/image013.gif'><span> against the entry. To delete any created Schema Mapping entry, tick the checkbox of that entry, and click Delete Schema Mapping.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 10.<span> </span>
+</span>
+<span>To confirm all the entries, click Import Files to start imported the XML Schema files from the selected ZIP file. If the import is successful, all created Schema Mapping entries will be displayed as Schema Mapping Files in the Schema Mapping Files list view page. </span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><img width='577' height='90' border='0' src='../images/image080.jpg'></p>
+<p><span></span>
+</p>
+<p><span>All other files will also be imported under the GridTalk schema directory, for example:</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><img width='259' height='170' border='0' src='../images/image081.jpg'></p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

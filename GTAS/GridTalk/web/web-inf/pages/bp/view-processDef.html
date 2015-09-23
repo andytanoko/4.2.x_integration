@@ -1,0 +1,339 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>View Process Definition</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="cancel"/>
+        <h4 id="general_heading">
+          lbGeneral
+        </h4>
+        <table>
+          <tr id="defName_details">
+            <td id="defName_label">
+              lbDefName
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="defName_value">
+              XXX
+            </td>
+          </tr>
+          <tr id="isSynchronous_details">
+            <td id="isSynchronous_label">
+              lbIsSynchronous
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="isSynchronous_value">
+              XXX
+            </td>
+          </tr>
+          <tr id="processType_details">
+            <td id="processType_label">
+              lbProcessType
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="processType_value">
+              XXX
+            </td>
+          </tr>
+          <tr id="requestAct_details">
+            <td/>
+            <td/>
+            <td>
+              <a id="requestAct_view" href="javascript:divertToMapping('divertViewRequestAct');">
+                lbViewRequestAct
+              </a>
+            </td>
+          </tr>
+          <tr id="responseAct_details">
+            <td/>
+            <td/>
+            <td>
+              <a id="responseAct_view" href="javascript:divertToMapping('divertViewResponseAct');">
+                lbViewResponseAct
+              </a>
+            </td>
+          </tr>
+          <tr id="actionTimeOut_details">
+            <td id="actionTimeOut_label">
+              lbActionTimeOut
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="actionTimeOut_value">
+              XXX
+            </td>
+          </tr>
+          <tr id="rnifVersion_details">
+            <td id="rnifVersion_label">
+              lbRnifVersion
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="rnifVersion_value">
+              XXX
+            </td>
+          </tr>
+          <tr id="processIndicatorCode_details">
+            <td id="processIndicatorCode_label">
+              lbProcessIndicatorCode
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="processIndicatorCode_value">
+              XXX
+            </td>
+          </tr>
+          <tr id="versionIdentifier_details">
+            <td id="versionIdentifier_label">
+              lbVersionIdentifier
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="versionIdentifier_value">
+              XXX
+            </td>
+          </tr>
+          <tr id="usageCode_details">
+            <td id="usageCode_label">
+              lbUsageCode
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="usageCode_value">
+              XXX
+            </td>
+          </tr>
+<!-- 20021224 DDJ: Not implemented yet! May be moved to ProcessAct?
+          <tr id="digestAlgCode_details">
+            <td id="digestAlgCode_label">
+              lbDigestAlgCode
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="digestAlgCode_value">
+              XXX
+            </td>
+          </tr>
+-->
+        </table>
+        <h4 id="from_heading">
+          lbFrom
+        </h4>
+        <table>
+          <tr id="fromPartnerClassCode_details">
+            <td id="fromPartnerClassCode_label">
+              lbFromPartnerClassCode
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="fromPartnerClassCode_value">
+              XXX
+            </td>
+          </tr>
+          <tr id="fromPartnerRoleClassCode_details">
+            <td id="fromPartnerRoleClassCode_label">
+              lbFromPartnerRoleClassCode
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="fromPartnerRoleClassCode_value">
+              XXX
+            </td>
+          </tr>
+          <tr id="fromBizServiceCode_details">
+            <td id="fromBizServiceCode_label">
+              lbFromBizServiceCode
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="fromBizServiceCode_value">
+              XXX
+            </td>
+          </tr>
+        </table>
+        <h4 id="to_heading">
+          lbTo
+        </h4>
+        <table>
+          <tr id="toPartnerClassCode_details">
+            <td id="toPartnerClassCode_label">
+              lbToPartnerClassCode
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="toPartnerClassCode_value">
+              XXX
+            </td>
+          </tr>
+          <tr id="toPartnerRoleClassCode_details">
+            <td id="toPartnerRoleClassCode_label">
+              lbToPartnerRoleClassCode
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="toPartnerRoleClassCode_value">
+              XXX
+            </td>
+          </tr>
+          <tr id="toBizServiceCode_details">
+            <td id="toBizServiceCode_label">
+              lbToBizServiceCode
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="toBizServiceCode_value">
+              XXX
+            </td>
+          </tr>
+        </table>
+        <h4 id="docIdentifier_heading">
+          lbDocIdentifier
+        </h4>
+        <table>
+          <tr id="requestDocThisDocIdentifier_details">
+            <td id="requestDocThisDocIdentifier_label">
+              lbRequestDocThisDocIdentifier
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="requestDocThisDocIdentifier_value">
+              XXX
+            </td>
+          </tr>
+          <tr id="responseDocThisDocIdentifier_details">
+            <td id="responseDocThisDocIdentifier_label">
+              lbResponseDocThisDocIdentifier
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="responseDocThisDocIdentifier_value">
+              XXX
+            </td>
+          </tr>
+          <tr id="responseDocRequestDocIdentifier_details">
+            <td id="responseDocRequestDocIdentifier_label">
+              lbResponseDocRequestDocIdentifier
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="responseDocRequestDocIdentifier_value">
+              XXX
+            </td>
+          </tr>
+          <tr id="userTrackingIdentifier_details">
+            <td id="userTrackingIdentifier_label">
+              lbUserTrackingIdentifier
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="userTrackingIdentifier_value">
+              XXX
+            </td>
+          </tr>
+        </table>
+<!-- 20021224 DDJ: Not implemented yet! May be moved to ProcessAct?
+        <h4 id="options_heading">
+          lbOptions
+        </h4>
+        <table>
+          <tr id="disableDtd_details">
+            <td id="disableDtd_label">
+              lbDisableDtd
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="disableDtd_value">
+              XXX
+            </td>
+          </tr>
+          <tr id="disableSchema_details">
+            <td id="disableSchema_label">
+              lbDisableSchema
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="disableSchema_value">
+              XXX
+            </td>
+          </tr>
+          <tr id="disableSignature_details">
+            <td id="disableSignature_label">
+              lbDisableSignature
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="disableSignature_value">
+              XXX
+            </td>
+          </tr>
+          <tr id="disableEncryption_details">
+            <td id="disableEncryption_label">
+              lbDisableEncryption
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="disableEncryption_value">
+              XXX
+            </td>
+          </tr>
+          <tr id="enableEncryptPayload_details">
+            <td id="enableEncryptPayload_label">
+              lbEnableEncryptPayload
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="enableEncryptPayload_value">
+              XXX
+            </td>
+          </tr>
+          <tr id="validateAtSender_details">
+            <td id="validateAtSender_label">
+              lbValidateAtSender
+            </td>
+            <td>
+              &nbsp;:&nbsp;
+            </td>
+            <td id="validateAtSender_value">
+              XXX
+            </td>
+          </tr>
+        </table>
+-->
+      </form>
+    </div>
+  </body>
+</html>
+

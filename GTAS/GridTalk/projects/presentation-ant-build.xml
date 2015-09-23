@@ -1,0 +1,254 @@
+<project name="Presentation" default="default" basedir=".">
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+
+  <!-- =================================================================== -->
+  <!-- Set global properties for this build                                -->
+  <!-- =================================================================== -->
+  <property environment="env"></property>
+  <property file="c:/my-build.properties"/>
+  <property file="./global-build.properties"/>
+
+
+  <!--  ===================================================================  -->
+  <!--  define the environment specific properties                           -->
+  <!--  ===================================================================  -->
+  <target name="define.properties">
+    <property name="project.dir" value="./../../"/>
+    <property name="module.dir" value="./.."/>
+    <property name="reqlib.dir" value="${project.dir}/reqlib"/>
+    <property name="deplib.dir" value="${module.dir}/deplib"/>
+    <property name="deploy.dir" value="${module.dir}/deploy"/>
+    <property name="dist.dir"
+            value="${module.dir}/dist/${webserver.name}-${webserver.version}"/>
+    <property name="ejbroot.dir" value="${deploy.dir}/ejbroot"/>
+    <property name="webroot.dir" value="${deploy.dir}/webroot"/>
+    <property name="work.dir" value="${module.dir}/work"/>
+    <property name="source.dir" value="${module.dir}/src"/>
+    <property name="web.dir" value="${module.dir}/web"/>
+    <property name="class.dir" value="${module.dir}/classes"/>
+    <property name="build.dir" value="${work.dir}/build"/>
+    <property name="config.dir" value="${module.dir}/conf/client"/>
+    <property name="src-html.dir" value="${web.dir}/src-html"/>
+    <property name="rebuild" value="false"/>
+    <property name="war.name" value="${application.name}.war"/>
+    <property name="log.libs" value="**/log4j*.jar,**/commons-logging*.jar"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Set the required classpath                                          -->
+  <!-- =================================================================== -->
+  <target name="default" depends="init,compile,package,deploy"/>
+
+ <!--  ===================================================================  -->
+  <!--  Initialise the build environment                                     -->
+  <!--  ===================================================================  -->
+  <target name="init" depends="define.properties">
+    <mkdir dir="${class.dir}"/>
+    <mkdir dir="${deplib.dir}"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Compile only modified source files                                  -->
+  <!-- =================================================================== -->
+  <target name="compile" description="Compiles only modified source files">
+    <path id="project.classpath">
+      <fileset dir="${reqlib.dir}">
+        <include name="**/*.jar"/>
+      </fileset>
+      <pathelement path="${classpath}"/>
+      <pathelement location="${class.dir}"/>
+      <pathelement location="${source.dir}"/>
+      <fileset dir="${deploy.dir}">
+        <include name="**/*.jar"/>
+      </fileset>
+      <fileset dir="${deplib.dir}">
+        <include name="**/*.jar"/>
+      </fileset>
+      <!-- includes required libs from other components here -->
+      <fileset dir="${framework.reqlib.dir}">
+        <include name="**/*.jar"/>
+      </fileset>
+    <fileset dir="${appserver.lib.dir}">
+        <include name="**/*.jar"/>
+    </fileset>
+    <fileset dir="${appserver.client.lib.dir}">
+        <include name="**/*.jar"/>
+    </fileset>
+    </path>
+    <javac classpathref="project.classpath"
+      srcdir="${source.dir}/Client"
+      includes="**"
+      destdir="${class.dir}"
+      debug="on"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Packages the application/module for deployment"                     -->
+  <!-- =================================================================== -->
+  <target name="package">
+    <!-- insert calls for packaging application components, eg. ejbs -->
+    <antcall target="package.web.war"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Package the application war file                                    -->
+  <!-- =================================================================== -->
+  <target name="package.web.war">
+    <!-- not mandatory if war not required -->
+    <condition property="war.uptodate">
+      <and>
+        <available file="${dist.dir}/${war.name}" type="file"/>
+        <uptodate targetfile="${dist.dir}/${war.name}">
+          <srcfiles dir="${config.dir}/web"
+                    includes="*.xml,**/${appserver.name}*.xml"/>
+        </uptodate>
+        <equals arg1="${all.uptodate}" arg2="true"/>
+      </and>
+    </condition>
+    <echo message="war.uptodate is ${war.uptodate}"/>
+    <antcall target="web.war"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Generates the application war file from the files defined in        -->
+  <!-- the fileset                                                         -->
+  <!-- =================================================================== -->
+  <target name="web.war" unless="war.uptodate">
+  	  <condition property="has.specific.dd.war">
+         <and>
+	      <available file="${config.dir}/web//${appserver.name}-${appserver.version}" type="dir"/>
+	    </and>
+	  </condition>
+
+    <antcall target="clean.build.dir"/>
+
+    <!-- copying files to WEB-INF/classes directory -->
+    <copy todir="${build.dir}/WEB-INF/classes">
+      <fileset dir="${config.dir}/web/i18n">
+        <include name="*.properties"></include>
+      </fileset>
+      <fileset dir="${config.dir}/web">
+        <include name="commons-logging.properties"></include>
+        <include name="log4j.properties"></include>
+      </fileset>
+      <fileset dir="${class.dir}">
+        <include name="**/client/**/*.class"></include>
+      </fileset>
+    </copy>
+
+    <!-- copying files to WEB-INF/lib directory -->
+    <copy todir="${build.dir}/WEB-INF/lib">
+      <fileset dir="${reqlib.dir}"
+               includes="commons-beanutils.jar,
+		                 commons-collections.jar,
+					     commons-digester.jar,
+					     commons-fileupload.jar,
+					     commons-lang.jar,
+					     commons-pool.jar,
+					     commons-services.jar,
+					     commons-validator.jar,
+					     jakarta-oro.jar,
+					     log4j-1.2.12.jar,
+					     struts-1.1.jar,
+					     struts-legacy.jar,
+					     tiles.jar,
+					     webdavclient.jar,
+					     xerces-2.7.1.jar,
+					     resolver.jar"/>
+    <fileset dir="${appserver.client.lib.dir}"
+             includes="${appserver.client.lib}"/>
+      <fileset dir="${deploy.dir}"
+               includes="gtas-client-*.jar, gtas-common.jar"/>
+      <fileset dir="${deplib.dir}" includes="framework-lite.jar" />
+    </copy>
+
+    <!-- copying files to WEB-INF directory -->
+    <copy todir="${build.dir}/WEB-INF">
+      <fileset dir="${config.dir}/web/struts">
+        <include name="**/*.*"></include>
+      </fileset>
+      <fileset dir="${config.dir}/web/xml">
+        <include name="**/*.*"></include>
+      </fileset>
+      <fileset dir="${config.dir}/web">
+        <include name="web.xml"></include>
+        <include name="navigation-config.xml"></include>
+        <include name="document-config.xml"></include>
+    <include name="${appserver.name}*.xml"></include>
+      </fileset>
+    </copy>
+    <antcall target="copy.specific.dd.war"/>
+
+    <!-- copying files to WEB-ROOT directory -->
+    <copy todir="${build.dir}">
+      <fileset dir="${web.dir}">
+        <include name="**/*.*"></include>
+      </fileset>
+	  <!-- sumedh: added for netweaver porting -->
+	  <fileset dir="${source.dir}/Client/com/gridnode/gtas/client/netweaver/jsp">
+        <include name="**/*.html"></include>
+      </fileset>
+    </copy>
+
+    <mkdir dir="${dist.dir}"/>
+    <war warfile="${dist.dir}/${war.name}"
+         webxml="${build.dir}/WEB-INF/web.xml">
+      <fileset dir="${build.dir}" includes="**/*.*" excludes="**/web.xml,${log.libs}">
+      </fileset>
+    </war>
+  </target>
+
+  <target name="copy.specific.dd.war">
+	  <if>
+		  <equals arg1="${has.specific.dd.war}" arg2="true"/>
+		  <then>
+				<copy todir="${build.dir}/WEB-INF" overwrite="true">
+				  <fileset dir="${config.dir}/web//${appserver.name}-${appserver.version}">
+					<include name="*.xml"/>
+				</fileset>
+				</copy>
+		  </then>
+	  </if>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Deploy the application war file to the app/web server               -->
+  <!-- deploy directory                                                    -->
+  <!-- =================================================================== -->
+  <target name="deploy" unless="deploy.skip.war">
+    <!-- this cleans up the exploded application directory-->
+    <delete dir="${webserver.app.dir}/${application.name}"/>
+
+    <copy file="${dist.dir}/${war.name}"
+          tofile="${webserver.deploy.dir}/${war.name}"
+          overwrite="yes"/>
+    <antcall target="setup.env"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Create the build directory structure used by compile and copy the   -->
+  <!-- deployment descriptors into it                                      -->
+  <!-- =================================================================== -->
+  <target name="clean.build.dir">
+    <delete dir="${work.dir}"/>
+    <mkdir dir="${work.dir}"/>
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${build.dir}/META-INF"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!--  Setting up the deployment environment                              -->
+  <!-- =================================================================== -->
+  <target name="setup.env">
+    <antcall target="deploy.app.conf"/>
+  </target>
+
+  <target name="deploy.app.conf" if="webserver.app.conf.dir">
+    <copy todir="${webserver.app.conf.dir}" overwrite="yes"
+        includeEmptyDirs="no">
+      <fileset dir="${config.dir}">
+        <exclude name="**/web/**/*.*"/>
+      </fileset>
+    </copy>
+  </target>
+</project>

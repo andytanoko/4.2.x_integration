@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for ExportEntityList  -->
+	<class name="com.gridnode.pdip.base.exportconfig.model.ExportEntityList">
+		<map-to xml="Entities"/>
+		<field name="Entities" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection">
+		</field>
+	</class>
+	
+	<!--  Mapping for ProcessMapping  -->
+	<class name="com.gridnode.gtas.server.dbarchive.model.ArchiveMetaInfo">
+		<map-to xml="ArchiveMetaInfo"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="ArchiveType" type="string">
+			<xml name="ArchiveType" node="element"/>
+		</field>
+		<field name="ArchiveDescription" type="string">
+			<xml name="ArchiveDescription" node="element"/>
+		</field>
+		<field name="FromStartDate" type="string">
+			<xml name="FromStartDate" node="element"/>
+		</field>
+		<field name="ToStartDate" type="string">
+			<xml name="ToStartDate" node="element"/>
+		</field>
+		<field name="FromStartTime" type="string">
+			<xml name="FromStartTime" node="element"/>
+		</field>
+		<field name="ToStartTime" type="string">
+			<xml name="ToStartTime" node="element"/>
+		</field>
+		<field name="ProcessDefNameList" type="string">
+			<xml name="ProcessDefNameList" node="element"/>
+		</field>
+		<field name="IncludeIncomplete" type="boolean" get-method="isIncludeIncompleteProcesses" set-method="setIncludeIncompleteProcesses">
+			<xml name="IsIncludeIncompleteProcesses" node="element"/>
+		</field>
+		
+		<field name="FolderList" type="string">
+			<xml name="FolderList" node="element"/>
+		</field>
+		<field name="DocumentTypeList" type="string">
+			<xml name="DocumentTypeList" node="element"/>
+		</field>
+		
+		<field name="IsEnableRestoreArchived" type="boolean" get-method="isEnableRestoreArchived" set-method="setEnableRestoreArchived">
+			<xml name="IsEnableRestoreArchived" node="element"/>
+		</field>
+		
+		<field name="IsEnableSearchArchived" type="boolean" get-method="isEnableSearchArchived" set-method="setEnableSearchArchived">
+			<xml name="IsEnableSearchArchived" node="element"/>
+		</field>
+		
+		<field name="PartnerIDForArchive" type="string">
+			<xml name="PartnerIDForArchive" node="element"/>
+		</field>
+		
+		<field name="ArchiveID" type="string">
+			<xml name="ArchiveID" node="element"/>
+		</field>
+
+		<field name="ClientTz" type="string">
+			<xml name="ClientTz" node="element"/>
+		</field>
+		
+	    <field name="IsArchiveFrequencyOnce" type="boolean" get-method="isArchiveFrequencyOnce" set-method="setArchiveFrequencyOnce">
+			<xml name="IsArchiveFrequencyOnce" node="element"/>
+		</field>
+		
+		<field name="ArchiveRecordOlderThan" type="integer">
+			<xml name="ArchiveRecordOlderThan" node="element"/>
+		</field>
+	</class>
+</mapping>

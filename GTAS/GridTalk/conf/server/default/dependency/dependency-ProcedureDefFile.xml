@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDependency name="ProcedureDefFile">
+  <Checker class-name="com.gridnode.pdip.base.userprocedure.helpers.EntityDependencyChecker"
+           method-name="checkDependentUserProceduresForProcedureDefFile">
+    <Param type="java.lang.Long" getter-method="getUId"/>
+  </Checker>
+</EntityDependency>

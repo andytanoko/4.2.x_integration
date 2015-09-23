@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ ****************************************************************************
+ * Date           Author                  Changes
+ ****************************************************************************
+ * Jan 04 2006    Tam Wei Xiang             Created.
+-->
+<!-- Data Object XML mapping for MessageProperty-->
+<mapping>
+	<class name="com.gridnode.pdip.app.alert.model.MessageProperty">
+		<map-to xml="MessageProperty"/>
+		<field name="PropertyKey" type="string">
+			<xml name="PropertyKey" node="element"/>
+		</field>
+		<field name="Type" type="integer">
+			<xml name="Type" node="element"/>
+                </field>
+		<field name="Value" type="string">
+			<xml name="Value" node="element"/>
+                </field>
+	</class>
+</mapping>

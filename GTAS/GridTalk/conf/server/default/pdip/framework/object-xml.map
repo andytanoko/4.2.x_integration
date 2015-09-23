@@ -1,0 +1,49 @@
+<!-- 04 Jan 2006  GT4.0    [Tam Wei Xiang]   Added  class DataObjectList, include message-property.map-->
+<!-- 03 Mar 2006  GT4.0    [Neo Sok Lay]     Reorganize the mapping files -->
+<mapping>
+        <!-- Mappings from PDIP framework -->
+	<!--  Mapping for KeyValuePair  -->
+	<class name="com.gridnode.pdip.framework.db.KeyValuePair">
+		<map-to xml="KeyValuePair"/>
+		<field name="key" type="other">
+			<xml name="Key" node="element"/>
+		</field>
+		<field name="value" type="other">
+			<xml name="Value" node="element"/>
+		</field>
+	</class>
+	<class name="com.gridnode.pdip.framework.db.DataObjectList">
+		<map-to xml="DataObjectList"/>
+		<field name="DataObjectList" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection">
+                     <xml name="DataObject"/>
+		</field>
+	</class>
+	<include href="conf/default/pdip/framework/filter.map"/>
+	<include href="conf/default/pdip/framework/entity-dependency.map"/>
+
+        <!-- Mappings for Alert -->
+	<include href="conf/default/pdip/app/alert/emailcode-ref.map"/>
+	<include href="conf/default/pdip/app/alert/emailconfig.map"/>
+	<include href="conf/default/pdip/app/alert/message-property.map"/>
+
+        <!-- Mappings for Registry -->
+	<include href="conf/default/pdip/app/bizreg/biz-entity.map"/>
+	<include href="conf/default/sync-entities.map"/>
+	<include href="conf/default/activation.map"/>
+	<include href="conf/default/registry/public-registry.map"/>
+
+        <!-- Mappings for Communication -->
+	<include href="conf/default/connection.map"/>
+	<include href="conf/default/pdip/app/channel/channel.map"/>
+
+        <!-- Mappings for Process and Document-->
+	<include href="conf/default/pdip/base/rnif/rnpackinfo.map"/>
+        <include href="conf/default/rnprofile.map"/>
+	<include href="conf/default/griddocument.map"/>
+	<include href="conf/default/partnerfunction.map"/>
+	<include href="conf/default/attachmentInfo.map"/>
+        <include href="conf/default/pdip/app/workflow/workflow.map"/>
+
+        <!-- Mappings for Administration -->
+        <include href="conf/default/housekeepinginfo.map"/>
+</mapping>

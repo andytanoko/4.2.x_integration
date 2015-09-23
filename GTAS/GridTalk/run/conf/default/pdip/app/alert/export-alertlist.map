@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for ExportEntityList  -->
+	<class name="com.gridnode.pdip.base.exportconfig.model.ExportEntityList">
+		<map-to xml="Entities"/>
+		<field name="Entities" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection">
+		</field>
+	</class>
+	<!--  Mapping for AlertCategory  -->
+	<class name="com.gridnode.pdip.app.alert.model.AlertCategory">
+		<map-to xml="AlertCategory"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="UserUid" type="long">
+			<xml name="UserUid" node="element"/>
+		</field>
+		<field name="FromUid" type="long">
+			<xml name="FromUid" node="element"/>
+		</field>
+		<field name="Title" type="string">
+			<xml name="Title" node="element"/>
+		</field>
+		<field name="Message" type="string">
+			<xml name="Message" node="element"/>
+		</field>
+		<field name="ReadStatus" type="boolean">
+			<xml name="ReadStatus" node="element"/>
+		</field>
+		<field name="Date" type="date">
+			<xml name="Date" node="element"/>
+		</field>
+	</class>
+</mapping>

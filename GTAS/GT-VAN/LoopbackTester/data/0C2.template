@@ -1,0 +1,179 @@
+Content-Type: multipart/related; type="application/xml"; 
+	boundary="###_BOUNDARY_###"
+
+--###_BOUNDARY_###
+Content-Type: application/xml
+Content-Transfer-Encoding: 7bit
+Content-ID: ###_PREAMBLE_CID_###
+Content-Location: RN-Preamble
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Preamble SYSTEM "Preamble_MS_V02_00.dtd">
+<Preamble>
+<standardName>
+<GlobalAdministeringAuthorityCode>RosettaNet</GlobalAdministeringAuthorityCode></standardName>
+<standardVersion>
+<VersionIdentifier>V02.00</VersionIdentifier></standardVersion>
+</Preamble>
+
+--###_BOUNDARY_###
+Content-Type: application/xml
+Content-Transfer-Encoding: 7bit
+Content-ID: ###_DELIVERY_CID_###
+Content-Location: RN-Delivery-Header
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE DeliveryHeader SYSTEM "DeliveryHeader_MS_V02_00.dtd">
+<DeliveryHeader>
+<isSecureTransportRequired>
+<AffirmationIndicator>Yes</AffirmationIndicator>
+</isSecureTransportRequired>
+<messageDateTime>
+<DateTimeStamp>###_DELIVERY_TS_###</DateTimeStamp>
+</messageDateTime>
+<messageReceiverIdentification>
+<PartnerIdentification><GlobalBusinessIdentifier>###_RECEIVER_DUNS_###</GlobalBusinessIdentifier></PartnerIdentification>
+</messageReceiverIdentification>
+<messageSenderIdentification>
+<PartnerIdentification><GlobalBusinessIdentifier>###_SENDER_DUNS_###</GlobalBusinessIdentifier></PartnerIdentification>
+</messageSenderIdentification>
+<messageTrackingID><InstanceIdentifier>###_MSG_TRACKING_ID_###</InstanceIdentifier></messageTrackingID></DeliveryHeader>
+
+--###_BOUNDARY_###
+Content-Type: application/xml
+Content-Transfer-Encoding: 7bit
+Content-ID: ###_SERVICEH_CID_###
+Content-Location: RN-Service-Header
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ServiceHeader SYSTEM "ServiceHeader_MS_V02_00.dtd">
+<ServiceHeader>
+<ProcessControl>
+<ActivityControl>
+<BusinessActivityIdentifier>###_BIZ_ACT_ID_###</BusinessActivityIdentifier><MessageControl>
+<fromRole>
+<GlobalPartnerRoleClassificationCode>###_FROM_GPRCC_###</GlobalPartnerRoleClassificationCode></fromRole>
+<fromService>
+<GlobalBusinessServiceCode>###_FROM_GBSC_###</GlobalBusinessServiceCode></fromService>
+<Manifest>
+<numberOfAttachments>
+<CountableAmount>0</CountableAmount></numberOfAttachments>
+<ServiceContentControl>
+<ActionIdentity>
+<GlobalBusinessActionCode>###_GBIZ_ACTION_CODE_###</GlobalBusinessActionCode></ActionIdentity>
+</ServiceContentControl>
+</Manifest>
+<toRole>
+<GlobalPartnerRoleClassificationCode>###_TO_GPRCC_###</GlobalPartnerRoleClassificationCode></toRole>
+<toService>
+<GlobalBusinessServiceCode>###_TO_GBSC_###</GlobalBusinessServiceCode></toService>
+</MessageControl>
+</ActivityControl>
+<GlobalUsageCode>###_GUSAGE_CODE_###</GlobalUsageCode><pipCode>
+<GlobalProcessIndicatorCode>###_PIP_CODE_###</GlobalProcessIndicatorCode></pipCode>
+<pipInstanceId>
+<InstanceIdentifier>###_PIP_INST_ID_###</InstanceIdentifier></pipInstanceId>
+<pipVersion>
+<VersionIdentifier>###_PIP_VERSION_###</VersionIdentifier></pipVersion>
+<KnownInitiatingPartner>
+<PartnerIdentification>
+<GlobalBusinessIdentifier>###_INITIATOR_DUNS_###</GlobalBusinessIdentifier></PartnerIdentification>
+</KnownInitiatingPartner>
+</ProcessControl>
+</ServiceHeader>
+
+--###_BOUNDARY_###
+Content-Type: application/xml
+Content-Transfer-Encoding: 7bit
+Content-ID: ###_SERVICEC_CID_###
+Content-Location: RN-Service-Content
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Pip0C2AsynchronousTestRequest SYSTEM "0C2_MS_R01_01_AsynchronousTestRequest.dtd">
+<Pip0C2AsynchronousTestRequest>
+	<AsynchronousTest>
+		<Attachment>
+			<description>
+				<FreeFormText>Text</FreeFormText>
+			</description>
+			<GlobalAttachmentDescriptionCode>Assembly drawings</GlobalAttachmentDescriptionCode>
+			<GlobalMimeTypeQualifierCode>application/activemessage</GlobalMimeTypeQualifierCode>
+			<UniversalResourceIdentifier>Text</UniversalResourceIdentifier>
+		</Attachment>
+	</AsynchronousTest>
+	<fromRole>
+		<PartnerRoleDescription>
+			<ContactInformation>
+				<contactName>
+					<FreeFormText>Text</FreeFormText>
+				</contactName>
+				<EmailAddress>abc@gridnode.com</EmailAddress>
+				<facsimileNumber>
+					<CommunicationsNumber>1234</CommunicationsNumber>
+				</facsimileNumber>
+				<telephoneNumber>
+					<CommunicationsNumber>1234</CommunicationsNumber>
+				</telephoneNumber>
+			</ContactInformation>
+            
+         <GlobalPartnerRoleClassificationCode>###_FROM_GPRCC_###</GlobalPartnerRoleClassificationCode>
+            
+			<PartnerDescription>
+				<BusinessDescription>
+                  
+               <GlobalBusinessIdentifier>###_SENDER_DUNS_###</GlobalBusinessIdentifier>
+                  
+					<GlobalSupplyChainCode>Electronic Components</GlobalSupplyChainCode>
+				</BusinessDescription>
+               
+            <GlobalPartnerClassificationCode>###_FROM_GPCC_###</GlobalPartnerClassificationCode>
+            
+			</PartnerDescription>
+		</PartnerRoleDescription>
+	</fromRole>
+	<GlobalDocumentFunctionCode>Request</GlobalDocumentFunctionCode>
+	<thisDocumentGenerationDateTime>
+         
+      <DateTimeStamp>###_DOC_GEN_TS_###</DateTimeStamp>
+      
+	</thisDocumentGenerationDateTime>
+	<thisDocumentIdentifier>
+         
+      <ProprietaryDocumentIdentifier>###_DOC_ID_###</ProprietaryDocumentIdentifier>
+      
+	</thisDocumentIdentifier>
+	<toRole>
+		<PartnerRoleDescription>
+			<ContactInformation>
+				<contactName>
+					<FreeFormText>Text</FreeFormText>
+				</contactName>
+				<EmailAddress>abc@gridnode.com</EmailAddress>
+				<facsimileNumber>
+					<CommunicationsNumber>1234567</CommunicationsNumber>
+				</facsimileNumber>
+				<telephoneNumber>
+					<CommunicationsNumber>1234567</CommunicationsNumber>
+				</telephoneNumber>
+			</ContactInformation>
+            
+         <GlobalPartnerRoleClassificationCode>###_TO_GPRCC_###</GlobalPartnerRoleClassificationCode>
+            
+			<PartnerDescription>
+				<BusinessDescription>
+                  
+               <GlobalBusinessIdentifier>###_RECEIVER_DUNS_###</GlobalBusinessIdentifier>
+                  
+               <GlobalSupplyChainCode>Information Technology</GlobalSupplyChainCode>
+               
+				</BusinessDescription>
+
+            <GlobalPartnerClassificationCode>###_TO_GPCC_###</GlobalPartnerClassificationCode>
+            
+			</PartnerDescription>
+		</PartnerRoleDescription>
+	</toRole>
+</Pip0C2AsynchronousTestRequest>
+
+--###_BOUNDARY_###--
+

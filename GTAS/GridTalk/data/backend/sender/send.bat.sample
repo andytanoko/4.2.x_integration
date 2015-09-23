@@ -1,0 +1,7 @@
+@echo off
+REM %PARAM1%=path to the sender.ini
+REM %PARAM2%=optional, path to the directory.file. applicable if required to send files in multiple locations
+     
+REM sample usage: 
+REM CALL %GRIDTALK_HOME%\bin\setenv.bat
+REM %JAVA_HOME%\bin\java -jar sender.jar %PARAM1% %PARAM2%

@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Edit AS2 DocumentTypeMapping</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <table>
+          <tr id="partnerId_details">
+            <td id="partnerId_label">
+              lbPartnerId
+            </td>
+            <td>
+              <select id="partnerId_value" name="partnerId" onchange="serverRefresh();">
+                <option value="">&nbsp;</option>
+              </select>
+              <a id="partnerId_create" href="javascript:divertToMapping('divertCreatePartner');">
+                lbCreatePartner
+              </a>
+            </td>
+            <td id="partnerId_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="as2DocType_details">
+            <td id="as2DocType_label">
+              lbAS2DocType
+            </td>
+            <td>
+              <select id="as2DocType_value" name="as2DocType">
+                <option value="">&nbsp;</option>
+              </select>
+              <a id="as2DocType_create" href="javascript:divertToMapping('divertCreateAS2DocType');">
+                lbCreateAS2DocType
+              </a>
+            </td>
+            <td id="as2DocType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="docType_details">
+            <td id="docType_label">
+              lbDocType
+            </td>
+            <td>
+              <select id="docType_value" name="docType">
+                <option value="">&nbsp;</option>
+              </select>
+              <a id="docType_create" href="javascript:divertToMapping('divertCreateDocType');">
+                lbCreateDocType
+              </a>
+            </td>
+            <td id="docType_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

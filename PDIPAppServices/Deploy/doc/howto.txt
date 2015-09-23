@@ -1,0 +1,11 @@
+Author: Mahesh
+Data: 04-10-2002
+Title: DeployMgr
+
+        This module allows us to deploy and undeploy the Bpss and Xpdl process definitions.
+
+    1)  To deploy Bpss or Xpdl definition files we can call deployBpss ,deployXpdl methods of datamanager,
+        which is done in testBpssDeploy, testXpdlDeploy methods of test case DemoDeployTestCase.java.
+
+    2)  To undeploy Bpss or Xpdl definition files we can call undeployBpss ,undeployXpdl methods of datamanager,
+        which is done in testUnBpssDeploy, testUnXpdlDeploy methods of test case DemoUnDeployTestCase.java.

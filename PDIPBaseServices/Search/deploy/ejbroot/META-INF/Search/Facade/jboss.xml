@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="Cp1252"?>
+<jboss>
+  <secure>false</secure>
+  <resource-managers/>
+  <enterprise-beans>
+    <session>
+      <ejb-name>Search</ejb-name>
+      <jndi-name>com.gridnode.pdip.base.search.facade.ejb.ISearchManagerHome</jndi-name>
+    </session>
+  </enterprise-beans>
+</jboss>

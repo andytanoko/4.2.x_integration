@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<application>
+  <display-name>Certificate Management Service</display-name>
+  <module>
+    <ejb>framework-db-keygen-ejb.jar</ejb>
+  </module>
+  <module>
+    <ejb>framework-db-metainfo-ejb.jar</ejb>
+  </module>
+  <module>
+    <ejb>framework-db-cursor-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-certificate-entities-ejb.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>base-certificate-facade-ejb.jar</ejb>
+  </module>
+
+
+
+<!--
+  <module>
+    <web>
+      <web-uri>app-user.war</web-uri>
+      <context-root>/signon</context-root>
+    </web>
+  </module>
+ -->
+</application>

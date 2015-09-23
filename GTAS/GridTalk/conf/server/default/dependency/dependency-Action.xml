@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDependency name="Action">
+  <Checker class-name="com.gridnode.pdip.app.alert.helpers.EntityDependencyChecker"
+           method-name="checkDependentAlertsForAction">
+    <Param type="java.lang.Long" getter-method="getUId"/>
+  </Checker>
+</EntityDependency>

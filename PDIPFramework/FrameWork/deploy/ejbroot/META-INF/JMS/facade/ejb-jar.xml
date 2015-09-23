@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+	<enterprise-beans>
+		<session>
+			<ejb-name>JMSMsgHandlerMgrBean</ejb-name>
+			<home>com.gridnode.pdip.framework.jms.ejb.IJMSMsgHandlerHome</home>
+			<remote>com.gridnode.pdip.framework.jms.ejb.IJMSMsgHandlerObj</remote>
+			<ejb-class>com.gridnode.pdip.framework.jms.ejb.JMSMsgHandlerMgrBean</ejb-class>
+			<session-type>Stateless</session-type>
+			<transaction-type>Container</transaction-type>
+		</session>
+		<session>
+			<ejb-name>JMSMsgHandlerMgrBean_local</ejb-name>
+			<local-home>com.gridnode.pdip.framework.jms.ejb.IJMSMsgHandlerLocalHome</local-home>
+			<local>com.gridnode.pdip.framework.jms.ejb.IJMSMsgHandlerLocalObj</local>
+			<ejb-class>com.gridnode.pdip.framework.jms.ejb.JMSMsgHandlerMgrBean</ejb-class>
+			<session-type>Stateless</session-type>
+			<transaction-type>Container</transaction-type>
+		</session>
+		<message-driven>
+			<ejb-name>JMSFailedMsgRetryMDBean</ejb-name>
+			<ejb-class>com.gridnode.pdip.framework.jms.ejb.JMSFailedMsgRetryMDBean</ejb-class>
+			<transaction-type>Container</transaction-type>
+            <message-destination-type>javax.jms.Topic</message-destination-type>
+			<activation-config>
+				<activation-config-property>
+				<activation-config-property-name>messageSelector</activation-config-property-name>
+				<activation-config-property-value>id='FailedJMS' AND hostid='${hostid:gnode1}'</activation-config-property-value>
+				</activation-config-property>
+			</activation-config>
+		</message-driven>	
+	</enterprise-beans>
+	<assembly-descriptor>
+		<container-transaction>
+			<method>
+				<ejb-name>JMSMsgHandlerMgrBean</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>RequiresNew</trans-attribute>
+		</container-transaction>
+		
+		<container-transaction>
+			<method>
+				<ejb-name>JMSMsgHandlerMgrBean_local</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>RequiresNew</trans-attribute>
+		</container-transaction>
+		
+		<container-transaction>
+			<method>
+				<ejb-name>JMSFailedMsgRetryMDBean</ejb-name>
+				<method-name>onMessage</method-name>
+			</method>
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
+	</assembly-descriptor>
+</ejb-jar>

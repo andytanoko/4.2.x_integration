@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="upgrade.main" default="start.upgrade" basedir=".">
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+    <taskdef name="var" classname="net.sf.antcontrib.property.Variable" classpath="./ant-contrib.jar"/>
+    <property environment="env"></property>
+    
+    <!-- Main Logic: read gtas.version in GridTalk, find the versions that need to be patched, and patch one by one -->
+    <target name="start.upgrade">
+        <loadfile property="curr.version" srcFile="${gtas.version.file}">
+            <filterchain>
+              <striplinebreaks/>
+            </filterchain>
+        </loadfile>
+        <loadfile property="target.version" srcFile="${target.version.file}">
+            <filterchain>
+              <striplinebreaks/>
+            </filterchain>
+        </loadfile>
+        <echo message="loading upgrade scripts for ./patch/upgrade-scripts-${curr.version}_${target.version}"/>
+        <property name="upgrade.scripts.file" value="./patch/upgrade-scripts-${curr.version}_${target.version}"/>
+        <available property="continue.patch" file="${upgrade.scripts.file}" type="file"/>
+        <if>
+           <equals arg1="${continue.patch}" arg2="true"/>
+           <then>
+                <loadfile property="upgrade.scripts" srcFile="${upgrade.scripts.file}">
+                    <filterchain>
+                      <striplinebreaks/>
+                    </filterchain>
+                </loadfile>
+                <parallel>
+                  <antcall target="start.db"/>
+                  <sequential>
+                    <antcall target="check.db.status"/>
+                    <foreach list="${upgrade.scripts}" target="patch" param="target.script" delimiter="," inheritAll="true"/> 
+                    <echo message="${target.version}" file="${gtas.version.file}"/>
+                    <antcall target="stop.db"/>
+                  </sequential>
+                </parallel>
+           </then>
+           <else>
+              <echo message="no patch available for your current GridTalk version ${curr.version}"/>
+           </else>
+       </if>
+    </target>
+    
+    <!-- Patch a script if the upgrade properties is available -->
+    <target name="patch" if="target.script">
+        <echo message="Executing patch script for [upgrade-${target.script}.properties]"/>
+        <var name="next.patch.file" value="./patch/upgrade-${target.script}.properties"/>
+        <var name="patch.available" unset="true"/>
+        <available property="patch.available" file="${next.patch.file}" type="file"/>
+        <if>
+           <equals arg1="${patch.available}" arg2="true"/>
+           <then>
+        	  <ant antfile="patch.xml" dir="." inheritAll="true">
+        		<property name="patch.properties.file" value="${next.patch.file}"/>
+              </ant>
+           </then>
+           <else>
+              <echo message="patch script ${next.patch.file} not available"/>
+           </else>
+       </if>
+    </target>
+    
+  <!-- =================================================================== -->
+  <!-- Patching the database                                               -->
+  <!-- =================================================================== -->
+  <target name="patch.app.db">
+    <echo message="Executing target:patch.app.db"/>
+	  <propertycopy name="patch.dbscripts.list" 
+                  from="patch.app.dbscripts.${db.name}.list"/>    
+    <parallel>
+      <antcall target="start.db"/>
+      <sequential>
+        <!--sleep seconds="5"/-->
+        <antcall target="check.db.status"/>
+        <antcall target="exec.patch.db"/>
+        <antcall target="stop.db"/>
+      </sequential>
+    </parallel>
+  </target>
+
+      <!-- =================================================================== -->
+      <!-- Start the database                                                  -->
+      <!-- =================================================================== -->
+      <target name="start.db">
+        <exec dir="." executable="${db.start.cmd}"/>
+      </target>
+    
+      <!-- =================================================================== -->
+      <!-- Stop the database                                                   -->
+      <!-- =================================================================== -->
+      <target name="stop.db">
+        <exec dir="." executable="${db.stop.cmd}">
+    		<arg value="${db.root.password}"/>
+    	</exec>
+      </target>
+    
+      <!-- =================================================================== -->
+      <!-- Check the database alive status                                     -->
+      <!-- =================================================================== -->
+      <target name="check.db.status">
+        <exec dir="." executable="${db.check.cmd}">
+    		<arg value="${db.root.password}"/>
+    	</exec>
+      </target>
+    
+
+</project>

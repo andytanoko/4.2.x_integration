@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+	<secure>false</secure>
+	<container-configurations/>
+	<resource-managers/>
+	<enterprise-beans>
+		<session>
+			<ejb-name>AppManager</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.appinterface.facade.ejb.IAppManagerHome</jndi-name>
+		</session>
+	</enterprise-beans>
+</jboss>

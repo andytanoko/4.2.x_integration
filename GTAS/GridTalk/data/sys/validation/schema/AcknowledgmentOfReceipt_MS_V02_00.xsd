@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.rosettanet.org/RNIF/V02.00" xmlns="http://www.rosettanet.org/RNIF/V02.00" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified">
+	<xsd:element name="NonRepudiationInformation">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="OriginalMessageDigest"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="OriginalMessageDigest" type="xsd:string"/>
+	<xsd:element name="ReceiptAcknowledgment">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="NonRepudiationInformation" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

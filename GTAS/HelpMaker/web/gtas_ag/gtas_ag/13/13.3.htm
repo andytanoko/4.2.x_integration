@@ -1,0 +1,402 @@
+<html>
+<head>
+<title>13.3 Scheduling Archive jobs </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h2>13.3 Scheduling Archive jobs </h2>
+<p></p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Click the Administration tab. This will bring you to the Administration page.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>Click Scheduled Archive Task. Then the Scheduled Archive Task list view page appears like this:</span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span><img width='644' height='90' border='0' src='../images/image178.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>Click the Create Scheduled Archive Task. This will bring you to the Scheduled Archive Task page where you can specify the scheduled archive configuration and the criteria to select the documents to be archived. </span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='549' height='398' border='0' src='../images/image179.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>Enter the criteria for archiving the documents and processes by referencing Chapter 13.1.</span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+<p><span>Step 5.<span> </span>
+</span>
+<span>Check the checked box Is Archive Once if you wish to schedule the archive task to be run one time only. Specify the archive date range by entering From Date/To Date and From Time/To Time.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='555' height='107' border='0' src='../images/image180.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 6.<span> </span>
+</span>
+<span>Uncheck the checked box Is Archive Once if you wish to schedule the archive task to be run as recurrence mode. Specify the value in the Archive Record Older Than to enable the system to automatically compute the archive date range. </span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='556' height='67' border='0' src='../images/image181.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>The subsequence step will indicate the logic on calculating the archive date range. Do note that the time zone you selected in your login session will be captured for subsequence calculating of the archive date range as well.</span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 7.<span> </span>
+</span>
+<span>Click Save Scheduled Archive Task to save the Scheduled Archive Task record.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 8.<span> </span>
+</span>
+<span>Next, click Scheduled Task under the Administration menu. This will display you the Scheduled Task list view page.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='568' height='148' border='0' src='../images/image182.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 9.<span> </span>
+</span>
+<span>Click Create Scheduled Task. This will display you the Scheduled Task configuration page.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='542' height='176' border='0' src='../images/image183.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+<p><span>Step 10.<span> </span>
+</span>
+<span>Enter the following fields in the Create Scheduled Task page.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Task Type</span>
+</b>
+</p>
+<p><span>This mandatory field indicates the type of the task that will be associated with the scheduled job. Select “DB Archive”.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Task ID</span>
+</b>
+</p>
+<p><span>This mandatory field indicates the list of available archive task that can be associated with the scheduled job.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Disabled</span>
+</b>
+</p>
+<p><span>Refer to Chapter 12.1.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Frequency</span>
+</b>
+</p>
+<p><span>This mandatory field is the schedule frequency, which you can select Once, Minutely, Hourly, Daily, Weekly or Monthly.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Depending on the </span>
+<span>Frequency</span>
+<span> you selected and the value in </span>
+<span>Archive Older Than field</span>
+<span> under Scheduled Archive Task, the system will automatically determine the archive date range.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The following will show how the system computes the archive date range given the different frequency.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><i><span>Once</span>
+</i>
+</b>
+</p>
+<p><span>The system will base on the value specified in From Date/From Time and To Date/To Time of the Scheduled Archive Task as the Archive Date Range.</span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' border='1' cellpadding='0'><tr><td width='288' valign='top'><p><span>Criteria</span>
+</p>
+</td>
+<td width='268' valign='top'><p><span>Computed Archive Date Range</span>
+</p>
+</td>
+</tr>
+<tr><td width='288' valign='top'><p><span>Scheduled job kick off: 2009-09-10 10:30:30 am</span>
+</p>
+<p><span>Archive Older Than: </span>
+</p>
+</td>
+<td width='268' valign='top'><p><span>Archive Start Date: &lt;From Date/From Time specified in Scheduled Archive Task&gt;</span>
+</p>
+<p><span>Archive End Date: &lt;To Date/To Time specified in Scheduled Archive Task&gt;</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><b><i><span>Minutely</span>
+</i>
+</b>
+</p>
+<p><span>The system will minus the number of minutes from the scheduled job kick off time given the value you specified in </span>
+<span>Archive Older Than</span>
+<span> field. </span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' border='1' cellpadding='0'><tr><td width='288' valign='top'><p><span>Criteria</span>
+</p>
+</td>
+<td width='268' valign='top'><p><span>Computed Archive Date Range</span>
+</p>
+</td>
+</tr>
+<tr><td width='288' valign='top'><p><span>Scheduled job kick off: 10 Sep 2009 10:30:30 SGT</span>
+</p>
+<p><span>Archive Older Than: 30 minutes</span>
+</p>
+</td>
+<td width='268' valign='top'><p><span>Archive Start Date: 01 Jan 1970 07:00:00 SGT</span>
+</p>
+<p><span>Archive End Date: 10 Sep 2009 10:00:30 SGT</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><b><i><span>Hourly</span>
+</i>
+</b>
+</p>
+<p><span>The system will minus the number of hours from the scheduled job kick off time given the value you specified in </span>
+<span>Archive Older Than</span>
+<span> field. </span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' border='1' cellpadding='0'><tr><td width='288' valign='top'><p><span>Criteria</span>
+</p>
+</td>
+<td width='268' valign='top'><p><span>Computed Archive Date Range</span>
+</p>
+</td>
+</tr>
+<tr><td width='288' valign='top'><p><span>Scheduled job kick off: 10 Sep 2009 11:30:30 SGT</span>
+</p>
+<p><span>Archive Older Than: 3 hours</span>
+</p>
+</td>
+<td width='268' valign='top'><p><span>Archive Start Date: 01 Jan 1970 07:00:00 SGT</span>
+</p>
+<p><span>Archive End Date: 10 Sep 2009 08:30:30 SGT</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><b><i><span>Daily</span>
+</i>
+</b>
+</p>
+<p><span>The system will minus the number of days from the scheduled job kick off time given the value you specified in </span>
+<span>Archive Older Than</span>
+<span> field. The time of the archive end date will be adjusted to 23:59:59.999.</span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' border='1' cellpadding='0'><tr><td width='288' valign='top'><p><span>Criteria</span>
+</p>
+</td>
+<td width='268' valign='top'><p><span>Computed Archive Date Range</span>
+</p>
+</td>
+</tr>
+<tr><td width='288' valign='top'><p><span>Scheduled job kick off: 10 Sep 2009 11:30:30 SGT</span>
+</p>
+<p><span>Archive Older Than: 3 days</span>
+</p>
+</td>
+<td width='268' valign='top'><p><span>Archive Start Date: 01 Jan 1970 07:00:00 SGT</span>
+</p>
+<p><span>Archive End Date: 07 Sep 2009 23:59:59 SGT</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><b><i><span>Weekly</span>
+</i>
+</b>
+</p>
+<p><span>The system will minus the number of weeks from the week the scheduled job kick off time falls within the month given the value you specified in </span>
+<span>Archive Older Than</span>
+<span> field. The day of the Archive End Date will be adjusted to the Saturday of the computed week. The time of the Archive End Date will be adjusted to 23:59:59.999.</span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' border='1' cellpadding='0'><tr><td width='288' valign='top'><p><span>Criteria</span>
+</p>
+</td>
+<td width='268' valign='top'><p><span>Computed Archive Date Range</span>
+</p>
+</td>
+</tr>
+<tr><td width='288' valign='top'><p><span>Scheduled job kick off: 10 Sep 2009 11:30:30 SGT</span>
+</p>
+<p><span>Archive Older Than: 3 weeks</span>
+</p>
+</td>
+<td width='268' valign='top'><p><span>Archive Start Date: 01 Jan 1970 07:00:00 SGT</span>
+</p>
+<p><span>Archive End Date: 22 Aug 2009 23:59:59 SGT</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><b><i><span>Monthly</span>
+</i>
+</b>
+</p>
+<p><span>The system will minus the number of months from the month the scheduled job kick off time falls within given the value you specified in Archive Older Than field. After that, additional 1 month will be deducted also.</span>
+</p>
+<p><span>The day of the Archive End Date will be adjusted to last day of the computed month. The time of the Archive End Date will be adjusted to 23:59:59.999.</span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' border='1' cellpadding='0'><tr><td width='288' valign='top'><p><span>Criteria</span>
+</p>
+</td>
+<td width='268' valign='top'><p><span>Computed Archive Date Range</span>
+</p>
+</td>
+</tr>
+<tr><td width='288' valign='top'><p><span>Scheduled job kick off: 10 Sep 2009 11:30:30 SGT</span>
+</p>
+<p><span>Archive Older Than: 3 months</span>
+</p>
+</td>
+<td width='268' valign='top'><p><span>Archive Start Date: 01 Jan 1970 07:00:00 SGT</span>
+</p>
+<p><span>Archive End Date: 31 May 2009 23:59:59 SGT</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Do note that when the </span>
+<span>Is Archive Once</span>
+<span> field in the Archive Scheduled Task is checked, the value of the </span>
+<span>Frequency</span>
+<span>needs to be configured to <i>Once</i>
+ as well. Else the archive scheduled task will not be kicked off.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Similarly, if the </span>
+<span>Is Archive Once</span>
+<span> field in the Archive Scheduled Task is unchecked, the value of the </span>
+<span>Frequency</span>
+<span>needs to be specified to value other than <i>Once</i>
+. Otherwise, the archive scheduled task will not be started.</span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Start Date (YYYY-MM-DD)</span>
+</b>
+</p>
+<p><span>Refer to Chapter 12.1</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Runtime (HH:MM)</span>
+</b>
+</p>
+<p><span>Refer to Chapter 12.1</span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 11.<span> </span>
+</span>
+<span>Click the Save Scheduled Task to create the schedule job for scheduling the archive document and processes task.</span>
+</p>
+<b><span><br clear='all'></span>
+</b>
+</body>
+</html>

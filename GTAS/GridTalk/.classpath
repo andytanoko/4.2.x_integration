@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/Client"/>
+	<classpathentry kind="src" path="src/Events/Acl"/>
+	<classpathentry kind="src" path="src/Events/Activation"/>
+	<classpathentry kind="src" path="src/Events/Alert"/>
+	<classpathentry kind="src" path="src/Events/Backend"/>
+	<classpathentry kind="src" path="src/Events/BizReg"/>
+	<classpathentry kind="src" path="src/Events/Certificate"/>
+	<classpathentry kind="src" path="src/Events/Channel"/>
+	<classpathentry kind="src" path="src/Events/Common"/>
+	<classpathentry kind="src" path="src/Events/Connection"/>
+	<classpathentry kind="src" path="src/Events/DBArchive"/>
+	<classpathentry kind="src" path="src/Events/DocAlert"/>
+	<classpathentry kind="src" path="src/Events/Document"/>
+	<classpathentry kind="src" path="src/Events/Enterprise"/>
+	<classpathentry kind="src" path="src/Events/ExportConfig"/>
+	<classpathentry kind="src" path="src/Events/GridForm"/>
+	<classpathentry kind="src" path="src/Events/GridNode"/>
+	<classpathentry kind="src" path="src/Events/Housekeeping"/>
+	<classpathentry kind="src" path="src/Events/Locale"/>
+	<classpathentry kind="src" path="src/Events/Mapper"/>
+	<classpathentry kind="src" path="src/Events/Partner"/>
+	<classpathentry kind="src" path="src/Events/PartnerFunction"/>
+	<classpathentry kind="src" path="src/Events/PartnerProcess"/>
+	<classpathentry kind="src" path="src/Events/Registration"/>
+	<classpathentry kind="src" path="src/Events/Rnif"/>
+	<classpathentry kind="src" path="src/Events/Scheduler"/>
+	<classpathentry kind="src" path="src/Events/SearchQuery"/>
+	<classpathentry kind="src" path="src/Events/ServiceMgmt"/>
+	<classpathentry kind="src" path="src/Events/User"/>
+	<classpathentry kind="src" path="src/Events/UserProcedure"/>
+	<classpathentry kind="src" path="src/Exceptions"/>
+	<classpathentry kind="src" path="src/Model/Acl"/>
+	<classpathentry kind="src" path="src/Model/Activation"/>
+	<classpathentry kind="src" path="src/Model/Alert"/>
+	<classpathentry kind="src" path="src/Model/Backend"/>
+	<classpathentry kind="src" path="src/Model/BizReg"/>
+	<classpathentry kind="src" path="src/Model/Certificate"/>
+	<classpathentry kind="src" path="src/Model/Channel"/>
+	<classpathentry kind="src" path="src/Model/Connection"/>
+	<classpathentry kind="src" path="src/Model/DBArchive"/>
+	<classpathentry kind="src" path="src/Model/DocAlert"/>
+	<classpathentry kind="src" path="src/Model/Document"/>
+	<classpathentry kind="src" path="src/Model/Enterprise"/>
+	<classpathentry kind="src" path="src/Model/ExportConfig"/>
+	<classpathentry kind="src" path="src/Model/GridForm"/>
+	<classpathentry kind="src" path="src/Model/GridNode"/>
+	<classpathentry kind="src" path="src/Model/Housekeeping"/>
+	<classpathentry kind="src" path="src/Model/Locale"/>
+	<classpathentry kind="src" path="src/Model/Mapper"/>
+	<classpathentry kind="src" path="src/Model/Partner"/>
+	<classpathentry kind="src" path="src/Model/PartnerFunction"/>
+	<classpathentry kind="src" path="src/Model/PartnerProcess"/>
+	<classpathentry kind="src" path="src/Model/Registration"/>
+	<classpathentry kind="src" path="src/Model/Rnif"/>
+	<classpathentry kind="src" path="src/Model/Scheduler"/>
+	<classpathentry kind="src" path="src/Model/SearchQuery"/>
+	<classpathentry kind="src" path="src/Model/ServiceMgmt"/>
+	<classpathentry kind="src" path="src/Model/User"/>
+	<classpathentry kind="src" path="src/Model/UserProcedure"/>
+	<classpathentry kind="src" path="src/Server/Acl"/>
+	<classpathentry kind="src" path="src/Server/Activation"/>
+	<classpathentry kind="src" path="src/Server/Alert"/>
+	<classpathentry kind="src" path="src/Server/Backend"/>
+	<classpathentry kind="src" path="src/Server/BizReg"/>
+	<classpathentry kind="src" path="src/Server/Certificate"/>
+	<classpathentry kind="src" path="src/Server/Channel"/>
+	<classpathentry kind="src" path="src/Server/Common"/>
+	<classpathentry kind="src" path="src/Server/Connection"/>
+	<classpathentry kind="src" path="src/Server/DBArchive"/>
+	<classpathentry kind="src" path="src/Server/DocAlert"/>
+	<classpathentry kind="src" path="src/Server/Document"/>
+	<classpathentry kind="src" path="src/Server/Enterprise"/>
+	<classpathentry kind="src" path="src/Server/ExportConfig"/>
+	<classpathentry kind="src" path="src/Server/GridNode"/>
+	<classpathentry kind="src" path="src/Server/Housekeeping"/>
+	<classpathentry kind="src" path="src/Server/Locale"/>
+	<classpathentry kind="src" path="src/Server/Mapper"/>
+	<classpathentry kind="src" path="src/Server/Partner"/>
+	<classpathentry kind="src" path="src/Server/PartnerFunction"/>
+	<classpathentry kind="src" path="src/Server/PartnerProcess"/>
+	<classpathentry kind="src" path="src/Server/Registration"/>
+	<classpathentry kind="src" path="src/Server/Rnif"/>
+	<classpathentry kind="src" path="src/Server/Scheduler"/>
+	<classpathentry kind="src" path="src/Server/SearchQuery"/>
+	<classpathentry kind="src" path="src/Server/ServiceMgmt"/>
+	<classpathentry kind="src" path="src/Server/User"/>
+	<classpathentry kind="src" path="src/Server/UserProcedure"/>
+	<classpathentry excluding="User/|BizReg/|Rnif/|Registration/|Activation/|Enterprise/|DBArchive/|Alert/|Acl/|DocAlert/|Locale/|PartnerFunction/|Connection/|Partner/|Channel/|Mapper/|Server/Actions/|Document/|GridNode/|PartnerProcess/" kind="src" output="testclasses" path="test"/>
+	<classpathentry kind="src" output="testclasses" path="test/Acl"/>
+	<classpathentry kind="src" output="testclasses" path="test/Activation"/>
+	<classpathentry kind="src" output="testclasses" path="test/Alert"/>
+	<classpathentry kind="src" output="testclasses" path="test/BizReg"/>
+	<classpathentry kind="src" output="testclasses" path="test/Channel"/>
+	<classpathentry kind="src" output="testclasses" path="test/Connection"/>
+	<classpathentry kind="src" output="testclasses" path="test/DBArchive"/>
+	<classpathentry kind="src" output="testclasses" path="test/DocAlert"/>
+	<classpathentry kind="src" output="testclasses" path="test/Document"/>
+	<classpathentry kind="src" output="testclasses" path="test/Enterprise"/>
+	<classpathentry kind="src" output="testclasses" path="test/GridNode"/>
+	<classpathentry kind="src" output="testclasses" path="test/Locale"/>
+	<classpathentry kind="src" output="testclasses" path="test/Mapper"/>
+	<classpathentry kind="src" output="testclasses" path="test/Partner"/>
+	<classpathentry kind="src" output="testclasses" path="test/PartnerFunction"/>
+	<classpathentry kind="src" output="testclasses" path="test/PartnerProcess"/>
+	<classpathentry kind="src" output="testclasses" path="test/Registration"/>
+	<classpathentry kind="src" output="testclasses" path="test/Rnif"/>
+	<classpathentry kind="src" output="testclasses" path="test/Server/Actions"/>
+	<classpathentry kind="src" output="testclasses" path="test/User"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/App-Alert"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/App-BizRegistry"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/App-Channel"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/App-CoyProfile"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/App-Deploy"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/App-License"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/App-Mapper"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/App-Partner"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/App-Rnif"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/App-SearchQuery"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/App-ServiceMgmt"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/App-User"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/App-Workflow"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-AccessControl"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-AppInterface"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-Certificate"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-ContextData"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-ExportConfig"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-GWFBase"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-Locale"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-Packaging"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-Rnif"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-Security"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-Session"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-Time"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-Transport"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-UserProcedure"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-Worklist"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-XML"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Framework"/>
+	<classpathentry kind="var" path="J2EE_HOME/lib/j2ee.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/reqlib/struts-1.1.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/reqlib/commons-logging.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/reqlib/commons-collections.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/reqlib/commons-digester.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/reqlib/commons-beanutils.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/reqlib/commons-lang.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/reqlib/gridmail-1.0.4.jar"/>
+	<classpathentry kind="var" path="JBOSS_HOME/client/jbossall-client.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/GTAS/reqlib/bcprov-jdk15-143.jar"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>

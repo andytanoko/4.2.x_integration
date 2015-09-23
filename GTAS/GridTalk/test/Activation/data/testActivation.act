@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GridNode nodeId="999999" name="GridNode 999999" category="GNL">
+    <ActivateReason>some reason for activation</ActivateReason>
+    <BusinessEntity Id="BE0" deleted="false">
+        <Description>BE Description 0</Description>
+        <WhitePage Tel="12234444">
+            <BusDesc>Business Description</BusDesc>
+            <DUNS>DUNS</DUNS>
+            <ContactPerson>Contact Person</ContactPerson>
+            <Email>email@email.com</Email>
+            <Fax>232434324</Fax>
+            <Website>http://abc@email.com</Website>
+            <Address>some address</Address>
+            <ZipCode>232444</ZipCode>
+            <Country>ABC</Country>
+            <Language>XYZ</Language>
+            <POBox>124434234</POBox>
+            <GlobalSupplyChainCode>GSCC</GlobalSupplyChainCode>
+            <City>some city</City>
+            <State>STATE</State>
+        </WhitePage>
+        <EnterpriseId>999999</EnterpriseId>
+        <State>0</State>
+        <publishable>true</publishable>
+        <syncToServer>true</syncToServer>
+        <Channel name="CHANNEL_NAME1" referenceId="999999">
+            <Description>CHANNEL_DESC1</Description>
+            <CommProfile name="MCI" RefId="999999">
+                <Description>COMMINFO_DESC1</Description>
+                <URL>smq://USER_NAME:Password@HOST:1234/destinationtype=TOPIC?destination=TOPIC</URL> 
+                <ProtocolType>JMS</ProtocolType>
+                <IsDefaultTpt>true</IsDefaultTpt>
+                <TptImplVersion>TPT_IM</TptImplVersion>
+            </CommProfile>
+            <TptProtocolType>JMS</TptProtocolType>
+            <PackagingProfile name="PKGP1">
+                <Description>PKGINFO_DESC1</Description>
+                <Envelope>None</Envelope>
+                <IsZip>true</IsZip>
+                <ZipThreshold>50</ZipThreshold>
+            </PackagingProfile>
+            <SecurityProfile name="SEC1">
+                <Description>SECINFO_DESC1</Description>
+                <EncryptionType>ET</EncryptionType>
+                <EncryptionLevel>64</EncryptionLevel>
+                <DigestAlgorithm>None</DigestAlgorithm>
+                <EncryptionCert ID="999999">
+                    <CertName>GridTalk</CertName>
+    <IssuerName>UXoxVFJ5eFBQVWR5YVdST2IyUmxJRkIwWlNCTWRHUXNUMVU5UjNKcFpFMWhjM1JsY2lCSmJuUmxjbTVoYkNCRFpYSjBMRU5PUFVkeQ0KYVdSTllYTjBaWElnU1c1MElFTmxjblJwWm1sallYUmw=</IssuerName>
+    <SerialNumber>QVFBQXZRPT0=</SerialNumber>
+    <CertBytes>TUlJQ1hEQ0NBY1dnQXdJQkFnSUVBUUFBdlRBTkJna3Foa2lHOXcwQkFRVUZBREJ3TVFzd0NRWURWUVFHRXdKVFJ6RVpNQmNHQTFVRQ0KQ2hNUVIzSnBaRTV2WkdVZ1VIUmxJRXgwWkRFaE1COEdBMVVFQ3hNWVIzSnBaRTFoYzNSbGNpQkpiblJsY201aGJDQkRaWEowTVNNdw0KSVFZRFZRUURFeHBIY21sa1RXRnpkR1Z5SUVsdWRDQkRaWEowYVdacFkyRjBaVEFlRncwd01URXdNak13TmpFM01ETmFGdzB5TVRFdw0KTWpNd05qRTNNRE5hTUdFeEN6QUpCZ05WQkFZVEFsTkhNUkl3RUFZRFZRUUtFd2xEVmxOSklFTnZjbkF4R3pBWkJnTlZCQXNURWtkeQ0KYVdSVVlXeHJJRFV5TWlBb1IwNU1LVEVoTUI4R0ExVUVBeE1ZUjNKcFpGUmhiR3NnTlRJeUlFTmxjblJwWm1sallYUmxNSUdmTUEwRw0KQ1NxR1NJYjNEUUVCQVFVQUE0R05BRENCaVFLQmdRRENVMWZjNmgyYWJ3Y3Y2M0ZtSVU5NjUwV3E0OWhkaDJheUZZSGF2dDIrSFZqVA0KVTUyNWdyVDNtZW51R0Z5WU5BY0IranNZUjNvaXlNWldCNXRJS1FtWHltSDlqOFJnSXR5RHdhaWE1dGt5R3F6TnNzMm91ODRIVmppUg0KT1RGRWY0U0NnZjgxUGFTWWV4dXAvQVhiRFkxckhxN3FMaE5xRFZWdTNYTjB0TXIyRHdJREFRQUJveEl3RURBT0JnTlZIUThCQWY4RQ0KQkFNQ0JKQXdEUVlKS29aSWh2Y05BUUVGQlFBRGdZRUFJcFhVL0VGVjZ6UFpZZWsxQUJXTmJ6aVVsTFJGMW8yZGR5VEZGc1E1SFZBSA0KY1FsRG1JT0dBWWtZeHJ5eDI4VHczK2tHQVhONk1vUnNzc2IwYXlPTTM4WEppTHYrK3ZxS3R5WFJpZnhQZG1SWDZZVWtxbXE4QmZKcg0Kb2xjN2ZxUzAyOEV5YnNOWCtWdzJaWW9Sc3dGVnZlRUplSlQ1TlhrMWc2VE1nY05YRlhFPQ==</CertBytes>
+                    <IsMaster>true</IsMaster>
+                </EncryptionCert>
+            </SecurityProfile>
+            <IsMaster>false</IsMaster>
+        </Channel>
+        <Channel name="CHANNEL_NAME2" referenceId="REF_ID">
+            <Description>CHANNEL_DESC2</Description>
+            <CommProfile name="MC2" RefId="999999">
+                <Description>COMMINFO_DESC2</Description>
+                <URL>smq://USER_NAME:Password@HOST:1234/destinationtype=TOPIC?destination=TOPIC</URL> 
+                <ProtocolType>JMS</ProtocolType>
+                <IsDefaultTpt>true</IsDefaultTpt>
+                <TptImplVersion>TPT_IM</TptImplVersion>
+            </CommProfile>
+            <TptProtocolType>JMS</TptProtocolType>
+            <PackagingProfile name="PKGP2">
+                <Description>PKGINFO_DESC2</Description>
+                <Envelope>None</Envelope>
+                <IsZip>true</IsZip>
+                <ZipThreshold>50</ZipThreshold>
+            </PackagingProfile>
+            <SecurityProfile name="SEC2">
+                <Description>SECINFO_DESC2</Description>
+                <EncryptionType>ET</EncryptionType>
+                <EncryptionLevel>64</EncryptionLevel>
+                <DigestAlgorithm>None</DigestAlgorithm>
+                <EncryptionCert ID="1111">
+                    <CertName>GridTalk</CertName>
+    <IssuerName>UXoxVFJ5eFBQVWR5YVdST2IyUmxJRkIwWlNCTWRHUXNUMVU5UjNKcFpFMWhjM1JsY2lCSmJuUmxjbTVoYkNCRFpYSjBMRU5PUFVkeQ0KYVdSTllYTjBaWElnU1c1MElFTmxjblJwWm1sallYUmw=</IssuerName>
+    <SerialNumber>QVFBQXZRPT0=</SerialNumber>
+    <CertBytes>TUlJQ1hEQ0NBY1dnQXdJQkFnSUVBUUFBdlRBTkJna3Foa2lHOXcwQkFRVUZBREJ3TVFzd0NRWURWUVFHRXdKVFJ6RVpNQmNHQTFVRQ0KQ2hNUVIzSnBaRTV2WkdVZ1VIUmxJRXgwWkRFaE1COEdBMVVFQ3hNWVIzSnBaRTFoYzNSbGNpQkpiblJsY201aGJDQkRaWEowTVNNdw0KSVFZRFZRUURFeHBIY21sa1RXRnpkR1Z5SUVsdWRDQkRaWEowYVdacFkyRjBaVEFlRncwd01URXdNak13TmpFM01ETmFGdzB5TVRFdw0KTWpNd05qRTNNRE5hTUdFeEN6QUpCZ05WQkFZVEFsTkhNUkl3RUFZRFZRUUtFd2xEVmxOSklFTnZjbkF4R3pBWkJnTlZCQXNURWtkeQ0KYVdSVVlXeHJJRFV5TWlBb1IwNU1LVEVoTUI4R0ExVUVBeE1ZUjNKcFpGUmhiR3NnTlRJeUlFTmxjblJwWm1sallYUmxNSUdmTUEwRw0KQ1NxR1NJYjNEUUVCQVFVQUE0R05BRENCaVFLQmdRRENVMWZjNmgyYWJ3Y3Y2M0ZtSVU5NjUwV3E0OWhkaDJheUZZSGF2dDIrSFZqVA0KVTUyNWdyVDNtZW51R0Z5WU5BY0IranNZUjNvaXlNWldCNXRJS1FtWHltSDlqOFJnSXR5RHdhaWE1dGt5R3F6TnNzMm91ODRIVmppUg0KT1RGRWY0U0NnZjgxUGFTWWV4dXAvQVhiRFkxckhxN3FMaE5xRFZWdTNYTjB0TXIyRHdJREFRQUJveEl3RURBT0JnTlZIUThCQWY4RQ0KQkFNQ0JKQXdEUVlKS29aSWh2Y05BUUVGQlFBRGdZRUFJcFhVL0VGVjZ6UFpZZWsxQUJXTmJ6aVVsTFJGMW8yZGR5VEZGc1E1SFZBSA0KY1FsRG1JT0dBWWtZeHJ5eDI4VHczK2tHQVhONk1vUnNzc2IwYXlPTTM4WEppTHYrK3ZxS3R5WFJpZnhQZG1SWDZZVWtxbXE4QmZKcg0Kb2xjN2ZxUzAyOEV5YnNOWCtWdzJaWW9Sc3dGVnZlRUplSlQ1TlhrMWc2VE1nY05YRlhFPQ==</CertBytes>
+                    <IsMaster>false</IsMaster>
+                </EncryptionCert>
+            </SecurityProfile>
+            <IsMaster>false</IsMaster>
+        </Channel>
+    </BusinessEntity>
+</GridNode>

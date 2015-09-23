@@ -1,0 +1,89 @@
+<html>
+<head>
+<title>9.4.1 To view a process instance </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>9.4.1 To view a process instance </h3>
+<p></p>
+<p><span>The Process Instance tracks a particular instance of a process. When a document tagged as a Process document is sent out, the Process Controller will create an instance for it. This process instance is a read-only view, and show the documents associated with the instance (including acknowledgements or exceptions).</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Each process instance is identified with a process instance ID that is unique within the context of either the process originator or the recipient. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>The User Tracking ID of the process instance is extracted from the request document according to the User Tracking Identifier, which is configured in the process definition as an XPath referring to a user-selected element of the request document.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>For example, if the request document is:</span>
+</p>
+<p><span></span>
+</p>
+<p><span>&lt;msg&gt;</span>
+</p>
+<p><span> &lt;user&gt;John&lt;/user&gt;</span>
+</p>
+<p><span> &lt;document&gt;</span>
+</p>
+<p><span> &lt;id&gt;123&lt;/id&gt;</span>
+</p>
+<p><span> &lt;/document&gt;</span>
+</p>
+<p><span>&lt;/msg&gt;</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Then the XPath value can be &quot;;//msg/user&quot;;, or <a name='OLE_LINK20'>&quot;;//msg/document/id&quot;;, </a>
+or any value that represents an element in the request document.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>After configuring the &quot;;User Tracking Identifier&quot;;, when processes of that process definition are executed, the user tracking ID (eg.”123”) will be extracted from the request document using the XPath value (eg. &quot;;//msg/document/id&quot;; ) specified in the process definition. The ID will be stored in the process instance and displayed alongside the existing process instance ID.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The State of the instance indicates which part of the process it is in. The user can tell if the request has been sent, or an acknowledgement is expected, etc.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The Time Due is the alarm for the process. This alarm will be controlled by the time to acknowledge (if the process instance is expecting an acknowledgement) or the time to perform (if a response document is expected). After this timeout, the system will trigger the corresponding action.</span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Click Process. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>Click Process Instances. This will bring you to the Process Instances list view page where you can see a list of process instances in the left pane of the page. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>Select the process instance. Click on the magnifying glass icon next to the process instance you have selected under the Process Instance ID column. The screen appears.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><img width='463' height='316' border='0' src='../images/image110.jpg'></p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>If you wish to view documents associated to the process instance you have selected, click the corresponding link under the Folder column.</span>
+</p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

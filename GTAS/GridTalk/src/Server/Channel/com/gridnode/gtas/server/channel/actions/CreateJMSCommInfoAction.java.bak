@@ -1,0 +1,151 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001-2002 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: CreateJMSCommInfoAction.java
+ *
+ ****************************************************************************
+ * Date           Author                  Changes
+ ****************************************************************************
+ * Jun 18 2002    Goh Kan Mun             Created
+ * Jul 05 2002    Goh Kan Mun             Modified - Add new fields.
+ * Jul 11 2002    Goh Kan Mun             Modified - Check for Dest Type.
+ * Jul 12 2002    Goh Kan Mun             Modified - Change of Class name from Add to Create.
+ * Aug 06 2002    Jagadeesh               Modified - Changed constructEventResponse to include
+ *                                        Map representation of the Entity
+ */
+package com.gridnode.gtas.server.channel.actions;
+
+
+import com.gridnode.gtas.model.channel.CommInfoEntityFieldId;
+import com.gridnode.gtas.model.channel.ICommInfo;
+import com.gridnode.gtas.server.rdm.ejb.actions.GridTalkEJBAction;
+import com.gridnode.gtas.server.channel.helpers.ChannelLogger;
+import com.gridnode.gtas.events.channel.CreateJMSCommInfoEvent;
+import com.gridnode.gtas.model.channel.CommInfoEntityFieldId;
+import com.gridnode.gtas.exceptions.IErrorCode;
+
+import com.gridnode.pdip.app.channel.facade.ejb.IChannelManagerHome;
+import com.gridnode.pdip.app.channel.facade.ejb.IChannelManagerObj;
+import com.gridnode.pdip.app.channel.model.JMSCommInfo;
+import com.gridnode.pdip.app.channel.model.CommInfo;
+
+
+import com.gridnode.pdip.framework.exceptions.*;
+import com.gridnode.pdip.framework.rpf.event.*;
+import com.gridnode.pdip.framework.rpf.ejb.action.*;
+import com.gridnode.pdip.framework.util.ServiceLocator;
+
+/**
+ * This Action class handles the creation of a new CommInfo.
+ *
+ * @author Goh Kan Mun
+ *
+ * @version 2.0
+ * @since 2.0
+ */
+public class CreateJMSCommInfoAction
+  extends    GridTalkEJBAction
+{
+  private CreateJMSCommInfoEvent _event = null;
+  private CommInfo _commInfo=null;
+
+  public IEventResponse perform(IEvent event)
+    throws EventException
+  {
+    _event = (CreateJMSCommInfoEvent)event;
+
+    IEventResponse response  = null;
+    Object[] params = null;
+    try
+    {
+      _commInfo = (CommInfo) prepareActionData(_event);
+      Long uid = getManager().createCommInfo(_commInfo);
+      _commInfo = (CommInfo)getManager().getCommInfo(uid);
+
+      params = new Object[] { _commInfo.getEntityName(), _commInfo.getEntityDescr()};
+      response = constructEventResponse(params);
+    }
+    catch (TypedException ex)
+    {
+      response = constructEventResponse(params, _event, ex);
+    }
+    catch (Throwable ex)
+    {
+      response = constructEventResponse(params, _event, new SystemException(ex));
+    }
+    return response;
+  }
+
+  protected void doSemanticValidation(IEvent event) throws Exception
+  {
+    _event = (CreateJMSCommInfoEvent) event;
+    if (_event.getDestType() != CreateJMSCommInfoEvent.QUEUE &&
+       _event.getDestType() != CreateJMSCommInfoEvent.TOPIC)
+      throw new EventException("Destination type not defined: " + _event.getDestType());
+  }
+
+  private Object prepareActionData(IEvent event)
+    throws Exception
+  {
+    _event = (CreateJMSCommInfoEvent)event;
+    JMSCommInfo jmsCommInfo = new JMSCommInfo();
+    jmsCommInfo.setDescription(_event.getDescription());
+    jmsCommInfo.setDestination(_event.getDest());
+    jmsCommInfo.setDestType(_event.getDestType());
+    jmsCommInfo.setHost(_event.getHost());
+    jmsCommInfo.setIsDefaultTpt(false);
+    jmsCommInfo.setName(_event.getName());
+    jmsCommInfo.setPassword(_event.getPassword());
+    jmsCommInfo.setPort(_event.getPort());
+    jmsCommInfo.setProtocolType(CommInfo.JMS);
+    jmsCommInfo.setProtocolVersion(JMSCommInfo.JMS_VERSION);
+    jmsCommInfo.setTptImplVersion(JMSCommInfo.IMPL_VERSION);
+    jmsCommInfo.setUser(_event.getUserName());
+    jmsCommInfo.setIsPartner((_event.isPartner()).booleanValue());
+    if (_event.isPartner().booleanValue())
+      // can only create for partner of "Other" category.
+      jmsCommInfo.setPartnerCategory(ICommInfo.CATEGORY_OTHERS);
+    else
+      jmsCommInfo.setRefId(getEnterpriseID());
+
+    return jmsCommInfo;
+  }
+
+  private IEventResponse constructEventResponse(Object[] params)
+  {
+    ChannelLogger.debugLog("CreateJMSCommInfoAction", "constructEventResponse", "Event Successful ");
+    BasicEventResponse response = null;
+    response = new BasicEventResponse(
+                   IErrorCode.NO_ERROR,
+                   params,
+                   _commInfo.convertToMap(_commInfo, CommInfoEntityFieldId.getEntityFieldID(), null));
+    return response;
+  }
+
+  private IEventResponse constructEventResponse(Object[] params, IEvent event, TypedException ex)
+  {
+    ChannelLogger.errorLog("CreateJMSCommInfoAction", "perform", "Event Error ", ex);
+    BasicEventResponse response = null;
+    response = new BasicEventResponse(
+                 IErrorCode.CREATE_ENTITY_ERROR,
+                 params,
+                 ex.getType(),
+                 ex.getLocalizedMessage(),
+                 ex.getStackTraceString());
+    return response;
+  }
+
+  private IChannelManagerObj getManager()
+    throws ServiceLookupException
+  {
+    return (IChannelManagerObj)ServiceLocator.instance(
+             ServiceLocator.CLIENT_CONTEXT).getObj(
+               IChannelManagerHome.class.getName(),
+               IChannelManagerHome.class,
+               new Object[0]);
+  }
+
+}

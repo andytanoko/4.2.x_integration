@@ -1,0 +1,194 @@
+$CurrentVersion=2.0
+
+--------------------------------------------------------------------------------------------------------------
+                                                   Version: 2.0
+--------------------------------------------------------------------------------------------------------------
+Compatible GTAS: 2.1.7 onwards
+Compatible XB  : 1.0.51.1 onwards 
+
+Contents:
+*********
+[10/28/2003  09:53a] infineon-proc.jar
+[10/28/2003  09:56a] infineon-proc.txt                                 
+[05/13/2003  01:17p] data\alert\userproc\receive-conf.properties
+[05/13/2003  01:14p] data\alert\userproc\report\3A4POConfirm.template
+[05/13/2003  01:13p] data\alert\userproc\report\3A8POChgConfirm.template
+[05/13/2003  01:14p] data\alert\userproc\report\dsm.sav
+[05/13/2003  11:58a] data\alert\userproc\report\gn-elixir-report-ext.jar
+[05/13/2003  11:54a] data\alert\userproc\report\endorsed\README.TXT
+[10/31/2002  02:27p] data\alert\userproc\report\endorsed\xalan.jar
+[01/27/2003  02:16p] data\alert\userproc\report\endorsed\xerces.jar
+[05/13/2003  11:54a] data\alert\userproc\report\endorsed\xml-apis.jar
+[05/13/2003  01:13p] data\alert\userproc\report\images\Infineonlogo.gif
+
+User Procedures:
+****************
+"infineon-proc.jar" contains the following user procedures:
+1. com.gridnode.infineon.ReceiveConfirmationProc
+   Purpose      : Use for sending email notification with attachement when a confirmation document arrives at GTAS.
+   Config. File : receive-conf.properties
+   Req. Files   : all files under data\alert\userproc\report folder
+
+Changes from Version 1.0
+************************
+Due to the implementation of GridTalk Alert Center, most of the user procedures are obsolete (can be replaced
+in one way or another by the Alert Center features. Thus, in this release, all user procedures are removed, only 
+com.gridnode.infineon.ReceiveConfirmationProc is retained.
+
+Also, due to changes in Java procedure invocation changes, method signatures with types more specific than
+the Data types available in User procedure configuration are no longer accepted. Thus, the sendEmailNotification()
+method signature in com.gridnode.infineon.ReceiveConfirmationProc is also changed to accept an Object type instead
+of GridDocument. 
+
+Instructions for upgrade from Version 1.0:
+******************************************
+1. Copy "infineon-proc.jar" from this distribution and replace the existing "infineon-proc.jar" under the
+   "GRIDTALK_HOME/jboss-3.0.5_tomcat-4.0.6/bin/gtas/data/sys/uproc/jar" folder.
+
+2. The code2role.properties and code2mail.properties are now obsolete. It is required to migrate them to the Email Code Reference file format.
+    Please refer to the sample Email Code Reference format in the gtas/data/alert/email/emailcode-ref.xml file.
+ 
+3. Existing Message Templates with <%UserDocument.EMAIL_CODE_RECIPIENTS%> need to be replaced with <%RecipientList.DYNAMIC_RECIPIENTS%>.
+ 
+4. User Procedure: ReceiveRNAckProc is replaced by Document Received By Partner alert type which is automatically triggered based on Alert Trigger.
+    a) For each docType configured in gtas/data/alert/userproc/receive-rnack.properties:
+    i.  Ensure that the Alert to be raised (docType.alert) is of "Document Received By Partner" Alert Type.
+    ii. Create an Alert Trigger:
+        - Level = 1, 
+        - Alert Type = Document Received By Partner, 
+        - Document Type = docType,
+        - Alert = Select the alert from i
+        - Recipients: Add one EMAIL_CODE entry for each docType.emailcode
+ 
+    b) Removing obsolete configurations:
+    i. The ReceiveRNAckProc User Procedure configuration
+    ii. Partner Function and Trigger for receiving of RN_ACK.
+ 
+5. User Procedure: ReceiveDocumentProc is replaced by Document Received alert type which is triggered by Raise Alert workflow activity based on Alert Trigger.
+    a) For each docType configured in gtas/data/alert/userproc/receive-doc.properties:
+    i.  Ensure that the Alert to be raised (docType.alert) is of "Document Received" Alert Type.
+    ii. Create an Alert Trigger:
+        - Level = 1, 
+        - Alert Type = Document Received ,
+        - Document Type = docType,
+        - Alert = Select the alert from i
+        - Recipients: Add one EMAIL_CODE entry for each docType.emailcode
+    iii. Edit the Partner Function for Receiving of docType documents:
+        - Remove the ReceiveDocumentProc user procedure workflow activity
+        - instead, replace with Raise Alert workflow activity on "Document Received" Alert Type.
+ 
+    b) Removing obsolete configurations:
+    i. The ReceiveDocumentProc User Procedure configuration
+ 
+6. User Procedure: ReceiveRNExceptionProc is replaced by Process Instance Failure alert type which is automatically triggered based on Alert Trigger.
+    a) For each docType configured in gtas/data/alert/userproc/receive-rnexcept.properties:
+    i.  Ensure that the Alert to be raised (docType.alert) are of "Process Instance Failure" Alert Type.
+        NOTE: The Default Process Instance Failure Alert can be used if no customization of the message template is required. Thus this step will not be necessary.
+    ii. Create an Alert Trigger:
+        - Level = 1, 
+        - Alert Type = Process Instance Failure, 
+        - Document Type = docType,
+        - Alert = Select the alert from i (or Default Process Instance Failure Alert if step i is skipped)
+        - Recipients: Add one EMAIL_CODE entry for each docType.emailcode 
+    
+    b) If Default Process Instance Failure Alert is used, 
+    i. Edit the PROCESS_INSTANCE_FAILURE_EMAIL Message Template:
+       - Add <%RecipientList.DYNAMIC_RECIPIENTS%> in the "To" field.
+     
+    c) Removing obsolete configurations:
+    i. The ReceiveRNExceptionProc User Procedure configuration
+    ii. Partner Function and Trigger for receiving of RN_EXCEPTION.
+
+
+Instructions for first time configuration:
+******************************************
+1. Configure a Procedure Definition using the "infineon-proc.jar".
+
+2. Configure a User Procedure for each user procedure mentioned above. 
+   i.  Use Java Procedure with Internal JVM
+   ii. Provide class name as per above and "sendEmailNotification" as the method name.
+   iii. Configure 1 parameter with "Object" data type and "GridDoc" data source.
+ 
+3. For each document that needs email notification with attachement when a confirmation document arrives,
+   i. Configure a Response Track Record for the document type
+   ii. Add a User Procedure workflow activity in the Partner Function for the document.
+   iii. Use the ReceiveConfirmationProc user procedure.
+   iv. Add a DocType-Template mapping for the document type in receive-conf.properties.
+
+4. Place all files under data\ folder in corresponding folder under the GTAS data directory.
+ 
+--------------------------------------------------------------------------------------------------------------
+                                                   Version: 1.0
+--------------------------------------------------------------------------------------------------------------
+Compatible GTAS: 2.0.24 onwards
+Compatible XB  : 1.0.51.1 onwards 
+
+Contents:
+*********
+[05/13/2003  01:12p] infineon-proc.jar
+[05/23/2003  05:47p] infineon-proc.txt                                 
+[05/13/2003  01:17p] data\alert\userproc\receive-conf.properties
+[05/13/2003  01:17p] data\alert\userproc\receive-doc.properties
+[05/13/2003  01:17p] data\alert\userproc\receive-rnack.properties
+[05/13/2003  01:17p] data\alert\userproc\receive-rnexcept.properties
+[05/13/2003  01:14p] data\alert\userproc\report\3A4POConfirm.template
+[05/13/2003  01:13p] data\alert\userproc\report\3A8POChgConfirm.template
+[05/13/2003  01:14p] data\alert\userproc\report\dsm.sav
+[05/13/2003  11:58a] data\alert\userproc\report\gn-elixir-report-ext.jar
+[05/13/2003  11:54a] data\alert\userproc\report\endorsed\README.TXT
+[10/31/2002  02:27p] data\alert\userproc\report\endorsed\xalan.jar
+[01/27/2003  02:16p] data\alert\userproc\report\endorsed\xerces.jar
+[05/13/2003  11:54a] data\alert\userproc\report\endorsed\xml-apis.jar
+[05/13/2003  01:13p] data\alert\userproc\report\images\Infineonlogo.gif
+
+User Procedures:
+****************
+"infineon-proc.jar" contains the following user procedures:
+1. com.gridnode.infineon.ReceiveDocumentProc
+   Purpose      : Use for sending email notification with attachment when a document arrives at GTAS.
+   Config. File : receive-doc.properties
+
+2. com.gridnode.infineon.ReceiveRNExceptionProc
+   Purpose      : Use for sending email notification when RosettaNet exception message arrives at GTAS.
+   Config. File : receive-rnexcept.properties
+
+3. com.gridnode.infineon.ReceiveRNAckProc
+   Purpose      : Use for sending email notification when RN ACK message arrives at GTAS.
+   Config. File : receive-rnack.properties
+
+4. com.gridnode.infineon.ReceiveConfirmationProc
+   Purpose      : Use for sending email notification with attachement when a confirmation document arrives at GTAS.
+   Config. File : receive-conf.properties
+   Req. Files   : all files under data\alert\userproc\report folder
+
+Instructions for first time configuration:
+******************************************
+1. Configure a Procedure Definition using the "infineon-proc.jar".
+
+2. Configure a User Procedure for each user procedure mentioned above. 
+   i.  Use Java Procedure with Internal JVM
+   ii. Provide class name as per above and "sendEmailNotification" as the method name.
+   iii. Configure 1 parameter with "Object" data type and "GridDoc" data source.
+
+3. For each type of document that needs email notification when document arrives,
+   i.  Add a User Procedure workflow activity in the Partner Function for the document.
+   ii. Use the ReceiveDocumentProc user procedure.
+   iii. Add a DocType-Alert mapping for the document type in receive-doc.properties.
+
+4. For documents that need email notification when RosettaNet exception message arrives,
+   i.  Create a Partner Function with a User Procedure workflow activity that uses the ReceiveRNExceptionProc user procedure.
+   ii. Create a Trigger at Level 1 for RN_EXCEPTION document type on the created Partner Function.
+   iii. Add a DocType-Alert mapping for each document type in receive-rnexcept.properties.
+
+5. For documents that need email notification when RN ACK message arrives,
+   i.  Create a Partner Function with a User Procedure workflow activity that uses the ReceiveRNAckProc user procedure.
+   ii. Create a Trigger at Level 1 for RN_ACK document type on the created Partner Function.
+   iii. Add a DocType-Alert ampping for each document type in receive-rnack.properties.
+
+6. For each document that needs email notification with attachement when a confirmation document arrives,
+   i. Configure a Response Track Record for the document type
+   ii. Add a User Procedure workflow activity in the Partner Function for the document.
+   iii. Use the ReceiveConfirmationProc user procedure.
+   iv. Add a DocType-Template mapping for the document type in receive-conf.properties.
+
+7. Place all files under data\ folder in corresponding folder under the GTAS data directory.

@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>7.5.3 To Export Own/Partner Certificate </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>7.5.3 To Export Own/Partner Certificate </h3>
+<p><br><span>Certificate files may be exported to the Key Store and Trust Store to facilitate the inbound and outbound HTTPS connections. The Key Store is used for inbound HTTPS connection whereas outbound HTTPS connection makes use of the Trust Store. In other words, you may only export own certificates to Key Store and partner certificates to Trust Store.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The In Key store and In Trust store fields are set by the server when you export a certificate to one of the stores using the “Export to Key Store” or “Export to Trust Store” buttons. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>When you click on the Export to Key Store button, the own certificate will be exported to the HTTP receiver server to replace the current certificate in the Key Store. The replacement would only take effect upon re-start of GridTalk. There is always </span>
+<span>one</span>
+<span> cert in the Key Store. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>When you click the Export to Trust Store button, the partner certificate will be exported to the HTTP sender to append to the Trust Store. You can then start sending the message to the partner using the latest exported certificate. There are always multiple certificates in the Trust Store.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>When exporting partner certificates to the Trust Store, the parent CA certificates should be exported first to the Trust Store, before exporting the end-entity certificates. Otherwise, the application would complain that the parent certificate is not in the Trust Store. </span>
+</p>
+<p><span></span>
+</p>
+<p><span><img width='630' height='96' src='../images/image064.gif'></span>
+</p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

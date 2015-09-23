@@ -1,0 +1,136 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subject to license terms.
+ *
+ * Copyright 2002 (c) GridNode Pte Ltd. All rights reserved.
+ * File: FeedbackMsg.java
+ *
+ * ********************************************************
+ * Date            Author                Changes
+ * ********************************************************
+ * Jun 05, 2002    Guo Jianyu            created
+ * Jun 20, 2002    Kan Mun               Modified - Add a data field and its getter and setter methods
+ *                                        so as to be able to return the BL data.
+ * Oct 24, 2002    Kan Mun               Modified - to keep the Exception, error message and the GNTransport.
+ *
+ */
+package com.gridnode.pdip.base.transport.helpers;
+
+/**
+ * This class describes the object used in feedback messages.
+ * For example, messages for status notification of a data send, messages
+ * for reporting a connection failure, etc.
+ *
+ * @author Guo Jianyu
+ *
+ * @version 1.0
+ * @since  1.0
+ */
+public class FeedbackMsg implements java.io.Serializable
+{
+  /**
+   * the status code, e.g. MESSAGE_SENT
+   */
+  private boolean _status;
+
+  /**
+   * some more meaningful description
+   */
+  private String _desc;
+
+  /**
+   *
+   */
+  private String[] _header;
+
+  /**
+   * constructor
+   */
+  public FeedbackMsg()
+  {
+    setStatus(false);
+    setDesc(null);
+    setHeader(null);
+  }
+
+  /**
+   * this constructor is meant for non-message-oriented feedback messages
+   */
+  public FeedbackMsg(boolean status, String desc)
+  {
+    setStatus(status);
+    setDesc(desc);
+    setHeader(null);
+  }
+
+  /**
+   * default constructor
+   * @since 1.0
+   */
+  public FeedbackMsg(boolean status, String desc, String[] header)
+  {
+    setStatus(status);
+    setDesc(desc);
+    setHeader(header);
+  }
+
+  /**
+   * @return "status" is returned
+   */
+  public boolean getStatus()
+  {
+    return _status;
+  }
+
+  /**
+   * @return "info" is returned
+   */
+  public String[] getHeader()
+  {
+    return _header;
+  }
+
+  /**
+   * @return "desc" is returned
+   */
+  public String getDesc()
+  {
+    return _desc;
+  }
+
+  /**
+   * set "code"
+   * @param code  -- the code to be set to
+   */
+  public void setStatus(boolean status)
+  {
+    _status = status;
+  }
+
+  /**
+   * set "info"
+   * @param info -- the info to be set to
+   */
+  public void setHeader(String[] header)
+  {
+    _header = header;
+  }
+
+  /**
+   * set "desc"
+   * @param desc -- the description to be set to
+   */
+  public void setDesc(String desc)
+  {
+    _desc = desc;
+  }
+
+  /**
+   * return the contents of the message in the form of a string
+   */
+  public String toString()
+  {
+    return "[FeedbackMsg: status = " + getStatus() + ", desc = " + getDesc() + "]";
+  }
+
+}

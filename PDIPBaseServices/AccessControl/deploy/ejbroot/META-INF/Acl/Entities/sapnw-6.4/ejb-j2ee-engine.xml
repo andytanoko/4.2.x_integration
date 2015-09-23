@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-j2ee-engine SYSTEM "ejb-j2ee-engine.dtd">
+<ejb-j2ee-engine>
+	<enterprise-beans>
+		<enterprise-bean>
+			<ejb-name>Feature</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.acl.entities.ejb.IFeatureLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>SubjectRole</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.acl.entities.ejb.ISubjectRoleLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>Role</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.acl.entities.ejb.IRoleLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>AccessRight</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.acl.entities.ejb.IAccessRightLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+	</enterprise-beans>
+</ejb-j2ee-engine>

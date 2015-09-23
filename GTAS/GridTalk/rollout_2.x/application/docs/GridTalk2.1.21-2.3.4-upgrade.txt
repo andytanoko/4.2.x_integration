@@ -1,0 +1,46 @@
+Upgrade Pack: GridTalk2.1.21-2.3.4-upgrade
+
+Purpose
+-------
+This upgrade pack is used for upgrading GridTalk from build 2.1.21 to build 2.3.4.
+
+New Features added upon upgrade:
+
+a. Webservice User Procedure
+b. Backend Soap Interface
+c. Soap B2B Messaging
+d. UDDI Registry Support
+e. P2P RN messaging enablement between GridTalk 2 series (both RNIF1 & RNIF2 messages)
+f. P2P Interoperability with GridTalk 1 series (including RNIF2 messages)
+g. Support for UCCnet Transport using UCCnet Transport Adaptor (User Procedure Call)
+h. AS2 Messaging Protocol
+i. Process Instance Tracking
+j. RosettaNet PIP(s) schemas auto-generation
+k. RosettaNet Next generation PIP support
+l. Document and Process instance listview sorting
+m. Document Searching
+n. Enable Manual Export from Inbound folder
+o. Asian Characters Support for XML content
+p. Workflow Activity Suspension and Resume Control
+q. Entities Dependency Checking
+r. Internal Scheduler (Schedule User procedure)
+s. Scheduled Housekeeping
+
+
+Instructions
+------------
+To apply the upgrade pack,
+1. Unpack the GridTalk2.1.21-2.3.4-upgrade.zip file to a temporary directory.
+2. Run upgrade.bat (double-click or type "upgrade" in command prompt)
+
+
+Notes:
+1. Upon this upgrade, please review each Channel profile on the flowcontrol settings
+   which are migrated from Packaging profiles. Some defaults have been given based on
+   the Channel Protocol Type:
+   a. HTTP      - Is Zip=false, Is Split=false
+   b. JMS       - Is Zip=true, Is Split=true
+
+   Manual updates may be necessary if these defaults are not applicable to particular channel.
+
+2. See readme_2_2.txt and readme.txt for features/enhancements/bugfixes details in the upgrade.

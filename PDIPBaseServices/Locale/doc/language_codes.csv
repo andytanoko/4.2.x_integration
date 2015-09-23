@@ -1,0 +1,162 @@
+Language,Alpha-2 Code,B Alpha-3 Code,T Alpha-3 Code
+Abkhazian,AB,ABK,ABK
+Afar,AA,AAR,AAR
+Afrikaans,AF,AFR,AFR
+Albanian,SQ,ALB,SQI
+Amharic,AM,AMH,AMH
+Arabic,AR,ARA,ARA
+Armenian,HY,ARM,HYE
+Assamese,AS,ASM,ASM
+Avestan,AE,AVE,AVE
+Aymara,AY,AYM,AYM
+Azerbaijani,AZ,AZE,AZE
+Bashkir,BA,BAK,BAK
+Basque,EU,BAQ,EUS
+Belarussian,BE,BEL,BEL
+Bengali,BN,BEN,BEN
+Bihari,BH,BIH,BIH
+Bislama,BI,BIS,BIS
+Bosnian,BS,BOS,BOS
+Breton,BR,BRE,BRE
+Bulgarian,BG,BUL,BUL
+Burmese,MY,BUR,MYA
+Catalan,CA,CAT,CAT
+Chamorro,CH,CHA,CHA
+Chechen,CE,CHE,CHE
+Chichewa; Nyanja,NY,NYA,NYA
+Chinese,ZH,CHI,ZHO
+Church Slavic,CU,CHU,CHU
+Chuvash,CV,CHV,CHV
+Cornish,KW,COR,COR
+Corsican,CO,COS,COS
+Croatian,HR,SCR,HRV
+Czech,CS,CZE,CES
+Danish,DA,DAN,DAN
+Dutch,NL,DUT,NLD
+Dzongkha,DZ,DZO,DZO
+English,EN,ENG,ENG
+Esperanto,EO,EPO,EPO
+Estonian,ET,EST,EST
+Faeroese,FO,FAO,FAO
+Fijian,FJ,FIJ,FIJ
+Finnish,FI ,FIN,FIN
+French,FR,FRE,FRA
+Frisian,FY,FRY,FRY
+Gaelic (Scots),GD,GLA,GLA
+Gallegan,GL,GLG,GLG
+Georgian,KA,GEO,KAT
+German,DE,GER,DEU
+Greek (Modern),EL,GRE,ELL
+Guarani,GN,GRN,GRN
+Gujarati,GU,GUJ,GUJ
+Hebrew,HE,HEB,HEB
+Herero,HZ,HER,HER
+Hindi,HI,HIN,HIN
+Hiri Motu,HO,HMO,HMO
+Hungarian,HU,HUN,HUN
+Icelandic,IS,ICE,ISL
+Indonesian,IN,IND,IND
+Interlingua,IA,INA,INA
+Interlingue,IE,ILE,ILE
+Inuktitut,IU,IKU,IKU
+Inupiaq [Inupiak],IK,IPK,IPK
+Irish,GA,GLE,GLE
+Italian,IT,ITA,ITA
+Japanese,JA,JPN,JPN
+Javanese,JV,JAV,JAV
+Kalaallisut [Greenlandic],KL,KAL,KAL
+Kannada,KN,KAN,KAN
+Kashmiri,KS,KAS,KAS
+Kazakh,KK,KAZ,KAZ
+Khmer,KM,KHM,KHM
+Kikuyu,KI,KIK,KIK
+Kinyarwanda,RW,KIN,KIN
+Kirghiz,KY,KIR,KIR
+Komi,KV,KOM,KOM
+Korean,KO,KOR,KOR
+Kurdish,KU,KUR,KUR
+Langue d'Oc (post 1500),OC,OCI,KUR
+Laothian,LO,LAO,LAO
+Latin,LA,LAT,LAT
+Latvian,LV,LAV,LAV
+Letzeburgesch,LB,LTZ,LTZ
+Lingala,LN,LIN,LIN
+Lithuanian,LT,LIT,LIT
+Macedonian,MK,MAC,MKD
+Malagasy,MG,MLG,MLG
+Malay,MS,MAY,MSA
+Malayalam,ML,MAL,MAL
+Maltese,MT,MLT,MLT
+Manx,GV,GLV,GLV
+Maori,MI,MAO,MRI
+Marathi,MR,MAR,MAR
+Marshall,MH,MAH,MAH
+Moldavian,MO,MOL,MOL
+Mongolian,MN,MON,MON
+Nauru,NA,NAU,NAU
+Navajo,NV,NAV,NAV
+"Ndebele, North",ND,NDE,NDE
+"Ndebele, South",NR,NBL,NBL
+Ndonga,NG,NDO,NDO
+Nepali,NE,NEP,NEP
+Northern Sami,SE,SME,SME
+Norwegian,NO,NOR,NOR
+Norwegian Bokmai,NB,NOB,NOB
+Norwegian Nynorsk,NN,NNO,NNO
+Occitan (post 1500); Provencal,OC,OCI,OCI
+Oriya,OR,ORI,ORI
+Oromo,OM,ORM,ORM
+Ossetian; Ossetic,OS,OSS,OSS
+Pali,PI,PLI,PLI
+Panjabi,PA,PAN,PAN
+Persian,FA,PER,FAS
+Polish,PL,POL,POL
+Portuguese,PT,POR,POR
+Pushto,PS,PUS,PUS
+Quechua,QU,QUE,QUE
+Rhaeto-Romance,RM,ROH,ROH
+Romanian,RO,RUM,RON
+Rundi,RN,RUN,RUN
+Russian,RU,RUS,RUS
+Samoan,SM,SMO,SMO
+Sangro,SG,SAG,SAG
+Sanskrit,SA,SAN,SAN
+Sardinian,SC,SRD,SRD
+Serbian,SR,SCC,SRP
+Shona,SN,SNA,SNA
+Sindhi,SD,SND,SND
+Sinhalese [Singhalese],SI,SNH,SIN
+Slovak,SK,SLO,SLK
+Slovenian,SL,SLV,SLV
+Somali,SO,SOM,SOM
+"Sotho, Southern",ST,SOT,SOT
+Spanish,ES,SPA,SPA
+Sudanese,SU,SUN,SUN
+Swahili,SW,SWA,SWA
+Swati,SS,SSW,SSW
+Swedish,SV,SWE,SWE
+Tagalog,TL,TAG,TGL
+Tahitian,TY,TAH,TAH
+Tajik,TG,TAJ,TGK
+Tamil,TA,TAM,TAM
+Tatar,TT,TAT,TAT
+Telugu,TE,TEL,TEL
+Thai,TH,THA,THA
+Tibetan,BO,TIB,BOD
+Tsonga,TS,TSO,TSO
+Tswana,TN,TSN,TSN
+Turkish,TR,TUR,TUR
+Turkmen,TK,TUK,TUK
+Twi,TW,TWI,TWI
+Uighur,UG,UIG,UIG
+Ukrainian,UK,UKR,UKR
+Urdu,UR,URD,URD
+Uzbek,UZ,UZB,UZB
+Vietnamese,VI,VIE,VIE
+Volapuk,VO,VOL,VOL
+Welsh,CY,WEL,CYM
+Wolof,WO,WOL,WOL
+Xhosa,XH,XHO,XHO
+Yiddish,YID,YID,YID
+Zhuang,ZA,ZHA,ZHA
+Zulu,ZU,ZUL,ZUL

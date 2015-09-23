@@ -1,0 +1,78 @@
+<project name="HelpMaker" default="default" basedir=".">
+
+  <!-- =================================================================== -->
+  <!-- Set global properties for this build                                -->
+  <!-- =================================================================== -->
+  <property environment="env"></property>
+
+  <target name="default" depends="init,unzip,package"/>
+
+  <!-- =================================================================== -->
+  <!-- Set local properties for this build                                 -->
+  <!-- =================================================================== -->
+  <target name="define.properties">
+    <property name="project.dir" value="./../../"/>
+    <property name="module.dir" value="./.."/>
+    <property name="dist.dir" value="${module.dir}/dist"/>
+    <property name="web.dir" value="${module.dir}/web"/>
+    <property name="war.name" value="help.war"/>
+  </target>
+  
+  <!-- =================================================================== -->
+  <!-- Initialise by deleting the GTAS Admin & User Guides                 -->
+  <!-- =================================================================== -->
+  <target name="init" depends="define.properties">
+    <delete dir="${web.dir}/gtas_ag"/>
+    <delete dir="${web.dir}/gtas_ug"/>
+  </target>
+  
+  <!-- =================================================================== -->
+  <!-- Unzip the GTAS Admin & User Guides                                  -->
+  <!-- =================================================================== -->
+  <target name="unzip">
+    <unzip dest="${web.dir}">
+      <fileset dir="${web.dir}">
+        <include name="*.zip"/>
+      </fileset>
+    </unzip>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Check if the war file is up-to-date                                 -->
+  <!-- =================================================================== -->
+  <target name="package">
+    <!-- not mandatory if war not required -->
+    <condition property="war.uptodate">
+      <and>
+        <available file="${dist.dir}/${war.name}" type="file"/>
+        <uptodate targetfile="${dist.dir}/${war.name}">
+          <srcfiles dir="${web.dir}"
+                    includes="**/**"
+                    excludes="*.zip,*.bak,*.keep,*.contrib*"/>
+        </uptodate>
+      </and>
+    </condition>
+    <echo message="war.uptodate is ${war.uptodate}"/>
+    <antcall target="web.war"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Delete the old war file and create a new one                        -->
+  <!-- =================================================================== -->
+  <target name="web.war" unless="war.uptodate">
+    <delete dir="${dist.dir}"/>
+    <mkdir dir="${dist.dir}"/>
+    <war warfile="${dist.dir}/${war.name}"
+         webxml="${web.dir}/WEB-INF/web.xml">
+      <fileset dir="${web.dir}">
+        <include name="**/**"></include>
+        <exclude name="**/web.xml"></exclude>
+        <exclude name="*.zip"></exclude>
+        <exclude name="*.bak"></exclude>
+        <exclude name="*.keep"></exclude>
+        <exclude name="*.contrib*"></exclude>
+      </fileset>
+    </war>
+  </target>
+
+</project>

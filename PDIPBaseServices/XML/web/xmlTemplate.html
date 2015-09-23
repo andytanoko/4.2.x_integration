@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>
+xmlConversion
+</title>
+<script language="JavaScript">
+<!--
+function checkVal()
+{
+ document.myfrm.submit();
+}
+ // -->
+</script>
+
+</head>
+<body BGCOLOR="#666699">
+<h1>
+XML Conversion Service ...
+</h1>
+<!--action=FileServlet-->
+<form ENCTYPE="multipart/form-data" method="post" action="InterfaceController" name="myfrm">
+<br><br>
+<b>Select the Conversion Service</b> &nbsp;&nbsp;&nbsp
+<select name = "conversion">
+<option value="Converter">Positional Text Conversion
+<!--"Excel Conversion"-->
+<option value="Converter">Excel Conversion
+<option value="Converter">Delimited Text Conversion
+</select>
+<br>
+<br>
+<br>
+<b>Source File </b>&nbsp;&nbsp;
+<input type="file" name="SRCFILE">
+<br>
+<b>Rules File </b>&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="file" name="RULESFILE">
+<br>
+<b>Output file </b>&nbsp;&nbsp;&nbsp;&nbsp;
+<input type = "text" name = "OUTPUTFILE" size=20 value="">
+<br>
+<br>
+
+<input type = hidden name="conversion" value="Converter" >
+<input type="Submit" name="Submit" value="Submit">
+&nbsp;&nbsp;
+<input type="Reset" name="Clear" value="Clear">
+<br>
+
+
+</form>
+</body>
+</html>

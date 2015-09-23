@@ -1,0 +1,258 @@
+<html>
+<head>
+<title>11.2 Backend Web Services Integration </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h2>11.2 Backend Web Services Integration </h2>
+<p><span></span>
+</p>
+<p><span>As discussed earlier in the Overview of Backend Integration, GridTalk integrates this backend with the web service to allow any web service clients to import documents into the applications (e.g. XB, SAP) via web services.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>As web services are language neutral and platform independent, there can be many ways of invoking the services. Have a look at the actual backend web service wsdl file as shown below. This is done by <span>pointing your URL to the following:</span>
+</span>
+</p>
+<p><span></span>
+</p>
+<p><span>http://&lt;host&gt;:&lt;port&gt;/gridtalk/webservice/services/BackendImport?wsdl</span>
+</p>
+<p><span></span>
+</p>
+<p><span>where the </span>
+<span>host</span>
+<span> refers to the IP address of the machine hosting GridTalk.</span>
+</p>
+<p><span></span>
+</p>
+<p><img width='641' height='438' alt='Text Box:   <?xml version="1.0" encoding="UTF-8" ?> 
+- <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
+       xmlns:ns0="http://backend.ws.gtas.gridnode.com" 
+       xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" 
+       xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns1="http://org.apache.axis2/xsd" 
+       xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" 
+       xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+       xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+       targetNamespace="http://backend.ws.gtas.gridnode.com">
++<wsdl:documentation>BackendImport</wsdl:documentation>
++<wsdl:types>
++<wsdl:message name="backendImport1Request">
++<wsdl:message name="backendImport1Response">
++<wsdl:message name="backendImport5Request">
++<wsdl:message name="backendImport5Response">
++<wsdl:message name="backendImport3Request">
++<wsdl:message name="backendImport3Response">
++<wsdl:message name="backendImport6Request">
++<wsdl:message name="backendImport6Response">
++<wsdl:message name="backendImport2Request">
++<wsdl:message name="backendImport2Response">
++<wsdl:message name="backendImport4Request">
++<wsdl:message name="backendImport4Response">
++<wsdl:portType name="BackendImportPortType">
++<wsdl:binding name="BackendImportSOAP11Binding" type="ns0:BackendImportPortType">
++<wsdl:binding name="BackendImportSOAP12Binding" type="ns0:BackendImportPortType">
++<wsdl:binding name="BackendImportHttpBinding" type="ns0:BackendImportPortType">
++<wsdl:service name="BackendImport">
+</wsdl:definitions>
+' src='../images/image153.gif'></p>
+<p></p>
+<p><span>There are six variants of the backend import services:</span>
+</p>
+<ol start='1' type='a'><li><b><span>backendImport1</span>
+</b>
+<span>: backend import without attachments, using DataHandler to transfer file</span>
+</li>
+<li><b><span>backendImport2</span>
+</b>
+<span>: backend import with attachments, using DataHandler to transfer files</span>
+</li>
+<li><b><span>backendImport3</span>
+</b>
+<span>: process-oriented backend import with attachments, using Data Handler to transfer files</span>
+</li>
+<li><b><span>backendImport4</span>
+</b>
+<span>: backend import without attachments, transferring files as byte contents</span>
+</li>
+<li><b><span>backendImport5</span>
+</b>
+<span>: backend import with attachments, transferring transaction doc as byte contents and transferring attachment using DataHandler</span>
+</li>
+<li><b><span>backendImport6</span>
+</b>
+<span>: process oriented backend import with attachments, transferring transaction doc as byte contents and transferring attachment using DataHandler</span>
+</li>
+</ol>
+<p><span></span>
+</p>
+<p><span>As shown below, the table for describing the WSDL file provides the detail of the services available. </span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' border='1' cellpadding='0'><tr><td width='144' valign='top'><p align='center'><b><span>Parameter</span>
+</b>
+</p>
+</td>
+<td width='267' valign='top'><p align='center'><b><span>Data Type</span>
+</b>
+</p>
+</td>
+<td width='69' valign='top'><p align='center'><b><span>Services</span>
+</b>
+</p>
+</td>
+<td width='148' valign='top'><p align='center'><b><span>Description</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>username</span>
+</p>
+</td>
+<td width='267' valign='top'><p><span>xs:string</span>
+</p>
+</td>
+<td width='69' valign='top'><p><span>All</span>
+</p>
+</td>
+<td width='148' valign='top'><p><span>This must match the ID of a valid user account configured in GT</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>password</span>
+</p>
+</td>
+<td width='267' valign='top'><p><span>xs:string</span>
+</p>
+</td>
+<td width='69' valign='top'><p><span>All</span>
+</p>
+</td>
+<td width='148' valign='top'><p><span>The password for the above user account</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>senderID</span>
+</p>
+</td>
+<td width='267' valign='top'><p><span>xs:string</span>
+</p>
+</td>
+<td width='69' valign='top'><p><span>c, f</span>
+</p>
+</td>
+<td width='148' valign='top'><p><span>This must match the ID of a configured Business Entity assigned to the user. If not specified, application assumes the default ID ‘DEF’</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>recipient</span>
+</p>
+</td>
+<td width='267' valign='top'><p><span>xs:string</span>
+</p>
+</td>
+<td width='69' valign='top'><p><span>All</span>
+</p>
+</td>
+<td width='148' valign='top'><p><span>The targeted recipient for the document. This must match a valid Partner ID configured in GT</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>contentFileName</span>
+</p>
+</td>
+<td width='267' valign='top'><p><span>xs:string</span>
+</p>
+</td>
+<td width='69' valign='top'><p><span>All</span>
+</p>
+</td>
+<td width='148' valign='top'><p><span>The filename of the document to be imported</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>content</span>
+</p>
+</td>
+<td width='267' valign='top'><p><span>xs:base64Binary</span>
+</p>
+</td>
+<td width='69' valign='top'><p><span>All</span>
+</p>
+</td>
+<td width='148' valign='top'><p><span>The byte content of the document to be imported</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>attachmentFileNames</span>
+</p>
+</td>
+<td width='267' valign='top'><p><span>xs:string, maxOccurs=”unbounded”, minOccurs=”0”</span>
+</p>
+</td>
+<td width='69' valign='top'><p><span>b,c,e,f</span>
+</p>
+</td>
+<td width='148' valign='top'><p><span>The filenames of the attachments. Null if no attachment.</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>attachments</span>
+</p>
+</td>
+<td width='267' valign='top'><p><span>xs:base64Binary, maxOccurs=”unbounded”, minOccurs=”0”</span>
+</p>
+</td>
+<td width='69' valign='top'><p><span>b,c,e,f</span>
+</p>
+</td>
+<td width='148' valign='top'><p><span>The handlers to transfer the byte content of the attachments. Null if no attachment.</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>docType</span>
+</p>
+</td>
+<td width='267' valign='top'><p><span>xs:string</span>
+</p>
+</td>
+<td width='69' valign='top'><p><span>All</span>
+</p>
+</td>
+<td width='148' valign='top'><p><span>This must match the Document Type configured in GT.</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>processID</span>
+</p>
+</td>
+<td width='267' valign='top'><p><span>xs:string</span>
+</p>
+</td>
+<td width='69' valign='top'><p><span>c,f</span>
+</p>
+</td>
+<td width='148' valign='top'><p><span>This must match a unique identifier that tracks the process profile record in the application. Null or empty string value is allowed.</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>docID</span>
+</p>
+</td>
+<td width='267' valign='top'><p><span>xs:string</span>
+</p>
+</td>
+<td width='69' valign='top'><p><span>c,f</span>
+</p>
+</td>
+<td width='148' valign='top'><p><span>This is a unique document identifier which will be tracked in the application. Null or empty string value is allowed.</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+</body>
+</html>

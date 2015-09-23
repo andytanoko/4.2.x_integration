@@ -1,0 +1,44 @@
+<project name="integrity-check" default="deploy" basedir=".">
+	<property name="build.dir" value="build"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="class.dir" value="classes"/>
+	<property name="src.dir" value="src/inprocess"/>
+	<property name="conf.dir" value="conf"/>
+	<property name="deploy.dir" value="${ant.project.name}"/>
+	<property name="manifest.file" value="META-INF/manifest.mf"/>
+		
+	<path id="compile.classpath">
+		<fileset dir="${lib.dir}" includes="*.jar"/>
+	</path>
+	
+	<target name="deploy" depends="build">
+		<mkdir dir="${deploy.dir}"/>
+		<mkdir dir="${deploy.dir}/log"/>
+		<copy todir="${deploy.dir}/${conf.dir}" preservelastmodified="true">
+			<fileset dir="${conf.dir}"/>
+		</copy>
+		<copy todir="${deploy.dir}/${lib.dir}" preservelastmodified="true">
+			<fileset dir="${lib.dir}" includes="*.jar"/>
+		</copy>
+		<copy todir="${deploy.dir}" preservelastmodified="true">
+			<fileset dir="./" includes="check.bat, checkIn*.bat, Readme.doc"/>
+			<fileset dir="${build.dir}" includes="${ant.project.name}.jar"/>
+		</copy>
+	</target>
+	
+	<target name="build" depends="compile">
+		<mkdir dir="${build.dir}"/>
+		<jar destfile="${build.dir}/${ant.project.name}.jar"  basedir="${class.dir}" manifest="${manifest.file}"/>
+	</target>
+	
+	<target name="compile" depends="clean">
+		<mkdir dir="${class.dir}"/>
+		<javac srcdir="${src.dir}" destdir="${class.dir}" classpathref="compile.classpath"/>
+	</target>
+	
+	<target name="clean">
+		<delete dir="${class.dir}" quiet="on"/>
+		<delete dir="${build.dir}" quiet="on"/>
+		<delete dir="${deploy.dir}" quiet="on"/>		
+	</target>
+</project>

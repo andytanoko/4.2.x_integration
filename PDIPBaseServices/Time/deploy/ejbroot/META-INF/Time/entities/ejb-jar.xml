@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+	<enterprise-beans>
+		<entity>
+			<display-name>iCalAlarm</display-name>
+			<ejb-name>iCalAlarm</ejb-name>
+			<home>com.gridnode.pdip.base.time.entities.ejb.IiCalAlarmHome</home>
+			<remote>com.gridnode.pdip.base.time.entities.ejb.IiCalAlarmObj</remote>
+			<ejb-class>com.gridnode.pdip.base.time.entities.ejb.iCalAlarmBean</ejb-class>
+			<persistence-type>Bean</persistence-type>
+			<prim-key-class>java.lang.Long</prim-key-class>
+			<reentrant>False</reentrant>
+		</entity>
+		<entity>
+			<display-name>iCalEvent</display-name>
+			<ejb-name>iCalEvent</ejb-name>
+			<home>com.gridnode.pdip.base.time.entities.ejb.IiCalEventHome</home>
+			<remote>com.gridnode.pdip.base.time.entities.ejb.IiCalEventObj</remote>
+			<ejb-class>com.gridnode.pdip.base.time.entities.ejb.iCalEventBean</ejb-class>
+			<persistence-type>Bean</persistence-type>
+			<prim-key-class>java.lang.Long</prim-key-class>
+			<reentrant>False</reentrant>
+		</entity>
+		<entity>
+			<display-name>iCalTodo</display-name>
+			<ejb-name>iCalTodo</ejb-name>
+			<home>com.gridnode.pdip.base.time.entities.ejb.IiCalTodoHome</home>
+			<remote>com.gridnode.pdip.base.time.entities.ejb.IiCalTodoObj</remote>
+			<ejb-class>com.gridnode.pdip.base.time.entities.ejb.iCalTodoBean</ejb-class>
+			<persistence-type>Bean</persistence-type>
+			<prim-key-class>java.lang.Long</prim-key-class>
+			<reentrant>False</reentrant>
+		</entity>
+<!--
+		<entity>
+			<display-name>iCalProperty</display-name>
+			<ejb-name>iCalProperty</ejb-name>
+			<home>com.gridnode.pdip.base.time.entities.ejb.IiCalPropertyHome</home>
+			<remote>com.gridnode.pdip.base.time.entities.ejb.IiCalPropertyObj</remote>
+			<ejb-class>com.gridnode.pdip.base.time.entities.ejb.iCalPropertyBean</ejb-class>
+			<persistence-type>Bean</persistence-type>
+			<prim-key-class>java.lang.Long</prim-key-class>
+			<reentrant>False</reentrant>
+		</entity>
+
+		<entity>
+			<display-name>iCalInt</display-name>
+			<ejb-name>iCalInt</ejb-name>
+			<home>com.gridnode.pdip.base.time.entities.ejb.IiCalIntHome</home>
+			<remote>com.gridnode.pdip.base.time.entities.ejb.IiCalIntObj</remote>
+			<ejb-class>com.gridnode.pdip.base.time.entities.ejb.iCalIntBean</ejb-class>
+			<persistence-type>Bean</persistence-type>
+			<prim-key-class>java.lang.Long</prim-key-class>
+			<reentrant>False</reentrant>
+		</entity>
+
+		<entity>
+			<display-name>iCalDate</display-name>
+			<ejb-name>iCalDate</ejb-name>
+			<home>com.gridnode.pdip.base.time.entities.ejb.IiCalDateHome</home>
+			<remote>com.gridnode.pdip.base.time.entities.ejb.IiCalDateObj</remote>
+			<ejb-class>com.gridnode.pdip.base.time.entities.ejb.iCalDateBean</ejb-class>
+			<persistence-type>Bean</persistence-type>
+			<prim-key-class>java.lang.Long</prim-key-class>
+			<reentrant>False</reentrant>
+		</entity>
+
+		<entity>
+			<display-name>iCalString</display-name>
+			<ejb-name>iCalString</ejb-name>
+			<home>com.gridnode.pdip.base.time.entities.ejb.IiCalStringHome</home>
+			<remote>com.gridnode.pdip.base.time.entities.ejb.IiCalStringObj</remote>
+			<ejb-class>com.gridnode.pdip.base.time.entities.ejb.iCalStringBean</ejb-class>
+			<persistence-type>Bean</persistence-type>
+			<prim-key-class>java.lang.Long</prim-key-class>
+			<reentrant>False</reentrant>
+		</entity>
+-->
+	<entity>
+			<display-name>iCalText</display-name>
+			<ejb-name>iCalText</ejb-name>
+			<home>com.gridnode.pdip.base.time.entities.ejb.IiCalTextHome</home>
+			<remote>com.gridnode.pdip.base.time.entities.ejb.IiCalTextObj</remote>
+			<ejb-class>com.gridnode.pdip.base.time.entities.ejb.iCalTextBean</ejb-class>
+			<persistence-type>Bean</persistence-type>
+			<prim-key-class>java.lang.Long</prim-key-class>
+			<reentrant>False</reentrant>
+		</entity>
+
+	</enterprise-beans>
+	<assembly-descriptor>
+		<container-transaction>
+			<method>
+				<ejb-name>iCalAlarm</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
+		<container-transaction>
+			<method>
+				<ejb-name>iCalEvent</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
+		<container-transaction>
+			<method>
+				<ejb-name>iCalTodo</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
+<!--
+ 		<container-transaction>
+			<method>
+				<ejb-name>iCalProperty</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
+
+		<container-transaction>
+			<method>
+				<ejb-name>iCalInt</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
+
+		<container-transaction>
+			<method>
+				<ejb-name>iCalDate</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
+
+		<container-transaction>
+			<method>
+				<ejb-name>iCalString</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
+
+-->		<container-transaction>
+			<method>
+				<ejb-name>iCalText</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
+
+	</assembly-descriptor>
+</ejb-jar>

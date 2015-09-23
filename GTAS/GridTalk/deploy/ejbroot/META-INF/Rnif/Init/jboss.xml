@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+  <secure>false</secure>
+  <resource-managers/>
+  <enterprise-beans>
+    <message-driven>
+      <ejb-name>RnifInitializerMDBean</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>topic/initialiserTopic</destination-jndi-name>
+    </message-driven>
+    <message-driven>
+      <ejb-name>RnifInitializerMDBean_onchange</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>topic/entityEventTopic</destination-jndi-name>
+    </message-driven>
+  </enterprise-beans>
+</jboss>

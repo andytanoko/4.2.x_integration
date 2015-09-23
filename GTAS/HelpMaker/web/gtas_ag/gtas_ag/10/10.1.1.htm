@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>10.1.1 To import the document into GridTalk </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>10.1.1 To import the document into GridTalk </h3>
+<p><b></b>
+</p>
+<p><span>For the backend sender to import the document into GridTalk, you will need to provide the information in </span>
+<span>sender.ini</span>
+<span> and/or </span>
+<span>directory.file</span>
+<span> as detailed in the following chapters. The backend sender directory is usually located at this location: &lt;GRIDTALK_HOME&gt;/backend/sender</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Typically, the sender.jar works in the following fashion:</span>
+</p>
+<p><span></span>
+</p>
+<ol start='1' type='1'><li><span>Pre-process (if required) files picked up from specified directory location(s)</span>
+</li>
+</ol>
+<p><span></span>
+</p>
+<ol start='2' type='1'><li><span>Drop files into a sub-folder </span>
+<span>outToGT</span>
+<span> before sending to GridTalk</span>
+</li>
+<ol start='1' type='a'><li><span>Files with conflicting names among the directories are renamed</span>
+</li>
+</ol>
+</ol>
+<p><span></span>
+</p>
+<ol start='3' type='1'><li><span>Move files imported to GridTalk into sub-folder </span>
+<span>outToGT/sentToGT</span>
+</li>
+<ol start='1' type='a'><li><span>Files failed to move are transferred to another sub-folder </span>
+<span>outToGT/fileCollision</span>
+</li>
+<li><span>Files with conflicting names are renamed</span>
+</li>
+</ol>
+</ol>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

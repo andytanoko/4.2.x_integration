@@ -1,0 +1,277 @@
+<html>
+<head>
+<title>14.1 Searching Archived Process Instances </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h2>14.1 Searching Archived Process Instances </h2>
+<p></p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Click the Archive Search tab. This will bring you to the Archived Process Instance Search page by default.</span>
+</p>
+<p></p>
+<p align='center'><img width='623' height='346' border='0' src='../images/image187.jpg'></p>
+<p><span></span>
+</p>
+<p><a name='_Ref154403696'><span>Step 2.<span> </span>
+</span>
+<span>Enter the search criteria as needed:</span>
+</a>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Process Definition</span>
+</b>
+</p>
+<p><span>This field indicates the type of the archived process instances to search for.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>State</span>
+</b>
+</p>
+<p><span>This field indicates the state of the archived process instances to search for.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Partner ID</span>
+</b>
+</p>
+<p><span>This field indicates the Partner ID of the partner that was involved in the archived process instances to search for.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Partner Name</span>
+</b>
+</p>
+<p><span>This field indicates the name of the partner(s) that was involved in the archived process instances to search for. The application would perform a wild card search based on the value input in this field.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>From Start Time (YYYY-MM-DD) (HH:MM)</span>
+</b>
+</p>
+<p><span>This indicates the starting date and time range to match the start times of the archived process instances to search for. The date portion can be entered without the time portion, which is then assumed to be 00:00. The time portion is automatically attached with the second and milliseconds portion 00.000. The matching archived process instances will have start times later than or same as the specified date and time.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>To Start Time (YYYY-MM-DD) (HH:MM)</span>
+</b>
+</p>
+<p><span>This indicates the ending date and time range to match the start times of the archived process instances to search for. The date portion can be entered without the time portion, which is then assumed to be 23:59. The time portion is automatically attached with seconds and milliseconds portion 59.999. The matching archived process instances will have start times earlier than or same as the specified date and time.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Doc. No.</span>
+</b>
+</p>
+<p><span>This indicates the document number of the request document of the archived process instances to search for. The application would perform a wild card search based on the specified value for this field. </span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>User Tracking ID</span>
+</b>
+</p>
+<p><span>This indicates the user tracking ID of the request document of the archived process instances to search for. This is only possible if the user tracking identifier XPath was specified in the Process Definition when the process instances were running.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>From Doc. Date (YYYY-MM-DD)</span>
+</b>
+</p>
+<p><span>This indicates the starting date range to match the document date of the request documents of the archived process instances to search for. The specified date is automatically attached with the time portion 00:00:00.0. The matching archived process instances would have its initial request document with document date later than or equal to this specified date.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>To Doc. Date (YYYY-MM-DD)</span>
+</b>
+</p>
+<p><span>This indicates the ending date range to match the document date of the request documents of the archived process instances to search for. The specified date is automatically attached with the time portion 23:59:59.999. The matching archived process instances would have its initial request document with document date earlier than or equal to this specified date.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Remark</span>
+</b>
+</p>
+<p><span>This indicates to search for archived process instances marked as Valid or Invalid during archival. A Valid archived process instance is termed as such if, during archival, all expected related records and files exist and are archived as a whole as one process instance. An Invalid archived process instance is termed as such if, during archival, any expected related records or files could not be found and not archived with the process instance. In short, archived process instances marked Invalid are those that have missing document records or files during the archival.</span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span>At least one of the above criteria must be specified in order to perform the search. </span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Doc. No.</span>
+</b>
+<span>, <b>From Doc. Date</b>
+, and <b>To Doc. Date</b>
+ criteria only work if the respective information is extracted into the GridDocument using XPath during folder transition or header mapping rules. See Chapter 8.2.8.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>Click <img width='16' height='16' border='0' src='../images/image188.gif'>Search to submit the entered search criteria.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>When the search is done, the Archived Process Instance Search Result page will be displayed, showing the submitted search criteria and the lists of the archived process instances that matched the search criteria. </span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='569' height='339' border='0' src='../images/image189.jpg'></span>
+</p>
+<p align='center'><span></span>
+</p>
+<p><span>Note that, for archived process instances marked Invalid, the Errors column would display the errors that were encountered when the process instances were archived. Otherwise, the Errors column would be empty. The errors are one of the following two values:</span>
+</p>
+<p><span>·<span> </span>
+</span>
+<i><span>No Docs</span>
+</i>
+<span> – this means that no documents have been found for the process instance.</span>
+</p>
+<p><span>·<span> </span>
+</span>
+<i><span>Docs invalid</span>
+</i>
+<span> – this means that some documents are missing or some files of the documents are missing.</span>
+</p>
+<p align='center'><span></span>
+</p>
+<p><span>Step 5.<span> </span>
+</span>
+<span>To sort the order of the presented list, click on the column header of the process instance field you want to sort by.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 6.<span> </span>
+</span>
+<span>To view the details of a process instance, click on hyperlink in the Process Instance ID column of the row you want to view. This will pop up a window displaying the Archive Process Instance detail page showing the process instance in more details and the documents that are associated with that process instance. You may view the details of multiple process instances at the same time; different pop-up windows are opened for each process instance.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The upper section of the page shows the general information of the archived process instance, and the bottom section shows the list of the documents that are associated with that process instance.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Process Instance ID</span>
+</b>
+</p>
+<p><span>This indicates the process instance id of the process instance. </span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Doc. No.</span>
+</b>
+</p>
+<p><span>This indicates the document number of the initial request document associated with this process instance. This value will only be present if document number is present in that document.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Partner ID</span>
+</b>
+</p>
+<p><span>This indicates the partner id of the partner that is involved in that process instance.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>State</span>
+</b>
+</p>
+<p><span>This indicates the state of the process instance when it was archived.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Start Time</span>
+</b>
+</p>
+<p><span>This indicates the start date/time of the process instance.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>End Time</span>
+</b>
+</p>
+<p><span>This indicates the end date/time of the process instance. This value will only be present if the process instance has completed, either successfully or abnormally, at the time of the archival.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>User Tracking ID</span>
+</b>
+</p>
+<p><span>This indicates the user tracking id of the initial request document associated with that process instance. This value will only be present if user tracking id is present in that document.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Doc. Date</span>
+</b>
+</p>
+<p><span>This indicates the document date of the initial request document associated with that process instance. This value will only be present if document date is present in that document.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Retry Number</span>
+</b>
+</p>
+<p><span>This indicates the number of retries that application had attempted to resend the request document of that process instance.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Failed Reason</span>
+</b>
+</p>
+<p><span>This indicates a short description on the reason why the process instance had failed. This value will only be present if the process instance was in one of the abnormal states at the time of archival.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Detail Reason</span>
+</b>
+</p>
+<p><span>This indicates the detail reason why the process instance had failed. This value will only be present if the process instance was in one of the abnormal states at the time of archival.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Errors</span>
+</b>
+</p>
+<p><span>This indicates the errors that were encountered when the process instance was archived. This value will only be present if some related documents and files are missing.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='607' height='357' border='0' src='../images/image190.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 7.<span> </span>
+</span>
+<span>To sort the order of the associated documents, click on the column header of the field of the GridDocument you want to sort by.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 8.<span> </span>
+</span>
+<span>To view the details of a document, click on the hyperlink in the GridDoc. ID column of the document you want to view. This will display the Archived Document detail page. See Chapter 14.3.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 9.<span> </span>
+</span>
+<span>You may close the Archived Process Instance detail page by clicking on the window close button.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 10.<span> </span>
+</span>
+<span>To submit another search, click the browser Back button to return to the Process Instance Search page, or click the Process Instance Search link on the left navigation pane. Repeat from Step 2 onwards.</span>
+</p>
+<p></p>
+<span><br clear='all'></span>
+<p></p>
+</body>
+</html>

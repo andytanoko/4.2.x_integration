@@ -1,0 +1,12 @@
+@echo off
+CALL setcp.bat
+
+REM Send one file into GridTalk
+
+SET PAYLOAD=<full_filepath_of_msg>
+SET PARTNER=<sender_partner_id>
+
+%GRIDTALK_HOME%\jre150_05\bin\java %JAVA_OPTS% -cp %CLASSPATH% com.gridnode.gridtalk.InboundTransporter "inbound.payload.file=%PAYLOAD%" "header.sender.info.sender.id=%PARTNER%"
+
+:end
+endlocal

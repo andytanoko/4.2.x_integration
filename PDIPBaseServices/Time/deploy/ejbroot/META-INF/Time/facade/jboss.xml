@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+	<secure>false</secure>
+	<container-configurations/>
+	<resource-managers>
+<!--
+       <resource-manager>
+           <res-name>topicfactoryref</res-name>
+           <res-jndi-name>java:/JmsXA</res-jndi-name>
+       </resource-manager>
+       <resource-manager>
+           <res-name>scheduletopicref</res-name>
+           <res-jndi-name>topic/timeScheduleTopic</res-jndi-name>
+       </resource-manager>
+       <resource-manager>
+           <res-name>invoketopicref</res-name>
+           <res-jndi-name>topic/timeInvokeTopic</res-jndi-name>
+       </resource-manager>
+-->
+	</resource-managers>
+	<enterprise-beans>
+		<session>
+			<ejb-name>iCalTimeMgr</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.time.facade.ejb.IiCalTimeMgrHome</jndi-name>
+			<!--clustered>${node.clustered:False}</clustered--> <!-- #69 TWX 02082008 Remove it to prevent lookup error in node 2 if we are shutting down node 2 due to container will notify all clustered ejb no to receive any more ejb call -->
+<!--
+		    <resource-ref>
+               <res-ref-name>jms/ConnectionFactory</res-ref-name>
+               <resource-name>topicfactoryref</resource-name>
+            </resource-ref>
+            <resource-ref>
+               <res-ref-name>jms/scheduleTopic</res-ref-name>
+               <resource-name>scheduletopicref</resource-name>
+            </resource-ref>
+            <resource-ref>
+               <res-ref-name>jms/invokeTopic</res-ref-name>
+               <resource-name>invoketopicref</resource-name>
+            </resource-ref>
+-->
+		</session>
+		<message-driven>
+			<ejb-name>TimeScheduleMDB</ejb-name>
+			<configuration-name>Standard Message Driven Bean</configuration-name>
+			<destination-jndi-name>queue/timeScheduleQueue</destination-jndi-name>
+		</message-driven>
+		<message-driven>
+			<ejb-name>TimeInvokeMDB</ejb-name>
+			<configuration-name>Standard Message Driven Bean</configuration-name>
+			<destination-jndi-name>queue/timeInvokeQueue</destination-jndi-name>
+		</message-driven>
+		<message-driven>
+			<ejb-name>TimeMissedMDB</ejb-name>
+			<configuration-name>Standard Message Driven Bean</configuration-name>
+			<destination-jndi-name>topic/timeMissedTopic</destination-jndi-name>
+		</message-driven>		
+	</enterprise-beans>
+</jboss>

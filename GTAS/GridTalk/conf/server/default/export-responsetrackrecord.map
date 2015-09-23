@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for ExportEntityList  -->
+	<class name="com.gridnode.pdip.base.exportconfig.model.ExportEntityList">
+		<map-to xml="Entities"/>
+		<field name="Entities" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection">
+		</field>
+	</class>
+	<!--  Mapping for ResponseTrackRecord  -->
+	<class name="com.gridnode.gtas.server.docalert.model.ResponseTrackRecord">
+		<map-to xml="ResponseTrackRecord"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="SentDocType" type="string">
+			<xml name="SentDocType" node="element"/>
+		</field>
+		<field name="SentDocIdXpath" type="string">
+			<xml name="SentDocIdXpath" node="element"/>
+		</field>
+		<field name="StartTrackDateXpath" type="string">
+			<xml name="StartTrackDateXpath" node="element"/>
+		</field>
+		<field name="ResponseDocType" type="string">
+			<xml name="ResponseDocType" node="element"/>
+		</field>
+		<field name="ResponseDocIdXpath" type="string">
+			<xml name="ResponseDocIdXpath" node="element"/>
+		</field>
+		<field name="ReceiveResponseAlert" type="string">
+			<xml name="ReceiveResponseAlert" node="element"/>
+		</field>
+		<field name="AlertRecipientXpath" type="string">
+			<xml name="AlertRecipientXpath" node="element"/>
+		</field>
+		<field name="isAttachResponseDoc" type="boolean" get-method="isAttachResponseDoc" set-method="setAttachResponseDoc">
+			<xml name="isAttachResponseDoc" node="element"/>
+		</field>
+	</class>
+</mapping>

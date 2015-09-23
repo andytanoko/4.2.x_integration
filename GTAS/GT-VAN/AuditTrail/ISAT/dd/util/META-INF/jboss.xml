@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+  <secure>false</secure>
+  <resource-managers/>
+  <enterprise-beans>
+    <session>
+      <ejb-name>JmsHandlerManagerBean_AT</ejb-name>
+      <jndi-name>com.gridnode.util.jms.ejb.IJmsHandlerManagerHome_AT</jndi-name>
+    </session>
+	<session>
+      <ejb-name>JmsHandlerManagerBean_local_AT</ejb-name>
+      <local-jndi-name>com.gridnode.util.jms.ejb.IJmsHandlerManagerLocalHome_AT</local-jndi-name>
+    </session>
+  </enterprise-beans>
+</jboss>

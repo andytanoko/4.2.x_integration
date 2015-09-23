@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Implementation-Version: 1.0
+Implementation-Title: GN-FTP-Pull
+Main-Class: com.gridnode.ftp.FTPPull
+CLASS-PATH: ./lib/gn-ftpclient.jar ./lib/gtvan-util.jar ./lib/gtvan-at-common.jar ./lib/gtvan-httpbc-common.jar ./lib/jbossall-client.jar ./lib/log4j.jar ./lib/hibernate3.jar ./lib/framework.jar ./lib/mail-1.4.jar ./lib/activation-1.1.jar ./lib/base-xml.jar ./lib/gtas-mapper.jar ./lib/gn-xml-1.1.1.jar ./lib/gn-convertor-1.1.2.jar ./lib/xerces-2.7.1.jar ./lib/gn-log-1.0.5.jar ./lib/jdom-1.0.jar ./lib/saxon-6.5.5.jar ./lib/gtas-document.jar ./lib/gtas-mapper.jar
+

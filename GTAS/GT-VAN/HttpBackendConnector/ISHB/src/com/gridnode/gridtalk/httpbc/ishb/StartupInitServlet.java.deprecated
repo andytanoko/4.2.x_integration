@@ -1,0 +1,119 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001-2005 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: StartupInitServlet.java
+ *
+ ****************************************************************************
+ * Date           Author              Changes
+ ****************************************************************************
+ * Jan 12, 2007        i00107             Created
+ */
+
+package com.gridnode.gridtalk.httpbc.ishb;
+
+import javax.ejb.Handle;
+import javax.naming.NamingException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+
+import com.gridnode.gridtalk.httpbc.common.util.IJndiNames;
+import com.gridnode.gridtalk.httpbc.ishb.ejb.ITxDeliveryTimer;
+import com.gridnode.gridtalk.httpbc.ishb.ejb.ITxDeliveryTimerHome;
+import com.gridnode.util.jndi.JndiFinder;
+
+/**
+ * @author i00107
+ * This servlet is used loaded at startup to initialize the delivery timers.
+ */
+public class StartupInitServlet extends HttpServlet
+{
+  /**
+   * Serial Version UID
+   */
+  private static final long serialVersionUID = 7434840509320085967L;
+  private Handle _timerHandle = null;
+  /**
+   * @see javax.servlet.GenericServlet#init()
+   */
+  @Override
+  public void init() throws ServletException
+  {
+    try
+    {
+      log("[init] Start initialising the HTTPBC.ISHB...");
+      initDeliveryTimer();
+    }
+    catch(Exception ex)
+    {
+      log("[init] Unable to initialise HTTPBC.ISHB", ex);
+      throw new ServletException("[StartupInitServlet.init] Error ", ex);
+    }
+  }
+
+  
+  /**
+   * @see javax.servlet.GenericServlet#destroy()
+   */
+  @Override
+  public void destroy()
+  {
+    try
+    {
+      log("[destroy] Destroying HTTPBC.ISHB...");
+      removeDeliveryTimer();
+      super.destroy();
+    }
+    catch(Exception ex)
+    {
+      log("[destroy] Unable to destroy", ex);
+    }
+  }
+
+  private void initDeliveryTimer() throws Exception
+  {
+    ITxDeliveryTimerHome home = lookup();
+    ITxDeliveryTimer timer = home.create();
+
+    timer.initializeTimer(1000, getDeliveryInterval("in")*1000, "in");
+    timer.initializeTimer(1000, getDeliveryInterval("out")*1000, "out");
+    _timerHandle = timer.getHandle();
+  }
+
+  private int getDeliveryInterval(String type)
+  {
+    String sInterval = getServletConfig().getInitParameter(type+".delivery.interval");
+    return getInt(sInterval, 60);
+  }
+  
+  private void removeDeliveryTimer() throws Exception
+  {
+    ITxDeliveryTimer timer = (ITxDeliveryTimer)_timerHandle.getEJBObject();
+    timer.cancelTimers();
+  }
+  
+  private int getInt(String sVal, int defVal)
+  {
+    if (sVal == null)
+    {
+      return defVal;
+    }
+    try
+    {
+      return Integer.parseInt(sVal);
+    }
+    catch (NumberFormatException ex)
+    {
+      return defVal;
+    }
+  }
+  
+  private ITxDeliveryTimerHome lookup() throws NamingException
+  {
+    JndiFinder finder = new JndiFinder(null);
+    
+    return (ITxDeliveryTimerHome)finder.lookup(IJndiNames.TX_DELIVERY_TIMER, ITxDeliveryTimerHome.class);
+  }
+}

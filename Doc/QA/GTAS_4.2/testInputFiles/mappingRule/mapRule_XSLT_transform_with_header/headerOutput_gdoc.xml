@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GridDocument>
+    <GdocId>4752</GdocId>
+    <GdocFilename>517-0-EP-4752.xml</GdocFilename>
+    <Folder>Export</Folder>
+    <SenderPartnerId></SenderPartnerId>
+    <UdocNum></UdocNum>
+    <RefUdocNum></RefUdocNum>
+    <UdocFilename>3A4R_input_full_3.xml</UdocFilename>
+    <UdocVersion>1</UdocVersion>
+    <UdocDocType>xslt2</UdocDocType>
+    <UdocFileType>xml</UdocFileType>
+    <SrcFolder>Import</SrcFolder>
+    <NotifyUserEmail></NotifyUserEmail>
+    <UdocFileSize>162</UdocFileSize>
+    <isExported>true</isExported>
+    <isViewAckReq>false</isViewAckReq>
+    <isExportAckReq>false</isExportAckReq>
+    <isReceiveAckReq>false</isReceiveAckReq>
+    <isViewed>false</isViewed>
+    <isSent>false</isSent>
+    <isLocalPending>true</isLocalPending>
+    <isExpired>false</isExpired>
+    <isRecAckProcessed>false</isRecAckProcessed>
+    <isRejected>false</isRejected>
+    <CreateBy></CreateBy>
+    <SenderNodeId>517</SenderNodeId>
+    <SenderGdocId>0</SenderGdocId>
+    <SenderRoute></SenderRoute>
+    <SenderPartnerFunction></SenderPartnerFunction>
+    <SenderUserId>admin</SenderUserId>
+    <SenderUserName>Administrator</SenderUserName>
+    <SenderBizEntityId>DEF</SenderBizEntityId>
+    <SenderBizEntityUuid></SenderBizEntityUuid>
+    <SenderRegistryQueryUrl></SenderRegistryQueryUrl>
+    <SenderPartnerType></SenderPartnerType>
+    <SenderPartnerGroup></SenderPartnerGroup>
+    <SenderPartnerName></SenderPartnerName>
+    <RefGdocId>2514</RefGdocId>
+    <RefUdocFilename>3A4R_input_full_3.xml</RefUdocFilename>
+    <RecipientNodeId>0</RecipientNodeId>
+    <RecipientPartnerId>AS2TestTp</RecipientPartnerId>
+    <RecipientPartnerFunction></RecipientPartnerFunction>
+    <EncryptionLevel>64</EncryptionLevel>
+    <RecipientPartnerType>in</RecipientPartnerType>
+    <RecipientPartnerGroup></RecipientPartnerGroup>
+    <RecipientPartnerName>AS2TestTp</RecipientPartnerName>
+    <RecipientBizEntityId>414</RecipientBizEntityId>
+    <RecipientBizEntityUuid></RecipientBizEntityUuid>
+    <RecipientRegistryQueryUrl></RecipientRegistryQueryUrl>
+    <RecipientGdocId>0</RecipientGdocId>
+    <RecipientChannelUid>0</RecipientChannelUid>
+    <RecipientChannelName></RecipientChannelName>
+    <RecipientChannelProtocol></RecipientChannelProtocol>
+    <PortUid>-1</PortUid>
+    <PortName>DEF</PortName>
+    <DateTimeCreate>2012-04-17T03:34:50.812+08:00</DateTimeCreate>
+    <DateTimeExport>2012-04-17T03:34:53.468+08:00</DateTimeExport>
+    <DateTimeImport>2012-04-17T03:34:50.764+08:00</DateTimeImport>
+    <Activity>
+        <ActivityType>Exit to System Folder</ActivityType>
+        <Description>Exit to System Folder Import</Description>
+        <DateTime>2012-04-17T03:34:50.774+08:00</DateTime>
+    </Activity>
+    <Activity>
+        <ActivityType>Exit from System Folder</ActivityType>
+        <Description>Exit from System Folder Import</Description>
+        <DateTime>2012-04-17T03:34:53.154+08:00</DateTime>
+    </Activity>
+    <Activity>
+        <ActivityType>Exit to System Folder</ActivityType>
+        <Description>Exit to System Folder Export</Description>
+        <DateTime>2012-04-17T03:34:53.240+08:00</DateTime>
+    </Activity>
+    <Activity>
+        <ActivityType>Exit to Port</ActivityType>
+        <Description>Exit to Port DEF</Description>
+        <DateTime>2012-04-17T03:34:53.435+08:00</DateTime>
+    </Activity>
+    <PartnerFunction>xslt20</PartnerFunction>
+    <ActionCode></ActionCode>
+    <RnProfileUid>0</RnProfileUid>
+    <ProcessDefId></ProcessDefId>
+    <isRequest>false</isRequest>
+    <hasAttachment>false</hasAttachment>
+    <isAttachmentLinkUpdated>true</isAttachmentLinkUpdated>
+    <UniqueDocIdentifier></UniqueDocIdentifier>
+    <UdocFullPath>/home/weixiang/GT423/GridTalk/data/GNapps/gtas/data/doc/udoc/Export/3A4R_input_full_3.xml</UdocFullPath>
+    <ExportedUdocFullPath>/home/weixiang/GT423/GridTalk/data/GNapps/port/DEF/3A4R_input_full_3.xml</ExportedUdocFullPath>
+    <Custom1>GlobalDocumentFunctionCode1</Custom1>
+    <Custom2>A00001 haha</Custom2>
+    <Custom3>A00001 haha</Custom3>
+    <Custom4>A00001 haha</Custom4>
+    <Custom5>GlobalDocumentFunctionCode1**A00001 haha****</Custom5>
+    <Custom6></Custom6>
+    <Custom7></Custom7>
+    <Custom8></Custom8>
+    <Custom9></Custom9>
+    <Custom10></Custom10>
+    <DocTransStatus></DocTransStatus>
+    <MessageDigest></MessageDigest>
+    <AuditFileName></AuditFileName>
+    <ReceiptAuditFileName></ReceiptAuditFileName>
+    <isOriginalDoc>false</isOriginalDoc>
+    <TracingID>384abd1a-a34c-4340-83b1-de5b17fea4b7</TracingID>
+    <IsRead>false</IsRead>
+</GridDocument>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for ExportEntityList  -->
+	<class name="com.gridnode.pdip.base.exportconfig.model.ExportEntityList">
+		<map-to xml="Entities"/>
+		<field name="Entities" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection">
+		</field>
+	</class>
+	<!--  Mapping for AS2DocTypeMapping  -->
+	<class name="com.gridnode.gtas.server.document.model.AS2DocTypeMapping">
+		<map-to xml="AS2DocTypeMapping"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="PartnerID" type="string">
+			<xml name="PartnerID" node="element"/>
+		</field>
+		<field name="As2DocType" type="string">
+			<xml name="As2DocType" node="element"/>
+		</field>
+		<field name="DocType" type="string">
+			<xml name="DocType" node="element"/>
+		</field>
+	</class>
+</mapping>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailConfig>
+    <SmtpServerHost></SmtpServerHost>
+    <SmtpServerPort>25</SmtpServerPort>
+    <AuthUser></AuthUser>
+    <AuthPassword></AuthPassword>
+    <RetryInterval>300</RetryInterval>
+    <MaxRetries>60</MaxRetries>
+    <SaveFailedEmails>true</SaveFailedEmails>
+</EmailConfig>

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Procedure Parameter Configuration</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <table border="0">
+          <tr id="name_details">
+            <td id="name_label">
+              lbName
+            </td>
+            <td>
+              <input type="text" id="name_value" name="name"/>
+            </td>
+            <td id="name_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="description_details">
+            <td id="description_label">
+              lbDescription
+            </td>
+            <td>
+              <input type="text" id="description_value" name="description"/>
+            </td>
+            <td id="description_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="source_details">
+            <td id="source_label">
+              lbSource
+            </td>
+            <td>
+              <select id="source_value" size="1" name="source" onchange="serverRefresh();">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+            </td>
+            <td id="source_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="type_details">
+            <td id="type_label">
+              lbType
+            </td>
+            <td>
+              <select id="type_value" size="1" name="type" onchange="serverRefresh();">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+            </td>
+            <td id="type_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="dateFormat_details">
+            <td id="dateFormat_label">
+              lbDateFormat
+            </td>
+            <td>
+              <select id="dateFormat_value" size="1" name="dateFormat">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+            </td>
+            <td id="dateFormat_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="value_details">
+            <td id="value_label">
+              lbValue
+            </td>
+            <td>
+              <div id="value_text_box">
+                <input type="text" id="value_value" name="value"/>
+              </div>
+              <div id="value_combo_box">
+                <select id="value_value" size="1" name="value">
+                  <option value="">
+                    &nbsp;
+                  </option>
+                </select>
+              </div>
+            </td>
+            <td id="value_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

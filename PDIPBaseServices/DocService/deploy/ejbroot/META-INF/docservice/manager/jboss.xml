@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="Cp1252"?>
+<jboss>
+  <secure>false</secure>
+  <container-configurations/>
+  <resource-managers/>
+  <enterprise-beans>
+    <session>
+      <ejb-name>DocumentMgr</ejb-name>
+      <jndi-name>com.gridnode.pdip.base.docservice.manager.ejb.IDocumentMgrHome</jndi-name>
+    </session>
+  </enterprise-beans>
+</jboss>

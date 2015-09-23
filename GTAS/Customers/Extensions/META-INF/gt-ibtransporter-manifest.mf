@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Sealed: true
+Main-Class: com.gridnode.gridtalk.InboundTransporter
+Class-Path: jaxrpc-api-1.1.jar,activation.jar

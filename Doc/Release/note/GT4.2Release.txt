@@ -1,0 +1,12 @@
+gtas.zip
+- application
+- appserver
+    - jboss4.2.2.GA    <--- configurable in "<VIEW_HOME>\GTAS\Gridtalk\rollout-exludes.txt".
+                            This folder resided under <VIEW_HOME>\GTAS\GridTalk\conf\appserver\
+
+gtas-win.zip
+- application
+- jre150_14   <-- specify in "<VIEW_HOME>\GTAS\Gridtalk\package-release.xml".
+                  This config file responsible to package the different package for different OS platform
+
+

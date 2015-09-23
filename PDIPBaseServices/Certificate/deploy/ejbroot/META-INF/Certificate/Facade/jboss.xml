@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+	<secure>false</secure>
+	<resource-managers/>
+	<enterprise-beans>
+		<session>
+			<ejb-name>CertificateManager</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.certificate.facade.ejb.ICertificateManagerHome</jndi-name>
+		</session>
+		    <message-driven>
+      <ejb-name>EntityChangeListenerMDB_cert</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>topic/entityEventTopic</destination-jndi-name>
+    </message-driven>
+	<message-driven>
+      <ejb-name>CertificateSwappingMDBean</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>queue/timeInvokeQueue</destination-jndi-name>
+    </message-driven>	
+	</enterprise-beans>
+</jboss>

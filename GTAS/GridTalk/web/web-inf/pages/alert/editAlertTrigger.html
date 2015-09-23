@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head id="xhtml_head">
+    <title id="title">lbGridTalk</title>
+    <base href="file:///C:\views\i00054_GT_2.1_AlertCenter\GTAS\GridTalk\web/gt.css" id="base_tag"/>
+    <link id="xhtml_stylesheet" rel="stylesheet" href="gt.css" type="text/css"/>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <table border="0">
+          <tr id="level_details">
+            <td id="level_label">
+              lbLevel
+            </td>
+            <td>
+              <select id="level_value" name="level" onchange="serverRefresh();">
+                <option>&nbsp;</option>
+              </select>
+            </td>
+            <td id="level_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="docType_details">
+            <td id="docType_label">
+              lbDocType
+            </td>
+            <td>
+              <select id="docType_value" name="docType">
+                <option>&nbsp;</option>
+              </select>
+              <a id="docType_create" href="javascript:divertToMapping('divertCreateDocumentType');">
+                lbCreateDocType
+              </a>
+            </td>
+            <td id="docType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="partnerId_details">
+            <td id="partnerId_label">
+              lbPartnerId
+            </td>
+            <td>
+              <select id="partnerId_value" name="partnerId">
+                <option>&nbsp;</option>
+              </select>
+              <a id="partnerId_create" href="javascript:divertToMapping('divertCreatePartner');">
+                lbCreatePartner
+              </a>
+            </td>
+            <td id="partnerId_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="partnerType_details">
+            <td id="partnerType_label">
+              lbPartnerType
+            </td>
+            <td>
+              <select id="partnerType_value" name="partnerType" onchange="serverRefresh();">
+                <option>&nbsp;</option>
+              </select>
+              <a id="partnerType_create" href="javascript:divertToMapping('divertCreatePartnerType');">
+                lbCreatePartnerType
+              </a>
+            </td>
+            <td id="partnerType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="partnerGroup_details">
+            <td id="partnerGroup_label">
+              lbPartnerGroup
+            </td>
+            <td>
+              <select id="partnerGroup_value" name="partnerGroup">
+                <option>&nbsp;</option>
+              </select>
+              <a id="partnerGroup_create" href="javascript:divertToMapping('divertCreatePartnerGroup');">
+                lbCreatePartnerGroup
+              </a>
+            </td>
+            <td id="partnerGroup_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="alertType_details">
+            <td id="alertType_label">
+              lbAlertType
+            </td>
+            <td>
+              <select id="alertType_value" name="alertType" onchange="serverRefresh();">
+                <option>&nbsp;</option>
+              </select>
+            </td>
+            <td id="alertType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="alertUid_details">
+            <td id="alertUid_label">
+              lbAlertUid
+            </td>
+            <td>
+              <select id="alertUid_value" name="alertUid">
+                <option>&nbsp;</option>
+              </select>
+              <a id="alertUid_create" href="javascript:divertToMapping('divertCreateAlert');">
+                lbCreateAlert
+              </a>
+            </td>
+            <td id="alertUid_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="recipients_details">
+            <td id="recipients_label" valign="top" class="fieldlabel">
+              lbRecipients
+            </td>
+            <td colspan="2">
+              <div id="recipients_creator">
+                <table border="0" width="95%">
+                  <tr>
+                    <td nowrap="nowrap" valign="top">
+                      <span id="recipient_type_label" class="fieldlabel">lbType</span><br/>
+                      <select id="recipient_type" name="type" onchange="serverRefresh();">
+                        <option>&nbsp;</option>
+                      </select>
+                      <span id="recipient_type_error" class="errortext"><br/>lbError</span>
+                    </td>
+                    <td nowrap="nowrap" valign="top">
+                      <span id="recipient_value_label" class="fieldlabel">lbValue</span><br/>
+                      <input type="text" id="recipient_value" name="value" size="30" />
+                      <a id="user_create" href="javascript:divertToMapping('divertCreateUser');">
+                        lbCreateUser
+                      </a>
+                      <a id="role_create" href="javascript:divertToMapping('divertCreateRole');">
+                        lbCreateRole
+                      </a>
+                      <span id="recipient_value_error" class="errortext"><br/>lbError</span>
+                    </td>
+                    <td nowrap="nowrap" valign="bottom" align="right">
+                      <span id="addAlertRecipient_button">
+                        <a id="addAlertRecipient" onclick="submitWithMethod('addAlertRecipient',true); return false;" href="javascript: void(0);">
+                          <img id="addAlertRecipient_icon" src="images/actions/new.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+                          lbAddAlertRecipient
+                        </a>
+                        &nbsp;
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <select id="recipients_value" size="8" multiple="multiple" style="width: 100%;">
+                        <option>&nbsp;</option>                      
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <span id="recipients_error" class="errortext">
+                        lbError
+                      </span>
+                      &nbsp;
+                    </td>
+                    <td nowrap="nowrap" align="right">
+                      <span id="removeAlertRecipient_button">
+                        <a id="removeAlertRecipient" onclick="submitWithMethod('removeAlertRecipient',true); return false;" href="javascript: void(0);">
+                          <img id="removeAlertRecipient_icon" src="images/actions/delete.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+                          lbRemoveAlertRecipient
+                        </a>
+                        &nbsp;
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+          <tr id="isAttachDoc_details">
+            <td>&nbsp;</td>
+            <td>
+              <input type="checkbox" id="isAttachDoc_value" name="isAttachDoc" value="true"/>
+              <span id="isAttachDoc_label">
+                lbIsAttachDoc
+              </span>
+            </td>
+            <td id="isAttachDoc_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="isEnabled_details">
+            <td>&nbsp;</td>
+            <td>
+              <input type="checkbox" id="isEnabled_value" name="isEnabled" value="true"/>
+              <span id="isEnabled_label">
+                lbIsEnabled
+              </span>
+            </td>
+            <td id="isEnabled_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

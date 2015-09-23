@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN" "http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
+<web-app>
+  <servlet>
+    <servlet-name>httpBackendServlet</servlet-name>
+    <servlet-class>com.gridnode.gridtalk.testkit.http.backend.HttpBackendServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>rnifServlet</servlet-name>
+    <servlet-class>com.gridnode.gridtalk.testkit.http.rnif.RnifServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <!--servlet>
+    <servlet-name>bufferServlet</servlet-name>
+    <servlet-class>com.gridnode.inovis.http.BufferServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>dummyServlet</servlet-name>
+    <servlet-class>com.gridnode.inovis.http.DummyServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet-->
+
+  <servlet-mapping>
+    <servlet-name>httpBackendServlet</servlet-name>
+    <url-pattern>/backend</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>rnifServlet</servlet-name>
+    <url-pattern>/rnif</url-pattern>
+  </servlet-mapping>
+  
+  <!--servlet-mapping>
+    <servlet-name>bufferServlet</servlet-name>
+    <url-pattern>/buffer/backend</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dummyServlet</servlet-name>
+    <url-pattern>/dummy/receiver</url-pattern>
+  </servlet-mapping-->
+  
+</web-app>
+    

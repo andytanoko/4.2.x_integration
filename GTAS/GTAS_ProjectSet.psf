@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+	<provider id="com.rational.clearcase.ccprovider_nature">
+		<project reference="2.0,1c062145.231547cc.96e4.87:c0:80:e3:40:18,5946fc04.5e88498d.a0b0.da:cf:e2:34:63:e6,\PDIPAppServices,./PDIPAppServices/Alert"/>
+		<project reference="2.0,1c062145.231547cc.96e4.87:c0:80:e3:40:18,2959d1ec.a5294237.b0ac.1a:9f:f9:c4:19:e6,\PDIPAppServices,./PDIPAppServices/BizRegistry"/>
+		<project reference="2.0,1c062145.231547cc.96e4.87:c0:80:e3:40:18,29c694f3.a75e47cf.b635.98:0c:49:e2:64:f1,\PDIPAppServices,./PDIPAppServices/Channel"/>
+		<project reference="2.0,1c062145.231547cc.96e4.87:c0:80:e3:40:18,49b659b8.49d14a2b.b592.6c:ed:9c:30:15:6c,\PDIPAppServices,./PDIPAppServices/CoyProfile"/>
+		<project reference="2.0,1c062145.231547cc.96e4.87:c0:80:e3:40:18,bb13de52.b4dd404c.891a.05:c8:bc:48:ae:05,\PDIPAppServices,./PDIPAppServices/Deploy"/>
+		<project reference="2.0,1c062145.231547cc.96e4.87:c0:80:e3:40:18,2f96f923.d8bf433b.996e.4b:ce:67:9b:21:10,\PDIPAppServices,./PDIPAppServices/License"/>
+		<project reference="2.0,1c062145.231547cc.96e4.87:c0:80:e3:40:18,0aa9efc0.30b04384.90fc.47:93:4a:dc:68:c3,\PDIPAppServices,./PDIPAppServices/Mapper"/>
+		<project reference="2.0,1c062145.231547cc.96e4.87:c0:80:e3:40:18,18e3c240.68fb484e.a0df.f7:26:a4:51:79:3e,\PDIPAppServices,./PDIPAppServices/Partner"/>
+		<project reference="2.0,1c062145.231547cc.96e4.87:c0:80:e3:40:18,0fd87885.39484626.b057.5c:c7:42:0f:08:19,\PDIPAppServices,./PDIPAppServices/Rnif"/>
+		<project reference="2.0,1c062145.231547cc.96e4.87:c0:80:e3:40:18,9e756ae6.f8804a6a.9c53.20:ce:41:81:56:50,\PDIPAppServices,./PDIPAppServices/SearchQuery"/>
+		<project reference="2.0,1c062145.231547cc.96e4.87:c0:80:e3:40:18,45403142.085f4f98.921a.c3:0f:0f:78:ec:eb,\PDIPAppServices,./PDIPAppServices/ServiceMgmt"/>
+		<project reference="2.0,1c062145.231547cc.96e4.87:c0:80:e3:40:18,5b28c3b8.749f4c35.af6e.16:44:a1:fc:2c:60,\PDIPAppServices,./PDIPAppServices/User"/>
+		<project reference="2.0,1c062145.231547cc.96e4.87:c0:80:e3:40:18,6bb483cd.1a294971.972e.9b:c2:ca:83:1a:b5,\PDIPAppServices,./PDIPAppServices/Workflow"/>
+		<project reference="2.0,90cfecab.451f4bb9.903d.06:1c:1f:6b:04:a8,a42b9053.356045cd.997f.da:52:49:e3:ec:d4,\PDIPBaseServices,./PDIPBaseServices/AccessControl"/>
+		<project reference="2.0,90cfecab.451f4bb9.903d.06:1c:1f:6b:04:a8,c35eb2cb.276a4f24.8566.52:fa:7e:cf:5c:91,\PDIPBaseServices,./PDIPBaseServices/AppInterface"/>
+		<project reference="2.0,90cfecab.451f4bb9.903d.06:1c:1f:6b:04:a8,c5442250.d3c349b9.9ca2.9c:b5:ce:ad:27:92,\PDIPBaseServices,./PDIPBaseServices/Certificate"/>
+		<project reference="2.0,90cfecab.451f4bb9.903d.06:1c:1f:6b:04:a8,054d9c0c.7c1c4c99.a62f.6e:57:b9:c3:09:1c,\PDIPBaseServices,./PDIPBaseServices/ContextData"/>
+		<project reference="2.0,90cfecab.451f4bb9.903d.06:1c:1f:6b:04:a8,57b04624.792c453a.8aa5.5b:08:6a:f5:c8:09,\PDIPBaseServices,./PDIPBaseServices/Data"/>
+		<project reference="2.0,90cfecab.451f4bb9.903d.06:1c:1f:6b:04:a8,22f7713b.53a74fe8.86e7.68:e0:26:82:40:5f,\PDIPBaseServices,./PDIPBaseServices/ExportConfig"/>
+		<project reference="2.0,90cfecab.451f4bb9.903d.06:1c:1f:6b:04:a8,1d626819.b7ce403c.be70.01:65:62:c5:69:74,\PDIPBaseServices,./PDIPBaseServices/Locale"/>
+		<project reference="2.0,90cfecab.451f4bb9.903d.06:1c:1f:6b:04:a8,4d3e9f10.611b400c.b194.86:c6:ad:32:98:6c,\PDIPBaseServices,./PDIPBaseServices/GWFBase"/>
+		<project reference="2.0,90cfecab.451f4bb9.903d.06:1c:1f:6b:04:a8,d27822ce.a38f4d52.be78.6b:9d:06:6d:24:48,\PDIPBaseServices,./PDIPBaseServices/Packaging"/>
+		<project reference="2.0,90cfecab.451f4bb9.903d.06:1c:1f:6b:04:a8,fab48e15.caf44824.947e.2f:0b:85:6e:31:83,\PDIPBaseServices,./PDIPBaseServices/Rnif"/>
+		<project reference="2.0,90cfecab.451f4bb9.903d.06:1c:1f:6b:04:a8,70c8f80e.c1d6477b.9635.49:8e:29:f1:b7:d3,\PDIPBaseServices,./PDIPBaseServices/RoleMap"/>
+		<project reference="2.0,90cfecab.451f4bb9.903d.06:1c:1f:6b:04:a8,2c7d4928.610f4710.9300.33:87:99:b0:5f:48,\PDIPBaseServices,./PDIPBaseServices/Security"/>
+		<project reference="2.0,90cfecab.451f4bb9.903d.06:1c:1f:6b:04:a8,c3831f5b.50c047e7.a8da.4b:d6:67:e3:84:7b,\PDIPBaseServices,./PDIPBaseServices/Session"/>
+		<project reference="2.0,90cfecab.451f4bb9.903d.06:1c:1f:6b:04:a8,bd039faf.028f4172.9265.fe:f4:ab:2d:68:01,\PDIPBaseServices,./PDIPBaseServices/Time"/>
+		<project reference="2.0,90cfecab.451f4bb9.903d.06:1c:1f:6b:04:a8,0a470eee.22b94833.90cc.54:2c:f2:03:88:58,\PDIPBaseServices,./PDIPBaseServices/Transport"/>
+		<project reference="2.0,90cfecab.451f4bb9.903d.06:1c:1f:6b:04:a8,e6df9b77.cc454f04.a97d.a9:82:c0:6d:1b:b3,\PDIPBaseServices,./PDIPBaseServices/UserProcedure"/>
+		<project reference="2.0,90cfecab.451f4bb9.903d.06:1c:1f:6b:04:a8,6b1e8b06.1b6e421e.9c94.fa:9f:7a:84:5e:a1,\PDIPBaseServices,./PDIPBaseServices/Worklist"/>
+		<project reference="2.0,f7040dc6.657b4159.8a48.6e:fa:b7:39:2d:ea,e1631f9d.76804016.85a1.3c:fa:b1:9e:a6:c0,\GTAS,./GTAS/Customers/Extensions"/>
+		<project reference="2.0,90cfecab.451f4bb9.903d.06:1c:1f:6b:04:a8,a4f1682f.0b5e416e.ba8d.54:53:e5:0f:be:d4,\PDIPBaseServices,./PDIPBaseServices/XML"/>
+		<project reference="2.0,33741b4a.1d17400e.98f0.17:71:2c:82:26:0b,319d268a.1b844b6c.9d3d.fa:14:fc:d3:2c:8f,\PDIPFramework,./PDIPFramework/FrameWork"/>
+		<project reference="2.0,f7040dc6.657b4159.8a48.6e:fa:b7:39:2d:ea,96c27e2c.367c49c4.919f.ee:c4:ca:5e:21:07,\GTAS,./GTAS/GridTalk"/>
+		<project reference="2.0,f7040dc6.657b4159.8a48.6e:fa:b7:39:2d:ea,7d5a61dd.d540475a.be31.92:51:58:1c:c0:fe,\GTAS,./GTAS/HelpMaker"/>
+		<project reference="2.0,f7040dc6.657b4159.8a48.6e:fa:b7:39:2d:ea,9a806c48.d293452e.b4bc.83:47:d8:4c:81:d9,\GTAS,./GTAS/IntegrityCheck"/>
+		<project reference="2.0,f7040dc6.657b4159.8a48.6e:fa:b7:39:2d:ea,0f78eab7.c3014dfb.b4ef.c4:2f:92:46:32:4c,\GTAS,./GTAS/WebService"/>
+	</provider>
+</psf>

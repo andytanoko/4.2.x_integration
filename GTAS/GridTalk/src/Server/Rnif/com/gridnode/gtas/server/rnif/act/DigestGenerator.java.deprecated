@@ -1,0 +1,45 @@
+package com.gridnode.gtas.server.rnif.act;
+import com.gridnode.gtas.server.rnif.helpers.RnifException;
+
+import java.io.File;
+
+public class DigestGenerator implements IDigestGenerator
+{
+
+  public DigestGenerator()
+  {
+  }
+
+  public byte[] getDigest(File afile, String alg) throws RnifException
+  {
+    //    String digestAlg = null;
+    //
+    //    if(IProcessDef.SHA_ALG.equals(alg))
+    //    {
+    //      digestAlg = .MSG_DIGEST_SHA1;
+    //    }else
+    //    {
+    //      if(!IProcessDef.MD5_ALG.equals(alg))
+    //      {
+    //        com.gridnode.db.Log.err("BL.PS","digest alg:["+ alg + "]is not supported, use MD5 instead!", new Exception());
+    //      }
+    //      digestAlg = com.gridnode.security.GridCertUtilities.MSG_DIGEST_MD5;
+    //    }
+    //
+    //     return com.gridnode.security.GridCertUtilities.getMsgDigest(digestAlg, afile);
+    return null;
+  }
+
+  public String getEncodedDigest(byte[] digest) throws RnifException
+  {
+    //return com.gridnode.security.GridCertUtilities.encode(digest);
+    return null;
+  }
+
+  public byte[] getDecodedDigest(String digestStr) throws RnifException
+  {
+    // return com.gridnode.security.GridCertUtilities.decode(digestStr);
+    return null;
+  }
+
+}

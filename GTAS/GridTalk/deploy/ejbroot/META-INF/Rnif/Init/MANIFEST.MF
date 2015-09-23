@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Created-By: Ant 1.4.1
+Class-Path: ./framework.jar ./gtas-rnif.jar ./base-xml.jar ./jaxen-1.1b7.jar ./jdom-1.0.jar
+
+

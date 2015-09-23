@@ -1,0 +1,46 @@
+package com.gridnode.pdip.app.channel.helpers.JMSChannelHandler;
+
+import com.gridnode.pdip.app.channel.exceptions.EventIdNotRegisteredException;
+import com.gridnode.pdip.app.channel.helpers.IReceiveFeedbackHandler;
+import com.gridnode.pdip.app.channel.helpers.ChannelLogger;
+
+import com.gridnode.pdip.base.transport.helpers.IGTTransportFeedbackListener;
+
+import java.io.File;
+
+public class JMSReceiveFeedbackHandler implements IGTTransportFeedbackListener
+{
+
+  public void updateFeedbackChange(String[] header, String[] data, String message)
+  {
+    try
+    {
+      // Check for Send File part event.
+      boolean isFilePartSend = false;
+      if (isFilePartSend)
+      {
+        /**@todo pass message to SendMessageHandler.*/
+        return;
+      }
+
+
+      // Check if there is a listener for this eventId
+      String eventId = header[0];
+      IReceiveFeedbackHandler msgHandler =
+                             JMSChannelController.getInstance().getReceiveFeedbackHandler(eventId);
+
+      /**@todo to invoke the security logic here. */
+      String[] dataReceived = null;
+      byte[] filepartReceived = null;
+
+      /**@todo to invoke the file-joining logic here. */
+      File[] filesReceived = null;
+      msgHandler.handlerFeedback(dataReceived, message);
+    }
+    catch (Throwable t)
+    {
+      ChannelLogger.errorLog("JMSReceiveFeedbackHandler", "updateEventChange", "Error:", t);
+    }
+  }
+
+}

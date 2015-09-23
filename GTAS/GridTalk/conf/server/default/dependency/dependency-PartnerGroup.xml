@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDependency name="PartnerGroup">
+  <Checker class-name="com.gridnode.gtas.server.partnerprocess.helpers.EntityDependencyChecker"
+           method-name="checkDependentTriggersForPartnerGroup">
+    <Param type="java.lang.String" getter-method="getName"/>
+  </Checker>
+  <Checker class-name="com.gridnode.gtas.server.alert.helpers.EntityDependencyChecker"
+           method-name="checkDependentAlertTriggersForPartnerGroup">
+    <Param type="java.lang.String" getter-method="getName"/>
+  </Checker>
+  <Checker class-name="com.gridnode.pdip.app.partner.helpers.EntityDependencyChecker"
+           method-name="checkDependentPartnersForPartnerGroup">
+    <Param type="java.lang.Long" getter-method="getUId"/>
+  </Checker>
+</EntityDependency>

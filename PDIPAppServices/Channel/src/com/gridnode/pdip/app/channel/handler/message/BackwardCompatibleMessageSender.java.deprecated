@@ -1,0 +1,128 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2002 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: BackwardCompatibleMessageSender.java
+ *
+ ****************************************************************************
+ * Date           Author                  Changes
+ ****************************************************************************
+ * July 17 2003    Jagadeesh             Created.
+ */
+
+package com.gridnode.pdip.app.channel.handler.message;
+
+
+import com.gridnode.pdip.app.channel.helpers.Package;
+import com.gridnode.pdip.app.channel.helpers.ChannelLogger;
+import com.gridnode.pdip.app.channel.helpers.GNCompatibleEventRegistry;
+
+import com.gridnode.pdip.app.channel.model.ChannelInfo;
+import com.gridnode.pdip.app.channel.model.IFlowControlInfo;
+import com.gridnode.pdip.app.channel.model.FlowControlInfo;
+import com.gridnode.pdip.app.channel.model.ISecurityInfo;
+import com.gridnode.pdip.app.channel.model.SecurityInfo;
+
+import com.gridnode.pdip.app.channel.exceptions.FlowControlException;
+import com.gridnode.pdip.base.transport.helpers.ITransportConstants;
+
+import java.util.Hashtable;
+
+public class BackwardCompatibleMessageSender extends DefaultMessageSender
+{
+
+  private static final String CLASS_NAME = "BackwardCompatibleMessageSender";
+
+  public BackwardCompatibleMessageSender()
+	{
+	}
+
+	public Package[] performPackageFlowControl(FlowControlInfo info,
+					Package packageEnvlData) throws FlowControlException
+	{
+		String eventId = (String)packageEnvlData.getHeader().get(ITransportConstants.EVENT_ID);
+		info = getBackwardCompatibleFlowControlInfo(info,eventId);
+		return super.performPackageFlowControl(info,packageEnvlData);
+	}
+
+  private FlowControlInfo getBackwardCompatibleFlowControlInfo(FlowControlInfo flowControlInfo,
+          String eventIdGtAs)
+  {
+    ChannelLogger.debugLog(CLASS_NAME, "getBackwardCompatibleFlowControlInfo()",
+              "Get Info for " + eventIdGtAs);
+    GNCompatibleEventRegistry eventRegistry = GNCompatibleEventRegistry.getInstance();
+    /** @todo This is done here only for testing .... */
+		if (flowControlInfo == null)
+		{
+			ChannelLogger.debugLog(CLASS_NAME,"getBackwardCompatibleFlowControlInfo()","[FlowControlInfo was Null]");
+			flowControlInfo = new FlowControlInfo();
+			flowControlInfo.setSplitSize(IFlowControlInfo.DEFAULT_SPLIT_SIZE);
+			flowControlInfo.setSplitThreshold(IFlowControlInfo.DEFAULT_SPLIT_THRESHOLD);
+		}
+		flowControlInfo.setIsZip(eventRegistry.isZip(eventIdGtAs));
+    flowControlInfo.setIsSplit(eventRegistry.isSplit(eventIdGtAs));
+
+    ChannelLogger.debugLog(CLASS_NAME, "getBackwardCompatibleFlowControlInfo",
+              "isZip=[" + flowControlInfo.isZip() +"]"+
+              "isSplit=[" + flowControlInfo.isSplit()+"]");
+    ChannelLogger.debugLog(CLASS_NAME, "getBackwardCompatibleFlowControlInfo",
+              "splitSize=[" + flowControlInfo.getSplitSize() +"]"+
+              "splitThreshold=[" + flowControlInfo.getSplitThreshold()+"]");
+
+
+    return flowControlInfo;
+  }
+
+
+	public Package performEncryptAndSign(SecurityInfo securityInfo,Package packageData)
+		throws SecurityException
+	{
+		String eventId = (String)packageData.getHeader().get(ITransportConstants.EVENT_ID);
+		securityInfo = getBackwardCompatibleSecurityInfo(securityInfo,eventId);
+		return super.performEncryptAndSign(securityInfo,packageData);
+	}
+
+
+  /**
+   * Get's the BackwardCompatible SecurityInfo - Read from the property file
+   * to set PackagingProfile attributes.
+   *
+   * EventId is a special discriminator in GTAS which in other words used as
+   * function id to make the profiles configurable "externally". This is in order
+   * to support GT 1.x.
+   *
+   * @param securityInfo - SecurityProfile set for this channel.
+   * @param eventIdGtAs   - EventId passed by the BL.
+   * @return - SecurityInfo - whose attribute values are adjusted according to
+   * EventId.
+   * @throws Exception - thrown when Properties cannot be read or any Application
+   * Exception.
+   */
+  protected SecurityInfo getBackwardCompatibleSecurityInfo(SecurityInfo securityInfo,
+          String eventIdGtAs)
+  {
+    GNCompatibleEventRegistry eventRegistry = GNCompatibleEventRegistry.getInstance();
+    boolean toEncryptNone   = eventRegistry.isEncryptNone(eventIdGtAs);
+    boolean toEncryptNoSign = eventRegistry.isEncryptNoSign(eventIdGtAs);
+
+    if (toEncryptNone)
+    {
+      ChannelLogger.debugLog(CLASS_NAME, "getBackwardCompatibleSecurityInfo",
+              "In EncryptNone " + eventIdGtAs);
+      securityInfo.setEncryptionType(ISecurityInfo.ENCRYPTION_TYPE_NONE);
+      securityInfo.setSignatureType(ISecurityInfo.SIGNATURE_TYPE_NONE);
+    }
+    if (toEncryptNoSign)
+    {
+       ChannelLogger.debugLog(CLASS_NAME, "getBackwardCompatibleSecurityInfo",
+              "In EncryptNoSign " + eventIdGtAs);
+       securityInfo.setEncryptionType(ISecurityInfo.ENCRYPTION_TYPE_ASYMMETRIC);
+       securityInfo.setSignatureType(ISecurityInfo.SIGNATURE_TYPE_NONE);
+    }
+    return securityInfo;
+  }
+
+
+}

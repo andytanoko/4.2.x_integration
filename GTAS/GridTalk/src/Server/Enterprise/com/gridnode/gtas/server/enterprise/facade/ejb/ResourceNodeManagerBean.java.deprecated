@@ -1,0 +1,578 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001-2002 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: ResourceNodeManagerBean.java
+ *
+ ****************************************************************************
+ * Date           Author              Changes
+ ****************************************************************************
+ * Aug 01 2002    Neo Sok Lay         Created
+ */
+package com.gridnode.gtas.server.enterprise.facade.ejb;
+
+import com.gridnode.gtas.server.enterprise.helpers.ResourceNodeEntityHandler;
+import com.gridnode.gtas.server.enterprise.helpers.Logger;
+import com.gridnode.gtas.server.enterprise.model.ResourceNode;
+import com.gridnode.gtas.server.enterprise.entities.ejb.IResourceNodeLocalObj;
+
+import com.gridnode.pdip.framework.db.filter.DataFilterImpl;
+import com.gridnode.pdip.framework.db.filter.IDataFilter;
+import com.gridnode.pdip.framework.log.FacadeLogger;
+import com.gridnode.pdip.framework.exceptions.*;
+
+import javax.ejb.CreateException;
+import javax.ejb.FinderException;
+import javax.ejb.RemoveException;
+import javax.ejb.SessionBean;
+import javax.ejb.SessionContext;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
+/**
+ * This bean provides services to manage the Enterprise Hierarchy.
+ *
+ * @author Neo Sok Lay
+ *
+ * @version 2.0 I4
+ * @since 2.0 I4
+ */
+public class ResourceNodeManagerBean
+  implements SessionBean
+{
+  transient private SessionContext _sessionCtx = null;
+
+  public void setSessionContext(SessionContext sessionCtx)
+  {
+    _sessionCtx = sessionCtx;
+  }
+
+  public void ejbCreate() throws CreateException
+  {
+  }
+
+  public void ejbRemove()
+  {
+  }
+
+  public void ejbActivate()
+  {
+  }
+
+  public void ejbPassivate()
+  {
+  }
+
+  // ******************** RESOURCE HIERARCHY (begin) ********************** //
+
+  /**
+   * Add a resource node to the enterprise hierarchy
+   *
+   * @param resourceNode The resource node to add. All children resource nodes
+   * will be added as well.
+   * @return The UID of the created ResourceNode.
+   */
+  public Long addResourceNode(ResourceNode resourceNode)
+    throws CreateEntityException, SystemException
+  {
+    FacadeLogger logger = Logger.getResourceFacadeLogger();
+    String methodName   = "addResourceNode";
+    Object[] params     = new Object[] {resourceNode};
+
+    Long key          = null;
+    try
+    {
+      logger.logEntry(methodName, params);
+
+      key = getEntityHandler().addResourceNode(resourceNode);
+    }
+    catch (Throwable t)
+    {
+      logger.logCreateError(methodName, params, t);
+    }
+    finally
+    {
+      logger.logExit(methodName, params);
+    }
+    return key;
+  }
+
+  /**
+   * Update a ResourceNode, with an option to adjust the children ResourceNode(s).
+   *
+   * @param resourceNode The node to update.
+   * @param adjustDescendants <b>true</b> to adjust the children ResourceNode(s)
+   * as specified in <code>resourceNode</code>. That means, existing descendant
+   * ResourceNode(s) may be removed or updated, and new descendent ResourceNode(s)
+   * will be added. If <b>true</b>, the <code>childrenResourceNodes</code>
+   * must not be <b>null</b>.
+   */
+  public void updateResourceNode(ResourceNode resourceNode, boolean adjustDescendants)
+    throws UpdateEntityException, SystemException
+  {
+    FacadeLogger logger = Logger.getResourceFacadeLogger();
+    String methodName   = "updateResourceNode";
+    Object[] params     = new Object[] {
+                            resourceNode,
+                            adjustDescendants?Boolean.TRUE:Boolean.FALSE};
+
+    try
+    {
+      logger.logEntry(methodName, params);
+
+      getEntityHandler().updateResourceNode(resourceNode, adjustDescendants);
+    }
+    catch (Throwable t)
+    {
+      logger.logUpdateError(methodName, params, t);
+    }
+    finally
+    {
+      logger.logExit(methodName, params);
+    }
+  }
+
+  /**
+   * Remove a resource node from the enterprise hierarchy. All descendants will
+   * be removed as well.
+   *
+   * @param resourceNodeUID The UID of the ResourceNode to remove.
+   */
+  public void removeResourceNode(Long resourceNodeUID)
+    throws DeleteEntityException, SystemException
+  {
+    FacadeLogger logger = Logger.getResourceFacadeLogger();
+    String methodName   = "removeResourceNode";
+    Object[] params     = new Object[] {resourceNodeUID};
+
+    try
+    {
+      logger.logEntry(methodName, params);
+
+      ResourceNode affected = getEntityHandler().getResourceNode(resourceNodeUID, false);
+      getEntityHandler().removeResourceNode(affected);
+    }
+    catch (Throwable t)
+    {
+      logger.logDeleteError(methodName, params, t);
+    }
+    finally
+    {
+      logger.logExit(methodName, params);
+    }
+  }
+
+  /**
+   * Remove a resource node from the enterprise hierachy.
+   *
+   * @param parentUID The UID of the parent ResourceNode of the resource node
+   * to remove.
+   * @param resourceType The type of resource to remove.
+   * @param resourceUID UID of the resource to remove.
+   */
+  public void removeResourceNode(Long parentUID, String resourceType, Long resourceUID)
+    throws DeleteEntityException, SystemException
+  {
+    FacadeLogger logger = Logger.getResourceFacadeLogger();
+    String methodName   = "removeResourceNode";
+    Object[] params     = new Object[] {parentUID,resourceType,resourceUID};
+
+    try
+    {
+      logger.logEntry(methodName, params);
+
+      ResourceNode affected = getEntityHandler().getResourceNode(
+                                parentUID, resourceType, resourceUID, false);
+
+      getEntityHandler().removeResourceNode(affected);
+    }
+    catch (Throwable t)
+    {
+      logger.logDeleteError(methodName, params, t);
+    }
+    finally
+    {
+      logger.logExit(methodName, params);
+    }
+  }
+
+  /**
+   * Remove all resource nodes under a particular ResourceNode.
+   *
+   * @param parentUID The UID of the parent ResourceNode whose resource nodes
+   * are to be removed.
+   */
+  public void removeResourceNodesByParent(Long parentUID)
+    throws DeleteEntityException, SystemException
+  {
+    FacadeLogger logger = Logger.getResourceFacadeLogger();
+    String methodName   = "removeResourceNodesByParent";
+    Object[] params     = new Object[] {parentUID};
+
+    try
+    {
+      logger.logEntry(methodName, params);
+
+      Collection affected = getEntityHandler().getResourceNodesByParent(parentUID, false);
+
+      for (Iterator i=affected.iterator(); i.hasNext(); )
+      {
+        ResourceNode node = (ResourceNode)i.next();
+        getEntityHandler().removeResourceNode(node);
+      }
+    }
+    catch (Throwable t)
+    {
+      logger.logDeleteError(methodName, params, t);
+    }
+    finally
+    {
+      logger.logExit(methodName, params);
+    }
+  }
+
+  /**
+   * Remove all resource nodes of certain type under a ResourceNode.
+   *
+   * @param parentUID The UID of the parent ResourceNode whose resource nodes
+   * are to be removed.
+   * @param resourceType The type of resources to remove.
+   */
+  public void removeResourceNodesByResourceType(Long parentUID, String resourceType)
+    throws DeleteEntityException, SystemException
+  {
+    FacadeLogger logger = Logger.getResourceFacadeLogger();
+    String methodName   = "removeResourceNodesByResourceType";
+    Object[] params     = new Object[] {parentUID,resourceType};
+
+    try
+    {
+      logger.logEntry(methodName, params);
+
+      Collection affected = getEntityHandler().getResourceNodesByResourceType(
+                              parentUID, resourceType, false);
+
+      for (Iterator i=affected.iterator(); i.hasNext(); )
+      {
+        ResourceNode node = (ResourceNode)i.next();
+        getEntityHandler().removeResourceNode(node);
+      }
+    }
+    catch (Throwable t)
+    {
+      logger.logDeleteError(methodName, params, t);
+    }
+    finally
+    {
+      logger.logExit(methodName, params);
+    }
+  }
+
+  // ************************ Finders ***************************************
+
+  /**
+   * Get a ResourceNode.
+   *
+   * @param uID The UID of the ResourceNode to find.
+   * @param getDescendants <b>true</b> to get the children ResourceNodes,
+   * <b>false</b> otherwise.
+   * @return The ResourceNode found, or <B>null</B> if none exists with that
+   * UID.
+   */
+  public ResourceNode getResourceNodeByUID(Long resourceNodeUID, boolean getDescendants)
+    throws FindEntityException, SystemException
+  {
+    FacadeLogger logger = Logger.getResourceFacadeLogger();
+    String methodName   = "getResourceNodeByUID";
+    Object[] params     = new Object[] {
+                            resourceNodeUID,
+                            getDescendants?Boolean.TRUE:Boolean.FALSE};
+
+    ResourceNode resourceNode = null;
+
+    try
+    {
+      logger.logEntry(methodName, params);
+
+      resourceNode = (ResourceNode)getEntityHandler().getResourceNode(
+                       resourceNodeUID, getDescendants);
+    }
+    catch (Throwable t)
+    {
+      logger.logFinderError(methodName, params, t);
+    }
+    finally
+    {
+      logger.logExit(methodName, params);
+    }
+
+    return resourceNode;
+  }
+
+  /**
+   * Get a ResourceNode.
+   *
+   * @param parentUID The UID of the parent of this ResourceNode to find.
+   * @param resourceType The resource type of the ResourceNode to find.
+   * @param resourceUID The resource UID of the ResourceNode to find.
+   * @param getDescendants <b>true</b> to get the children ResourceNodes,
+   * <b>false</b> otherwise.
+   * @return The ResourceNode found, or <B>null</B> if none exists with that
+   * UID.
+   */
+  public ResourceNode getResourceNode(
+    Long parentUID, String resourceType, Long resourceUID, boolean getDescendants)
+    throws FindEntityException, SystemException
+  {
+    FacadeLogger logger = Logger.getResourceFacadeLogger();
+    String methodName   = "getResourceNode";
+    Object[] params     = new Object[] {
+                            parentUID, resourceType, resourceUID,
+                            getDescendants?Boolean.TRUE:Boolean.FALSE};
+
+    ResourceNode resourceNode = null;
+
+    try
+    {
+      logger.logEntry(methodName, params);
+
+      resourceNode = (ResourceNode)getEntityHandler().getResourceNode(
+                       parentUID, resourceType, resourceUID, getDescendants);
+    }
+    catch (Throwable t)
+    {
+      logger.logFinderError(methodName, params, t);
+    }
+    finally
+    {
+      logger.logExit(methodName, params);
+    }
+
+    return resourceNode;
+  }
+
+  /**
+   * Get the children ResourceNode(s) for a particular ResourceNode.
+   *
+   * @param parentUID The UID of the parent ResourceNode.
+   * @param getDescendants <b>true</b> to further get the children
+   * ResourceNode(s) of these children ResourceNode(s), i.e. get all
+   * ResourceNode(s) underneath. <b>false</b> to get only the immediate
+   * children.
+   * @return Collection of ResourceNode(s) found or empty Collection if
+   * none exists.
+   */
+  public Collection getResourceNodesByParent(Long parentUID, boolean getDescendants)
+    throws FindEntityException, SystemException
+  {
+    FacadeLogger logger = Logger.getResourceFacadeLogger();
+    String methodName   = "getResourceNodesByParent";
+    Object[] params     = new Object[] {
+                            parentUID,
+                            getDescendants?Boolean.TRUE:Boolean.FALSE};
+
+    Collection resourceNodes = null;
+
+    try
+    {
+      logger.logEntry(methodName, params);
+
+      resourceNodes = getEntityHandler().getResourceNodesByParent(
+                        parentUID, getDescendants);
+    }
+    catch (Throwable t)
+    {
+      logger.logFinderError(methodName, params, t);
+    }
+    finally
+    {
+      logger.logExit(methodName, params);
+    }
+
+    return resourceNodes;
+  }
+
+  /**
+   * Get a number of ResourceNode(s) using a filtering condition.
+   *
+   * @param filter The filtering condition of the ResourceNode(s) to find.
+   * @param getDescendants <b>true<b> to get all children underneath each
+   * ResourceNode found, <b>false</b> otherwise.
+   * @return A Collection of ResourceNode(s) found, or empty collection
+   * if none
+   * exists.
+   */
+  public Collection getResourceNodesByFilter(IDataFilter filter, boolean getDescendants)
+    throws FindEntityException, SystemException
+  {
+    FacadeLogger logger = Logger.getResourceFacadeLogger();
+    String methodName   = "getResourceNodesByFilter";
+    Object[] params     = new Object[] {
+                            filter,
+                            getDescendants?Boolean.TRUE:Boolean.FALSE};
+
+    Collection resourceNodes = null;
+
+    try
+    {
+      logger.logEntry(methodName, params);
+
+      resourceNodes = getEntityHandler().getResourceNodesByFilter(
+                        filter, getDescendants);
+    }
+    catch (Throwable t)
+    {
+      logger.logFinderError(methodName, params, t);
+    }
+    finally
+    {
+      logger.logExit(methodName, params);
+    }
+
+    return resourceNodes;
+  }
+
+  /**
+   * Get the ResourceNode(s) representing the same resource in the enterprise
+   * hierarchy.
+   *
+   * @param resourceType The type of the resource.
+   * @param resourceUID UID of the resource.
+   * @param getDescendants <b>true</b> to further get the children
+   * ResourceNode(s) of these ResourceNode(s), i.e. get all
+   * ResourceNode(s) underneath. <b>false</b> to get only the immediate
+   * resultset.
+   * @return Collection of ResourceNode(s) found or empty Collection if
+   * none exists.
+   */
+  public Collection getResourceNodesByResource(
+    String resourceType, Long resourceUID, boolean getDescendants)
+    throws FindEntityException, SystemException
+  {
+    FacadeLogger logger = Logger.getResourceFacadeLogger();
+    String methodName   = "getResourceNodesByResource";
+    Object[] params     = new Object[] {
+                            resourceType, resourceUID,
+                            getDescendants?Boolean.TRUE:Boolean.FALSE};
+
+    Collection resourceNodes = null;
+
+    try
+    {
+      logger.logEntry(methodName, params);
+
+      resourceNodes = getEntityHandler().getResourceNodes(
+                        resourceType, resourceUID, getDescendants);
+    }
+    catch (Throwable t)
+    {
+      logger.logFinderError(methodName, params, t);
+    }
+    finally
+    {
+      logger.logExit(methodName, params);
+    }
+
+    return resourceNodes;
+  }
+
+  /**
+   * Get the children ResourceNode(s) of a certain resource type for a
+   * particular ResourceNode.
+   *
+   * @param parentUID The UID of the parent ResourceNode.
+   * @param childrenResourceType The type of the children resource.
+   * @param getDescendants <b>true</b> to further get the children
+   * ResourceNode(s) of these children ResourceNode(s), i.e. get all
+   * ResourceNode(s) underneath. <b>false</b> to get only the immediate
+   * children.
+   * @return Collection of ResourceNode(s) found or empty Collection if
+   * none exists.
+   */
+  public Collection getResourceNodesByResourceType(
+    Long parentUID, String childrenResourceType, boolean getDescendants)
+    throws FindEntityException, SystemException
+  {
+    FacadeLogger logger = Logger.getResourceFacadeLogger();
+    String methodName   = "getResourceNodesByResourceType";
+    Object[] params     = new Object[] {
+                            parentUID, childrenResourceType,
+                            getDescendants?Boolean.TRUE:Boolean.FALSE};
+
+    Collection resourceNodes = null;
+
+    try
+    {
+      logger.logEntry(methodName, params);
+
+      resourceNodes = getEntityHandler().getResourceNodesByResourceType(
+                        parentUID, childrenResourceType, getDescendants);
+    }
+    catch (Throwable t)
+    {
+      logger.logFinderError(methodName, params, t);
+    }
+    finally
+    {
+      logger.logExit(methodName, params);
+    }
+
+    return resourceNodes;
+  }
+
+  /**
+   * Get the ResourceNode(s) of the same resource type in the enterprise
+   * hierarchy.
+   *
+   * @param resourceType The type of the resources.
+   * @param getDescendants <b>true</b> to further get the children
+   * ResourceNode(s) of these ResourceNode(s), i.e. get all
+   * ResourceNode(s) underneath. <b>false</b> to get only the immediate
+   * resultset.
+   * @return Collection of ResourceNode(s) found or empty Collection if
+   * none exists.
+   */
+  public Collection getResourceNodesByResourceType(
+    String resourceType, boolean getDescendants)
+    throws FindEntityException, SystemException
+  {
+    FacadeLogger logger = Logger.getResourceFacadeLogger();
+    String methodName   = "getResourceNodesByResourceType";
+    Object[] params     = new Object[] {
+                            resourceType,
+                            getDescendants?Boolean.TRUE:Boolean.FALSE};
+
+    Collection resourceNodes = null;
+
+    try
+    {
+      logger.logEntry(methodName, params);
+
+      resourceNodes = getEntityHandler().getResourceNodesByResourceType(
+                        resourceType, getDescendants);
+    }
+    catch (Throwable t)
+    {
+      logger.logFinderError(methodName, params, t);
+    }
+    finally
+    {
+      logger.logExit(methodName, params);
+    }
+
+    return resourceNodes;
+  }
+
+
+  // ********************** RESOURCE HIERARCHY (end) ************************
+
+
+  private ResourceNodeEntityHandler getEntityHandler()
+  {
+     return ResourceNodeEntityHandler.getInstance();
+  }
+}

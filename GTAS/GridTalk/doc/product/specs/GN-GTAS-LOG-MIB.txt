@@ -1,0 +1,65 @@
+GRIDNODE-GTAS-LOG-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+	enterprises				FROM RFC1155-SMI
+	DisplayString				FROM RFC1213-MIB
+	OBJECT-TYPE						FROM RFC-1212;
+
+	
+gridnode	OBJECT IDENTIFIER ::= { enterprises 27955 }
+
+gnProducts	OBJECT IDENTIFIER ::= { gridnode 1 }
+gnGtas		OBJECT IDENTIFIER ::= { gnProducts 1 }
+gnGtasLog	OBJECT IDENTIFIER ::= { gnGtas 1 }
+
+gnGtasLogTimestamp OBJECT-TYPE
+    SYNTAX      DisplayString
+    ACCESS  not-accessible
+    STATUS	mandatory
+    DESCRIPTION
+	"GridTalk log timestamp"
+    ::= { gnGtasLog 1 }
+
+gnGtasLogThread OBJECT-TYPE
+    SYNTAX      DisplayString
+    ACCESS  not-accessible
+    STATUS	mandatory
+    DESCRIPTION
+	"GridTalk log thread identifier"
+    ::= { gnGtasLog 2 }
+
+
+gnGtasLogLevel OBJECT-TYPE
+    SYNTAX      DisplayString
+    ACCESS  not-accessible
+    STATUS	mandatory
+    DESCRIPTION
+	"GridTalk log level"
+    ::= { gnGtasLog 3 }
+
+gnGtasLogCategory OBJECT-TYPE
+    SYNTAX      DisplayString
+    ACCESS  not-accessible
+    STATUS	mandatory
+    DESCRIPTION
+	"GridTalk component identifier"
+    ::= { gnGtasLog 4 }
+
+gnGtasLogMessage OBJECT-TYPE
+    SYNTAX      DisplayString
+    ACCESS  not-accessible
+    STATUS	mandatory
+    DESCRIPTION
+	"GridTalk log message"
+    ::= { gnGtasLog 5 }
+
+
+gnGtasLogErrorCode OBJECT-TYPE
+    SYNTAX      DisplayString
+    ACCESS  not-accessible
+    STATUS	mandatory
+    DESCRIPTION
+	"GridTalk log error code"
+    ::= { gnGtasLog 6 }
+
+END

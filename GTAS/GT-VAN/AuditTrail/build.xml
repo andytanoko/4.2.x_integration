@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="build" name="GTAT">
+    <description>This is the HTTP Backend Connector component for GtVan</description>
+    <property environment="env"/>
+	<property file="c:\gtvan-build.properties"/>
+	<property name="dist.dir" value="dist"/>
+    <!-- ================================= 
+          target: build
+         ================================= -->
+    <target name="build">
+		<ant antfile="../shared-build.xml" dir="${basedir}" target="build" inheritAll="no">
+			<property name="dist.dir" value="${basedir}/${dist.dir}"/>
+			<property file="project-build.properties"/>
+		</ant>
+    </target>
+
+    <!-- ================================= 
+          target: dist
+         ================================= -->
+	<!-- not yet tested -->	
+	<target name="dist">
+		<ant antfile="../shared-build.xml" dir="${basedir}" target="dist" inheritAll="no">
+			<property name="dist.dir" value="${basedir}/${dist.dir}"/>
+			<property file="project-build.properties"/>
+		</ant>
+	</target>
+</project>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+  <enterprise-beans>
+    <message-driven>
+      <ejb-name>ResourceChangeListenerMDB</ejb-name>
+      <ejb-class>com.gridnode.gtas.server.enterprise.listener.ejb.ResourceChangeListenerMDBean</ejb-class>
+      <transaction-type>Container</transaction-type>
+      <message-destination-type>javax.jms.Topic</message-destination-type>
+      <activation-config>
+      	<activation-config-property>
+      		<activation-config-property-name>messageSelector</activation-config-property-name>
+      		<activation-config-property-value>EntityType IN ('BusinessEntity','UserAccount','Partner','ChannelInfo') AND hostid='${hostid:gnode1}'</activation-config-property-value>
+      	</activation-config-property>
+      </activation-config>
+    </message-driven>
+    <!-- message-driven>
+      <ejb-name>ActivationListenerMDB</ejb-name>
+      <ejb-class>com.gridnode.gtas.server.enterprise.listener.ejb.ActivationListenerMDBean</ejb-class>
+      <message-selector>id='Activation'</message-selector>
+      <transaction-type>Container</transaction-type>
+      <message-driven-destination>
+        <destination-type>javax.jms.Topic</destination-type>
+        <subscription-durability>NonDurable</subscription-durability>
+      </message-driven-destination>
+    </message-driven-->
+    <message-driven>
+      <ejb-name>EnterpriseCreatedListenerMDB</ejb-name>
+      <ejb-class>com.gridnode.gtas.server.enterprise.listener.ejb.EnterpriseCreatedListenerMDBean</ejb-class>
+      <transaction-type>Container</transaction-type>
+      <message-destination-type>javax.jms.Topic</message-destination-type>
+      <activation-config>
+      	<activation-config-property>
+      		<activation-config-property-name>messageSelector</activation-config-property-name>
+      		<activation-config-property-value>id='EnterpriseCreated' AND hostid='${hostid:gnode1}'</activation-config-property-value>
+      	</activation-config-property>
+      </activation-config>
+    </message-driven>
+    <!-- message-driven>
+      <ejb-name>ConnectionListenerMDBean</ejb-name>
+      <ejb-class>com.gridnode.gtas.server.enterprise.listener.ejb.ConnectionListenerMDBean</ejb-class>
+      <message-selector>id='Connection' AND nodeType IN ('1','3') AND state IN('1','2')</message-selector>
+      <message-driven-destination>
+        <destination-type>javax.jms.Topic</destination-type>
+        <subscription-durability>NonDurable</subscription-durability>
+      </message-driven-destination>
+      <transaction-type>Container</transaction-type>
+    </message-driven-->
+  </enterprise-beans>
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+        <ejb-name>ResourceChangeListenerMDB</ejb-name>
+        <method-name>onMessage</method-name>
+      </method>
+      <method>
+      	<ejb-name>EnterpriseCreatedListenerMDB</ejb-name>
+      	<method-name>onMessage</method-name>
+      </method>
+      <!-- method>
+        <ejb-name>ConnectionListenerMDBean</ejb-name>
+        <method-name>*</method-name>
+      </method-->
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+    <!-- container-transaction>
+      <method>
+        <ejb-name>ActivationListenerMDB</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction-->
+  </assembly-descriptor>
+</ejb-jar>

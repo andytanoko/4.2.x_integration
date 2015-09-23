@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>3.5 Detail View Page </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h2>3.5 Detail View Page </h2>
+<p></p>
+<p><span>In general, when you choose to edit or view a record presented in a list view, its detail view will open in a new window. This allows you to open multiple detail view pages so that you may examine and edit more than one record at once. Certain detail view pages will be shown in the main panel of the screen however. The “Company Profile” detail view page is one example.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>A detail view page may be in one of two modes, that is, View or Edit. Here is an example of a typical detail view in view mode:</span>
+</p>
+<p align='center'><img src='../images/image018.jpg' width='582' height='240'></p>
+<p></p>
+<p><span>You will note the <u>Edit</u>
+ link at the foot of the page in the screenshot above. If the record is one that you are allowed to edit, then this link will be provided. Clicking it will place the record into the edit mode. The following screenshot is from the same record in the edit mode:</span>
+</p>
+<p align='center'><img src='../images/image019.jpg' width='535' height='480'></p>
+<p><span>At the foot of the detail view in edit mode is a <u>Save</u>
+ link. Clicking this will save the changes that you have made to this record. Changes you make are not stored in the system until you save them. After saving the record the detail view will close. If it is in its own window and you did not “divert” to this page then this will close the window (more will be said about the process of diversion shortly) otherwise if the detail view is in the main panel then in most cases you will be returned to the page that took you to this detail view.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Common to both edit and view mode is a <u>Cancel</u>
+ link. Like save, cancel will close the detail view; however changes that you made to this record will not be stored.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Some detail views (such as the one in the screenshot above) make use of tab panels to organize their content. The currently visible tab is highlighted – in the example above this is the “White Page” tab. To move between tabs, simply click the tab you wish to switch to.</span>
+</p>
+<p></p>
+<p align='center'><img src='../images/image020.jpg' width='204' height='43'></p>
+<p></p>
+<p><span>If you are viewing the detail view in its own window then closing this window manually will have a similar effect to cancel. When you do this you may notice a small window opening temporarily. This window is used to send information to the server telling it that you closed the detail view window. Unlike using the cancel link, closing the detail view window manually will not return you to the previous page of a diversion sequence, so you are advised to get into the habit of using the cancel link to exit detail views.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>We use the term diversion to refer to the mechanism by which you can while creating or editing one type of record, divert to another page to create a new record of another type that you need for the first. During this diversion the changes that you made to the first record are not updated in the system, but they are remembered, so that upon return from the diversion you may continue editing where you left off. Diversions are usually activated by a link next to or below a field that refers to another record. This can be seen in the screenshot below:</span>
+</p>
+<p></p>
+<p align='center'><img src='../images/image021.jpg' width='574' height='114'></p>
+<p></p>
+<p><span>Here we see the ‘channels’ field from the detail view of a “Business Entity” record. Business Entities can have one or more related “Channel” records. Below the channels field is a link that will allow you to divert to the Channel detail view to create a new channel. When you save (or cancel) the editing of this new channel it will be stored and you will be returned to the Business Entity detail view. Any changes you made to the business entity record before diverting will still be present, and the new channel will also be available for selection.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Diversions may themselves be diverted from. Returning to the example above, if you had diverted to the channel detail view to create a new channel you would as part of that process need to specify a “Communication Profile” for the channel to use. If there was not already a suitable communication profile you could divert again using the link provided and create one. On completion you would be returned to the channel detail view, and having completed that, returned back to the business entity detail view.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Normally detail views are presented in their own window. Unlike the cancel link, closing the detail view window will not return you to any pages you had diverted from, and so the changes you made on such pages will be lost. (Only those records you had already explicitly saved already will be updated in the system – although for certain types of records that have very closely related child records this may not be the case – one example being the workflow activities associated with a partner function. Where this is the case it will be noted in the documentation for that record type).</span>
+</p>
+<p><span></span>
+</p>
+<p><span>When the detail view is presented not in its own window, but rather in the main panel, use of the navigation tabs and the links in the navigation tree will act in a similar manner with regards to diversion as closing the window would for a detail view in its own window. In this case however you will be prompted as to whether you wish to abort the operation. Again, only changes to records that you have explicitly saved will be updated in the system.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>When editing a record, some fields must be given a value. These fields are known as “mandatory” fields. Mandatory fields are displayed with a different shade of colour in their background to make them more recognisable. For example in the following screenshot the Command File Dir and Command File fields are mandatory while the Command Line field is not:</span>
+</p>
+<p></p>
+<p align='center'><img src='../images/image022.jpg' width='447' height='114'></p>
+<p></p>
+<p><span>If you try to save the changes and there are mandatory fields that have not had a value specified, the changes will not be saved, but rather the page will be redisplayed, with the addition of error messages next to those fields that needed a value and did not have one. An example is shown in the screenshot below. Here we have tried to save a record without filling in details for one of the mandatory fields:</span>
+</p>
+<p></p>
+<p align='center'><img src='../images/image023.jpg' width='576' height='150'></p>
+<p></p>
+<p><span>Other types of validation error are also possible, for example when you enter a value that is of the wrong type or outside the allowed range. These errors will also be displayed next to or above the field in question.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Until you provide input that satisfies the forms validation constraints, you will be unable to save the changes.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Many fields require you to choose from a list of options, or to enter certain fields, however the options that appear, or the fields that must be entered, depend on the value you provide for another field. Where this is the case, when you change the value of the field on which these options depend, the page will be refreshed from the server. You will see the “Communicating with GridTalk server” message appear momentarily and then be returned to the page with the appropriate fields, options, etc. available for use.</span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

@@ -1,0 +1,1555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gtas.module" default="build" basedir=".">
+	<!-- comment off this task if you do not have jalopy installed -->
+	<!-- comment off doformat in build.properties as well -->
+	<!--taskdef name="jalopy" classname="de.hunsicker.jalopy.plugin.ant.AntPlugin"/-->
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+	<!--  ===================================================================  -->
+	<!--  Set global properties for this build                                 -->
+	<!--  ===================================================================  -->
+	<property environment="env"/>
+	<property file="c:/my-build.properties"/>
+	<!--  ===================================================================  -->
+	<!--  Define the standard build target sets: build, all, default           -->
+	<!--  ===================================================================  -->
+	<target name="build" depends="init">
+		<echo message="[${layer.name}-${module.name}] Executing target:build"/>
+		<antcall target="decide.build.all"/>
+		<antcall target="decide.build.default"/>
+	</target>
+	<target name="all" depends="deplib,format,compile,package,reqlib,ear.dd.body.own,ear.dd.footer,prepare.env,deploy,timestamping"/>
+	<target name="default" depends="deplib,compile,package,reqlib,ear.dd.body.own,prepare.env,timestamping"/>
+	<!--  ===================================================================  -->
+	<!--  Initialise the build environment                                     -->
+	<!--  ===================================================================  -->
+	<target name="init" depends="get.properties,
+                   define.properties,
+                   exist.timestamp,
+                   create.timestamp">
+		<echo message="[${layer.name}-${module.name}] Executing target:init"/>
+		<mkdir dir="${class.dir}"/>
+		<mkdir dir="${deplib.dir}"/>
+	</target>
+	<!--  ===================================================================  -->
+	<!--  Rebuild if necessary                                                 -->
+	<!--  ===================================================================  -->
+	<target name="decide.rebuild" if="rebuild">
+		<property file="${module.dir}/projects/${module.name}-rebuild.properties"/>
+		<condition property="no.rebuild">
+			<equals arg1="${rebuild.timestamp}" arg2="${timestamp}"/>
+		</condition>
+		<antcall target="delete.module.class.dir"/>
+	</target>
+	<target name="delete.module.class.dir" unless="no.rebuild">
+		<delete dir="${class.dir}/**/model/${module.name}"/>
+		<delete dir="${class.dir}/**/events/${module.name}"/>
+		<delete dir="${class.dir}/**/server/${module.name}"/>
+	</target>
+	<!--  ===================================================================  -->
+	<!--  Set the timestamp info                                               -->
+	<!--  ===================================================================  -->
+	<target name="create.timestamp" unless="timestamp">
+		<tstamp/>
+		<property name="timestamp" value="${DSTAMP}-${TSTAMP}"/>
+		<echo message="[${layer.name}-${module.name}] Timestamp Created=${timestamp}"/>
+	</target>
+	<target name="exist.timestamp" if="timestamp">
+		<echo message="[${layer.name}-${module.name}] Timestamp Exist=${timestamp}"/>
+	</target>
+	<!--  ===================================================================  -->
+	<!--  decide whether the build.properties file for this module should      -->
+	<!--  be used                                                              -->
+	<!--  ===================================================================  -->
+	<target name="get.properties">
+		<property name="global.build.path" value="."/>
+		<property file="${global.build.path}/global-build.properties"/>
+	</target>
+	<!--  ===================================================================  -->
+	<!--  define the environment specific properties                           -->
+	<!--  ===================================================================  -->
+	<target name="define.properties">
+		<property name="module.dir" value="./.."/>
+		<property name="config.dir" value="${module.dir}/conf"/>
+		<property name="data.dir" value="${module.dir}/data"/>
+		<property name="reqlib.dir" value="${project.dir}/reqlib"/>
+		<property name="deplib.dir" value="${module.dir}/deplib"/>
+		<property name="deploy.dir" value="${module.dir}/deploy"/>
+		<property name="ejbroot.dir" value="${deploy.dir}/ejbroot"/>
+		<property name="webroot.dir" value="${deploy.dir}/webroot"/>
+		<property name="work.dir" value="${module.dir}/work"/>
+		<property name="source.dir" value="${module.dir}/src"/>
+		<property name="test.dir" value="${module.dir}/test"/>
+		<property name="web.dir" value="${module.dir}/web"/>
+		<property name="class.dir" value="${module.dir}/classes"/>
+		<property name="sqlscripts.dir" value="${module.dir}/sqlscripts"/>
+		<property name="build.dir" value="${work.dir}/build"/>
+		<property name="run.dir" value="${module.dir}/run"/>
+		<property file="${module.properties}"/>
+                <property name="log.libs" value="**/log4j*.jar,**/commons-logging*.jar"/>
+	</target>
+	<!--  ===================================================================  -->
+	<!--  decide which build to perform                                        -->
+	<!--  ===================================================================  -->
+	<target name="decide.build.all" unless="build.default" depends="ear.dd.header">
+		<!-- comment off this property if you want the sub modules to use all -->
+		<echo message="[${layer.name}-${module.name}] Executing target:decide.build.all"/>
+		<antcall target="decide.rebuild"/>
+		<delete dir="${run.dir}" includeEmptyDirs="true"/>
+		<mkdir dir="${run.dir}"/>
+		<echo message="[${layer.name}-${module.name}] Executing build script for [gtas-common]"/>
+		<ant antfile="common-ant-build.xml" target="build" dir="." inheritAll="false">
+			<property name="global.build.path" value="${basedir}"/>
+			<property name="build.default" value="defined"/>
+			<property name="top.build.dir" value="${top.build.dir}"/>
+			<property name="timestamp" value="${timestamp}"/>
+			<property name="application.xml.file" value="${application.xml.file}"/>
+		</ant>
+		<antcall target="all"/>
+	</target>
+	<target name="decide.build.default" if="build.default">
+		<!-- comment off this property if you want the sub modules to use all -->
+		<echo message="[${layer.name}-${module.name}] Executing target:decide.build.default"/>
+		<antcall target="decide.rebuild"/>
+		<antcall target="default"/>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Build dependent libraries                                           -->
+	<!-- =================================================================== -->
+	<target name="deplib" unless="no.deplib">
+		<echo message="[${layer.name}-${module.name}] Executing target:deplib"/>
+		<mkdir dir="${deplib.dir}"/>
+		<antcall target="gtas.deplib.build.1"/>
+		<antcall target="gtas.deplib.build.2"/>
+		<antcall target="gtas.deplib.build.3"/>
+		<antcall target="gtas.deplib.build.4"/>
+		<antcall target="gtas.deplib.build.5"/>
+		<antcall target="gtas.deplib.build.6"/>
+		<antcall target="gtas.deplib.build.7"/>
+		<antcall target="gtas.deplib.build.8"/>
+		<antcall target="gtas.deplib.build.9"/>
+		<antcall target="gtas.deplib.build.10"/>
+		<antcall target="deplib.init.rebuild"/>
+		<antcall target="deplib.build.1"/>
+		<antcall target="deplib.build.2"/>
+		<antcall target="deplib.build.3"/>
+		<antcall target="deplib.build.4"/>
+		<antcall target="deplib.build.5"/>
+		<antcall target="deplib.build.6"/>
+		<antcall target="deplib.build.7"/>
+		<antcall target="deplib.build.8"/>
+		<antcall target="deplib.build.9"/>
+		<antcall target="deplib.build.10"/>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Initialize all classes folders of dependent libraries               -->
+	<!-- =================================================================== -->
+	<target name="deplib.init.rebuild" if="rebuild">
+		<antcall target="deplib.init.rebuild.1"/>
+		<antcall target="deplib.init.rebuild.2"/>
+		<antcall target="deplib.init.rebuild.3"/>
+		<antcall target="deplib.init.rebuild.4"/>
+		<antcall target="deplib.init.rebuild.5"/>
+		<antcall target="deplib.init.rebuild.6"/>
+		<antcall target="deplib.init.rebuild.7"/>
+		<antcall target="deplib.init.rebuild.8"/>
+		<antcall target="deplib.init.rebuild.9"/>
+		<antcall target="deplib.init.rebuild.10"/>
+	</target>
+	<target name="deplib.init.rebuild.1" if="deplib.module.1">
+		<property name="deplib.module.dir" value="${deplib.module.1.dir}"/>
+		<antcall target="decide.clean.deplib"/>
+	</target>
+	<target name="deplib.init.rebuild.2" if="deplib.module.2">
+		<property name="deplib.module.dir" value="${deplib.module.2.dir}"/>
+		<antcall target="decide.clean.deplib"/>
+	</target>
+	<target name="deplib.init.rebuild.3" if="deplib.module.3">
+		<property name="deplib.module.dir" value="${deplib.module.3.dir}"/>
+		<antcall target="decide.clean.deplib"/>
+	</target>
+	<target name="deplib.init.rebuild.4" if="deplib.module.4">
+		<property name="deplib.module.dir" value="${deplib.module.4.dir}"/>
+		<antcall target="decide.clean.deplib"/>
+	</target>
+	<target name="deplib.init.rebuild.5" if="deplib.module.5">
+		<property name="deplib.module.dir" value="${deplib.module.5.dir}"/>
+		<antcall target="decide.clean.deplib"/>
+	</target>
+	<target name="deplib.init.rebuild.6" if="deplib.module.6">
+		<property name="deplib.module.dir" value="${deplib.module.6.dir}"/>
+		<antcall target="decide.clean.deplib"/>
+	</target>
+	<target name="deplib.init.rebuild.7" if="deplib.module.7">
+		<property name="deplib.module.dir" value="${deplib.module.7.dir}"/>
+		<antcall target="decide.clean.deplib"/>
+	</target>
+	<target name="deplib.init.rebuild.8" if="deplib.module.8">
+		<property name="deplib.module.dir" value="${deplib.module.8.dir}"/>
+		<antcall target="decide.clean.deplib"/>
+	</target>
+	<target name="deplib.init.rebuild.9" if="deplib.module.9">
+		<property name="deplib.module.dir" value="${deplib.module.9.dir}"/>
+		<antcall target="decide.clean.deplib"/>
+	</target>
+	<target name="deplib.init.rebuild.10" if="deplib.module.10">
+		<property name="deplib.module.dir" value="${deplib.module.10.dir}"/>
+		<antcall target="decide.clean.deplib"/>
+	</target>
+	<target name="decide.clean.deplib" depends="check.rebuild.timestamp.for.pdip.modules">
+		<antcall target="delete.class.dir">
+			<param name="target.dir" value="${deplib.module.dir}/classes"/>
+		</antcall>
+	</target>
+	<target name="delete.class.dir" unless="no.rebuild">
+		<delete dir="${target.dir}" failonerror="false"/>
+		<mkdir dir="${target.dir}"/>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Iteration targets to build dependent libraries                      -->
+	<!-- =================================================================== -->
+	<target name="deplib.build.1" if="deplib.module.1">
+		<property name="deplib.module" value="${deplib.module.1}"/>
+		<property name="deplib.module.layer" value="${deplib.module.layer.1}"/>
+		<property name="deplib.module.dir" value="${deplib.module.1.dir}"/>
+		<antcall target="decide.build.deplib"/>
+	</target>
+	<target name="deplib.build.2" if="deplib.module.2">
+		<property name="deplib.module" value="${deplib.module.2}"/>
+		<property name="deplib.module.layer" value="${deplib.module.layer.2}"/>
+		<property name="deplib.module.dir" value="${deplib.module.2.dir}"/>
+		<antcall target="decide.build.deplib"/>
+	</target>
+	<target name="deplib.build.3" if="deplib.module.3">
+		<property name="deplib.module" value="${deplib.module.3}"/>
+		<property name="deplib.module.layer" value="${deplib.module.layer.3}"/>
+		<property name="deplib.module.dir" value="${deplib.module.3.dir}"/>
+		<antcall target="decide.build.deplib"/>
+	</target>
+	<target name="deplib.build.4" if="deplib.module.4">
+		<property name="deplib.module" value="${deplib.module.4}"/>
+		<property name="deplib.module.layer" value="${deplib.module.layer.4}"/>
+		<property name="deplib.module.dir" value="${deplib.module.4.dir}"/>
+		<antcall target="decide.build.deplib"/>
+	</target>
+	<target name="deplib.build.5" if="deplib.module.5">
+		<property name="deplib.module" value="${deplib.module.5}"/>
+		<property name="deplib.module.layer" value="${deplib.module.layer.5}"/>
+		<property name="deplib.module.dir" value="${deplib.module.5.dir}"/>
+		<antcall target="decide.build.deplib"/>
+	</target>
+	<target name="deplib.build.6" if="deplib.module.6">
+		<property name="deplib.module" value="${deplib.module.6}"/>
+		<property name="deplib.module.layer" value="${deplib.module.layer.6}"/>
+		<property name="deplib.module.dir" value="${deplib.module.6.dir}"/>
+		<antcall target="decide.build.deplib"/>
+	</target>
+	<target name="deplib.build.7" if="deplib.module.7">
+		<property name="deplib.module" value="${deplib.module.7}"/>
+		<property name="deplib.module.layer" value="${deplib.module.layer.7}"/>
+		<property name="deplib.module.dir" value="${deplib.module.7.dir}"/>
+		<antcall target="decide.build.deplib"/>
+	</target>
+	<target name="deplib.build.8" if="deplib.module.8">
+		<property name="deplib.module" value="${deplib.module.8}"/>
+		<property name="deplib.module.layer" value="${deplib.module.layer.8}"/>
+		<property name="deplib.module.dir" value="${deplib.module.8.dir}"/>
+		<antcall target="decide.build.deplib"/>
+	</target>
+	<target name="deplib.build.9" if="deplib.module.9">
+		<property name="deplib.module" value="${deplib.module.9}"/>
+		<property name="deplib.module.layer" value="${deplib.module.layer.9}"/>
+		<property name="deplib.module.dir" value="${deplib.module.9.dir}"/>
+		<antcall target="decide.build.deplib"/>
+	</target>
+	<target name="deplib.build.10" if="deplib.module.10">
+		<property name="deplib.module" value="${deplib.module.10}"/>
+		<property name="deplib.module.layer" value="${deplib.module.layer.10}"/>
+		<property name="deplib.module.dir" value="${deplib.module.10.dir}"/>
+		<antcall target="decide.build.deplib"/>
+	</target>
+	<target name="decide.build.deplib" depends="check.rebuild.timestamp.for.pdip.modules">
+		<property name="from.dir" value="${deplib.module.dir}"/>
+		<property name="from.jar" value="${deplib.module.layer}-${deplib.module}*.jar,${deplib.module.layer}*.war,${deplib.module.layer}.jar"/>
+		<antcall target="deplib.build"/>
+		<antcall target="deplib.copy"/>
+		<condition property="is.top">
+			<equals arg1="${top.build.dir}" arg2="${module.dir}"/>
+		</condition>
+		<!--antcall target="deplib.dd.copy"/-->
+	</target>
+	<target name="gtas.deplib.build.1" if="gtas.deplib.module.1">
+		<property name="deplib.module" value="${gtas.deplib.module.1}"/>
+		<property name="deplib.module.layer" value="${gtas.deplib.module.layer.1}"/>
+		<property name="deplib.module.dir" value="${gtas.deplib.module.1.dir}"/>
+		<property name="deplib.module.properties.file" value="${gtas.deplib.module.1.properties.file}"/>
+		<antcall target="gtas.decide.build.deplib"/>
+	</target>
+	<target name="gtas.deplib.build.2" if="gtas.deplib.module.2">
+		<property name="deplib.module" value="${gtas.deplib.module.2}"/>
+		<property name="deplib.module.layer" value="${gtas.deplib.module.layer.2}"/>
+		<property name="deplib.module.dir" value="${gtas.deplib.module.2.dir}"/>
+		<property name="deplib.module.properties.file" value="${gtas.deplib.module.2.properties.file}"/>
+		<antcall target="gtas.decide.build.deplib"/>
+	</target>
+	<target name="gtas.deplib.build.3" if="gtas.deplib.module.3">
+		<property name="deplib.module" value="${gtas.deplib.module.3}"/>
+		<property name="deplib.module.layer" value="${gtas.deplib.module.layer.3}"/>
+		<property name="deplib.module.dir" value="${gtas.deplib.module.3.dir}"/>
+		<property name="deplib.module.properties.file" value="${gtas.deplib.module.3.properties.file}"/>
+		<antcall target="gtas.decide.build.deplib"/>
+	</target>
+	<target name="gtas.deplib.build.4" if="gtas.deplib.module.4">
+		<property name="deplib.module" value="${gtas.deplib.module.4}"/>
+		<property name="deplib.module.layer" value="${gtas.deplib.module.layer.4}"/>
+		<property name="deplib.module.dir" value="${gtas.deplib.module.4.dir}"/>
+		<property name="deplib.module.properties.file" value="${gtas.deplib.module.4.properties.file}"/>
+		<antcall target="gtas.decide.build.deplib"/>
+	</target>
+	<target name="gtas.deplib.build.5" if="gtas.deplib.module.5">
+		<property name="deplib.module" value="${gtas.deplib.module.5}"/>
+		<property name="deplib.module.layer" value="${gtas.deplib.module.layer.5}"/>
+		<property name="deplib.module.dir" value="${gtas.deplib.module.5.dir}"/>
+		<property name="deplib.module.properties.file" value="${gtas.deplib.module.5.properties.file}"/>
+		<antcall target="gtas.decide.build.deplib"/>
+	</target>
+	<target name="gtas.deplib.build.6" if="gtas.deplib.module.6">
+		<property name="deplib.module" value="${gtas.deplib.module.6}"/>
+		<property name="deplib.module.layer" value="${gtas.deplib.module.layer.6}"/>
+		<property name="deplib.module.dir" value="${gtas.deplib.module.6.dir}"/>
+		<property name="deplib.module.properties.file" value="${gtas.deplib.module.6.properties.file}"/>
+		<antcall target="gtas.decide.build.deplib"/>
+	</target>
+	<target name="gtas.deplib.build.7" if="gtas.deplib.module.7">
+		<property name="deplib.module" value="${gtas.deplib.module.7}"/>
+		<property name="deplib.module.layer" value="${gtas.deplib.module.layer.7}"/>
+		<property name="deplib.module.dir" value="${gtas.deplib.module.7.dir}"/>
+		<property name="deplib.module.properties.file" value="${gtas.deplib.module.7.properties.file}"/>
+		<antcall target="gtas.decide.build.deplib"/>
+	</target>
+	<target name="gtas.deplib.build.8" if="gtas.deplib.module.8">
+		<property name="deplib.module" value="${gtas.deplib.module.8}"/>
+		<property name="deplib.module.layer" value="${gtas.deplib.module.layer.8}"/>
+		<property name="deplib.module.dir" value="${gtas.deplib.module.8.dir}"/>
+		<property name="deplib.module.properties.file" value="${gtas.deplib.module.8.properties.file}"/>
+		<antcall target="gtas.decide.build.deplib"/>
+	</target>
+	<target name="gtas.deplib.build.9" if="gtas.deplib.module.9">
+		<property name="deplib.module" value="${gtas.deplib.module.9}"/>
+		<property name="deplib.module.layer" value="${gtas.deplib.module.layer.9}"/>
+		<property name="deplib.module.dir" value="${gtas.deplib.module.9.dir}"/>
+		<property name="deplib.module.properties.file" value="${gtas.deplib.module.9.properties.file}"/>
+		<antcall target="gtas.decide.build.deplib"/>
+	</target>
+	<target name="gtas.deplib.build.10" if="gtas.deplib.module.10">
+		<property name="deplib.module" value="${gtas.deplib.module.10}"/>
+		<property name="deplib.module.layer" value="${gtas.deplib.module.layer.10}"/>
+		<property name="deplib.module.dir" value="${gtas.deplib.module.10.dir}"/>
+		<property name="deplib.module.properties.file" value="${gtas.deplib.module.10.properties.file}"/>
+		<antcall target="gtas.decide.build.deplib"/>
+	</target>
+	<target name="gtas.decide.build.deplib" depends="check.rebuild.timestamp.for.gtas.modules">
+		<property name="from.dir" value="${deplib.module.dir}"/>
+		<property name="from.jar" value="${deplib.module.layer}-${deplib.module}*.jar,${deplib.module.layer}*.war,${deplib.module.layer}.jar"/>
+		<antcall target="gtas.deplib.build"/>
+	</target>
+	<target name="gtas.deplib.build" unless="no.rebuild">
+		<echo message="[[${layer.name}]] Executing build script for [${deplib.module.layer}-${deplib.module}]"/>
+		<ant antfile="module-ant-build.xml" target="build" dir="${from.dir}/projects" inheritAll="false">
+			<property name="global.build.path" value="${basedir}"/>
+			<property name="build.default" value="defined"/>
+			<property name="top.build.dir" value="${top.build.dir}"/>
+			<property name="timestamp" value="${timestamp}"/>
+			<property name="module.properties" value="${deplib.module.properties.file}"/>
+			<property name="application.xml.file" value="${application.xml.file}"/>
+			<property name="setup.env" value="${setup.env}"/>
+		</ant>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Check the timestamp of dependent libraries                          -->
+	<!-- =================================================================== -->
+	<target name="check.rebuild.timestamp.for.pdip.modules">
+		<property file="${deplib.module.dir}/projects/rebuild.properties"/>
+		<condition property="no.rebuild">
+			<equals arg1="${rebuild.timestamp}" arg2="${timestamp}"/>
+		</condition>
+		<!--antcall target="deplib.build"/-->
+	</target>
+	<target name="check.rebuild.timestamp.for.gtas.modules">
+		<property file="${deplib.module.dir}/projects/${deplib.module}-rebuild.properties"/>
+		<condition property="no.rebuild">
+			<equals arg1="${rebuild.timestamp}" arg2="${timestamp}"/>
+		</condition>
+		<!--antcall target="deplib.build"/-->
+	</target>
+	<!-- =================================================================== -->
+	<!-- Build dependent libraries                                           -->
+	<!-- =================================================================== -->
+	<target name="deplib.build" unless="no.rebuild">
+		<antcall target="deplib.build.refresh"/>
+		<echo message="[${layer.name}-${module.name}] Executing build script for [${deplib.module.layer}-${deplib.module}]"/>
+		<ant antfile="ant-build.xml" target="build" dir="${from.dir}/projects" inheritAll="false">
+			<property name="global.build.path" value="${basedir}"/>
+			<property name="build.default" value="defined"/>
+			<property name="top.build.dir" value="${top.build.dir}"/>
+			<property name="timestamp" value="${timestamp}"/>
+			<property name="application.xml.file" value="${application.xml.file}"/>
+			<property name="setup.env" value="${setup.env}"/>
+		</ant>
+		<!--antcall target="deplib.dd.copy"/-->
+	</target>
+	<!-- =================================================================== -->
+	<!-- Copy ant script to dependent modules                                -->
+	<!-- =================================================================== -->
+	<target name="deplib.build.refresh" description="Copy ant script to dependent modules">
+		<delete dir="${from.dir}/projects" includes="ant-build.xml" failonerror="false"/>
+		<copy todir="${from.dir}/projects" preservelastmodified="yes">
+			<fileset dir="${from.dir}/.." includes="ant-build.xml"/>
+		</copy>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Copy a dependent library to the deplib folder                       -->
+	<!-- =================================================================== -->
+	<target name="deplib.copy" description="Copy dependent libraries">
+		<copy todir="${deplib.dir}" preservelastmodified="yes">
+			<fileset dir="${from.dir}/deploy" includes="${from.jar}"/>
+			<fileset dir="${from.dir}/deplib" includes="*.jar,*.war"/>
+		</copy>
+	</target>
+	<!--target name="deplib.dd.copy" unless="is.top">
+    <copy todir="${top.build.dir}/deplib" preservelastmodified="yes">
+      <fileset dir="${from.dir}/projects" includes="*-dd.properties"/>
+    </copy>
+  </target-->
+	<!--  ===================================================================  -->
+	<!--  Compile only modified source files                                   -->
+	<!--  ===================================================================  -->
+	<target name="compile" description="Compiles only modified source files">
+		<echo message="[${layer.name}-${module.name}] Executing target:compile"/>
+		<path id="project.classpath">
+			<pathelement path="${classpath}"/>
+			<pathelement location="${class.dir}"/>
+			<pathelement location="${source.dir}"/>
+			<fileset dir="${deplib.dir}">
+				<include name="**/*.jar"/>
+			</fileset>
+			<fileset dir="${reqlib.dir}">
+				<include name="**/*.jar"/>
+			</fileset>
+			<!--  includes required libs from other components here  -->
+			<fileset dir="${appserver.lib.dir}">
+				<include name="**/*.jar"/>
+			</fileset>
+			<fileset dir="${appserver.client.lib.dir}">
+				<include name="**/*.jar"/>
+			</fileset>
+		</path>
+		<javac classpathref="project.classpath" srcdir="${source.dir}/Model/${module.name}" destdir="${class.dir}" debug="on"/>
+		<javac classpathref="project.classpath" srcdir="${source.dir}/Events/${module.name}" destdir="${class.dir}" debug="on"/>
+		<javac classpathref="project.classpath" srcdir="${source.dir}/Server/${module.name}" destdir="${class.dir}" debug="on"/>
+	</target>
+	<!--  ===================================================================  -->
+	<!--  Packages the application/module for deployment"                      -->
+	<!--  ===================================================================  -->
+	<target name="package">
+		<echo message="[${layer.name}-${module.name}] Executing target:package"/>
+		<antcall target="package.non-ejb.jars"/>
+		<antcall target="package.ejb.jars"/>
+		<property name="war.name.server" value="${layer.name}-${module.name}.war"/>
+		<property name="war.name.client" value="${layer.name}-${module.name}-client.war"/>
+		<antcall target="package.web"/>
+	</target>
+	<target name="package.web" depends="create.war.dd">
+		<antcall target="package.server.war"/>
+		<antcall target="package.client.war"/>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Package ejb classes into the deploy directory (jar preparation)     -->
+	<!-- =================================================================== -->
+	<target name="package.ejb.jars">
+		<echo message="[${layer.name}-${module.name}] Executing target:package.ejb.jars"/>
+		<antcall target="package.1.bean"/>
+		<antcall target="package.2.bean"/>
+		<antcall target="package.3.bean"/>
+		<antcall target="package.4.bean"/>
+		<antcall target="package.5.bean"/>
+		<!-- insert calls for other EJBs here -->
+	</target>
+	<!-- =================================================================== -->
+	<!-- Package the ejb classes of the application/module                   -->
+	<!-- =================================================================== -->
+	<target name="package.1.bean" if="ejb.jar.1.comp.name">
+		<antcall target="package.ejb">
+			<param name="jar.name" value="${layer.name}-${module.name}-${ejb.jar.1.comp.name}-ejb.jar"/>
+			<param name="meta.dir" value="${ejbroot.dir}/META-INF/${module.name}/${ejb.jar.1.comp.name}"/>
+			<param name="source.path" value="${source.dir}/"/>
+			<param name="package.path" value="${ejb.jar.1.package.path}"/>
+			<param name="home.class" value="*Home.class"/>
+			<param name="remote.class" value="*Obj.class"/>
+			<param name="bean.class" value="*Bean.class"/>
+			<param name="depn.class" value=""/>
+		</antcall>
+	</target>
+	<target name="package.2.bean" if="ejb.jar.2.comp.name">
+		<antcall target="package.ejb">
+			<param name="jar.name" value="${layer.name}-${module.name}-${ejb.jar.2.comp.name}-ejb.jar"/>
+			<param name="meta.dir" value="${ejbroot.dir}/META-INF/${module.name}/${ejb.jar.2.comp.name}"/>
+			<param name="source.path" value="${source.dir}/"/>
+			<param name="package.path" value="${ejb.jar.2.package.path}"/>
+			<param name="home.class" value="*Home.class"/>
+			<param name="remote.class" value="*Obj.class"/>
+			<param name="bean.class" value="*Bean.class"/>
+			<param name="depn.class" value=""/>
+		</antcall>
+	</target>
+	<target name="package.3.bean" if="ejb.jar.3.comp.name">
+		<antcall target="package.ejb">
+			<param name="jar.name" value="${layer.name}-${module.name}-${ejb.jar.3.comp.name}-ejb.jar"/>
+			<param name="meta.dir" value="${ejbroot.dir}/META-INF/${module.name}/${ejb.jar.3.comp.name}"/>
+			<param name="source.path" value="${source.dir}/"/>
+			<param name="package.path" value="${ejb.jar.3.package.path}"/>
+			<param name="home.class" value="*Home.class"/>
+			<param name="remote.class" value="*Obj.class"/>
+			<param name="bean.class" value="*Bean.class"/>
+			<param name="depn.class" value=""/>
+		</antcall>
+	</target>
+	<target name="package.4.bean" if="ejb.jar.4.comp.name">
+		<antcall target="package.ejb">
+			<param name="jar.name" value="${layer.name}-${module.name}-${ejb.jar.4.comp.name}-ejb.jar"/>
+			<param name="meta.dir" value="${ejbroot.dir}/META-INF/${module.name}/${ejb.jar.4.comp.name}"/>
+			<param name="source.path" value="${source.dir}/"/>
+			<param name="package.path" value="${ejb.jar.4.package.path}"/>
+			<param name="home.class" value="*Home.class"/>
+			<param name="remote.class" value="*Obj.class"/>
+			<param name="bean.class" value="*Bean.class"/>
+			<param name="depn.class" value=""/>
+		</antcall>
+	</target>
+	<target name="package.5.bean" if="ejb.jar.5.comp.name">
+		<antcall target="package.ejb">
+			<param name="jar.name" value="${layer.name}-${module.name}-${ejb.jar.5.comp.name}-ejb.jar"/>
+			<param name="meta.dir" value="${ejbroot.dir}/META-INF/${module.name}/${ejb.jar.5.comp.name}"/>
+			<param name="source.path" value="${source.dir}/"/>
+			<param name="package.path" value="${ejb.jar.5.package.path}"/>
+			<param name="home.class" value="*Home.class"/>
+			<param name="remote.class" value="*Obj.class"/>
+			<param name="bean.class" value="*Bean.class"/>
+			<param name="depn.class" value=""/>
+		</antcall>
+	</target>
+	<!--  ===================================================================  -->
+	<!--  Package non ejb classes into the deploy directory (jar preparation)  -->
+	<!--  ===================================================================  -->
+	<target name="package.non-ejb.jars">
+		<echo message="[${layer.name}-${module.name}] Executing target:package.non-ejb.jars"/>
+		<antcall target="package.server.non-ejb"/>
+		<antcall target="package.client.non-ejb"/>
+		<!--  insert calls for other non EJBs here  -->
+	</target>
+	<target name="package.server.non-ejb">
+		<antcall target="package.non-ejb">
+			<param name="jar.name" value="${layer.name}-${module.name}.jar"/>
+			<!-- modified includes value from: **/${module.name}/**/*.class -->
+			<!-- to: com/gridnode/**/${module.name}/**/*.class              -->
+			<param name="includes" value="com/gridnode/**/${module.name}/**/*.class"/>
+			<param name="excludes" value="**/*Bean.class,com/gridnode/**/client/**/${module.name}/**/*.class"/>
+		</antcall>
+	</target>
+	<target name="package.client.non-ejb">
+		<antcall target="package.non-ejb">
+			<param name="jar.name" value="${layer.name}-client-${module.name}.jar"/>
+			<param name="includes" value="**/events/${module.name}/**/*.class,**/model/${module.name}/**/*.class"/>
+			<param name="excludes" value="**/*Bean.class"/>
+		</antcall>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Package non ejb classes into the deploy directory (jar preparation) -->
+	<!-- =================================================================== -->
+	<target name="package.non-ejb">
+		<condition property="jar.uptodate">
+			<and>
+				<available file="${deploy.dir}/${jar.name}" type="file"/>
+				<uptodate targetfile="${deploy.dir}/${jar.name}">
+					<srcfiles dir="${class.dir}" includes="${includes}" excludes="${excludes}"/>
+				</uptodate>
+			</and>
+		</condition>
+		<condition property="all.uptodate">
+			<equals arg1="${jar.uptodate}" arg2="true"/>
+		</condition>
+		<echo message="[${layer.name}-${module.name}] ${jar.name} is uptodate:${jar.uptodate}"/>
+		<antcall target="package.non-ejb.init"/>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Initialize the build folder                                         -->
+	<!-- =================================================================== -->
+	<target name="package.non-ejb.init" unless="jar.uptodate">
+		<antcall target="clean.build.dir"/>
+		<copy todir="${build.dir}/classes" preservelastmodified="yes">
+			<fileset dir="${class.dir}" includes="${includes}" excludes="${excludes}"/>
+		</copy>
+		<condition property="non-ejb.classes.exist">
+			<available file="${build.dir}/classes" type="dir"/>
+		</condition>
+		<antcall target="non-ejb.jar"/>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Jar all non-ejb class files exception the Bean class                -->
+	<!-- =================================================================== -->
+	<target name="non-ejb.jar" if="non-ejb.classes.exist">
+		<!-- Jars all files in the class directory excluding bean classes -->
+		<jar jarfile="${deploy.dir}/${jar.name}">
+			<fileset dir="${build.dir}/classes" includes="**/*.class"/>
+		</jar>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Package ejb classes into the deploy directory (jar preparation)     -->
+	<!-- =================================================================== -->
+	<target name="package.ejb">
+		<condition property="has.specific.dd">
+			<and>
+				<available file="${meta.dir}/${appserver.name}-${appserver.version}" type="dir"/>
+			</and>
+		</condition>
+		<!-- Clean up the build directory -->
+		<antcall target="clean.build.dir"/>
+		<!-- Copy all bean related files to the build directory -->
+		<mkdir dir="${build.dir}/${package.path}"/>
+		<copy todir="${build.dir}/${package.path}" preservelastmodified="true">
+			<fileset dir="${class.dir}/${package.path}" includes="${home.class},${remote.class},${bean.class}"/>
+		</copy>
+		<copy todir="${build.dir}/META-INF" preservelastmodified="true">
+			<fileset dir="${meta.dir}">
+				<include name="ejb-jar.xml"/>
+				<include name="${appserver.name}*.xml"/>
+				<include name="*M*.*"/>
+				<exclude name="*.bak"/>
+			</fileset>
+		</copy>
+		<antcall target="copy.specific.dd"/>
+		<!-- Set the bean.uptodate property to true if all conditions hold true -->
+		<condition property="bean.uptodate">
+			<and>
+				<available file="${deploy.dir}/${jar.name}" type="file"/>
+				<uptodate targetfile="${deploy.dir}/${jar.name}">
+					<srcfiles dir="${build.dir}/${package.path}" includes="${home.class},${remote.class},${bean.class}"/>
+				</uptodate>
+				<uptodate targetfile="${deploy.dir}/${jar.name}">
+					<srcfiles dir="${build.dir}/META-INF" includes="*.xml,*.MF"/>
+				</uptodate>
+			</and>
+		</condition>
+		<condition property="all.uptodate">
+			<equals arg1="${bean.uptodate}" arg2="true"/>
+		</condition>
+		<echo message="[${layer.name}] ${jar.name} is uptodate:${bean.uptodate}"/>
+		<antcall target="ejb.jar"/>
+	</target>
+	<target name="copy.specific.dd" if="has.specific.dd">
+		<copy todir="${build.dir}/META-INF" overwrite="true" preservelastmodified="true">
+			<fileset dir="${meta.dir}/${appserver.name}-${appserver.version}">
+				<include name="*.xml"/>
+			</fileset>
+		</copy>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Pack the beans related files into the jar                           -->
+	<!-- =================================================================== -->
+	<target name="ejb.jar" unless="bean.uptodate">
+		<!-- Jars all files in the build directory -->
+		<jar jarfile="${deploy.dir}/${jar.name}" basedir="${build.dir}" manifest="${build.dir}/META-INF/MANIFEST.MF"/>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Deploy the application ear file to the application server           -->
+	<!-- deploy directory                                                    -->
+	<!-- =================================================================== -->
+	<target name="deploy">
+		<echo message="[${layer.name}-${module.name}] Executing target:deploy"/>
+		<property name="ear.name" value="${module.name}.ear"/>
+		<!--antcall target="create.ear.dd"/-->
+		<antcall target="package.ejb.ear"/>
+		<copy file="${deploy.dir}/${ear.name}" tofile="${appserver.deploy.dir}/${ear.name}" overwrite="yes"/>
+		<antcall target="setup.env"/>
+	</target>
+	<!--  ===================================================================  -->
+	<!--  Package the application ear file if the ear.uptodate property is     -->
+	<!--  set to false                                                         -->
+	<!--  ===================================================================  -->
+	<target name="package.ejb.ear">
+		<echo message="[${layer.name}-${module.name}] Executing target:package.ejb.ear"/>
+	    <condition property="has.specific.dd.ear">
+         <and>
+	      <available file="${deploy.dir}/META-INF/${module.name}/${appserver.name}-${appserver.version}" type="dir"/>
+	    </and>
+	  </condition>
+		<condition property="ear.uptodate">
+			<and>
+				<available file="${deploy.dir}/${ear.name}" type="file"/>
+				<uptodate targetfile="${deploy.dir}/${ear.name}">
+					<srcfiles dir="${deploy.dir}/META-INF/${module.name}">
+						<include name="**/*application.xml"/>
+						<exclude name="**/*.bak"/>
+					</srcfiles>
+				</uptodate>
+				<or>
+					<and>
+						<equals arg1="${has.specific.dd.ear}" arg2="true"/>
+						<uptodate targetfile="${deploy.dir}/${ear.name}">
+							<srcfiles dir="${deploy.dir}/META-INF/${module.name}/${appserver.name}-${appserver.version}">
+								<include name="*.xml"/>
+							</srcfiles>
+						</uptodate>
+					</and>
+					<equals arg1="${has.specific.dd.ear}" arg2="false"/>
+					<not>
+						<isset property="${has.specific.dd.ear}"/>
+					</not>
+				</or>
+				<equals arg1="${bean.uptodate}" arg2="true"/>
+				<equals arg1="${all.uptodate}" arg2="true"/>
+			</and>
+		</condition>
+		<echo message="[${layer.name}-${module.name}] ${ear.name} is uptodate: ${ear.uptodate}"/>
+		<antcall target="ejb.ear"/>
+	</target>
+	<!--  ===================================================================  -->
+	<!--  Generates the application ear file from the files defined in         -->
+	<!--  the fileset                                                          -->
+	<!--  ===================================================================  -->
+	<target name="ejb.ear" unless="ear.uptodate">
+		<antcall target="clean.build.dir"/>
+		<copy todir="${build.dir}">
+			<fileset dir="${deploy.dir}/META-INF/${module.name}" includes="*.MF,application.xml,${appserver.name}*.xml"/>
+      <fileset dir="${deploy.dir}" includes="*.jar" excludes="*-client-*.jar,*-lite.jar"/>
+      <fileset dir="${deplib.dir}" includes="*.jar,*.war" excludes="*-client.war,*-lite.jar"/>
+		</copy>
+    <antcall target="copy.specific.dd.ear"/>
+		<antcall target="copy.reqlibs"/>
+		<ear earfile="${deploy.dir}/${ear.name}" basedir="${build.dir}" appxml="${build.dir}/application.xml" includes="*.jar,*.war,**/*.xml" excludes="${build.dir}/application.xml" manifest="${build.dir}/MANIFEST.MF"/>
+		<delete dir="${work.dir}"/>
+	</target>
+
+  <target name="copy.reqlibs" if="reqlibs">
+    <copy todir="${build.dir}">
+      <fileset dir="${reqlib.dir}" includes="${reqlibs}"/>
+    </copy>
+  </target>
+
+  <target name="copy.specific.dd.ear">
+	  <if>
+		  <equals arg1="${has.specific.dd.ear}" arg2="true"/>
+		  <then>
+				<copy todir="${build.dir}/META-INF" overwrite="true" preservelastmodified="true">
+				  <fileset dir="${deploy.dir}/META-INF/${module.name}/${appserver.name}-${appserver.version}">
+					<include name="*.xml"/>
+				</fileset>
+				</copy>
+		  </then>
+	  </if>
+  </target>
+
+	<!--  ===================================================================  -->
+	<!--  Package the application war file                                     -->
+	<!--  ===================================================================  -->
+	<target name="package.server.war" if="has.server">
+		<echo message="[${layer.name}-${module.name}] Executing target:package.web.war"/>
+		<echo message="[${layer.name}-${module.name}] Packaging server war"/>
+		<antcall target="clean.build.dir"/>
+		<copy todir="${build.dir}">
+			<fileset dir="${webroot.dir}/server" includes="**/*.*"/>
+			<fileset dir="${deploy.dir}" includes="${server.war.libs}" excludes="*ejb.jar"/>
+			<fileset dir="${deplib.dir}" includes="${server.war.deplibs}" excludes="*ejb.jar"/>
+			<fileset dir="${web.dir}/server" includes="**/*.*"/>
+			<fileset dir="${reqlib.dir}" includes="${server.war.reqlibs}"/>
+		</copy>
+		<war warfile="${deploy.dir}/${war.name.server}" basedir="${build.dir}" webxml="${build.dir}/WEB-INF/web.xml" includes="**/*.*" excludes="${log.libs}"/>
+	</target>
+	<target name="package.client.war" if="has.client">
+		<echo message="[${layer.name}-${module.name}] Packaging client war"/>
+		<antcall target="clean.build.dir"/>
+		<copy todir="${build.dir}">
+			<fileset dir="${webroot.dir}/client" includes="**/*.*"/>
+			<fileset dir="${deploy.dir}" includes="${client.war.libs}" excludes="*ejb.jar"/>
+			<fileset dir="${deplib.dir}" includes="${client.war.deplibs}" excludes="*ejb.jar"/>
+			<fileset dir="${web.dir}/client" includes="**/*"/>
+			<fileset dir="${reqlib.dir}" includes="${client.war.reqlibs}"/>
+		</copy>
+		<war warfile="${deploy.dir}/${war.name.client}" basedir="${build.dir}" webxml="${build.dir}/WEB-INF/web.xml" includes="**/*.*" excludes="${log.libs}"/>
+		<!--  not mandatory if war not required  -->
+	</target>
+	<!-- =================================================================== -->
+	<!-- Create the build directory structure used by compile and copy the   -->
+	<!-- deployment descriptors into it                                      -->
+	<!-- =================================================================== -->
+	<target name="clean.build.dir">
+		<delete dir="${work.dir}"/>
+		<mkdir dir="${work.dir}"/>
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${build.dir}/META-INF"/>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Formats all source files                                            -->
+	<!-- =================================================================== -->
+	<target name="format" if="doformat">
+		<jalopy fileformat="DOS" backup="false" history="comment" javadoc="true" loglevel="info" force="false" style="${jalopy.pref}" threads="2">
+			<fileset dir="${source.dir}"/>
+			<fileset dir="${test.dir}"/>
+		</jalopy>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Perform timestamping                                                -->
+	<!-- =================================================================== -->
+	<target name="timestamping">
+		<echo file="${module.name}-rebuild.properties" message="rebuild.timestamp=${timestamp}"/>
+	</target>
+
+  <target name="reqlib">
+    <condition property="copy.reqlib">
+	  <and>
+	    <not>
+          <equals arg1="${top.build.dir}" arg2="${module.dir}"/>
+		</not>
+		<isset property="reqlibs"/>
+	  </and>
+    </condition>
+    <antcall target="reqlib.copy"/>
+  </target>
+
+  <target name="reqlib.copy" if="copy.reqlib">
+    <copy todir="${top.build.dir}/deplib">
+       <fileset dir="${reqlib.dir}" includes="${reqlibs}"/>
+    </copy>    
+  </target>
+
+	<!-- =================================================================== -->
+	<!-- Preparing the deployment environment                                -->
+	<!-- =================================================================== -->
+	<target name="prepare.env" if="setup.env">
+		<echo message="[${layer.name}-${module.name}] Executing target:prepare.env"/>
+		<antcall target="sqlscripts.copy"/>
+	</target>
+
+    <!-- TWX 20081222 Added folder DB vendor which allow us to group different script for diff db vendor -->
+	<target name="sqlscripts.copy">
+		<echo message="[${layer.name}-${module.name}] Executing target:sqlscripts.copy, DB vendor:${database.vendor}"/>
+		<mkdir dir="${sqlscripts.dir}/${module.name}/${database.vendor}"/>
+		<mkdir dir="${top.build.dir}/run/sqlscripts/${layer.name}/${module.name}/setup"/>
+    <!-- start:added by NSL on 21/10/03-->
+    <mkdir dir="${top.build.dir}/run/sqlscripts/${layer.name}/${module.name}/update"/>
+    <!-- end-->
+		<!-- start:added by AMH on 07/10/02-->
+		<mkdir dir="${top.build.dir}/run/sqlscripts/${layer.name}/${module.name}/patch"/>
+		<!-- end-->
+		<mkdir dir="${top.build.dir}/run/sqlscripts/${layer.name}/${module.name}/populate"/>
+		<copy todir="${top.build.dir}/run/sqlscripts/${layer.name}/${module.name}/setup">
+			<fileset dir="${sqlscripts.dir}/${module.name}/${database.vendor}" includes="create-tables.sql, insert-metainfo.sql"/>
+		</copy>
+    <!-- start:added by NSL on 21/10/03-->
+    <copy todir="${top.build.dir}/run/sqlscripts/${layer.name}/${module.name}/update">
+       <fileset dir="${sqlscripts.dir}/${module.name}/${database.vendor}" includes="update*.sql"/>
+    </copy>
+		<!-- start:added by AMH on 07/10/02-->
+		<copy todir="${top.build.dir}/run/sqlscripts/${layer.name}/${module.name}/patch">
+			<fileset dir="${sqlscripts.dir}/${module.name}/${database.vendor}" includes="patch*.sql"/>
+		</copy>
+		<!-- end-->
+		<copy todir="${top.build.dir}/run/sqlscripts/${layer.name}/${module.name}/populate">
+			<fileset dir="${sqlscripts.dir}/${module.name}/${database.vendor}" includes="create-default.sql"/>
+		</copy>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Setting up the deployment environment                               -->
+	<!-- =================================================================== -->
+	<target name="setup.env" if="setup.env">
+		<echo message="[${layer.name}-${module.name}] Executing target:setup.env"/>
+		<antcall target="setup.db"/>
+		<antcall target="deploy.config"/>
+		<antcall target="deploy.data"/>
+	</target>
+	<target name="deploy.config">
+		<echo message="[${layer.name}-${module.name}] Executing target:deploy.config"/>
+		<antcall target="config.copy"/>
+		<delete dir="${appserver.app.conf.dir}" includeEmptyDirs="true"/>
+		<copy todir="${appserver.app.conf.dir" overwrite="yes">
+			<fileset dir="${run.dir}/conf"/>
+		</copy>
+	</target>
+	<target name="config.copy">
+		<echo message="[${layer.name}-${module.name}] Executing target:config.copy"/>
+		<property name="top.config.dir" value="${top.build.dir}/run/conf/default"/>
+		<mkdir dir="${top.config.dir}"/>
+		<!-- consolidate all gtas specific properties files at run/conf/default
+    < folder first. these shall be moved to run/conf/gtas folder next time -->
+    <copy todir="${top.config.dir}" overwrite="yes">
+       <fileset dir="${config.dir}/server/default" includes="**/*.*"/>
+    </copy>
+    <if>
+        <available file="${config.dir}/server/${appserver.name}" type="dir"/>
+	<then>
+    	    <copy todir="${top.config.dir}" overwrite="yes">
+	       <fileset dir="${config.dir}/server/${appserver.name}" includes="**/*.*"/>
+	    </copy>
+	</then>
+    </if>
+    <if>
+        <available file="${config.dir}/server/${appserver.name}-${appserver.version}" type="dir"/>
+	<then>
+	    <copy todir="${top.config.dir}" overwrite="yes">
+	       <fileset dir="${config.dir}/${appserver.name}-${appserver.versopn}" includes="**/*.*"/>
+	    </copy>
+	</then>
+    </if>
+	</target>
+	<target name="deploy.data">
+		<echo message="[${layer.name}-${module.name}] Executing target:deploy.data"/>
+		<antcall target="data.copy"/>
+		<delete dir="${appserver.app.data.dir}/${application.name}" includeEmptyDirs="true"/>
+		<copy todir="${appserver.app.data.dir}/${application.name}" overwrite="yes">
+			<fileset dir="${run.dir}" includes="data/**/*.*"/>
+		</copy>
+	</target>
+	<target name="data.copy">
+		<echo message="[${layer.name}-${module.name}] Executing target:data.copy"/>
+		<property name="top.data.dir" value="${top.build.dir}/run/data"/>
+		<mkdir dir="${top.data.dir}"/>
+		<!-- consolidate all gtas specific properties files at run/conf/default
+    < folder first. these shall be moved to run/conf/gtas folder next time -->
+		<copy todir="${top.data.dir}">
+			<fileset dir="${data.dir}" includes="**/*.*"/>
+		</copy>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Setting up the database environment                                 -->
+	<!-- =================================================================== -->
+	<target name="setup.db">
+		<echo message="[${layer.name}-${module.name}] Executing target:setup.db"/>
+		<antcall target="cleanup.db"/>
+		<parallel>
+			<antcall target="start.db"/>
+			<sequential>
+				<sleep seconds="5"/>
+				<antcall target="exec.sqlscripts"/>
+				<antcall target="stop.db"/>
+			</sequential>
+		</parallel>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Cleanup the database                                                  -->
+	<!-- =================================================================== -->
+	<target name="cleanup.db">
+		<echo message="[${layer.name}-${module.name}] Executing target:cleanup.db"/>
+		<delete dir="${db.home}/data/appdb"/>
+		<delete dir="${db.home}/data/userdb"/>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Start the database                                                  -->
+	<!-- =================================================================== -->
+	<target name="start.db">
+		<echo message="[${layer.name}-${module.name}] Executing target:start.db"/>
+		<exec dir="${db.home}" executable="${db.start.cmd}"/>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Stop the database                                                   -->
+	<!-- =================================================================== -->
+	<target name="stop.db">
+		<echo message="[${layer.name}-${module.name}] Executing target:stop.db"/>
+		<exec dir="${db.home}" executable="${db.stop.cmd}"/>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Execute the database scripts                                        -->
+	<!-- =================================================================== -->
+	<target name="exec.sqlscripts" depends="exec.dbscripts.create,
+                  exec.dbscripts.setup,
+                  exec.dbscripts.update,
+                  exec.dbscripts.populate"/>
+	<target name="exec.dbscripts.create">
+		<echo message="[${layer.name}-${module.name}] Executing target:exec.dbscripts.create"/>
+		<antcall target="exec.dbscripts">
+			<param name="dbscript.dir" value="${run.dir}/sqlscripts"/>
+			<param name="includes" value="create-db.sql"/>
+		</antcall>
+		<antcall target="exec.dbscripts">
+			<param name="dbscript.dir" value="${run.dir}/sqlscripts"/>
+			<param name="includes" value="*.sql"/>
+			<param name="excludes" value="create-db.sql"/>
+		</antcall>
+	</target>
+	<target name="exec.dbscripts.setup">
+		<echo message="[${layer.name}-${module.name}] Executing target:exec.dbscripts.setup"/>
+		<antcall target="exec.dbscripts">
+			<param name="dbscript.dir" value="${run.dir}/sqlscripts"/>
+			<param name="includes" value="**/setup/**/*.sql"/>
+		</antcall>
+	</target>
+	<!-- added by AMH on 07/10/02 -->
+	<target name="exec.dbscripts.update">
+		<echo message="[${layer.name}-${module.name}] Executing target:exec.dbscripts.update"/>
+		<antcall target="exec.dbscripts">
+			<param name="dbscript.dir" value="${run.dir}/sqlscripts"/>
+			<param name="includes" value="**/update/**/*.sql"/>
+		</antcall>
+	</target>
+	<!-- end -->
+	<target name="exec.dbscripts.populate">
+		<echo message="[${layer.name}-${module.name}] Executing target:exec.dbscripts.populate"/>
+		<antcall target="exec.dbscripts">
+			<param name="dbscript.dir" value="${run.dir}/sqlscripts"/>
+			<param name="includes" value="**/populate/**/*.sql"/>
+		</antcall>
+	</target>
+	<target name="exec.dbscripts">
+		<apply executable="${project.dir}/dbscript.bat">
+			<arg value="${db.exec.cmd}"/>
+			<fileset dir="${dbscript.dir}" includes="${includes}" excludes="${excludes}"/>
+		</apply>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Create the deployment descriptors for web			         -->
+	<!-- =================================================================== -->
+	<target name="create.war.dd">
+		<property file="./${layer.name}-${module.name}-dd.properties"/>
+		<condition property="has.server">
+			<or>
+				<equals arg1="${servlet.type.1}" arg2="server"/>
+				<equals arg1="${servlet.type.2}" arg2="server"/>
+				<equals arg1="${servlet.type.3}" arg2="server"/>
+				<equals arg1="${servlet.type.4}" arg2="server"/>
+				<equals arg1="${servlet.type.5}" arg2="server"/>
+			</or>
+		</condition>
+		<condition property="has.client">
+			<or>
+				<equals arg1="${servlet.type.1}" arg2="client"/>
+				<equals arg1="${servlet.type.2}" arg2="client"/>
+				<equals arg1="${servlet.type.3}" arg2="client"/>
+				<equals arg1="${servlet.type.4}" arg2="client"/>
+				<equals arg1="${servlet.type.5}" arg2="client"/>
+			</or>
+		</condition>
+		<antcall target="decide.client"/>
+		<antcall target="decide.server"/>
+	</target>
+	<target name="decide.client" if="has.client">
+		<property mame="client.web.xml.file" value="${webroot.dir}/client/${module.name}/WEB-INF/web.xml"/>
+		<property mame="client.jboss.web.xml.file" value="${webroot.dir}/client/${module.name}/WEB-INF/jboss-web.xml"/>
+		<antcall target="create.web.xml.header">
+			<param name="servlet.type" value="client"/>
+			<param name="war.description" value="${client.war.description}"/>
+			<param name="display.name" value="${client.war.display.name}"/>
+			<param name="web.xml.file" value="${client.web.xml.file}"/>
+		</antcall>
+		<antcall target="create.jboss-web.xml.header">
+			<param name="servlet.type" value="client"/>
+			<param name="jboss.web.xml.file" value="${client.jboss.web.xml.file}"/>
+		</antcall>
+		<antcall target="create.dd.own.body">
+			<param name="for.servlet.type" value="client"/>
+			<param name="web.xml.file" value="${client.web.xml.file}"/>
+			<param name="jboss.web.xml.file" value="${client.jboss.web.xml.file}"/>
+		</antcall>
+		<antcall target="create.web.xml.footer">
+			<param name="servlet.type" value="client"/>
+			<param name="web.xml.file" value="${client.web.xml.file}"/>
+		</antcall>
+		<antcall target="create.jboss-web.xml.footer">
+			<param name="servlet.type" value="client"/>
+			<param name="jboss.web.xml.file" value="${client.jboss.web.xml.file}"/>
+		</antcall>
+	</target>
+	<target name="decide.server" if="has.server">
+		<property mame="server.web.xml.file" value="${webroot.dir}/server/${module.name}/WEB-INF/web.xml"/>
+		<property mame="server.jboss.web.xml.file" value="${webroot.dir}/server/${module.name}/WEB-INF/jboss-web.xml"/>
+		<antcall target="create.web.xml.header">
+			<param name="servlet.type" value="server"/>
+			<param name="war.description" value="${server.war.description}"/>
+			<param name="display.name" value="${server.war.display.name}"/>
+			<param name="web.xml.file" value="${server.web.xml.file}"/>
+		</antcall>
+		<antcall target="create.jboss-web.xml.header">
+			<param name="servlet.type" value="server"/>
+			<param name="jboss.web.xml.file" value="${server.jboss.web.xml.file}"/>
+		</antcall>
+		<antcall target="create.dd.own.body">
+			<param name="for.servlet.type" value="server"/>
+			<param name="web.xml.file" value="${server.web.xml.file}"/>
+			<param name="jboss.web.xml.file" value="${server.jboss.web.xml.file}"/>
+		</antcall>
+		<antcall target="create.web.xml.footer">
+			<param name="servlet.type" value="server"/>
+			<param name="web.xml.file" value="${server.web.xml.file}"/>
+		</antcall>
+		<antcall target="create.jboss-web.xml.footer">
+			<param name="servlet.type" value="server"/>
+			<param name="jboss.web.xml.file" value="${server.jboss.web.xml.file}"/>
+		</antcall>
+	</target>
+	<target name="create.dd.own.body">
+		<antcall target="create.dd.per.module.servlet.1"/>
+		<antcall target="create.dd.per.module.servlet.2"/>
+		<antcall target="create.dd.per.module.servlet.3"/>
+		<antcall target="create.dd.per.module.servlet.4"/>
+		<antcall target="create.dd.per.module.servlet.5"/>
+		<antcall target="create.dd.per.module.ejb-ref.1"/>
+		<antcall target="create.dd.per.module.ejb-ref.2"/>
+		<antcall target="create.dd.per.module.ejb-ref.3"/>
+		<antcall target="create.dd.per.module.ejb-ref.4"/>
+		<antcall target="create.dd.per.module.ejb-ref.5"/>
+		<antcall target="create.dd.per.module.taglib.1"/>
+		<antcall target="create.dd.per.module.taglib.2"/>
+		<antcall target="create.dd.per.module.taglib.3"/>
+		<antcall target="create.dd.per.module.taglib.4"/>
+		<antcall target="create.dd.per.module.taglib.5"/>
+	</target>
+	<target name="create.dd.per.module.servlet.1" if="servlet.name.1">
+		<condition property="can.create.body">
+			<equals arg1="${for.servlet.type}" arg2="${servlet.type.1}"/>
+		</condition>
+		<antcall target="create.dd.body.per.servlet">
+			<param name="servlet.name" value="${servlet.name.1}"/>
+			<param name="servlet.display.name" value="${servlet.display.name.1}"/>
+			<param name="servlet.description" value="${servlet.description.1}"/>
+			<param name="servlet.class" value="${servlet.class.1}"/>
+			<param name="servlet.load.on.startup" value="${servlet.load.on.startup.1}"/>
+			<param name="servlet.type" value="${servlet.type.1}"/>
+		</antcall>
+	</target>
+	<target name="create.dd.per.module.servlet.2" if="servlet.name.2">
+		<condition property="can.create.body">
+			<equals arg1="${for.servlet.type}" arg2="${servlet.type.2}"/>
+		</condition>
+		<antcall target="create.dd.body.per.servlet">
+			<param name="servlet.name" value="${servlet.name.2}"/>
+			<param name="servlet.display.name" value="${servlet.display.name.2}"/>
+			<param name="servlet.description" value="${servlet.description.2}"/>
+			<param name="servlet.class" value="${servlet.class.2}"/>
+			<param name="servlet.load.on.startup" value="${servlet.load.on.startup.2}"/>
+			<param name="servlet.type" value="${servlet.type.2}"/>
+		</antcall>
+	</target>
+	<target name="create.dd.per.module.servlet.3" if="servlet.name.3">
+		<condition property="can.create.body">
+			<equals arg1="${for.servlet.type}" arg2="${servlet.type.1}"/>
+		</condition>
+		<antcall target="create.dd.body.per.servlet">
+			<param name="servlet.name" value="${servlet.name.3}"/>
+			<param name="servlet.display.name" value="${servlet.display.name.3}"/>
+			<param name="servlet.description" value="${servlet.description.3}"/>
+			<param name="servlet.class" value="${servlet.class.3}"/>
+			<param name="servlet.load.on.startup" value="${servlet.load.on.startup.3}"/>
+			<param name="servlet.type" value="${servlet.type.3}"/>
+		</antcall>
+	</target>
+	<target name="create.dd.per.module.servlet.4" if="servlet.name.4">
+		<condition property="can.create.body">
+			<equals arg1="${for.servlet.type}" arg2="${servlet.type.1}"/>
+		</condition>
+		<antcall target="create.dd.body.per.servlet">
+			<param name="servlet.name" value="${servlet.name.4}"/>
+			<param name="servlet.display.name" value="${servlet.display.name.4}"/>
+			<param name="servlet.description" value="${servlet.description.4}"/>
+			<param name="servlet.class" value="${servlet.class.4}"/>
+			<param name="servlet.load.on.startup" value="${servlet.load.on.startup.4}"/>
+			<param name="servlet.type" value="${servlet.type.4}"/>
+		</antcall>
+	</target>
+	<target name="create.dd.per.module.servlet.5" if="servlet.name.5">
+		<condition property="can.create.body">
+			<equals arg1="${for.servlet.type}" arg2="${servlet.type.1}"/>
+		</condition>
+		<antcall target="create.dd.body.per.servlet">
+			<param name="servlet.name" value="${servlet.name.5}"/>
+			<param name="servlet.display.name" value="${servlet.display.name.5}"/>
+			<param name="servlet.description" value="${servlet.description.5}"/>
+			<param name="servlet.class" value="${servlet.class.5}"/>
+			<param name="servlet.load.on.startup" value="${servlet.load.on.startup.5}"/>
+			<param name="servlet.type" value="${servlet.type.5}"/>
+		</antcall>
+	</target>
+	<target name="create.dd.per.module.ejb-ref.1" if="ejb.ref.name.1">
+		<antcall target="create.dd.body.per.ejb.ref">
+			<param name="ejb.ref.name" value="${ejb.ref.name.1}"/>
+			<param name="ejb.ref.type" value="${ejb.ref.type.1}"/>
+			<param name="ejb.ref.home" value="${ejb.ref.home.1}"/>
+			<param name="ejb.ref.remote" value="${ejb.ref.remote.1}"/>
+			<param name="ejb.ref.jndi.name" value="${ejb.ref.jndi.name.1}"/>
+			<param name="servlet.type" value="${for.servlet.type}"/>
+		</antcall>
+	</target>
+	<target name="create.dd.per.module.ejb-ref.2" if="ejb.ref.name.2">
+		<antcall target="create.dd.body.per.ejb.ref">
+			<param name="ejb.ref.name" value="${ejb.ref.name.2}"/>
+			<param name="ejb.ref.type" value="${ejb.ref.type.2}"/>
+			<param name="ejb.ref.home" value="${ejb.ref.home.2}"/>
+			<param name="ejb.ref.remote" value="${ejb.ref.remote.2}"/>
+			<param name="ejb.ref.jndi.name" value="${ejb.ref.jndi.name.2}"/>
+			<param name="servlet.type" value="${for.servlet.type}"/>
+		</antcall>
+	</target>
+	<target name="create.dd.per.module.ejb-ref.3" if="ejb.ref.name.3">
+		<antcall target="create.dd.body.per.ejb.ref">
+			<param name="ejb.ref.name" value="${ejb.ref.name.3}"/>
+			<param name="ejb.ref.type" value="${ejb.ref.type.3}"/>
+			<param name="ejb.ref.home" value="${ejb.ref.home.3}"/>
+			<param name="ejb.ref.remote" value="${ejb.ref.remote.3}"/>
+			<param name="ejb.ref.jndi.name" value="${ejb.ref.jndi.name.3}"/>
+			<param name="servlet.type" value="${for.servlet.type}"/>
+		</antcall>
+	</target>
+	<target name="create.dd.per.module.ejb-ref.4" if="ejb.ref.name.4">
+		<antcall target="create.dd.body.per.ejb.ref">
+			<param name="ejb.ref.name" value="${ejb.ref.name.4}"/>
+			<param name="ejb.ref.type" value="${ejb.ref.type.4}"/>
+			<param name="ejb.ref.home" value="${ejb.ref.home.4}"/>
+			<param name="ejb.ref.remote" value="${ejb.ref.remote.4}"/>
+			<param name="ejb.ref.jndi.name" value="${ejb.ref.jndi.name.4}"/>
+			<param name="servlet.type" value="${for.servlet.type}"/>
+		</antcall>
+	</target>
+	<target name="create.dd.per.module.ejb-ref.5" if="ejb.ref.name.5">
+		<antcall target="create.dd.body.per.ejb.ref">
+			<param name="ejb.ref.name" value="${ejb.ref.name.5}"/>
+			<param name="ejb.ref.type" value="${ejb.ref.type.5}"/>
+			<param name="ejb.ref.home" value="${ejb.ref.home.5}"/>
+			<param name="ejb.ref.remote" value="${ejb.ref.remote.5}"/>
+			<param name="ejb.ref.jndi.name" value="${ejb.ref.jndi.name.5}"/>
+			<param name="servlet.type" value="${for.servlet.type}"/>
+		</antcall>
+	</target>
+	<target name="create.dd.per.module.taglib.1" if="taglib.uri.1">
+		<antcall target="create.dd.body.per.taglib">
+			<param name="taglib.uri" value="${taglib.uri.1}"/>
+			<param name="taglib.location" value="${taglib.location.1}"/>
+			<param name="servlet.type" value="${for.servlet.type}"/>
+		</antcall>
+	</target>
+	<target name="create.dd.per.module.taglib.2" if="taglib.uri.2">
+		<antcall target="create.dd.body.per.taglib">
+			<param name="taglib.uri" value="${taglib.uri.2}"/>
+			<param name="taglib.location" value="${taglib.location.2}"/>
+			<param name="servlet.type" value="${for.servlet.type}"/>
+		</antcall>
+	</target>
+	<target name="create.dd.per.module.taglib.3" if="taglib.uri.3">
+		<antcall target="create.dd.body.per.taglib">
+			<param name="taglib.uri" value="${taglib.uri.3}"/>
+			<param name="taglib.location" value="${taglib.location.3}"/>
+			<param name="servlet.type" value="${for.servlet.type}"/>
+		</antcall>
+	</target>
+	<target name="create.dd.per.module.taglib.4" if="taglib.uri.4">
+		<antcall target="create.dd.body.per.taglib">
+			<param name="taglib.uri" value="${taglib.uri.4}"/>
+			<param name="taglib.location" value="${taglib.location.4}"/>
+			<param name="servlet.type" value="${for.servlet.type}"/>
+		</antcall>
+	</target>
+	<target name="create.dd.per.module.taglib.5" if="taglib.uri.5">
+		<antcall target="create.dd.body.per.taglib">
+			<param name="taglib.uri" value="${taglib.uri.5}"/>
+			<param name="taglib.location" value="${taglib.location.5}"/>
+			<param name="servlet.type" value="${for.servlet.type}"/>
+		</antcall>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Create the deployment descriptors for app				                                         -->
+	<!-- =================================================================== -->
+	<!--target name="create.ear.dd">
+    <antcall target="create.application.xml.header"/>
+    <antcall target="create.dd.module.own"/>
+    <antcall target="create.dd.module.1"/>
+    <antcall target="create.dd.module.2"/>
+    <antcall target="create.dd.module.3"/>
+    <antcall target="create.dd.module.4"/>
+    <antcall target="create.dd.module.5"/>
+    <antcall target="create.application.xml.footer"/>
+  </target>
+
+  <target name="create.dd.module.1" if="deplib.module.1">
+    <antcall target="create.dd.body.per.module">
+      <param name="deplib.module.layer" value="${deplib.module.layer.1}"/>
+      <param name="deplib.module" value="${deplib.module.1}"/>
+    </antcall>
+  </target>
+
+  <target name="create.dd.module.2" if="deplib.module.2">
+    <antcall target="create.dd.body.per.module">
+      <param name="deplib.module.layer" value="${deplib.module.layer.2}"/>
+      <param name="deplib.module" value="${deplib.module.2}"/>
+    </antcall>
+  </target>
+
+  <target name="create.dd.module.3" if="deplib.module.3">
+    <antcall target="create.dd.body.per.module">
+      <param name="deplib.module.layer" value="${deplib.module.layer.3}"/>
+      <param name="deplib.module" value="${deplib.module.3}"/>
+    </antcall>
+  </target>
+
+  <target name="create.dd.module.4" if="deplib.module.4">
+    <antcall target="create.dd.body.per.module">
+      <param name="deplib.module.layer" value="${deplib.module.layer.4}"/>
+      <param name="deplib.module" value="${deplib.module.4}"/>
+    </antcall>
+  </target>
+
+  <target name="create.dd.module.5" if="deplib.module.5">
+    <antcall target="create.dd.body.per.module">
+      <param name="deplib.module.layer" value="${deplib.module.layer.5}"/>
+      <param name="deplib.module" value="${deplib.module.5}"/>
+    </antcall>
+  </target-->
+	<!-- =================================================================== -->
+	<!-- Define the application.xml file name                                -->
+	<!-- =================================================================== -->
+	<target name="define.app.xml" unless="application.xml.file">
+		<property name="application.xml.file" value="${top.build.dir}/deploy/META-INF/${module.name}/application.xml"/>
+		<delete file="${application.xml.file}"/>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Create the Headers for deployment descriptors for Ear               -->
+	<!-- =================================================================== -->
+	<target name="ear.dd.header" depends="define.app.xml" unless="build.default">
+		<echo message="[${layer.name}-${module.name}] Executing target:ear.dd.header"/>
+		<antcall target="create.application.xml.header"/>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Create the Footers for deployment descriptors for Ear               -->
+	<!-- =================================================================== -->
+	<target name="ear.dd.footer" if="application.xml.file" unless="build.default">
+		<echo message="[${layer.name}-${module.name}] Executing target:ear.dd.footer"/>
+		<antcall target="create.application.xml.footer"/>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Append Own Body for deployment descriptors for Ear                  -->
+	<!-- =================================================================== -->
+	<target name="ear.dd.body.own" if="application.xml.file">
+		<echo message="[${layer.name}-${module.name}] Executing target:ear.dd.body.own"/>
+		<antcall target="create.dd.module.own"/>
+	</target>
+	<target name="create.dd.module.own">
+		<property file="./${layer.name}-${module.name}-dd.properties"/>
+		<antcall target="create.application.xml.body.ejb.1"/>
+		<antcall target="create.application.xml.body.ejb.2"/>
+		<antcall target="create.application.xml.body.ejb.3"/>
+		<antcall target="create.application.xml.body.ejb.4"/>
+		<antcall target="create.application.xml.body.ejb.5"/>
+		<antcall target="create.application.xml.body.web.1"/>
+		<antcall target="create.application.xml.body.web.2"/>
+		<antcall target="create.application.xml.body.web.3"/>
+		<antcall target="create.application.xml.body.web.4"/>
+		<antcall target="create.application.xml.body.web.5"/>
+	</target>
+	<!--target name="decide.application.xml.body.ejb.1" if="ejb.jar.1.comp.name">
+    <antcall target="create.application.xml.body.ejb.1">
+      <param name="ejb.jar.1" value="${layer.name}-${module.name}-${ejb.jar.1.comp.name}-ejb.jar"/>
+    </antcall>
+  </target>
+
+  <target name="decide.application.xml.body.ejb.2" if="ejb.jar.2.comp.name">
+    <antcall target="create.application.xml.body.ejb.2">
+      <param name="ejb.jar.2" value="${layer.name}-${module.name}-${ejb.jar.2.comp.name}-ejb.jar"/>
+    </antcall>
+  </target>
+
+  <target name="decide.application.xml.body.ejb.3" if="ejb.jar.3.comp.name">
+    <antcall target="create.application.xml.body.ejb.3">
+      <param name="ejb.jar.3" value="${layer.name}-${module.name}-${ejb.jar.3.comp.name}-ejb.jar"/>
+    </antcall>
+  </target>
+
+  <target name="decide.application.xml.body.ejb.4" if="ejb.jar.4.comp.name">
+    <antcall target="create.application.xml.body.ejb.4">
+      <param name="ejb.jar.4" value="${layer.name}-${module.name}-${ejb.jar.4.comp.name}-ejb.jar"/>
+    </antcall>
+  </target>
+
+  <target name="decide.application.xml.body.ejb.5" if="ejb.jar.5.comp.name">
+    <antcall target="create.application.xml.body.ejb.5">
+      <param name="ejb.jar.5" value="${layer.name}-${module.name}-${ejb.jar.5.comp.name}-ejb.jar"/>
+    </antcall>
+  </target-->
+	<!--target name="create.dd.body.per.module">
+    <property file="${deplib.dir}/${deplib.module.layer}-${deplib.module}-dd.properties"/>
+    <antcall target="create.application.xml.body.ejb.1"/>
+    <antcall target="create.application.xml.body.ejb.2"/>
+    <antcall target="create.application.xml.body.ejb.3"/>
+    <antcall target="create.application.xml.body.ejb.4"/>
+    <antcall target="create.application.xml.body.ejb.5"/>
+    <antcall target="create.application.xml.body.web.1"/>
+    <antcall target="create.application.xml.body.web.2"/>
+    <antcall target="create.application.xml.body.web.3"/>
+    <antcall target="create.application.xml.body.web.4"/>
+    <antcall target="create.application.xml.body.web.5"/>
+  </target-->
+	<target name="create.application.xml.body.ejb.1" if="ejb.jar.1">
+		<antcall target="create.application.xml.body.ejb">
+			<param name="ejb.jar" value="${ejb.jar.1}"/>
+		</antcall>
+	</target>
+	<target name="create.application.xml.body.ejb.2" if="ejb.jar.2">
+		<antcall target="create.application.xml.body.ejb">
+			<param name="ejb.jar" value="${ejb.jar.2}"/>
+		</antcall>
+	</target>
+	<target name="create.application.xml.body.ejb.3" if="ejb.jar.3">
+		<antcall target="create.application.xml.body.ejb">
+			<param name="ejb.jar" value="${ejb.jar.3}"/>
+		</antcall>
+	</target>
+	<target name="create.application.xml.body.ejb.4" if="ejb.jar.4">
+		<antcall target="create.application.xml.body.ejb">
+			<param name="ejb.jar" value="${ejb.jar.4}"/>
+		</antcall>
+	</target>
+	<target name="create.application.xml.body.ejb.5" if="ejb.jar.5">
+		<antcall target="create.application.xml.body.ejb">
+			<param name="ejb.jar" value="${ejb.jar.5}"/>
+		</antcall>
+	</target>
+	<target name="create.application.xml.body.web.1" if="web.uri.1">
+		<antcall target="create.application.xml.body.web">
+			<param name="web.uri" value="${web.uri.1}"/>
+			<param name="web.context.root" value="${web.context.root.1}"/>
+		</antcall>
+	</target>
+	<target name="create.application.xml.body.web.2" if="web.uri.2">
+		<antcall target="create.application.xml.body.web">
+			<param name="web.uri" value="${web.uri.2}"/>
+			<param name="web.context.root" value="${web.context.root.2}"/>
+		</antcall>
+	</target>
+	<target name="create.application.xml.body.web.3" if="web.uri.3">
+		<antcall target="create.application.xml.body.web">
+			<param name="web.uri" value="${web.uri.3}"/>
+			<param name="web.context.root" value="${web.context.root.3}"/>
+		</antcall>
+	</target>
+	<target name="create.application.xml.body.web.4" if="web.uri.4">
+		<antcall target="create.application.xml.body.web">
+			<param name="web.uri" value="${web.uri.4}"/>
+			<param name="web.context.root" value="${web.context.root.4}"/>
+		</antcall>
+	</target>
+	<target name="create.application.xml.body.web.5" if="web.uri.5">
+		<antcall target="create.application.xml.body.web">
+			<param name="web.uri" value="${web.uri.5}"/>
+			<param name="web.context.root" value="${web.context.root.5}"/>
+		</antcall>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Template of the jboss-web.xml file                                               -->
+	<!-- =================================================================== -->
+	<target name="create.jboss-web.xml.header">
+		<!-- Header -->
+		<echo file="${jboss.web.xml.file}">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+
+&lt;jboss-web&gt;
+    </echo>
+	</target>
+	<target name="create.jboss-web.xml.body">
+		<!-- Body -->
+		<echo file="${jboss.web.xml.file}" append="true">
+  &lt;ejb-ref&gt;
+    &lt;ejb-ref-name&gt;${ejb.ref.name}&lt;/ejb-ref-name&gt;
+    &lt;jndi-name>${ejb.ref.jndi.name}&lt;/jndi-name&gt;
+  &lt;/ejb-ref&gt;
+    </echo>
+	</target>
+	<target name="create.jboss-web.xml.footer">
+		<!-- Footer -->
+		<echo file="${jboss.web.xml.file}" append="true">
+&lt;/jboss-web&gt;
+    </echo>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Template of the web.xml file                                               -->
+	<!-- =================================================================== -->
+	<target name="create.web.xml.header">
+		<!-- Header -->
+		<echo file="${web.xml.file}">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+
+&lt;!DOCTYPE web-app PUBLIC &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN&quot;
+&quot;http://java.sun.com/j2ee/dtds/web-app_2_2.dtd&quot;&gt;
+&lt;web-app&gt;
+  &lt;display-name&gt;${display.name}&lt;/display-name&gt;
+  &lt;description&gt;${war.description}&lt;/description&gt;
+  &lt;distributable/&gt;
+  &lt;welcome-file-list&gt;&lt;/welcome-file-list&gt;
+    </echo>
+	</target>
+	<target name="create.web.xml.body">
+		<!-- Body -->
+	</target>
+	<target name="create.dd.body.per.servlet" if="can.create.body">
+		<echo file="${web.xml.file}" append="true">
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;${servlet.name}&lt;/servlet-name&gt;
+    &lt;display-name&gt;${servlet.display.name}&lt;/display-name&gt;
+    &lt;description&gt;${servlet.description}&lt;/description&gt;
+    &lt;servlet-class&gt;${servlet.class}&lt;/servlet-class&gt;
+    &lt;load-on-startup&gt;${servlet.load.on.startup}&lt;/load-on-startup&gt;
+  &lt;/servlet&gt;
+    </echo>
+	</target>
+	<target name="create.dd.body.per.ejb.ref">
+		<echo file="${web.xml.file}" append="true">
+  &lt;ejb-ref&gt;
+    &lt;ejb-ref-name&gt;${ejb.ref.name}&lt;/ejb-ref-name&gt;
+    &lt;ejb-ref-type&gt;${ejb.ref.type}&lt;/ejb-ref-type&gt;
+    &lt;home&gt;${ejb.ref.home}&lt;/home&gt;
+    &lt;remote&gt;${ejb.ref.remote}&lt;/remote&gt;
+  &lt;/ejb-ref&gt;
+    </echo>
+		<antcall target="create.jboss-web.xml.body"/>
+	</target>
+	<target name="create.dd.body.per.taglib">
+		<echo file="${web.xml.file}" append="true">
+  &lt;taglib&gt;
+    &lt;taglib-uri&gt;${taglib.uri}&lt;/taglib-uri&gt;
+    &lt;taglib-location&gt;${taglib.location}&lt;/taglib-location&gt;
+  &lt;/taglib&gt;
+    </echo>
+	</target>
+	<target name="create.web.xml.footer">
+		<!-- Footer -->
+		<echo file="${web.xml.file}" append="true">
+&lt;/web-app&gt;
+    </echo>
+	</target>
+	<!-- =================================================================== -->
+	<!-- Template of the application.xml file                                               -->
+	<!-- =================================================================== -->
+	<target name="create.application.xml.header">
+		<!-- Header -->
+		<echo file="${application.xml.file}">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+
+&lt;application&gt;
+  &lt;display-name&gt;${ear.display.name}&lt;/display-name&gt;
+    </echo>
+	</target>
+	<target name="create.application.xml.body.ejb">
+		<!-- Body -->
+		<echo file="${application.xml.file}" append="true">
+  &lt;module&gt;
+    &lt;ejb&gt;${ejb.jar}&lt;/ejb&gt;
+  &lt;/module&gt;
+    </echo>
+	</target>
+	<target name="create.application.xml.body.web">
+		<!-- Body -->
+		<echo file="${application.xml.file}" append="true">
+  &lt;module&gt;
+    &lt;web&gt;
+      &lt;web-uri&gt;${web.uri}&lt;/web-uri&gt;
+      &lt;context-root&gt;${web.context.root}&lt;/context-root&gt;
+    &lt;/web&gt;
+  &lt;/module&gt;
+    </echo>
+	</target>
+	<target name="create.application.xml.footer">
+		<!-- Footer -->
+		<echo file="${deploy.dir}/META-INF/${module.name}/application.xml" append="true">
+&lt;/application&gt;
+    </echo>
+	</target>
+</project>

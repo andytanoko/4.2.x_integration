@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+	<secure>false</secure>
+	<resource-managers/>
+	<enterprise-beans>
+         <entity>
+            <ejb-name>CertificateEntity</ejb-name>
+            <local-jndi-name>com.gridnode.pdip.base.certificate.entities.ejb.ICertificateLocalHome</local-jndi-name>
+            <!-- The get* methods are Marked Read-Only, as well the Accessors of this Methods.
+                 @See AbstractEntityBean for getterMethods -->
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+        </entity>
+	</enterprise-beans>
+</jboss>

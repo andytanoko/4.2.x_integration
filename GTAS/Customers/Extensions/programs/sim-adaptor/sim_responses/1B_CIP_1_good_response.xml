@@ -1,0 +1,58 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<uccnet:envelope communicationVersion="2.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fmcg="http://www.ean-ucc.org/schemas/1.3/fmcg" xmlns:hbc="http://www.uccnet.org/schemas/1.3/hbc" xmlns:hardlines="http://www.uccnet.org/schemas/1.3/hardlines" xmlns:produce="http://www.uccnet.org/schemas/1.3/produce" xmlns:uccnet="http://www.uccnet.org/schemas/2.2/uccnet" xmlns:eanucc="http://www.ean-ucc.org/schemas/1.3/eanucc" xmlns:otc="http://www.uccnet.org/schemas/1.3/otc"  xsi:schemaLocation="http://www.uccnet.org/schemas/2.2/uccnet http://www.testregistry.net/xmlschema/uccnet/2.2/Envelope.xsd ">
+<messageHeader>
+  <messageIdentifier>
+    <value>36379460</value>
+  </messageIdentifier>
+  <userId>UCCNET_SYSTEM</userId>
+  <representingParty>
+    <gln>0614141800001</gln>
+  </representingParty>
+</messageHeader>
+<body>
+<response>
+<acknowledge>
+<acknowledgement>
+<acknowledgementHeader type="PROCESSED" success="TRUE" duplicate="FALSE">
+  <entityIdentification>
+    <uniqueCreatorIdentification>15-Oct-2003 16:10</uniqueCreatorIdentification>
+    <globalLocationNumber>
+      <gln>0488222000006</gln>
+    </globalLocationNumber>
+  </entityIdentification>
+  <messageIdentifier>
+    <value>15-Oct-2003 16:10</value>
+  </messageIdentifier>
+</acknowledgementHeader>
+<subdocumentValid success="TRUE">
+<documentIdentifier>
+  <typedEntityIdentification type="TRANSACTION">
+    <entityIdentification>
+      <uniqueCreatorIdentification>m3 cip 001</uniqueCreatorIdentification>
+      <globalLocationNumber>
+        <gln>0488222000006</gln>
+      </globalLocationNumber>
+    </entityIdentification>
+  </typedEntityIdentification>
+</documentIdentifier>
+<subdocumentValid xmlns:uccnet="http://www.uccnet.org/schemas/2.2/uccnet" xmlns:eanucc="http://www.ean-ucc.org/schemas/1.3/eanucc" validationKey="" success="TRUE">
+<documentIdentifier>
+<typedEntityIdentification type="PUBLICATION_COMMAND">
+<entityIdentification xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">                               <uniqueCreatorIdentification>m3 cip 002</uniqueCreatorIdentification>                               <globalLocationNumber>                         <gln>0488222000006</gln>                               </globalLocationNumber>                   </entityIdentification>
+</typedEntityIdentification>
+</documentIdentifier>
+<subdocumentValid success="TRUE">
+<documentIdentifier>
+<catalogueItemPublication>
+<catalogueItemReference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">                         <gtin>00048822299929</gtin>                         <dataSource>0488222000006</dataSource>                         <targetMarket>                            <targetMarketCountryCode>840</targetMarketCountryCode>                         </targetMarket>                      </catalogueItemReference>
+<publishToGLN xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">0474636000008</publishToGLN>
+</catalogueItemPublication>
+</documentIdentifier>
+</subdocumentValid>
+</subdocumentValid>
+</subdocumentValid>
+</acknowledgement>
+</acknowledge>
+</response>
+</body>
+</uccnet:envelope>

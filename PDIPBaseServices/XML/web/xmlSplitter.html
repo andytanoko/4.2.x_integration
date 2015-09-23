@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>
+xmlConversion
+</title>
+<script language="JavaScript">
+<!--
+function checkVal()
+{
+ document.myfrm.submit();
+}
+ // -->
+</script>
+
+</head>
+<body BGCOLOR="#666699">
+<h1>
+XML Splitter Service ...
+</h1>
+<!--action=FileServlet-->
+<form ENCTYPE="multipart/form-data" method="post" action="InterfaceController" name="myfrm">
+<br><br>
+<b>Select the Conversion Service</b> &nbsp;&nbsp;&nbsp
+<br>
+<br>
+<br>
+<b>StyleSheet File </b>&nbsp;&nbsp;
+<input type="file" name="SRCFILE">
+<br>
+<b>Input File &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="file" name="RULESFILE">
+<br>
+<b>Xpath &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;
+<input type = "text" name = "Xpath" size=20 value="">
+<br>
+<b>Parameter &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;
+<input type = "text" name = "Parameter" size=20 value="">
+
+<input type = hidden name="conversion" value="Splitter" >
+<br>
+<br>
+<input type="Submit" name="Submit" value="Submit">
+&nbsp;&nbsp;
+<input type="Reset" name="Clear" value="Clear">
+<br>
+
+
+</form>
+</body>
+</html>

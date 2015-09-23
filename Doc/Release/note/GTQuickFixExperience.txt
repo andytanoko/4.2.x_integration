@@ -1,0 +1,24 @@
+
+
+# Quick Fix Release experience
+Whenever we release one urgent fix, we will increase the GT build number and tag the project source code in SVN.
+
+I usually work in the GT4.0.2.X or 4.0.2_dev which is the incremental baseline. When the offended code is identified containg bug, i will check which version of GT the customer having issue.
+
+1) If customer GT version is a base GT like GT4.0.2, and the offended code in the GT4.0.2 incremental baseline (Assume at GT4.0.2.4) is same as the base GT (GT4.0.2), i will just make the quick fix from the incremental baseline. The jar will be extracted from the GT402 binary release, and the updated java class file will be updated into it.
+The build version will be incremented (it will be GT4.0.2.5), Thus we need the customer to apply all the quick fix we have so far (GT4.0.2.1 to 4.0.2.4). It is kind of cumalative patch.
+
+
+
+2) If the customer build version is GT4.0.2.1, the offended code is still same as the incremental baseline, we can also make changes from incremental baseline.
+3) If the customer build version is GT4.0.2.1, the offended code is no longer same as the incremtal baseline (due to we update the code for other enhancemnt/fix and we have GT4.0.2.6), we can also fix directly on the incremental baseline, and request the customer to apply all the available quick fix.
+
+
+# NOTE: for GT4.0.2.X in SVN
+
+The GT4.0.2.1 the code different is no longer just containing the quick fix listed in GT4.0.2 quick fix folder. It actually containing some fix from GT4.0.X. See changeset 44, 45, 46,47. 
+
+Although we have quick fix version GT4.0.2.5, the corresponding "tag" GT4.0.2.5 is not only containing the updated code regarding the 5 quick fix, but also some fixes from GT4.0.X. See above
+
+
+See the 4.0.2 revision log for more detail....

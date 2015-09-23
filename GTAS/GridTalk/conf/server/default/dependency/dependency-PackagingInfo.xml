@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDependency name="PackagingInfo">
+  <Checker class-name="com.gridnode.pdip.app.channel.helpers.EntityDependencyChecker"
+           method-name="checkDependentChannelnfosForPackagingInfo">
+    <Param type="java.lang.Long" getter-method="getUId"/>
+  </Checker>
+</EntityDependency>

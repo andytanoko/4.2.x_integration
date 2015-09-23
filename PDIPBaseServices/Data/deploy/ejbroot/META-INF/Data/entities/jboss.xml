@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+	<secure>false</secure>
+	<container-configurations />
+	<resource-managers />
+	<enterprise-beans>
+		<entity>
+			<ejb-name>BusinessDocument</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.data.entities.ejb.IBusinessDocumentHome</jndi-name>
+		</entity>
+		<entity>
+			<ejb-name>DataItem</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.data.entities.ejb.IDataItemHome</jndi-name>
+		</entity>
+		<entity>
+			<ejb-name>DataItemLocationMap</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.data.entities.ejb.IDataItemLocationMapHome</jndi-name>
+		</entity>
+		<entity>
+			<ejb-name>StringData</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.data.entities.ejb.IStringDataHome</jndi-name>
+		</entity>
+		<entity>
+			<ejb-name>ByteData</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.data.entities.ejb.IByteDataHome</jndi-name>
+		</entity>
+	</enterprise-beans>
+</jboss>

@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EDI850>
+   <PO>
+      <POLIN>
+		 <HEADER>
+            <DataIntNo>000001266</DataIntNo>
+            <TransNo>0002</TransNo>
+            <POType>RL</POType>
+            <PONum>H4F2H04551</PONum>
+            <PODate>20070817</PODate>
+            <VNCODE>906118061001</VNCODE>
+            <EVCODE>SAPAPL</EVCODE>
+            <POCODE>SBA444340 Courtney Edmonds</POCODE>
+            <OQCODE>0200828361</OQCODE>
+            <PHCODE>GEN</PHCODE>
+            <_9HCODE>SYCA</_9HCODE>
+            <MOCODE>F242</MOCODE>
+            <_4CCODE>AU</_4CCODE>
+            <EVCODE>SAPAPL</EVCODE>
+            <VNCODE>680003073001</VNCODE>
+            <POCODE>SBA444391 Bawej Norbert</POCODE>
+            <OQCODE>0200828551</OQCODE>
+            <PHCODE>GEN</PHCODE>
+            <_9HCODE>TKAT</_9HCODE>
+            <MOCODE>F242</MOCODE>
+            <PKG01/>
+            <PKG02/>
+            <PKG05/>
+            <TD502/>
+            <TD503/>
+            <ST01>HEWLETT PACKARD AUSTRALIA PTY LTD</ST01>
+            <ST021>ATTN:COURTNEY EDMONDS</ST021>
+            <ST022>3 RICHARDSON PLACE</ST022>
+            <ST031/>
+            <ST032/>
+            <ST041>AU</ST041>
+            <ST042/>
+            <ST043>AU</ST043>
+            <ST044>AU</ST044>
+            <ST045>CC</ST045>
+            <ST046>Australia</ST046>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <PL01>AMTEK INDUSTRIES PTE LTD</PL01>
+            <PL021/>
+            <PL022/>
+            <PL031/>
+            <PL032/>
+            <PL041/>
+            <PL042/>
+            <PL043/>
+            <PL044/>
+            <PL045/>
+            <PL046/>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <SO01>HEWLETT-PACKARD SINGAPORE (PRIVATE)</SO01>
+            <SO021>LIMITED RCB NO.: 197000137C</SO021>
+            <SO022>P.O.BOX 200, ALEXANDRA POST OFFICE</SO022>
+            <SO031>SINGAPORE 911507</SO031>
+            <SO032>P.O.BOX 200, ALEXANDRA POST OFFICE</SO032>
+            <SO041/>
+            <SO042/>
+            <SO043>SG</SO043>
+            <SO044>SG</SO044>
+            <SO045>CC</SO045>
+            <SO046>Singapore</SO046>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <ST01>HEWLETT-PACKARD (MALAYSIA) SDN BHD</ST01>
+            <ST021>HP TOWERS, NO 12,JLN GELENGGANG</ST021>
+            <ST022>BUKIT DAMANSARA</ST022>
+            <ST031>50490 KUALA LUMPUR</ST031>
+            <ST032>ATTN:SEGAR RAJOO 60 323323233</ST032>
+            <ST041>MY</ST041>
+            <ST042/>
+            <ST043>MY</ST043>
+            <ST044>MY</ST044>
+            <ST045>CC</ST045>
+            <ST046>Malaysia</ST046>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <PL01>AMTEK INDUSTRIES PTE LTD</PL01>
+            <PL021/>
+            <PL022/>
+            <PL031/>
+            <PL032/>
+            <PL041/>
+            <PL042/>
+            <PL043/>
+            <PL044/>
+            <PL045/>
+            <PL046/>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <BT01>HEWLETT-PACKARD ASIA PACIFIC PTE.</BT01>
+            <BT021>LTD. RCB NO.: 198703164G</BT021>
+            <BT022>P.O.BOX 200, ALEXANDRA POST OFFICE</BT022>
+            <BT031>SINGAPORE 911507</BT031>
+            <BT032>P.O.BOX 200, ALEXANDRA POST OFFICE</BT032>
+            <BT041/>
+            <BT042/>
+            <BT043>SG</BT043>
+            <BT044>SG</BT044>
+            <BT045>CC</BT045>
+            <BT046>Singapore</BT046>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <BG01>HEWLETT-PACKARD ASIA PACIFIC PTE.</BG01>
+            <BG021>LTD. RCB NO.: 198703164G</BG021>
+            <BG022>P.O.BOX 200, ALEXANDRA POST OFFICE</BG022>
+            <BG031>SINGAPORE 911507</BG031>
+            <BG032>P.O.BOX 200, ALEXANDRA POST OFFICE</BG032>
+            <BG041/>
+            <BG042/>
+            <BG043>SG</BG043>
+            <BG044>SG</BG044>
+            <BG045>CC</BG045>
+            <BG046>Singapore</BG046>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <TOTLIN>1</TOTLIN>
+         </HEADER>
+         <DETAIL>
+            <LINE>
+               <RESLIN>1</RESLIN>
+               <ORDLIN>10</ORDLIN>
+               <Ordqty>1</Ordqty>
+               <UOM>EA</UOM>
+               <SKU/>
+               <PL>J8699A#ABG</PL>
+               <MKU>00001</MKU>
+               <UPCCode/>
+               <SO_Line>882780284531</SO_Line>
+               <DLEC>0100</DLEC>
+               <PO_Line/>
+               <HP_ITEM/>
+               <MKUDSC/>
+               <LCODE/>
+               <REFCODE1>TN</REFCODE1>
+               <REFDSC1>SYCA40546689</REFDSC1>
+               <REFCODE2>TN</REFCODE2>
+               <REFDSC2>SYCA40546689</REFDSC2>
+               <TDESC/>
+               <FOB03>DDU DELIVERED DUTY UNPAID</FOB03>
+               <FOB07>DF</FOB07>
+               <DLVDATE>20070821</DLVDATE>
+               <SHIPDATE>20070821</SHIPDATE>
+               <TD502/>
+               <TD503/>
+               <TD504/>
+               <TD512/>
+               <N902/>
+               <MSG1/>
+               <MSG2/>
+               <MSG3/>
+               <MSG4/>
+               <MSG5/>
+               <MSG6/>
+               <MSG7/>
+               <MSG8/>
+               <MSG9/>
+               <MSG10/>
+            </LINE>
+            <LINE>
+               <RESLIN>1</RESLIN>
+               <ORDLIN>10</ORDLIN>
+               <Ordqty>1</Ordqty>
+               <UOM>EA</UOM>
+               <SKU/>
+               <PL>J8699A#ABG</PL>
+               <MKU>00001</MKU>
+               <UPCCode/>
+               <SO_Line>882780284531</SO_Line>
+               <DLEC>0100</DLEC>
+               <PO_Line/>
+               <HP_ITEM/>
+               <MKUDSC/>
+               <LCODE/>
+               <REFCODE1>TN</REFCODE1>
+               <REFDSC1>SYCA40546689</REFDSC1>
+               <REFCODE2>TN</REFCODE2>
+               <REFDSC2>SYCA40546689</REFDSC2>
+               <TDESC/>
+               <FOB03>DDU DELIVERED DUTY UNPAID</FOB03>
+               <FOB07>DF</FOB07>
+               <DLVDATE>20070821</DLVDATE>
+               <SHIPDATE>20070821</SHIPDATE>
+               <TD502/>
+               <TD503/>
+               <TD504/>
+               <TD512/>
+               <N902/>
+               <MSG1/>
+               <MSG2/>
+               <MSG3/>
+               <MSG4/>
+               <MSG5/>
+               <MSG6/>
+               <MSG7/>
+               <MSG8/>
+               <MSG9/>
+               <MSG10/>
+            </LINE>
+         </DETAIL>
+      </POLIN>
+      <POLIN>
+          <HEADER>
+            <DataIntNo>000001266</DataIntNo>
+            <TransNo>0001</TransNo>
+            <POType>RL</POType>
+            <PONum>32F2H04010</PONum>
+            <PODate>20070817</PODate>
+            <VNCODE>906118061001</VNCODE>
+            <EVCODE>SAPAPL</EVCODE>
+            <POCODE>SBA444340 Courtney Edmonds</POCODE>
+            <OQCODE>0200828361</OQCODE>
+            <PHCODE>GEN</PHCODE>
+            <_9HCODE>SYCA</_9HCODE>
+            <MOCODE>F242</MOCODE>
+            <_4CCODE>AU</_4CCODE>
+            <EVCODE>SAPAPL</EVCODE>
+            <VNCODE>680003073001</VNCODE>
+            <POCODE>SBA444391 Bawej Norbert</POCODE>
+            <OQCODE>0200828551</OQCODE>
+            <PHCODE>GEN</PHCODE>
+            <_9HCODE>TKAT</_9HCODE>
+            <MOCODE>F242</MOCODE>
+            <PKG01/>
+            <PKG02/>
+            <PKG05/>
+            <TD502/>
+            <TD503/>
+            <ST01>HEWLETT PACKARD AUSTRALIA PTY LTD</ST01>
+            <ST021>ATTN:COURTNEY EDMONDS</ST021>
+            <ST022>3 RICHARDSON PLACE</ST022>
+            <ST031/>
+            <ST032/>
+            <ST041>AU</ST041>
+            <ST042/>
+            <ST043>AU</ST043>
+            <ST044>AU</ST044>
+            <ST045>CC</ST045>
+            <ST046>Australia</ST046>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <PL01>AMTEK INDUSTRIES PTE LTD</PL01>
+            <PL021/>
+            <PL022/>
+            <PL031/>
+            <PL032/>
+            <PL041/>
+            <PL042/>
+            <PL043/>
+            <PL044/>
+            <PL045/>
+            <PL046/>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <SO01>HEWLETT-PACKARD SINGAPORE (PRIVATE)</SO01>
+            <SO021>LIMITED RCB NO.: 197000137C</SO021>
+            <SO022>P.O.BOX 200, ALEXANDRA POST OFFICE</SO022>
+            <SO031>SINGAPORE 911507</SO031>
+            <SO032>P.O.BOX 200, ALEXANDRA POST OFFICE</SO032>
+            <SO041/>
+            <SO042/>
+            <SO043>SG</SO043>
+            <SO044>SG</SO044>
+            <SO045>CC</SO045>
+            <SO046>Singapore</SO046>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <ST01>HEWLETT-PACKARD (MALAYSIA) SDN BHD</ST01>
+            <ST021>HP TOWERS, NO 12,JLN GELENGGANG</ST021>
+            <ST022>BUKIT DAMANSARA</ST022>
+            <ST031>50490 KUALA LUMPUR</ST031>
+            <ST032>ATTN:SEGAR RAJOO 60 323323233</ST032>
+            <ST041>MY</ST041>
+            <ST042/>
+            <ST043>MY</ST043>
+            <ST044>MY</ST044>
+            <ST045>CC</ST045>
+            <ST046>Malaysia</ST046>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <PL01>AMTEK INDUSTRIES PTE LTD</PL01>
+            <PL021/>
+            <PL022/>
+            <PL031/>
+            <PL032/>
+            <PL041/>
+            <PL042/>
+            <PL043/>
+            <PL044/>
+            <PL045/>
+            <PL046/>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <BT01>HEWLETT-PACKARD ASIA PACIFIC PTE.</BT01>
+            <BT021>LTD. RCB NO.: 198703164G</BT021>
+            <BT022>P.O.BOX 200, ALEXANDRA POST OFFICE</BT022>
+            <BT031>SINGAPORE 911507</BT031>
+            <BT032>P.O.BOX 200, ALEXANDRA POST OFFICE</BT032>
+            <BT041/>
+            <BT042/>
+            <BT043>SG</BT043>
+            <BT044>SG</BT044>
+            <BT045>CC</BT045>
+            <BT046>Singapore</BT046>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <BG01>HEWLETT-PACKARD ASIA PACIFIC PTE.</BG01>
+            <BG021>LTD. RCB NO.: 198703164G</BG021>
+            <BG022>P.O.BOX 200, ALEXANDRA POST OFFICE</BG022>
+            <BG031>SINGAPORE 911507</BG031>
+            <BG032>P.O.BOX 200, ALEXANDRA POST OFFICE</BG032>
+            <BG041/>
+            <BG042/>
+            <BG043>SG</BG043>
+            <BG044>SG</BG044>
+            <BG045>CC</BG045>
+            <BG046>Singapore</BG046>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <TOTLIN>2</TOTLIN>
+         </HEADER>
+         <DETAIL>
+            <LINE>
+               <RESLIN>1</RESLIN>
+               <ORDLIN>10</ORDLIN>
+               <Ordqty>6</Ordqty>
+               <UOM>EA</UOM>
+               <SKU/>
+               <PL>J8987A#ACC</PL>
+               <MKU>00001</MKU>
+               <UPCCode/>
+               <SO_Line>882780114760</SO_Line>
+               <DLEC>0100</DLEC>
+               <PO_Line/>
+               <HP_ITEM/>
+               <MKUDSC/>
+               <LCODE/>
+               <REFCODE1>TN</REFCODE1>
+               <REFDSC1>TKAT40546690</REFDSC1>
+               <REFCODE2>TN</REFCODE2>
+               <REFDSC2>TKAT40546690</REFDSC2>
+               <TDESC/>
+               <FOB03>DDU DELIVERED DUTY UNPAID</FOB03>
+               <FOB07>DF</FOB07>
+               <DLVDATE>20070821</DLVDATE>
+               <SHIPDATE>20070821</SHIPDATE>
+               <TD502/>
+               <TD503/>
+               <TD504/>
+               <TD512/>
+               <N902/>
+               <MSG1/>
+               <MSG2/>
+               <MSG3/>
+               <MSG4/>
+               <MSG5/>
+               <MSG6/>
+               <MSG7/>
+               <MSG8/>
+               <MSG9/>
+               <MSG10/>
+            </LINE>
+         </DETAIL>
+      </POLIN>
+	  <POLIN>
+         <HEADER>
+            <DataIntNo>000001266</DataIntNo>
+            <TransNo>0002</TransNo>
+            <POType>RL</POType>
+            <PONum>JJJKKK999</PONum>
+            <PODate>20070817</PODate>
+            <VNCODE>906118061001</VNCODE>
+            <EVCODE>SAPAPL</EVCODE>
+            <POCODE>SBA444340 Courtney Edmonds</POCODE>
+            <OQCODE>0200828361</OQCODE>
+            <PHCODE>GEN</PHCODE>
+            <_9HCODE>SYCA</_9HCODE>
+            <MOCODE>F242</MOCODE>
+            <_4CCODE>AU</_4CCODE>
+            <EVCODE>SAPAPL</EVCODE>
+            <VNCODE>680003073001</VNCODE>
+            <POCODE>SBA444391 Bawej Norbert</POCODE>
+            <OQCODE>0200828551</OQCODE>
+            <PHCODE>GEN</PHCODE>
+            <_9HCODE>TKAT</_9HCODE>
+            <MOCODE>F242</MOCODE>
+            <PKG01/>
+            <PKG02/>
+            <PKG05/>
+            <TD502/>
+            <TD503/>
+            <ST01>HEWLETT PACKARD AUSTRALIA PTY LTD</ST01>
+            <ST021>ATTN:COURTNEY EDMONDS</ST021>
+            <ST022>3 RICHARDSON PLACE</ST022>
+            <ST031/>
+            <ST032/>
+            <ST041>AU</ST041>
+            <ST042/>
+            <ST043>AU</ST043>
+            <ST044>AU</ST044>
+            <ST045>CC</ST045>
+            <ST046>Australia</ST046>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <PL01>AMTEK INDUSTRIES PTE LTD</PL01>
+            <PL021/>
+            <PL022/>
+            <PL031/>
+            <PL032/>
+            <PL041/>
+            <PL042/>
+            <PL043/>
+            <PL044/>
+            <PL045/>
+            <PL046/>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <SO01>HEWLETT-PACKARD SINGAPORE (PRIVATE)</SO01>
+            <SO021>LIMITED RCB NO.: 197000137C</SO021>
+            <SO022>P.O.BOX 200, ALEXANDRA POST OFFICE</SO022>
+            <SO031>SINGAPORE 911507</SO031>
+            <SO032>P.O.BOX 200, ALEXANDRA POST OFFICE</SO032>
+            <SO041/>
+            <SO042/>
+            <SO043>SG</SO043>
+            <SO044>SG</SO044>
+            <SO045>CC</SO045>
+            <SO046>Singapore</SO046>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <ST01>HEWLETT-PACKARD (MALAYSIA) SDN BHD</ST01>
+            <ST021>HP TOWERS, NO 12,JLN GELENGGANG</ST021>
+            <ST022>BUKIT DAMANSARA</ST022>
+            <ST031>50490 KUALA LUMPUR</ST031>
+            <ST032>ATTN:SEGAR RAJOO 60 323323233</ST032>
+            <ST041>MY</ST041>
+            <ST042/>
+            <ST043>MY</ST043>
+            <ST044>MY</ST044>
+            <ST045>CC</ST045>
+            <ST046>Malaysia</ST046>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <PL01>AMTEK INDUSTRIES PTE LTD</PL01>
+            <PL021/>
+            <PL022/>
+            <PL031/>
+            <PL032/>
+            <PL041/>
+            <PL042/>
+            <PL043/>
+            <PL044/>
+            <PL045/>
+            <PL046/>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <BT01>HEWLETT-PACKARD ASIA PACIFIC PTE.</BT01>
+            <BT021>LTD. RCB NO.: 198703164G</BT021>
+            <BT022>P.O.BOX 200, ALEXANDRA POST OFFICE</BT022>
+            <BT031>SINGAPORE 911507</BT031>
+            <BT032>P.O.BOX 200, ALEXANDRA POST OFFICE</BT032>
+            <BT041/>
+            <BT042/>
+            <BT043>SG</BT043>
+            <BT044>SG</BT044>
+            <BT045>CC</BT045>
+            <BT046>Singapore</BT046>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <BG01>HEWLETT-PACKARD ASIA PACIFIC PTE.</BG01>
+            <BG021>LTD. RCB NO.: 198703164G</BG021>
+            <BG022>P.O.BOX 200, ALEXANDRA POST OFFICE</BG022>
+            <BG031>SINGAPORE 911507</BG031>
+            <BG032>P.O.BOX 200, ALEXANDRA POST OFFICE</BG032>
+            <BG041/>
+            <BG042/>
+            <BG043>SG</BG043>
+            <BG044>SG</BG044>
+            <BG045>CC</BG045>
+            <BG046>Singapore</BG046>
+            <REFID1/>
+            <REFID2/>
+            <ContactName1/>
+            <ContactName2/>
+            <Tel1/>
+            <Tel2/>
+            <TOTLIN>1</TOTLIN>
+         </HEADER>
+         <DETAIL>
+            <LINE>
+               <RESLIN>1</RESLIN>
+               <ORDLIN>10</ORDLIN>
+               <Ordqty>6</Ordqty>
+               <UOM>EA</UOM>
+               <SKU/>
+               <PL>J8987A#ACC</PL>
+               <MKU>00001</MKU>
+               <UPCCode/>
+               <SO_Line>882780114760</SO_Line>
+               <DLEC>0100</DLEC>
+               <PO_Line/>
+               <HP_ITEM/>
+               <MKUDSC/>
+               <LCODE/>
+               <REFCODE1>TN</REFCODE1>
+               <REFDSC1>TKAT40546690</REFDSC1>
+               <REFCODE2>TN</REFCODE2>
+               <REFDSC2>TKAT40546690</REFDSC2>
+               <TDESC/>
+               <FOB03>DDU DELIVERED DUTY UNPAID</FOB03>
+               <FOB07>DF</FOB07>
+               <DLVDATE>20070821</DLVDATE>
+               <SHIPDATE>20070821</SHIPDATE>
+               <TD502/>
+               <TD503/>
+               <TD504/>
+               <TD512/>
+               <N902/>
+               <MSG1/>
+               <MSG2/>
+               <MSG3/>
+               <MSG4/>
+               <MSG5/>
+               <MSG6/>
+               <MSG7/>
+               <MSG8/>
+               <MSG9/>
+               <MSG10/>
+            </LINE>
+         </DETAIL>
+      </POLIN>
+   </PO>
+</EDI850>

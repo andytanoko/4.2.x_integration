@@ -1,0 +1,47 @@
+package com.gridnode.pdip.framework.db.meta;
+
+import java.util.*;
+
+import javax.ejb.*;
+
+import com.gridnode.pdip.framework.j2ee.*;
+import com.gridnode.pdip.framework.log.*;
+
+public class EntityMetaServiceBean implements SessionBean{
+	private SessionContext _sessionCtx = null;
+
+	public void setSessionContext(SessionContext parm1){
+	_sessionCtx = parm1;
+	}
+
+	public void ejbCreate () throws CreateException {
+	}
+
+	public void ejbRemove(){
+	}
+
+	public void ejbActivate(){
+	}
+
+	public void ejbPassivate(){
+	}
+
+	public IMetaInfoFactory getMetaInfoFactory(){
+		try{
+			ServiceLookup serviceLookup=ServiceLookup.getInstance(null);
+			IEntityMetaInfoHome home = (IEntityMetaInfoHome)serviceLookup.getHome(IEntityMetaInfoHome.class);
+			Collection entityMetaInfoObjects = home.findAllEntityMetaInfo();
+			MetaInfoFactory factory = new MetaInfoFactory();
+			for (Iterator i=entityMetaInfoObjects.iterator(); i.hasNext(); ){
+				IEntityMetaInfoObj metaInfoObject = (IEntityMetaInfoObj)i.next();
+                                EntityMetaInfo entityMetaInfo = metaInfoObject.getData();
+				factory.addEntityMetaInfo(entityMetaInfo);
+        Log.debug(Log.DB, "[EntityMetaServiceBean.getMetaInfoFactory] Loaded EntityMetaInfo: "+entityMetaInfo);
+			}
+            return factory;
+		}catch (Exception ex){
+			Log.err(Log.DB,"[EntityMetaServiceBean.getMetaInfoFactory]  Exception ",ex);
+		}
+		return null;
+	}
+}

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dictionary>
+	<GlobalBusinessActionCode>
+		<value>Return Product Request</value>
+		<value>Return Product Response</value>
+		<value>Pending Return Notification</value>
+		<value>Return Result</value>
+		<value>Inspection Result Notification</value>
+		<value>Invoice Notification</value>
+		<value>Invoice Reject Notification</value>
+		<value>Financing Request</value>
+		<value>Financing Response</value>
+		<value>Remittance Advice Notification</value>
+		<value>Billing Statement Notification</value>
+		<value>Product Resource Update</value>
+		<value>Product Information Notification</value>
+		<value>Purchase Order Status Notification</value>
+		<value>Stock Keeping Unit Creation Notification</value>
+		<value>Subscription Request</value>
+		<value>Subscription Cancellation</value>
+		<value>Subscription Change</value>
+		<value>Subscription Confirmation</value>
+		<value>Purchase Order Request</value>
+		<value>Purchase Order Request Action</value> <!-- To be deleted -->
+		<value>Purchase Order Change</value>
+		<value>Purchase Order Cancellation</value>
+		<value>Purchase Order Acceptance</value>
+		<value>Purchase Order Status Query</value>
+		<value>Purchase Order Status Response</value>
+		<value>Price and Availability Query</value>
+		<value>Price and Availability Response</value>
+		<value>Product Information Query</value>
+		<value>Product Information Response</value>
+		<value>Technical Information Query</value>
+		<value>Technical Information Response</value>
+		<value>Shopping Cart Transfer</value>
+		<value>Shopping Cart Transfer Acceptance</value>
+		<value>Failure Notification</value>
+		<value>Purchase Order Acceptance Notification</value>
+	</GlobalBusinessActionCode>
+	<GlobalDocumentFunctionCode>
+		<value>Request</value>
+		<value>Response</value>
+	</GlobalDocumentFunctionCode>
+<!--
+	<GlobalPartnerClassificationCode>
+		<value>Carrier</value>
+		<value>Distributor</value>
+		<value>End User</value>
+		<value>End User Government</value>
+		<value>Financier</value>
+		<value>Manufacturer</value>
+		<value>Retailer</value>
+		<value>Shopper</value>
+		<value>Freight Forwarder</value>
+	</GlobalPartnerClassificationCode> 
+-->
+	<GlobalBusinessSignalCode>
+		<value>Receipt Acknowledge</value>
+	  	<value>Acceptance Acknowledge</value>
+  		<value>Receipt Acknowledgement Exception</value>
+  		<value>Acceptance Acknowledgement Exception</value>
+  		<value>General Exception</value>
+	</GlobalBusinessSignalCode>
+	<GlobalPartnerRoleClassificationCode>
+		<value>Product Seller</value>
+		<value>Product Trader</value>
+		<value>Sale Lead Orginator</value>
+		<value>Sale Lead Processor</value>
+		<value>Marketing Activity Initiator</value>
+		<value>Marketing Activity Information User</value>
+		<value>Sales Marketing Claim Requester</value>
+		<value>Sales Marketing Claim Processor</value>
+		<value>Sales Marketing Claimant</value>
+		<value>Return Requester</value>
+		<value>Return Provider</value>
+		<value>Return Receiver</value>
+		<value>Financier</value>
+		<value>Payer</value>
+		<value>Payee</value>
+		<value>Catalog Distributor</value>
+		<value>Catalog Producer</value>
+		<value>Anonymous Buyer</value>
+		<value>Product Information Distributor</value>
+		<value>Product Information User</value>
+		<value>Buyer</value>
+		<value>Seller</value>
+		<value>Customer Manager</value>
+		<value>Product Supplier</value>
+		<value>Sales Facilitator</value>
+		<value>Supplier</value>
+		<value>Shipment Information User</value>
+		<value>Claim Requester</value>
+		<value>Transport Service Provider</value>
+		<value>Appointment Provider</value>
+		<value>In-transit Information User</value>
+		<value>Consignee</value>
+		<value>Shipment Requester</value>
+		<value>PIP Failure Notifier</value>
+		<value>Failure Report Administrator</value>
+	</GlobalPartnerRoleClassificationCode>
+	<GlobalTransactionCode>
+		<value>Distribute Notification of Failure</value>
+		<value>Request Return</value>
+		<value>Process Return Product Request</value>
+		<value>Notify of Return Product Response</value>
+		<value>Notify of Pending Return</value>
+		<value>Notification of Return Result</value>
+		<value>Notify of Inspection Result</value>
+		<value>Confirm Financing</value>
+		<value>Process Transaction Request</value>
+		<value>Notify of Invoice/Credit Memo</value>
+		<value>Notify of Invalid Invoice</value>
+		<value>Create Billing Statement Notification</value>
+		<value>Create Remittance Advice</value>
+		<value>Distribute New Product information</value>
+		<value>Distribute New Product resource</value>
+		<value>Distribute Purchase Order Status</value>
+		<value>Distribute Stock Keeping Unit Creation Notification</value>
+		<value>Create Subscription</value>
+		<value>Change Subscription</value>
+		<value>Cancel Subscription</value>
+		<value>Create Purchase Order</value>
+		<value>Change Purchase Order</value>
+		<value>Cancel Purchase Order</value>
+		<value>Query Purchase Order Status</value>
+		<value>Query Price and Availability</value>
+		<value>Query Product Information</value>
+		<value>Query Technical Information</value>
+		<value>Transfer Shopping Cart</value>
+		<value>Notify of Purchase Order Acceptance</value>
+	</GlobalTransactionCode>
+	<GlobalProcessCode>
+		<value>Manage Product Information Subscriptions</value>
+		<value>Distribute New Product Information</value>
+		<value>Query Product Information</value>
+		<value>Query Technical Information</value>
+		<value>Distribute Product Stock Keeping Unit</value>
+		<value>Query Price and Availability</value>
+		<value>Transfer Shopping Cart</value>
+		<value>Manage Purchase Order</value>
+		<value>Query Order Status</value>
+		<value>Distribute Order Status</value>
+		<value>Notification of Failure</value>
+		<value>Return Product</value>
+		<value>Obtain Financing Approval</value>
+		<value>Reconcile Invoice</value>
+		<value>Process Payment</value>
+		<value>Notify of Purchase Order Acceptance</value>
+	</GlobalProcessCode>
+	<GlobalProcessIndicatorCode>
+		<value>1B1</value>
+		<value>2A1</value>
+		<value>2A2</value>
+		<value>2A5</value>
+		<value>2A8</value>
+		<value>3A2</value>
+		<value>3A3</value>
+		<value>3A4</value>
+		<value>3A5</value>
+		<value>3A6</value>
+		<value>0A1</value>
+		<value>3C1</value>
+		<value>3C2</value>
+		<value>3C3</value>
+		<value>3C4</value>
+		<value>3C7</value>
+	</GlobalProcessIndicatorCode>
+	<GlobalBusinessServiceCode>
+		<value>Product Information Distributor Service</value>
+		<value>Customer Manager Service</value>
+		<value>Seller Service</value>
+		<value>Product Information Subscriber Service</value>
+		<value>Product Supplier Service</value>
+		<value>Customer Service</value>
+		<value>Sales Facilitator Service</value>
+		<value>Supplier Service</value>
+		<value>Buyer Service</value>
+		<value>Product Information User Service</value>
+		<value>Product Information Distributor Agent</value>
+		<value>PIP Failure Notifier Service</value>
+		<value>Failure Report Administrator Service</value>
+	</GlobalBusinessServiceCode>
+</dictionary>

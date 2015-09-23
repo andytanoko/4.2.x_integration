@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Pip3A8PurchaseOrderChangeConfirmation SYSTEM "3A8_MS_V01_02_PurchaseOrderChangeConfirmation.dtd">
+<Pip3A8PurchaseOrderChangeConfirmation>
+  <fromRole>
+    <PartnerRoleDescription>
+      <ContactInformation>
+        <contactName>
+          <FreeFormText>MR. ALLEN LOW</FreeFormText>
+        </contactName>
+        <EmailAddress>Not used</EmailAddress>
+        <facsimileNumber>
+          <CommunicationsNumber />
+        </facsimileNumber>
+        <telephoneNumber>
+          <CommunicationsNumber>04-6415911</CommunicationsNumber>
+        </telephoneNumber>
+      </ContactInformation>
+      <GlobalPartnerRoleClassificationCode>Seller</GlobalPartnerRoleClassificationCode>
+      <PartnerDescription>
+        <BusinessDescription>
+          <GlobalBusinessIdentifier>894157064</GlobalBusinessIdentifier>
+        </BusinessDescription>
+        <GlobalPartnerClassificationCode>Manufacturer</GlobalPartnerClassificationCode>
+      </PartnerDescription>
+    </PartnerRoleDescription>
+  </fromRole>
+  <PurchaseOrder>
+    <AccountDescription>
+      <accountName>
+        <FreeFormText />
+      </accountName>
+      <billTo>
+        <PartnerDescription>
+          <BusinessDescription>
+            <GlobalBusinessIdentifier>89421689</GlobalBusinessIdentifier>
+            <businessName>
+              <FreeFormText />
+            </businessName>
+            <PartnerBusinessIdentification>
+              <ProprietaryBusinessIdentifier>0001</ProprietaryBusinessIdentifier>
+              <ProprietaryDomainIdentifier />
+              <ProprietaryIdentifierAuthority>5687</ProprietaryIdentifierAuthority>
+            </PartnerBusinessIdentification>
+          </BusinessDescription>
+          <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+          <ContactInformation>
+            <contactName>
+              <FreeFormText>YEO M.L.(CONSIGN)</FreeFormText>
+            </contactName>
+            <facsimileNumber>
+              <CommunicationsNumber> </CommunicationsNumber>
+            </facsimileNumber>
+            <telephoneNumber>
+              <CommunicationsNumber>06-231 4453</CommunicationsNumber>
+            </telephoneNumber>
+            <PhysicalLocation>
+              <PhysicalAddress>
+                <addressLine1>
+                  <FreeFormText> </FreeFormText>
+                </addressLine1>
+                <addressLine2>
+                  <FreeFormText> </FreeFormText>
+                </addressLine2>
+                <cityName>
+                  <FreeFormText> </FreeFormText>
+                </cityName>
+                <GlobalCountryCode> </GlobalCountryCode>
+                <NationalPostalCode> </NationalPostalCode>
+                <postOfficeBoxIdentifier>
+                  <FreeFormText>  </FreeFormText>
+                </postOfficeBoxIdentifier>
+                <regionName>
+                  <FreeFormText> </FreeFormText>
+                </regionName>
+              </PhysicalAddress>
+            </PhysicalLocation>
+          </ContactInformation>
+        </PartnerDescription>
+      </billTo>
+    </AccountDescription>
+    <comments>
+      <FreeFormText>Securiforce Logistics (S) Pte Ltd No.30, Mandai Estate #1-02,Mandai Industrial BuildingSingapore 729918Tel: 2698880 Fax: 3670128/3670228Attn : Encik Nazri,Encik Din(Operation) or Mr Chow(The Manager)</FreeFormText>
+    </comments>
+    <ContractInformation>
+      <contractIdentifier>
+        <ProprietaryDocumentIdentifier>2000007392</ProprietaryDocumentIdentifier>
+      </contractIdentifier>
+      <primaryContractWith>
+        <PartnerDescription>
+          <BusinessDescription>
+            <PartnerBusinessIdentification>
+              <ProprietaryBusinessIdentifier>0000011773</ProprietaryBusinessIdentifier>
+              <ProprietaryDomainIdentifier />
+            </PartnerBusinessIdentification>
+          </BusinessDescription>
+        </PartnerDescription>
+      </primaryContractWith>
+    </ContractInformation>
+    <DocumentReference>
+      <DateTimeStamp>20030129T105811.000Z</DateTimeStamp>
+      <GlobalDocumentReferenceTypeCode>Purchase Order</GlobalDocumentReferenceTypeCode>
+      <LineNumber />
+      <ProprietaryDocumentIdentifier>2000007395</ProprietaryDocumentIdentifier>
+    </DocumentReference>
+    <DocumentReference>
+      <DateTimeStamp />
+      <GlobalDocumentReferenceTypeCode>Sales Order</GlobalDocumentReferenceTypeCode>
+      <LineNumber />
+      <ProprietaryDocumentIdentifier>ACCEPT 29/01/2003</ProprietaryDocumentIdentifier>
+    </DocumentReference>
+    <FinancingTerms>
+      <GlobalFinanceTermsCode>Mutually defined/determined by TPA</GlobalFinanceTermsCode>
+      <PaymentTerms>
+        <GlobalPaymentConditionCode />
+        <netTermsDays>
+          <CountableAmount />
+        </netTermsDays>
+        <percentDue>
+          <PercentAmount />
+        </percentDue>
+      </PaymentTerms>
+      <PaymentTerms>
+        <GlobalPaymentConditionCode />
+        <netTermsDays>
+          <CountableAmount />
+        </netTermsDays>
+        <percentDue>
+          <PercentAmount />
+        </percentDue>
+      </PaymentTerms>
+    </FinancingTerms>
+    <GlobalPurchaseOrderChangeCode>Resend</GlobalPurchaseOrderChangeCode>
+    <GlobalPurchaseOrderStatusCode>Accept</GlobalPurchaseOrderStatusCode>
+    <GlobalPurchaseOrderTypeCode>Consigned order</GlobalPurchaseOrderTypeCode>
+    <isDropShip>
+      <AffirmationIndicator>No</AffirmationIndicator>
+    </isDropShip>
+    <OrderShippingInformation>
+      <GlobalShipmentTermsCode>FCA</GlobalShipmentTermsCode>
+      <packListRequirements>
+        <FreeFormText>SIN-SECURIFORCE</FreeFormText>
+      </packListRequirements>
+    </OrderShippingInformation>
+    <ProductLineItem>
+      <buyerLineItem>
+        <LineNumber>00010</LineNumber>
+      </buyerLineItem>
+      <comments>
+        <FreeFormText>Approved |SPECIFICATION C : A66502-C0204-M010-*-7425 REV A DD 24.4.96 |DRAWING NO : C63078-A6506-C012-*- 0006 REV 01 DD 26.2.98 |SHALL THERE ARE ANY SPECIFICATION/ DRAWING CHANGE, WE WILL NOTIFY YOU |THROUGH OUR USDS (UPDATE SPECIFICATIONS/DRAWINGS TO SUPPLIER) |  |^This is a test Buyer Change Remark |with multiple lines.|</FreeFormText>
+        <!--FreeFormText> ^Approved |SPECIFICATION C : A66502-C0204-M010-*-7425 REV A DD 24.4.96 |DRAWING NO : C63078-A6506-C012-*- 0006 REV 01 DD 26.2.98 |SHALL THERE ARE ANY SPECIFICATION/ DRAWING CHANGE, WE WILL NOTIFY YOU |THROUGH OUR USDS (UPDATE SPECIFICATIONS/DRAWINGS TO SUPPLIER) |  |^This is a test Buyer Change Remark |with multiple lines.|</FreeFormText-->
+      </comments>
+      <GlobalActionCode>Revise</GlobalActionCode>
+      <GlobalProductUnitOfMeasureCode>Piece</GlobalProductUnitOfMeasureCode>
+      <GlobalPurchaseOrderStatusCode>Accept</GlobalPurchaseOrderStatusCode>
+      <isDropShip>
+        <AffirmationIndicator>No</AffirmationIndicator>
+      </isDropShip>
+      <LineNumber>00010</LineNumber>
+      <OrderQuantity>
+        <requestedQuantity>
+          <ProductQuantity>9000.000</ProductQuantity>
+        </requestedQuantity>
+        <scheduledShipQuantity>
+          <ProductQuantity>2000.000</ProductQuantity>
+        </scheduledShipQuantity>
+      </OrderQuantity>
+      <originalScheduledEvent>
+        <TransportationEvent>
+          <DateStamp />
+          <GlobalTransportEventCode>Ship</GlobalTransportEventCode>
+        </TransportationEvent>
+      </originalScheduledEvent>
+      <ProductIdentification>
+        <PartnerProductIdentification>
+          <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+          <ProprietaryProductIdentifier>000000000025047680</ProprietaryProductIdentifier>
+          <revisionIdentifier>
+            <FreeFormText>FR A6506-C12AKN(FPG 3L SMD 8MM SLOT)</FreeFormText>
+          </revisionIdentifier>
+        </PartnerProductIdentification>
+        <PartnerProductIdentification>
+          <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+          <ProprietaryProductIdentifier>000000000025047680</ProprietaryProductIdentifier>
+          <revisionIdentifier>
+            <FreeFormText>1</FreeFormText>
+          </revisionIdentifier>
+        </PartnerProductIdentification>
+      </ProductIdentification>
+      <proprietaryInformation>
+        <FreeFormText />
+      </proprietaryInformation>
+      <requestedEvent>
+        <TransportationEvent>
+          <DateStamp />
+          <GlobalTransportEventCode>Ship</GlobalTransportEventCode>
+        </TransportationEvent>
+      </requestedEvent>
+      <requestedUnitPrice>
+        <FinancialAmount>
+          <GlobalCurrencyCode />
+          <MonetaryAmount />
+        </FinancialAmount>
+      </requestedUnitPrice>
+      <RevisionNumber />
+      <totalLineItemAmount>
+        <FinancialAmount>
+          <GlobalCurrencyCode />
+          <MonetaryAmount />
+        </FinancialAmount>
+      </totalLineItemAmount>
+    </ProductLineItem>
+    <purchaseOrderDate>
+      <DateTimeStamp>20030129T000000.000Z</DateTimeStamp>
+    </purchaseOrderDate>
+    <purchaseOrderIdentifier>
+      <ProprietaryDocumentIdentifier>2000007392</ProprietaryDocumentIdentifier>
+    </purchaseOrderIdentifier>
+    <shipTo>
+      <PartnerDescription>
+        <BusinessDescription>
+          <GlobalBusinessIdentifier>89421689</GlobalBusinessIdentifier>
+          <businessName>
+            <FreeFormText>Infineon Technologies (Malaysia) Sdn. Bhd. (56645-D)</FreeFormText>
+          </businessName>
+          <PartnerBusinessIdentification>
+            <ProprietaryBusinessIdentifier />
+            <ProprietaryDomainIdentifier>7000</ProprietaryDomainIdentifier>
+          </PartnerBusinessIdentification>
+        </BusinessDescription>
+        <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+        <ContactInformation>
+          <facsimileNumber>
+            <CommunicationsNumber>60-06-2321539 / 2326743</CommunicationsNumber>
+          </facsimileNumber>
+          <telephoneNumber>
+            <CommunicationsNumber>60-06-2325266</CommunicationsNumber>
+          </telephoneNumber>
+        </ContactInformation>
+        <PhysicalLocation>
+          <PhysicalAddress>
+            <addressLine1>
+              <FreeFormText>Batu Berendam Free Trade Zone</FreeFormText>
+            </addressLine1>
+            <addressLine2>
+              <FreeFormText> </FreeFormText>
+            </addressLine2>
+            <cityName>
+              <FreeFormText>Melaka</FreeFormText>
+            </cityName>
+            <GlobalCountryCode>MY</GlobalCountryCode>
+            <NationalPostalCode> </NationalPostalCode>
+            <postOfficeBoxIdentifier>
+              <FreeFormText>7571052</FreeFormText>
+            </postOfficeBoxIdentifier>
+            <regionName>
+              <FreeFormText>MK</FreeFormText>
+            </regionName>
+          </PhysicalAddress>
+        </PhysicalLocation>
+      </PartnerDescription>
+    </shipTo>
+    <totalAmount>
+      <FinancialAmount>
+        <GlobalCurrencyCode />
+        <MonetaryAmount />
+      </FinancialAmount>
+    </totalAmount>
+  </PurchaseOrder>
+  <requestingDocumentDateTime>
+    <DateTimeStamp>20030129T000000.000Z</DateTimeStamp>
+  </requestingDocumentDateTime>
+  <requestingDocumentIdentifier>
+    <ProprietaryDocumentIdentifier>2000007392</ProprietaryDocumentIdentifier>
+  </requestingDocumentIdentifier>
+  <thisDocumentGenerationDateTime>
+    <DateTimeStamp>20030411T110240.467Z</DateTimeStamp>
+  </thisDocumentGenerationDateTime>
+  <thisDocumentIdentifier>
+    <ProprietaryDocumentIdentifier>2000007392</ProprietaryDocumentIdentifier>
+  </thisDocumentIdentifier>
+  <toRole>
+    <PartnerRoleDescription>
+      <ContactInformation>
+        <contactName>
+          <FreeFormText />
+        </contactName>
+        <EmailAddress>M04</EmailAddress>
+        <facsimileNumber>
+          <CommunicationsNumber> </CommunicationsNumber>
+        </facsimileNumber>
+        <telephoneNumber>
+          <CommunicationsNumber>06-231 4453</CommunicationsNumber>
+        </telephoneNumber>
+      </ContactInformation>
+      <GlobalPartnerRoleClassificationCode>Buyer</GlobalPartnerRoleClassificationCode>
+      <PartnerDescription>
+        <BusinessDescription>
+          <GlobalBusinessIdentifier>894211689</GlobalBusinessIdentifier>
+        </BusinessDescription>
+        <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+      </PartnerDescription>
+    </PartnerRoleDescription>
+  </toRole>
+</Pip3A8PurchaseOrderChangeConfirmation>
+

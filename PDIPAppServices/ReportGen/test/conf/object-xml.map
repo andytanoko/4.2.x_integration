@@ -1,0 +1,14 @@
+<mapping>
+	<!--  Mapping for KeyValuePair  -->
+	<class name="com.gridnode.pdip.framework.db.KeyValuePair">
+		<map-to xml="KeyValuePair" />
+		<field name="key" type="other">
+			<xml name="Key" node="element"/>
+		</field>
+		<field name="value" type="other">
+			<xml name="Value" node="element"/>
+		</field>
+  	</class>
+	<include href="conf/default/pdip/framework/filter.map"/>
+  	<!-- include hrefs to other mappings here -->
+</mapping>

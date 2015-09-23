@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ ****************************************************************************
+ * Date           Author                  Changes
+ ****************************************************************************
+ * Jul 02 2004    Mahesh		             Created.
+-->
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for EmailConfig  -->
+	<class name="com.gridnode.pdip.app.alert.model.EmailConfig">
+		<map-to xml="EmailConfig"/>
+		<field name="SmtpServerHost" type="string">
+			<xml name="SmtpServerHost" node="element"/>
+		</field>	
+		<field name="SmtpServerPort" type="int">
+			<xml name="SmtpServerPort" node="element"/>
+		</field>	
+		<field name="AuthUser" type="string">
+			<xml name="AuthUser" node="element"/>
+		</field>	
+		<field name="AuthPassword" type="string">
+			<xml name="AuthPassword" node="element"/>
+		</field>	
+		<field name="RetryInterval" type="long">
+			<xml name="RetryInterval" node="element"/>
+		</field>	
+		<field name="MaxRetries" type="int">
+			<xml name="MaxRetries" node="element"/>
+		</field>	
+		<field name="SaveFailedEmails" type="boolean">
+			<xml name="SaveFailedEmails" node="element"/>
+		</field>	
+	</class>
+</mapping>

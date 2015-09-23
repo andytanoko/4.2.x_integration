@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+    <secure>false</secure>
+    <container-configurations />
+    <resource-managers />
+    <enterprise-beans>
+        <session>
+		    <ejb-name>GWFWorkflowManager</ejb-name>
+		    <jndi-name>com.gridnode.pdip.app.workflow.facade.ejb.IGWFWorkflowManagerHome</jndi-name>
+		    <!--clustered>${node.clustered:False}</clustered--> <!-- TWX: if enabled, will cause the shutting down node failed to lookup it due to container notify all the clustered bean not to proceed any more request during shutdown-->
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.runtime.ejb.IGWFRtActivityHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.runtime.ejb.IGWFRtProcessHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.runtime.ejb.IGWFRtRestrictionHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.runtime.ejb.IGWFTransActivationStateHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.runtime.ejb.IGWFRtProcessDocHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.engine.ejb.IGWFActivityManagerHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.engine.ejb.IGWFProcessManagerHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.engine.ejb.IGWFRestrictionManagerHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.contextdata.entities.ejb.IContextDataHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.contextdata.facade.ejb.IDataManagerHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.framework.db.meta.IEntityMetaInfoHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.framework.db.meta.IFieldMetaInfoLocalHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.bpss.ejb.IBpssReqBusinessActivityHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.bpss.ejb.IBpssResBusinessActivityHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.bpss.ejb.IBpssBusinessTransActivityHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.bpss.ejb.IBpssCollaborationActivityHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.bpss.ejb.IBpssBinaryCollaborationActivityHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.bpss.ejb.IBpssBusinessTransHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.bpss.ejb.IBpssBinaryCollaborationHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.bpss.ejb.IBpssMultiPartyCollaborationHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.bpss.ejb.IBpssStartHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.bpss.ejb.IBpssForkHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.bpss.ejb.IBpssJoinHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.bpss.ejb.IBpssCompletionStateHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.bpss.ejb.IBpssTransitionHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.bpss.ejb.IBpssBusinessPartnerRoleHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.bpss.ejb.IBpssProcessSpecificationHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.bpss.ejb.IBpssProcessSpecEntryHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.bpss.ejb.IBpssBusinessDocumentHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.bpss.ejb.IBpssDocumentationHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.bpss.ejb.IBpssDocumentEnvelopeHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.xpdl.ejb.IXpdlActivityHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.xpdl.ejb.IXpdlApplicationHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.xpdl.ejb.IXpdlDataFieldHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.xpdl.ejb.IXpdlExternalPackageHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.xpdl.ejb.IXpdlFormalParamHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.xpdl.ejb.IXpdlPackageHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.xpdl.ejb.IXpdlParticipantHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.xpdl.ejb.IXpdlParticipantListHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.xpdl.ejb.IXpdlProcessHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.xpdl.ejb.IXpdlSubFlowHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.xpdl.ejb.IXpdlToolHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.xpdl.ejb.IXpdlTransitionHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.xpdl.ejb.IXpdlTransitionRefHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.xpdl.ejb.IXpdlTransitionRestrictionHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.xpdl.ejb.IXpdlTypeDeclarationHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.gwfbase.xpdl.ejb.IXpdlComplexDataTypeHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.worklist.manager.ejb.GWFWorkListSessionHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.worklist.entities.ejb.GWFWorkListEntityHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.worklist.entities.ejb.GWFWorkListUserEntityHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.time.facade.ejb.IiCalTimeMgrHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.time.entities.ejb.IiCalAlarmHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.time.entities.ejb.IiCalEventHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.time.entities.ejb.IiCalTodoHome</depends>
+			<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.base.time.entities.ejb.IiCalTextHome</depends>
+        </session>
+    </enterprise-beans>
+</jboss>

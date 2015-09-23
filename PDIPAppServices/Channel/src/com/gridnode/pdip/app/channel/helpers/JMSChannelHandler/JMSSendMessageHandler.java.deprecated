@@ -1,0 +1,49 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2002 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: JMSSendMessageHandler.java
+ *
+ ****************************************************************************
+ * Date           Author                  Changes
+ ****************************************************************************
+ * Jun 21 2002    Goh Kan Mun             Created
+ * Jul 03 2002    Goh Kan Mun             Modified - Change in the CommInfo and the ChannelInfo
+ */
+package com.gridnode.pdip.app.channel.helpers.JMSChannelHandler;
+
+import com.gridnode.pdip.app.channel.model.ChannelInfo;
+
+import com.gridnode.pdip.base.transport.facade.ejb.ITransportControllerObj;
+
+import java.rmi.RemoteException;
+import java.io.File;
+
+public class JMSSendMessageHandler
+{
+/*  public static void processSendMessage(ChannelInfo info, String[] dataToSend,
+         File[] file, String eventId) throws Exception
+  {
+    /**@todo invoke file splitting here*/
+
+//    String[] header = new String[1];
+//    header[0] = eventId;
+//    header[1] = "Sender Information";
+//    header[2] = "Recipient Information";
+//    header[3] = "Security Information";
+//    header[4] = "File Splitter Information";
+//    header[5] = "Session Id";  //For file splitting, may need to use sessionBean.
+//    //        But then how to recover if there is a hang in the recipient side?
+
+    /**@todo invoke security here to do encryption */
+
+/*    String[] encryptedData = dataToSend;
+    byte[] encryptedFilePart = null;
+
+    JMSChannelController.getInstance().getTransportController().send(
+      info.getTptCommInfo(), header, encryptedData, encryptedFilePart);
+  }
+  */
+}

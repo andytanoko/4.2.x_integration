@@ -1,0 +1,102 @@
+body {background-color: #FFFFFF;
+      font-size: 12pt;
+      font-family: SansSerif}       
+
+h1  {font-size: 22pt;
+     font-weight: bold;
+     color: #8080C0;
+     margin-top: 0;
+     margin-bottom: 0}
+
+h1.cover {border-top="300em";
+	  margin-botttom="120";
+	  font-family: Palatino}
+
+h2 {font-size: 18pt;
+    font-weight: bold;
+    color: #8080C0;
+    margin-top: 15;
+    margin-bottom: -5}
+
+h3 {font-size: 14pt;
+    font-weight: bold;
+    color: #8080C0;
+    margin-top: 10;
+    margin-bottom: -5}
+
+p   {font-size: 12pt;
+     margin-top: 10;
+     margin-bottom: 0}
+
+p.code {font-family: Monospaced;
+	margin-left: 0}
+
+
+p.indent1  {margin-left: 3}
+
+p.indent2  {margin-left: 12}
+
+p.indent3  {margin-left: 32}
+
+p.indent4  {margin-left: 52}
+
+p.note {margin-top: -19;
+	margin-left: 22}
+
+
+center {margin-top: 10}
+
+dl {margin-left: 10;
+    margin-top: 10;
+    margin-bottom: 10}
+
+dd.hang {margin-left:15;
+	 margin-bottom:10}
+
+dd.hang_last {margin-left:15;
+	 margin-bottom:0}
+
+dd.next {margin-left: 31}
+
+dd p {margin-left: 20;
+    margin-top: 0;
+    margin-bottom: 0}
+
+
+ul {margin-top: 10;
+    margin-bottom: 0;
+    margin-left: 30;
+    -bullet-gap: 5;
+list-style-type: disc;}
+
+
+ol {margin-top: 10;
+    margin-bottom: 0;
+    margin-left: 5;
+    }
+		
+	
+li {margin-left: 30}
+
+ul li {margin-bottom: 7}
+
+ul li.tight {margin-bottom: 2}
+
+
+table {
+
+	margin-top: 10;
+       	margin-bottom: 5;
+       	margin-left: 5;
+	margin-right: 5;
+	padding: 5;
+	width:100%}
+
+
+table.border {
+		 border-color=gray;
+		 border-style=outset;}
+
+td   {font-size: 12pt;}
+
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>JDom</fullname>
+  <class>
+    <path>[../../reqlib/jdom-b8.jar]</path>
+    <path>[../../reqlib/jaxen.jar]</path>
+    <path>[../../reqlib/saxpath-1.0-FCS.jar]</path>
+  </class>
+</library>
+

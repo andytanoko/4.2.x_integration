@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>6.3.3 To create a new JMS message template </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>6.3.3 To create a new JMS message template </h3>
+<p></p>
+<p><span>The JMS message template contains the following fields you will want to modify to create a new Message Template:</span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' width='100%' border='1' cellpadding='0'><tr><td width='21%' valign='top'><p><b><span>Field</span>
+</b>
+</p>
+</td>
+<td width='78%' valign='top'><p><b><span>Explanation</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='21%' valign='top'><p><span>Name</span>
+</p>
+</td>
+<td width='78%' valign='top'><p><span>The name of the Message Template</span>
+</p>
+</td>
+</tr>
+<tr><td width='21%' valign='top'><p><span>JMS Destination</span>
+</p>
+</td>
+<td width='78%' valign='top'><p><span>The target JMS Destination to send the alert messages to</span>
+</p>
+</td>
+</tr>
+<tr><td width='21%' valign='top'><p><span>Message Properties</span>
+</p>
+</td>
+<td width='78%' valign='top'><p><span>Additional JMS message properties to set into the JMS alert message</span>
+</p>
+</td>
+</tr>
+<tr><td width='21%' valign='top'><p><span>Message</span>
+</p>
+</td>
+<td width='78%' valign='top'><p><span>The message content of the alert message</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><span>Let us create the simple scenario where you can configure alert message to send as JMS message to notify your JMS-enabled backend systems on occasions that a process instance has failed.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>To create a new message template, click Create Message Template. Select the Message Type for the template. You are given the options to determine if the message type in the template is Email, Log, or JMS. Select JMS. The screen appears.</span>
+</p>
+<pre><span></span>
+</pre>
+<p align='center'><span><img width='590' height='441' border='0' src='../images/image026.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>Enter Name. For example, Process Instance Failure</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>Specify the JMS Destination. Select the target JMS Destination from the listbox display the list of JMS Destinations that you have created earlier. If the target JMS Destination has not been created, click <img width='16' height='16' border='0' src='../images/image011.gif'>to create a new JMS Destination.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>Specify message properties for the JMS message, if necessary. Click Add Property to add a new message property. Enter the key, data type, and value for the message property. OFRT is supported in the Value field.</span>
+</p>
+<pre><span></span>
+</pre>
+<pre><span><img width='563' height='47' border='0' src='../images/image027.jpg'></span>
+</pre>
+<pre><span></span>
+</pre>
+<pre><span>To remove a property, tick the checkbox against the property row, and click “Remove Property”.</span>
+</pre>
+<pre><span></span>
+</pre>
+<p><span>Step 5.<span> </span>
+</span>
+<span>You may compose any kind of text message in the Message textbox – this depends on the interface agreement with the JMS-enabled backend system. For example, the message can present in the form of key-value pairs, or user-friendly email-like message.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='571' height='428' border='0' src='../images/image028.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 6.<span> </span>
+</span>
+<span>To save the new message template, click Save Message Template. The new message template will be displayed in the list table of the Message Templates page. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 7.<span> </span>
+</span>
+<span>To edit the existing or current message template, select the message template and then click on the Edit button<img width='16' height='16' border='0' src='../images/image013.gif'></span>
+<span>.</span>
+<span> Update the entries for the Message Template as necessary. Next click Save Message Template.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 8.<span> </span>
+</span>
+<span>To delete the existing or current message template, tick the Select check box of the message template you want to delete. Click Delete Message Template. The selected message template will be removed from the list.</span>
+</p>
+<p></p>
+<span><br clear='all'></span>
+<p></p>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<html>
+<head>
+<title>9.1 Configuring Partner Functions </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h2>9.1 Configuring Partner Functions </h2>
+<p><b><span></span>
+</b>
+</p>
+<p><span>Now that you know a partner is someone you need to build a specific function to trigger the business process, each partner may have specific functions, which are called partner functions.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Partner functions are used to define the workflows in the exchange of business documents.</span>
+</p>
+<p><a name='_Toc37764117'></a>
+<a name='_Toc37168451'></a>
+</p>
+<p><span>A Partner Function is composed of one or more workflows which are made up of workflow activities. For instance, on receive of a document you can generate an automated response to send back to your partner, and at the same time, you can export it for your backend ERP system.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The table illustrates the list of workflow activities and their meanings:</span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' border='1' cellpadding='0'><tr><td width='180' valign='top'><p align='center'><b><span>Activity Type</span>
+</b>
+</p>
+</td>
+<td width='477' valign='top'><p align='center'><b><span>Description</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='180' valign='top'><p align='center'><span>Exit to export</span>
+</p>
+</td>
+<td width='477' valign='top'><p><span>This exit allows you to configure the workflow action, which the documents can flow into the Export folder.</span>
+</p>
+</td>
+</tr>
+<tr><td width='180' valign='top'><p align='center'><span>Exit to outbound</span>
+</p>
+</td>
+<td width='477' valign='top'><p><span>This exit allows you to configure the workflow action, which the documents can flow into the Outbound folder. </span>
+</p>
+</td>
+</tr>
+<tr><td width='180' valign='top'><p align='center'><span>Exit to Channel</span>
+</p>
+</td>
+<td width='477' valign='top'><p><span>This workflow action is configured for the user to send the documents to the trading partner based on the recipient partner Id field in the GridDocument. This activity can only be configured in the Outbound folder.</span>
+</p>
+</td>
+</tr>
+<tr><td width='180' valign='top'><p align='center'><span>Mapping Rule</span>
+</p>
+</td>
+<td width='477' valign='top'><p><span>This mapping rule transforms, converts or splits a user document. </span>
+</p>
+</td>
+</tr>
+<tr><td width='180' valign='top'><p align='center'><span>Exit to import</span>
+</p>
+</td>
+<td width='477' valign='top'><p><span>This exit allows you to configure the workflow action, which the documents can flow into the Import folder.</span>
+</p>
+</td>
+</tr>
+<tr><td width='180' valign='top'><p align='center'><span>Raise alert</span>
+</p>
+</td>
+<td width='477' valign='top'><p><span>This workflow action is configured to raise an alert when the event takes place.</span>
+</p>
+</td>
+</tr>
+<tr><td width='180' valign='top'><p align='center'><span>Exit workflow</span>
+</p>
+</td>
+<td width='477' valign='top'><p><span>This exit signals the end of the chain of workflow activities in the current folder. The immediate workflow activity that follows, if any, may act upon the document in the originating folder. </span>
+</p>
+</td>
+</tr>
+<tr><td width='180' valign='top'><p align='center'><span>Save to Folder</span>
+</p>
+</td>
+<td width='477' valign='top'><p><span>This workflow action is configured to allow the documents to save into the current folder in its current state.</span>
+</p>
+</td>
+</tr>
+<tr><td width='180' valign='top'><p align='center'><span>User Procedure</span>
+</p>
+</td>
+<td width='477' valign='top'><p><span>The user procedure makes use of configured external codes/programs to execute configured parameters to pass to external codes/program and expected return value. The user also can configure actions to raise alerts based on their return value. For example, user procedure to perform FTP.</span>
+</p>
+</td>
+</tr>
+<tr><td width='180' valign='top'><p align='center'><span>Exit to Port</span>
+</p>
+</td>
+<td width='477' valign='top'><p><span>This exit allows you to configure the workflow action, which the documents can be exported through the indicated port. This activity can only be configured in the Export folder.</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><span>For the multiple workflow example mentioned above, the partner function can be defined with the following sequence of workflow activity types:</span>
+</p>
+<p><span></span>
+</p>
+<ol start='1' type='1'><li><span>Exit to Outbound</span>
+</li>
+<li><span>Mapping Rule – Transform to response</span>
+</li>
+<li><span>Exit to Channel</span>
+</li>
+<li><span>Exit Workflow</span>
+</li>
+<li><span>Exit to Export</span>
+</li>
+<li><span>Mapping Rule – Convert to Flat File</span>
+</li>
+<li><span>Exit to Port – ERP Backend</span>
+</li>
+<li><span>Exit Workflow</span>
+</li>
+</ol>
+<p><span></span>
+</p>
+<p><span>As you may notice, activities 1 to 4 constitute one workflow, and activities 5 to 8 constitute another workflow. Each workflow in the Partner Function is demarcated by an Exit Workflow activity type. </span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+</body>
+</html>

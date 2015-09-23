@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>9.4.2 To cancel a process instance </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>9.4.2 To cancel a process instance </h3>
+<p><span></span>
+</p>
+<p><span>When a Process Instance is in progress, the user can choose to cancel the process. This option allows the user to stop the process in progress without generating additional retries or exception messages.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>If the process instance has failed, the failure reason is shown as well. This can be either a RosettaNet Exception received, or perhaps cancelled by the user.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>When a process is cancelled, a 0A1 Failure Notification process will be initiated to the trading partner of the original process that has been cancelled. However, for the failure PIP to be initiated successfully, the appropriate Process Mapping must be configured for 0A1 Failure Notification between you and your trading partner. Refer to Chapter 9.5 for details on configuring Process Mappings.</span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Click Process Instances. This will bring you to the Process Instances panel on the left. When a process is performed, it will appear under the Process Instances folder. </span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><img width='524' height='290' border='0' src='../images/image111.jpg'></p>
+<p><span></span>
+</p>
+<p><span> The following information is displayed in the list of process instances:</span>
+</p>
+<p><span></span>
+</p>
+<p><span> <b>Process Instance Id</b>
+</span>
+</p>
+<p><span>This column indicates the identity of the process instance.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>State</span>
+</b>
+</p>
+<p><span>This column indicates the state of the process instance. For example, </span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' border='1' cellpadding='0'><tr><td width='343' valign='top'><p align='center'><b><span>State</span>
+</b>
+</p>
+</td>
+<td width='343' valign='top'><p align='center'><b><span>Explanation</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='343' valign='top'><p align='center'><span>Abnormally Completed</span>
+</p>
+</td>
+<td width='343' valign='top'><p><span>Occurs if you have cancelled the process instance as it has failed.</span>
+</p>
+</td>
+</tr>
+<tr><td width='343' valign='top'><p align='center'><span>Running</span>
+</p>
+</td>
+<td width='343' valign='top'><p><span>Occurs if the process instance has not been yet completed while still awaiting for acknowledgement or confirmation</span>
+</p>
+</td>
+</tr>
+<tr><td width='343' valign='top'><p align='center'><span>Complete</span>
+</p>
+</td>
+<td width='343' valign='top'><p><span>Occurs if the process instance has been successfully completed.</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><b><span>Start Time</span>
+</b>
+</p>
+<p><span>Date and time when the process instance started.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>End Time</span>
+</b>
+</p>
+<p><span>Date and time when the process instance is completed.</span>
+</p>
+<p><span></span>
+</p>
+<p><a name='OLE_LINK18'><b><span>Is Failed</span>
+</b>
+</a>
+</p>
+<p><span>This field indicates the status of process instance. True or False. For example, True means that the process instance has failed.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>User Tracking ID</span>
+</b>
+</p>
+<p><span>Refer to Chapter 9.4.1.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>To cancel a process instance, tick the checkbox for the process instance, and click Cancel Process Instances. A 0A1 Failure Notification PIP will be initiated for the process instance which is in Running or Complete state.</span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

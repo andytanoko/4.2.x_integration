@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>transporter-reqlibs</fullname>
+  <class>
+    <path>[../programs/gt-ibtransporter/jaxrpc.jar]</path>
+    <path>[../programs/gt-ibtransporter/activation.jar]</path>
+  </class>
+  <lastmodsaved>1069416177778</lastmodsaved>
+</library>

@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>6.5.2 The Email Code Reference File </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>6.5.2 The Email Code Reference File </h3>
+<p><span></span>
+</p>
+<p><span>The Email Code Reference File</span>
+<span> is used for configuring</span>
+<span> email codes for use in email alert notifications. It refers to the emailcode</span>
+<span>-ref.xml</span>
+<span>, which you need to manually add in the email codes for the following:</span>
+</p>
+<p><span></span>
+</p>
+<ul type='disc'><li><span>Alert Trigger configuration (using Email code and/or Email code xpath);</span>
+</li>
+<li><span>Response Track Record configuration (using email code xpath); and</span>
+</li>
+<li><span>Message Template configuration (using RecipientList EMAIL_CODE or EMAIL_CODE_XPATH)</span>
+</li>
+</ul>
+<p><span></span>
+</p>
+<p><span>This file is in Xml format that defines a collection of EmailCodes. Each EmailCode may map to:</span>
+</p>
+<p><span>·<span> </span>
+</span>
+<span>0-n number ofEmail addresses</span>
+</p>
+<p><span>·<span> </span>
+</span>
+<span>0-n number of Roles</span>
+</p>
+<p><span>·<span> </span>
+</span>
+<span>0-n number of Users</span>
+</p>
+<p></p>
+<p><span>Here is an example of using the Email Code Reference File to look up the email codes that will be resolved to actual email addresses, users, and/or roles:</span>
+</p>
+<p><span></span>
+</p>
+<p><span><img width='583' height='211' alt='Text Box: 01.  <EmailCodeRef>
+02.    <EmailCode id="code1">                                       
+03.       <EmailRef>gridnode@yahoo.com.sg</EmailRef>   
+04.       <RoleRef>Administrator</RoleRef>                      
+05.       <UserRef>admin</UserRef>                                 
+06.    </EmailCode>
+07.    <EmailCode id="code2">                                       
+08.       <EmailRef>gridnode@cybergal.com</EmailRef>
+09.       <RoleRef>Administrator</RoleRef>
+10.       <RoleRef>User</RoleRef>
+11.    </EmailCode>
+12.  </EmailCodeRef>
+' src='../images/image033.gif'></span>
+<br clear='all'></p>
+<p><span>Where,</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Line 02: this code defines one EmailCode with id &quot;;code1&quot;;</span>
+</p>
+<p><span><br>Line 03: this code maps to the Email address</span>
+</p>
+<p><span><br>Line 04: this code maps to the Administrator Role (Name of Role configured in GridTalk)</span>
+</p>
+<p><span><br>Line 05: this code maps to the “admin” User (UserID of UserAccount configured in GridTalk)<br><br>Line 07: this code defines another EmailCode with id &quot;;code2&quot;;<br><br></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

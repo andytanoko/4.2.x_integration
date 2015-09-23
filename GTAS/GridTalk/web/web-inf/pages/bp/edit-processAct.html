@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Process Action</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <h4 id="files_heading">
+          lbFiles
+        </h4>
+        <table>
+          <tr id="msgType_details">
+            <td id="msgType_label">
+              lbMsgType
+            </td>
+            <td>
+              <select id="msgType_value" size="1" name="msgType">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+              <a id="msgType_create" href="javascript:divertToMapping('divertCreateMsgType');">
+                lbCreateMsgType
+              </a>
+            </td>
+            <td id="msgType_error">&nbsp;
+              
+            </td>
+          </tr>
+          <tr id="dictFile_details">
+            <td id="dictFile_label">
+              lbDictFile
+            </td>
+            <td>
+              <select id="dictFile_value" size="1" name="dictFile">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+              <a id="dictFile_create" href="javascript:divertToMapping('divertCreateDictFile');">
+                lbCreateDictFile
+              </a>
+            </td>
+            <td id="dictFile_error">&nbsp;
+              
+            </td>
+          </tr>
+          <tr id="xmlSchema_details">
+            <td id="xmlSchema_label">
+              lbXmlSchema
+            </td>
+            <td>
+              <select id="xmlSchema_value" size="1" name="xmlSchema">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+              <a id="xmlSchema_create" href="javascript:divertToMapping('divertCreateXmlSchema');">
+                lbCreateXmlSchema
+              </a>
+            </td>
+            <td id="xmlSchema_error">&nbsp;
+              
+            </td>
+          </tr>
+        </table>
+        <h4 id="details_heading">
+          lbDetails
+        </h4>
+        <table>
+          <tr id="bizActivityIdentifier_details">
+            <td id="bizActivityIdentifier_label">
+              lbBizActivityIdentifier
+            </td>
+            <td>
+              <input type="text" id="bizActivityIdentifier_value" name="bizActivityIdentifier"/>
+            </td>
+            <td id="bizActivityIdentifier_error">&nbsp;
+              
+            </td>
+          </tr>
+          <tr id="bizActionCode_details">
+            <td id="bizActionCode_label">
+              lbBizActionCode
+            </td>
+            <td>
+              <input type="text" id="bizActionCode_value" name="bizActionCode"/>
+            </td>
+            <td id="bizActionCode_error">&nbsp;
+              
+            </td>
+          </tr>
+          <tr id="retries_details">
+            <td id="retries_label">
+              lbRetries
+            </td>
+            <td>
+              <input type="text" id="retries_value" name="retries"/>
+            </td>
+            <td id="retries_error">&nbsp;
+              
+            </td>
+          </tr>
+          <tr id="timeToAcknowledge_details">
+            <td id="timeToAcknowledge_label">
+              lbTimeToAcknowledge
+            </td>
+            <td>
+              <input type="text" id="timeToAcknowledge_value" name="timeToAcknowledge"/>
+            </td>
+            <td id="timeToAcknowledge_error">&nbsp;
+              
+            </td>
+          </tr>
+        </table>
+        <h4 id="options_heading">
+          lbOptions
+        </h4>
+        <table>
+          <tr id="isAuthorizationRequired_details">
+            <td id="isAuthorizationRequired_label">
+              lbIsAuthorizationRequired
+            </td>
+            <td>
+              <input type="checkbox" id="isAuthorizationRequired_value" name="isAuthorizationRequired" value="true"/>
+            </td>
+            <td id="isAuthorizationRequired_error">&nbsp;
+              
+            </td>
+          </tr>
+          <tr id="isNonRepudiationRequired_details">
+            <td id="isNonRepudiationRequired_label">
+              lbIsNonRepudiationRequired
+            </td>
+            <td>
+              <input type="checkbox" id="isNonRepudiationRequired_value" name="isNonRepudiationRequired" value="true"/>
+            </td>
+            <td id="isNonRepudiationRequired_error">&nbsp;
+              
+            </td>
+          </tr>
+          <tr id="isSecureTransportRequired_details">
+            <td id="isSecureTransportRequired_label">
+              lbIsSecureTransportRequired
+            </td>
+            <td>
+              <input type="checkbox" id="isSecureTransportRequired_value" name="isSecureTransportRequired" value="true"/>
+            </td>
+            <td id="isSecureTransportRequired_error">&nbsp;
+              
+            </td>
+          </tr>
+          <tr id="disableDtd_details">
+            <td id="disableDtd_label">
+              lbDisableDtd
+            </td>
+            <td>
+              <input type="checkbox" id="disableDtd_value" name="disableDtd" value="true"/>
+            </td>
+            <td id="disableDtd_error">&nbsp;
+              
+            </td>
+          </tr>
+          <tr id="disableSchema_details">
+            <td id="disableSchema_label">
+              lbDisableSchema
+            </td>
+            <td>
+              <input type="checkbox" id="disableSchema_value" name="disableSchema" value="true"/>
+            </td>
+            <td id="disableSchema_error">&nbsp;
+              
+            </td>
+          </tr>
+          <tr id="validateAtSender_details">
+            <td id="validateAtSender_label">
+              lbValidateAtSender
+            </td>
+            <td>
+              <input type="checkbox" id="validateAtSender_value" name="validateAtSender" value="true"/>
+            </td>
+            <td id="validateAtSender_error">&nbsp;
+              
+            </td>
+          </tr>
+        </table>
+        <h4 id="encryption_heading">
+          lbEncryption
+        </h4>
+        <table>
+          <tr id="disableEncryption_details">
+            <td id="disableEncryption_label">
+              lbDisableEncryption
+            </td>
+            <td>
+              <input type="checkbox" id="disableEncryption_value" name="disableEncryption" value="true"/>
+            </td>
+            <td id="disableEncryption_error">&nbsp;
+              
+            </td>
+          </tr>
+          <tr id="disableSignature_details">
+            <td id="disableSignature_label">
+              lbDisableSignature
+            </td>
+            <td>
+              <input type="checkbox" id="disableSignature_value" name="disableSignature" value="true"/>
+            </td>
+            <td id="disableSignature_error">&nbsp;
+              
+            </td>
+          </tr>
+          <tr id="onlyEncryptPayload_details">
+            <td id="onlyEncryptPayload_label">
+              lbOnlyEncryptPayload
+            </td>
+            <td>
+              <input type="checkbox" id="onlyEncryptPayload_value" name="onlyEncryptPayload" value="true"/>
+            </td>
+            <td id="onlyEncryptPayload_error">&nbsp;
+              
+            </td>
+          </tr>
+          <tr id="digestAlgorithm_details">
+            <td id="digestAlgorithm_label">
+              lbDigestAlgorithm
+            </td>
+            <td>
+              <select id="digestAlgorithm_value" size="1" name="digestAlgorithm">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+            </td>
+            <td id="digestAlgorithm_error">&nbsp;
+              
+            </td>
+          </tr>
+          <tr id="encryptionAlgorithm_details">
+            <td id="encryptionAlgorithm_label">
+              lbEncryptionAlgorithm
+            </td>
+            <td>
+              <select id="encryptionAlgorithm_value" size="1" name="encryptionAlgorithm">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+            </td>
+            <td id="encryptionAlgorithm_error">&nbsp;
+              
+            </td>
+          </tr>
+          <tr id="encryptionAlgorithmLength_details">
+            <td id="encryptionAlgorithmLength_label">
+              lbEncryptionAlgorithmLength
+            </td>
+            <td>
+              <input type="text" id="encryptionAlgorithmLength_value" name="encryptionAlgorithmLength"/>
+            </td>
+            <td id="encryptionAlgorithmLength_error">&nbsp;
+              
+            </td>
+          </tr>
+        </table>
+		<h4 id="compression_heading">
+          lbCompression
+        </h4>
+        <table>
+          <tr id="isCompressRequired_details">
+            <td id="isCompressRequired_label">
+              lbIsCompressRequired
+            </td>
+            <td>
+              <input type="checkbox" id="isCompressRequired_value" name="isCompressRequired" value="true"/>
+            </td>
+            <td id="isCompressRequired_error">&nbsp;
+
+            </td>
+          </tr>
+		  </table>
+      </form>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <table>
+          <tr id="name_details">
+            <td id="name_label">
+              lbName
+            </td>
+            <td>
+              <input type="text" id="name_value" name="name"/>
+            </td>
+            <td id="name_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="description_details">
+            <td id="description_label">
+              lbDescription
+            </td>
+            <td>
+              <input type="text" id="description_value" name="description"/>
+            </td>
+            <td id="description_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="msgId_details">
+            <td id="msgId_label">
+              lbMsgId
+            </td>
+            <td>
+              <select id="msgId_value" size="1" name="messageId">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+              <a id="msgId_create" href="javascript:divertToMapping('divertCreateMessageTemplate');">
+                lbCreateMessageTemplate
+              </a>
+            </td>
+            <td id="msgId_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

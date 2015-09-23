@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>
+xmlConversion
+</title>
+<script language="JavaScript">
+<!--
+function checkVal()
+{
+ document.myfrm.submit();
+}
+ // -->
+</script>
+
+</head>
+<body BGCOLOR="#666699">
+<h1>
+XML Transformer Service ...
+</h1>
+<!--action=FileServlet-->
+<form ENCTYPE="multipart/form-data" method="post" action="InterfaceController" name="myfrm">
+<br><br>
+<br>
+<br>
+<b>StyleSheet File </b>&nbsp;&nbsp;
+<input type="file" name="SRCFILE">
+<br>
+<b>Input File &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="file" name="RULESFILE">
+<br>
+<br>
+<br>
+<input type = hidden name="conversion" value="Transformer">
+<input type="Submit" name="Submit" value="Submit">
+&nbsp;&nbsp;
+<input type="Reset" name="Clear" value="Clear">
+<br>

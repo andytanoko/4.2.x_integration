@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RulesContainer>
+	<ConversionName>PositionalText</ConversionName>
+	<OutputFileExt>xml</OutputFileExt>
+	<Read>
+		<PositionalTextRules>
+			<RemovePadding>true</RemovePadding>
+			<FirstFieldIdentifier>true</FirstFieldIdentifier>
+			<Root NAME="ORDERS01"/>
+			<Element NAME="IDOC" LEVEL="1" OCCURRENCE="1"/>
+			<Element NAME="EDI_DC40" IDENTIFIER="EDI_DC40" LENGTH="524" LEVEL="2" OCCURRENCE="1">
+				<Element NAME="TABNAM" LENGTH="8" PADDING="RIGHT"/>
+				<Element NAME="MANDT" LENGTH="5" PADDING="RIGHT"/>
+				<Element NAME="DOCNUM" LENGTH="16" PADDING="RIGHT"/>
+				<Element NAME="DOCREL" LENGTH="4" PADDING="RIGHT"/>
+				<Element NAME="STATUS" LENGTH="2" PADDING="RIGHT"/>
+				<Element NAME="DIRECT" LENGTH="1" PADDING="RIGHT"/>
+				<Element NAME="OUTMOD" LENGTH="1" PADDING="RIGHT"/>
+				<Element NAME="EXPRSS" LENGTH="1" PADDING="RIGHT"/>
+				<Element NAME="TEST" LENGTH="1" PADDING="RIGHT"/>
+				<Element NAME="IDOCTYP" LENGTH="30" PADDING="RIGHT"/>
+				<Element NAME="CIMTYP" LENGTH="30" PADDING="RIGHT"/>
+				<Element NAME="MESTYP" LENGTH="30" PADDING="RIGHT"/>
+				<Element NAME="MESCOD" LENGTH="3" PADDING="RIGHT"/>
+				<Element NAME="MESFCT" LENGTH="3" PADDING="RIGHT"/>
+				<Element NAME="STD" LENGTH="1" PADDING="RIGHT"/>
+				<Element NAME="STDVRS" LENGTH="6" PADDING="RIGHT"/>
+				<Element NAME="STDMES" LENGTH="6" PADDING="RIGHT"/>
+				<Element NAME="SNDPOR" LENGTH="10" PADDING="RIGHT"/>
+				<Element NAME="SNDPRT" LENGTH="2" PADDING="RIGHT"/>
+				<Element NAME="SNDPFC" LENGTH="2" PADDING="RIGHT"/>
+				<Element NAME="SNDPRN" LENGTH="10" PADDING="RIGHT"/>
+				<Element NAME="SNDSAD" LENGTH="21" PADDING="RIGHT"/>
+				<Element NAME="SNDLAD" LENGTH="70" PADDING="RIGHT"/>
+				<Element NAME="RCVPOR" LENGTH="10" PADDING="RIGHT"/>
+				<Element NAME="RCVPRT" LENGTH="2" PADDING="RIGHT"/>
+				<Element NAME="RCVPFC" LENGTH="2" PADDING="RIGHT"/>
+				<Element NAME="RCVPRN" LENGTH="10" PADDING="RIGHT"/>
+				<Element NAME="RCVSAD" LENGTH="21" PADDING="RIGHT"/>
+				<Element NAME="RCVLAD" LENGTH="70" PADDING="RIGHT"/>
+				<Element NAME="CREDAT" LENGTH="8" PADDING="RIGHT"/>
+				<Element NAME="CRETIM" LENGTH="6" PADDING="RIGHT"/>
+				<Element NAME="REFINT" LENGTH="14" PADDING="RIGHT"/>
+				<Element NAME="REFGRP" LENGTH="14" PADDING="RIGHT"/>
+				<Element NAME="REFMES" LENGTH="14" PADDING="RIGHT"/>
+				<Element NAME="ARCKEY" LENGTH="70" PADDING="RIGHT"/>
+				<Element NAME="SERIAL" LENGTH="20" PADDINGCHAR="0" PADDING="RIGHT"/>
+			</Element>
+			<!--Element NAME="E2EDK01" IDENTIFIER="E2EDK01" LENGTH="420" LEVEL="2" OCCURRENCE="1">
+				<Element NAME="TABNAM" LENGTH="7" PADDING="RIGHT"/>
+				<Element NAME="SEGNAM" LENGTH="5" PADDING="RIGHT"/>
+			</Element-->
+			<Element NAME="E2EDK14" IDENTIFIER="E2EDK14" LENGTH="101" LEVEL="2" OCCURRENCE="0">
+				<Element NAME="TABNAM" LENGTH="7" PADDING="RIGHT"/>
+				<Element NAME="SEGNAM" LENGTH="23" PADDING="RIGHT"/>
+				<Element NAME="MANDT" LENGTH="3" PADDING="RIGHT"/>
+				<Element NAME="DOCNUM" LENGTH="16" PADDING="RIGHT"/>
+				<Element NAME="SEGNUM" LENGTH="6" PADDING="RIGHT" PADDINGCHAR="*"/>
+				<Element NAME="PSGNUM" LENGTH="6" PADDING="RIGHT" PADDINGCHAR="0"/>
+				<Element NAME="HLEVEL" LENGTH="2" PADDING="RIGHT"/>
+				<Element NAME="QUALF" LENGTH="3" PADDING="RIGHT"/>
+				<Element NAME="ORGID" LENGTH="35" PADDING="RIGHT"/>
+			</Element>
+			<!--Element NAME="E2EDK03" IDENTIFIER="E2EDK03" LENGTH="101" LEVEL="2"/>
+			<Element NAME="E2EDK04" IDENTIFIER="E2EDK04" LENGTH="101" LEVEL="2" OCCURRENCE="1"/>
+			<Element NAME="E2EDK05" IDENTIFIER="E2EDK05" LENGTH="101" LEVEL="2" OCCURRENCE="1"/>
+			<Element NAME="E2EDKA1" IDENTIFIER="E2EDKA1" LENGTH="101" LEVEL="2" OCCURRENCE="1"/>
+			<Element NAME="E2EDK02" IDENTIFIER="E2EDK02" LENGTH="101" LEVEL="2" OCCURRENCE="1"/>
+			<Element NAME="E2EDK17" IDENTIFIER="E2EDK17" LENGTH="101" LEVEL="2" OCCURRENCE="1"/>
+			<Element NAME="E2EDK18" IDENTIFIER="E2EDK18" LENGTH="101" LEVEL="2" OCCURRENCE="1"/>
+			<Element NAME="E2EDKT1" IDENTIFIER="E2EDKT1" LENGTH="101" LEVEL="2" OCCURRENCE="1"/>
+			<Element NAME="E2EDP01" IDENTIFIER="E2EDP01" LENGTH="101" LEVEL="2" OCCURRENCE="1"/>
+			<Element NAME="E2EDS01" IDENTIFIER="E2EDS01" LENGTH="101" LEVEL="2" OCCURRENCE="1"/-->
+		</PositionalTextRules>
+	</Read>
+	<Write>
+		<XSLTRules>
+			<xsl:transform xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" xmlns:saxon="http://icl.com/saxon" exclude-result-prefixes="saxon">
+				<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+				<xsl:strip-space elements="*"/>
+				<xsl:template match="ORDERS01">
+					<xsl:copy-of select="."/>
+				</xsl:template>
+			</xsl:transform>
+		</XSLTRules>
+	</Write>
+</RulesContainer>

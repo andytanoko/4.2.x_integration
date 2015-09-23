@@ -1,0 +1,35 @@
+Upgrade Pack: GridTalk2.2.10-2.3.4-upgrade
+
+Purpose
+-------
+This upgrade pack is used for upgrading GridTalk from build 2.2.10 to build 2.3.4.
+
+New Features added in 2.3 version include:
+a. P2P RN messaging enablement between GridTalk 2 series (both RNIF1 & RNIF2 messages)
+b. P2P Interoperability with GridTalk 1 series (including RNIF2 messages)
+c. Support for UCCnet Transport using UCCnet Transport Adaptor (User Procedure Call)
+d. AS2 Messaging Protocol
+e. Document Searching
+f. Asian Characters Support for XML content
+g. Scheduled Housekeeping
+h. Workflow Activity Suspension and Resume Control
+
+
+Instructions
+------------
+To apply the upgrade pack,
+1. Unpack the GridTalk2.2.10-2.3.4-upgrade.zip file to a temporary directory.
+2. Run upgrade.bat (double-click or type "upgrade" in command prompt)
+
+
+Notes:
+1. Upon this upgrade, please review each Channel profile on the flowcontrol settings
+   which are migrated from Packaging profiles. Some defaults have been given based on
+   the Channel Protocol Type:
+   a. HTTP      - Is Zip=false, Is Split=false
+   b. JMS       - Is Zip=true, Is Split=true
+   c. SOAP-HTTP - Is Zip=true, Is Split=false
+
+   Manual updates may be necessary if these defaults are not applicable to particular channel.
+
+2. See readme.txt for features/enhancements/bugfixes details in GridTalk 2.3.

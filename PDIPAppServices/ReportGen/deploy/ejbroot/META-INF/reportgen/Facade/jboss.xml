@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="Cp1252"?>
+<jboss>
+  <secure>false</secure>
+  <resource-managers/>
+  <enterprise-beans>
+    <session>
+      <ejb-name>ReportGen</ejb-name>
+      <jndi-name>com.gridnode.pdip.app.reportgen.facade.ejb.IReportGenManagerHome</jndi-name>
+    </session>
+  </enterprise-beans>
+</jboss>

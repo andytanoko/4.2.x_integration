@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ ****************************************************************************
+ * Date           Author                  Changes
+ ****************************************************************************
+ * Oct 21 2002    Neo Sok Lay             Created.
+ * Dec 04 2002    Neo Sok Lay             Define mapping for ConnectionProperties
+ *                                        and ConnectionSetupProperties.
+-->
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for NetworkSetting  -->
+	<class name="com.gridnode.gtas.server.connection.model.NetworkSetting">
+		<map-to xml="NetworkSetting"/>
+		<field name="ConnectionLevel" type="short">
+			<xml name="ConnectionLevel" node="element"/>
+		</field>
+		<field name="LocalJmsRouter" type="string">
+			<xml name="LocalJmsRouter" node="element"/>
+		</field>
+		<field name="HttpProxyServer" type="string">
+			<xml name="HttpProxyServer" node="element"/>
+		</field>
+		<field name="HttpProxyPort" type="integer">
+			<xml name="HttpProxyPort" node="element"/>
+		</field>
+		<field name="ProxyAuthUser" type="string">
+			<xml name="ProxyAuthUser" node="element"/>
+		</field>
+		<field name="ProxyAuthPassword" type="string">
+			<xml name="ProxyAuthPassword" node="element"/>
+		</field>
+		<field name="KeepAliveInterval" type="integer">
+			<xml name="KeepAliveInterval" node="element"/>
+		</field>
+		<field name="ResponseTimeout" type="integer">
+			<xml name="ResponseTimeout" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for ConnectionSetupParam  -->
+	<class name="com.gridnode.gtas.server.connection.model.ConnectionSetupParam">
+		<map-to xml="ConnectionSetupParam"/>
+		<field name="CurrentLocation" type="string">
+			<xml name="CurrentLocation" node="element"/>
+		</field>
+		<field name="ServicingRouter" type="string">
+			<xml name="ServicingRouter" node="element"/>
+		</field>
+		<field name="OriginalLocation" type="string">
+			<xml name="OriginalLocation" node="element"/>
+		</field>
+		<field name="OriginalServicingRouter" type="string">
+			<xml name="OriginalServicingRouter" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for ConnectionSetupResult  -->
+	<class name="com.gridnode.gtas.server.connection.model.ConnectionSetupResult">
+		<map-to xml="ConnectionSetupResult"/>
+		<field name="Status" type="short">
+			<xml name="Status" node="element"/>
+		</field>
+		<field name="SetupParams" type="com.gridnode.gtas.server.connection.model.ConnectionSetupParam">
+			<xml name="SetupParams" node="element"/>
+		</field>
+		<field name="FailureReason" type="string">
+			<xml name="FailureReason" node="element"/>
+		</field>
+		<field name="AvailableGridMastersUIDs" collection="collection" type="long">
+			<xml name="AvailableGridMasterUIDs" node="element"/>
+		</field>
+		<field name="AvailableRouterUIDs" collection="collection" type="long">
+			<xml name="AvailableRouterUIDs" node="element"/>
+		</field>
+		<field name="LocalRouterTopic" type="string">
+			<xml name="LocalRouterTopic" node="element"/>
+		</field>
+		<field name="LocalRouterUser" type="string">
+			<xml name="LocalRouterUser" node="element"/>
+		</field>
+		<field name="LocalRouterPassword" type="string">
+			<xml name="LocalRouterPassword" node="element"/>
+		</field>
+		<field name="NetworkRouterTopic" type="string">
+			<xml name="NetworkRouterTopic" node="element"/>
+		</field>
+		<field name="NetworkRouterUser" type="string">
+			<xml name="NetworkRouterUser" node="element"/>
+		</field>
+		<field name="NetworkRouterPassword" type="string">
+			<xml name="NetworkRouterPassword" node="element"/>
+		</field>
+		<field name="GmTopicItems" collection="collection" type="com.gridnode.pdip.framework.db.KeyValuePair">
+			<xml name="GmTopicItems" node="element"/>
+		</field>
+	</class>
+
+	<!--  Mapping for ConnectionSetupProperties  -->
+	<class name="com.gridnode.gtas.server.connection.setup.ConnectionSetupProperties">
+		<map-to xml="ConnectionSetupProperties"/>
+		<field name="isTest" type="boolean">
+			<xml name="isTest" node="attribute"/>
+		</field>
+		<field name="PreSetupEventId" type="string">
+			<xml name="PreSetupEventId" node="element"/>
+		</field>
+		<field name="PreSetupAckEventId" type="string">
+			<xml name="PreSetupAckEventId" node="element"/>
+		</field>
+		<field name="SetupEventId" type="string">
+			<xml name="SetupEventId" node="element"/>
+		</field>
+		<field name="SetupAckEventId" type="string">
+			<xml name="SetupAckEventId" node="element"/>
+		</field>
+		<field name="PostSetupEventId" type="string">
+			<xml name="PostSetupEventId" node="element"/>
+		</field>
+		<field name="SetupSendTopic" type="string">
+			<xml name="SetupSendTopic" node="element"/>
+		</field>
+		<field name="SetupListenTopic" type="string">
+			<xml name="SetupListenTopic" node="element"/>
+		</field>
+		<field name="MsgFormatVersion" type="string">
+			<xml name="MsgFormatVersion" node="element"/>
+		</field>
+		<field name="ServicingRouterPort" type="integer">
+			<xml name="ServicingRouterPort" node="element"/>
+		</field>
+		<field name="CommInfoVersion" type="string">
+			<xml name="CommInfoVersion" node="element"/>
+		</field>
+		<field name="SendChannelRefId" type="string">
+			<xml name="SendChannelRefId" node="element"/>
+		</field>
+		<field name="SendChannelPkgName" type="string">
+			<xml name="SendChannelPkgName" node="element"/>
+		</field>
+		<field name="SendChannelPkgDesc" type="string">
+			<xml name="SendChannelPkgDesc" node="element"/>
+		</field>
+		<field name="SendChannelSecName" type="string">
+			<xml name="SendChannelSecName" node="element"/>
+		</field>
+		<field name="SendChannelSecDesc" type="string">
+			<xml name="SendChannelSecDesc" node="element"/>
+		</field>
+		<field name="SendChannelCommName" type="string">
+			<xml name="SendChannelCommName" node="element"/>
+		</field>
+		<field name="SendChannelCommDesc" type="string">
+			<xml name="SendChannelCommDesc" node="element"/>
+		</field>
+		<field name="SendChannelName" type="string">
+			<xml name="SendChannelName" node="element"/>
+		</field>
+		<field name="SendChannelDesc" type="string">
+			<xml name="SendChannelDesc" node="element"/>
+		</field>
+		<field name="SetupListenUser" type="string">
+			<xml name="SetupListenUser" node="element"/>
+		</field>
+		<field name="SetupListenPassword" type="string">
+			<xml name="SetupListenPassword" node="element"/>
+		</field>
+		<field name="MasterChannelPkgName" type="string">
+			<xml name="MasterChannelPkgName" node="element"/>
+		</field>
+		<field name="MasterChannelPkgDesc" type="string">
+			<xml name="MasterChannelPkgDesc" node="element"/>
+		</field>
+		<field name="MasterChannelSecName" type="string">
+			<xml name="MasterChannelSecName" node="element"/>
+		</field>
+		<field name="MasterChannelSecDesc" type="string">
+			<xml name="MasterChannelSecDesc" node="element"/>
+		</field>
+		<field name="MasterChannelCommName" type="string">
+			<xml name="MasterChannelCommName" node="element"/>
+		</field>
+		<field name="MasterChannelCommDesc" type="string">
+			<xml name="MasterChannelCommDesc" node="element"/>
+		</field>
+		<field name="MasterChannelCommPort" type="integer">
+			<xml name="MasterChannelCommPort" node="element"/>
+		</field>
+		<field name="MasterChannelName" type="string">
+			<xml name="MasterChannelName" node="element"/>
+		</field>
+		<field name="MasterChannelDesc" type="string">
+			<xml name="MasterChannelDesc" node="element"/>
+		</field>
+		<field name="GmChannelPkgName" type="string">
+			<xml name="GmChannelPkgName" node="element"/>
+		</field>
+		<field name="GmChannelPkgDesc" type="string">
+			<xml name="GmChannelPkgDesc" node="element"/>
+		</field>
+		<field name="GmChannelSecName" type="string">
+			<xml name="GmChannelSecName" node="element"/>
+		</field>
+		<field name="GmChannelSecDesc" type="string">
+			<xml name="GmChannelSecDesc" node="element"/>
+		</field>
+		<field name="GmChannelCommName" type="string">
+			<xml name="GmChannelCommName" node="element"/>
+		</field>
+		<field name="GmChannelCommDesc" type="string">
+			<xml name="GmChannelCommDesc" node="element"/>
+		</field>
+		<field name="GmChannelCommPort" type="integer">
+			<xml name="GmChannelCommPort" node="element"/>
+		</field>
+		<field name="GmChannelName" type="string">
+			<xml name="GmChannelName" node="element"/>
+		</field>
+		<field name="GmChannelDesc" type="string">
+			<xml name="GmChannelDesc" node="element"/>
+		</field>
+		<field name="GmCategory" type="string">
+			<xml name="GmCategory" node="element"/>
+		</field>
+	</class>
+
+	<!--  Mapping for ConnectionProperties  -->
+	<class name="com.gridnode.gtas.server.connection.connect.ConnectionProperties">
+		<map-to xml="ConnectionProperties"/>
+		<field name="isTest" type="boolean">
+			<xml name="isTest" node="attribute"/>
+		</field>
+		<field name="KeepAliveTimeout" type="integer">
+			<xml name="KeepAliveTimeout" node="element"/>
+		</field>
+		<field name="ConnectTimeout" type="integer">
+			<xml name="ConnectTimeout" node="element"/>
+		</field>
+		<field name="ReconnectRetries" type="integer">
+			<xml name="ReconnectRetries" node="element"/>
+		</field>
+		<field name="ReconnectInterval" type="integer">
+			<xml name="ReconnectInterval" node="element"/>
+		</field>
+		<field name="AutoConnectOnStartup" type="boolean">
+			<xml name="AutoConnectOnStartup" node="element"/>
+		</field>
+		<field name="ConnectEventId" type="string">
+			<xml name="ConnectEventId" node="element"/>
+		</field>
+		<field name="ConnectAckEventId" type="string">
+			<xml name="ConnectAckEventId" node="element"/>
+		</field>
+		<field name="KeepAliveEventId" type="string">
+			<xml name="KeepAliveEventId" node="element"/>
+		</field>
+		<field name="KeepAliveAckEventId" type="string">
+			<xml name="KeepAliveAckEventId" node="element"/>
+		</field>
+		<field name="RetrievePendingEventId" type="string">
+			<xml name="RetrievePendingEventId" node="element"/>
+		</field>
+		<field name="RetrievePendingAckEventId" type="string">
+			<xml name="RetrievePendingAckEventId" node="element"/>
+		</field>
+		<field name="RetrievePartnerStatusEventId" type="string">
+			<xml name="RetrievePartnerStatusEventId" node="element"/>
+		</field>
+		<field name="RetrievePartnerStatusAckEventId" type="string">
+			<xml name="RetrievePartnerStatusAckEventId" node="element"/>
+		</field>
+		<field name="OnlineNotificationEventId" type="string">
+			<xml name="OnlineNotificationEventId" node="element"/>
+		</field>
+		<field name="OnlineNotificationAckEventId" type="string">
+			<xml name="OnlineNotificationAckEventId" node="element"/>
+		</field>
+		<field name="DisconnectEventId" type="string">
+			<xml name="DisconnectEventId" node="element"/>
+		</field>
+		<field name="DisconnectAckEventId" type="string">
+			<xml name="DisconnectAckEventId" node="element"/>
+		</field>
+		<field name="OfflineNotificationEventId" type="string">
+			<xml name="OfflineNotificationEventId" node="element"/>
+		</field>
+		<field name="OfflineNotificationAckEventId" type="string">
+			<xml name="OfflineNotificationAckEventId" node="element"/>
+		</field>
+		<field name="ConfirmAliveEventId" type="string">
+			<xml name="ConfirmAliveEventId" node="element"/>
+		</field>
+		<field name="ConfirmAliveAckEventId" type="string">
+			<xml name="ConfirmAliveAckEventId" node="element"/>
+		</field>
+		<field name="ExpiredNotificationEventId" type="string">
+			<xml name="ExpiredNotificationEventId" node="element"/>
+		</field>
+	</class>
+
+</mapping>

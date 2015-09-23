@@ -1,0 +1,45 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001-2005 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: ITxDeliveryTimer.java
+ *
+ ****************************************************************************
+ * Date           Author              Changes
+ ****************************************************************************
+ * Jan 12, 2007   i00107              Created
+ */
+
+package com.gridnode.gridtalk.httpbc.ishb.ejb;
+
+import java.rmi.RemoteException;
+
+import javax.ejb.EJBObject;
+
+/**
+ * @author i00107
+ * The Remote interface for TxDeliverTimerBean.
+ */
+public interface ITxDeliveryTimer extends EJBObject
+{
+  /**
+   * Initialize the delivery timer
+   * 
+   * @param delay The delay in milliseconds before the first execution of the
+   * timer takes place. 
+   * @param interval The interval in milliseconds between each execution of the timer.
+   * @param deliveryType The type of delivery to perform. Accepted values are: [in | out] (case-insensitive). 
+   * @throws RemoteException
+   */
+  public void initializeTimer(long delay, long interval, String deliveryType) 
+    throws RemoteException;
+
+  /**
+   * Cancel the delivery timers.
+   * @throws RemoteException
+   */
+  public void cancelTimers() throws RemoteException;
+
+}

@@ -1,0 +1,132 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: ResourceNode.java
+ *
+ ****************************************************************************
+ * Date           Author              Changes
+ ****************************************************************************
+ * Aug 01 2001    Neo Sok Lay         Created
+ */
+package com.gridnode.gtas.server.enterprise.model;
+
+import com.gridnode.pdip.framework.db.entity.AbstractEntity;
+
+import java.util.Collection;
+
+/**
+ * This is an object model for ResourceNode entity. A ResourceNode keeps
+ * tracks of the hierarchy of resources in the entire enterprise, including
+ * partner enterprises.<P>
+ *
+ * The Model:<BR><PRE>
+ *   UId                - UID for a ResourceNode entity instance.
+ *   ParentNodeUID      - UID of the parent ResourceNode for this
+ *                        ResourceNode instance.
+ *   ResourceUID        - UID of the resource (in the specific resource table)
+ *                        this ResourceNode instance denotes.
+ *   ResourceType       - Type of resource this ResourceNode instance denotes.
+ *   Priority           - Priority of the resource among other resources of the
+ *                        same type under the same parent.
+ *   ChildrenResourceNodes- Collection of the ResourceNode(s) underneath this
+ *                        ResourceNode instance.
+ *   CanDelete          - Whether this ResourceNode can be deleted by the user.
+ *   Version            - The version of this ResourceNode.
+ * </PRE>
+ * <P>
+ * Getters and setters are provided for each attribute.<BR>
+ * NOTE that all getters and setters are required for JDO
+ * marshalling/unmarshalling.
+ *
+ * @author Neo Sok Lay
+ *
+ * @version 2.0 I4
+ * @since 2.0 I4
+ */
+public class ResourceNode
+  extends    AbstractEntity
+  implements IResourceNode
+{
+  protected Long       _parentUID;
+  protected Long       _resourceUID;
+  protected String     _resourceType;
+  protected Collection _childrenResourceNodes;
+  protected int        _priority;
+
+  public ResourceNode()
+  {
+  }
+
+  // *************** Methods from AbstractEntity ***************************
+  public Number getKeyId()
+  {
+    return UID;
+  }
+
+  public String getEntityDescr()
+  {
+    return getParentNodeUID() + "/" + getResourceType() + "-" + getResourceUID();
+  }
+
+  public String getEntityName()
+  {
+    return ENTITY_NAME;
+  }
+
+  // ************************* Getters for attributes ***********************
+
+  public Long getParentNodeUID()
+  {
+    return _parentUID;
+  }
+
+  public Long getResourceUID()
+  {
+    return _resourceUID;
+  }
+
+  public String getResourceType()
+  {
+    return _resourceType;
+  }
+
+  public Collection getChildrenResourceNodes()
+  {
+    return _childrenResourceNodes;
+  }
+
+  public int getPriority()
+  {
+    return _priority;
+  }
+
+  // ********************** Setters for attributes ***************************
+
+  public void setParentNodeUID(Long parentUID)
+  {
+    _parentUID = parentUID;
+  }
+
+  public void setResourceUID(Long resourceUID)
+  {
+    _resourceUID = resourceUID;
+  }
+
+  public void setResourceType(String resourceType)
+  {
+    _resourceType = resourceType;
+  }
+
+  public void setChildrenResourceNodes(Collection children)
+  {
+    _childrenResourceNodes = children;
+  }
+
+  public void setPriority(int priority)
+  {
+    _priority = priority;
+  }
+}

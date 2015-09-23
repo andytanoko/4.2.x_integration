@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+  <secure>false</secure>
+  <container-configurations />
+  <resource-managers />
+  <enterprise-beans>
+    <entity>
+      <ejb-name>ContextData</ejb-name>
+      <jndi-name>com.gridnode.pdip.base.contextdata.entities.ejb.IContextDataHome</jndi-name>
+      <!--clustered>${node.clustered:False}</clustered--> <!-- #69 TWX 02082008 Remove it to prevent lookup error in node 2 if we are shutting down node 2 due to container will notify all clustered ejb no to receive any more ejb call -->
+			<!--method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes-->
+    </entity>
+  </enterprise-beans>
+</jboss>

@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head 
+		id="xhtml_head">
+		<title 
+			id="title">
+			lbGridTalk
+		</title>
+		<base 
+			href="file:///C:\views\sumedh_2_estore\GTAS\GridTalk\web\gt.css" 
+			id="base_tag"/>
+		<link 
+			id="xhtml_stylesheet" 
+			rel="stylesheet" 
+			href="gt.css" 
+			type="text/css"/>
+	</head>
+	<body>
+	  <div id="page_content">
+		<form id="form" name="entityForm" method="post" action="">
+			<input id="operation_context" type="hidden" name="operationContextId"/>
+            <input type="hidden" name="method" value="save"/>
+            <input type="hidden" name="divertTo"/>
+			
+			<h4 id="heading">lbDocument Search</h4>
+            <table id="esSearchDoc_details">
+				<tr id="formMsg_details">
+					<td id="formMsg_error" colspan="6"></td>
+				</tr>
+				<tr id="partnerID_details">
+					<td id="partnerID_label" class="fieldlabel" nowrap="nowrap">
+							lbPartner ID
+					</td>
+					<td>
+						<select id="partnerID_value" name="partnerID" size="1">
+								<option></option>
+						</select>
+					</td>
+					<td id="partnerID_error" colspan="4">
+							&nbsp;
+					</td>
+				</tr>
+				<tr id="partnerName_details">
+					<td id="partnerName_label" class="fieldlabel" nowrap="nowrap">
+						lbPartner Name
+					</td>
+					<td>
+						<input type="text" id="partnerName_value" name="partnerName"/>
+					</td>
+					<td id="partnerName_error" colspan="4">
+						&nbsp;
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan="6">&nbsp;</td>
+				</tr>
+
+				<tr id="folder_details">
+					<td id="folder_label" class="fieldlabel" nowrap="nowrap">
+						lbFolder
+					</td>
+					<td>
+						<select class="mandatory" id="folder_value" name="folder" size="1">
+							 <option selected="selected" value=""></option>
+						</select>
+					</td>
+					<td id="folder_error" colspan="4">
+						&nbsp;
+					</td>
+				</tr>
+
+				<tr id="docType_details">
+					<td id="docType_label" class="fieldlabel" nowrap="nowrap">
+						lbDoc. Type
+					</td>
+					<td>
+						<select class="mandatory" id="docType_value" name="docType" size="1">
+							<option selected="selected" value="">
+							</option>
+						</select>
+					</td>
+					<td id="docType_error" colspan="4">
+						&nbsp;
+					</td>
+				</tr>
+				<tr id="userTrackingID_details">
+					<td id="userTrackingID_label" class="fieldlabel" nowrap="nowrap">
+						lbUser Tracking ID
+					</td>
+					<td>
+						<input type="text" id="userTrackingID_value" name="userTrackingID"/>
+					</td>
+					<td id="userTrackingID_error" colspan="4">
+						&nbsp;
+					</td>
+				</tr>
+				<tr>
+					<td colspan="6">&nbsp;</td>
+				</tr>
+
+				<!--from create date -->
+				<tr id="fromCreateDate_details">
+					<td id="fromCreateDate_label" class="fieldlabel" nowrap="nowrap">
+						lbFrom Create Date (YYYY-MM-DD)
+					</td>
+					<td>
+						<input type="text" id="fromCreateDate_value" name="fromCreateDate" />
+							<a href="javascript:NewCal('fromCreateDate_value','yyyyMMdd');">
+								<img src="images/actions/cal.gif" width="16" height="16" border="0" alt="Pick"/>
+							</a>
+					</td>
+					<td id="fromCreateDate_error">
+						&nbsp;&nbsp;
+					</td>
+					<td id="fromCreateDateHour_label" class="fieldlabel" nowrap="nowrap">
+						lb(HH:MM)
+					</td>
+					<td>
+						<input type="text" id="fromCreateDateHour_value" name="fromCreateDateHour"/>
+					</td>
+					<td id="fromCreateDateHour_error" width="99%">
+						&nbsp;
+					</td>
+				</tr>
+
+
+				<!--to create date -->
+				<tr id="toCreateDate_details">
+					<td id="toCreateDate_label" class="fieldlabel" nowrap="nowrap">
+						lbTo Create Date (YYYY-MM-DD)
+					</td>
+					<td>
+						<input type="text" id="toCreateDate_value" name="toCreateDate" />
+							<a href="javascript:NewCal('toCreateDate_value','yyyyMMdd');">
+								<img src="images/actions/cal.gif" width="16" height="16" border="0" alt="Pick"/>
+							</a>
+					</td>
+					<td id="toCreateDate_error">
+						&nbsp;&nbsp;
+					</td>
+					<td id="toCreateDateHour_label" class="fieldlabel" nowrap="nowrap">
+						lb(HH:MM)
+					</td>
+					<td> 
+						<input type="text" id="toCreateDateHour_value" name="toCreateDateHour"/>
+					</td>
+					<td id="toCreateDateHour_error" width="99%">
+						&nbsp;
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan="6">&nbsp;</td>
+				</tr>
+
+				<!-- from sent date -->
+
+				<tr id="fromSentDate_details">
+					<td id="fromSentDate_label" class="fieldlabel" nowrap="nowrap">
+						lbFrom Sent Date (YYYY-MM-DD)
+					</td>
+					<td>
+						<input type="text" id="fromSentDate_value" name="fromSentDate" />
+							<a href="javascript:NewCal('fromSentDate_value','yyyyMMdd');">
+								<img src="images/actions/cal.gif" width="16" height="16" border="0" alt="Pick"/>
+							</a>
+					</td>
+					<td id="fromSentDate_error">
+						&nbsp;&nbsp;
+					</td>
+					<td id="fromSentDateHour_label" class="fieldlabel" nowrap="nowrap">
+						lb(HH:MM)
+					</td>
+					<td>
+						<input type="text" id="fromSentDateHour_value" name="fromSentDateHour"/>
+					</td>
+					<td id="fromSentDateHour_error" width="99%">
+						&nbsp;
+					</td>
+				</tr>
+
+				<!--to sent date -->
+				<tr id="toSentDate_details">
+					<td id="toSentDate_label" class="fieldlabel" nowrap="nowrap">
+						lbTo Sent Date (YYYY-MM-DD)
+					</td>
+					<td>
+						<input type="text" id="toSentDate_value" name="toSentDate"/>
+							<a href="javascript:NewCal('toSentDate_value','yyyyMMdd');">
+								<img src="images/actions/cal.gif" width="16" height="16" border="0" alt="Pick"/>
+							</a>
+					</td>
+					<td id="toSentDate_error">
+						&nbsp;&nbsp;
+					</td>
+					<td id="toSentDateHour_label" class="fieldlabel" nowrap="nowrap">
+							lb(HH:MM)
+					</td>
+					<td>
+							<input type="text" id="toSentDateHour_value" name="toSentDateHour"/>
+					</td>
+					<td id="toSentDateHour_error" width="99%">
+							&nbsp;
+					</td>
+				</tr>
+				<tr>
+					<td colspan="6">&nbsp;</td>
+				</tr>
+
+				<!--from received date -->
+				<tr id="fromReceivedDate_details">
+					<td id="fromReceivedDate_label" class="fieldlabel" nowrap="nowrap">
+						lbFrom Received Date (YYYY-MM-DD)
+					</td>
+					<td>
+						<input type="text" id="fromReceivedDate_value" name="fromReceivedDate" />
+							<a href="javascript:NewCal('fromReceivedDate_value','yyyyMMdd');">
+								<img src="images/actions/cal.gif" width="16" height="16" border="0" alt="Pick"/>
+							</a>
+					</td>
+					<td id="fromReceivedDate_error">
+						 &nbsp;&nbsp;
+					</td>
+					<td id="fromReceivedDateHour_label" class="fieldlabel" nowrap="nowrap">
+						lb(HH:MM)
+					</td>
+					<td>
+						<input type="text" id="fromReceivedDateHour_value" name="fromReceivedDateHour"/>
+					</td>
+					<td id="fromReceivedDateHour_error" width="99%">
+						&nbsp;
+					</td>
+				</tr>
+
+				<!--to received date --> 
+				<tr id="toReceivedDate_details">
+					<td id="toReceivedDate_label" class="fieldlabel" nowrap="nowrap">
+						lbTo Received Date (YYYY-MM-DD)
+					</td>
+					<td>
+						<input type="text" id="toReceivedDate_value" name="toReceivedDate" />
+							<a href="javascript:NewCal('toReceivedDate_value','yyyyMMdd');">
+								<img src="images/actions/cal.gif" width="16" height="16" border="0" alt="Pick"/>
+							</a>
+					</td>
+					<td id="toReceivedDate_error">
+						&nbsp;&nbsp;
+					</td>
+					<td id="toReceivedDateHour_label" class="fieldlabel" nowrap="nowrap">
+						lb(HH:MM)
+					</td>
+					<td>
+						<input type="text" id="toReceivedDateHour_value" name="toReceivedDateHour"/>
+					</td>
+					<td id="toReceivedDateHour_error" width="99%">
+						&nbsp;
+					</td>
+				</tr>
+				<tr>
+					<td colspan="6">&nbsp;</td>
+				</tr>
+
+
+				<!--doc No -->
+				<tr id="docNo_details">
+					<td id="docNo_label" class="fieldlabel" nowrap="nowrap">
+						lbDoc. No.
+					</td>
+					<td>
+						<input type="text" id="docNo_value" name="docNo"/>
+					</td>
+					<td id="docNo_error" colspan="4">
+						&nbsp;
+					</td>
+				</tr>
+
+				<!--From doc date -->
+				<tr id="fromDocDate_details">
+					<td id="fromDocDate_label" class="fieldlabel" nowrap="nowrap">
+						lbFrom Doc. Date (YYYY-MM-DD)
+					</td>
+					<td>
+						<input type="text" id="fromDocDate_value" name="fromDocDate" />
+							<a href="javascript:NewCal('fromDocDate_value','yyyyMMdd');">
+								<img src="images/actions/cal.gif" width="16" height="16" border="0" alt="Pick"/>
+							</a>
+					</td>
+					<td id="fromDocDate_error">
+						&nbsp;&nbsp;
+					</td>
+					<td id="fromDocDateHour_label" class="fieldlabel" nowrap="nowrap">
+						lb(HH:MM)
+					</td>
+					<td>
+						<input type="text" id="fromDocDateHour_value" name="fromDocDateHour"/>
+					</td>
+					<td id="fromDocDateHour_error" width="99%">
+						&nbsp;
+					</td>
+				</tr>
+
+				<!--to doc date -->
+				<tr id="toDocDate_details">
+					<td id="toDocDate_label" class="fieldlabel" nowrap="nowrap">
+						lbTo Doc. Date (YYYY-MM-DD)
+					</td>
+					<td>
+						<input type="text" id="toDocDate_value" name="toDocDate" />
+							<a href="javascript:NewCal('toDocDate_value','yyyyMMdd');">
+								<img src="images/actions/cal.gif" width="16" height="16" border="0" alt="Pick"/>
+							</a>
+					</td>
+					<td id="toDocDate_error">
+						&nbsp;&nbsp;
+					</td>
+					<td id="toDocDateHour_label" class="fieldlabel" nowrap="nowrap">
+						lb(HH:MM)
+					</td>
+					<td>
+						<input type="text" id="toDocDateHour_value" name="toDocDateHour"/>
+					</td>
+					<td id="toDocDateHour_error" width="99%">
+						&nbsp;
+					</td>
+				</tr>
+                <tr id="remark_details">
+						<td id="remark_label" class="fieldlabel" nowrap="nowrap">
+							lbRemark
+						</td>
+						<td>
+							<select id="remark_value" name="remark" size="1">
+								<option></option>
+							</select>
+						</td>
+						<td id="remark_error" colspan="4">
+							&nbsp;
+						</td>
+				</tr>   
+			</table>
+			<!-- end search content -->
+		</form>
+	  </div>
+	</body>
+</html>

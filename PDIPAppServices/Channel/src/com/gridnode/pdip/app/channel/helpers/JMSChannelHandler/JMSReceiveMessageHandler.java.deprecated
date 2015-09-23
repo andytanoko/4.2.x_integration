@@ -1,0 +1,59 @@
+package com.gridnode.pdip.app.channel.helpers.JMSChannelHandler;
+
+import com.gridnode.pdip.app.channel.exceptions.EventIdNotRegisteredException;
+import com.gridnode.pdip.app.channel.helpers.IReceiveMessageHandler;
+import com.gridnode.pdip.app.channel.helpers.ChannelLogger;
+
+import com.gridnode.pdip.base.transport.helpers.IGTTransportReceiveListener;
+import com.gridnode.pdip.base.transport.comminfo.ICommInfo;
+
+import java.io.File;
+
+public class JMSReceiveMessageHandler implements IGTTransportReceiveListener
+{
+
+  public void updateEventChange(ICommInfo commInfo, String[] header, byte[] fileData, String[] dataReceived)
+  {
+    try
+    {
+      // Check for Received File part acknowledge.
+      boolean isFilePartReceiveAck = false;
+      if (isFilePartReceiveAck)
+      {
+        /**@todo pass message to SendMessageHandler.*/
+        return;
+      }
+
+
+      // Check if there is a listener for this eventId
+      String eventId = header[0];
+      IReceiveMessageHandler msgHandler =
+                             JMSChannelController.getInstance().getReceiveMessageHandler(eventId);
+
+      // Check if all file part received.
+      boolean allFilePartsReceived = true;
+      /**@todo to invoke the security logic here. */
+      String[] decryptedData = dataReceived;
+      byte[] decryptedFilePart = null;
+      if (allFilePartsReceived)
+      {
+        /**@todo to invoke the file-joining logic here. */
+        File[] decryptedFile = null;
+        msgHandler.handlerMessage(decryptedData, decryptedFile);
+      }
+      else
+      {
+        /**@todo acknowledge File packets received */
+      }
+    }
+    catch (EventIdNotRegisteredException ex)
+    {
+      /**@todo to send a negative reply to Sender. */
+    }
+    catch (Throwable t)
+    {
+      ChannelLogger.errorLog("", "", "", t);
+    }
+  }
+
+}

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  JBoss Server Configuration                                           -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<!-- $Id: postgres-ds.xml 41016 2006-02-07 14:23:00Z acoliver $ -->
+<!-- ==================================================================== -->
+<!--  Datasource config for Postgres                                      -->
+<!-- ==================================================================== -->
+
+
+<datasources>
+
+  <!--APPDB DS-->
+  <local-tx-datasource>
+    <jndi-name>appdbdatasource</jndi-name>
+    <connection-url>jdbc:postgresql://localhost:35432/gtdb</connection-url>
+    <driver-class>org.postgresql.Driver</driver-class>
+    <user-name>appdb</user-name>
+    <password>gridnode</password>
+	<min-pool-size>5</min-pool-size>
+    <max-pool-size>35</max-pool-size>
+	<idle-timeout-minutes>15</idle-timeout-minutes>
+	<blocking-timeout-millis>400000</blocking-timeout-millis>
+        <!-- sql to call when connection is created.  Can be anything, select 1 is valid for PostgreSQL
+        <new-connection-sql>select 1</new-connection-sql>
+        -->
+
+        <!-- sql to call on an existing pooled connection when it is obtained from pool.  Can be anything, select 1 is valid for PostgreSQL
+        <check-valid-connection-sql>select 1</check-valid-connection-sql>
+        -->
+
+      <!-- corresponding type-mapping in the standardjbosscmp-jdbc.xml (optional) -->
+      <metadata>
+         <type-mapping>PostgreSQL 7.2</type-mapping>
+      </metadata>
+  </local-tx-datasource>
+
+  <!-- USERDB DS -->
+  <local-tx-datasource>
+    <jndi-name>userdbdatasource</jndi-name>
+    <connection-url>jdbc:postgresql://localhost:35432/gtdb</connection-url>
+    <driver-class>org.postgresql.Driver</driver-class>
+    <user-name>userdb</user-name>
+    <password>gridnode</password>
+	<min-pool-size>10</min-pool-size>
+    <max-pool-size>40</max-pool-size>
+	<idle-timeout-minutes>15</idle-timeout-minutes>
+	<blocking-timeout-millis>400000</blocking-timeout-millis>
+        <!-- sql to call when connection is created.  Can be anything, select 1 is valid for PostgreSQL
+        <new-connection-sql>select 1</new-connection-sql>
+        -->
+
+        <!-- sql to call on an existing pooled connection when it is obtained from pool.  Can be anything, select 1 is valid for PostgreSQL
+        <check-valid-connection-sql>select 1</check-valid-connection-sql>
+        -->
+
+      <!-- corresponding type-mapping in the standardjbosscmp-jdbc.xml (optional) -->
+      <metadata>
+         <type-mapping>PostgreSQL 7.2</type-mapping>
+      </metadata>
+  </local-tx-datasource>	
+  
+  <!-- ARCHIVEDB DS -->
+  <local-tx-datasource>
+    <jndi-name>archivedbdatasource</jndi-name>
+    <connection-url>jdbc:postgresql://localhost:35432/gtdb</connection-url>
+    <driver-class>org.postgresql.Driver</driver-class>
+    <user-name>archivedb</user-name>
+    <password>gridnode</password>
+	<min-pool-size>1</min-pool-size>
+    <max-pool-size>5</max-pool-size>
+	<idle-timeout-minutes>15</idle-timeout-minutes>
+	<blocking-timeout-millis>400000</blocking-timeout-millis>
+        <!-- sql to call when connection is created.  Can be anything, select 1 is valid for PostgreSQL
+        <new-connection-sql>select 1</new-connection-sql>
+        -->
+
+        <!-- sql to call on an existing pooled connection when it is obtained from pool.  Can be anything, select 1 is valid for PostgreSQL
+        <check-valid-connection-sql>select 1</check-valid-connection-sql>
+        -->
+
+      <!-- corresponding type-mapping in the standardjbosscmp-jdbc.xml (optional) -->
+      <metadata>
+         <type-mapping>PostgreSQL 7.2</type-mapping>
+      </metadata>
+  </local-tx-datasource>
+
+  <!-- JBOSSDB DS -->
+  <local-tx-datasource>
+    <jndi-name>DefaultDS</jndi-name>
+    <connection-url>jdbc:postgresql://localhost:35432/gtdb</connection-url>
+    <driver-class>org.postgresql.Driver</driver-class>
+    <user-name>jbossdb</user-name>
+    <password>gridnode</password>
+	<min-pool-size>5</min-pool-size>
+    <max-pool-size>40</max-pool-size>
+	<idle-timeout-minutes>15</idle-timeout-minutes>
+	<blocking-timeout-millis>400000</blocking-timeout-millis>
+        <!-- sql to call when connection is created.  Can be anything, select 1 is valid for PostgreSQL
+        <new-connection-sql>select 1</new-connection-sql>
+        -->
+
+        <!-- sql to call on an existing pooled connection when it is obtained from pool.  Can be anything, select 1 is valid for PostgreSQL
+        <check-valid-connection-sql>select 1</check-valid-connection-sql>
+        -->
+
+      <!-- corresponding type-mapping in the standardjbosscmp-jdbc.xml (optional) -->
+      <metadata>
+         <type-mapping>PostgreSQL 7.2</type-mapping>
+      </metadata>
+  </local-tx-datasource>
+
+</datasources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="gtas.module.build" default="build" basedir=".">
+  	<target name="build">
+		<echo message="Executing build script for [gtas-${gtas.module}]"/>
+		<ant antfile="module-ant-build.xml" target="build" dir="." inheritAll="false">
+			<property name="module.properties" value="${gtas.module}-build.properties"/>
+			<property name="build.default" value="defined"/>
+		</ant>
+	</target>
+</project>

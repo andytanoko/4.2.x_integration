@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar version="2.1"
+	xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+	http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+	<enterprise-beans>
+		<session>
+			<display-name>GenReportHandler Session Bean</display-name>
+			<ejb-name>GenReportHandlerBean</ejb-name>
+			<home>com.gridnode.gridtalk.genreport.ejb.IGenReportHandlerHome</home>
+			<remote>com.gridnode.gridtalk.genreport.ejb.IGenReportHandler</remote>
+			<ejb-class>com.gridnode.gridtalk.genreport.ejb.GenReportHandlerBean</ejb-class>
+			<session-type>Stateless</session-type>	
+			<transaction-type>Container</transaction-type>
+		</session>
+		<session>
+			<display-name>GenScheduleHandler Session Bean</display-name>
+			<ejb-name>GenScheduleHandlerBean</ejb-name>
+			<home>com.gridnode.gridtalk.genreport.ejb.IGenScheduleHandlerHome</home>
+			<remote>com.gridnode.gridtalk.genreport.ejb.IGenScheduleHandler</remote>
+			<ejb-class>com.gridnode.gridtalk.genreport.ejb.GenScheduleHandlerBean</ejb-class>
+			<session-type>Stateless</session-type>	
+			<transaction-type>Container</transaction-type>
+		</session>
+	</enterprise-beans>
+	
+	<assembly-descriptor>
+		<!--container-transaction>
+			<method>
+				<ejb-name>GenScheduleHandlerBean</ejb-name>
+				<method-name>ejbTimeout</method-name>
+			</method>
+			<trans-attribute>RequiresNew</trans-attribute>
+		</container-transaction-->
+		<container-transaction>
+			<method>
+				<ejb-name>GenReportHandlerBean</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>RequiresNew</trans-attribute>
+		</container-transaction>
+		<container-transaction>
+			<method>
+				<ejb-name>GenScheduleHandlerBean</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>RequiresNew</trans-attribute>
+		</container-transaction>
+	</assembly-descriptor>
+	
+</ejb-jar>

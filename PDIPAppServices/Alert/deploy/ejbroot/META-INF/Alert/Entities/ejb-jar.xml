@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+  <enterprise-beans>
+    <entity>
+      <display-name>Alert</display-name>
+      <ejb-name>Alert</ejb-name>
+      <local-home>com.gridnode.pdip.app.alert.entities.ejb.IAlertLocalHome</local-home>
+      <local>com.gridnode.pdip.app.alert.entities.ejb.IAlertLocalObj</local>
+      <ejb-class>com.gridnode.pdip.app.alert.entities.ejb.AlertBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+
+    <entity>
+      <display-name>Action</display-name>
+      <ejb-name>Action</ejb-name>
+      <local-home>com.gridnode.pdip.app.alert.entities.ejb.IActionLocalHome</local-home>
+      <local>com.gridnode.pdip.app.alert.entities.ejb.IActionLocalObj</local>
+      <ejb-class>com.gridnode.pdip.app.alert.entities.ejb.ActionBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+
+    <entity>
+      <display-name>MessageTemplate</display-name>
+      <ejb-name>MessageTemplate</ejb-name>
+      <local-home>com.gridnode.pdip.app.alert.entities.ejb.IMessageTemplateLocalHome</local-home>
+      <local>com.gridnode.pdip.app.alert.entities.ejb.IMessageTemplateLocalObj</local>
+      <ejb-class>com.gridnode.pdip.app.alert.entities.ejb.MessageTemplateBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+
+    <entity>
+      <display-name>AlertAction</display-name>
+      <ejb-name>AlertAction</ejb-name>
+      <local-home>com.gridnode.pdip.app.alert.entities.ejb.IAlertActionLocalHome</local-home>
+      <local>com.gridnode.pdip.app.alert.entities.ejb.IAlertActionLocalObj</local>
+      <ejb-class>com.gridnode.pdip.app.alert.entities.ejb.AlertActionBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+
+    <entity>
+      <display-name>AlertList</display-name>
+      <ejb-name>AlertList</ejb-name>
+      <local-home>com.gridnode.pdip.app.alert.entities.ejb.IAlertListLocalHome</local-home>
+      <local>com.gridnode.pdip.app.alert.entities.ejb.IAlertListLocalObj</local>
+      <ejb-class>com.gridnode.pdip.app.alert.entities.ejb.AlertListBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+
+    <entity>
+      <display-name>AlertType</display-name>
+      <ejb-name>AlertType</ejb-name>
+      <local-home>com.gridnode.pdip.app.alert.entities.ejb.IAlertTypeLocalHome</local-home>
+      <local>com.gridnode.pdip.app.alert.entities.ejb.IAlertTypeLocalObj</local>
+      <ejb-class>com.gridnode.pdip.app.alert.entities.ejb.AlertTypeBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+
+    <entity>
+      <display-name>AlertCategory</display-name>
+      <ejb-name>AlertCategory</ejb-name>
+      <local-home>com.gridnode.pdip.app.alert.entities.ejb.IAlertCategoryLocalHome</local-home>
+      <local>com.gridnode.pdip.app.alert.entities.ejb.IAlertCategoryLocalObj</local>
+      <ejb-class>com.gridnode.pdip.app.alert.entities.ejb.AlertCategoryBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+	
+	<entity>
+      <display-name>JmsDestination</display-name>
+      <ejb-name>JmsDestination</ejb-name>
+      <local-home>com.gridnode.pdip.app.alert.entities.ejb.IJmsDestinationLocalHome</local-home>
+      <local>com.gridnode.pdip.app.alert.entities.ejb.IJmsDestinationLocalObj</local>
+      <ejb-class>com.gridnode.pdip.app.alert.entities.ejb.JmsDestinationBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+
+	<entity>
+      <display-name>JmsMessageRecord</display-name>
+      <ejb-name>JmsMessageRecord</ejb-name>
+      <local-home>com.gridnode.pdip.app.alert.entities.ejb.IJmsMessageRecordLocalHome</local-home>
+      <local>com.gridnode.pdip.app.alert.entities.ejb.IJmsMessageRecordLocalObj</local>
+      <ejb-class>com.gridnode.pdip.app.alert.entities.ejb.JmsMessageRecordBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+
+  </enterprise-beans>
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+        <ejb-name>Alert</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+
+    <container-transaction>
+      <method>
+        <ejb-name>Action</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+
+    <container-transaction>
+      <method>
+        <ejb-name>MessageTemplate</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+
+    <container-transaction>
+      <method>
+        <ejb-name>AlertAction</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+
+    <container-transaction>
+      <method>
+        <ejb-name>AlertList</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+
+    <container-transaction>
+      <method>
+        <ejb-name>AlertType</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+
+    <container-transaction>
+      <method>
+        <ejb-name>AlertCategory</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+	
+	<container-transaction>
+      <method>
+        <ejb-name>JmsDestination</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+	
+	<container-transaction>
+      <method>
+        <ejb-name>JmsMessageRecord</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+
+  </assembly-descriptor>
+</ejb-jar>

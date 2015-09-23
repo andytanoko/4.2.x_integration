@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Java Procedure Configuration</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <table border="0">
+          <tr id="className_details">
+            <td id="className_label" class="fieldlabel">
+              lbClassName
+            </td>
+            <td>
+              <select id="className_value" name="className" onchange="serverRefresh();">
+                <option>&nbsp;</option>
+              </select>
+            </td>
+            <td id="className_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="isLocal">
+            <td id="isLocal_label" class="fieldlabel">
+              lbIsLocal
+            </td>
+            <td>
+              <input type="checkbox" id="isLocal_value" name="isLocal" value="true" onclick="serverRefresh();"/>
+            </td>
+            <td id="isLocal_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="methodName_details">
+            <td id="methodName_label" class="fieldlabel" valign="top">
+              lbMethodName
+            </td>
+            <td colspan="2">
+              <span id="methodName_error" class="errortext">
+              </span>
+              <div id="methodName_value" class="selectionTable">
+                SelectionTable
+              </div>
+            </td>
+          </tr>
+          <tr id="jvmOptions_details">
+            <td id="jvmOptions_label" class="fieldlabel">
+              lbJvmOptions
+            </td>
+            <td>
+              <input type="text" id="jvmOptions_value" name="jvmOptions"/>
+            </td>
+            <td id="jvmOptions_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="arguments_details">
+            <td id="arguments_label" class="fieldlabel">
+              lbArguments
+            </td>
+            <td>
+              <input type="text" id="arguments_value" name="arguments"/>
+            </td>
+            <td id="arguments_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

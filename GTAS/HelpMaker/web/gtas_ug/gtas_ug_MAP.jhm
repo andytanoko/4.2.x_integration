@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='ISO-8859-1'  ?>
+<!DOCTYPE map PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Map Version 1.0//EN" "http://java.sun.com/products/javahelp/map_1_0.dtd">
+<map version="1.0">
+
+  <mapID target="openbook" url="images/openbook.gif" />
+  <mapID target="chapter" url="images/chapTopic.gif" />
+  <mapID target="topic" url="images/topic.gif" />
+
+  <mapID target="home" url="" />
+  <mapID target="gtas_ug.0" url="gtas_ug/1/1.htm" />
+  <mapID target="gtas_ug.1" url="gtas_ug/1/1.1.htm" />
+  <mapID target="gtas_ug.2" url="gtas_ug/2/2.htm" />
+  <mapID target="gtas_ug.3" url="gtas_ug/3/3.htm" />
+  <mapID target="gtas_ug.4" url="gtas_ug/3/3.1.htm" />
+  <mapID target="gtas_ug.5" url="gtas_ug/3/3.2.htm" />
+  <mapID target="gtas_ug.6" url="gtas_ug/3/3.3.htm" />
+  <mapID target="gtas_ug.7" url="gtas_ug/3/3.4.htm" />
+  <mapID target="gtas_ug.8" url="gtas_ug/3/3.5.htm" />
+  <mapID target="gtas_ug.9" url="gtas_ug/3/3.6.htm" />
+  <mapID target="gtas_ug.10" url="gtas_ug/3/3.6.1.htm" />
+  <mapID target="gtas_ug.11" url="gtas_ug/3/3.6.2.htm" />
+  <mapID target="gtas_ug.12" url="gtas_ug/3/3.6.3.htm" />
+  <mapID target="gtas_ug.13" url="gtas_ug/3/3.6.4.htm" />
+  <mapID target="gtas_ug.14" url="gtas_ug/3/3.6.5.htm" />
+  <mapID target="gtas_ug.15" url="gtas_ug/3/3.6.6.htm" />
+  <mapID target="gtas_ug.16" url="gtas_ug/4/4.htm" />
+  <mapID target="gtas_ug.17" url="gtas_ug/4/4.1.htm" />
+  <mapID target="gtas_ug.18" url="gtas_ug/4/4.1.1.htm" />
+  <mapID target="gtas_ug.19" url="gtas_ug/4/4.2.htm" />
+  <mapID target="gtas_ug.20" url="gtas_ug/4/4.2.1.htm" />
+  <mapID target="gtas_ug.21" url="gtas_ug/4/4.2.2.htm" />
+  <mapID target="gtas_ug.22" url="gtas_ug/4/4.2.3.htm" />
+  <mapID target="gtas_ug.23" url="gtas_ug/4/4.2.4.htm" />
+  <mapID target="gtas_ug.24" url="gtas_ug/5/5.htm" />
+  <mapID target="gtas_ug.25" url="gtas_ug/5/5.1.htm" />
+  <mapID target="gtas_ug.26" url="gtas_ug/5/5.1.1.htm" />
+  <mapID target="gtas_ug.27" url="gtas_ug/5/5.2.htm" />
+  <mapID target="gtas_ug.28" url="gtas_ug/5/5.2.1.htm" />
+  <mapID target="gtas_ug.29" url="gtas_ug/5/5.3.htm" />
+  <mapID target="gtas_ug.30" url="gtas_ug/5/5.3.1.htm" />
+  <mapID target="gtas_ug.31" url="gtas_ug/6/6.htm" />
+  <mapID target="gtas_ug.32" url="gtas_ug/6/6.1.htm" />
+  <mapID target="gtas_ug.33" url="gtas_ug/6/6.1.1.htm" />
+  <mapID target="gtas_ug.34" url="gtas_ug/6/6.1.2.htm" />
+  <mapID target="gtas_ug.35" url="gtas_ug/6/6.1.3.htm" />
+  <mapID target="gtas_ug.36" url="gtas_ug/6/6.1.4.htm" />
+  <mapID target="gtas_ug.37" url="gtas_ug/6/6.1.5.htm" />
+  <mapID target="gtas_ug.38" url="gtas_ug/6/6.2.htm" />
+  <mapID target="gtas_ug.39" url="gtas_ug/6/6.2.1.htm" />
+  <mapID target="gtas_ug.40" url="gtas_ug/6/6.2.2.htm" />
+  <mapID target="gtas_ug.41" url="gtas_ug/6/6.3.htm" />
+  <mapID target="gtas_ug.42" url="gtas_ug/6/6.3.1.htm" />
+  <mapID target="gtas_ug.43" url="gtas_ug/6/6.3.2.htm" />
+  <mapID target="gtas_ug.44" url="gtas_ug/6/6.4.htm" />
+  <mapID target="gtas_ug.45" url="gtas_ug/6/6.4.1.htm" />
+  <mapID target="gtas_ug.46" url="gtas_ug/6/6.5.htm" />
+  <mapID target="gtas_ug.47" url="gtas_ug/6/6.5.1.htm" />
+  <mapID target="gtas_ug.48" url="gtas_ug/6/6.5.2.htm" />
+  <mapID target="gtas_ug.49" url="gtas_ug/7/7.htm" />
+  <mapID target="gtas_ug.50" url="gtas_ug/7/7.1.htm" />
+  <mapID target="gtas_ug.51" url="gtas_ug/7/7.1.1.htm" />
+  <mapID target="gtas_ug.52" url="gtas_ug/7/7.1.2.htm" />
+  <mapID target="gtas_ug.53" url="gtas_ug/7/7.2.htm" />
+  <mapID target="gtas_ug.54" url="gtas_ug/7/7.2.1.htm" />
+</map>

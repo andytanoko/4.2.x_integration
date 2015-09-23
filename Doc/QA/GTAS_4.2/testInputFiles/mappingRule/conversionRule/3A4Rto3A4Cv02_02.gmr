@@ -1,0 +1,1232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<RulesContainer>
+  <Generated>10-Jun-2005 05:25 PM</Generated>
+  <ConvertorVersion>1000-1001</ConvertorVersion>
+  <ConversionName>XML</ConversionName>
+  <OutputFileExt>xml</OutputFileExt>
+  <Write>
+    <XSLTRules>
+      <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" exclude-result-prefixes="">
+        <xsl:output method="xml" indent="yes" encoding="UTF-8" doctype-system="3A4_MS_V02_02_PurchaseOrderConfirmation.dtd"/>
+        <xsl:template match="/">
+          <xsl:call-template name="Pip3A4PurchaseOrderConfirmation"/>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation">
+          <Pip3A4PurchaseOrderConfirmation>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-fromRole"/>
+            <!--GlobalDocumentFunctionCode - No mapping-->
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder"/>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-requestingDocumentDateTime"/>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-requestingDocumentIdentifier"/>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-thisDocumentGenerationDateTime"/>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-thisDocumentIdentifier"/>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-toRole"/>
+          </Pip3A4PurchaseOrderConfirmation>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole">
+          <fromRole>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription"/>
+          </fromRole>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription">
+          <PartnerRoleDescription>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-ContactInformation"/>
+            <GlobalPartnerRoleClassificationCode>
+              <xsl:value-of select="/Pip3A4PurchaseOrderRequest/toRole/PartnerRoleDescription/GlobalPartnerRoleClassificationCode"/>
+            </GlobalPartnerRoleClassificationCode>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription"/>
+          </PartnerRoleDescription>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-ContactInformation">
+          <ContactInformation>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-ContactInformation-contactName"/>
+            <EmailAddress>
+              <xsl:value-of select="/Pip3A4PurchaseOrderRequest/toRole/PartnerRoleDescription/ContactInformation/EmailAddress"/>
+            </EmailAddress>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-ContactInformation-facsimileNumber"/>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-ContactInformation-telephoneNumber"/>
+            <!--PhysicalLocation - No Mapping-->
+          </ContactInformation>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-ContactInformation-contactName">
+          <contactName>
+            <FreeFormText>
+              <xsl:value-of select="/Pip3A4PurchaseOrderRequest/toRole/PartnerRoleDescription/ContactInformation/contactName/FreeFormText"/>
+            </FreeFormText>
+          </contactName>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-ContactInformation-facsimileNumber">
+          <facsimileNumber>
+            <CommunicationsNumber>
+              <xsl:value-of select="/Pip3A4PurchaseOrderRequest/toRole/PartnerRoleDescription/ContactInformation/facsimileNumber/CommunicationsNumber"/>
+            </CommunicationsNumber>
+          </facsimileNumber>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-ContactInformation-telephoneNumber">
+          <telephoneNumber>
+            <CommunicationsNumber>
+              <xsl:value-of select="/Pip3A4PurchaseOrderRequest/toRole/PartnerRoleDescription/ContactInformation/telephoneNumber/CommunicationsNumber"/>
+            </CommunicationsNumber>
+          </telephoneNumber>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription">
+          <PartnerDescription>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-BusinessDescription"/>
+            <GlobalPartnerClassificationCode>
+              <xsl:value-of select="/Pip3A4PurchaseOrderRequest/toRole/PartnerRoleDescription/PartnerDescription/GlobalPartnerClassificationCode"/>
+            </GlobalPartnerClassificationCode>
+            <!--ContactInformation - No Mapping-->
+            <!--PhysicalLocation - No Mapping-->
+          </PartnerDescription>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-BusinessDescription">
+          <BusinessDescription>
+            <GlobalBusinessIdentifier>
+              <xsl:value-of select="/Pip3A4PurchaseOrderRequest/toRole/PartnerRoleDescription/PartnerDescription/BusinessDescription/GlobalBusinessIdentifier"/>
+            </GlobalBusinessIdentifier>
+            <!--GlobalSupplyChainCode - No mapping-->
+            <!--businessName - No Mapping-->
+            <!--PartnerBusinessIdentification - No Mapping-->
+            <!--NationalBusinessTaxIdentifier - No Mapping-->
+          </BusinessDescription>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-fromRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder">
+          <PurchaseOrder>
+            <!--AccountDescription - No Mapping-->
+            <!--comments - No Mapping-->
+            <!--ContractInformation - No Mapping-->
+            <!--DocumentReference - No Mapping-->
+            <!--FinancingTerms - No Mapping-->
+            <!--generalServicesAdministrationNumber - No Mapping-->
+            <!--GlobalConfirmationTypeCode - No mapping-->
+            <!--GlobalGovernmentPriorityRatingCode - No mapping-->
+            <!--GlobalPurchaseOrderAcknowledgmentReasonCode - No mapping-->
+            <!--GlobalPurchaseOrderFillPriorityCode - No mapping-->
+            <GlobalPurchaseOrderStatusCode>
+              <xsl:value-of select="&apos;Pending&apos;"/>
+            </GlobalPurchaseOrderStatusCode>
+            <GlobalPurchaseOrderTypeCode>
+              <xsl:value-of select="/Pip3A4PurchaseOrderRequest/PurchaseOrder/GlobalPurchaseOrderTypeCode"/>
+            </GlobalPurchaseOrderTypeCode>
+            <!--governmentContractIdentifier - No Mapping-->
+            <!--installAt - No Mapping-->
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-isDropShip"/>
+            <!--OrderShippingInformation - No Mapping-->
+            <xsl:for-each select="/Pip3A4PurchaseOrderRequest/PurchaseOrder/ProductLineItem">
+              <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem"/>
+            </xsl:for-each>
+            <!--proprietaryInformation - No Mapping-->
+            <!--requestedEvent - No Mapping-->
+            <!--requestedShipFrom - No Mapping-->
+            <!--scheduledEvent - No Mapping-->
+            <!--SecondaryBuyer - No Mapping-->
+            <!--shipFrom - No Mapping-->
+            <!--shipTo - No Mapping-->
+            <!--TaxExemptStatus - No Mapping-->
+            <!--TaxSummary - No Mapping-->
+            <!--totalAmount - No Mapping-->
+          </PurchaseOrder>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-accountName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-billTo-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-CreditCard"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-CreditCard-cardHolderName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-CreditCard-creditCardIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-CreditCard-expiryDate"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-financedBy-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-AccountDescription-prePaymentCheckNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-comments"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-contractIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-DocumentReference"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-FinancingTerms"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-FinancingTerms-PaymentTerms"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-FinancingTerms-PaymentTerms-Discounts"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-FinancingTerms-PaymentTerms-Discounts-discountDay"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-FinancingTerms-PaymentTerms-Discounts-discountDays"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-FinancingTerms-PaymentTerms-Discounts-discountPercent"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-FinancingTerms-PaymentTerms-netTermsDay"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-FinancingTerms-PaymentTerms-netTermsDays"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-FinancingTerms-PaymentTerms-percentDue"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-generalServicesAdministrationNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-governmentContractIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-isDropShip">
+          <isDropShip>
+            <AffirmationIndicator>
+              <xsl:value-of select="/Pip3A4PurchaseOrderRequest/PurchaseOrder/isDropShip/AffirmationIndicator"/>
+            </AffirmationIndicator>
+          </isDropShip>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-OrderShippingInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-OrderShippingInformation-CarrierInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-OrderShippingInformation-CarrierInformation-accountIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-OrderShippingInformation-packListRequirements"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-OrderShippingInformation-SpecialHandlingInstruction"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-OrderShippingInformation-SpecialHandlingInstruction-specialHandlingText"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem">
+          <ProductLineItem>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-buyerLineItem"/>
+            <!--comments - No Mapping-->
+            <!--ContractInformation - No Mapping-->
+            <!--countryOfOrigin - No Mapping-->
+            <!--CustomerInformation - No Mapping-->
+            <!--DocumentReference - No Mapping-->
+            <!--expediteReferenceIdentifier - No Mapping-->
+            <GlobalProductUnitOfMeasureCode>
+              <xsl:value-of select="GlobalProductUnitOfMeasureCode"/>
+            </GlobalProductUnitOfMeasureCode>
+            <!--GlobalPurchaseOrderAcknowledgmentReasonCode - No mapping-->
+            <!--GlobalPurchaseOrderFillPriorityCode - No mapping-->
+            <GlobalPurchaseOrderStatusCode>
+              <xsl:value-of select="&apos;Pending&apos;"/>
+            </GlobalPurchaseOrderStatusCode>
+            <!--installAt - No Mapping-->
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-isDropShip"/>
+            <LineNumber>
+              <xsl:value-of select="position()"/>
+            </LineNumber>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-OrderQuantity"/>
+            <!--OrderShippingInformation - No Mapping-->
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductIdentification"/>
+            <!--ProductSubLineItem - No Mapping-->
+            <!--proprietaryInformation - No Mapping-->
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-requestedEvent"/>
+            <!--requestedShipFrom - No Mapping-->
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-requestedUnitPrice"/>
+            <!--scheduledEvent - No Mapping-->
+            <!--shipFrom - No Mapping-->
+            <!--ShippedQuantityInformation - No Mapping-->
+            <!--shipTo - No Mapping-->
+            <!--SubstituteProductReference - No Mapping-->
+            <!--TaxExemptStatus - No Mapping-->
+            <!--TaxSummary - No Mapping-->
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-totalLineItemAmount"/>
+            <!--unitPrice - No Mapping-->
+          </ProductLineItem>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-buyerLineItem">
+          <buyerLineItem>
+            <LineNumber>
+              <xsl:value-of select="LineNumber"/>
+            </LineNumber>
+          </buyerLineItem>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-comments"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-contractIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-countryOfOrigin"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-customerProjectIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-CustomerInformation-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-DocumentReference"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-expediteReferenceIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-isDropShip">
+          <isDropShip>
+            <AffirmationIndicator>
+              <xsl:value-of select="isDropShip/AffirmationIndicator"/>
+            </AffirmationIndicator>
+          </isDropShip>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-OrderQuantity">
+          <OrderQuantity>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-OrderQuantity-requestedQuantity"/>
+            <!--scheduledShipQuantity - No Mapping-->
+          </OrderQuantity>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-OrderQuantity-requestedQuantity">
+          <requestedQuantity>
+            <ProductQuantity>
+              <xsl:value-of select="OrderQuantity/requestedQuantity/ProductQuantity"/>
+            </ProductQuantity>
+          </requestedQuantity>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-OrderQuantity-scheduledShipQuantity"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-OrderShippingInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-OrderShippingInformation-CarrierInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-OrderShippingInformation-CarrierInformation-accountIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-OrderShippingInformation-packListRequirements"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-OrderShippingInformation-SpecialHandlingInstruction"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-OrderShippingInformation-SpecialHandlingInstruction-specialHandlingText"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductIdentification">
+          <ProductIdentification>
+            <GlobalProductIdentifier>
+              <xsl:value-of select="ProductIdentification/GlobalProductIdentifier"/>
+            </GlobalProductIdentifier>
+            <!--PartnerProductIdentification - No Mapping-->
+          </ProductIdentification>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductIdentification-PartnerProductIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductIdentification-PartnerProductIdentification-revisionIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-buyerSubLineItem"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-comments"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-contractIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-primaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ContractInformation-secondaryContractWith-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-countryOfOrigin"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-customerProjectIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-CustomerInformation-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-expediteReferenceIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-installAt-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-isDropShip"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-OrderQuantity"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-OrderQuantity-requestedQuantity"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-OrderQuantity-scheduledShipQuantity"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-OrderShippingInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-OrderShippingInformation-CarrierInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-OrderShippingInformation-CarrierInformation-accountIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-OrderShippingInformation-packListRequirements"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-OrderShippingInformation-SpecialHandlingInstruction"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-OrderShippingInformation-SpecialHandlingInstruction-specialHandlingText"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-proprietaryInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-requestedEvent"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-requestedEvent-TransportationEvent"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-requestedEvent-TransportationEvent-beginTime"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-requestedEvent-TransportationEvent-endTime"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-requestedShipFrom"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-requestedShipFrom-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-requestedShipFrom-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-requestedShipFrom-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-requestedShipFrom-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-requestedShipFrom-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-requestedShipFrom-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-requestedShipFrom-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-requestedShipFrom-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-requestedUnitPrice"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-requestedUnitPrice-FinancialAmount"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-scheduledEvent"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-scheduledEvent-TransportationEvent"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-scheduledEvent-TransportationEvent-beginTime"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-scheduledEvent-TransportationEvent-endTime"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ShippedQuantityInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ShippedQuantityInformation-DocumentReference"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-ShippedQuantityInformation-shippedQuantity"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-subLineItem"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-unitPrice"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ProductSubLineItem-unitPrice-FinancialAmount"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-proprietaryInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-requestedEvent">
+          <requestedEvent>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-requestedEvent-TransportationEvent"/>
+          </requestedEvent>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-requestedEvent-TransportationEvent">
+          <TransportationEvent>
+            <!--beginTime - No Mapping-->
+            <DateStamp>
+              <xsl:value-of select="requestedEvent/TransportationEvent/DateStamp"/>
+            </DateStamp>
+            <!--endTime - No Mapping-->
+            <GlobalTransportEventCode>
+              <xsl:value-of select="requestedEvent/TransportationEvent/GlobalTransportEventCode"/>
+            </GlobalTransportEventCode>
+          </TransportationEvent>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-requestedEvent-TransportationEvent-beginTime"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-requestedEvent-TransportationEvent-endTime"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-requestedShipFrom"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-requestedShipFrom-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-requestedShipFrom-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-requestedShipFrom-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-requestedShipFrom-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-requestedShipFrom-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-requestedShipFrom-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-requestedShipFrom-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-requestedShipFrom-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-requestedUnitPrice">
+          <requestedUnitPrice>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-requestedUnitPrice-FinancialAmount"/>
+          </requestedUnitPrice>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-requestedUnitPrice-FinancialAmount">
+          <FinancialAmount>
+            <GlobalCurrencyCode>
+              <xsl:value-of select="requestedUnitPrice/FinancialAmount/GlobalCurrencyCode"/>
+            </GlobalCurrencyCode>
+            <!--GlobalMonetaryAmountTypeCode - No mapping-->
+            <!--InvoiceChargeTypeCode - No mapping-->
+            <MonetaryAmount>
+              <xsl:value-of select="requestedUnitPrice/FinancialAmount/MonetaryAmount"/>
+            </MonetaryAmount>
+          </FinancialAmount>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-scheduledEvent"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-scheduledEvent-TransportationEvent"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-scheduledEvent-TransportationEvent-beginTime"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-scheduledEvent-TransportationEvent-endTime"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ShippedQuantityInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ShippedQuantityInformation-DocumentReference"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-ShippedQuantityInformation-shippedQuantity"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-SubstituteProductReference"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-SubstituteProductReference-ProductIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-SubstituteProductReference-ProductIdentification-PartnerProductIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-SubstituteProductReference-ProductIdentification-PartnerProductIdentification-revisionIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxExemptStatus"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxExemptStatus-isTaxExempt"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxExemptStatus-TaxExemption"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxExemptStatus-TaxExemption-taxExemptionCertificationIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxSummary"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxSummary-CityTax"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxSummary-CityTax-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxSummary-CityTax-FinancialAmount"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxSummary-CityTax-taxRate"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxSummary-NationalTax"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxSummary-NationalTax-FinancialAmount"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxSummary-NationalTax-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxSummary-NationalTax-taxRate"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxSummary-RegionalTax"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxSummary-RegionalTax-FinancialAmount"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxSummary-RegionalTax-RegionalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxSummary-RegionalTax-RegionalBusinessTaxIdentifier-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxSummary-RegionalTax-taxRate"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxSummary-totalAmount"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-TaxSummary-totalAmount-FinancialAmount"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-totalLineItemAmount">
+          <totalLineItemAmount>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-totalLineItemAmount-FinancialAmount"/>
+          </totalLineItemAmount>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-totalLineItemAmount-FinancialAmount">
+          <FinancialAmount>
+            <GlobalCurrencyCode>
+              <xsl:value-of select="totalLineItemAmount/FinancialAmount/GlobalCurrencyCode"/>
+            </GlobalCurrencyCode>
+            <!--GlobalMonetaryAmountTypeCode - No mapping-->
+            <!--InvoiceChargeTypeCode - No mapping-->
+            <MonetaryAmount>
+              <xsl:value-of select="totalLineItemAmount/FinancialAmount/MonetaryAmount"/>
+            </MonetaryAmount>
+          </FinancialAmount>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-unitPrice"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-ProductLineItem-unitPrice-FinancialAmount"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-proprietaryInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-requestedEvent"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-requestedEvent-TransportationEvent"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-requestedEvent-TransportationEvent-beginTime"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-requestedEvent-TransportationEvent-endTime"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-requestedShipFrom"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-requestedShipFrom-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-requestedShipFrom-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-requestedShipFrom-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-requestedShipFrom-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-requestedShipFrom-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-requestedShipFrom-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-requestedShipFrom-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-requestedShipFrom-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-scheduledEvent"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-scheduledEvent-TransportationEvent"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-scheduledEvent-TransportationEvent-beginTime"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-scheduledEvent-TransportationEvent-endTime"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-SecondaryBuyer-secondaryBuyerPurchaseOrderIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipFrom-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-BusinessDescription"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-shipTo-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxExemptStatus"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxExemptStatus-isTaxExempt"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxExemptStatus-TaxExemption"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxExemptStatus-TaxExemption-taxExemptionCertificationIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxSummary"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxSummary-CityTax"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxSummary-CityTax-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxSummary-CityTax-FinancialAmount"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxSummary-CityTax-taxRate"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxSummary-NationalTax"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxSummary-NationalTax-FinancialAmount"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxSummary-NationalTax-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxSummary-NationalTax-taxRate"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxSummary-RegionalTax"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxSummary-RegionalTax-FinancialAmount"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxSummary-RegionalTax-RegionalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxSummary-RegionalTax-RegionalBusinessTaxIdentifier-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxSummary-RegionalTax-taxRate"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxSummary-totalAmount"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-TaxSummary-totalAmount-FinancialAmount"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-totalAmount"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-PurchaseOrder-totalAmount-FinancialAmount"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-requestingDocumentDateTime">
+          <requestingDocumentDateTime>
+            <DateTimeStamp>
+              <xsl:value-of select="/Pip3A4PurchaseOrderRequest/thisDocumentGenerationDateTime/DateTimeStamp"/>
+            </DateTimeStamp>
+          </requestingDocumentDateTime>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-requestingDocumentIdentifier">
+          <requestingDocumentIdentifier>
+            <ProprietaryDocumentIdentifier>
+              <xsl:value-of select="/Pip3A4PurchaseOrderRequest/thisDocumentIdentifier/ProprietaryDocumentIdentifier"/>
+            </ProprietaryDocumentIdentifier>
+          </requestingDocumentIdentifier>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-thisDocumentGenerationDateTime">
+          <thisDocumentGenerationDateTime>
+            <xsl:variable name="varNow">
+              <xsl:call-template name="Now">
+                <xsl:with-param name="format" select="&apos;yyyyMMdd&apos;"/>
+              </xsl:call-template>
+            </xsl:variable>
+            <xsl:variable name="varNow_1">
+              <xsl:call-template name="Now">
+                <xsl:with-param name="format" select="&apos;HHmmss.SSS&apos;"/>
+              </xsl:call-template>
+            </xsl:variable>
+            <DateTimeStamp>
+              <xsl:value-of select="concat($varNow, &apos;T&apos;, $varNow_1, &apos;Z&apos;)"/>
+            </DateTimeStamp>
+          </thisDocumentGenerationDateTime>
+        </xsl:template>
+        <xsl:template xmlns:simpleDateFormat="/java.text.SimpleDateFormat" name="Now">
+		
+          <xsl:param name="format"/>
+		
+          <xsl:variable name="nowSimpleDate" select="simpleDateFormat:new($format)"/>
+		
+          <xsl:variable xmlns:Date="/java.util.Date" name="nowDate" select="Date:new()"></xsl:variable>
+		
+          <xsl:value-of select="simpleDateFormat:format($nowSimpleDate, $nowDate)"/>
+	
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-thisDocumentIdentifier">
+          <thisDocumentIdentifier>
+            <ProprietaryDocumentIdentifier>
+              <xsl:value-of select="concat(/Pip3A4PurchaseOrderRequest/thisDocumentIdentifier/ProprietaryDocumentIdentifier, &apos;Confirmation&apos;)"/>
+            </ProprietaryDocumentIdentifier>
+          </thisDocumentIdentifier>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole">
+          <toRole>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription"/>
+          </toRole>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription">
+          <PartnerRoleDescription>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-ContactInformation"/>
+            <GlobalPartnerRoleClassificationCode>
+              <xsl:value-of select="/Pip3A4PurchaseOrderRequest/fromRole/PartnerRoleDescription/GlobalPartnerRoleClassificationCode"/>
+            </GlobalPartnerRoleClassificationCode>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription"/>
+          </PartnerRoleDescription>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-ContactInformation">
+          <ContactInformation>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-ContactInformation-contactName"/>
+            <EmailAddress>
+              <xsl:value-of select="/Pip3A4PurchaseOrderRequest/fromRole/PartnerRoleDescription/ContactInformation/EmailAddress"/>
+            </EmailAddress>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-ContactInformation-facsimileNumber"/>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-ContactInformation-telephoneNumber"/>
+            <!--PhysicalLocation - No Mapping-->
+          </ContactInformation>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-ContactInformation-contactName">
+          <contactName>
+            <FreeFormText>
+              <xsl:value-of select="/Pip3A4PurchaseOrderRequest/fromRole/PartnerRoleDescription/ContactInformation/contactName/FreeFormText"/>
+            </FreeFormText>
+          </contactName>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-ContactInformation-facsimileNumber">
+          <facsimileNumber>
+            <CommunicationsNumber>
+              <xsl:value-of select="/Pip3A4PurchaseOrderRequest/fromRole/PartnerRoleDescription/ContactInformation/facsimileNumber/CommunicationsNumber"/>
+            </CommunicationsNumber>
+          </facsimileNumber>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-ContactInformation-telephoneNumber">
+          <telephoneNumber>
+            <CommunicationsNumber>
+              <xsl:value-of select="/Pip3A4PurchaseOrderRequest/fromRole/PartnerRoleDescription/ContactInformation/telephoneNumber/CommunicationsNumber"/>
+            </CommunicationsNumber>
+          </telephoneNumber>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription">
+          <PartnerDescription>
+            <xsl:call-template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-BusinessDescription"/>
+            <GlobalPartnerClassificationCode>
+              <xsl:value-of select="/Pip3A4PurchaseOrderRequest/fromRole/PartnerRoleDescription/PartnerDescription/GlobalPartnerClassificationCode"/>
+            </GlobalPartnerClassificationCode>
+            <!--ContactInformation - No Mapping-->
+            <!--PhysicalLocation - No Mapping-->
+          </PartnerDescription>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-BusinessDescription">
+          <BusinessDescription>
+            <GlobalBusinessIdentifier>
+              <xsl:value-of select="/Pip3A4PurchaseOrderRequest/fromRole/PartnerRoleDescription/PartnerDescription/BusinessDescription/GlobalBusinessIdentifier"/>
+            </GlobalBusinessIdentifier>
+            <!--GlobalSupplyChainCode - No mapping-->
+            <!--businessName - No Mapping-->
+            <!--PartnerBusinessIdentification - No Mapping-->
+            <!--NationalBusinessTaxIdentifier - No Mapping-->
+          </BusinessDescription>
+        </xsl:template>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-BusinessDescription-businessName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-BusinessDescription-PartnerBusinessIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-BusinessDescription-NationalBusinessTaxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-ContactInformation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-ContactInformation-contactName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-ContactInformation-facsimileNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-ContactInformation-telephoneNumber"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-ContactInformation-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation-PartnerLocationIdentification"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation-PhysicalAddress"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine1"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine2"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation-PhysicalAddress-addressLine3"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation-PhysicalAddress-cityName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation-PhysicalAddress-postOfficeBoxIdentifier"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation-PhysicalAddress-regionName"/>
+        <xsl:template name="Pip3A4PurchaseOrderConfirmation-toRole-PartnerRoleDescription-PartnerDescription-PhysicalLocation-PhysicalAddress-PartnerLocationIdentification"/>
+      </xsl:stylesheet>
+    </XSLTRules>
+  </Write>
+</RulesContainer>

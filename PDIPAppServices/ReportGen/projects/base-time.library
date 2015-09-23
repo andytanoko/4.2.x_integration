@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>base-time</fullname>
+  <class>
+    <path>[../../../PDIPBaseServices/Time/deploy/base-time.jar]</path>
+    <path>[../../../PDIPBaseServices/Time/deploy/base-time-facade-ejb.jar]</path>
+  </class>
+  <source>
+    <path>../../../PDIPBaseServices/time/src</path>
+  </source>
+</library>
+

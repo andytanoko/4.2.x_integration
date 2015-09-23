@@ -1,0 +1,149 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2002 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: DefaultMessageSender.java
+ *
+ ****************************************************************************
+ * Date           Author                  Changes
+ ****************************************************************************
+ * July 17 2003    Jagadeesh             Created.
+ */
+
+
+package com.gridnode.pdip.app.channel.handler.message;
+
+import com.gridnode.pdip.app.channel.helpers.PackagingServiceHandler;
+import com.gridnode.pdip.app.channel.helpers.FlowControlServiceHandler;
+import com.gridnode.pdip.app.channel.helpers.SecurityServiceHandler;
+
+import com.gridnode.pdip.app.channel.helpers.ChannelLogger;
+
+import com.gridnode.pdip.app.channel.helpers.GNCompatibleEventRegistry;
+import com.gridnode.pdip.app.channel.exceptions.ChannelException;
+
+import com.gridnode.pdip.app.channel.helpers.ChannelUtil;
+
+import com.gridnode.pdip.app.channel.helpers.Package;
+import com.gridnode.pdip.app.channel.model.ChannelInfo;
+import com.gridnode.pdip.app.channel.model.CommInfo;
+import com.gridnode.pdip.app.channel.model.PackagingInfo;
+import com.gridnode.pdip.app.channel.model.SecurityInfo;
+import com.gridnode.pdip.app.channel.model.FlowControlInfo;
+
+import com.gridnode.pdip.app.channel.handler.jmschannel.DispatchMessage;
+
+import com.gridnode.pdip.app.channel.model.ISecurityInfo;
+
+import com.gridnode.pdip.base.transport.comminfo.HttpCommInfo;
+import com.gridnode.pdip.base.transport.comminfo.ICommInfo;
+import com.gridnode.pdip.base.transport.comminfo.IHttpCommInfo;
+import com.gridnode.pdip.base.transport.comminfo.IJMSCommInfo;
+import com.gridnode.pdip.base.transport.comminfo.JMSCommInfo;
+
+
+
+import javax.jms.Message;
+
+import java.util.Hashtable;
+
+import java.io.File;
+import java.io.InputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+
+public class RelayMessageSender extends DefaultMessageSender
+{
+
+  public RelayMessageSender()
+  {
+  }
+
+	public void sendMessage(DispatchMessage messageToSend)
+	{
+		//ChannelInfo info = getRelayChannel();
+	}
+
+/*
+	public void sendMessage(DispatchMessage messageToSend)
+		throws ChannelException
+	{
+	  final String CLASS_NAME = "RelayMessageSender";
+    String[] header        = null;
+    String[] dataContent   = null;
+    File[] fileContent     = null;
+    ChannelInfo channelInfo = null;
+		try
+		{
+      header      = messageToSend.getHeader();
+      dataContent = messageToSend.getData();
+      fileContent = messageToSend.getFile();
+      channelInfo = messageToSend.getChannelInfo();
+      boolean isNullHeader = checkNullHeader(header);
+
+      if (isNullHeader)
+        throw new ChannelException("[Message Header Cannot be NULL]");
+
+      String eventIdGtAs    = header[0];
+      String tptImplVersion = channelInfo.getTptCommInfo().getTptImplVersion();
+
+      FlowControlInfo flowControlInfo = super.getFlowControlInfo(tptImplVersion,
+                                                           channelInfo,
+                                                           eventIdGtAs
+                                                           );
+
+      //Moved the construction of envelope header from PackagingService to Channel.
+      Hashtable envelopeHeader =
+          PackagingServiceHandler.getEnvelopeHeader(header,channelInfo.getName());
+
+      //Envelop the content according to envelope type.
+	    PackagingInfo packagingInfo = channelInfo.getPackagingProfile();
+      Package packageData = new Package(envelopeHeader,dataContent,fileContent);
+
+      Package packageEnvlData =
+            PackagingServiceHandler.envelope(packagingInfo.getEnvelope(),packageData);
+
+
+			channelInfo	=  ChannelUtil.getInstance().getRelayChannelInfo(); //Assign Relay ChannelInfo
+      tptImplVersion = channelInfo.getTptCommInfo().getTptImplVersion(); //Reassign the RelayTptImplVersion.
+
+			SecurityInfo securityInfo   = super.getSecurityInfo(tptImplVersion,
+                                                    channelInfo,
+                                                    eventIdGtAs
+                                                    );
+
+      //To perform FlowControl to handle Zip/Split....given the P
+      Package packagFlowData =  FlowControlServiceHandler.performPackageFlowControl(
+                                flowControlInfo,
+                                packageEnvlData
+                                );
+      //To perform Securityservices to handle.
+		  Package encryptPackage = null;
+		  String[] encryptData = null;
+			if (packagFlowData.getDataContent() != null)
+			{
+				encryptData = SecurityServiceHandler.encryptData(securityInfo,
+																	  packagFlowData.getDataContent()
+																		);
+			}
+			else
+				encryptData = packagFlowData.getDataContent(); //Perhaps can alert the user.
+
+			encryptPackage = new Package(packagFlowData.getHeader(),
+																   encryptData,
+																	 packagFlowData.getFileContent()
+																	 );
+			performTptSend(encryptPackage,channelInfo.getTptCommInfo(),securityInfo);
+		  ChannelLogger.debugLog(CLASS_NAME,"sendMessage()","After Send ...");
+		}
+		catch (Exception ex)
+		{
+			throw new ChannelException("[Cannot Perform Send via this Channel ...]",ex);
+		}
+
+	}
+*/
+}

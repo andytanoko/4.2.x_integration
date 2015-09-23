@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Procedure Return Condition</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <table border="0">
+          <tr id="operator_details">
+            <td id="operator_label">
+              lbOperator
+            </td>
+            <td>
+              <select id="operator_value" size="1" name="operator" onchange="serverRefresh();">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+            </td>
+            <td id="operator_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="value_details">
+            <td id="value_label">
+              lbValue
+            </td>
+            <td>
+              <input type="text" id="value_value" name="value"/>
+              <span id="multiValues_details">
+                <input type="text" id="value1_value" name="value1" class="mandatory"/>
+                &nbsp;-&nbsp;
+                <input type="text" id="value2_value" name="value2" class="mandatory"/>
+              </span>
+            </td>
+            <td id="value_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="actionType_details">
+            <td id="actionType_label">
+              lbActionType
+            </td>
+            <td>
+              <input type="hidden" name="actionType" value="1"/>
+              <select id="actionType_value" size="1" name="actionType" disabled="true">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+            </td>
+            <td id="actionType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="alert_details">
+            <td id="alert_label">
+              lbAlert
+            </td>
+            <td>
+              <select id="alert_value" name="alert">
+                <option>&nbsp;</option>
+              </select>
+              <a id="alert_create" href="javascript:divertToMapping('divertCreateAlert');">
+                lbCreateAlert
+              </a>
+            </td>
+            <td id="alert_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

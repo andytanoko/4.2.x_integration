@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+  <enterprise-beans>
+    <entity>
+      <display-name>UserProcedure</display-name>
+      <ejb-name>UserProcedure</ejb-name>
+      <local-home>com.gridnode.pdip.base.userprocedure.entities.ejb.IUserProcedureLocalHome</local-home>
+      <local>com.gridnode.pdip.base.userprocedure.entities.ejb.IUserProcedureLocalObj</local>
+      <ejb-class>com.gridnode.pdip.base.userprocedure.entities.ejb.UserProcedureBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+    <entity>
+      <display-name>ProcedureDefinitionFile</display-name>
+      <ejb-name>ProcedureDefinitionFile</ejb-name>
+      <local-home>com.gridnode.pdip.base.userprocedure.entities.ejb.IProcedureDefFileLocalHome</local-home>
+      <local>com.gridnode.pdip.base.userprocedure.entities.ejb.IProcedureDefFileLocalObj</local>
+      <ejb-class>com.gridnode.pdip.base.userprocedure.entities.ejb.ProcedureDefFileBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+  </enterprise-beans>
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+        <ejb-name>UserProcedure</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+    <container-transaction>
+      <method>
+        <ejb-name>ProcedureDefinitionFile</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+</ejb-jar>

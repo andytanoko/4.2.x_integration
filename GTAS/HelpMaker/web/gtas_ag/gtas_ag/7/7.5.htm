@@ -1,0 +1,34 @@
+<html>
+<head>
+<title>7.5 Importing and exporting Certificates </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h2>7.5 Importing and exporting Certificates </h2>
+<p><span></span>
+</p>
+<p><span>A number of different processes are carried out between the two GridTalk sites during activation. Firstly, their partners exchange data and information about themselves, such as about their business entities and contact information. More importantly, they will exchange Certificates of Authentication, as well as Public Keys. These are security measures used by GridTalk.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Certificates are used to verify the identity of the sender when a document is received. Each partner will have his/her own unique certificate. When a document is sent, the sender’s certificate will be attached as proof of the sender’s identity. The receiver’s GridTalk will compare the sender’s certificate with the certificate provided by the partner during activation to verify if the sender is indeed the partner. If the certificates are not identical, the document is rejected. This provides confirmation of the sender’s identity and prevents ‘spoofing’ or falsifying identities.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Public keys are part of the document encryption system used by GridTalk, which employs RSA Security’s PKI infrastructure. At registration, each GridTalk is issued with a unique set comprising a Private Key and a Public Key. Any document encrypted with a Private Key can only be decrypted with the corresponding Public Key, and vice versa. Signature is used to authenticate the sender so that nobody else can send ‘fake’ messages using your identity.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>When activation is carried out, you and your partner exchange copies of your Public Keys. Any document sent by you to that partner will now be encrypted with your partner’s Public Key and signed with own Private Key. This means that only your partner, who has his own corresponding Private Key and your Public Key, can open the document. Even if someone else obtains your Public Key and intercepts your document, he will not have your partner’s Private Key and will be unable to decrypt the document.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='623' height='310' border='0' src='../images/image053.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

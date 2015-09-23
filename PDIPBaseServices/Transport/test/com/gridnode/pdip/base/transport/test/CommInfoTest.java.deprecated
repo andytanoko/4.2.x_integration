@@ -1,0 +1,92 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subject to license terms.
+ *
+ * Copyright 2002 (c) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: CommInfoTest.java
+ *
+ * *****************************************************************
+ * Date             Author                  Changes
+ * *****************************************************************
+ * June 18 2002     Guo Jianyu              Created
+ * Jun 21 2002      Kan Mun                 Modified - change methodName getVersion to getTptImplVersion
+ */
+package com.gridnode.pdip.base.transport.test;
+
+import com.gridnode.pdip.base.transport.comminfo.*;
+
+public class CommInfoTest implements IJMSCommInfo
+{
+  private String host = null;
+  private int port = -1;
+  private String protocol = null;
+  private String protocolVersion = null;
+  private String version = null;
+
+  private String destination = null;
+  private int destType = -1;
+  private String user = null;
+  private String password = null;
+
+  public CommInfoTest(String host, int port, String protocol, String protocolVersion,
+      String version, String destination, int destType, String user, String password )
+  {
+    this.host = host;
+    this.port = port;
+    this.protocol = protocol;
+    this.protocolVersion = protocolVersion;
+    this.version = version;
+
+    this.destination = destination;
+    this.destType = destType;
+    this.user = user;
+    this.password = password;
+  }
+
+  public String getHost()
+  {
+    return host;
+  }
+
+  public int getPort()
+  {
+    return port;
+  }
+
+  public String getProtocolType()
+  {
+    return protocol;
+  }
+
+  public String getProtocolVersion()
+  {
+    return protocolVersion;
+  }
+
+  public String getTptImplVersion()
+  {
+    return version;
+  }
+
+  public String getDestination()
+  {
+    return destination;
+  }
+
+  public int getDestType()
+  {
+    return destType;
+  }
+
+  public String getUser()
+  {
+    return user;
+  }
+
+  public String getPassword()
+  {
+    return password;
+  }
+
+}

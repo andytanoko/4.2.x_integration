@@ -1,0 +1,512 @@
+<html>
+<head>
+<title>11.3.2 Web service for retrieving doc </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>11.3.2 Web service for retrieving doc </h3>
+<p></p>
+<p><span>This web service allows a particular TP to retrieve document from GT.</span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' border='1' cellpadding='0'><tr><td width='636' valign='top'><p><span><span></span>
+</span>
+<span><span>&lt;</span>
+</span>
+<span><span>wsdl:definitions</span>
+</span>
+<span><span> xmlns:wsdl</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://schemas.xmlsoap.org/wsdl/</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> xmlns:mime</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://schemas.xmlsoap.org/wsdl/mime/</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> xmlns:http</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://schemas.xmlsoap.org/wsdl/http/</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> xmlns:soap12</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://schemas.xmlsoap.org/wsdl/soap12/</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> xmlns:ns0</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://model.document.ws.gtas.gridnode.com/xsd</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> xmlns:ns1</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://document.ws.gtas.gridnode.com</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> xmlns:wsaw</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://www.w3.org/2006/05/addressing/wsdl</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> xmlns:ns3</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://exceptions.framework.pdip.gridnode.com/xsd</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> xmlns:ns2</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://exception.soap.transport.base.pdip.gridnode.com/xsd</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> xmlns:xs</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://www.w3.org/2001/XMLSchema</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> xmlns:soap</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://schemas.xmlsoap.org/wsdl/soap/</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> targetNamespace</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://document.ws.gtas.gridnode.com</span>
+</b>
+<span><span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span><span> &lt;</span>
+</span>
+<span><span>wsdl:documentation</span>
+</span>
+<span><span>&gt;</span>
+</span>
+<span><span>MessageRetrieveService</span>
+</span>
+<span><span>&lt;/</span>
+</span>
+<span><span>wsdl:documentation</span>
+</span>
+<span><span>&gt;</span>
+</span>
+</p>
+<p><span> <a href='http://localhost:9099/gridtalk/webservice/services/MessageRetrieveService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:types</span>
+<span>&gt;</span>
+</span>
+</p>
+<p><span> <a href='http://localhost:9099/gridtalk/webservice/services/MessageRetrieveService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:message name</span>
+<span>=&quot;;</span>
+<b>markMessageAsDownloadedRequest</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span><span> &lt;</span>
+</span>
+<span><span>wsdl:message</span>
+</span>
+<span> <span>name</span>
+<span>=&quot;;</span>
+<b>markMessageAsDownloadedResponse</b>
+<span>&quot;; /&gt;</span>
+</span>
+</p>
+<p><span><span> </span>
+</span>
+<span><a href='http://localhost:9099/gridtalk/webservice/services/MessageRetrieveService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:message name</span>
+<span>=&quot;;</span>
+<b>GtasWsException</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span><span> </span>
+</span>
+<span><a href='http://localhost:9099/gridtalk/webservice/services/MessageRetrieveService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:message name</span>
+<span>=&quot;;</span>
+<b>retrieveAttachmentRequest</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span><span> </span>
+</span>
+<span><a href='http://localhost:9099/gridtalk/webservice/services/MessageRetrieveService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:message name</span>
+<span>=&quot;;</span>
+<b>retrieveAttachmentResponse</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span> <a href='http://localhost:9099/gridtalk/webservice/services/MessageRetrieveService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:message name</span>
+<span>=&quot;;</span>
+<b>retrieveMessagePayloadRequest</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span><span> </span>
+</span>
+<span><a href='http://localhost:9099/gridtalk/webservice/services/MessageRetrieveService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:message name</span>
+<span>=&quot;;</span>
+<b>retrieveMessagePayloadResponse</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span><span> </span>
+</span>
+<span><a href='http://localhost:9099/gridtalk/webservice/services/MessageRetrieveService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:message name</span>
+<span>=&quot;;</span>
+<b>retrieveMessageInfosRequest</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span><span> </span>
+</span>
+<span><a href='http://localhost:9099/gridtalk/webservice/services/MessageRetrieveService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:message name</span>
+<span>=&quot;;</span>
+<b>retrieveMessageInfosResponse</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span> <a href='http://localhost:9099/gridtalk/webservice/services/MessageRetrieveService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:portType name</span>
+<span>=&quot;;</span>
+<b>MessageRetrieveServicePortType</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span> <a href='http://localhost:9099/gridtalk/webservice/services/MessageRetrieveService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:binding name</span>
+<span>=&quot;;</span>
+<b>MessageRetrieveServiceSOAP11Binding</b>
+<span>&quot;;</span>
+<span> type</span>
+<span>=&quot;;</span>
+<b>ns1:MessageRetrieveServicePortType</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span> <a href='http://localhost:9099/gridtalk/webservice/services/MessageRetrieveService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:binding name</span>
+<span>=&quot;;</span>
+<b>MessageRetrieveServiceSOAP12Binding</b>
+<span>&quot;;</span>
+<span> type</span>
+<span>=&quot;;</span>
+<b>ns1:MessageRetrieveServicePortType</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span><a href='http://localhost:9099/gridtalk/webservice/services/MessageRetrieveService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:binding name</span>
+<span>=&quot;;</span>
+<b>MessageRetrieveServiceHttpBinding</b>
+<span>&quot;;</span>
+<span> type</span>
+<span>=&quot;;</span>
+<b>ns1:MessageRetrieveServicePortType</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span><a href='http://localhost:9099/gridtalk/webservice/services/MessageRetrieveService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:service name</span>
+<span>=&quot;;</span>
+<b>MessageRetrieveService</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span><span>&lt;/</span>
+</span>
+<span><span>wsdl:definitions</span>
+</span>
+<span><span>&gt;</span>
+</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><span>The following shows the web services for retrieving the document:</span>
+</p>
+<ol start='1' type='a'><li><b><span>retrieveMessageInfos: </span>
+</b>
+<span>Retrieve the array of meta info of the Outbound Document.</span>
+</li>
+<li><b><span>retrieveMessagePayload: </span>
+</b>
+<span>Retrieve the payload of the Outbound Document, using DataHandler for transferring the payload</span>
+</li>
+<li><b><span>retrieveAttachment</span>
+</b>
+<span>: Retrieve the attachment associated with the message payload, using DataHandler for transferring the attachment</span>
+</li>
+<li><b><span>markMessageAsDownloaded</span>
+</b>
+<span>: Indicate that the Outbound Document has been downloaded previously</span>
+</li>
+</ol>
+<p><span></span>
+</p>
+<p><span>Take note that HTTP Basic Authentication is required in order to access the above web services. Access it with the GT login account (with role <b>User</b>
+) in order for the GT to authenticate the web service client.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>To enforce that only the TP can access their data, the TP ID that is configured in GT has to match the GT login account ID we created for the TP.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Refer to 5.1.1<span>To create a new user</span>
+ for the creation of GT login account</span>
+</p>
+<p><i><span>Refer to Chapter 5.1.1 To Create a Partner in GridTalk 4.2 User Guide</span>
+</i>
+<span> for creation of TP</span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+<p><span>As shown below, the table for describing the WSDL file provides the detail of the services available. </span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' border='1' cellpadding='0'><tr><td width='144' valign='top'><p align='center'><b><span>Parameter</span>
+</b>
+</p>
+</td>
+<td width='267' valign='top'><p align='center'><b><span>Data Type</span>
+</b>
+</p>
+</td>
+<td width='69' valign='top'><p align='center'><b><span>Services</span>
+</b>
+</p>
+</td>
+<td width='148' valign='top'><p align='center'><b><span>Description</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>retrieveCriteria</span>
+</p>
+</td>
+<td width='267' valign='top'><p><span>ns0:MessageRetrieveCriteria</span>
+</p>
+</td>
+<td width='69' valign='top'><p><span>a</span>
+</p>
+</td>
+<td width='148' valign='top'><p><span>The criteria for retrieving the Message Info of the OB Document.</span>
+</p>
+<p><span></span>
+</p>
+<p><i><span>DocNumber</span>
+</i>
+<span>: It is related to the OB GDoc’s UdocNum field.</span>
+</p>
+<p><span></span>
+</p>
+<p><i><span>DocType</span>
+</i>
+<span>: It is related to the OB GDoc’s UdocDocType field.</span>
+</p>
+<p><span></span>
+</p>
+<p><i><span>fromCreationDate/ToCreationDate</span>
+</i>
+<span>: It is related to the OB GDoc’s DateTimeCreate field.</span>
+</p>
+<p><span></span>
+</p>
+<p><i><span>msgId</span>
+</i>
+<span>: It is the combination of the GDoc’s Folder and GDoc’s GdocId field. The format is &lt;folder&gt;-&lt;gdocId&gt; for example “OB-12345”. The expected folder is “OB”, “IB”, “EP”, “IP”.</span>
+</p>
+<p><span></span>
+</p>
+<p><i><span>read</span>
+</i>
+<span>: It is related to the OB GDoc’s IsRead field. It indicates whether the document has been read or downloaded before. </span>
+</p>
+<p><span></span>
+</p>
+<p><i><span>Sender</span>
+</i>
+<span>: It is related to the OB GDoc’s SenderBizEntityId. It indicates the sender of the document.</span>
+</p>
+<p><span></span>
+</p>
+<p><i><span>TotalFetch</span>
+</i>
+<span>: To limit the total number of Message Info to be returned. Currently, it is not supported yet.</span>
+</p>
+<p><span></span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>msgInfo</span>
+</p>
+</td>
+<td width='267' valign='top'><p><span>ns0:MessageInfo</span>
+</p>
+</td>
+<td width='69' valign='top'><p><span>b,c,d</span>
+</p>
+</td>
+<td width='148' valign='top'><p><span>The meta info of the OB Document.</span>
+</p>
+<p><span></span>
+</p>
+<p><i><span>containAttachment</span>
+</i>
+<span>: It indicate whether the OB doc containing any attachment</span>
+</p>
+<p><span></span>
+</p>
+<p><span>creationTimestamp: It indicate the creation timestamp of the OB doc.</span>
+</p>
+<p><span></span>
+</p>
+<p><i><span>docFilename</span>
+</i>
+<span>: It indicate the payload filename of the OB doc</span>
+</p>
+<p><span></span>
+</p>
+<p><i><span>docType</span>
+</i>
+<span>: It indicate the document type of the OB doc</span>
+</p>
+<p><span></span>
+</p>
+<p><i><span>msgId</span>
+</i>
+<span>: It indicate the unique identifier of the OB doc.</span>
+</p>
+<p><span></span>
+</p>
+<p><i><span>Read</span>
+</i>
+<span>: It indicate whether the OB doc has been downloaded before</span>
+</p>
+<p><span></span>
+</p>
+<p><i><span>Sender</span>
+</i>
+<span>: It indicate the sender of the doc. </span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

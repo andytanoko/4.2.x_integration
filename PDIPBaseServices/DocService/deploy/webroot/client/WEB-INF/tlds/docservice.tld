@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib
+    PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN"
+    "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+
+<taglib>
+  <tlibversion>1.0</tlibversion>
+  <jspversion>1.1</jspversion>
+  <shortname>docservice</shortname>
+  <info>Document service tag library</info>
+  
+  <tag>
+    <name>nodedetails</name>
+    <tagclass>com.gridnode.pdip.base.docservice.taglib.action.FileSystemNodeTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Login tag</info>
+    <attribute>
+      <name>nodeType</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+  
+  <tag>
+    <name>node</name>
+    <tagclass>com.gridnode.pdip.base.docservice.taglib.action.CurrentNodeTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Login tag</info>
+    <attribute>
+      <name>nodeType</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>nodeaction</name>
+    <tagclass>com.gridnode.pdip.base.docservice.taglib.action.DocumentMgrActionTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Document manager action tag</info>
+  </tag>
+    
+  <tag>
+    <name>nodetable</name>
+    <tagclass>com.gridnode.pdip.base.docservice.taglib.display.FileSystemNodeTableTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>File system details tag</info>
+  </tag>
+  
+  <tag>
+    <name>actionresult</name>
+    <tagclass>com.gridnode.pdip.base.docservice.taglib.display.ActionResultTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Action failure tag</info>
+    <attribute>
+      <name>resultType</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>iterator</name>
+    <tagclass>com.gridnode.pdip.base.docservice.taglib.display.CollectionIteratorTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Collection Iterator tag</info>
+  </tag>
+
+  <tag>
+    <name>element</name>
+    <tagclass>com.gridnode.pdip.base.docservice.taglib.display.CollectionElementTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Collection element tag</info>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+  </tag>
+
+</taglib>

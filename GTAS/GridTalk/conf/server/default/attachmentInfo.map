@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for AttachmentInfo  -->
+	<class name="com.gridnode.gtas.server.document.model.AttachmentInfo">
+		<map-to xml="Attachments"/>
+		<field name="Attachments" type="com.gridnode.gtas.server.document.model.Attachment" collection="collection">
+			<xml name="Attachment" node="element"/>
+		</field>
+	</class>
+	<class name="com.gridnode.gtas.server.document.model.Attachment">
+		<map-to xml="Attachment"/>
+		<field name="uId" type="long">
+			<xml name="UID" node="element"/>
+		</field>
+		<field name="OriginalFilename" type="string">
+			<xml name="OrgFilename" node="element"/>
+		</field>
+	</class>
+</mapping>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDependency name="FileType">
+  <Checker class-name="com.gridnode.gtas.server.mapper.helpers.EntityDependencyChecker"
+           method-name="checkDependentGtMappingRulesForFileType">
+    <Param type="java.lang.String" getter-method="getName"/>
+  </Checker>
+</EntityDependency>

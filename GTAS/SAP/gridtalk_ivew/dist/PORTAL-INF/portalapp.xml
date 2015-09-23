@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<application>
+  <application-config>
+    <property name="PrivateSharingReference" value="com.sap.portal.htmlb,com.sap.portal.usermapping"/>
+  </application-config>
+  <components>
+    <component name="MyPage">
+      <component-config>
+        <property name="ClassName" value="com.gridnode.pct.gridtalk.MyPage"/>
+        <!--<property name="ComponentType" value="jspnative"/>
+        <property name="JSP" value="pagelet/JSPDyn.jsp"/>-->
+      </component-config>
+
+	  <component-profile>
+      	<property name="tagLib" value="/SERVICE/htmlb/taglib/htmlb.tld" />
+      </component-profile>
+      
+    </component>
+  </components>
+  <services/>
+</application>

@@ -1,0 +1,15 @@
+Author: Mahesh
+Data: 04-10-2002
+Title: Workflow
+
+        This module allows us to create process,create activity and change the process and activity states.
+    We can use remote methods of GWFWorkflowManagerBean.java to do this actions.
+    methods.
+
+    1) In order to create runtime process we need to call remote method createRtProcess of GWFWorkflowManagerBean.
+
+    2) In order to create runtime activity we need to call remote method createRtActivity of GWFWorkflowManagerBean.
+
+    3) In order to change runtime state of the process we need to call remote method changeProcessState of GWFWorkflowManagerBean.
+
+    4) In order to change runtime state of the activity we need to call remote method changeActivityState of GWFWorkflowManagerBean.

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+	<secure>false</secure>
+	<container-configurations/>
+	<resource-managers/>
+	<enterprise-beans>
+		<session>
+			<ejb-name>NotifierMgrBean</ejb-name>
+			<jndi-name>com.gridnode.pdip.framework.notification.ejb.INotifierMgrHome</jndi-name>
+		</session>
+		<session>
+			<ejb-name>NotifierMgrBean_local</ejb-name>
+			<local-jndi-name>com.gridnode.pdip.framework.notification.ejb.INotifierMgrLocalHome</local-jndi-name>
+		</session>
+	</enterprise-beans>
+</jboss>

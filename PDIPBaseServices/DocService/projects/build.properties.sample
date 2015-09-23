@@ -1,0 +1,63 @@
+#------------------------------------------------------------
+#choose compiler: classic, modern, jikes, or jvc
+#------------------------------------------------------------
+JAVAC=modern
+
+#------------------------------------------------------------
+# application specific properties
+#
+# rebuild:
+#   true - build all files regardless of whether they are up
+#   to date
+#
+# doformat:
+#   true - format the source code base on coding standard
+#------------------------------------------------------------
+project.dir=../..
+module.case-sensitive.name=Deploy
+module.non-case-sensitive.name=deploy
+rebuild=false
+#doformat=true
+
+#------------------------------------------------------------
+# application server & formatter directories set
+#------------------------------------------------------------
+jboss.home=D:/Apps/jboss-3.0.0alpha
+jboss.deploy=${jboss.home}/deploy
+appserver=jboss
+appserver.home=${jboss.home}
+appserver.deploy=${jboss.deploy}
+ejblib.dir=${jboss.home}/lib
+ejbclient.dir=${jboss.home}/client
+jalopy.pref=D:/Apps/jalopy/ant/bin/pref.xml
+
+#------------------------------------------------------------
+# required libs directories set
+#------------------------------------------------------------
+appservice.reqlib.dir=../../../PDIPAppServices/reqlib/
+baseservice.reqlib.dir=../../../PDIPBaseServices/reqlib/
+framework.reqlib.dir=../../../PDIPFramework/reqlib/
+
+#------------------------------------------------------------
+# application service modules directories
+#------------------------------------------------------------
+appservice.dir=../../../PDIPAppServices
+appservice.user.dir=${appservice.dir}/User/
+appservice.partner.dir=${appservice.dir}/Partner/
+appservice.workflow.dir=${appservice.dir}/Workflow
+appservice.deploy.dir=${appservice.dir}/Deploy
+
+#------------------------------------------------------------
+# base service modules directories
+#------------------------------------------------------------
+baseservice.dir=../../../PDIPBaseServices
+baseservice.transport.dir=${baseservice.dir}/Transport
+baseservice.xml.dir=${baseservice.dir}/XML
+baseservice.time.dir=${baseservice.dir}/Time
+baseservice.gwfbase.dir=${baseservice.dir}/GWFBase
+
+#------------------------------------------------------------
+# framework modules directories set
+#------------------------------------------------------------
+framework.dir=../../../PDIPFramework/FrameWork
+

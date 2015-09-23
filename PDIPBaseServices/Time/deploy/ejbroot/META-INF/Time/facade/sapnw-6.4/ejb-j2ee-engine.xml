@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-j2ee-engine SYSTEM "ejb-j2ee-engine.dtd">
+<ejb-j2ee-engine>
+	<enterprise-beans>
+		<enterprise-bean>
+			<ejb-name>iCalTimeMgr</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.time.facade.ejb.IiCalTimeMgrHome</jndi-name>
+			<session-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>TimeScheduleMDB</ejb-name>
+			<message-props>
+				<destination-name>timeScheduleQueue</destination-name>
+                                <connection-factory-name>GNQueueConnectionFactory</connection-factory-name>
+			</message-props>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>TimeInvokeMDB</ejb-name>
+			<message-props>
+				<destination-name>timeInvokeQueue</destination-name>
+                                <connection-factory-name>GNQueueConnectionFactory</connection-factory-name>
+			</message-props>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>TimeMissedMDB</ejb-name>
+			<message-props>
+				<destination-name>timeMissedQueue</destination-name>
+                                <connection-factory-name>GNQueueConnectionFactory</connection-factory-name>
+			</message-props>
+		</enterprise-bean>
+	</enterprise-beans>
+</ejb-j2ee-engine>

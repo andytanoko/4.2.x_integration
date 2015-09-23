@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+        <enterprise-beans>
+                <entity>
+                        <display-name>PartnerFunction</display-name>
+                        <ejb-name>PartnerFunction</ejb-name>
+                        <local-home>com.gridnode.gtas.server.partnerfunction.entities.ejb.IPartnerFunctionLocalHome</local-home>
+                        <local>com.gridnode.gtas.server.partnerfunction.entities.ejb.IPartnerFunctionLocalObj</local>
+                        <ejb-class>com.gridnode.gtas.server.partnerfunction.entities.ejb.PartnerFunctionBean</ejb-class>
+                        <persistence-type>Bean</persistence-type>
+                        <prim-key-class>java.lang.Long</prim-key-class>
+                        <reentrant>False</reentrant>
+                </entity>
+                <entity>
+                        <display-name>WorkflowActivity</display-name>
+                        <ejb-name>WorkflowActivity</ejb-name>
+                        <local-home>com.gridnode.gtas.server.partnerfunction.entities.ejb.IWorkflowActivityLocalHome</local-home>
+                        <local>com.gridnode.gtas.server.partnerfunction.entities.ejb.IWorkflowActivityLocalObj</local>
+                        <ejb-class>com.gridnode.gtas.server.partnerfunction.entities.ejb.WorkflowActivityBean</ejb-class>
+                        <persistence-type>Bean</persistence-type>
+                        <prim-key-class>java.lang.Long</prim-key-class>
+                        <reentrant>False</reentrant>
+                </entity>
+        </enterprise-beans>
+        <assembly-descriptor>
+                <container-transaction>
+                        <method>
+                                <ejb-name>PartnerFunction</ejb-name>
+                                <method-name>*</method-name>
+                        </method>
+                        <method>
+                                <ejb-name>WorkflowActivity</ejb-name>
+                                <method-name>*</method-name>
+                        </method>
+                        <trans-attribute>Required</trans-attribute>
+                </container-transaction>
+        </assembly-descriptor>
+</ejb-jar>

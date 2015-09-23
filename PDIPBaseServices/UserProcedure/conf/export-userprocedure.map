@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for ExportEntityList  -->
+	<class name="com.gridnode.pdip.base.exportconfig.model.ExportEntityList">
+		<map-to xml="Entities"/>
+		<field name="Entities" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection">
+		</field>
+	</class>
+	<!--  Mapping for UserProcedure  -->
+	<class name="com.gridnode.pdip.base.userprocedure.model.UserProcedure">
+		<map-to xml="UserProcedure"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="Name" type="string">
+			<xml name="Name" node="element"/>
+		</field>
+		<field name="Description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="isSynchronous" type="boolean" get-method="isSynchronous" set-method="setIsSynchronous">
+			<xml name="isSynchronous" node="element"/>
+		</field>
+		<field name="ProcedureType" type="integer">
+			<xml name="ProcedureType" node="element"/>
+		</field>
+		<field name="ProcedureDefFile" type="com.gridnode.pdip.base.userprocedure.model.ProcedureDefFile">
+			<xml name="ProcedureDefFile" node="element"/>
+		</field>
+		<field name="ProcedureDef" type="com.gridnode.pdip.base.userprocedure.model.ProcedureDef">
+			<xml name="ProcedureDef" node="element"/>
+		</field>
+		<field name="ProcedureParamList" type="com.gridnode.pdip.base.userprocedure.model.ParamDef" collection="vector">
+			<xml name="ParamDef" node="element"/>
+		</field>
+		<field name="ReturnDataType" type="integer">
+			<xml name="ReturnDataType" node="element"/>
+		</field>
+		<field name="ProcedureDefAction" type="integer">
+			<xml name="ProcedureDefAction" node="element"/>
+		</field>
+		<field name="ProcedureDefAlert" type="long">
+			<xml name="ProcedureDefAlert" node="element"/>
+		</field>
+		<field name="ProcedureReturnList" type="com.gridnode.pdip.base.userprocedure.model.ReturnDef" collection="vector">
+			<xml name="ReturnDef" node="element"/>
+		</field>
+		<field name="GridDocField" type="integer">
+			<xml name="GridDocField" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for ProcedureDefFile  -->
+	<class name="com.gridnode.pdip.base.userprocedure.model.ProcedureDefFile">
+		<map-to xml="ProcedureDefFile"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for ShellExecutable  -->
+	<class name="com.gridnode.pdip.base.userprocedure.model.ShellExecutable">
+		<map-to xml="ShellExecutable"/>
+		<field name="Type" type="integer">
+			<xml name="Type" node="element"/>
+		</field>
+		<field name="CmdLineExpr" type="string">
+			<xml name="CmdLineExpr" node="element"/>
+		</field>
+		<field name="Arguments" type="string">
+			<xml name="Arguments" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for JavaProcedure  -->
+	<class name="com.gridnode.pdip.base.userprocedure.model.JavaProcedure">
+		<map-to xml="JavaProcedure"/>
+		<field name="Type" type="integer">
+			<xml name="Type" node="element"/>
+		</field>
+		<field name="CmdLineExpr" type="string">
+			<xml name="CmdLineExpr" node="element"/>
+		</field>
+		<field name="ClassPath" type="string">
+			<xml name="ClassPath" node="element"/>
+		</field>
+		<field name="ClassName" type="string">
+			<xml name="ClassName" node="element"/>
+		</field>
+		<field name="MethodName" type="string">
+			<xml name="MethodName" node="element"/>
+		</field>
+		<field name="isLocal" type="boolean" get-method="isLocal" set-method="setIsLocal">
+			<xml name="isLocal" node="element"/>
+		</field>
+		<field name="JVMOptions" type="string">
+			<xml name="JVMOptions" node="element"/>
+		</field>
+		<field name="Arguments" type="string">
+			<xml name="Arguments" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for SoapProcedure  -->
+	<class name="com.gridnode.pdip.base.userprocedure.model.SoapProcedure">
+		<map-to xml="SoapProcedure"/>
+		<field name="Type" type="integer">
+			<xml name="Type" node="element"/>
+		</field>
+		<field name="MethodName" type="string">
+			<xml name="MethodName" node="element"/>
+		</field>
+		<field name="Username" type="string">
+			<xml name="Username" node="element"/>
+		</field>
+		<field name="Password" type="string">
+			<xml name="Password" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for ParamDef  -->
+	<class name="com.gridnode.pdip.base.userprocedure.model.ParamDef">
+		<map-to xml="ParamDef"/>
+		<field name="Name" type="string">
+			<xml name="Name" node="element"/>
+		</field>
+		<field name="Description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="Source" type="integer">
+			<xml name="Source" node="element"/>
+		</field>
+		<field name="DateFormat" type="string">
+			<xml name="DateFormat" node="element"/>
+		</field>
+		<field name="Type" type="integer">
+			<xml name="Type" node="element"/>
+		</field>
+		<field name="Value" type="other">
+			<xml name="Value" node="element"/>
+		</field>
+		<field name="ActualValue" type="other">
+			<xml name="ActualValue" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for ReturnDef  -->
+	<class name="com.gridnode.pdip.base.userprocedure.model.ReturnDef">
+		<map-to xml="ReturnDef"/>
+		<field name="Operator" type="integer">
+			<xml name="Operator" node="element"/>
+		</field>
+		<field name="Value" type="other">
+			<xml name="Value" node="element"/>
+		</field>
+		<field name="Action" type="integer">
+			<xml name="Action" node="element"/>
+		</field>
+		<field name="Alert" type="long">
+			<xml name="Alert" node="element"/>
+		</field>
+	</class>
+</mapping>

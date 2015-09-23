@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+  <secure>false</secure>
+  <container-configurations/>
+  <resource-managers/>
+  <enterprise-beans>
+    <entity>
+      <ejb-name>PartnerType</ejb-name>
+      <local-jndi-name>com.gridnode.pdip.app.partner.ejb.IPartnerTypeLocalHome</local-jndi-name>
+    </entity>
+    <entity>
+      <ejb-name>PartnerGroup</ejb-name>
+      <local-jndi-name>com.gridnode.pdip.app.partner.ejb.IPartnerGroupLocalHome</local-jndi-name>
+    </entity>
+    <entity>
+      <ejb-name>Partner</ejb-name>
+      <local-jndi-name>com.gridnode.pdip.app.partner.ejb.IPartnerLocalHome</local-jndi-name>
+    </entity>
+
+    <!-- insert other entity beans here -->
+  </enterprise-beans>
+</jboss>

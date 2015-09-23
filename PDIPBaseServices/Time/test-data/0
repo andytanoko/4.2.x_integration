@@ -1,0 +1,10 @@
+BEGIN:VCALENDAR
+BEGIN:VEVENT
+SUMMARY:Bastille Day Party This option indicates that xauth should attempt to break any authority file locks before proceeding.
+SUMMARY:Bastille Day Party This option indicates that xauth should 
+ attempt to break any authority file locks before proceeding.
+CLASS:CONFIDENTIAL
+CATEGORIES:ANNIVERSARY,PERSONAL,SPECIAL OCCASION
+RRULE:FREQ=YEARLY
+END:VEVENT
+END:VCALENDAR

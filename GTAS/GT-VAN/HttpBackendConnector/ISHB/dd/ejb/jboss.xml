@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+  <secure>false</secure>
+  <resource-managers/>
+  <enterprise-beans>
+  
+    <message-driven>
+      <ejb-name>ISHB_In_SaveTransactionMDBean</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>queue/gtvan/ishb/TxInQueue</destination-jndi-name>
+    </message-driven>
+	<message-driven>
+      <ejb-name>ISHB_IncomingTransactionMDBean</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>queue/gtvan/ishb/processBackTxQueue</destination-jndi-name>
+    </message-driven>
+	<message-driven>
+      <ejb-name>ISHB_OutgoingTransactionMDBean</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>queue/gtvan/ishb/processBackTxQueue</destination-jndi-name>
+    </message-driven>
+    <!--message-driven>
+      <ejb-name>ISHB_Out_SaveTransactionMDBean</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>queue/gtvan/ishb/TxOutQueue</destination-jndi-name>
+    </message-driven-->
+    <session>
+    	<ejb-name>ISHB_TransactionHandlerBean</ejb-name>
+    	<clustered>${node.clustered:False}</clustered>
+    </session>
+  </enterprise-beans>
+</jboss>

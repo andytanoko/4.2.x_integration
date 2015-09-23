@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>12 Internal Scheduler </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h1>12 Internal Scheduler </h1>
+<p><span></span>
+</p>
+<p><span>The GridTalk Internal Scheduler function allows the user to schedule jobs internally in GridTalk to run at specific times once, minutely, hourly, daily, weekly, or monthly. The function is accessible in <i>Admin</i>
+ mode under the <i>Administration</i>
+ tab using the <i>Scheduled Task</i>
+ list view page. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>There are three types of schedule tasks: one which is system task, the second one is user procedure task and the third one is the DB Archive task. You are only allowed to schedule new user procedure tasks and DB Archive tasks. System tasks are pre-configured with the GridTalk application but you are allowed to modify the schedule timings. So far, there are two pre-scheduled system tasks, and one pre-scheduled user procedure task:</span>
+</p>
+<p><span></span>
+</p>
+<ul type='disc'><li><span>Housekeeping – this helps you to housekeep the temporary files and log files generated from the day-to-day transactions of the GridTalk application. This task is disabled by default. See Chapter 13.4 Scheduling housekeeping jobs for more details.</span>
+</li>
+</ul>
+<p><span></span>
+</p>
+<ul type='disc'><li><span>License Checking – this helps you to monitor the validity period of your GridTalk license and will notify you by email before and after the license expiry so that you can promptly take actions to renew the license with GridNode. This task is enabled by default and is scheduled to run daily at midnight. You may modify the schedule timing as well as the frequency.</span>
+</li>
+</ul>
+<p><span></span>
+</p>
+<ul type='disc'><li><span>Certificate Expiry Checking – this helps you to monitor the validity period of all your certificates as well as partner certificates, and will notify you by email before and after any certificate expiry so that you can promptly take actions to renew the certificate. This task is enabled by default and is scheduled to run daily at the time of installation. You may modify the schedule timing as well as the frequency. This is a user procedure task, which means the way the expiry checking is performed may be changed by replacing the user procedure or modifying the user procedure. </span>
+</li>
+</ul>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><a name='_Ref153884600'></a>
+<a name='_Ref153884597'></a>
+<a name='_Ref134450785'></a>
+<a name='_Toc133896838'></a>
+<a name='_Configuring_Scheduled_Tasks'></a>
+<span></span>
+</p>
+</body>
+</html>

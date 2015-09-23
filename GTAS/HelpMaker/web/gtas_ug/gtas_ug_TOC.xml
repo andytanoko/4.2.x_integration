@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='ISO-8859-1'  ?>
+<!DOCTYPE toc PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp TOC Version 1.0//EN" "http://java.sun.com/products/javahelp/toc_1_0.dtd">
+<toc version="1.0">
+  <tocitem text="GridTalk User Guide" image="chapter" target="home">
+
+<!-- Chapter 1 -->
+    <tocitem text="1 About the Guide " image="chapter" target="gtas_ug.0">
+      <tocitem text="1.1 Related Documentation " image="topic" target="gtas_ug.1"/>
+    </tocitem>
+
+<!-- Chapter 2 -->
+    <tocitem text="2 Getting Started with GridTalk " image="topic" target="gtas_ug.2"/>
+
+<!-- Chapter 3 -->
+    <tocitem text="3 Using GridTalk User Interface " image="chapter" target="gtas_ug.3">
+      <tocitem text="3.1 Tabs " image="topic" target="gtas_ug.4"/>
+      <tocitem text="3.2 Links " image="topic" target="gtas_ug.5"/>
+      <tocitem text="3.3 Navigation Panel " image="topic" target="gtas_ug.6"/>
+      <tocitem text="3.4 List View Page " image="topic" target="gtas_ug.7"/>
+      <tocitem text="3.5 Detail View Page " image="topic" target="gtas_ug.8"/>
+      <tocitem text="3.6 Fields " image="chapter" target="gtas_ug.9">
+        <tocitem text="3.6.1 Text Fields " image="topic" target="gtas_ug.10"/>
+        <tocitem text="3.6.2 Drop Down Select Boxes " image="topic" target="gtas_ug.11"/>
+        <tocitem text="3.6.3 Checkboxes and Radio Buttons " image="topic" target="gtas_ug.12"/>
+        <tocitem text="3.6.4 Multi-selector " image="topic" target="gtas_ug.13"/>
+        <tocitem text="3.6.5 Files " image="topic" target="gtas_ug.14"/>
+        <tocitem text="3.6.6 Embedded List Views " image="topic" target="gtas_ug.15"/>
+      </tocitem>
+    </tocitem>
+
+<!-- Chapter 4 -->
+    <tocitem text="4 Registry " image="chapter" target="gtas_ug.16">
+      <tocitem text="4.1 Viewing and updating the Company Profile " image="chapter" target="gtas_ug.17">
+        <tocitem text="4.1.1 To view your company profile " image="topic" target="gtas_ug.18"/>
+      </tocitem>
+      <tocitem text="4.2 Managing business entities " image="chapter" target="gtas_ug.19">
+        <tocitem text="4.2.1 To view a list of all business entities " image="topic" target="gtas_ug.20"/>
+        <tocitem text="4.2.2 To create a own business entity " image="topic" target="gtas_ug.21"/>
+        <tocitem text="4.2.3 To delete a business entity " image="topic" target="gtas_ug.22"/>
+        <tocitem text="4.2.4 To create a partner business entity " image="topic" target="gtas_ug.23"/>
+      </tocitem>
+    </tocitem>
+
+<!-- Chapter 5 -->
+    <tocitem text="5 Partner " image="chapter" target="gtas_ug.24">
+      <tocitem text="5.1 Managing Partners " image="chapter" target="gtas_ug.25">
+        <tocitem text="5.1.1 To create a partner " image="topic" target="gtas_ug.26"/>
+      </tocitem>
+      <tocitem text="5.2 Managing partner types " image="chapter" target="gtas_ug.27">
+        <tocitem text="5.2.1 To create a partner type " image="topic" target="gtas_ug.28"/>
+      </tocitem>
+      <tocitem text="5.3 Managing Partner Groups " image="chapter" target="gtas_ug.29">
+        <tocitem text="5.3.1 To create a partner group " image="topic" target="gtas_ug.30"/>
+      </tocitem>
+    </tocitem>
+
+<!-- Chapter 6 -->
+    <tocitem text="6 Documents " image="chapter" target="gtas_ug.31">
+      <tocitem text="6.1 Understanding Information about a Document " image="chapter" target="gtas_ug.32">
+        <tocitem text="6.1.1 General Information " image="topic" target="gtas_ug.33"/>
+        <tocitem text="6.1.2 Traceability Information " image="topic" target="gtas_ug.34"/>
+        <tocitem text="6.1.3 Partner Information " image="topic" target="gtas_ug.35"/>
+        <tocitem text="6.1.4 Communication Information " image="topic" target="gtas_ug.36"/>
+        <tocitem text="6.1.5 Attachment Information " image="topic" target="gtas_ug.37"/>
+      </tocitem>
+      <tocitem text="6.2 Managing Documents in the Import folder " image="chapter" target="gtas_ug.38">
+        <tocitem text="6.2.1 To view the import folder " image="topic" target="gtas_ug.39"/>
+        <tocitem text="6.2.2 To import a document " image="topic" target="gtas_ug.40"/>
+      </tocitem>
+      <tocitem text="6.3 Managing documents in the Outbound Folder " image="chapter" target="gtas_ug.41">
+        <tocitem text="6.3.1 To view the outbound folder " image="topic" target="gtas_ug.42"/>
+        <tocitem text="6.3.2 To manually send a document " image="topic" target="gtas_ug.43"/>
+      </tocitem>
+      <tocitem text="6.4 Managing documents in the Inbound Folder " image="chapter" target="gtas_ug.44">
+        <tocitem text="6.4.1 To view the inbound folder " image="topic" target="gtas_ug.45"/>
+      </tocitem>
+      <tocitem text="6.5 Managing documents in the Export Folder " image="chapter" target="gtas_ug.46">
+        <tocitem text="6.5.1 To view the export folder " image="topic" target="gtas_ug.47"/>
+        <tocitem text="6.5.2 To manually export a document " image="topic" target="gtas_ug.48"/>
+      </tocitem>
+    </tocitem>
+
+<!-- Chapter 7 -->
+    <tocitem text="7 Document Searching " image="chapter" target="gtas_ug.49">
+      <tocitem text="7.1 Configuring Search Queries " image="chapter" target="gtas_ug.50">
+        <tocitem text="7.1.1 To create a search query for searching by Grid Document " image="topic" target="gtas_ug.51"/>
+        <tocitem text="7.1.2 To create a search query for searching by user document " image="topic" target="gtas_ug.52"/>
+      </tocitem>
+      <tocitem text="7.2 Running Search Queries " image="chapter" target="gtas_ug.53">
+        <tocitem text="7.2.1 To run a search query and view searched documents " image="topic" target="gtas_ug.54"/>
+      </tocitem>
+    </tocitem>
+  </tocitem>
+</toc>

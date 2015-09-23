@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDependency name="PartnerFunction">
+  <Checker class-name="com.gridnode.gtas.server.partnerprocess.helpers.EntityDependencyChecker"
+           method-name="checkDependentTriggersForPartnerFunction">
+    <Param type="java.lang.String" getter-method="getPartnerFunctionId"/>
+  </Checker>
+</EntityDependency>

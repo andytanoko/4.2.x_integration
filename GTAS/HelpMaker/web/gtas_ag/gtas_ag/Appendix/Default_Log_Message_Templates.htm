@@ -1,0 +1,396 @@
+<html>
+<head>
+<title>Default Log Message Templates </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h2>Default Log Message Templates </h2>
+<p></p>
+<p>The following are the default log message templates provided by GridTalk 4.2:</p>
+<p></p>
+<table cellspacing='0' border='1' cellpadding='0'><tr><td width='636' colspan='2' valign='top'><p><b><span>LICENSE_EXPIRED_LOG</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Location</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>license.log</span>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Append</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>yes</span>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Message</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>[&lt;%System.CURRENT_DATETIME%&gt;] GridTalk License has expired for GridNode &lt;%GridNode.ID%&gt; - &lt;%GridNode.NAME%&gt; on &lt;%License.END_DATE#yyyy-MM-dd%&gt;.</span>
+</p>
+</td>
+</tr>
+<tr><td width='636' colspan='2' valign='top'><p><span></span>
+</p>
+</td>
+</tr>
+<tr><td width='636' colspan='2' valign='top'><p><b><span>PARTNER_FUNCTION_FAILURE_LOG</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Location</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>process-errors.log</span>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Append</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>yes</span>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Message</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>[&lt;%System.CURRENT_DATETIME#yyyy-MM-dd HH:mm:ss.SSS%&gt;] Partner Function &lt;%GridDocument.PARTNER_FUNCTION%&gt; has failed for document &lt;%GridDocument.U_DOC_FILENAME%&gt;, Error Type: &lt;%ProcessingError.TYPE%&gt;, Reason: &lt;%ProcessingError.REASON%&gt;, Message: &lt;%ProcessingError.MESSAGE%&gt;.</span>
+</p>
+</td>
+</tr>
+<tr><td width='636' colspan='2' valign='top'><p><span></span>
+</p>
+</td>
+</tr>
+<tr><td width='636' colspan='2' valign='top'><p><b><span>PROCESS_INSTANCE_FAILURE_LOG</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Location</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>process-errors.log</span>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Append</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>yes</span>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Message</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>[&lt;%System.CURRENT_DATETIME#yyyy-MM-dd HH:mm:ss.SSS%&gt;] Process Instance (&lt;%Process.PROCESS_DEF_NAME%&gt;/</span>
+</p>
+<p><span>&lt;%Process.PROCESS_ORIGINATOR_ID%&gt;/&lt;%Process.PROCESS_INSTANCE_ID%&gt;) has failed for document &lt;%GridDocument.U_DOC_FILENAME%&gt;.</span>
+</p>
+</td>
+</tr>
+<tr><td width='636' colspan='2' valign='top'><p><span></span>
+</p>
+</td>
+</tr>
+<tr><td width='636' colspan='2' valign='top'><p><b><span>USER_PROCEDURE_FAILURE_LOG</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Location</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>process-errors.log</span>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Append</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>yes</span>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Message</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>[&lt;%System.CURRENT_DATETIME#yyyy-MM-dd HH:mm:ss.SSS%&gt;] User procedure &lt;%UserProcedure.NAME%&gt; has failed for document &lt;%GridDocument.U_DOC_FILENAME%&gt;, Reason: &lt;%ProcessingError.REASON%&gt;, Message: &lt;%ProcessingError.MESSAGE%&gt;.</span>
+</p>
+</td>
+</tr>
+<tr><td width='636' colspan='2' valign='top'><p><span></span>
+</p>
+</td>
+</tr>
+<tr><td width='636' colspan='2' valign='top'><p><b><span>MAPPING_FAILURE_LOG</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Location</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>process-errors.log</span>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Append</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>yes</span>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Message</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>[&lt;%System.CURRENT_DATETIME#yyyy-MM-dd HH:mm:ss.SSS%&gt;] Mapping Rule &lt;%Mapping.NAME%&gt; has failed for document &lt;%GridDocument.U_DOC_FILENAME%&gt;, Message: &lt;%Exception.MESSAGE%&gt;</span>
+</p>
+</td>
+</tr>
+<tr><td width='636' colspan='2' valign='top'><p><span></span>
+</p>
+</td>
+</tr>
+<tr><td width='636' colspan='2' valign='top'><p><b><span>DOC_STATUS_UPDATE_LOG</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Location</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>docStatus/&lt;%GridDocument.FOLDER%&gt;-&lt;%GridDocument.G_DOC_ID%&gt;-&lt;%GridDocument.UNIQUE_DOC_IDENTIFIER%&gt;.xml</span>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Append</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>no</span>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Message</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>&lt;?xml version=&quot;;1.0&quot;; encoding=&quot;;UTF-8&quot;;?&gt;</span>
+</p>
+<p><span>&lt;GridDocument&gt;</span>
+</p>
+<p><span> &lt;GdocId&gt;&lt;%GridDocument.G_DOC_ID%&gt;&lt;/GdocId&gt;</span>
+</p>
+<p><span> &lt;UniqueDocIdentifier&gt;&lt;%GridDocument.UNIQUE_DOC_IDENTIFIER%&gt;&lt;/UniqueDocIdentifier&gt;</span>
+</p>
+<p><span> &lt;isViewed&gt;&lt;%GridDocument.IS_VIEWED%&gt;&lt;/isViewed&gt;</span>
+</p>
+<p><span> &lt;isSent&gt;&lt;%GridDocument.IS_SENT%&gt;&lt;/isSent&gt;</span>
+</p>
+<p><span> &lt;isExpired&gt;&lt;%GridDocument.IS_EXPIRED%&gt;&lt;/isExpired&gt;</span>
+</p>
+<p><span>&lt;isRejected&gt;&lt;%GridDocument.IS_REJECTED%&gt;&lt;/isRejected&gt;&lt;%?NN?GridDocument.DT_SEND_END#'</span>
+</p>
+<p><span> &lt;DateTimeSendEnd&gt;'yyyy-MM-dd'T'HH:mm:ss.SSS'&lt;/DateTimeSendEnd&gt;'%&gt;&lt;%?NN?GridDocument.DT_SEND_START#'</span>
+</p>
+<p><span> &lt;DateTimeSendStart&gt;'yyyy-MM-dd'T'HH:mm:ss.SSS'&lt;/DateTimeSendStart&gt;'%&gt;&lt;%?NN?GridDocument.DT_TRANSACTION_COMPLETE#'</span>
+</p>
+<p><span> </span>
+<span lang='IT'>&lt;DateTimeTransComplete&gt;'yyyy-MM-dd'T'HH:mm:ss.SSS'&lt;/DateTimeTransComplete&gt;'%&gt;</span>
+</p>
+<p><span lang='IT'>&lt;/GridDocument&gt;</span>
+</p>
+</td>
+</tr>
+<tr><td width='636' colspan='2' valign='top'><p><span></span>
+</p>
+</td>
+</tr>
+<tr><td width='636' colspan='2' valign='top'><p><b><span>CERT_EXPIRY_CHECK_LOG</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Location</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>certexpiry.log</span>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Append</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span>yes</span>
+</p>
+</td>
+</tr>
+<tr><td width='77' valign='top'><p><span>Message</span>
+</p>
+</td>
+<td width='559' valign='top'><p><span lang='IT'>[&lt;%System.CURRENT_DATETIME%&gt;] &lt;%CertExpiry.CERT_NAME%&gt; &lt;%?Nhas expiredN?CertExpiry.CHECK_DAYS#will be expiring in ## days%&gt;.</span>
+</p>
+</td>
+</tr>
+</table>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<b><span lang='IT'><br clear='all'></span>
+</b>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span lang='IT'></span>
+</b>
+</p>
+<p><b><span>COPYRIGHT</span>
+</b>
+</p>
+<p>This Admin Guide contains information, which is proprietary to CrimsonLogic eTrade Services Pte Ltd. No part of this Admin Guide may be reproduced in any material form (including photocopying or storing it in any medium by electronic means and whether or not transiently or incidentally to some other use of this publication) without the written permission of CrimsonLogic eTrade Services Pte Ltd except in accordance with the Copyright Act of Singapore (Cap. 63).</p>
+</body>
+</html>
+</body>
+</html>

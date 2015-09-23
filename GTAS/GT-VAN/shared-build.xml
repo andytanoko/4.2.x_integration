@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="dist" name="GtVan">
+    <description>This is the common build file for components of GtVan</description>
+  <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+  <taskdef name="xdoclet" classname="org.xdoclet.ant.XDocletTask">
+    <classpath>
+            <fileset dir="${ant.home}/lib/xdoclet">
+                <include name="lib/*.jar"/>
+                <include name="plugins/*hibernate*.jar"/>
+            </fileset>
+        </classpath>
+  </taskdef>
+
+  <property environment="env"/>
+  <property file="c:\gtvan-build.properties"/>
+  <property file="project-build.properties"/>
+  <property name="classes.dir" value="classes"/>
+  <property name="build.dir" value="build"/>
+  <property name="lib.dir" value="reqlib"/>
+  <property name="dd.dir" value="dd"/>
+  <property name="metainf.dir" value="dd/meta-inf"/>
+  <property name="dd.ejb.dir" value="dd/ejb"/>
+  <property name="dd.har.dir" value="dd/har"/>
+  <property name="dd.war.dir" value="dd/war"/>
+  <property name="dd.ear.dir" value="dd/ear"/>
+  <property name="dd.mbean.dir" value="dd/mbean"/>
+  <property name="cluster.dd.mbean.dir" value="dd/clustering/mbean"/>
+  <property name="src.dir" value="src"/>
+  <property name="dep.lib.dir" value="deplib"/>
+  <property name="hib.dir" value="hibernate"/>
+
+  <tstamp>
+    <format property="touch.time" pattern="yyyyMMdd-HHmmss"/>
+  </tstamp>
+    <path id="compile.classpath">
+    <fileset dir="${j2ee.lib.dir}">
+      <include name="j2ee.jar"/>
+    </fileset>
+    <fileset dir="${lib.dir}" includes="*.jar"/>
+      <fileset dir="${build.dir}" includes="*.jar,${dep.lib.dir}/*.jar"/>
+    <fileset dir="${jboss.lib.dir}">
+      <include name="jboss-system.jar"/>
+      <include name="jboss-jmx.jar"/>
+      <include name="commons-logging.jar"/>
+    </fileset>
+    <fileset dir="${jboss.serverlib.dir}">  
+	  <include name="jbossha.jar"/>
+	  <include name="jmx-adaptor-plugin.jar"/>	  
+    </fileset>
+    </path>
+
+
+    <!-- =================================
+          target: compile
+         ================================= -->
+
+
+
+
+
+
+    <target name="compile" depends="compile.clean">
+      <javac srcdir="${src.dir}"
+         destdir="${classes.dir}"
+         classpathref="compile.classpath"
+         debug="on" />
+      <copy todir="${classes.dir}">
+        <fileset dir="${src.dir}" includes="**/*.properties"/>
+      </copy>
+    </target>
+
+    <target name="compile.clean">
+      <delete dir="${classes.dir}" quiet="true"/>
+      <mkdir dir="${classes.dir}"/>
+    </target>
+
+    <!-- Generate Hibernate Mappings -->
+    <target name="generate.hibernate"
+      description="Generate Hibernate Class Descriptor Files" if="entity.classes">
+      <!-- Execute the xdoclet task -->
+      <echo message="generate mapping for ${entity.classes}"/>
+      <xdoclet verbose="true">
+         <fileset dir="${src.dir}" includes="${entity.classes}"/>
+         <fileset dir="${generated.home}" includes="**/*.java"/>
+         <component classname="org.xdoclet.plugin.hibernate.HibernateMappingPlugin"
+                                destdir="${generated.home}" force="true"
+                                version="3.0"/>
+      </xdoclet>
+      <copy todir="${generated.home}">
+         <fileset dir="${classes.dir}" includes="${entity.classes}"/>
+         <fileset dir="${src.dir}" includes="${entity.classes}"/>
+      </copy>
+    </target>
+
+    <!-- =================================
+          target: build
+         ================================= -->
+    <target name="build" depends="build.clean">
+      <echo message="dependent projects: ${dependent.projects.loc}, components: ${component.names}"/>
+      <antcall target="build.dep.projects" inheritall="true"/>
+      <antcall target="build.components" inheritall="true"/>
+    </target>
+
+  <target name="build.clean">
+    <delete quiet="true" dir="${dist.dir}">
+    </delete>
+    <mkdir dir="${dist.dir}"/>
+  </target>
+
+  <!-- Build dependent projects -->
+  <target name="build.dep.projects" if="dependent.projects.loc">
+      <echo message="building dependent projects ${dependent.projects.loc}...."/>
+    <foreach list="${dependent.projects.loc}" target="build.dep.project" param="project.loc"/>
+  </target>
+
+  <target name="build.dep.project">
+     <ant antfile="build.xml" dir="../${project.loc}" target="dist" inheritAll="no">
+        <property name="dist.dir" value="${dist.dir}"/>
+     </ant>
+  </target>
+  
+  <!-- Build components of this project -->
+  <target name="build.components" if="component.names">
+      <echo message="building components ${component.names}...."/>
+    <foreach list="${component.names}" target="build.component" param="component.name">
+      <param name="build.dir" value="dist"/>
+    </foreach>
+  </target>
+
+  <target name="build.component.clean" description="clean build directory for component">
+          <echo message="cleaning up ${basedir}/${build.dir}"/>
+    <delete quiet="true">
+      <fileset dir="${build.dir}" includes="*.jar,*.war,*.ear,*.har,${dep.lib.dir}/**,${hib.dir}/**"/>
+    </delete>
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${build.dir}/${dep.lib.dir}"/>
+    <mkdir dir="${build.dir}/${hib.dir}"/>
+  </target>
+
+  <target name="copy.component.libs" if="dep.components" description="copy dependent libs from other components">
+    <foreach list="${dep.components}" target="copy.dep.libs" param="dep.loc"/>
+  </target>
+
+  <target name="copy.dep.libs" if="dep.loc">
+    <copy todir="${build.dir}/${dep.lib.dir}" preservelastmodified="true">
+      <fileset dir="${dist.dir}/${dep.loc}" includes="*.jar,*.har,*.war,*.ear"/>
+    </copy>
+    <copy todir="${build.dir}/${hib.dir}" preservelastmodified="true">
+      <fileset dir="${dist.dir}/${dep.loc}/${hib.dir}"/>
+    </copy>
+  </target>
+
+  <!-- Build a component -->
+  <target name="build.component">
+    <echo message="current dir = ${basedir}"/>
+    <antcall target="build.component.clean">
+      <param name="build.dir" value="${component.name}/${build.dir}"/>
+    </antcall>
+
+    <propertycopy property="dep.components" from="${component.name}.dep.components" silent="true"/>
+    <antcall target="copy.component.libs">
+      <param name="build.dir" value="${component.name}/${build.dir}"/>
+    </antcall>
+
+    <antcall target="compile">
+      <param name="classes.dir" value="${component.name}/${classes.dir}"/>
+      <param name="lib.dir" value="${component.name}/${lib.dir}"/>
+      <param name="src.dir" value="${component.name}/${src.dir}"/>
+      <param name="build.dir" value="${component.name}/${build.dir}"/>
+    </antcall>
+
+    <propertycopy property="entity.classes" from="${component.name}.entity.classes" silent="true"/>
+    <antcall target="generate.hibernate">
+      <param name="generated.home" value="${basedir}/${component.name}/${build.dir}/${hib.dir}"/>
+      <param name="src.dir" value="${component.name}/${src.dir}"/>
+      <param name="hibernate.classes" value="${entity.classes}"/>
+      <param name="classes.dir" value="${component.name}/${classes.dir}"/>
+    </antcall>
+
+    <antcall target="jar.component">
+      <param name="build.dir" value="${component.name}/${build.dir}"/>
+    </antcall>
+
+    <antcall target="build.har" inheritrefs="true">
+      <param name="build.dir" value="${component.name}/${build.dir}"/>
+    </antcall>
+    
+    <antcall target="build.war">
+      <param name="build.dir" value="${component.name}/${build.dir}"/>
+      <param name="lib.dir" value="${component.name}/${lib.dir}"/>
+    </antcall>
+    
+	<!--TWX To override the DD of the dependent project if any. TODO: currently only supported overwrite one depedent project DD.-->
+	<propertycopy property="override.depend.projects.dd" from="${component.name}.override.dependent.project.dd" silent="true"/>
+	<propertycopy property="override.depend.projects.prefix" from="${component.name}.override.dependent.project.prefix" silent="true"/>
+	<echo message="override project dd: ${override.depend.projects.dd}" />
+	<echo message="override project prefix: ${override.depend.projects.prefix}" />
+	<antcall target="override.dep.project.dd">
+	  <param name="build.dir" value="${component.name}/${build.dir}"/>
+	  <param name="component.name" value="${component.name}"/>
+	  <param name="override.dep.pro.dd.value" value="${override.depend.projects.dd}"/>
+	  <param name="override.comp.prefix" value="${override.depend.projects.prefix}"/>
+	</antcall>
+	
+    <antcall target="build.ear">
+      <param name="build.dir" value="${component.name}/${build.dir}"/>
+      <param name="lib.dir" value="${component.name}/${lib.dir}"/>
+    </antcall>
+
+    <antcall target="copy.libs">
+      <param name="build.dir" value="${component.name}/${build.dir}"/>
+      <param name="lib.dir" value="${component.name}/${lib.dir}"/>
+    </antcall>
+
+  </target>
+  
+  <!--Overwrite dependent project -->
+  <target name="override.dep.project.dd">
+    <available property="has.override" file="${component.name}/dd/${override.dep.pro.dd.value}/META-INF" type="dir"/>
+	<echo message="override folder is exist: ${component.name}/dd/${override.dep.pro.dd.value}/META-INF" />
+	<if>
+        <equals arg1="${has.override}" arg2="true"/>
+		<then>
+		    
+            <zip destfile="${build.dir}/${dep.lib.dir}/${override.comp.prefix}${override.dep.pro.dd.value}-ejb.jar" update="true">
+				   <zipfileset dir="${component.name}/dd/${override.dep.pro.dd.value}/META-INF" prefix="META-INF/"/>
+			</zip>
+		</then>
+	</if><!-- -->
+  </target>
+  
+  <target name="jar.component">
+    <delete quiet="true" file="${build.dir}/${component.prefix}${component.name}*.jar"/>
+    <antcall target="build.jar"/>
+    <available property="has.ejb" file="${component.name}/${dd.ejb.dir}/ejb-jar.xml" type="file"/>
+    <antcall target="build.ejb.jar"/>
+  </target>
+
+  <target name="build.jar" description="build normal jar">
+    <propertycopy property="component.title" from="${component.name}.title"/>
+    <propertycopy property="ejb.beans" from="${component.name}.ejb.beans" silent="true"/>
+    <propertycopy property="dep.jar.includes" from="${component.name}.jar.includes" silent="true"/>
+    <echo message="${component.name}.jar.includes is: ${dep.jar.includes}"/>
+    <if>
+      <isset property="dep.jar.includes"/>
+      <then>
+        <jar destfile="${build.dir}/${component.prefix}${component.name}.jar" basedir="${component.name}/${classes.dir}"
+             excludes="${ejb.beans}" duplicate="preserve">
+          <zipgroupfileset dir="${build.dir}/${dep.lib.dir}" includes="${dep.jar.includes}"/>
+          <manifest>
+              <attribute name="Built-By" value="${user.name}"/>
+              <section name="${component.prefix}${component.name}">
+                <attribute name="Specification-Title" value="${project.name}"/>
+                <attribute name="Specification-Version" value="${version}"/>
+                <attribute name="Specification-Vendor" value="GridNode Pte Ltd"/>
+                <attribute name="Implementation-Title" value="${component.title}"/>
+                <attribute name="Implementation-Version" value="${version} ${TODAY}"/>
+                <attribute name="Implementation-Vendor" value="GridNode Pte Ltd"/>
+              </section>
+          </manifest>
+        </jar>
+      </then>
+      <else>
+        <jar destfile="${build.dir}/${component.prefix}${component.name}.jar" basedir="${component.name}/${classes.dir}" excludes="${ejb.beans}">
+          <manifest>
+              <attribute name="Built-By" value="${user.name}"/>
+              <section name="${component.prefix}${component.name}">
+                <attribute name="Specification-Title" value="${project.name}"/>
+                <attribute name="Specification-Version" value="${version}"/>
+                <attribute name="Specification-Vendor" value="GridNode Pte Ltd"/>
+                <attribute name="Implementation-Title" value="${component.title}"/>
+                <attribute name="Implementation-Version" value="${version} ${TODAY}"/>
+                <attribute name="Implementation-Vendor" value="GridNode Pte Ltd"/>
+              </section>
+          </manifest>
+        </jar>
+      </else>
+    </if>
+  </target>
+  
+  <target name="build.ejb.jar" if="has.ejb" description="build ejb jar">
+    <propertycopy property="ejb.classpath" from="${component.name}.classpath"/>
+    <propertycopy property="component.title" from="${component.name}.title"/>
+    <propertycopy property="ejb.classes" from="${component.name}.ejb.classes"/>
+	<!--TWX Refine the override logic. Dun use the zip to overrrite. The newer file can't be overwritten by old file. This will make the build process not getting the correct file -->
+	<available property="has.override" file="${override.conf.dir}/${project.location}/${component.name}/${dd.ejb.dir}" type="dir"/>
+	<echo message="override meta info dir is ${has.override}"/>
+	<if>
+        <equals arg1="${has.override}" arg2="true"/>
+		<then>
+			<var name="metainf.dd.dir" value="${override.conf.dir}/${project.location}/${component.name}/${dd.ejb.dir}"/>
+		</then>
+		<else>
+		    <var name="metainf.dd.dir" value="${component.name}/${dd.ejb.dir}"/>
+		</else>
+	</if>
+	<echo message="ejb meta-inf: ${metainf.dd.dir}"/>
+	
+    <jar destfile="${build.dir}/${component.prefix}${component.name}-ejb.jar" basedir="${component.name}/${classes.dir}" includes="${ejb.classes}">
+      <metainf dir="${metainf.dd.dir}" includes="*.xml"/>
+      <manifest>
+          <attribute name="Built-By" value="${user.name}"/>
+          <attribute name="Class-Path" value="${ejb.classpath}"/>
+          <section name="${component.prefix}${component.name}">
+            <attribute name="Specification-Title" value="${project.name}"/>
+            <attribute name="Specification-Version" value="${version}"/>
+            <attribute name="Specification-Vendor" value="GridNode Pte Ltd"/>
+            <attribute name="Implementation-Title" value="${component.title}"/>
+            <attribute name="Implementation-Version" value="${version} ${TODAY}"/>
+            <attribute name="Implementation-Vendor" value="GridNode Pte Ltd"/>
+          </section>
+      </manifest>
+    </jar>
+    
+	
+    
+  </target>
+
+  <target name="build.har" description="build hibernate archive">
+    <var name="hib.dd.dir" value="${component.name}/${dd.har.dir}"/>
+    <var name="hib.service.file" value="hibernate-service.xml"/>
+    <available property="has.hibernate" file="${hib.dd.dir}/${hib.service.file}" type="file"/>
+    <if>
+      <equals arg1="${has.hibernate}" arg2="true"/>
+      <then>
+        <available property="has.override" file="${override.conf.dir}/${project.location}/${hib.dd.dir}/${hib.service.file}" type="file"/>
+        <echo message="has.override is ${has.override}"/>
+        <if>
+           <equals arg1="${has.override}" arg2="true"/>
+           <then>
+             <var name="hib.dd.dir" value="${override.conf.dir}/${project.location}/${component.name}/${dd.har.dir}"/>
+           </then>
+        </if>
+        <jar destfile="${build.dir}/${component.prefix}${component.name}.har" filesonly="true">
+          <metainf dir="${hib.dd.dir}" includes="${hib.service.file}">
+          </metainf>
+          <manifest>
+              <attribute name="Built-By" value="${user.name}"/>
+              <section name="${component.prefix}${component.name}">
+                <attribute name="Specification-Title" value="${project.name}"/>
+                <attribute name="Specification-Version" value="${version}"/>
+                <attribute name="Specification-Vendor" value="GridNode Pte Ltd"/>
+                <attribute name="Implementation-Title" value="${component.name}"/>
+                <attribute name="Implementation-Version" value="${version} ${TODAY}"/>
+                <attribute name="Implementation-Vendor" value="GridNode Pte Ltd"/>
+              </section>
+          </manifest>
+          <fileset dir="${build.dir}/${hib.dir}" excludes="**/*.java"/>
+        </jar>
+      </then>
+    </if>
+  </target>
+
+  <target name="build.war" description="build web archive">
+    <available property="has.war" file="${component.name}/${dd.war.dir}/web.xml" type="file"/>
+    <if>
+      <equals arg1="${has.war}" arg2="true"/>
+      <then>
+        <propertycopy property="war.includes" from="${component.name}.war.includes" silent="true"/>
+
+		<!--TWX 14 Aug 2007 whether to override the web.xml -->
+		<available property="has.override" file="${override.conf.dir}/${project.location}/${component.name}/${dd.war.dir}" type="dir"/>
+		<var name="webinfo.dir" value="${component.name}/${dd.war.dir}"/>
+        <if>
+		   <equals arg1="${has.override}" arg2="true"/>
+           <then>
+              <echo message="override web info dir is true" />
+              <var name="webinfo.dir" value="${override.conf.dir}/${project.location}/${component.name}/${dd.war.dir}" />
+		   </then>
+		</if>
+        <war destfile="${build.dir}/${component.prefix}${component.name}.war" webxml="${webinfo.dir}/web.xml"
+          filesonly="true">
+          <webinf dir="${component.name}/${dd.war.dir}" excludes="web.xml"/>
+          <lib dir="${build.dir}" includes="${war.includes}" excludes="*-ejb.jar,log4j*.jar"/>
+          <lib dir="${lib.dir}" includes="${war.includes}" excludes="log4j*.jar"/>
+          <lib dir="${build.dir}/${dep.lib.dir}" includes="${war.includes}" excludes="log4j*.jar"/>
+        </war>
+      </then>
+    </if>
+  </target>
+
+  <target name="build.ear" description="build Ear">
+    <available property="has.ear" file="${component.name}/${dd.ear.dir}/application.xml" type="file"/>
+    <if>
+      <equals arg1="${has.ear}" arg2="true"/>
+      <then>
+	  
+	    <!--TWX Refine the override logic. Dun use the zip to overrrite. The newer file can't be overwritten by old file. This will make the build process not getting the correct file -->
+		<available property="has.override.dd" file="${override.conf.dir}/${project.location}/${component.name}/dd/ear" type="dir"/>
+        <echo message="has.override.dd ear is ${has.override.dd}"/>
+        <if>
+            <equals arg1="${has.override.dd}" arg2="true"/>
+			<then>
+			    <var name="ear.metainf.dd.dir" value="${override.conf.dir}/${project.location}/${component.name}/dd/ear"/>
+			</then>
+			<else>
+			    <var name="ear.metainf.dd.dir" value="${component.name}/${dd.ear.dir}"/>
+			</else>
+		</if>
+		<echo message="ear dir is: ${ear.metainf.dd.dir}"/>
+		
+        <ear destfile="${build.dir}/${component.prefix}${component.name}.ear" appxml="${ear.metainf.dd.dir}/application.xml">
+          <metainf dir="${ear.metainf.dd.dir}" excludes="application.xml"/>
+          <fileset dir="${build.dir}" includes="*.har,*.war,*.jar"/>
+          <fileset dir="${lib.dir}" includes="*.jar"/>
+          <fileset dir="${build.dir}/${dep.lib.dir}" includes="*.har,*.war,*.jar"/>
+        </ear>
+        <propertycopy property="service.files" from="${component.name}.service" silent="true"/>
+        <if>
+           <isset property="service.files"/>
+           <then>
+		       <!--TWX Refine the override logic. Dun use the zip to overrrite. The newer file can't be overwritten by old file. This will make the build process not getting the correct file -->
+			   <available property="has.override" file="${override.conf.dir}/${project.location}/${component.name}/${dd.mbean.dir}" type="dir"/>
+               <echo message="has.override is ${has.override}"/>
+			   <if>
+                   <equals arg1="${has.override}" arg2="true"/>
+                   <then>
+					 <var name="mbean.dd.dir" value="${override.conf.dir}/${project.location}/${component.name}/${dd.mbean.dir}"/>	
+                   </then>
+				   <else>
+				      <!--TWX support the GT standard release with clustering (Previously, clustering specific DD file is only available for specific customer -->
+			          <if>
+					     <equals arg1="${is.clustering}" arg2="true"/>
+					     <then>
+						    <var name="mbean.dd.dir" value="${component.name}/${cluster.dd.mbean.dir}"/>	
+						 </then>
+					     <else>
+						    <var name="mbean.dd.dir" value="${component.name}/${dd.mbean.dir}"/>	
+						 </else>
+					  </if>
+				   </else>
+               </if>
+			   
+			   
+			   
+			   <echo message="mbean.dd.dir is: ${mbean.dd.dir}"/>
+               <zip destfile="${build.dir}/${component.prefix}${component.name}.ear" update="yes" basedir="${mbean.dd.dir}" includes="${service.files}"/>
+           </then>
+        </if>
+
+      </then>
+    </if>
+  </target>
+
+  <target name="copy.libs">
+    <copy todir="${dist.dir}/${component.name}" preservelastmodified="true">
+      <fileset dir="${build.dir}" excludes="${dep.lib.dir}/*"/>
+      <fileset dir="${lib.dir}"/>
+    </copy>
+
+  </target>
+
+  <target name="dist" depends="build" if="dist.dir">
+    <copy todir="${dist.dir}" preservelastmodified="true">
+      <fileset dir="${build.dir}"/>
+      <fileset dir="${lib.dir}"/>
+    </copy>
+  </target>
+</project>

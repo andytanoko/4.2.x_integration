@@ -1,0 +1,293 @@
+<html>
+<head>
+<title>10.3.1 To create a User Procedure to perform FTP </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>10.3.1 To create a User Procedure to perform FTP </h3>
+<p></p>
+<p><span>GridTalk provides with you a default Procedure Definition file which is a Jar file. The Jar file produces a class called </span>
+<span>com.Gridnode.ftp.FTPClientDelegate</span>
+<span>. This way, you can select the default Procedure Definition file to configure a User Procedure to perform FTP. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>In addition, alerts to notify a user of whether the FTP is successful or not are a must to configure before executing a user procedure.</span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Click User Procedure.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>To create a new user procedure, click Create User Procedure. </span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><img width='459' height='333' border='0' src='../images/image148.jpg'></p>
+<p><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>Key in </span>
+<span>USERPROCEDURE_FTP</span>
+<span> for the Name field.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>Key in </span>
+<span>UserProcedure to perform FTP</span>
+<span> at the Description field.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 5.<span> </span>
+</span>
+<span>Select Java Procedure for the Procedure Type. Then you have to create new parameters for that type by clicking Edit Java Procedure Configurations.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 6.<span> </span>
+</span>
+<span>Select Class Name. This field represents one of the class files found in the Procedure Definition File that was selected. For example, </span>
+<span>com.Gridnode.ftp.FTPClientDelegate</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 7.<span> </span>
+</span>
+<span>If you want to execute this class file internally, tick the Execute within Application VM checkbox so that the mark ‘</span>
+<span>ü</span>
+<span>‘ appears in the box. </span>
+</p>
+<p><b><span></span>
+</b>
+</p>
+<p><span>Step 17.<span> </span>
+</span>
+<span>Select Method Name. This field represents one of the methods found in the Class Name. For example, </span>
+<i><span>boolean</span>
+</i>
+<span> equals(<i>java.lang.Object arg1</i>
+).</span>
+<span> This one is a method in the FTPClientDelegate class. </span>
+</p>
+<pre><span></span>
+</pre>
+<p><span>Step 18.<span> </span>
+</span>
+<span>Click Save Java Procedure Configuration to save the configuration and to return you to the User Procedure page.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 19.<span> </span>
+</span>
+<span>Proceed to define Return Data Type. This field is the data type of the return value after executing the jar file. Since FTP always returns an integer value, so select Integer. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 20.<span> </span>
+</span>
+<span>Select Alerts. See Chapter 6 for creating FTP alerts.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 21.<span> </span>
+</span>
+<span>Next go to the Procedure Parameter List pane to configure two parameters for that FTP user procedure you have created. For example, the parameters to be created may include FTP details such as FTPURL and FileName. The parameter FTPURL comprises the information of the host, port, server user name and password. In the example, the format for FTPURL is </span>
+<span>ftp://username:password@host:post</span>
+<span>.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Use the table to specify the following fields for each of the two parameters:</span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' border='1' cellpadding='0'><tr><td width='97' valign='top'><p align='center'><b><span>Name</span>
+</b>
+</p>
+</td>
+<td width='240' valign='top'><p align='center'><b><span>Description</span>
+</b>
+</p>
+</td>
+<td width='107' valign='top'><p align='center'><b><span>Data Type</span>
+</b>
+</p>
+</td>
+<td width='148' valign='top'><p align='center'><b><span>Data Source</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='97' valign='top'><p align='center'><span>FTPURL</span>
+</p>
+</td>
+<td width='240' valign='top'><p align='center'><span>URL to FTP TO</span>
+</p>
+</td>
+<td width='107' valign='top'><p align='center'><span>String</span>
+</p>
+</td>
+<td width='148' valign='top'><p align='center'><span>User defined</span>
+</p>
+</td>
+</tr>
+<tr><td width='97' valign='top'><p align='center'><span>FILENAME</span>
+</p>
+</td>
+<td width='240' valign='top'><p align='center'><span>File to FTP to backend system</span>
+</p>
+</td>
+<td width='107' valign='top'><p align='center'><span>String</span>
+</p>
+</td>
+<td width='148' valign='top'><p align='center'><span>Header document (GridDoc)</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 22.<span> </span>
+</span>
+<span>Then proceed to the Procedure Return List pane to create a new procedure return condition. It is to determine the return value after executing the FTP user procedure. For example, you need to check for the return value from the FTP server after the file is transferred to your trading partner. According to the FTP return codes standard, if the return value is 250, it means that FTP operation is successfully completed. But if the return value is between 500 and 557, it means that the FTP operation is unsuccessfully completed.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>For alerts, see Alert, Action and Template Message in the GridTalk 4.2 Administrator Guide. You may configure two alerts, one is </span>
+<span>FTP_Successful</span>
+<span> and another is </span>
+<span>FTP_Unsuccessful</span>
+<span> as specified in the exemplified table. Prior to creating alerts, you have to create the actions for composing template messages as the email notification.</span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' border='1' cellpadding='0'><tr><td width='168' valign='top'><p align='center'><b><span>Name</span>
+</b>
+</p>
+</td>
+<td width='168' valign='top'><p align='center'><b><span>Description</span>
+</b>
+</p>
+</td>
+<td width='168' valign='top'><p align='center'><b><span>Type</span>
+</b>
+</p>
+</td>
+<td width='169' valign='top'><p align='center'><b><span>Action</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='168' valign='top'><p align='center'><span>FTP_SUCCESSFUL</span>
+</p>
+</td>
+<td width='168' valign='top'><p align='center'><span>Successful FTP alert</span>
+</p>
+</td>
+<td width='168' valign='top'><p align='center'><span>User defined</span>
+</p>
+</td>
+<td width='169' valign='top'><p align='center'><span>User configured</span>
+</p>
+</td>
+</tr>
+<tr><td width='168' valign='top'><p align='center'><span>FTP_UNSUCCESSFUL</span>
+</p>
+</td>
+<td width='168' valign='top'><p align='center'><span>Unsuccessful FTP alert</span>
+</p>
+</td>
+<td width='168' valign='top'><p align='center'><span>User defined</span>
+</p>
+</td>
+<td width='169' valign='top'><p align='center'><span>User configured</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><span>Step 23.<span> </span>
+</span>
+<span>Click Create Procedure Return Condition. The Procedure Return Conditions page is displayed.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='446' height='153' border='0' src='../images/image149.jpg'></span>
+</p>
+<p><b><span></span>
+</b>
+</p>
+<p><span>Assume that if the operator is “=”, and the value is 250, then the successful alert to be raised will be triggered. To do this, follow the steps:</span>
+</p>
+<p><span></span>
+</p>
+<p><span>a.<span> </span>
+</span>
+<span>Select Operator. For example, (=) Equal. </span>
+</p>
+<p><span>b.<span> </span>
+</span>
+<span>Next enter Value. For example, 250.</span>
+</p>
+<p><span>c.<span> </span>
+</span>
+<span>Select Alert. For example, FTP_Successful.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 15.<span> </span>
+</span>
+<span>To create the return to raise the Unsuccessful FTP alert, follow the steps:</span>
+</p>
+<p><span></span>
+</p>
+<p><span>a.<span> </span>
+</span>
+<span>Select Operator. For example, (&gt;&lt;) Between. </span>
+</p>
+<p><span>b.<span> </span>
+</span>
+<span>Next enter Value. For example, 500 - 557.</span>
+</p>
+<p><span>c.<span> </span>
+</span>
+<span>Select Alert. For example, FTP_Unsuccessful.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 16.<span> </span>
+</span>
+<span>Click Save Procedure Return Conditions. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 17.<span> </span>
+</span>
+<span>Click Save User Procedure then the user procedure to perform FTP is successfully created.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 18.<span> </span>
+</span>
+<span>You may add this user procedure as one of the workflow activities to be performed in the partner functions (See Chapter 9.1), or schedule as a regular job to perform (See Chapter 0).</span>
+</p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p></p>
+</body>
+</html>

@@ -1,0 +1,109 @@
+A:link
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 15px;
+    COLOR: black;
+    FONT-FAMILY: 'Arial Narrow';
+    TEXT-DECORATION: underline
+}
+A:hover
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 15px;
+    COLOR: black;
+    FONT-FAMILY: 'Arial Narrow';
+    TEXT-DECORATION: underline
+}
+TD
+{
+    TEXT-ALIGN: left
+}
+A:visited
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 15px;
+    COLOR: black;
+    FONT-FAMILY: 'Arial Narrow';
+    TEXT-DECORATION: underline
+}
+.side:hover
+{
+    COLOR: #ff9900;
+    FONT-FAMILY: 'Arial Narrow'
+}
+.top:hover
+{
+    COLOR: black;
+    FONT-FAMILY: 'Arial Narrow'
+}
+.tdtop
+{
+    TEXT-ALIGN: center
+}
+.table
+{
+    CLEAR: right;
+    PADDING-RIGHT: 0px;
+    MARGIN-TOP: 0px;
+    PADDING-LEFT: 0px;
+    LEFT: 2%;
+    MARGIN-LEFT: 0px;
+    OVERFLOW: auto;
+    WIDTH: 100%;
+    MARGIN-RIGHT: 0px;
+    PADDING-TOP: 0px;
+    POSITION: absolute;
+    TOP: 0px;
+    HEIGHT: 100%
+}
+.mainfont
+{
+    FONT-SIZE: 15px;
+    COLOR: black;
+    FONT-FAMILY: 'Arial Narrow'
+}
+.name
+{
+    FONT-SIZE: 15px;
+    COLOR: black;
+    FONT-FAMILY: 'Arial Narrow'
+}
+.surname
+{
+    FONT-SIZE: 15px;
+    COLOR: black;
+    FONT-FAMILY: 'Arial Narrow'
+}
+.heading
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 15px;
+    COLOR: black;
+    FONT-STYLE: normal;
+    FONT-FAMILY: 'Arial Narrow'
+}
+.hside:hover
+{
+    FONT-SIZE: 15px;
+    COLOR: black;
+    FONT-FAMILY: 'Arial Narrow';
+    TEXT-DECORATION: none
+}
+.hside:link
+{
+    FONT-SIZE: 15px;
+    COLOR: black;
+    FONT-FAMILY: 'Arial Narrow';
+    TEXT-DECORATION: underline
+}
+.point
+{
+    COLOR: white;
+    BACKGROUND-COLOR: black
+}
+.tablefont
+{
+    FONT-SIZE: 15px;
+    COLOR: yellow;
+    FONT-FAMILY: 'Arial Narrow'
+}

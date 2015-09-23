@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+  <secure>false</secure>
+  <container-configurations />
+  <resource-managers />
+  <enterprise-beans>
+    <entity>
+      <ejb-name>LocaleListProvider</ejb-name>
+      <jndi-name>com.gridnode.pdip.base.locale.facade.ejb.ILocaleManagerHome</jndi-name>
+    </entity>
+  </enterprise-beans>
+</jboss>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for ExportEntityList  -->
+	<class name="com.gridnode.pdip.base.exportconfig.model.ExportEntityList">
+		<map-to xml="Entities"/>
+		<field name="Entities" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection">
+		</field>
+	</class>
+	<!--  Mapping for Mapping File  -->
+	<class name="com.gridnode.pdip.app.mapper.model.MappingFile">
+		<map-to xml="MappingFile"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="Name" type="string">
+			<xml name="Name" node="element"/>
+		</field>
+		<field name="Description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="Filename" type="string">
+			<xml name="Filename" node="element"/>
+		</field>
+		<field name="Path" type="string">
+			<xml name="Path" node="element"/>
+		</field>
+		<field name="SubPath" type="string" required="false">
+			<xml name="SubPath" node="element"/>
+		</field>
+		<field name="Type" type="short">
+			<xml name="Type" node="element"/>
+		</field>
+		<field name="MappingObject" type="other">
+			<xml name="MappingObject" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for XpathMapping  -->
+	<class name="com.gridnode.pdip.app.mapper.model.XpathMapping">
+		<map-to xml="XpathMapping"/>
+		<field name="RootElement" type="string">
+			<xml name="RootElement" node="element"/>
+		</field>
+		<field name="XpathUid" type="long">
+			<xml name="XpathUid" node="element"/>
+		</field>
+	</class>
+</mapping>

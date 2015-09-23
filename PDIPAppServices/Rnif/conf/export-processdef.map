@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for ExportEntityList  -->
+	<class name="com.gridnode.pdip.base.exportconfig.model.ExportEntityList">
+		<map-to xml="Entities"/>
+		<field name="Entities" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection">
+		</field>
+	</class>
+	<!--  Mapping for ProcessDef  -->
+	<class name="com.gridnode.pdip.app.rnif.model.ProcessDef">
+		<map-to xml="ProcessDef"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="RequestAct" type="com.gridnode.pdip.app.rnif.model.ProcessAct">
+			<xml name="RequestAct" node="element"/>
+		</field>
+		<field name="ResponseAct" type="com.gridnode.pdip.app.rnif.model.ProcessAct">
+			<xml name="ResponseAct" node="element"/>
+		</field>
+		<field name="DefName" type="string">
+			<xml name="DefName" node="element"/>
+		</field>
+		<field name="ActionTimeOut" type="integer">
+			<xml name="ActionTimeOut" node="element"/>
+		</field>
+		<field name="ProcessType" type="string">
+			<xml name="ProcessType" node="element"/>
+		</field>
+		<field name="RNIFVersion" type="string">
+			<xml name="RNIFVersion" node="element"/>
+		</field>
+		<field name="FromPartnerRoleClassCode" type="string">
+			<xml name="FromPartnerRoleClassCode" node="element"/>
+		</field>
+		<field name="FromBizServiceCode" type="string">
+			<xml name="FromBizServiceCode" node="element"/>
+		</field>
+		<field name="FromPartnerClassCode" type="string">
+			<xml name="FromPartnerClassCode" node="element"/>
+		</field>
+		<field name="GToPartnerRoleClassCode" type="string">
+			<xml name="GToPartnerRoleClassCode" node="element"/>
+		</field>
+		<field name="GToBizServiceCode" type="string">
+			<xml name="GToBizServiceCode" node="element"/>
+		</field>
+		<field name="GToPartnerClassCode" type="string">
+			<xml name="GToPartnerClassCode" node="element"/>
+		</field>
+		<field name="GProcessIndicatorCode" type="string">
+			<xml name="GProcessIndicatorCode" node="element"/>
+		</field>
+		<field name="VersionIdentifier" type="string">
+			<xml name="VersionIdentifier" node="element"/>
+		</field>
+		<field name="GUsageCode" type="string">
+			<xml name="GUsageCode" node="element"/>
+		</field>
+		<field name="RequestDocThisDocIdentifier" type="string">
+			<xml name="RequestDocThisDocIdentifier" node="element"/>
+		</field>
+		<field name="ResponseDocThisDocIdentifier" type="string">
+			<xml name="ResponseDocThisDocIdentifier" node="element"/>
+		</field>
+		<field name="ResponseDocRequestDocIdentifier" type="string">
+			<xml name="ResponseDocRequestDocIdentifier" node="element"/>
+		</field>
+		<!-- NSL20070514: GNDB00028355 -->
+		<field name="UserTrackingIdentifier" type="string" required="false">
+			<xml name="UserTrackingIdentifier" node="element"/>
+		</field>
+		<!-- -->
+		<field name="IsSynchronous" type="boolean">
+			<xml name="IsSynchronous" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for ProcessAct  -->
+	<class name="com.gridnode.pdip.app.rnif.model.ProcessAct">
+		<map-to xml="ProcessAct"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="ProcessDefUid" type="long">
+			<xml name="ProcessDefUid" node="element"/>
+		</field>
+		<field name="ProcessDefAct" type="integer">
+			<xml name="ProcessDefAct" node="element"/>
+		</field>
+		<field name="MsgType" type="long">
+			<xml name="MsgType" node="element"/>
+		</field>
+		<field name="Retries" type="integer">
+			<xml name="Retries" node="element"/>
+		</field>
+		<field name="TimeToAcknowledge" type="integer">
+			<xml name="TimeToAcknowledge" node="element"/>
+		</field>
+		<field name="IsAuthorizationRequired" type="boolean">
+			<xml name="IsAuthorizationRequired" node="element"/>
+		</field>
+		<field name="IsNonRepudiationRequired" type="boolean">
+			<xml name="IsNonRepudiationRequired" node="element"/>
+		</field>
+		<field name="IsSecureTransportRequired" type="boolean">
+			<xml name="IsSecureTransportRequired" node="element"/>
+		</field>
+		<field name="BizActivityIdentifier" type="string">
+			<xml name="BizActivityIdentifier" node="element"/>
+		</field>
+		<field name="GBizActionCode" type="string">
+			<xml name="GBizActionCode" node="element"/>
+		</field>
+		<field name="DictFile" type="long">
+			<xml name="DictFile" node="element"/>
+		</field>
+		<field name="XMLSchema" type="long">
+			<xml name="XMLSchema" node="element"/>
+		</field>
+		<!--field name="GDigestAlgCode" type="string">
+			<xml name="GDigestAlgCode" node="element"/>
+		</field-->
+		<field name="DisableDTD" type="boolean">
+			<xml name="DisableDTD" node="element"/>
+		</field>
+		<field name="DisableSchema" type="boolean">
+			<xml name="DisableSchema" node="element"/>
+		</field>
+		<field name="DisableEncryption" type="boolean">
+			<xml name="DisableEncryption" node="element"/>
+		</field>
+		<field name="DisableSignature" type="boolean">
+			<xml name="DisableSignature" node="element"/>
+		</field>
+		<field name="ValidateAtSender" type="boolean">
+			<xml name="ValidateAtSender" node="element"/>
+		</field>
+		<field name="OnlyEncryptPayload" type="boolean">
+			<xml name="OnlyEncryptPayload" node="element"/>
+		</field>
+		<field name="DigestAlgorithm" type="string">
+			<xml name="DigestAlgorithm" node="element"/>
+		</field>
+		<field name="EncryptionAlgorithm" type="string">
+			<xml name="EncryptionAlgorithm" node="element"/>
+		</field>
+		<field name="EncryptionAlgorithmLength" type="integer">
+			<xml name="EncryptionAlgorithmLength" node="element"/>
+		</field>
+	</class>
+</mapping>

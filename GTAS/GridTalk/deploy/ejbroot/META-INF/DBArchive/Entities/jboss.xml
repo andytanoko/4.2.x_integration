@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+        <secure>false</secure>
+        <resource-managers/>
+        <enterprise-beans>
+				<entity>
+                        <ejb-name>DocumentMetaInfo</ejb-name>
+                        <local-jndi-name>com.gridnode.gtas.server.dbarchive.entities.ejb.IDocumentMetaInfoLocalHome</local-jndi-name>
+                </entity>
+                <entity>
+                        <ejb-name>ArchiveMetaInfo</ejb-name>
+                        <local-jndi-name>com.gridnode.gtas.server.dbarchive.entities.ejb.IArchiveMetaInfoLocalHome</local-jndi-name>
+                </entity>
+				<entity>
+                        <ejb-name>ProcessInstanceMetaInfo</ejb-name>
+                        <local-jndi-name>com.gridnode.gtas.server.dbarchive.entities.ejb.IProcessInstanceMetaInfoLocalHome</local-jndi-name>
+                </entity>
+        </enterprise-beans>
+</jboss>

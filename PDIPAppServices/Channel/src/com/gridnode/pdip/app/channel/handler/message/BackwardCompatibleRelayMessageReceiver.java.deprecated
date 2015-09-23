@@ -1,0 +1,104 @@
+/**
+* This software is the proprietary information of GridNode Pte Ltd.
+* Use is subjected to license terms.
+*
+* Copyright 2002 (C) GridNode Pte Ltd. All Rights Reserved.
+*
+* File: BackwardCompatibleRelayMessageReceiver.java
+*
+****************************************************************************
+* Date           Author                  Changes
+****************************************************************************
+* July 17 2003    Jagadeesh             Created.
+*/
+
+package com.gridnode.pdip.app.channel.handler.message;
+
+import com.gridnode.pdip.app.channel.helpers.IPackage;
+import com.gridnode.pdip.app.channel.helpers.Package;
+import com.gridnode.pdip.app.channel.helpers.ChannelLogger;
+
+import com.gridnode.pdip.app.channel.helpers.IReceiveMessageHandler;
+import com.gridnode.pdip.app.channel.helpers.SecurityServiceHandler;
+import com.gridnode.pdip.app.channel.helpers.PackagingServiceHandler;
+import com.gridnode.pdip.app.channel.helpers.FlowControlServiceHandler;
+import com.gridnode.pdip.app.channel.helpers.ChannelUtil;
+
+
+import com.gridnode.pdip.app.channel.helpers.GNCompatibleEventRegistry;
+import com.gridnode.pdip.app.channel.handler.MessageHandlerRegistry;
+
+import com.gridnode.pdip.app.channel.exceptions.ChannelException;
+import com.gridnode.pdip.app.channel.exceptions.FlowControlException;
+
+import com.gridnode.pdip.app.channel.model.ChannelInfo;
+import com.gridnode.pdip.app.channel.model.SecurityInfo;
+import com.gridnode.pdip.app.channel.model.ISecurityInfo;
+import com.gridnode.pdip.app.channel.model.PackagingInfo;
+import com.gridnode.pdip.app.channel.model.FlowControlInfo;
+
+import com.gridnode.pdip.base.transport.helpers.ITransportConstants;
+import com.gridnode.pdip.base.packaging.helper.IPackagingConstants;
+
+import com.gridnode.pdip.base.transport.helpers.GNTransportPayload;
+
+import java.util.Hashtable;
+import java.io.File;
+
+/**
+ * This Class handles the RelayMessages received by GTAS. This class is specialized,
+ * to perform Decryption and Verification uniquely.
+ *
+ * The DataContent is Decrypted with Signature Certificate, and Verified with
+ * Encryption Certificate.
+ *
+ * The FileContent is Decrypted with Signature Certificate, and Verified with
+ * Original Sender's(SENDER_NODE_ID) Master Channel Encryption Certificate.
+ *
+ */
+
+public class BackwardCompatibleRelayMessageReceiver extends BackwardCompatibleMessageReceiver
+{
+
+  private static final String CLASS_NAME  = "BackwardCompatibleRelayMessageReceiver";
+
+/*	public BackwardCompatibleRelayMessageReceiver(ChannelInfo channelInfo)
+  {
+    _channelInfo = channelInfo;
+	}
+*/
+
+/**
+ * Need not override this method as its already done in super class (found it after testing).
+ */
+
+/*	protected String[] performDataDecryption(String eventID,String[] dataContent,
+						SecurityInfo secInfo) throws Exception
+	{
+		Long encryptionCertificateId = secInfo.getEncryptionCertificateID();
+		Long signCertificateId = secInfo.getSignatureEncryptionCertificateID();
+		secInfo.setEncryptionCertificateID(signCertificateId);
+		secInfo.setSignatureEncryptionCertificateID(encryptionCertificateId);
+		ChannelLogger.infoLog(CLASS_NAME,"performDataDecryption()","[After swaping Certificates]");
+		return super.performDataDecryption(eventID,dataContent,secInfo);
+	}
+
+*/
+
+
+	protected byte[] perfromFileDecryption(Hashtable header,byte[] fileContent,
+		SecurityInfo secInfo)throws Exception
+	{
+		//Long signCertificateId = secInfo.getSignatureEncryptionCertificateID();
+		String senderNodeId = (String)header.get(ITransportConstants.SENDER_NODE_ID);
+		ChannelInfo senderMasterChannel = ChannelUtil.getInstance().getMasterChannelInfoByRefId(senderNodeId);
+		SecurityInfo sendersSecurityInfo = senderMasterChannel.getSecurityProfile();
+	  Long encryptionCertificateId = sendersSecurityInfo.getEncryptionCertificateID();
+
+		//secInfo.setEncryptionCertificateID(signCertificateId);
+		secInfo.setSignatureEncryptionCertificateID(encryptionCertificateId);
+		ChannelLogger.infoLog(CLASS_NAME,"performDataDecryption()","[After using Senders MasterChannel Certificates]");
+		return super.perfromFileDecryption(header,fileContent,secInfo);
+	}
+
+}

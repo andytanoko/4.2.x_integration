@@ -1,0 +1,395 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title id="heading">lbHeading</title>
+    <base href="file:///C:\viewroot\i00054_GT_2.0_I4\GTAS\GridTalk\web/gt.css" id="base_tag"/>
+    <link rel="stylesheet" href="gt.css" type="text/css"/>
+    <script id="include_selectUtils" language="JavaScript" src="scripts/selectUtils.js"><!----></script>
+    <script id="include_stdFormMethods" language="JavaScript" src="scripts/stdFormMethods.js"><!----></script>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="save"/>
+        <input type="hidden" name="divertTo"/>
+        <table border="1" width="100%" id="tabTable">
+          <tr>
+            <td nowrap="nowrap" width="1%" class="activeTab" id="be_tab">
+              lbBusinessEntity
+            </td>
+            <td nowrap="nowrap" width="1%" id="whitePage_tab" class="inactiveTab">
+              lbWhitePage
+            </td>
+            <td nowrap="nowrap" width="1%" id="domainIdentifiers_tab" class="inactiveTab">
+              lbDomainIdentifiers
+            </td>
+            <td width="99%" class="nullTab">
+              &nbsp;
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" id="be_tab_panel">
+              <table border="0" width="100%">
+                <tr id="enterpriseId_details">
+                  <td id="enterpriseId_label">
+                    lbEnterpriseId
+                  </td>
+                  <td id="enterpriseId_value">
+                    XXX
+                  </td>
+                  <td id="enterpriseId_error" width="99%">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="id_details">
+                  <td id="id_label">
+                    lbId
+                  </td>
+                  <td>
+                    <input id="id_value" type="text" name="id"/>
+                  </td>
+                  <td id="id_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="description_details">
+                  <td id="description_label">
+                    lbDescription
+                  </td>
+                  <td>
+                    <input id="description_value" type="text" name="description"/>
+                  </td>
+                  <td id="description_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="partnerCategory_details">
+                  <td id="partnerCategory_label">
+                    lbPartnerCategory
+                  </td>
+                  <td>
+                    <span id="partnerCategory_value">XXX</span>
+                  </td>
+                  <td id="partnerCategory_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="forPartner_details">
+                  <td id="forPartner_label">
+                    lbForPartner
+                  </td>
+                  <td>
+                    <input type="checkbox" id="forPartner_value" name="forPartner" value="true" onclick="serverRefresh();"/>
+                  </td>
+                  <td id="forPartner_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="publishable_details">
+                  <td id="publishable_label">
+                    lbPublishable
+                  </td>
+                  <td>
+                    <input type="checkbox" id="publishable_value" name="publishable" value="true"/>
+                  </td>
+                  <td id="publishable_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="syncToServer_details">
+                  <td id="syncToServer_label">
+                    lbSyncToServer
+                  </td>
+                  <td>
+                    <input type="checkbox" id="syncToServer_value" name="syncToServer" value="true"/>
+                  </td>
+                  <td id="syncToServer_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="beState_details">
+                  <td id="beState_label">
+                    lbBeState
+                  </td>
+                  <td id="beState_value">
+                    XXX
+                  </td>
+                  <td id="beState_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="channels_details">
+                  <td id="channels_label" valign="top">
+                    lbChannels
+                  </td>
+                  <td colspan="2">
+                    <div id="channels_value" class="multiselector">
+                      Multiselector(allowsOrdering)
+                    </div>
+                    <a id="channels_create" href="javascript:divertToMapping('divertCreateChannelInfo');">
+                      lbCreateChannelInfo
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" id="whitePage_tab_panel">
+              <table id="whitePage_value">
+                <tr id="businessDesc_details">
+                  <td id="businessDesc_label">
+                    lbBusinessDesc
+                  </td>
+                  <td>
+                    <input id="businessDesc_value" type="text" name="businessDesc"/>
+                  </td>
+                  <td id="businessDesc_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="duns_details">
+                  <td id="duns_label">
+                    lbDuns
+                  </td>
+                  <td>
+                    <input id="duns_value" type="text" name="duns"/>
+                  </td>
+                  <td id="duns_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="globalSupplyChainCode_details">
+                  <td id="globalSupplyChainCode_label">
+                    lbGlobalSupplyChainCode
+                  </td>
+                  <td>
+                    <input id="globalSupplyChainCode_value" type="text" name="globalSupplyChainCode"/>
+                  </td>
+                  <td id="globalSupplyChainCode_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="contactPerson_details">
+                  <td id="contactPerson_label">
+                    lbContactPerson
+                  </td>
+                  <td>
+                    <input id="contactPerson_value" type="text" name="contactPerson"/>
+                  </td>
+                  <td id="contactPerson_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="email_details">
+                  <td id="email_label">
+                    lbEmail
+                  </td>
+                  <td>
+                    <input id="email_value" type="text" name="email"/>
+                  </td>
+                  <td id="email_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="tel_details">
+                  <td id="tel_label">
+                    lbTel
+                  </td>
+                  <td>
+                    <input id="tel_value" type="text" name="tel"/>
+                  </td>
+                  <td id="tel_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="fax_details">
+                  <td id="fax_label">
+                    lbFax
+                  </td>
+                  <td>
+                    <input id="fax_value" type="text" name="fax"/>
+                  </td>
+                  <td id="fax_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="website_details">
+                  <td id="website_label">
+                    lbWebsite
+                  </td>
+                  <td>
+                    <input id="website_value" type="text" name="website"/>
+                  </td>
+                  <td id="website_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="address_details">
+                  <td id="address_label" valign="top">
+                    lbAddress
+                  </td>
+                  <td colspan="2">
+                    <span id="address_error"> </span>
+                    <textarea id="address_value" name="address" rows="4" cols="50">
+                      XXX
+                    </textarea>
+                  </td>
+                </tr>
+                <tr id="poBox_details">
+                  <td id="poBox_label">
+                    lbPoBox
+                  </td>
+                  <td>
+                    <input id="poBox_value" type="text" name="poBox"/>
+                  </td>
+                  <td id="poBox_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="city_details">
+                  <td id="city_label">
+                    lbCity
+                  </td>
+                  <td>
+                    <input id="city_value" type="text" name="city"/>
+                  </td>
+                  <td id="city_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="state_details">
+                  <td id="state_label">
+                    lbState
+                  </td>
+                  <td>
+                    <input id="state_value" type="text" name="state"/>
+                  </td>
+                  <td id="state_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="zipCode_details">
+                  <td id="zipCode_label">
+                    lbPostcode
+                  </td>
+                  <td>
+                    <input id="zipCode_value" type="text" name="zipCode"/>
+                  </td>
+                  <td id="zipCode_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="country_details">
+                  <td id="country_label">
+                    lbCountry
+                  </td>
+                  <td>
+                    <select id="country_value" size="1" name="country">
+                      <option value="">&nbsp;</option>
+                    </select>
+                  </td>
+                  <td id="country_error">
+                    &nbsp;
+                  </td>
+                </tr>
+                <tr id="language_details">
+                  <td id="language_label">
+                    lbLanguage
+                  </td>
+                  <td>
+                    <select id="language_value" size="1" name="language">
+                      <option value="">&nbsp;</option>
+                    </select>
+                  </td>
+                  <td id="language_error">
+                    &nbsp;
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" id="domainIdentifiers_tab_panel">
+              <table cellspacing="0" border="0">
+                <tr>
+                  <th>
+                    &nbsp;
+                  </th>
+                  <th id="domainIdentifier.type_label" style="font-weight: bold; color: black">
+                    lbType
+                  </th>
+                  <th id="domainIdentifier.value_label" style="font-weight: bold; color: black">
+                    lbValues
+                  </th>
+                  <th>
+                    &nbsp;
+                  </th>
+                </tr>
+                <tr id="domainIdentifier_row">
+                  <td>
+                    <input id="selected_value" type="checkbox" name="selected"/>
+                  </td>
+                  <td>
+                    <select id="type_value" size="1" name="type">
+                      <option value="">
+                        &nbsp;
+                      </option>
+                    </select>
+                  </td>
+                  <td>
+                    <input id="value_value" type="text" name="value"/>
+                  </td>
+                  <td id="domainIdentifier_error"></td>
+                </tr>
+
+                <tr id="control_row">
+                  <script type="text/javascript"><!--
+                    function doDomainIdentifierUpdateAction(updateAction)
+                    {
+                      try
+                      {
+                        var elementName = "updateAction";
+                        document.entityForm.elements[elementName].value = updateAction;
+                        serverRefresh(); 
+                      }
+                      catch(error)
+                      {
+                        alert('Error caught by doDomainIdentifierUpdateAction('
+                              + updateAction
+                              + ')\ntype=' + error.type
+                              + '\nname=' + error.name );
+                        throw error;
+                      }
+                    }
+                  // --></script>
+                  <td align="right" colspan="5" nowrap="nowrap" valign="top">
+                    <span id="removeDomainIdentifier_parent">
+                      <a id="removeDomainIdentifier" href="javascript: void doDomainIdentifierUpdateAction('removeDomainIdentifier');">
+                        <img border="0" id="removeDomainIdentifier_icon" src="images/actions/delete.gif" style="vertical-align: text-top; margin-right: 3;"/>
+                        lbRemoveDomainIdentifier
+                      </a>
+                      &nbsp;&nbsp;
+                    </span>
+                    <span id="addDomainIdentifier_parent">
+                      <a id="addDomainIdentifier" href="javascript: void doDomainIdentifierUpdateAction('addDomainIdentifier');">
+                        <img border="0" id="addDomainIdentifier_icon" src="images/actions/filter.gif" style="vertical-align: text-top; margin-right: 3;"/>
+                        lbAddDomainIdentifier
+                      </a>
+                      &nbsp;&nbsp;
+                    </span>
+                    <input name="updateAction" type="hidden" value=""/>
+                  </td>
+                </tr>
+          
+              </table>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

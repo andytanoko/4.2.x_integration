@@ -1,0 +1,119 @@
+Setup steps for SAP GT
+----------------------
+
+<deployment during development>
+-> During development, the my-build.properties should have the following settings:
+
+appserver.name=sapnw
+appserver.version=6.4
+appserver.home=C:/Release/SAP/deployment
+appserver.deploy.dir=${appserver.home}/components
+appserver.lib.dir=${gridtalk.home}/JC00/j2ee/cluster/server0/bin/ext
+appserver.client.lib.dir=${gridtalk.home}/JC00/j2ee/j2eeclient
+#this is commented off as it is not needed when client is deploy on the same j2ee server)
+#appserver.client.lib=sapj2eeclient.jar,exception.jar,logging.jar  
+appserver.app.data.dir=${gridtalk.home}/SYS/global/GNapps
+appserver.app.conf.dir=${gridtalk.home}/SYS/global/GNapps/conf
+
+db.home=${gridtalk.home}/SYS/global/GNapps/mysql
+
+-> The EAR file will be deployed to a fixed directory C:/Release/SAP/deployment/components.
+If setup.appserver.conf is defined, the following files will also be copied to the deploy.dir:
+./gtas.dlp
+./gtas.rar
+./components/*.jar
+
+-> Unrar the gtas.rar on the directory itself.
+
+-> extract app-user.jar from gtas.ear and place it under the appserver.deploy.dir.
+
+-> To deploy the EAR to the J2EE server, go to Deploy Tool and open the gtas.dlp project. 
+   See below for more details to deploy the EAR and other server components.
+
+
+<One-time configuration>
+1. HTTP Provider
+   Visual Administrator -> Cluster -> Dispatcher -> HTTP Provider
+   - Ports
+     (Port:9099,SocketQueue:200,AcceptingThreadsCount:10,BindAddress:,Type:http)(Port:8080,SocketQueue:200,AcceptingThreadsCount:10,BindAddress:,Type:http)(Port:443,SocketQueue:200,AcceptingThreadsCount:10,BindAddress:,Type:ssl)
+   - KeepAliveTimeout   50
+
+   Visual Administrator -> Cluster -> Service -> HTTP Provider
+   - FileBufferSize   40960
+   - MinFileLenghtFOrLongDataTransfer   512000
+   - MinimumGZipLength  81920   (Increase for large file transfer)
+
+  
+2. Deploy JDBC driver
+   Deploy Tool -> gtas.dlp -> Server Components -> MySQL.jar -> Ctrl+P
+
+3. Login Module
+   Deploy Tool -> gtas.dlp -> Server Components -> gridnode_login_module.jar -> Ctrl+P
+
+   Visual Administrator -> Security Provider -> Runtime -> Properties
+      -> select LoginModuleClassLoaders property -> change value to "library:GridNode User Login Module"
+         (this is the display name given to the login module in library SDA)
+         -> click Update -> click Save
+
+   Visual Administrator -> Security Provider -> Runtime -> User Management -> click Manage Security Stores
+      -> select active UME User Store
+      -> click Add Login Module -> Enter:
+         Class Name: com.gridnode.pdip.app.user.login.UserLoginModule
+         Display Name: PDIPUserLoginModule (arbitrary name)
+         Description: PDIP User Login Module (arbitrary)
+         Options:
+           Name            Value
+           debug           true
+           freezeTimeout   10
+           maxWrongCred    3
+   
+   Visual Administrator -> Security Provider -> Runtime -> Policy Configurations -> click Add under Components
+      -> enter "gridtalk" for name of policy configuration
+      -> under Authentication tab, click "Add New"
+      -> select PDIPUserLoginModule (or any arbitrary Display name given for the login module) -> OK
+      -> Select "REQUISITE" for the Flag of the added Login Module
+
+5. User mapping
+   Visual Administrator -> Security Provider -> Runtime -> User Management -> Create User
+      -> Create a user with name mapping to the user id of the corresponding user in GridTalk
+
+
+6. Deployment setting
+   Visual Administrator -> Cluster -> Service -> Deploy -> Properties
+   -> Add to Initially_Not_Started_Apps:  gridnode.com/GridTalk 
+   -> Click Update -> Save (requires restart appserver)
+
+   (Note: this setting is to prevent the application to be started when the webAS is start up. 
+    As there's a problem with stopping the application, this allows the re-deployment to take place before
+    without the need to stop the application.)
+
+   -> Strict_J2EE_Checks   true (use for development)
+                           false (use for production)
+
+7. tools.jar (for JSP)
+   Config Tool -> Instance -> Server -> General tab
+   -> Include path to tools.jar JDK library in Classpath  
+
+Restart J2EE server
+   
+<deploy application>
+8. Deploy Tool -> gtas.dlp -> Deployer -> Deploy Ear (or Update if already deployed before)
+   Deployer will prompt for start application when deploy / update is completed.
+      
+9. To start application without re-deployment, Visual Administrator -> Cluster -> Service -> Deploy
+   -> Start Mysql database for GridTalk
+
+   Method A:
+   -> Select Application option
+   -> Select gridnode.com/GridTalk (in stopped state) and click Start Application button.
+      click Ok.
+      when the application is started successfully, the state icon will be changed to 'tick'.
+
+   Method B:
+   -> Telnet localhost on port 50004
+      Login id: Administrator  password: admin
+      > jump 0
+      > add deploy
+      > start_app gridnode.com/GridTalk
+      > list_app  (repeatedly to check status)
+

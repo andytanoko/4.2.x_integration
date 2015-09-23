@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>User Procedure</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <table border="0">
+          <tr id="name_details">
+            <td id="name_label">
+              lbName
+            </td>
+            <td>
+              <input type="text" id="name_value" name="name"/>
+            </td>
+            <td id="name_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="description_details">
+            <td id="description_label">
+              lbDescription
+            </td>
+            <td>
+              <input type="text" id="description_value" name="description"/>
+            </td>
+            <td id="description_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="procType_details">
+            <td id="procType_label">
+              lbProcType
+            </td>
+            <td>
+              <select id="procType_value" size="1" name="procType" onchange="serverRefresh();">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+            </td>
+            <td id="procType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="procDefFile_details">
+            <td id="procDefFile_label">
+              lbProcDefFile
+            </td>
+            <td>
+              <select id="procDefFile_value" size="1" name="procDefFile">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+              <a id="procDefFile_create" href="javascript:divertToMapping('divertCreateProcedureDefFile');">
+                lbCreateProcDefFile
+              </a>
+            </td>
+            <td id="procDefFile_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="procDef_details">
+            <td/>
+            <td>
+              <a id="shellExecutable_edit" href="javascript:divertToMapping('divertEditShellExecutable');">
+                lbEditShellExecutable
+              </a>
+              <a id="javaProcedure_edit" href="javascript:divertToMapping('divertEditJavaProcedure');">
+                lbEditJavaProcedure
+              </a>
+              <a id="soapProcedure_edit" href="javascript:divertToMapping('divertEditSoapProcedure');">
+                lbEditSoapProcedure
+              </a>
+            </td>
+            <td id="procDef_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="isSynchronous_details">
+            <td id="isSynchronous_label">
+              lbIsSynchronous
+            </td>
+            <td>
+              <input type="hidden" name="isSynchronous" value="true"/>
+              <input type="checkbox" id="isSynchronous_value" name="isSynchronous" value="true" disabled="true" onclick="serverRefresh();"/>
+            </td>
+            <td id="isSynchronous_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="returnDataType_details">
+            <td id="returnDataType_label">
+              lbReturnDataType
+            </td>
+            <td>
+              <select id="returnDataType_value" size="1" name="returnDataType">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+            </td>
+            <td id="returnDataType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="defAction_details">
+            <td id="defAction_label">
+              lbDefAction
+            </td>
+            <td>
+              <input type="hidden" name="defAction" value="1"/>
+              <select id="defAction_value" size="1" name="defAction" disabled="true">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+            </td>
+            <td id="defAction_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="defAlert_details">
+            <td id="defAlert_label">
+              lbDefAlert
+            </td>
+            <td>
+              <select id="defAlert_value" name="defAlert">
+                <option>&nbsp;</option>
+              </select>
+              <a id="defAlert_create" href="javascript:divertToMapping('divertCreateAlert');">
+                lbCreateDefAlert
+              </a>
+            </td>
+            <td id="defAlert_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="gridDocField_details">
+            <td id="gridDocField_label">
+              lbGridDocField
+            </td>
+            <td>
+              <select id="gridDocField_value" name="gridDocField">
+                <option>&nbsp;</option>
+              </select>
+            </td>
+            <td id="gridDocField_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+        <div id="procParamList_details">
+        </div>
+        <div id="procReturnList_details">
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
+

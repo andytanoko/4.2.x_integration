@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping>
+	<class access="shared" name="com.gridnode.pdip.framework.db.filter.DataFilter">
+		<description>Simple Data Filter</description>
+		<map-to xml="Filter"/>
+		<field set-method="setNegate" get-method="hasNegation" transient="false" type="boolean" required="false" direct="false" name="negate">
+			<bind-xml node="attribute" type="boolean" name="negate"/>
+		</field>
+		<field transient="false" type="com.gridnode.pdip.framework.db.filter.ValueFilter" required="false" direct="false" name="valueFilter">
+			<bind-xml node="element" name="ValueFilter"/>
+		</field>
+		<field transient="false" type="com.gridnode.pdip.framework.db.filter.DataFilter" required="false" direct="false" name="leftFilter">
+			<bind-xml node="element" name="LeftFilter"/>
+		</field>
+		<field transient="false" type="com.gridnode.pdip.framework.db.filter.DataFilter" required="false" direct="false" name="rightFilter">
+			<bind-xml node="element" name="RightFilter"/>
+		</field>
+		<field transient="false" type="string" required="false" direct="false" name="connector">
+			<bind-xml node="element" name="Connector"/>
+		</field>
+		<field transient="false" type="com.gridnode.pdip.framework.db.filter.DataFilter" required="false" direct="false" name="nextFilter">
+			<bind-xml node="element" name="NextFilter"/>
+		</field>
+		<field transient="false" type="string" required="false" direct="false" name="nextConnector">
+			<bind-xml node="element" name="NextConnector"/>
+		</field>
+		<field collection="vector" transient="false" required="false" direct="false" name="sortFilters" type="com.gridnode.pdip.framework.db.filter.SortFilter">
+			<bind-xml node="element" name="SortBy"/>
+		</field>
+	</class>
+	<class access="shared" name="com.gridnode.pdip.framework.db.filter.ValueFilter">
+		<description>Simple Value Filter</description>
+		<map-to xml="ValueFilter"/>
+		<field transient="false" required="true" direct="false" name="filterField" type="other">
+			<bind-xml node="element" name="FilterField"/>
+		</field>
+		<field transient="false" type="string" required="false" direct="false" name="operator">
+			<bind-xml node="element" name="Operator"/>
+		</field>
+		<field transient="false" required="false" direct="false" name="singleValue" type="other">
+			<bind-xml node="element" name="SingleValue"/>
+		</field>
+		<field transient="false" required="false" direct="false" name="lowValue" type="other">
+			<bind-xml node="element" name="LowValue"/>
+		</field>
+		<field transient="false" required="false" direct="false" name="highValue" type="other">
+			<bind-xml node="element" name="HighValue"/>
+		</field>
+		<field collection="vector" transient="false" required="false" direct="false" name="domainValues" type="other">
+			<bind-xml node="element" name="DomainValue"/>
+		</field>
+	</class>
+	<class access="shared" name="com.gridnode.pdip.framework.db.filter.DataFilterGroup">
+		<description>Simple Data Filter Group</description>
+		<map-to xml="DataFilterGroup"/>
+		<field collection="vector" transient="false" type="com.gridnode.pdip.framework.db.filter.DataTypeFilter" required="false" direct="false" name="filters">
+			<bind-xml node="element" name="DataFilter"/>
+		</field>
+	</class>
+	<class access="shared" name="com.gridnode.pdip.framework.db.filter.DataTypeFilter">
+		<description>Simple Typed Data Filter</description>
+		<map-to xml="DataFilter"/>
+		<field transient="false" type="string" required="true" direct="false" name="type">
+			<bind-xml node="attribute" name="type"/>
+		</field>
+		<field transient="false" type="string" required="false" direct="false" name="andOr">
+			<bind-xml node="attribute" name="andOr"/>
+		</field>
+		<field transient="false" type="com.gridnode.pdip.framework.db.filter.DataFilter" required="true" direct="false" name="filter">
+			<bind-xml node="element" name="Filter"/>
+		</field>
+	</class>
+	<class access="shared" name="com.gridnode.pdip.framework.db.filter.SortFilter">
+		<description>Simple Sort Filter</description>
+		<map-to xml="SortFilter"/>
+		<field transient="false" type="other" required="true" direct="false" name="sortField">
+			<bind-xml node="element" name="field"/>
+		</field>
+		<field transient="false" type="boolean" required="true" direct="false" name="sortOrder">
+			<bind-xml node="attribute" name="ascendingOrder"/>
+		</field>
+	</class>
+</mapping>

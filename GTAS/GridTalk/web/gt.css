@@ -1,0 +1,383 @@
+method {
+  font-family: monospace;
+  font-size: 12px;
+}
+body {
+  font-family: Verdana,Geneva,Arial,Helvetica;
+  font-size: 11px;
+  color: #a5a5b5;
+  background-color: #ffffff;
+}
+td {
+  font-family: Verdana,Geneva,Arial,Helvetica;
+  font-size: 12px;
+  color: #2f3e42;
+}
+table {
+  font-family: Verdana,Geneva,Arial,Helvetica;
+  font-size: 12px;
+  color: #a5a5b5;
+}
+legend {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  color: #666666;
+}
+.pwlselect
+{
+  width: 110px;
+}
+.lvdcell
+{
+  font-family: Verdana,Geneva,Arial,Helvetica;
+  font-size: 10px;
+  border: solid windowtext .5pt;
+  border-color: #dedbe0;
+  border-top: 0;
+  border-left: 0;
+}
+.lvscell
+{
+  font-family: Verdana,Geneva,Arial,Helvetica;
+  font-size: 10px;
+  border: solid windowtext .5pt;
+  border-color: #dedbe0;
+  border-top: 0px;
+}
+.title {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  color: #666666;
+}
+.gnname {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  color: #9999cc;
+}
+.fieldlabel {
+  font-weight: bold;
+}
+.navtitle {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #666666;
+}
+.errortext {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  color: #ff0000;
+}
+.listheader {
+  padding: 0px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  color: #2d437c;
+  background-image: URL(images/backgrounds/row.gif);
+  background-position: left center;
+  vertical-align: text_top;
+  background-color: #e4e4f0;
+  border: solid windowtext .5pt;
+  border-color: #e4e4f0;
+}
+.borderthin {
+  border: 1px #cccccc solid
+}
+.visibleRow {
+
+}
+.hiddenRow {
+  display: none;
+}
+.visibleSection {
+  margin-left: 8px;
+  padding-left: 8px;
+  border-left: thin groove;
+}
+.hiddenSection {
+  display: none;
+}
+.treeCell {
+  font-size: 13px;
+  color: #2d437c;
+  border-width: 0px;
+  border-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+.visibleTab {
+  border-top: none;
+}
+.hiddenTab {
+  display: none;
+}
+.activeTab {
+  font-weight: bold;
+  background-color: #dae2f0;
+  border-bottom: none;
+  cursor: hand;
+}
+.inactiveTab {
+  background-color: #bdcae1;
+  text-decoration: underline;
+  cursor: hand;
+}
+.disabledTab {
+  background-color: #bdcae1;
+  text-decoration: underline;
+  color: #909090;
+  font-style: italic;
+}
+.nullTab {
+  border-right: none;
+  border-top: none;
+  background-color: #bdcae1;
+}
+.activeNavTab {
+  font-weight: bold;
+  background-color: #efefff;
+  border-bottom: none;
+  font-weight: bold;
+}
+.inactiveNavTab {
+  border-right: none;
+  border-top: none;
+  border-left: none;
+  color: #bdcae1;
+  background-color: #ccccff;
+}
+.disabledlink {
+  font-size: 10px;
+  color: #cccccc;
+  background-color: transparent;
+  text-decoration: none;
+}
+.mherEntityTypeLabel {
+  font-weight: bold;
+}
+.mherEntityLabel {
+  
+}
+.mheReference {
+  border: thin groove;
+  width: 100%;
+  height: 300;
+  overflow: scroll;
+}
+.mheReferenceNoScroll {
+  
+}
+.sectionExpander {
+  vertical-align: middle;
+  cursor: crosshair;
+}
+
+.lockedSectionExpander {
+  vertical-align: middle;
+}
+
+// Hyperlinks //
+A:active {
+  font-size: 13px;
+  color: #6699cc;
+  background-color: transparent;
+  text-decoration: underline
+}
+A:link {
+  font-size: 12px;
+  color: #003366;
+  background-color: transparent;
+  text-decoration: underline;
+}
+A:visited {
+  font-size: 12px;
+  color: #003366;
+  background-color: transparent;
+  text-decoration: underline;
+}
+A:hover {
+  color: #6699cc;
+  background-color: transparent;
+  text-decoration: underline
+}
+.activeAnchor {
+  font-weight: bold;
+}
+.inactiveAnchor {
+
+}
+A.activeAnchor {
+  color: #3333cc;
+}
+A:visited.activeAnchor {
+  color: #3333cc;
+}
+A:link.activeAnchor {
+  color: #3333cc;
+}
+A:active.activeAnchor {
+  color: #3333cc;
+}
+
+H4 {
+  font-family: Verdana,Geneva,Arial,Helvetica;
+  font-size: 14px;
+  font-weight: bold;
+}
+// input fields //
+INPUT.login {
+  font-size: 13px;
+  font-family: Verdana;
+  font-weight: bold;
+  background-color: #c5bdb9;
+  border-style: thin groove;
+  color: #252f4c;
+}
+SELECT {
+  font-family : Verdana;
+  border : thin groove;
+  background-color : #eeeeee;
+  font-weight : normal;
+  font-size : 12px;
+}
+INPUT, textarea, select, password {
+  font-family : Verdana;
+  border : thin groove;
+  background-color : #eeeeee;
+  font-weight : normal;
+  font-size : 13px;
+}
+INPUT.checkbox {
+  border: thin groove;
+  border-right: #535353 .5px solid;
+  border-top: #535353 .5px solid;
+  border-left: #453045 .5px solid;
+  border-bottom: #453045 .5px solid;
+  border-color: 535353;
+  background-color: transparent;
+}
+INPUT.halfTrueCheckbox {
+  border: thin groove;
+  border-right: #535353 .5px solid;
+  border-top: #535353 .5px solid;
+  border-left: #453045 .5px solid;
+  border-bottom: #453045 .5px solid;
+  border-color: gray;
+  background-color: transparent;
+}
+.login {
+  font-family: Verdana;
+  border: groove solid windowtext .5pt;
+  border-color: 70819a;
+  background-color: #d6dbe3;
+  font-weight: normal;
+  font-size: 13px;
+}
+.loginbutton {
+  font-size: 12px;
+  font-family: Verdana;
+  font-weight: bold;
+  background-color: #c5bdb9;
+  border-style: thin groove;
+  color: #252f4c;
+}
+.loginheading {
+  font-family: Verdana;
+  font-weight: bold;
+  font-size: 15px;
+  color: white;
+}
+.readonly {
+  font-family : Verdana;
+  border : none;
+  background-color : transparent;
+  font-weight : normal;
+  font-size : 13px;
+}
+.highlight {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: #ff0000;
+  background-color : #000000;
+}
+.mandatory {
+  font-family : Verdana;
+  background-color : #ededff;
+  font-weight : normal;
+  font-size : 13px;
+}
+SELECT.mandatory {
+  font-family : Verdana;
+  background-color : #ededff;
+  font-weight : normal;
+  font-size : 12px;
+}
+.badfield {
+  font-family : Verdana;
+  background-color : #ffedff;
+  font-weight : normal;
+  font-size : 13px;
+}
+SELECT.badfield {
+  font-family : Verdana;
+  background-color : #ffedff;
+  font-weight : normal;
+  font-size : 12px;
+}
+
+.pageheader {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #666666
+}
+.status_label {
+  font-family : Verdana
+  font-weight : normal;
+  font-size : 11px;
+  font-style : normal;
+}
+.status_value {
+  font-family : Verdana
+  font-weight : normal;
+  font-size : 11px;
+  font-style : italic;
+}
+.explanatory {
+  font-family: Verdana,Geneva,Arial,Helvetica;
+  font-size: 12px;
+  font-style: italic;
+  color: #666666;
+}
+.external {
+  FONT-SIZE: 13px;
+  COLOR: #003366;
+  BACKGROUND-COLOR: transparent;
+  TEXT-DECORATION: underline
+}
+.fancyTabUp
+{
+  background-image: URL(images/tabs/backUp.gif);
+  font-weight: bold;
+}
+A.fancyTabUp
+{
+  font-weight: bold;
+}
+.fancyTabDown
+{
+  background-image: URL(images/tabs/backDown.gif);
+  text-decoration: underline;
+  cursor: hand;
+  font-size: smaller;
+}
+A.fancyTabDown
+{
+  text-decoration: underline;
+  cursor: hand;
+  font-size: smaller;
+}

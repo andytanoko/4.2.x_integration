@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-j2ee-engine SYSTEM "ejb-j2ee-engine.dtd">
+<ejb-j2ee-engine>
+	<enterprise-beans>
+		<enterprise-bean>
+			<ejb-name>RnifManager</ejb-name>
+			<jndi-name>com.gridnode.gtas.server.rnif.facade.ejb.IRnifManagerHome</jndi-name>
+			<session-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>ReceiveRNDocMDB</ejb-name>
+			<message-props>
+				<destination-name>receiveRNDocTopic</destination-name>
+                                <connection-factory-name>GNTopicConnectionFactory</connection-factory-name>
+			</message-props>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>SendRNDocMDB</ejb-name>
+			<message-props>
+				<destination-name>sendRNDocTopic</destination-name>
+                                <connection-factory-name>GNTopicConnectionFactory</connection-factory-name>
+			</message-props>
+		</enterprise-bean>
+	</enterprise-beans>
+</ejb-j2ee-engine>

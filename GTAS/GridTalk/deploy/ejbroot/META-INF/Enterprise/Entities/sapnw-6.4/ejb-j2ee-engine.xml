@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-j2ee-engine SYSTEM "ejb-j2ee-engine.dtd">
+<ejb-j2ee-engine>
+	<enterprise-beans>
+		<enterprise-bean>
+			<ejb-name>ResourceLink</ejb-name>
+			<jndi-name>com.gridnode.gtas.server.enterprise.entities.ejb.IResourceLinkLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>SharedResource</ejb-name>
+			<jndi-name>com.gridnode.gtas.server.enterprise.entities.ejb.ISharedResourceLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+	</enterprise-beans>
+</ejb-j2ee-engine>

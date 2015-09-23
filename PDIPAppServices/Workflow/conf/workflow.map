@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for GWFRtProcessDoc  -->
+	<class name="com.gridnode.pdip.app.workflow.runtime.model.GWFRtProcessDoc">
+		<map-to xml="GWFRtProcessDoc"/>
+    <field name="UId" type="long">
+      <xml name="UId" node="element"/>
+    </field>
+    <field name="DocumentId" type="string">
+      <xml name="DocumentId" node="element"/>
+    </field>
+    <field name="DocumentType" type="string">
+      <xml name="DocumentType" node="element"/>
+    </field>
+    <field name="DocumentName" type="string">
+      <xml name="DocumentName" node="element"/>
+    </field>
+    <field name="BusinessTransActivityId" type="string">
+      <xml name="BusinessTransActivityId" node="element"/>
+    </field>
+    <field name="BinaryCollaborationUId" type="long">
+      <xml name="BinaryCollaborationUId" node="element"/>
+    </field>
+    <field name="RtBinaryCollaborationUId" type="long">
+      <xml name="RtBinaryCollaborationUId" node="element"/>
+    </field>
+    <field name="RtBusinessTransactionUId" type="long">
+      <xml name="RtBusinessTransactionUId" node="element"/>
+    </field>
+    <field name="IsPositiveResponse" type="boolean">
+      <xml name="IsPositiveResponse" node="element"/>
+    </field>
+    <field name="DocProcessedFlag" type="boolean">
+      <xml name="DocProcessedFlag" node="element"/>
+    </field>
+    <field name="AckReceiptSignalFlag" type="boolean">
+      <xml name="AckReceiptSignalFlag" node="element"/>
+    </field>
+    <field name="AckAcceptSignalFlag" type="boolean">
+      <xml name="AckAcceptSignalFlag" node="element"/>
+    </field>
+    <field name="ExceptionSignalType" type="string">
+      <xml name="ExceptionSignalType" node="element"/>
+    </field>
+    <field name="RoleType" type="string">
+      <xml name="RoleType" node="element"/>
+    </field>
+    <field name="RetryCount" type="integer">
+      <xml name="RetryCount" node="element"/>
+    </field>
+    <field name="RequestDocType" type="string">
+      <xml name="RequestDocType" node="element"/>
+    </field>
+    <field name="ResponseDocTypes" type="string">
+      <xml name="ResponseDocTypes" node="element"/>
+    </field>
+    <field name="PartnerKey" type="string">
+      <xml name="PartnerKey" node="element"/>
+    </field>
+    <field name="Status" type="integer">
+      <xml name="Status" node="element"/>
+    </field>
+    <field name="Reason" type="string">
+      <xml name="Reason" node="element"/>
+    </field>
+    <field name="CustomerBEId" type="string">
+      <xml name="CustomerBEId" node="element"/>
+    </field>
+  </class>
+  <class name="com.gridnode.pdip.app.workflow.runtime.model.GWFRtActivity">
+	<map-to xml="GWFRtActivity"/>
+	<field name="UId" type="long">
+	   <xml name="UId" node="element"/>
+	</field>
+	<field name="ActivityUId" type="long">
+	   <xml name="ActivityUId" node="element"/>
+	</field>
+	<field name="State" type="integer">
+	   <xml name="State" node="element"/>
+	</field>
+	<field name="Priority" type="integer">
+	   <xml name="Priority" node="element"/>
+	</field>
+	<field name="RtProcessUId" type="long">
+	   <xml name="RtProcessUId" node="element"/>
+	</field>
+	<field name="ActivityType" type="string">
+	   <xml name="ActivityType" node="element"/>
+	</field>
+	<field name="FinishInterval" type="long">
+	   <xml name="FinishInterval" node="element"/>
+	</field>
+	<field name="StartTime" type="java.util.Date">
+	   <xml name="StartTime" node="element"/>
+	</field>
+	<field name="EndTime" type="java.util.Date">
+	   <xml name="EndTime" node="element"/>
+	</field>
+	<field name="ContextUId" type="long">
+	   <xml name="ContextUId" node="element"/>
+	</field>
+	<field name="EngineType" type="string">
+	   <xml name="EngineType" node="element"/>
+	</field>
+	<field name="BranchName" type="string">
+	   <xml name="BranchName" node="element"/>
+	</field>
+	<field name="ProcessDefKey" type="string">
+	   <xml name="ProcessDefKey" node="element"/>
+	</field>
+  </class>
+  <class name="com.gridnode.pdip.app.workflow.runtime.model.GWFRtProcess">  
+	<map-to xml="GWFRtProcess"/>
+	<field name="UId" type="long">
+	   <xml name="UId" node="element"/>
+	</field> 
+	<field name="ProcessUId" type="long">
+	   <xml name="ProcessUId" node="element"/>
+	</field> 
+	<field name="State" type="integer">
+	   <xml name="State" node="element"/>
+	</field> 
+	<field name="ProcessType" type="string">
+	   <xml name="ProcessType" node="element"/>
+	</field> 
+	<field name="ParentRtActivityUId" type="long">
+	   <xml name="ParentRtActivityUId" node="element"/>
+	</field> 
+	<field name="MaxConcurrency" type="integer">
+	   <xml name="MaxConcurrency" node="element"/>
+	</field> 
+	<field name="FinishInterval" type="long">
+	   <xml name="FinishInterval" node="element"/>
+	</field> 
+	<field name="StartTime" type="java.util.Date">
+	   <xml name="StartTime" node="element"/>
+	</field> 
+	<field name="EndTime" type="java.util.Date">
+	   <xml name="EndTime" node="element"/>
+	</field> 
+	<field name="ContextUId" type="long">
+	   <xml name="ContextUId" node="element"/>
+	</field> 
+	<field name="EngineType" type="string">
+	   <xml name="EngineType" node="element"/>
+	</field> 
+	<field name="ProcessDefKey" type="string">
+	   <xml name="ProcessDefKey" node="element"/>
+	</field> 
+  </class>	
+</mapping>

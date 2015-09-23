@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+  <enterprise-beans>
+    <entity>
+      <display-name>WebService</display-name>
+      <ejb-name>WebService</ejb-name>
+      <local-home>com.gridnode.pdip.app.servicemgmt.entities.ejb.IWebServiceLocalHome</local-home>
+      <local>com.gridnode.pdip.app.servicemgmt.entities.ejb.IWebServiceLocalObj</local>
+      <ejb-class>com.gridnode.pdip.app.servicemgmt.entities.ejb.WebServiceBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+    <entity>
+      <display-name>ServiceAssignment</display-name>
+      <ejb-name>ServiceAssignment</ejb-name>
+      <local-home>com.gridnode.pdip.app.servicemgmt.entities.ejb.IServiceAssignmentLocalHome</local-home>
+      <local>com.gridnode.pdip.app.servicemgmt.entities.ejb.IServiceAssignmentLocalObj</local>
+      <ejb-class>com.gridnode.pdip.app.servicemgmt.entities.ejb.ServiceAssignmentBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+  </enterprise-beans>
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+        <ejb-name>WebService</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <method>
+        <ejb-name>ServiceAssignment</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+</ejb-jar>

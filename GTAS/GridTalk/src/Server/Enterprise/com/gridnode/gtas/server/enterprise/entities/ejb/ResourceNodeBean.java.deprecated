@@ -1,0 +1,68 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001-2002 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: ResourceNodeBean.java
+ *
+ ****************************************************************************
+ * Date           Author              Changes
+ ****************************************************************************
+ * Aug 01 2002    Neo Sok Lay         Created
+ */
+package com.gridnode.gtas.server.enterprise.entities.ejb;
+
+import com.gridnode.gtas.server.enterprise.helpers.Logger;
+import com.gridnode.gtas.server.enterprise.model.ResourceNode;
+
+import com.gridnode.pdip.framework.db.entity.IEntity;
+import com.gridnode.pdip.framework.db.dao.*;
+import com.gridnode.pdip.framework.db.filter.DataFilterImpl;
+import com.gridnode.pdip.framework.db.ejb.*;
+import com.gridnode.pdip.framework.exceptions.*;
+
+import javax.ejb.FinderException;
+import javax.ejb.CreateException;
+import javax.ejb.EJBException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
+
+/**
+ * A ResourceNodeBean provides persistency services for ResourceHierarchies.
+ *
+ * @author Neo Sok Lay
+ *
+ * @version 2.0 I4
+ * @since 2.0 I4
+ */
+public class ResourceNodeBean extends AbstractEntityBean
+{
+  public String getEntityName()
+  {
+    return ResourceNode.ENTITY_NAME;
+  }
+
+  //called during ejbCreate()
+  protected void checkDuplicate(IEntity entity) throws java.lang.Exception
+  {
+    ResourceNode node = (ResourceNode)entity;
+
+    DataFilterImpl filter = new DataFilterImpl();
+    filter.addSingleFilter(null, ResourceNode.PARENT_UID, filter.getEqualOperator(),
+      node.getParentNodeUID(), false);
+    filter.addSingleFilter(filter.getAndConnector(), ResourceNode.RESOURCE_TYPE,
+      filter.getEqualOperator(), node.getResourceType(), false);
+    filter.addSingleFilter(filter.getAndConnector(), ResourceNode.RESOURCE_UID,
+      filter.getEqualOperator(), node.getResourceUID(), false);
+
+    if (getDAO().getEntityCount(filter) > 0)
+      throw new DuplicateEntityException(
+        "Resource node ["+ node.getEntityDescr() + "] already exists!");
+
+  }
+
+
+}

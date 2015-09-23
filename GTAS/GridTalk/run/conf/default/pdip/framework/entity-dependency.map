@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping>
+	<class access="shared" name="com.gridnode.pdip.framework.db.dependency.DependencyDescriptor">
+		<description>Entity Dependency Descriptor</description>
+		<map-to xml="EntityDependency"/>
+		<field type="string" required="true" name="name">
+			<bind-xml node="attribute" name="name"/>
+		</field>
+		<field type="com.gridnode.pdip.framework.db.dependency.CheckerDescriptor" collection="array" required="false" name="checkers">
+			<bind-xml node="element" name="Checker"/>
+		</field>
+	</class>
+	<class access="shared" name="com.gridnode.pdip.framework.db.dependency.CheckerDescriptor">
+		<description>Dependency Checker Descriptor</description>
+		<map-to xml="Checker"/>
+		<field required="true" name="className" type="string">
+			<bind-xml node="attribute" name="class-name"/>
+		</field>
+		<field required="true" name="methodName" type="string">
+			<bind-xml node="attribute" name="method-name"/>
+		</field>
+		<field required="true" name="params" type="com.gridnode.pdip.framework.db.dependency.ParamDescriptor" collection="array">
+			<bind-xml node="element" name="Param"/>
+		</field>
+		<field required="false" name="descriptorCreator" type="com.gridnode.pdip.framework.db.dependency.DescriptorCreatorDescriptor">
+			<bind-xml node="element" name="EntityDescriptorCreator"/>
+		</field>
+	</class>
+	<class access="shared" name="com.gridnode.pdip.framework.db.dependency.ParamDescriptor">
+		<description>Input Param Descriptor</description>
+		<map-to xml="Param"/>
+		<field type="string" required="true" name="type">
+			<bind-xml node="attribute" name="type"/>
+		</field>
+		<field type="string" required="true" name="getterMethod">
+			<bind-xml node="attribute" name="getter-method"/>
+		</field>
+	</class>
+	<class access="shared" name="com.gridnode.pdip.framework.db.dependency.DescriptorCreatorDescriptor">
+		<description>Entity Descriptor Creator Descriptor</description>
+		<map-to xml="EntityDescriptorCreator"/>
+		<field required="true" name="className" type="string">
+			<bind-xml node="attribute" name="class-name"/>
+		</field>
+		<field required="true" name="methodName" type="string">
+			<bind-xml node="attribute" name="method-name"/>
+		</field>
+	</class>
+</mapping>

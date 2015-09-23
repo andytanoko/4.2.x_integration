@@ -1,0 +1,74 @@
+
+##### Common Properties #####
+
+# InboundTransporterProperties file (for overriding the default properties).
+# Optional.
+inbound.transporter.properties=
+
+# Log file for InboundTransporter
+# if omitted, all logs will be onto the console
+inbound.transporter.log=ibtransporter.log
+
+# inbound transport method
+# Currently supports only 'soap'
+inbound.transporter.method=soap
+
+# single payload file to transmit
+# optional if inbound.payload.dir is set
+inbound.payload.file=
+
+# directory to grab payload files to transmit
+# optional if inbound.payload.file is set
+inbound.payload.dir=
+
+# directory to keep the payload files that fail to transmit. 
+# if omitted, the failed payload files will be deleted.
+inbound.payload.fail.dir=failed
+
+# directory to keep the payload files that are transmitted successfully
+# if omitted, the successful payload files will be deleted
+inbound.payload.success.dir=transmitted
+
+# points to the property to store the unique id for the payload file
+# if omitted, no unique id will be generated. Thus the receiving end
+# must take care of generating the unique file id.
+inbound.payload.file.id=header.payload.info.payload.id
+
+# prefix for the unique file id, allows current timestamp (ms) to be substituted with ${now}
+# suffix of the file id will be the payload filename
+# if omitted, the payload filename will be used as the unique file id
+inbound.payload.file.id.prefix=Sibtpt_T${now}_F
+
+#####  Specific for SOAP transport method #####
+
+# The name of the receive service in GridTalk.
+transport.soap.inbound.service.name=SoapMessageReceiverService
+
+# The name of the receive service port in GridTalk.
+transport.soap.inbound.service.port=SoapMessageReceiverService
+
+# The name of the receive service operation to be called in GridTalk.
+transport.soap.inbound.service.op=receiveMessage
+
+# The EndPoint address of the service hosted in GridTalk.
+transport.soap.inbound.service.endpoint=http://localhost:8080/gridtalk/webservice/services/SoapMessageReceiverService
+
+##### Headers #####
+
+header.message.info.event.id=3200
+header.message.info.event.sub.id=51200
+header.payload.info.payload.type=GN_BACKWARDCOMPATIBLE
+header.payload.info.payload.group=UC
+header.payload.info.payload.is.zip=false
+header.sender.info.sender.id=
+header.sender.info.sender.be.id=
+header.sender.info.sender.be.gnid=
+header.sender.info.sender.be.duns=
+header.sender.info.sender.be.uddi.url=
+header.sender.info.sender.be.uuid=
+header.recipient.info.recipient.be.id=
+header.recipient.info.recipient.be.gnid=
+header.recipient.info.recipient.be.duns=
+header.recipient.info.recipient.be.uddi.url=
+header.recipient.info.recipient.be.uuid=
+header.comm.info.comm.channel=

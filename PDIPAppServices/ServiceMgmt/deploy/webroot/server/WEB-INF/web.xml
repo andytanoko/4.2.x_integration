@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN" "http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
+<web-app>
+  <servlet>
+    <servlet-name>gtsoaprouterservlet</servlet-name>
+    <servlet-class>com.gridnode.pdip.app.servicemgmt.router.GTSoapRouterServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>gtwsdlrouterservlet</servlet-name>
+    <servlet-class>com.gridnode.pdip.app.servicemgmt.router.GTWSDLRouterServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>gtsoaprouterservlet</servlet-name>
+    <url-pattern>/invoke</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>gtwsdlrouterservlet</servlet-name>
+    <url-pattern>/service</url-pattern>
+  </servlet-mapping>
+  
+  <security-constraint>
+      <web-resource-collection>
+         <web-resource-name>Invoke Webservices via Router</web-resource-name>
+         <url-pattern>/invoke</url-pattern>
+      </web-resource-collection>
+      <web-resource-collection>
+         <web-resource-name>Get Webservices WSDL via Router</web-resource-name>
+         <url-pattern>/service</url-pattern>
+      </web-resource-collection>
+      <auth-constraint>
+         <role-name>PARTNER</role-name>
+      </auth-constraint>
+   </security-constraint>
+
+   <login-config>
+      <auth-method>BASIC</auth-method>
+      <realm-name>Gridnode Webservices Router Management</realm-name>
+   </login-config>
+   <security-role>
+      <description>
+      user for accessing the applications
+    </description>
+      <role-name>PARTNER</role-name>
+   </security-role>
+   
+   <ejb-ref>
+    <ejb-ref-name>ejb/ServiceMgmtManager</ejb-ref-name>
+    <ejb-ref-type>Session</ejb-ref-type>
+    <home>com.gridnode.pdip.app.servicemgmt.facade.ejb.IServiceMgmtManagerHome</home>
+    <remote>com.gridnode.pdip.app.servicemgmt.facade.ejb.IServiceMgmtManagerObj</remote>
+   </ejb-ref>   
+</web-app>

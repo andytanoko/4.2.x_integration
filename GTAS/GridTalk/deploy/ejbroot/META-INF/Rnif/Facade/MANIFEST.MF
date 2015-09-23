@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Created-By: Ant 1.4.1
+Class-Path: ./activation-1.0.2.jar ./mail-1.3.3.jar ./framework.jar ./gtas-rnif.jar
+
+
+
+

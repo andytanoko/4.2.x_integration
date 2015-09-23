@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  Log4j Configuration                                                  -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<!--
+log4j.rootCategory=DEBUG, JBOSS
+
+# appender for GridTalk logs
+log4j.category.GN =DEBUG, R
+log4j.appender.R=com.gridnode.pdip.framework.log.JbossRollingFileZipAppender
+log4j.appender.R.File=${user.dir}/jboss-4.0.5.GA/bin/gtas/data/log/gts.log
+log4j.appender.R.layout=org.apache.log4j.PatternLayout
+log4j.appender.R.layout.ConversionPattern= [%d{dd:MM:yy-HH:mm:ss,SSS}][%t][%5p][%c][%X{GnErrorCode}]%m%n 
+log4j.appender.R.MaxFileSize=500KB
+log4j.appender.R.MaxBackupIndex=10
+log4j.appender.R.SafeLog=-1
+log4j.appender.R.Append=true
+
+# appender for JBoss logs
+log4j.category.org.jboss=INFO
+log4j.appender.JBOSS=com.gridnode.pdip.framework.log.JbossRollingFileZipAppender
+log4j.appender.JBOSS.File=${user.dir}/jboss-4.0.5.GA/server/default/log/server.log
+log4j.appender.JBOSS.layout=org.apache.log4j.PatternLayout
+log4j.appender.JBOSS.layout.ConversionPattern= [%d{dd:MM:yy-HH:mm:ss,SSS}] [%5p:%c] [%t] %m%n 
+log4j.appender.JBOSS.MaxFileSize=1MB
+log4j.appender.JBOSS.MaxBackupIndex=10
+log4j.appender.JBOSS.SafeLog=-1
+log4j.appender.JBOSS.Append=false
+
+# additivity: false - ensure no duplicate
+log4j.additivity.rootCategory=false
+log4j.additivity.GN=false
+-->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+   <!-- Zip file rolling appender -->
+   <appender name="gts-r" class="com.gridnode.pdip.framework.log.JbossRollingFileZipAppender">
+     <param name="File" value="${user.dir}/logs/gtas/gts.log"/>
+     <param name="MaxFileSize" value="1MB"/>
+     <param name="MaxBackupIndex" value="10"/>
+     <param name="SafeLog" value="-1"/>
+     <param name="Append" value="true"/>
+     <param name="Threshold" value="DEBUG"/>
+     <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm"/>
+     <layout class="org.apache.log4j.PatternLayout">
+       <param name="ConversionPattern" value="[%d{dd:MM:yy-HH:mm:ss,SSS}][%t][%5p][%c][%X{GnErrorCode}]%m%n"/>
+     </layout>
+   </appender>
+
+   <appender name="jboss-r" class="com.gridnode.pdip.framework.log.JbossRollingFileZipAppender">
+     <param name="File" value="${user.dir}/logs/server/server.log"/>
+     <param name="MaxFileSize" value="1MB"/>
+     <param name="MaxBackupIndex" value="10"/>
+     <param name="SafeLog" value="-1"/>
+     <param name="Append" value="false"/>
+     <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm"/>
+     <layout class="org.apache.log4j.PatternLayout">
+       <param name="ConversionPattern" value="[%d{dd:MM:yy-HH:mm:ss,SSS}] [%5p:%c] [%t] %m%n"/>
+     </layout>
+   </appender>
+   
+   <!--
+      SNMPv1 trap appender
+      Instructions to enable sending of SNMP traps from GTAS
+      1.	Configure the following as required:
+      		ManagementHost					: The URL/IP of the SNMP NMS listening to the traps.
+      		ManagementHostTrapListenPort	: Port number of the SNMP NMS listening to the traps.
+	  2.	Uncomment the appender block below.
+	  3.	Uncomment the logger block with gts-snmp appender-ref
+   -->
+
+   <!--appender name="gts-snmp" class="org.apache.log4j.ext.SNMPTrapAppender">
+      <param name="ImplementationClassName" value="org.apache.log4j.ext.JoeSNMPTrapSender"/>
+	  <param name="ManagementHost" value="127.0.0.1"/>
+	  <param name="ManagementHostTrapListenPort" value="162"/>
+	  <param name="EnterpriseOID" value="1.3.6.1.4.1.27955.0"/>
+	  <param name="LocalIPAddress" value="${host.id}"/>
+	  <param name="LocalTrapSendPort" value="11161"/>
+	  <param name="GenericTrapType" value="6"/>
+	  <param name="SpecificTrapType" value="12345678"/>
+	  <param name="CommunityString" value="public"/>
+	  <param name="ForwardStackTraceWithTrap" value="false"/>
+	  <param name="Threshold" value="ERROR"/>
+	  <layout class="org.apache.log4j.ext.SnmpDelimitedConversionPatternLayout">  
+	     <param name="ConversionPattern" value="%d;1.3.6.1.4.1.27955.1.1.1.1/%t;1.3.6.1.4.1.27955.1.1.1.2/%p;1.3.6.1.4.1.27955.1.1.1.3/%c;1.3.6.1.4.1.27955.1.1.1.4/%m;1.3.6.1.4.1.27955.1.1.1.5/%X{GnErrorCode};1.3.6.1.4.1.27955.1.1.1.6"/>  
+	   </layout>  
+	</appender-->
+
+   <!-- ================ -->
+   <!-- Limit categories -->
+   <!-- ================ -->
+   <logger name="GN" additivity="false">
+    <level value="DEBUG"/>
+    <appender-ref ref="gts-r"/>
+    <!-- appender-ref ref="gts-snmp"/-->
+   </logger> 
+
+   <logger name="org.jboss">
+    <level value="INFO"/>
+   </logger> 
+
+   <!-- ======================= -->
+   <!-- Setup the Root category -->
+   <!-- ======================= -->
+
+   <root>
+      <priority value ="DEBUG" />	
+      <appender-ref ref="jboss-r"/>
+   </root>
+
+</log4j:configuration>

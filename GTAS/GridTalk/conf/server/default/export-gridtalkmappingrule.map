@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for ExportEntityList  -->
+	<class name="com.gridnode.pdip.base.exportconfig.model.ExportEntityList">
+		<map-to xml="Entities"/>
+		<field name="Entities" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection">
+		</field>
+	</class>
+	<!--  Mapping for GridTalkMappingRule  -->
+	<class name="com.gridnode.gtas.server.mapper.model.GridTalkMappingRule">
+		<map-to xml="GridTalkMappingRule"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="Name" type="string">
+			<xml name="Name" node="element"/>
+		</field>
+		<field name="Description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+
+		<field name="SourceDocType" type="string">
+			<xml name="SourceDocType" node="element"/>
+		</field>
+		<field name="TargetDocType" type="string">
+			<xml name="TargetDocType" node="element"/>
+		</field>
+		<field name="SourceDocFileType" type="string">
+			<xml name="SourceDocFileType" node="element"/>
+		</field>
+		<field name="TargetDocFileType" type="string">
+			<xml name="TargetDocFileType" node="element"/>
+		</field>
+		<field name="isHeaderTransformation" type="boolean" get-method="isHeaderTransformation" set-method="setHeaderTransformation">
+			<xml name="isHeaderTransformation" node="element"/>
+		</field>
+		<field name="isTransformWithHeader" type="boolean" get-method="isTransformWithHeader" set-method="setTransformWithHeader">
+			<xml name="isTransformWithHeader" node="element"/>
+		</field>
+		<field name="isTransformWithSource" type="boolean" get-method="isTransformWithSource" set-method="setTransformWithSource">
+			<xml name="isTransformWithSource" node="element"/>
+		</field>
+		<field name="MappingRule" type="com.gridnode.pdip.app.mapper.model.MappingRule">
+			<xml name="MappingRule" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for MappingRule  -->
+	<class name="com.gridnode.pdip.app.mapper.model.MappingRule">
+		<map-to xml="MappingRule"/>
+		<field name="Name" type="string">
+			<xml name="Name" node="element"/>
+		</field>
+		<field name="Description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="Type" type="short">
+			<xml name="Type" node="element"/>
+		</field>
+		<field name="MappingFile" type="com.gridnode.pdip.app.mapper.model.MappingFile">
+			<xml name="MappingFile" node="element"/>
+		</field>
+		<field name="isTransformRefDoc" type="boolean" get-method="isTransformRefDoc" set-method="setTransformRefDoc">
+			<xml name="isTransformRefDoc" node="element"/>
+		</field>
+		<field name="RefDocUID" type="long">
+			<xml name="RefDocUID" node="element"/>
+		</field>
+		<field name="XPath" type="string">
+			<xml name="XPath" node="element"/>
+		</field>
+		<field name="ParamName" type="string">
+			<xml name="ParamName" node="element"/>
+		</field>
+		<field name="isKeepOriginal" type="boolean" get-method="isKeepOriginal" set-method="setKeepOriginal">
+			<xml name="isKeepOriginal" node="element"/>
+		</field>
+		<field name="MappingClass" type="string">
+			<xml name="MappingClass" node="element"/>
+		</field>
+	</class>
+	<class name="com.gridnode.pdip.app.mapper.model.MappingFile">
+		<map-to xml="MappingFile"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+	</class>
+</mapping>

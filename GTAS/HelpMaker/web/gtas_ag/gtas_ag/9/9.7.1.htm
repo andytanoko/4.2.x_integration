@@ -1,0 +1,186 @@
+<html>
+<head>
+<title>9.7.1 To create a port using an RFC </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>9.7.1 To create a port using an RFC </h3>
+<p><span></span>
+</p>
+<p><a name='_Ref134510589'><span>Step 1.<span> </span>
+</span>
+<span>Click Process. Then the browser will take you to the list of submenus under Process in the left pane.</span>
+</a>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>Click Ports from the Process on the left panel of the page. The Ports list view page is displayed.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>Click Create Port. The Port detail view page is displayed with the blank fields.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='507' height='259' border='0' src='../images/image116.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><a name='_Ref134510590'><span>Step 4.<span> </span>
+</span>
+<span>Type in the Port name and Description for the port you want to create.</span>
+</a>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 5.<span> </span>
+</span>
+<span>If you want to create a new port with a RFC, click on the RFC checkbox. A check </span>
+<span>ü</span>
+<span> will appear in the box. As a result, the RFC listbox will be enabled to display the list of already defined RFCs. If the RFC is not listed here, click on the <img width='16' height='16' border='0' src='../images/image011.gif'>icon to create a new RFC.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='283' height='51' border='0' src='../images/image117.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 6.<span> </span>
+</span>
+<span>Select the RFC you wish to use. Otherwise deselect the RFC checkbox if you do not wish to configure a port with it.</span>
+</p>
+<p><span></span>
+</p>
+<p><a name='_Ref134510591'><span>Step 7.<span> </span>
+</span>
+<span>In the field Host Directory, type in the path for the file to be exported.<span> </span>
+If RFC is selected, this path will be the path in the remote machine specified by the RFC; otherwise this path will be in the local machine.</span>
+</a>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 8.<span> </span>
+</span>
+<span>In the case of the export file having the same name as an existing file in the Host Directory and you want to overwrite the existing file, click on the Overwrite file checkbox. The check mark will appear in the box. If you wish not to overwrite the existing file, deselect this checkbox and the content of the export file will be appended to the existing file.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Note that the Overwrite option applies to all exported files, including both user documents and attachments. However, the appending to existing file <u>only</u>
+ applies to user documents. For attachments, a timestamp string of the form “ddMMyyHHmmssSSS” will be automatically appended to the filename to prevent overwriting the existing file.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 9.<span> </span>
+</span>
+<span>If you want to rename the export file, click the Different filename checkbox, otherwise go to Step 16.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='444' height='78' border='0' src='../images/image118.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 10.<span> </span>
+</span>
+<span>In the Filename field, type in the filename that you would like to use to rename files exported out of GridTalk under this port definition.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 11.<span> </span>
+</span>
+<span>The Add File Extension checkbox allows you to append additional information to the exported filename. The information can be the system date/time or a field value from the corresponding Grid Document.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 12.<span> </span>
+</span>
+<span>Tick this checkbox, and it will turn both the File Extension Type and the File Extension Value fields on. The options for the File Extension Type are Date/Time, Grid Document, and Running Sequence Number. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 13.<span> </span>
+</span>
+<span>If you select Date/Time, you will be prompted to select one of the available date and time formats which are listed in the File Extension Value listbox. The date and/or time of the selected format will be appended to the specified File Name before the ending file extension, e.g. if File Name is specified as POR_.xml and File Extension Value is yyyyMMddHHmmss, then the exported filename might be POR_20060502190805.xml if the document is exported on 2<sup>nd</sup>
+ May 2006 at 7:08:05 pm.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='294' height='262' border='0' src='../images/image119.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 14.<span> </span>
+</span>
+<span>If you select Grid Document, you will be prompted to select the available GridDocument fields from the File Extension Value listbox. The selected field value will be appended to the File Name before the ending file extension, e.g. if File Name is specified as POR-.xml and File Extension Value is GridDoc. ID, then the exported filename might be POR-1092.xml if the exported document’s GridDoc. ID is 1092.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='293' height='378' border='0' src='../images/image120.jpg'></span>
+</p>
+<p align='center'><span></span>
+</p>
+<p><span></span>
+</p>
+<p><a name='_Ref78115072'><span>Step 15.<span> </span>
+</span>
+<span>If you select Running Sequence Number, you will be prompted to enter the Minimum Sequence Number, Maximum Sequence Number, Next Sequence Number and whether to pad the number with leading zeros. The Maximum Sequence Number is the highest number the running number can reach, after that it will reset to the Minimum Sequence Number. The Next Sequence Number is the amount to step up for the next file to be exported, e.g. a value of 2 means that the between two consecutive exports using the same port definition, the difference of the running number is 2. </span>
+</a>
+</p>
+<p><span></span>
+</p>
+<p><span>If you tick the Pad With Leading Zeros checkbox, you will be prompted to enter the length of the number. This is to determine the number of zeros to pad to the running number. For example, if the next running number is 123 and the length is set as 5, the output extension will be 00123.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The output extension will be appended to the File Name before the ending file extension, e.g. if File Name is POR.xml and the output extension is 00123, then the exported filename might be POR00123.xml.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='420' height='184' border='0' src='../images/image121.jpg'></span>
+</p>
+<p align='center'><span></span>
+</p>
+<p><a name='_Ref134362601'><span>Step 16.<span> </span>
+</span>
+<span>Tick the Export GDoc checkbox if you want the Grid Document of the export document to be exported as well (it will be treated as an attachment).</span>
+</a>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 17.<span> </span>
+</span>
+<span>Select the way of grouping the exported files (that is, including the document and user attachments and GridDoc) from the File Grouping listbox. The options available are: Group All Files, Group Attachments Only, and No Grouping.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='337' height='89' border='0' src='../images/image122.jpg'></span>
+</p>
+<p align='center'><span></span>
+</p>
+<p><span>If you select Group All Files, then all the exported files will be contained under a folder named after the exported document. For example, if the exported document filename is POR1223.xml, then all files, including POR1223.xml and all attachments of the document (including GridDoc if Export GDoc is ticked), will be exported to a folder named POR1223 under the specified Host Directory.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Following from the example above, if you select Group Attachments Only, then POR1223.xml will be exported directly under the specified Host Directory, and all the attachments of the document (including GridDoc if Export GDoc is ticked) will be exported under a folder named POR1223 under the specified Host Directory.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>If you select No Grouping, then all the exported files will be contained directly under the specified Host Directory.</span>
+</p>
+<p><span></span>
+</p>
+<p><a name='_Ref134510592'><span>Step 18.<span> </span>
+</span>
+<span>Click Save Port.</span>
+</a>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+</body>
+</html>

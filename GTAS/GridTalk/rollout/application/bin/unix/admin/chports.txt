@@ -1,0 +1,94 @@
+Instructions for changing Ports used by GridTalk
+------------------------------------------------
+
+1. Get ready the required Files:
+   a. chports.sh      - for executing the change of ports
+   b. ports.map       - for changing from default ports to a custom set of ports
+   c. default.map     - for changing from custom set of ports to default ports
+
+2. Set up ports.map:
+   Port numbers on the left-hand-side are the default ports used by GridTalk.
+   Customize the ports on the right-hand-side to the desired number. If no change is
+   required, put the port number the same to the left-hand-side.
+
+3. Set up default.map: (optional, in case need to change the ports back to default)
+   Port numbers on the right-hand-side are the default ports used by GridTalk.
+   Customize the ports on the left-hand-side as is done for the ports.map (on the rhs).
+   This file should be the exact reverse of ports.map.
+
+   (Make sure GridTalk is not running before performing this step)
+4. Go to shell prompt where the above files are placed in a single directory,
+   type> sh ./chports.sh ports.map
+   See below for Notes on changing specific ports.
+
+5. Startup GridTalk and login (using changed port) to verify that everything is OK.
+
+6. If there is need to revert to default ports, repeat steps 4-6, this time
+   using default.map and changing the customized ports to default port values.
+   Note that same steps apply if there is need to customize the ports again to 
+   some other values. There is just need to set up a file that maps the current ports
+   to the new ports, and supply this file to chports.sh.
+
+--- Notes on changing specific ports -----
+A. Changing Login redirection port (default 9099)
+   a. If the above port is customized to some other value, say, 28099
+   b. Edit WEB-INF/web.xml in gtas.war (zip file) in 
+      $GRIDTALK_HOME/jboss-<x.x.x>.GA/server/default/deploy/gtas.ear (zip file)
+   c. Replace all occurrences of 9099 to 28099.
+   d. Put the changed file back to gtas.war, which is put back to gtas.ear.
+
+B. Changing of GridTalk backend listening port (default 6763)
+   The backend sender configuration files need to be altered as follows:
+   a. If the above port is customized to some other value, say, 28763
+   b. Edit the sender.ini, senderlite.bat or send.bat (could be some other names) from the 
+      deployed location of backend sender
+   c. Replace all occurrences of 6763 to 28763.
+
+C. Changing of GridTalk Postgres DB port (default 35432)
+   This need to be changed manually as follows:
+   a. If the above port is customized to some other value, say, 36432
+   b. Edit postgresql.conf in GRIDTALK_HOME/db/
+   c. Replace all occurrences of 35432 to 36432.
+
+D. Changing of Jndi port (default 31099)
+   This need to be changed manually as follows:
+   a. If the above port is customized to some other value, say, 41099
+   b. Edit the gtas-schedule-service.xml in GRIDTALK_HOME/jboss-<x.x.x>.GA/server/default/deploy/gtas.ear
+   c. Replace all occurrences of 31099 to 41099.
+   c. Put the changed file back to gtas.ear.
+   
+List of Ports used by GridTalk (default)
+---------------------------------------
+443   -  SSL connection port
+35432 -  GridTalk Database server port
+4444  -  JBoss internal service port
+4445  -  JBoss internal service port
+5001  -  GridTalk Backend Webservice monitor service port
+6763  -  GridTalk Backend listening port
+6767  -  GridTalk Backend Receiver listening port
+8009  -  AJP connection port (for connection to Apache server)
+8080  -  HTTP connection port
+8083  -  JBoss Webservice port
+8093  -  JBoss MQ service port
+9099  -  GridTalk Login redirection port
+12345 -  GridTalk Logger service port
+31098 -  Naming Service RMI port (Jndi)
+31099 -  Naming Service port (Jndi)
+
+Additional ports used for Cluster setup
+---------------------------------------
+1100  - JBoss HAJNDI Port
+1101  - JBoss HAJNDI RMI Port
+1102  - JBoss HAJNDI Auto Discovery Group Port
+4446  - JBoss RMI/Socket Pooled Invoker Server Bind Port
+4447  - JBoss RMI/JRMP Invoker Server Listening Port
+
+IMPORTANT NOTE: 
+DO NOT EXECUTE chports.sh MORE THAN ONCE CONSECUTIVELY ON THE SAME .MAP FILE! THIS
+MAY CAUSE PROBLEMS IF ANY OF THE DEFAULT PORTS MATCHES PARTIALLY IN ANY OF THE PORTS TO 
+CHANGE TO.  FOR EXAMPLE, 1099=21099 WILL CHANGE ALL OCCURRENCES OF 1099 to 21099 ON FIRST
+EXECUTION. ON SECOND EXECUTION, 21099 will be changed to 221099, WHICH IS NOT A VALID PORT.
+IF A MISTAKE HAS BEEN MADE ON FIRST EXECUTION, THEN EXECUTE THE REVERSE MAPPING (default.map)
+FIRST BEFORE RE-EXECUTING THE MODIFIED ports.map.
+ALTERNATIVELY, REFRAIN FROM USING PARTIAL MATCH PORT NUMBERS.
+

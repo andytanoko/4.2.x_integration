@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  Log4j Configuration                                                  -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+   <!-- ================ -->
+   <!-- Limit categories -->
+   <!-- ================ -->
+   <logger name="GN.HTTPBC">
+    <level value="DEBUG"/>
+   </logger> 
+
+   <logger name="GN.Util">
+    <level value="DEBUG"/>
+   </logger> 
+
+   <logger name="GN.AUDIT">
+    <level value="DEBUG"/>
+   </logger> 
+
+   <logger name="GN.GenReport">
+    <level value="DEBUG"/>
+   </logger> 
+
+</log4j:configuration>

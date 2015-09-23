@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE REF SYSTEM "THC_REF.dtd">
+<REF>
+	<QTY>
+		<UOM>
+			<CMC_UOM>DRM</CMC_UOM>
+			<THC_UOM>DR</THC_UOM>
+		</UOM>
+		<UOM>
+			<CMC_UOM>KG</CMC_UOM>
+			<THC_UOM>KG</THC_UOM>
+		</UOM>
+		<UOM>
+			<CMC_UOM>TOT</CMC_UOM>
+			<THC_UOM>TE</THC_UOM>
+		</UOM>
+	</QTY>
+</REF>

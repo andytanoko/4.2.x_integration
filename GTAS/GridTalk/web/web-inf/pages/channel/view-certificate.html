@@ -1,0 +1,494 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>View Certificate</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="cancel"/>
+        <table border="1" width="100%">
+          <tr>
+            <td nowrap="nowrap" width="1%" class="activeTab" id="main_tab">
+              lbCertificate
+            </td>
+            <td nowrap="nowrap" width="1%" id="issuerDetails_tab" class="inactiveTab">
+              lbIssuerDetails
+            </td>
+            <td nowrap="nowrap" width="1%" id="subjectDetails_tab" class="inactiveTab">
+              lbSubjectDetails
+            </td>
+            <td width="99%" class="nullTab">
+              &nbsp;
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" id="main_tab_panel">
+              <table>
+                <tr id="name_details">
+                  <td id="name_label">
+                    lbName
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="name_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="isPartner_details">
+                  <td id="isPartner_label">
+                    lbIsPartner
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="isPartner_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="password_details">
+                  <td id="password_label">
+                    lbPassword
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="password_value">
+                    XXX
+                  </td>
+                </tr>
+				<tr id="isCa_details">
+                  <td id="isCa_label">
+                    lbisCA
+                  </td>
+				  <td>
+				    &nbsp;:&nbsp;
+				  </td>
+                  <td id="isCa_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="certFile_details">
+                  <td id="certFile_label" valign="top" class="fieldlabel">
+                    lbCertFile
+                  </td>
+                  <td valign="top">
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td valign="top">
+                    <div id="certFile_value" class="multifiles">
+                      Multifiles(viewOnly)
+                    </div>
+                  </td>
+                </tr>
+                <tr id="inKeyStore_details">
+                  <td id="inKeyStore_label">
+                    lbInKeyStore
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="inKeyStore_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="inTrustStore_details">
+                  <td id="inTrustStore_label">
+                    lbInTrustStore
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="inTrustStore_value">
+                    XXX
+                  </td>
+                </tr>
+				<tr id="serialNum_details">
+			      <td id="serialNum_label">
+				    lbSerialNumber
+				  </td>
+				  <td>
+				    &nbsp;:&nbsp;
+				  </td>
+				  <td id="serialNum_value">
+				    XXX
+				  </td>
+				</tr>
+				<tr id="startDate_details">
+			      <td id="startDate_label">
+				    lbValidFrom
+				  </td>
+				  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+				  <td id="startDate_value">
+				    XXX
+				  </td>
+				</tr>
+				<tr id="endDate_details">
+			      <td id="endDate_label">
+				    lbValidTo
+				  </td>
+				  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+				  <td id="endDate_value">
+					XXX
+				  </td>
+				</tr>
+                <tr id="relatedCertUid_details">
+                  <td id="relatedCertUid_label">
+                    lbRelatedCertUid
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="relatedCertUid_value">
+                    XXX
+                  </td>
+                </tr>
+				<tr id="replacementCertUid_details">
+                   <td id="replacementCertUid_label">
+                    lbReplacementCertUid
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="replacementCertUid_value">
+                    XXX
+                  </td>
+                </tr>
+				<tr id="swapDate_details">
+                   <td id="swapDate_label">
+                    lbSwapDate
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="swapDate_value">
+                    XXX
+                  </td>
+                </tr>
+				<tr id="swapTime_details">
+                   <td id="swapTime_label">
+                    lbSwapTime
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="swapTime_value">
+                    XXX
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" id="issuerDetails_tab_panel">
+              <span id="issuerDetails_selectCert">lbSelectCert</span>
+              <table id="issuerDetails_details">
+                <tr id="issuerDetails.country_details">
+                  <td id="issuerDetails.country_label">
+                    lbCountry
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="issuerDetails.country_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="issuerDetails.state_details">
+                  <td id="issuerDetails.state_label">
+                    lbState
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="issuerDetails.state_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="issuerDetails.organization_details">
+                  <td id="issuerDetails.organization_label">
+                    lbOrganization
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="issuerDetails.organization_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="issuerDetails.locality_details">
+                  <td id="issuerDetails.locality_label">
+                    lbLocality
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="issuerDetails.locality_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="issuerDetails.organizationalUnit_details">
+                  <td id="issuerDetails.organizationalUnit_label">
+                    lbOrganizationalUnit
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="issuerDetails.organizationalUnit_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="issuerDetails.streetAddress_details">
+                  <td id="issuerDetails.streetAddress_label">
+                    lbStreetAddress
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="issuerDetails.streetAddress_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="issuerDetails.commonName_details">
+                  <td id="issuerDetails.commonName_label">
+                    lbCommonName
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="issuerDetails.commonName_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="issuerDetails.title_details">
+                  <td id="issuerDetails.title_label">
+                    lbTitle
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="issuerDetails.title_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="issuerDetails.emailAddress_details">
+                  <td id="issuerDetails.emailAddress_label">
+                    lbEmailAddress
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="issuerDetails.emailAddress_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="issuerDetails.businessCategory_details">
+                  <td id="issuerDetails.businessCategory_label">
+                    lbBusinessCategory
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="issuerDetails.businessCategory_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="issuerDetails.telephoneNumber_details">
+                  <td id="issuerDetails.telephoneNumber_label">
+                    lbTelephoneNumber
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="issuerDetails.telephoneNumber_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="issuerDetails.postalCode_details">
+                  <td id="issuerDetails.postalCode_label">
+                    lbPostalCode
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="issuerDetails.postalCode_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="issuerDetails.unknownAttributeType_details">
+                  <td id="issuerDetails.unknownAttributeType_label">
+                    lbUnknownAttributeType
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="issuerDetails.unknownAttributeType_value">
+                    XXX
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" id="subjectDetails_tab_panel">
+              <span id="subjectDetails_selectCert">lbSelectCert</span>
+              <table id="subjectDetails_details">
+                <tr id="subjectDetails.country_details">
+                  <td id="subjectDetails.country_label">
+                    lbCountry
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="subjectDetails.country_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="subjectDetails.state_details">
+                  <td id="subjectDetails.state_label">
+                    lbState
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="subjectDetails.state_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="subjectDetails.organization_details">
+                  <td id="subjectDetails.organization_label">
+                    lbOrganization
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="subjectDetails.organization_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="subjectDetails.locality_details">
+                  <td id="subjectDetails.locality_label">
+                    lbLocality
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="subjectDetails.locality_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="subjectDetails.organizationalUnit_details">
+                  <td id="subjectDetails.organizationalUnit_label">
+                    lbOrganizationalUnit
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="subjectDetails.organizationalUnit_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="subjectDetails.streetAddress_details">
+                  <td id="subjectDetails.streetAddress_label">
+                    lbStreetAddress
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="subjectDetails.streetAddress_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="subjectDetails.commonName_details">
+                  <td id="subjectDetails.commonName_label">
+                    lbCommonName
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="subjectDetails.commonName_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="subjectDetails.title_details">
+                  <td id="subjectDetails.title_label">
+                    lbTitle
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="subjectDetails.title_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="subjectDetails.emailAddress_details">
+                  <td id="subjectDetails.emailAddress_label">
+                    lbEmailAddress
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="subjectDetails.emailAddress_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="subjectDetails.businessCategory_details">
+                  <td id="subjectDetails.businessCategory_label">
+                    lbBusinessCategory
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="subjectDetails.businessCategory_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="subjectDetails.telephoneNumber_details">
+                  <td id="subjectDetails.telephoneNumber_label">
+                    lbTelephoneNumber
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="subjectDetails.telephoneNumber_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="subjectDetails.postalCode_details">
+                  <td id="subjectDetails.postalCode_label">
+                    lbPostalCode
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="subjectDetails.postalCode_value">
+                    XXX
+                  </td>
+                </tr>
+                <tr id="subjectDetails.unknownAttributeType_details">
+                  <td id="subjectDetails.unknownAttributeType_label">
+                    lbUnknownAttributeType
+                  </td>
+                  <td>
+                    &nbsp;:&nbsp;
+                  </td>
+                  <td id="subjectDetails.unknownAttributeType_value">
+                    XXX
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

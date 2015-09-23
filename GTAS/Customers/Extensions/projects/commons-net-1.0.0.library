@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>commons-net-1.0.0</fullname>
+  <class>
+    <path>[../jar/reqlib/commons-net-1.0.0.jar]</path>
+  </class>
+</library>

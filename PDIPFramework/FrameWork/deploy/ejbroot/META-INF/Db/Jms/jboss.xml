@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+  <secure>false</secure>
+  <container-configurations />
+  <resource-managers />
+  <enterprise-beans>
+    <entity>
+      <ejb-name>JMSFailedMsg</ejb-name>
+      <jndi-name>com.gridnode.pdip.framework.db.jms.IJMSFailedMsgHome</jndi-name>
+      <clustered>${node.clustered:False}</clustered>
+    </entity>
+  </enterprise-beans>
+</jboss>

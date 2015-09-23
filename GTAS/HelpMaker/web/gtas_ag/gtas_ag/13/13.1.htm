@@ -1,0 +1,170 @@
+<html>
+<head>
+<title>13.1 Archiving Documents and Processes </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h2>13.1 Archiving Documents and Processes </h2>
+<p></p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Click the Administration tab. This will bring you to the Administration page.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='623' height='350' border='0' src='../images/image169.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><a name='OLE_LINK12'><span>Step 2.<span> </span>
+</span>
+<span>Click Archive Documents. Then the browser will bring you to the Archive Documents page where you can set the criteria to select the documents to be archived. </span>
+</a>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='587' height='362' border='0' src='../images/image170.jpg'></span>
+</p>
+<p align='center'><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>Enter the following fields in the Archive Documents detail view page:</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Name</span>
+</b>
+</p>
+<p><span>This is an arbitrary name to identify the particular archival that you are performing right now. </span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Description</span>
+</b>
+</p>
+<p><span>This is an optional field to give a much more detailed description of this archival.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Archive Type</span>
+</b>
+</p>
+<p><span>This indicates the type of items to archive. Available options are: Document and Process Instance. Document archive type means that only matching GridDocuments and business documents are archived, regardless of whether they are participating in a process. Process Instance archive type means that matching Process Instances and also the participating GridDocuments, business documents and audit files are archived. It is recommended that a Process Instance archival be performed before a Document archival. This field is mandatory.</span>
+</p>
+<p><b><span></span>
+</b>
+</p>
+<p><b><span>Enable Search</span>
+</b>
+</p>
+<p><span>This indicates whether to enable the archived data for searching later on. Selecting this option would compress and store the archived data in an archive database. The archived documents are accessible from the GridTalk application using the Archive Search module. See Chapter 14.</span>
+</p>
+<p><b><span></span>
+</b>
+</p>
+<p><b><span>Enable Restore</span>
+</b>
+</p>
+<p><span>This indicates whether to enable the archived data for restoration later on. Selecting this option would compress and store the archived data in an archive folder. An Archive Summary file is attached to each archive, which is necessary for restoration. See Chapter 13.2</span>
+<span>.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>If both <b>Enable Search</b>
+ and <b>Enable Restore</b>
+ options are not selected, the archival is equivalent to as purging, i.e. permanently removing the documents and processes from GridTalk.</span>
+</p>
+<p><b><span></span>
+</b>
+</p>
+<p><b><span>From Date (YYYY-MM-DD)</span>
+</b>
+</p>
+<p><span>This mandatory field indicates the date portion of the starting date/time range to match based on the selected Archive Type.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>From Time (HH:MM)</span>
+</b>
+</p>
+<p><span>This mandatory field indicates the time portion of the starting date/time range to match based on the selected Archive Type.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>To Date (YYYY-MM-DD)</span>
+</b>
+</p>
+<p><span>This mandatory field indicates the date portion of the ending date/time range to match based on the selected Archive Type.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>To Time (HH:MM)</span>
+</b>
+</p>
+<p><span>This mandatory field indicates the time portion of the ending date/time range to match based on the selected Archive Type.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Partner</span>
+</b>
+</p>
+<p><span>This optional field indicates to include the documents/process instances that involve the selected partners. For the partners that you want, select and click the <img width='16' height='16' border='0' src='../images/image171.gif'>arrow to move them to the right listbox. For those partners that you do not wish to match, select them in the right listbox and click the <img width='16' height='16' border='0' src='../images/image172.gif'>arrow to move them to the left listbox.</span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span>For Document archive type, the input date/time range will be matched against the document create date/time. For Process Instance archive type, the input date/time range will be matched against the process instance start date/time.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>If you select Document archive type, you will be prompted further for the folders and document types of the documents to match. For the folders and document types that you want, select and click the <img width='16' height='16' border='0' src='../images/image171.gif'>arrow to move them to the right listbox. For those items that you do not wish to match, select them in the right listbox and click the <img width='16' height='16' border='0' src='../images/image172.gif'>arrow to move them to the left listbox. At least one folder and document type must be selected in the respective right listboxes.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='557' height='134' border='0' src='../images/image173.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 5.<span> </span>
+</span>
+<span>If you select Process Instance archive type, you will be prompted with the process definitions to match and whether to include processes that are still in running state. For the process definitions that you want, select and click the <img width='16' height='16' border='0' src='../images/image171.gif'>arrow to move them to the right listbox. For those items that you do not wish to match, select them in the right listbox and click the <img width='16' height='16' border='0' src='../images/image172.gif'>arrow to move them to the left listbox. At least one Process Definition must be selected in the right listbox. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>If you want to also archive process instances that are still in running state, select Yes for Include Incomplete Processes, otherwise leave it as No.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='557' height='93' border='0' src='../images/image174.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 6.<span> </span>
+</span>
+<span>After completing the necessary entries, click Generate Archive to start the archival process. The archival is performed as a background process and may take quite some time if there are a lot to archive based on the selected criteria. You may logout of the application while the archival is still in progress.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><img width='475' height='121' border='0' src='../images/image175.jpg'></p>
+<p align='center'><span></span>
+</p>
+<p><span>You will be notified by email upon the start and completion of the archival process, as well as upon failure of the archival process. The emails are sent to the Administrator user by default. To change the email recipients, edit the “ARCHIVE_START_EMAIL”, “ARCHIVE_COMPLETE_EMAIL” and “ARCHIVE_FAIL_EMAIL” message templates, following procedures in Chapter </span>
+<span>6.3</span>
+<span>. See Appendix </span>
+<span>Default Email Message Templates for the respective email templates.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The “ARCHIVE_COMPLETE_EMAIL” and “ARCHIVE_FAIL_EMAIL” emails will contain an attachment which is the archive summary file (an XML file) that indicates the result of the archival and the archival details. You may save this summary file for reference and also for restore later on if necessary.</span>
+</p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE server>
+<server>
+    <mbean code="org.jboss.hibernate.jmx.Hibernate" name="jboss.har:service=Hibernate_GenReport">
+        <attribute name="DatasourceName">java:/GtVanDS</attribute>
+        <attribute name="Dialect">org.hibernate.dialect.Oracle9Dialect</attribute>
+        <attribute name="SessionFactoryName">
+            java:/hibernate/GenReportSessionFactory
+        </attribute>
+        <!--attribute name="CacheProviderClass">
+        	org.hibernate.cache.TreeCacheProvider
+        </attribute-->
+
+        <attribute name="DefaultSchema">GTVAN</attribute>
+        <attribute name="ShowSqlEnabled">true</attribute>
+    </mbean>
+
+    <mbean code="org.jboss.hibernate.jmx.Hibernate" name="jboss.har:service=Hibernate_GenReportUserDB">
+        <attribute name="DatasourceName">java:/userdbdatasource</attribute>
+        <attribute name="Dialect">org.hibernate.dialect.Oracle9Dialect</attribute>
+        <attribute name="SessionFactoryName">
+            java:/hibernate/GenReportUserDBSessionFactory
+        </attribute>
+        <!--attribute name="CacheProviderClass">
+        	org.hibernate.cache.TreeCacheProvider
+        </attribute-->
+
+        <attribute name="DefaultSchema">USERDB</attribute>
+        <attribute name="ShowSqlEnabled">true</attribute>
+    </mbean>
+
+</server>

@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <base href="file:///C:\views\i00054_GT_2.0_I8_2\GTAS\GridTalk\web/gt.css" id="base_tag"/>
+    <link rel="stylesheet" href="gt.css" type="text/css"/>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="cancel"/>
+        <input type="hidden" name="divertTo"/>
+        <div>
+          <h4 id="heading">
+            lbSearchGridNodeQuery
+          </h4>
+          <table border="0">
+            <tr id="searchId_details">
+              <td id="searchId_label">
+                lbSearchId
+              </td>
+              <td>
+                <span id="searchId_value">XXX</span>
+              </td>
+              <td id="searchid_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="criteriaType_details">
+              <td id="criteriaType_label">
+                lbCriteriaType
+              </td>
+              <td>
+                <select id="criteriaType_value" size="1" name="criteriaType" onchange="serverRefresh();">
+                  <option value="">
+                    &nbsp;
+                  </option>
+                </select>
+              </td>
+              <td id="criteriaType_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="matchType_details">
+              <td id="matchType_label">
+                lbMatchType
+              </td>
+              <td>
+                <select id="matchType_value" size="1" name="matchType">
+                  <option value="">
+                    &nbsp;
+                  </option>
+                </select>
+              </td>
+              <td id="matchType_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="dtSubmitted_details">
+              <td id="dtSubmitted_label">
+                lbDtSubmitted
+              </td>
+              <td>
+                <span id="dtSubmitted_value">XXX</span>
+              </td>
+              <td id="dtSubmitted_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="dtResponded_details">
+              <td id="dtResponded_label">
+                lbDtResponded
+              </td>
+              <td>
+                <span id="dtResponded_value">XXX</span>
+              </td>
+              <td id="dtRespinded_error">
+                &nbsp;
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div id="byGridNodeInfo_details">
+          <h4 id="byGridNodeInfo_label">
+            lbByGridNodeInfo
+          </h4>
+          <table>
+            <tr id="gridNodeId_details">
+              <td id="gridNodeId_label">
+                lbGridNodeId
+              </td>
+              <td>
+                <input type="text" id="gridNodeId_value" name="gridNodeId"/>
+              </td>
+              <td id="gridNodeId_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="gridNodeName_details">
+              <td id="gridNodeName_label">
+                lbGridNodeName
+              </td>
+              <td>
+                <input type="text" id="gridNodeName_value" name="gridNodeName"/>
+              </td>
+              <td id="gridNodeName_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="category_details">
+              <td id="category_label">
+                lbCatgeory
+              </td>
+              <td>
+                <select id="category_value" name="category">
+                  <option>&nbsp;</option>
+                </select>
+              </td>
+              <td id="category_error">
+                &nbsp;
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div id="byWhitepageInfo_details">
+          <h4 id="byWhitePageInfo_label">
+            lbByWhitePageInfo
+          </h4>
+          <table>
+            <tr id="businessDesc_details">
+              <td id="businessDesc_label">
+                lbBusinessDesc
+              </td>
+              <td>
+                <input type="text" id="businessDesc_value" name="businessDesc"/>
+              </td>
+              <td id="businessDesc_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="duns_details">
+              <td id="duns_label">
+                lbDuns
+              </td>
+              <td>
+                <input type="text" id="duns_value" name="duns"/>
+              </td>
+              <td id="duns_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="contactPerson_details">
+              <td id="contactPerson_label">
+                lbContactPerson
+              </td>
+              <td>
+                <input type="text" id="contactPerson_value" name="contactPerson"/>
+              </td>
+              <td id="contactPerson_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="email_details">
+              <td id="email_label">
+                lbEmail
+              </td>
+              <td>
+                <input type="text" id="email_value" name="email"/>
+              </td>
+              <td id="email_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="website_details">
+              <td id="website_label">
+                lbWebsite
+              </td>
+              <td>
+                <input type="text" id="website_value" name="website"/>
+              </td>
+              <td id="website_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="tel_details">
+              <td id="tel_label">
+                lbTel
+              </td>
+              <td>
+                <input type="text" id="tel_value" name="tel"/>
+              </td>
+              <td id="tel_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="fax_details">
+              <td id="fax_label">
+                lbFax
+              </td>
+              <td>
+                <input type="text" id="fax_value" name="fax"/>
+              </td>
+              <td id="fax_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="country_details">
+              <td id="country_label">
+                lbBusinessDesc
+              </td>
+              <td>
+                <select id="country_value" name="country" size="1">
+                  <option>&nbsp;</option>
+                </select>
+              </td>
+              <td id="country_error">
+                &nbsp;
+              </td>
+            </tr>
+          </table>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
+

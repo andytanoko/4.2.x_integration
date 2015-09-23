@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>elixir-4.0</fullname>
+  <class>
+    <path>[../jar/reqlib/elixir-report-4.0.jar]</path>
+    <path>[../programs/gn-elixir-report-ext/endorsed/xalan.jar]</path>
+    <path>[../programs/gn-elixir-report-ext/endorsed/xerces.jar]</path>
+    <path>[../jar/reqlib/license.jar]</path>
+  </class>
+  <lastmodsaved>1069416586528</lastmodsaved>
+</library>

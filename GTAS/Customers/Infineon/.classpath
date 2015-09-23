@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="jar/infineon-proc.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/GridTalk"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/App-Alert"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Framework"/>
+	<classpathentry kind="var" path="J2EE_HOME/lib/j2ee.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Extensions"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <base href="file:///C:\viewroot\i00054_GT_2.0_I4\GTAS\GridTalk\web/gt.css" id="base_tag"/>
+    <link rel="stylesheet" href="gt.css" type="text/css"/>
+    <script id="include_selectUtils" language="JavaScript" src="scripts/selectUtils.js"><!----></script>
+    <script id="include_stdFormMethods" language="JavaScript" src="scripts/stdFormMethods.js"><!----></script>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="save"/>
+        <input type="hidden" name="divertTo"/>
+        <h4 id="general_heading">
+          lbGeneral
+        </h4>
+        <table border="0">
+          <tr id="description_details">
+            <td id="description_label" nowrap="nowrap">
+              lbDescription
+            </td>
+            <td id="description_value" >
+              XXX
+            </td>
+            <td id="description_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="activityType_details">
+            <td id="activityType_label" nowrap="nowrap">
+              lbActivityType
+            </td>
+            <td width="50%" nowrap="nowrap">
+              <select id="activityType_value" size="1" name="triggerOn" onchange="serverRefresh();">
+                <option>&nbsp;</option>
+              </select>
+            </td>
+            <td id="activityType_error" width="50%">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="mappingRuleUids_details">
+            <td id="mappingRuleUids_label" valign="top" nowrap="nowrap">
+              lbMappingRuleUids
+            </td>
+            <td colspan="2">
+              <div id="mappingRuleUids_value" class="multiselector">
+                Multiselector(allowsOrdering)
+              </div>
+              <a id="mappingRuleUids_create" href="javascript:divertToMapping('divertCreateGridTalkMappingRule');">
+                lbCreateMappingRule
+              </a>
+            </td>
+          </tr>
+          <tr id="userProcedureUids_details">
+            <td id="userProcedureUids_label" valign="top" nowrap="nowrap">
+              lbUserProcedureUids
+            </td>
+            <td colspan="2">
+              <div id="userProcedureUids_value" class="multiselector">
+                Multiselector(allowsOrdering)
+              </div>
+              <a id="userProcedureUids_create" href="javascript:divertToMapping('divertCreateUserProcedure');">
+                lbCreateUserProcedureUids
+              </a>
+            </td>
+          </tr>
+          <tr id="portUids_details">
+            <td id="portUids_label" valign="top" nowrap="nowrap">
+              lbPortUids
+            </td>
+            <td>
+              <select id="portUids_value" name="portUids" size="1">
+                <option>&nbsp;</option>
+              </select>
+              <a id="portUids_create" href="javascript:divertToMapping('divertCreatePort');">
+                lbCreatePort
+              </a>
+            </td>
+            <td id="portUids_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="alertType_details">
+            <td id="alertType_label" valign="top" nowrap="nowrap">
+              lbAlertType
+            </td>
+            <td>
+              <select id="alertType_value" name="alertType" size="1" onchange="serverRefresh();">
+                <option>&nbsp;</option>
+              </select>
+            </td>
+            <td id="alertType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="userDefinedAlertUids_details">
+            <td id="userDefinedAlertUids_label" valign="top" nowrap="nowrap">
+              lbUserDefinedAlertUids
+            </td>
+            <td>
+              <select id="userDefinedAlertUids_value" name="userDefinedAlert" size="1">
+                <option>&nbsp;</option>
+              </select>
+              <a id="userDefinedAlertUids_create" href="javascript:divertToMapping('divertCreateAlert');">
+                lbCreateAlert
+              </a>
+            </td>
+            <td id="userDefinedAlertUids_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+        <h4 id="suspend_heading">
+          lbSuspend
+        </h4>
+        <table border="0">
+          <tr id="dispatchInterval_details">
+            <td id="dispatchInterval_label" nowrap="nowrap">
+              lbDispatchInterval
+            </td>
+            <td>
+              <input type="text" id="dispatchInterval_value" name="dispatchInterval"/>
+            </td>
+            <td id="dispatchInterval_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="dispatchCount_details">
+            <td id="dispatchCount_label" nowrap="nowrap">
+              lbDispatchCount
+            </td>
+            <td>
+              <input type="text" id="dispatchCount_value" name="dispatchCount"/>
+            </td>
+            <td id="dispatchCount_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

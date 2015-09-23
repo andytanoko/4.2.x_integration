@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="pdip" default="build" basedir=".">
+
+  <!--  ===================================================================  -->
+  <!--  Set global properties for this build                                 -->
+  <!--  ===================================================================  -->
+  <property environment="env"/>
+  <property file="c:/my-build.properties"/>
+
+  <!--  ===================================================================  -->
+  <!--  Define the standard build target sets: build, all, default           -->
+  <!--  ===================================================================  -->
+  <target name="build" depends="init">
+    <echo message="[${layer.name}-${module.name}] Executing target:build"/>
+    <antcall target="decide.build.all"/>
+    <antcall target="decide.build.default"/>
+  </target>
+
+  <target name="default" depends="deplib,compile,package,reqlib,timestamping"/>
+
+  <!--  ===================================================================  -->
+  <!--  Initialise the build environment                                     -->
+  <!--  ===================================================================  -->
+  <target name="init"
+          depends="get.properties,
+                   define.properties,
+                   exist.timestamp,
+                   create.timestamp,
+                   select.appserver">
+    <echo message="[${layer.name}-${module.name}] Executing target:init"/>
+    <mkdir  dir="${class.dir}"/>
+    <mkdir  dir="${deplib.dir}"/>
+  </target>
+
+  <!--  ===================================================================  -->
+  <!--  Rebuild if necessary                                                 -->
+  <!--  ===================================================================  -->
+  <target name="decide.rebuild" if="rebuild">
+    <property file="${module.dir}/projects/rebuild.properties"/>
+    <condition property="no.rebuild">
+      <equals arg1="${rebuild.timestamp}" arg2="${timestamp}"/>
+    </condition>
+    <antcall target="delete.class.dir">
+      <param name="target.dir" value="${class.dir}"/>
+    </antcall>
+  </target>
+
+  <!--  ===================================================================  -->
+  <!--  Set the timestamp info                                               -->
+  <!--  ===================================================================  -->
+  <target name="create.timestamp" unless="timestamp">
+    <tstamp/>
+    <property name="timestamp" value="${DSTAMP}-${TSTAMP}"/>
+    <echo message="[${layer.name}-${module.name}] Timestamp Created=${timestamp}"/>
+  </target>
+
+  <target name="exist.timestamp" if="timestamp">
+    <echo message="[${layer.name}-${module.name}] Timestamp Exist=${timestamp}"/>
+  </target>
+
+  <!--  ===================================================================  -->
+  <!--  Select the application server                                        -->
+  <!--  ===================================================================  -->
+  <target name="select.appserver"
+          depends="select.jboss,select.weblogic,select.iplanet,select.websphere"/>
+
+  <target name="select.jboss" if="jboss.selected">
+    <echo message="[${layer.name}-${module.name}] Executing target:select.jboss"/>
+    <property name="appserver" value="jboss"/>
+    <property name="appserver.home" value="${jboss.home}"/>
+    <property name="appserver.deploy" value="${jboss.deploy}"/>
+    <property name="ejblib.dir" value="${jboss.ejblib.dir}"/>
+    <property name="ejbclient.dir" value="${jboss.ejbclient.dir}"/>
+  </target>
+
+  <target name="select.weblogic" if="weblogic.selected">
+    <echo message="[${layer.name}-${module.name}] Executing target:select.weblogic"/>
+    <property name="appserver" value="weblogic"/>
+    <property name="appserver.home" value="${weblogic.home}"/>
+    <property name="appserver.deploy" value="${weblogic.deploy}"/>
+    <property name="ejblib.dir" value="${weblogic.ejblib.dir}"/>
+    <property name="ejbclient.dir" value="${weblogic.ejbclient.dir}"/>
+  </target>
+
+  <target name="select.iplanet" if="iplanet.selected">
+    <echo message="[${layer.name}-${module.name}] Executing target:select.iplanet"/>
+    <property name="appserver" value="iplanet"/>
+    <property name="appserver.home" value="${iplanet.home}"/>
+    <property name="appserver.deploy" value="${iplanet.deploy}"/>
+    <property name="ejblib.dir" value="${iplanet.ejblib.dir}"/>
+    <property name="ejbclient.dir" value="${iplanet.ejbclient.dir}"/>
+  </target>
+
+  <target name="select.websphere" if="websphere.selected">
+    <echo message="[${layer.name}-${module.name}] Executing target:select.websphere"/>
+    <property name="appserver" value="websphere"/>
+    <property name="appserver.home" value="${websphere.home}"/>
+    <property name="appserver.deploy" value="${webshere.deploy}"/>
+    <property name="ejblib.dir" value="${websphere.ejblib.dir}"/>
+    <property name="ejbclient.dir" value="${websphere.ejbclient.dir}"/>
+  </target>
+
+  <!--  ===================================================================  -->
+  <!--  decide whether the build.properties file for this module should      -->
+  <!--  be used                                                              -->
+  <!--  ===================================================================  -->
+  <target name="get.properties">
+    <property name="global.build.path" value="."/>
+    <property file="${global.build.path}/global-build.properties"/>
+  </target>
+
+  <!--  ===================================================================  -->
+  <!--  define the environment specific properties                           -->
+  <!--  ===================================================================  -->
+  <target name="define.properties">
+    <property name="module.dir" value="./.."/>
+    <property name="config.dir" value="${module.dir}/conf"/>
+    <property name="reqlib.dir" value="${project.dir}/reqlib"/>
+    <property name="deplib.dir" value="${module.dir}/deplib"/>
+    <property name="deploy.dir" value="${module.dir}/deploy"/>
+    <property name="ejbroot.dir" value="${deploy.dir}/ejbroot"/>
+    <property name="webroot.dir" value="${deploy.dir}/webroot"/>
+    <property name="work.dir" value="${module.dir}/work"/>
+    <property name="source.dir" value="${module.dir}/src"/>
+    <property name="test.dir" value="${module.dir}/test"/>
+    <property name="web.dir" value="${module.dir}/web"/>
+    <property name="class.dir" value="${module.dir}/classes"/>
+    <property name="sqlscripts.dir" value="${module.dir}/sqlscripts"/>
+    <property name="build.dir" value="${work.dir}/build"/>
+    <property name="run.dir" value="${module.dir}/run"/>
+    <property file="./bridge-build.properties"/>
+  </target>
+
+  <!--  ===================================================================  -->
+  <!--  decide which build to perform                                        -->
+  <!--  ===================================================================  -->
+  <target name="decide.build.all" unless="build.default">
+    <!-- comment off this property if you want the sub modules to use all -->
+    <echo message="[${layer.name}-${module.name}] Executing target:decide.build.all"/>
+    <antcall target="decide.rebuild"/>
+    <antcall target="all"/>
+  </target>
+
+  <target name="decide.build.default" if="build.default">
+    <!-- comment off this property if you want the sub modules to use all -->
+    <echo message="[${layer.name}-${module.name}] Executing target:decide.build.default"/>
+    <antcall target="decide.rebuild"/>
+    <antcall target="default"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Build dependent libraries                                           -->
+  <!-- =================================================================== -->
+  <target name="deplib">
+    <echo message="[${layer.name}-${module.name}] Executing target:deplib"/>
+    <mkdir dir="${deplib.dir}"/>
+    <antcall target="deplib.init.rebuild"/>
+    <antcall target="deplib.build.1"/>
+    <antcall target="deplib.build.2"/>
+    <antcall target="deplib.build.3"/>
+    <antcall target="deplib.build.4"/>
+    <antcall target="deplib.build.5"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Initialize all classes folders of dependent libraries               -->
+  <!-- =================================================================== -->
+  <target name="deplib.init.rebuild" if="rebuild">
+    <antcall target="deplib.init.rebuild.1"/>
+    <antcall target="deplib.init.rebuild.2"/>
+    <antcall target="deplib.init.rebuild.3"/>
+    <antcall target="deplib.init.rebuild.4"/>
+    <antcall target="deplib.init.rebuild.5"/>
+  </target>
+
+  <target name="deplib.init.rebuild.1" if="deplib.module.1">
+    <property name="deplib.module.dir" value="${deplib.module.1.dir}"/>
+    <antcall target="decide.clean.deplib"/>
+  </target>
+
+  <target name="deplib.init.rebuild.2" if="deplib.module.2">
+    <property name="deplib.module.dir" value="${deplib.module.2.dir}"/>
+    <antcall target="decide.clean.deplib"/>
+  </target>
+
+  <target name="deplib.init.rebuild.3" if="deplib.module.3">
+    <property name="deplib.module.dir" value="${deplib.module.3.dir}"/>
+    <antcall target="decide.clean.deplib"/>
+  </target>
+
+  <target name="deplib.init.rebuild.4" if="deplib.module.4">
+    <property name="deplib.module.dir" value="${deplib.module.4.dir}"/>
+    <antcall target="decide.clean.deplib"/>
+  </target>
+
+  <target name="deplib.init.rebuild.5" if="deplib.module.5">
+     <property name="deplib.module.dir" value="${deplib.module.5.dir}"/>
+    <antcall target="decide.clean.deplib"/>
+  </target>
+
+  <target name="decide.clean.deplib" depends="check.timestamp">
+    <antcall target="delete.class.dir">
+      <param name="target.dir"
+             value="${deplib.module.dir}/classes"/>
+    </antcall>
+  </target>
+
+  <target name="delete.class.dir" unless="no.rebuild">
+    <delete dir="${target.dir}" failonerror="false"/>
+    <mkdir dir="${target.dir}"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Iteration targets to build dependent libraries                      -->
+  <!-- =================================================================== -->
+  <target name="deplib.build.1" if="deplib.module.1">
+    <property name="deplib.module" value="${deplib.module.1}"/>
+    <property name="deplib.module.layer" value="${deplib.module.layer.1}"/>
+    <property name="deplib.module.dir" value="${deplib.module.1.dir}"/>
+    <antcall target="decide.build.deplib"/>
+  </target>
+
+  <target name="deplib.build.2" if="deplib.module.2">
+    <property name="deplib.module" value="${deplib.module.2}"/>
+    <property name="deplib.module.layer" value="${deplib.module.layer.2}"/>
+    <property name="deplib.module.dir" value="${deplib.module.2.dir}"/>
+    <antcall target="decide.build.deplib"/>
+  </target>
+
+  <target name="deplib.build.3" if="deplib.module.3">
+    <property name="deplib.module" value="${deplib.module.3}"/>
+    <property name="deplib.module.layer" value="${deplib.module.layer.3}"/>
+    <property name="deplib.module.dir" value="${deplib.module.3.dir}"/>
+    <antcall target="decide.build.deplib"/>
+  </target>
+
+  <target name="deplib.build.4" if="deplib.module.4">
+    <property name="deplib.module" value="${deplib.module.4}"/>
+    <property name="deplib.module.layer" value="${deplib.module.layer.4}"/>
+    <property name="deplib.module.dir" value="${deplib.module.4.dir}"/>
+    <antcall target="decide.build.deplib"/>
+  </target>
+
+  <target name="deplib.build.5" if="deplib.module.5">
+    <property name="deplib.module" value="${deplib.module.5}"/>
+    <property name="deplib.module.layer" value="${deplib.module.layer.5}"/>
+    <property name="deplib.module.dir" value="${deplib.module.5.dir}"/>
+    <antcall target="decide.build.deplib"/>
+  </target>
+
+  <target name="decide.build.deplib" depends="check.timestamp">
+    <property name="from.dir" value="${deplib.module.dir}"/>
+    <property name="from.jar" value="${deplib.module.layer}-${deplib.module}*.jar,${deplib.module.layer}-${deplib.module}*.war,${deplib.module.layer}.jar"/>
+    <antcall target="deplib.build"/>
+    <antcall target="deplib.copy"/>
+    <condition property="is.top">
+      <equals arg1="${top.build.dir}" arg2="${module.dir}"/>
+    </condition>
+    <!--antcall target="deplib.dd.copy"/-->
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Check the timestamp of dependent libraries                          -->
+  <!-- =================================================================== -->
+  <target name="check.timestamp">
+    <property file="${deplib.module.dir}/projects/rebuild.properties"/>
+    <condition property="no.rebuild">
+      <equals arg1="${rebuild.timestamp}" arg2="${timestamp}"/>
+    </condition>
+    <!--antcall target="deplib.build"/-->
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Build dependent libraries                                           -->
+  <!-- =================================================================== -->
+  <target name="deplib.build" unless="no.rebuild">
+    <antcall target="deplib.build.refresh"/>
+    <echo message="[${layer.name}-${module.name}] Executing build script for [${deplib.module.layer}-${deplib.module}]"/>
+    <ant antfile="ant-build.xml" target="build" dir="${from.dir}/projects" inheritAll="false">
+      <property name="global.build.path" value="${basedir}"/>
+      <property name="build.default" value="defined"/>
+      <property name="top.build.dir" value="${top.build.dir}"/>
+      <property name="timestamp" value="${timestamp}"/>
+      <property name="application.xml.file" value="${application.xml.file}"/>
+      <property name="setup.env" value="${setup.env}"/>
+    </ant>
+    <!--antcall target="deplib.dd.copy"/-->
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Copy ant script to dependent modules                                -->
+  <!-- =================================================================== -->
+  <target name="deplib.build.refresh" description="Copy ant script to dependent modules">
+    <delete dir="${from.dir}/projects" includes="ant-build.xml" failonerror="false"/>
+    <copy todir="${from.dir}/projects" preservelastmodified="yes">
+      <fileset dir="${from.dir}/.." includes="ant-build.xml"/>
+    </copy>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Copy a dependent library to the deplib folder                       -->
+  <!-- =================================================================== -->
+  <target name="deplib.copy" description="Copy dependent libraries">
+    <copy todir="${deplib.dir}" preservelastmodified="yes">
+      <fileset dir="${from.dir}/deploy" includes="${from.jar}"/>
+      <fileset dir="${from.dir}/deplib" includes="*.jar,*.war"/>
+    </copy>
+  </target>
+
+  <!--target name="deplib.dd.copy" unless="is.top">
+    <copy todir="${top.build.dir}/deplib" preservelastmodified="yes">
+      <fileset dir="${from.dir}/projects" includes="*-dd.properties"/>
+    </copy>
+  </target-->
+
+  <!--  ===================================================================  -->
+  <!--  Compile only modified source files                                   -->
+  <!--  ===================================================================  -->
+  <target name="compile" description="Compiles only modified source files">
+    <echo message="[${layer.name}-${module.name}] Executing target:compile"/>
+    <path id="project.classpath">
+      <pathelement path="${classpath}"/>
+      <pathelement location="${class.dir}"/>
+      <pathelement location="${source.dir}"/>
+      <fileset dir="${deplib.dir}">
+        <include name="**/*.jar"/>
+      </fileset>
+      <fileset dir="${reqlib.dir}">
+        <include name="**/*.jar"/>
+      </fileset>
+      <!--  includes required libs from other components here  -->
+      <fileset dir="${ejblib.dir}">
+        <include name="**/*.jar"/>
+      </fileset>
+      <fileset dir="${ejbclient.dir}">
+        <include name="**/*.jar"/>
+      </fileset>
+    </path>
+    <javac classpathref="project.classpath" srcdir="${source.dir}" destdir="${class.dir}" includes="**/bridge/*.java"/>
+    <javac classpathref="project.classpath" srcdir="${source.dir}" destdir="${class.dir}" includes="**/helpers/*.java"/>
+    <javac classpathref="project.classpath" srcdir="${source.dir}" destdir="${class.dir}" includes="**/exceptions/*.java"/>
+    <javac classpathref="project.classpath" srcdir="${source.dir}" destdir="${class.dir}" includes="**/comminfo/*.java"/>
+
+  </target>
+
+  <!--  ===================================================================  -->
+  <!--  Packages the application/module for deployment"                      -->
+  <!--  ===================================================================  -->
+  <target name="package">
+    <echo message="[${layer.name}-${module.name}] Executing target:package"/>
+    <antcall target="package.non-ejb.jars"/>
+  </target>
+
+   <!--  ===================================================================  -->
+   <!--  Package non ejb classes into the deploy directory (jar preparation)  -->
+   <!--  ===================================================================  -->
+   <target name="package.non-ejb.jars">
+     <echo message="[${layer.name}-${module.name}] Executing target:package.non-ejb.jars"/>
+     <antcall target="package.bridge.jar"/>
+     <!--  insert calls for other non EJBs here  -->
+   </target>
+
+   <target name="package.bridge.jar">
+     <property name="jar.name" value="${module.name}.jar"/>
+     <antcall target="package.non-ejb">
+       <param name="includes"
+              value="**/bridge/**/*.class,**/helpers/*.class,**/exceptions/*.class,**/comminfo/*.class"/>
+     </antcall>
+     <jar jarfile="${deploy.dir}/${jar.name}" update="yes">
+       <fileset dir="${framework.dir}/classes" includes="**/config/*.class,**/util/*.class,**/log/*.class,**/exceptions/*.class"/>
+     </jar>
+   </target>
+
+   <!-- =================================================================== -->
+   <!-- Package non ejb classes into the deploy directory (jar preparation) -->
+   <!-- =================================================================== -->
+   <target name="package.non-ejb">
+     <condition property="jar.uptodate">
+       <and>
+         <available file="${deploy.dir}/${jar.name}" type="file"/>
+         <uptodate targetfile="${deploy.dir}/${jar.name}">
+           <srcfiles dir="${class.dir}" includes="${includes}" excludes="**/*Bean.class"/>
+         </uptodate>
+       </and>
+     </condition>
+     <condition property="all.uptodate">
+       <equals arg1="${jar.uptodate}" arg2="true"/>
+     </condition>
+     <echo message="[${layer.name}-${module.name}] ${jar.name} is uptodate:${jar.uptodate}"/>
+     <antcall target="package.non-ejb.init"/>
+   </target>
+
+   <!-- =================================================================== -->
+   <!-- Initialize the build folder                                         -->
+   <!-- =================================================================== -->
+   <target name="package.non-ejb.init" unless="jar.uptodate">
+     <antcall target="clean.build.dir"/>
+     <copy todir="${build.dir}/classes" preservelastmodified="yes">
+       <fileset dir="${class.dir}" includes="${includes}" excludes="**/*Bean.class"/>
+     </copy>
+     <antcall target="non-ejb.jar"/>
+   </target>
+
+   <!-- =================================================================== -->
+   <!-- Jar all non-ejb class files exception the Bean class                -->
+   <!-- =================================================================== -->
+   <target name="non-ejb.jar">
+     <!-- Jars all files in the class directory excluding bean classes -->
+     <jar jarfile="${deploy.dir}/${jar.name}">
+       <fileset dir="${build.dir}/classes" includes="**/*.class"/>
+     </jar>
+   </target>
+
+  <!-- =================================================================== -->
+  <!-- Deploy the application ear file to the application server           -->
+  <!-- deploy directory                                                    -->
+  <!-- =================================================================== -->
+  <target name="deploy">
+    <echo message="[${layer.name}-${module.name}] Executing target:deploy"/>
+    <antcall target="package.ejb.ear"/>
+    <copy file="${deploy.dir}/${ear.name}" tofile="${appserver.deploy}/${ear.name}" overwrite="yes"/>
+    <antcall target="setup.env"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Create the build directory structure used by compile and copy the   -->
+  <!-- deployment descriptors into it                                      -->
+  <!-- =================================================================== -->
+  <target name="clean.build.dir">
+    <delete dir="${work.dir}"/>
+    <mkdir dir="${work.dir}"/>
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${build.dir}/META-INF"/>
+    <mkdir dir="${build.dir}/classes"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Perform timestamping                                                -->
+  <!-- =================================================================== -->
+  <target name="timestamping">
+    <echo file="rebuild.properties" message="rebuild.timestamp=${timestamp}"/>
+  </target>
+
+  <target name="reqlib">
+    <condition property="is.top">
+      <equals arg1="${top.build.dir}" arg2="${module.dir}"/>
+    </condition>
+    <antcall target="reqlib.copy"/>
+  </target>
+
+  <target name="reqlib.copy" unless="is.top">
+    <copy todir="${top.build.dir}/deplib">
+       <fileset dir="${reqlib.dir}" includes="${reqlibs}"/>
+    </copy>
+  </target>
+</project>

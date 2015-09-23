@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for ExportEntityList  -->
+	<class name="com.gridnode.pdip.base.exportconfig.model.ExportEntityList">
+		<map-to xml="Entities"/>
+		<field name="Entities" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection">
+		</field>
+	</class>
+	<!--  Mapping for Rfc  -->
+	<class name="com.gridnode.gtas.server.backend.model.Rfc">
+		<map-to xml="Rfc"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="Name" type="string">
+			<xml name="Name" node="element"/>
+		</field>
+		<field name="Description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="Host" type="string">
+			<xml name="Host" node="element"/>
+		</field>
+		<field name="ConnectionType" type="string">
+			<xml name="ConnectionType" node="element"/>
+		</field>
+		<field name="PortNumber" type="integer">
+			<xml name="PortNumber" node="element"/>
+		</field>
+		<field name="UseCommandFile" type="boolean">
+			<xml name="UseCommandFile" node="element"/>
+		</field>
+		<field name="CommandFileDir" type="string">
+			<xml name="CommandFileDir" node="element"/>
+		</field>
+		<field name="CommandFile" type="string">
+			<xml name="CommandFile" node="element"/>
+		</field>
+		<field name="CommandLine" type="string">
+			<xml name="CommandLine" node="element"/>
+		</field>
+	</class>
+</mapping>

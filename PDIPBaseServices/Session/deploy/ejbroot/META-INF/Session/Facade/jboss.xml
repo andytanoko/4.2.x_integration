@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+  <secure>false</secure>
+  <resource-managers/>
+  <enterprise-beans>
+    <session>
+      <ejb-name>SessionManager</ejb-name>
+      <jndi-name>com.gridnode.pdip.base.session.facade.ejb.ISessionManagerHome</jndi-name>
+    </session>
+  </enterprise-beans>
+</jboss>

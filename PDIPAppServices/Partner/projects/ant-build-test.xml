@@ -1,0 +1,379 @@
+<project name="Partner Management" default="default" basedir=".">
+
+<!-- =================================================================== -->
+<!-- Set global properties for this build                                -->
+<!-- =================================================================== -->
+  <property environment="env"></property>
+  <property file="./build.properties"></property>
+  <property name="module.dir" value="./.."></property>
+  <property name="reqlib.dir" value="${project.dir}/reqlib"></property>
+  <property name="deplib.dir" value="${module.dir}/deplib"></property>
+
+  <!-- required for testing only -->
+  <property name="test.dir" value="${module.dir}/test"></property>
+  <property name="class.dir" value="${test.dir}/classes"></property>
+  <property name="deploy.dir" value="${module.dir}/test-deploy"></property>
+
+  <!--property name="deploy.dir" value="${module.dir}/deploy"></property-->
+  <property name="ejbroot.dir" value="${deploy.dir}/ejbroot"></property>
+  <property name="webroot.dir" value="${deploy.dir}/webroot"></property>
+  <property name="work.dir" value="${module.dir}/work"></property>
+  <property name="source.dir" value="${module.dir}/src"></property>
+  <property name="web.dir" value="${module.dir}/web"></property>
+  <!--property name="class.dir" value="${module.dir}/classes"></property -->
+  <property name="build.dir" value="${work.dir}/build"></property>
+  <property name="rebuild" value="false"></property>
+
+  <!-- required for testing only -->
+  <property name="test.dir" value="${module.dir}/test"></property>
+  <property name="class.dir" value="${test.dir}/classes"></property>
+  <property name="deploy.dir" value="${module.dir}/test-deploy"></property>
+
+
+<!-- =================================================================== -->
+<!-- Set the required classpath                                          -->
+<!-- =================================================================== -->
+  <path id="project.classpath">
+    <pathelement path="${classpath}"></pathelement>
+    <pathelement location="${class.dir}"></pathelement>
+    <pathelement location="${source.dir}"></pathelement>
+     <fileset dir="${reqlib.dir}">
+      <include name="**/*.jar"></include>
+    </fileset>
+    <fileset dir="${deplib.dir}">
+      <include name="**/*.jar"></include>
+    </fileset>
+    <fileset dir="${ejblib.dir}">
+      <include name="**/*.jar"></include>
+    </fileset>
+    <fileset dir="${ejbclient.dir}">
+      <include name="**/*.jar"></include>
+    </fileset>
+
+    <!-- required for testing only -->
+    <fileset dir="${framework.reqlib.dir}">
+      <include name="**/junit*.jar"></include>
+    </fileset>
+
+  </path>
+
+  <target name="all" depends="init, deplib.build, compile, package, deploy"/>
+  <target name="default"
+          depends="init, deplib.exclude.common, compile, package"/>
+
+<!-- =================================================================== -->
+<!-- Initialise the build environment                                    -->
+<!-- =================================================================== -->
+  <target name="init">
+    <!-- Create the time stamp   -->
+    <tstamp></tstamp>
+    <mkdir dir="${class.dir}"></mkdir>
+
+    <!-- insert calls for other dependent ant scripts here -->
+
+  </target>
+
+ <!-- =================================================================== -->
+  <!-- Build Dependent Libraries                                           -->
+  <!-- =================================================================== -->
+  <target name="deplib.exclude.common"
+          description="Build dependent libraries, excluding common ones">
+    <antcall target="deplib.build">
+      <param name="exclude.common" value="true"/>
+    </antcall>
+  </target>
+
+  <target name="deplib.build" description="Build all dependent libraries">
+    <antcall target="common-deplib"/>
+    <antcall target="other-deplib"/>
+    <antcall target="deplib.copy"/>
+  </target>
+
+  <target name="common-deplib" unless="exclude.common"
+          description="Build common dependent libraries">
+    <!-- call all common dependent ant scripts here -->
+    <ant antfile="ant-build.xml"
+         target="default"
+         dir="${framework.dir}/projects"
+         inheritAll="false"/>
+  </target>
+
+  <target name="other-deplib"
+          description="Build other dependent libraries">
+    <!-- call all other dependent ant scripts here -->
+  </target>
+
+  <target name="deplib.copy" description="Copy dependent libraries">
+    <mkdir dir="${deplib.dir}"></mkdir>
+    <!-- copy all dependent ant scripts here -->
+    <copy todir="${deplib.dir}" preservelastmodified="yes">
+      <fileset dir="${framework.dir}/deploy" includes="framework*.jar"/>
+      <!-- required for testing only -->
+      <fileset dir="${framework.dir}/deploy" includes="junit*.war"/>
+    </copy>
+  </target>
+
+
+<!-- =================================================================== -->
+<!-- Compile only modified source files                                  -->
+<!-- =================================================================== -->
+  <target name="compile" description="Compiles only modified source files">
+    <javac classpathref="project.classpath"
+      srcdir="${source.dir}"
+      destdir="${class.dir}"/>
+
+    <!-- required for testing only -->
+    <javac classpathref="project.classpath"
+      srcdir="${test.dir}"
+      destdir="${class.dir}"/>
+  </target>
+
+
+<!-- =================================================================== -->
+<!-- Packages the application/module for deployment"                     -->
+<!-- =================================================================== -->
+  <target name="package">
+    <antcall target="package.non-ejb.jars"/>
+    <antcall target="package.ejb.jars"/>
+  </target>
+
+<!-- =================================================================== -->
+<!-- Package non ejb classes into the deploy directory (jar preparation) -->
+<!-- =================================================================== -->
+  <target name="package.non-ejb.jars">
+    <antcall target="package.app.partner"/>
+    <!-- insert calls for other non EJBs here -->
+  </target>
+
+<!-- =================================================================== -->
+<!-- Package ejb classes into the deploy directory (jar preparation)     -->
+<!-- =================================================================== -->
+  <target name="package.ejb.jars">
+    <antcall target="package.app.partner.facade.bean"/>
+    <antcall target="package.app.partner.entities.bean"/>
+    <!-- insert calls for other EJBs here -->
+  </target>
+
+<!-- =================================================================== -->
+<!-- Package the non-ejb classes of the application/module               -->
+<!-- =================================================================== -->
+  <target name="package.app.partner" >
+    <antcall target="package.non-ejb" >
+        <param name="jar.name" value="app-partner.jar"/>
+    </antcall>
+  </target>
+
+<!-- =================================================================== -->
+<!-- Package the ejb classes of the application/module                   -->
+<!-- =================================================================== -->
+  <target name="package.app.partner.facade.bean" >
+    <antcall target="package.ejb" >
+        <param name="jar.name" value="app-partner-facade-ejb.jar"/>
+        <param name="meta.dir" value="${ejbroot.dir}/META-INF/PartnerFacade/"/>
+        <param name="source.path" value="${source}/"/>
+        <param name="package.path" value="com/gridnode/pdip/app/partner/ejb/"/>
+        <param name="home.class" value="IPartnerManagerHome.*"/>
+        <param name="proxy.class" value="IPartnerManagerObj.*"/>
+        <param name="bean.class" value="PartnerManagerBean.*"/>
+        <param name="depn.class" value=""/>
+    </antcall>
+  </target>
+
+  <target name="package.app.partner.entities.bean" >
+    <antcall target="package.ejb" >
+        <param name="jar.name" value="app-partner-entities-ejb.jar"/>
+        <param name="meta.dir" value="${ejbroot.dir}/META-INF/PartnerEntities/"/>
+        <param name="source.path" value="${source}/"/>
+        <param name="package.path" value="com/gridnode/pdip/app/partner/ejb/"/>
+        <param name="home.class"
+               value="IPartnerTypeLocalHome.*,
+                      IPartnerGroupLocalHome.*,
+                      IPartnerLocalHome.*"/>
+        <param name="proxy.class"
+               value="IPartnerTypeLocalObj.*,
+                      IPartnerGroupLocalObj.*,
+                      IPartnerLocalObj.*"/>
+        <param name="bean.class"
+               value="PartnerTypeBean.*,
+                      PartnerGroupBean.*,
+                      PartnerBean.*"/>
+        <param name="depn.class" value=""/>
+    </antcall>
+  </target>
+
+
+  <!-- insert calls for packaging other beans here -->
+
+
+<!-- =================================================================== -->
+<!-- Package non ejb classes into the deploy directory (jar preparation) -->
+<!-- =================================================================== -->
+  <target name="package.non-ejb">
+    <condition property="jar.uptodate">
+      <and>
+        <available file="${deploy.dir}/${jar.name}" type="file"></available>
+        <uptodate targetfile="${deploy.dir}/${jar.name}">
+          <srcfiles dir="${class.dir}">
+            <include name="**/*.class" />
+            <exclude name="**/*Bean.class" />
+          </srcfiles>
+        </uptodate>
+        <equals arg1="${rebuild}" arg2="false"></equals>
+      </and>
+    </condition>
+    <condition property="all.uptodate" >
+      <equals arg1="${jar.uptodate}" arg2="true"></equals>
+    </condition>
+    <echo message="${jar.name} is not uptodate"></echo>
+
+    <antcall target="non-ejb.jar"/>
+  </target>
+
+<!-- =================================================================== -->
+<!-- Jar all non-ejb class files exception the Bean class                -->
+<!-- =================================================================== -->
+  <target name="non-ejb.jar" unless="jar.uptodate">
+    <!-- Jars all files in the class directory excluding bean classes -->
+    <jar jarfile="${deploy.dir}/${jar.name}">
+      <fileset dir="${class.dir}" excludes="**/*Bean.class, **/*.dependency"/>
+    </jar>
+  </target>
+
+<!-- =================================================================== -->
+<!-- Package ejb classes into the deploy directory (jar preparation)     -->
+<!-- =================================================================== -->
+  <target name="package.ejb">
+    <!-- Set the bean.uptodate property to true if all conditions hold true -->
+    <condition property="bean.uptodate">
+      <and>
+        <available file="${deploy.dir}/${jar.name}" type="file"></available>
+        <uptodate targetfile="${deploy.dir}/${jar.name}">
+          <srcfiles dir="${class.dir}/${package.path}"
+                    includes="${home.class},${proxy.class},${bean.class}" />
+        </uptodate>
+        <uptodate targetfile="${deploy.dir}/${jar.name}">
+          <srcfiles dir="${meta.dir}"
+                    includes="ejb-jar.xml,${appserver}*.xml,*.MF" />
+        </uptodate>
+        <equals arg1="${rebuild}" arg2="false"></equals>
+      </and>
+    </condition>
+    <condition property="all.uptodate" >
+      <equals arg1="${bean.uptodate}" arg2="true"></equals>
+    </condition>
+    <echo message="${jar.name} is not uptodate "></echo>
+
+    <antcall target="ejb.jar"/>
+  </target>
+
+<!-- =================================================================== -->
+<!-- Copy all bean related files to build directory and jar them         -->
+<!-- =================================================================== -->
+  <target name="ejb.jar" unless="bean.uptodate">
+    <!-- Clean up the build directory -->
+    <antcall target="clean.build.dir"></antcall>
+
+    <!-- Copy all bean related files to the build directory -->
+    <mkdir dir="${build.dir}/${package.path}"></mkdir>
+    <copy todir="${build.dir}/${package.path}" >
+      <fileset dir="${class.dir}/${package.path}"
+               includes="${home.class},${proxy.class},${bean.class}" />
+    </copy>
+    <copy todir="${build.dir}/META-INF" >
+      <fileset dir="${meta.dir}">
+        <include name="ejb-jar.xml"></include>
+        <include name="${appserver}*.xml"></include>
+        <include name="*M*.*"></include>
+        <exclude name="*.bak"></exclude>
+      </fileset>
+    </copy>
+
+    <!-- Jars all files in the build directory -->
+    <jar jarfile="${deploy.dir}/${jar.name}"
+         basedir="${build.dir}"
+         manifest="${build.dir}/META-INF/MANIFEST.MF" >
+    </jar>
+  </target>
+
+<!-- =================================================================== -->
+<!-- Package the application ear file if the ear.uptodate property is    -->
+<!-- set to false                                                        -->
+<!-- =================================================================== -->
+  <target name="package.ejb.ear">
+    <condition property="ear.uptodate">
+      <and>
+        <available file="${deploy.dir}/${ear.name}" type="file"/>
+        <uptodate targetfile="${deploy.dir}/${ear.name}">
+          <srcfiles dir="${deploy.dir}">
+            <include name="**/*application.xml"/>
+            <exclude name="**/*.bak"/>
+          </srcfiles>
+        </uptodate>
+        <equals arg1="${framework.uptodate}" arg2="true"/>
+        <equals arg1="${bean.uptodate}" arg2="true"/>
+        <equals arg1="${all.uptodate}" arg2="true"/>
+      </and>
+    </condition>
+    <echo message="(${framework.uptodate},${bean.uptodate},${all.uptodate})
+                   ear.uptodate is ${ear.uptodate}"/>
+
+    <antcall target="ejb.ear"/>
+  </target>
+
+<!-- =================================================================== -->
+<!-- Generates the application ear file from the files defined in        -->
+<!-- the fileset                                                         -->
+<!-- =================================================================== -->
+  <target name="ejb.ear" unless="ear.uptodate">
+    <antcall target="clean.build.dir"/>
+
+    <copy todir="${build.dir}">
+      <fileset dir="${deploy.dir}" includes="META-INF/**/*.MF,META-INF/**/*.xml"/>
+      <fileset dir="${deploy.dir}" includes="*.jar"/>
+      <fileset dir="${deploy.dir}" includes="*.war"/>
+      <fileset dir="${deplib.dir}" includes="*.jar"/>
+      <!-- required for testing only -->
+      <fileset dir="${deplib.dir}" includes="junit*.war"/>
+
+      <!-- required for testing only -->
+      <fileset dir="${framework.dir}/../reqlib" includes="junit*.jar"></fileset>
+    </copy>
+
+    <ear earfile="${deploy.dir}/${ear.name}"
+         basedir="${build.dir}"
+         appxml="${build.dir}/META-INF/application.xml"
+         includes="*.jar,*.war,"
+         manifest="${build.dir}/META-INF/MANIFEST.MF"/>
+    <delete dir="${work.dir}"/>
+  </target>
+
+<!-- =================================================================== -->
+<!-- Package the application war file                                    -->
+<!-- =================================================================== -->
+  <target name="package.web.war">
+     <!-- not mandatory if war not required -->
+  </target>
+
+<!-- =================================================================== -->
+<!-- Deploy the application ear file to the application server           -->
+<!-- deploy directory                                                    -->
+<!-- =================================================================== -->
+  <target name="deploy">
+    <antcall target="package.ejb.ear"/>
+    <antcall target="package.web.war"/>
+    <copy file="${deploy.dir}/${ear.name}"
+          tofile="${appserver.deploy}/${ear.name}" overwrite="yes"/>
+  </target>
+
+<!-- =================================================================== -->
+<!-- Create the build directory structure used by compile and copy the   -->
+<!-- deployment descriptors into it                                      -->
+<!-- =================================================================== -->
+  <target name="clean.build.dir">
+    <delete dir="${work.dir}"></delete>
+    <mkdir dir="${work.dir}"></mkdir>
+    <mkdir dir="${build.dir}"></mkdir>
+    <mkdir dir="${build.dir}/META-INF"></mkdir>
+  </target>
+
+</project>

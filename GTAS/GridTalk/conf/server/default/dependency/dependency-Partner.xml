@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDependency name="Partner">
+  <Checker class-name="com.gridnode.gtas.server.partnerprocess.helpers.EntityDependencyChecker"
+           method-name="checkDependentBizCertMappingsForPartner">
+    <Param type="java.lang.String" getter-method="getPartnerID"/>
+  </Checker>
+  <Checker class-name="com.gridnode.gtas.server.partnerprocess.helpers.EntityDependencyChecker"
+           method-name="checkDependentProcessMappingsForPartner">
+    <Param type="java.lang.String" getter-method="getPartnerID"/>
+  </Checker>
+  <Checker class-name="com.gridnode.gtas.server.partnerprocess.helpers.EntityDependencyChecker"
+           method-name="checkDependentTriggersForPartner">
+    <Param type="java.lang.String" getter-method="getPartnerID"/>
+  </Checker>
+  <Checker class-name="com.gridnode.gtas.server.alert.helpers.EntityDependencyChecker"
+           method-name="checkDependentAlertTriggersForPartner">
+    <Param type="java.lang.String" getter-method="getPartnerID"/>
+  </Checker>
+  <Checker class-name="com.gridnode.gtas.server.document.helpers.EntityDependencyChecker"
+           method-name="checkDependentAS2DocTypeMappingForPartner">
+    <Param type="java.lang.String" getter-method="getPartnerID"/>
+  </Checker>
+</EntityDependency>

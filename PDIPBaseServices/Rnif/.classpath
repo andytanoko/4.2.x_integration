@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" output="testclasses" path="test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-Packaging"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-Security"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-Transport"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-XML"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Framework"/>
+	<classpathentry kind="var" path="J2EE_HOME/lib/j2ee.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-Certificate"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>

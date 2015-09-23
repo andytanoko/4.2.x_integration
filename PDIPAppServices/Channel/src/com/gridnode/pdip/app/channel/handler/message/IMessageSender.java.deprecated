@@ -1,0 +1,39 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2002 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: IMessageSender.java
+ *
+ ****************************************************************************
+ * Date           Author                  Changes
+ ****************************************************************************
+ * July 17 2003    Jagadeesh             Created.
+ */
+
+package com.gridnode.pdip.app.channel.handler.message;
+
+import com.gridnode.pdip.app.channel.handler.jmschannel.DispatchMessage;
+import com.gridnode.pdip.app.channel.exceptions.ChannelException;
+
+import com.gridnode.pdip.framework.exceptions.SystemException;
+/**
+ * This is a Generic Interface for all Handlers to implement to handle the
+ * message.
+ *
+ * The concrete implementation  shld know how to send a message.
+ *
+ * To be continued ....
+ */
+
+public interface IMessageSender
+{
+	public void init(MessageContext context);
+
+	public void sendMessage() throws ChannelException,SystemException;
+
+  /** @todo To include specific exceptions later. */
+  //public void sendMessage(DispatchMessage inboundMessage) throws Exception;
+
+}

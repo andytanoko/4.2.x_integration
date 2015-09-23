@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <table>
+          <tr id="daysToReminder_details">
+            <td id="daysToReminder_label">
+              lbDaysToReminder
+            </td>
+            <td>
+              <input type="text" id="daysToReminder_value" name="daysToReminder"/>
+            </td>
+            <td id="daysToReminder_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="alertToRaise_details">
+            <td id="alertToRaise_label">
+              lbAlertToRaise
+            </td>
+            <td>
+              <select id="alertToRaise_value" size="1" name="alertToRaise">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+<!-- 20030214 DDJ: Not implemented yet!
+              <a id="alertToRaise_create" href="javascript:divertToMapping('divertCreateAlert');">
+                lbCreateAlert
+              </a>
+-->
+            </td>
+            <td id="alertToRaise_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="docRecipientXpath_details">
+            <td id="docRecipientXpath_label">
+              lbDocRecipientXpath
+            </td>
+            <td>
+              <input type="text" id="docRecipientXpath_value" name="docRecipientXpath"/>
+            </td>
+            <td id="docRecipientXpath_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="docSenderXpath_details">
+            <td id="docSenderXpath_label">
+              lbDocSenderXpath
+            </td>
+            <td>
+              <input type="text" id="docSenderXpath_value" name="docSenderXpath"/>
+            </td>
+            <td id="docSenderXpath_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Partner</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <table>
+          <tr id="partnerId_details">
+            <td id="partnerId_label">
+              lbPartnerId
+            </td>
+            <td>
+              <input id="partnerId_value" type="text" name="partnerId"/>
+            </td>
+            <td id="partnerId_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="name_details">
+            <td id="name_label">
+              lbName
+            </td>
+            <td>
+              <input id="name_value" type="text" name="name"/>
+            </td>
+            <td id="name_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="description_details">
+            <td id="description_label">
+              lbDescription
+            </td>
+            <td>
+              <input id="description_value" type="text" name="description"/>
+            </td>
+            <td id="description_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="state_details">
+            <td id="state_label" valign="top">
+              lbState
+            </td>
+            <td>
+              <select id="state_value" size="1" name="state">
+              </select>
+            </td>
+            <td id="state_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="partnerType_details">
+            <td id="partnerType_label">
+              lbPartnerType
+            </td>
+            <td>
+              <select id="partnerType_value" size="1" name="partnerType" onchange="serverRefresh();">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+              <a id="partnerType_create" href="javascript:divertToMapping('divertCreatePartnerType');">
+                lbCreatePartnerType
+              </a>
+            </td>
+            <td id="partnerType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="partnerGroup_details">
+            <td id="partnerGroup_label">
+              lbPartnerGroup
+            </td>
+            <td>
+              <select id="partnerGroup_value" size="1" name="partnerGroup">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+              <a id="partnerGroup_create" href="javascript:divertToMapping('divertCreatePartnerGroup');">
+                lbCreatePartnerGroup
+              </a>
+            </td>
+            <td id="partnerGroup_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="be_details">
+            <td id="be_label">
+              lbBe
+            </td>
+            <td>
+              <select id="be_value" size="1" name="be" onchange="serverRefresh();">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+              <a id="be_create" href="javascript:divertToMapping('divertCreateBusinessEntity');">
+                lbCreateBusinessEntity
+              </a>
+            </td>
+            <td id="be_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="channel_details">
+            <td id="channel_label">
+              lbChannel
+            </td>
+            <td>
+              <select id="channel_value" size="1" name="channel">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+            </td>
+            <td id="channel_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="creator_details">
+            <td id="creator_label">
+              lbCreator
+            </td>
+            <td id="creator_value">
+              XXX
+            </td>
+            <td id="creator_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="created_details">
+            <td id="created_label">
+              lbCreated
+            </td>
+            <td id="created_value">
+              XXX
+            </td>
+            <td id="created_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

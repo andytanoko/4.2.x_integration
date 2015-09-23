@@ -1,0 +1,258 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head id="xhtml_head">
+    <base href="file:///C:\viewroot\i00054_GT_2.0_I4\GTAS\GridTalk\web/gt.css" id="base_tag"/>
+    <link id="xhtml_stylesheet" rel="stylesheet" href="gt.css" type="text/css"/>
+    <script id="include_selectUtils" language="JavaScript" src="scripts/selectUtils.js"><!----></script>
+    <script id="include_stdFormMethods" language="JavaScript" src="scripts/stdFormMethods.js"><!----></script>
+    <script id="include_dateTimePicker" language="JavaScript" src="scripts/dateTimePicker.js"><!----></script>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <script type="text/javascript"><!--
+           function clickedMonthOption(form)
+           {
+             if (form.monthOption[0].checked)
+             {
+                form.interval.disabled = false;
+                form.reverseInterval.disabled = true;
+                form.dayOfWeek.disabled = true;
+                form.weekOfMonth.disabled = true;
+             }
+             if (form.monthOption[1].checked)
+             {
+                form.interval.disabled = true;
+                form.reverseInterval.disabled = false;
+                form.dayOfWeek.disabled = true;
+                form.weekOfMonth.disabled = true;
+             }
+             if (form.monthOption[2].checked)
+             {
+                form.interval.disabled = true;
+                form.reverseInterval.disabled = true;
+                form.dayOfWeek.disabled = false;
+                form.weekOfMonth.disabled = false;
+             }
+           }
+          --></script>
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="save"/>
+        <input type="hidden" name="divertTo"/>
+        <table border="0">
+          <tr id="taskType_details">
+            <td id="taskType_label" class="fieldlabel" nowrap="nowrap" colspan="2">
+              lbTaskType
+            </td>
+            <td>
+              <select id="taskType_value" size="1" name="taskType" onchange="serverRefresh();">
+                <option>&nbsp;</option>
+              </select>
+            </td>
+            <td id="taskType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="taskId_details">
+            <td id="taskId_label" class="fieldlabel" nowrap="nowrap" colspan="2">
+              lbTaskId
+            </td>
+            <td>
+              <select size="1" id="taskId_value" name="taskId">
+                &nbsp;
+              </select>
+            </td>
+            <td id="taskId_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="isDisabled_details">
+            <td id="isDisabled_label" class="fieldlabel" nowrap="nowrap" colspan="2">
+              lbIsDisabled
+            </td>
+            <td>
+              <input type="checkbox" id="isDisabled_value" name="isDisabled"/>
+            </td>
+            <td id="isDisabled_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="frequency_details">
+            <td id="frequency_label" class="fieldlabel" nowrap="nowrap" colspan="2">
+              lbFrequency
+            </td>
+            <td>
+              <select id="frequency_value" name="frequency" size="1" onchange="serverRefresh();">
+                <option>&nbsp;</option>
+              </select>
+            </td>
+            <td id="frequency_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="minutely_details">
+            <td id="interval_label" class="fieldlabel" nowrap="nowrap" colspan="2">
+              lbMinutely
+            </td>
+            <td>
+              <input type="text" id="interval_value" name="mn_interval"/>
+            </td>
+            <td id="interval_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="hourly_details">
+            <td id="interval_label" class="fieldlabel" nowrap="nowrap" colspan="2">
+              lbHourly
+            </td>
+            <td>
+              <input type="text" id="interval_value" name="h_interval"/>
+            </td>
+            <td id="interval_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="daily_details">
+            <td id="interval_label" class="fieldlabel" nowrap="nowrap" colspan="2">
+              lbDaily
+            </td>
+            <td>
+              <input type="text" id="interval_value" name="d_interval"/>
+            </td>
+            <td id="interval_error">
+              &nbsp;
+            </td>
+          </tr>
+          <div id="weekly_details">
+            <tr id="interval_details">
+              <td id="interval_label" class="fieldlabel" nowrap="nowrap" colspan="2">
+                lbWeekly
+              </td>
+              <td>
+                <input type="text" id="interval_value" name="w_interval"/>
+              </td>
+              <td id="interval_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="daysOfWeek_details">
+              <td id="daysOfWeek_label" class="fieldlabel" nowrap="nowrap" colspan="2">
+                lbDaysOfWeek
+              </td>
+              <td colspan="2">
+                <div id="daysOfWeek_value" class="multiselector">
+                  Multiselector(nosort)
+                </div>
+              </td>
+            </tr>
+          </div>
+          <div id="monthly_details">
+            <tr>
+                <td colspan="3" id="monthOption_error">
+                  &nbsp;
+                </td>
+            </tr>
+             <tr id="monthOption_day_details">
+                <td>
+                  <input id="monthOption_value" type="radio" name="monthOption" value="day" onClick="clickedMonthOption(this.form)"/>
+                </td>
+                <td id="interval_label" class="fieldlabel" nowrap="nowrap">
+                  lbDayMonthly
+                </td>
+                <td>
+                  <input type="text" id="interval_value" name="m_interval"/>
+                </td>
+                <td id="interval_error">
+                  &nbsp;
+                </td>
+             </tr>
+             <tr id="monthOption_lastDay_details">
+                <td>
+                  <input id="monthOption_value" type="radio" name="monthOption" value="lastDay" onClick="clickedMonthOption(this.form)"/>
+                </td>
+                <td id="reverseInterval_label" class="fieldlabel" nowrap="nowrap">
+                  lbLastDayMonthly
+                </td>
+                <td>
+                  <input type="text" id="reverseInterval_value" name="reverseInterval"/>
+                </td>
+                <td id="reverseInterval_error">
+                  &nbsp;
+                </td>
+             </tr>
+             <tr id="monthOption_week_details">
+                <td>
+                  <input id="monthOption_value" type="radio" name="monthOption" value="week" onClick="clickedMonthOption(this.form)"/>
+                </td>
+                <td id="weekOfMonth_label" class="fieldlabel" nowrap="nowrap">
+                  lbWeekOfMonth
+                </td>
+                <td>
+                  <select id="weekOfMonth_value" size="1" name="weekOfMonth">
+                    <option>&nbsp;</option>
+                  </select>
+                </td>
+                <td id="weekOfMonth_error">
+                  &nbsp;
+                </td>
+             </tr>
+             <tr id="dayOfWeek_details">
+                <td>
+                  &nbsp;
+                </td>
+                <td id="dayOfWeek_label" class="fieldlabel" nowrap="nowrap">
+                  lbDayOfWeek
+                </td>
+                <td>
+                  <select id="dayOfWeek_value" size="1" name="dayOfWeek">
+                    <option>&nbsp;</option>
+                  </select>
+                </td>
+                <td id="dayOfWeek_error">
+                  &nbsp;
+                </td>
+             </tr>
+          </div>
+          <tr id="startDate_details">
+            <td id="startDate_label" class="fieldlabel" nowrap="nowrap" colspan="2">
+              lbStartDate
+            </td>
+            <td>
+              <input type="text" id="startDate_value" name="startDate"/>
+              <a href="javascript:NewCal('startDate_value','yyyyMMdd');">
+                 <img src="images/actions/cal.gif" width="16" height="16" border="0" alt="Pick"/>
+              </a>
+            </td>
+            <td id="startDate_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="runTime_details">
+            <td id="runTime_label" class="fieldlabel" nowrap="nowrap" colspan="2">
+              lbRunTime
+            </td>
+            <td>
+              <input type="text" id="runTime_value" name="runTime"/>
+            </td>
+            <td id="runTime_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="count_details">
+            <td id="count_label" class="fieldlabel" nowrap="nowrap" colspan="2">
+              lbCount
+            </td>
+            <td>
+              <input type="text" id="count_value" name="count"/>
+            </td>
+            <td id="count_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

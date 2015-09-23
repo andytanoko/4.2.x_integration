@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+	<enterprise-beans>
+		<entity>
+			<display-name>MappingFile</display-name>
+			<ejb-name>MappingFile</ejb-name>
+			<local-home>com.gridnode.pdip.app.mapper.entities.ejb.IMappingFileLocalHome</local-home>
+			<local>com.gridnode.pdip.app.mapper.entities.ejb.IMappingFileLocalObj</local>
+			<ejb-class>com.gridnode.pdip.app.mapper.entities.ejb.MappingFileBean</ejb-class>
+			<persistence-type>Bean</persistence-type>
+			<prim-key-class>java.lang.Long</prim-key-class>
+			<reentrant>False</reentrant>
+		</entity>
+		<entity>
+			<display-name>MappingRule</display-name>
+			<ejb-name>MappingRule</ejb-name>
+			<local-home>com.gridnode.pdip.app.mapper.entities.ejb.IMappingRuleLocalHome</local-home>
+			<local>com.gridnode.pdip.app.mapper.entities.ejb.IMappingRuleLocalObj</local>
+			<ejb-class>com.gridnode.pdip.app.mapper.entities.ejb.MappingRuleBean</ejb-class>
+			<persistence-type>Bean</persistence-type>
+			<prim-key-class>java.lang.Long</prim-key-class>
+			<reentrant>False</reentrant>
+		</entity>
+		<entity>
+			<display-name>XpathMapping</display-name>
+			<ejb-name>XpathMapping</ejb-name>
+			<local-home>com.gridnode.pdip.app.mapper.entities.ejb.IXpathMappingLocalHome</local-home>
+			<local>com.gridnode.pdip.app.mapper.entities.ejb.IXpathMappingLocalObj</local>
+			<ejb-class>com.gridnode.pdip.app.mapper.entities.ejb.XpathMappingBean</ejb-class>
+			<persistence-type>Bean</persistence-type>
+			<prim-key-class>java.lang.Long</prim-key-class>
+			<reentrant>False</reentrant>
+		</entity>
+		<!-- insert other entity beans here -->
+	</enterprise-beans>
+	<assembly-descriptor>
+		<container-transaction>
+			<method>
+				<ejb-name>MappingFile</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<method>
+				<ejb-name>MappingRule</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<method>
+				<ejb-name>XpathMapping</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<!-- insert other methods here -->
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
+	</assembly-descriptor>
+</ejb-jar>

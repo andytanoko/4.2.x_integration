@@ -1,0 +1,159 @@
+REM Current GT behaviour will associate the attachment list we define in the attachment dir to all the docs we want to import to GT.
+REM Add in one more option in the directory file to specify whether to associate the attachments to one doc only. This can be done 
+REM if the attachment has the folowing hierary.
+REM         doc import = c:/docImport/3C3.xml
+REM
+REM         att        = c:/att/3C3/att.txt
+REM                                /att1.txt
+REM        The attachment att.txt, att1.txt will be tag along with the 3C3,xml and be inserted into GT
+REM                        OR
+REM        att        = c:/att/3C3.xml
+REM .      Only the attachment 3C3.xml will be tag along with the 3C3.xml and be inserted into GT.
+
+
+@ECHO off
+CALL configSenderLite.bat
+
+echo ### Configurable Sender lite Attr ###
+echo import doc folder: %importFolder%
+echo attachment Folder: %attachFolder%
+
+echo docType: %docType%
+echo partner: %partner%
+
+echo GridTalk url: %gtURL%
+echo GridTalk listener: %gtListenPort%
+echo GridTalk login: %gtLogin%
+echo GridTalk password: %gtLoginPw%
+echo own be: %ownBE%
+
+echo smtp server: %smtpServer%
+echo email recipient: %emailRecipient%
+
+echo deleteAtt: %isDelAttDoc%
+echo deleteImportDoc: %isDelImportDoc%
+echo isDebug: %isDebug%
+
+SET importFilename=''
+SET filenamePrefix=''
+SET attNestedFullPath=''
+SET archivedFolder=noAttachment
+
+echo ### ###
+
+
+::List the FILES only
+FOR /F %%G IN ('dir /b /A:-D %importFolder%') DO (
+
+call :get_filename_prefix %%G
+call :set_file_to_import %%G
+call :set_att_to_send
+call :invoke_sender_lite
+
+)
+
+:: get the filename prefix for the document we want to import into GT
+:get_filename_prefix
+
+   SET filename=%1
+   SET filenameExt=%filename:*.=%
+
+   ::Now remove this from the original string
+   CALL SET filenamePrefix=%%filename:.%filenameExt%=%%
+GOTO :eof   
+   
+:set_file_to_import
+   SET importFilename=%importFolder%%1
+GOTO :eof
+
+:: Get the attachment file to send
+:set_att_to_send
+   
+   SET flag=''
+   SET attToSend=
+   SET isContainedNestedAtt=
+
+   :: Try lookup att files in %attachFolder%, only one attachment is supported
+   echo Looking for attachment with prefix: %filenamePrefix%.* in folder: %attachFolder%
+   FOR /F %%J IN ('dir /b /A:-D %attachFolder%%filenamePrefix%.*') DO (
+      echo file retrieved: %%J
+      CALL :set_filename %%J %%flag%% %%attachFolder%%
+   )
+
+   echo attachment to send %attToSend%
+   IF DEFINED attToSend (
+     GOTO :eof
+   )
+
+   :: Try nested attachment folder which is the filenamePrefix
+   :: setup att folder
+   SET attNestedFullPath=%attachFolder%%filenamePrefix%\
+   SET attToSend=
+   SET flag=''
+   
+   ::List the FILES only
+   echo Try to look for attachment under %attNestedFullPath%
+   IF EXIST %attNestedFullPath% (
+	FOR /F %%H IN ('dir /b /A:-D %attNestedFullPath%') DO (
+	    CALL :set_filename %%H %%flag%% %%attNestedFullPath%%
+	)
+   )
+
+   IF DEFINED attToSend (
+      SET isContainedNestedAtt=true
+   )
+
+   echo attachment to send %attToSend%
+GOTO :eof
+
+:: set the filename. We need to force the %attToSend% to be re-evaluated, we can't just set in the loop
+   :: %1 filename
+   :: %2 the flag which indicate whether the %attToSend% is containing any value
+   :: %3 the attachment folder path (can be the nested att folder path or att folder path)
+:set_filename
+  if %2 == '' (
+         SET attToSend=%3%1
+	 SET flag=dummy
+  ) ELSE (
+         SET attToSend=%attToSend%;%3%1
+  )
+GOTO :eof
+
+:invoke_sender_lite
+  
+  echo ######### Start invoking senderlite ###############
+  echo attachment gather %attToSend%
+  echo import gather %importFilename%
+
+  IF NOT DEFINED attToSend (
+	IF %isEnforceAttachment% == true (
+	   
+           SET archivedFolderPath=%importFolder%%archivedFolder%
+           echo %DATE% %TIME% Enforce attachment is set to true, but no attachment can be found for doc : %importFilename%. Aborting... >>log.txt
+           
+	   REM IF NOT EXIST %archivedFolderPath% (MD %archivedFolderPath%)
+	   REM MOVE %importFilename% %archivedFolderPath%
+	   REM echo Moved to folder %archivedFolderPath%
+
+	   GOTO :eof
+	)
+  ) 
+
+ 
+  java -jar %GRIDTALK_HOME%/backend/sender/senderlite.jar -I %gtURL% -O %gtListenPort% -N %gtLogin% -W %gtLoginPw% -B %ownBE% -S %smtpServer% -E %emailRecipient% -D %docType% -P %partner% -F %importFilename% -A %attToSend% %isDelImportDoc% %isDelAttDoc% %isDebug%
+
+  IF ERRORLEVEL 1 (
+           echo Error occured while invoking senderlite. Error Level : %ERRORLEVEL%
+  ) ELSE (
+          echo successfully invoke senderlite
+	  IF DEFINED isDelAttDoc (
+	     IF DEFINED isContainedNestedAtt (
+                echo start delete att folder %attachFolder%%filenamePrefix%
+		RD %attachFolder%%filenamePrefix%
+	     )
+	  )
+  )
+
+  echo #############Invoke senderlite end#################
+
+GOTO :eof

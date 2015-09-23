@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN" "http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
+<web-app>
+  <servlet>
+    <servlet-name>httpRnifServlet</servlet-name>
+    <servlet-class>com.gridnode.gridtalk.tester.loopback.RnifServlet</servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>httpRnifAckServlet</servlet-name>
+    <servlet-class>com.gridnode.gridtalk.tester.loopback.RnifAckServlet</servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>httpBackendServlet</servlet-name>
+    <servlet-class>com.gridnode.gridtalk.tester.loopback.BackendServlet</servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>httpRetBackendServlet</servlet-name>
+    <servlet-class>com.gridnode.gridtalk.tester.loopback.ReturnBackendServlet</servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>initServlet</servlet-name>
+    <servlet-class>com.gridnode.gridtalk.tester.loopback.InitServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>httpBackendServlet</servlet-name>
+    <url-pattern>/backend</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>httpRnifServlet</servlet-name>
+    <url-pattern>/rnif</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>httpRnifAckServlet</servlet-name>
+    <url-pattern>/rnifAck</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>httpRetBackendServlet</servlet-name>
+    <url-pattern>/retbackend</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
+    

@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>BizCertMapping</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <table>
+          <tr id="partnerId_details">
+            <td id="partnerId_label">
+              lbPartnerId
+            </td>
+            <td>
+              <select id="partnerId_value" name="partnerId" onchange="serverRefresh();">
+                <option value="">&nbsp;</option>
+              </select>
+              <a id="partnerId_create" href="javascript:divertToMapping('divertCreatePartner');">
+                lbCreatePartner
+              </a>
+            </td>
+            <td id="partnerId_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="partnerCert_details">
+            <td id="partnerCert_label">
+              lbPartnerCert
+            </td>
+            <td>
+              <select id="partnerCert_value" name="partnerCert">
+                <option value="">&nbsp;</option>
+              </select>
+              <a id="partnerCert_create" href="javascript:divertToMapping('divertCreateCertificate');">
+                lbCreateCertificate
+              </a>
+            </td>
+            <td id="partnerCert_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="ownCert_details">
+            <td id="ownCert_label">
+              lbOwnCert
+            </td>
+            <td>
+              <select id="ownCert_value" name="ownCert">
+                <option value="">&nbsp;</option>
+              </select>
+              <a id="ownCert_create" href="javascript:divertToMapping('divertCreateCertificate');">
+                lbCreateCertificate
+              </a>
+            </td>
+            <td id="ownCert_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

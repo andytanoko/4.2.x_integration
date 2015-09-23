@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Package SYSTEM "../../validation/dtd/xpdl.dtd">
+<Package Id="Alert">
+	<PackageHeader>
+		<XPDLVersion/>
+		<Vendor/>
+		<Created>2003-04-29 10:24:0</Created>
+	</PackageHeader>
+	<RedefinableHeader>
+		<Author>GTAS</Author>
+		<Version>1.0</Version>
+	</RedefinableHeader>
+	<Applications>
+		<Application Id="AlertAdapter">
+			<Description>Adapter to call java procedure to raise alert</Description>
+			<FormalParameters>
+				<FormalParameter Id="Param1" Index="1" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.lang.String"/>
+					</DataType>
+				</FormalParameter>
+				<FormalParameter Id="Param2" Index="2" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.lang.String"/>
+					</DataType>
+				</FormalParameter>
+				<FormalParameter Id="Param3" Index="3" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.util.Collection"/>
+					</DataType>
+				</FormalParameter>
+				<FormalParameter Id="Param4" Index="4" Mode="OUT">
+					<DataType>
+						<DeclaredType Id="java.util.Collection"/>
+					</DataType>
+				</FormalParameter>
+			</FormalParameters>
+			<ExtendedAttributes>
+				<ExtendedAttribute Name="AdapterClass" Value="com.gridnode.gtas.server.docalert.helpers.RaiseAlertDelegate"/>
+				<ExtendedAttribute Name="AdapterMethod" Value="raiseAlert"/>
+			</ExtendedAttributes>
+		</Application>
+	</Applications>
+	<WorkflowProcesses>
+		<WorkflowProcess Id="Alert">
+			<ProcessHeader/>
+			<FormalParameters>
+				<FormalParameter Id="alert.type" Index="1" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.lang.String"/>
+					</DataType>
+				</FormalParameter>
+				<FormalParameter Id="userdefined.alert" Index="2" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.lang.String"/>
+					</DataType>
+				</FormalParameter>
+				<FormalParameter Id="in.gdocs" Index="3" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.util.Collection"/>
+					</DataType>
+				</FormalParameter>
+				<FormalParameter Id="out.gdocs" Index="4" Mode="OUT">
+					<DataType>
+						<DeclaredType Id="java.util.Collection"/>
+					</DataType>
+				</FormalParameter>
+			</FormalParameters>
+			<Activities>
+				<Activity Id="START">
+					<Description>Start of Process</Description>
+					<Implementation>
+						<No/>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+				<Activity Id="END">
+					<Description>End of Process</Description>
+					<Implementation>
+						<No/>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+				<Activity Id="RaiseAlert">
+					<Description>Raise Alert</Description>
+					<Implementation>
+						<Tool Id="AlertAdapter" Type="APPLICATION">
+							<ActualParameters>
+								<ActualParameter>alert.type</ActualParameter>
+								<ActualParameter>userdefined.alert</ActualParameter>
+								<ActualParameter>in.gdocs</ActualParameter>
+								<ActualParameter>out.gdocs</ActualParameter>
+							</ActualParameters>
+						</Tool>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+			</Activities>
+			<Transitions>
+				<Transition Id="START_RaiseAlert" From="START" To="RaiseAlert"/>
+				<Transition Id="RaiseAlert_END" From="RaiseAlert" To="END"/>
+			</Transitions>
+		</WorkflowProcess>
+	</WorkflowProcesses>
+</Package>

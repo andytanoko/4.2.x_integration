@@ -1,0 +1,132 @@
+/**
+* This software is the proprietary information of GridNode Pte Ltd.
+* Use is subjected to license terms.
+*
+* Copyright 2002 (C) GridNode Pte Ltd. All Rights Reserved.
+*
+* File: AbstractMessageReceiver.java
+*
+****************************************************************************
+* Date           Author                  Changes
+****************************************************************************
+* Aug 17 2003    Jagadeesh             Created.
+*/
+
+package com.gridnode.pdip.app.channel.handler.message;
+
+import com.gridnode.pdip.app.channel.helpers.IPackage;
+import com.gridnode.pdip.app.channel.helpers.Package;
+import com.gridnode.pdip.app.channel.helpers.ChannelLogger;
+
+import com.gridnode.pdip.app.channel.helpers.IReceiveMessageHandler;
+import com.gridnode.pdip.app.channel.helpers.SecurityServiceHandler;
+import com.gridnode.pdip.app.channel.helpers.PackagingServiceHandler;
+import com.gridnode.pdip.app.channel.helpers.FlowControlServiceHandler;
+
+import com.gridnode.pdip.app.channel.handler.MessageHandlerRegistry;
+
+import com.gridnode.pdip.app.channel.model.ChannelInfo;
+import com.gridnode.pdip.app.channel.model.SecurityInfo;
+import com.gridnode.pdip.app.channel.model.PackagingInfo;
+import com.gridnode.pdip.app.channel.model.FlowControlInfo;
+
+import com.gridnode.pdip.base.transport.helpers.ITransportConstants;
+import com.gridnode.pdip.base.packaging.helper.IPackagingConstants;
+
+import com.gridnode.pdip.app.channel.exceptions.ChannelException;
+import com.gridnode.pdip.app.channel.exceptions.FlowControlException;
+import com.gridnode.pdip.base.security.exceptions.SecurityServiceException;
+
+import com.gridnode.pdip.base.transport.helpers.GNTransportPayload;
+import com.gridnode.pdip.base.packaging.exceptions.PackagingException;
+
+import com.gridnode.pdip.framework.exceptions.SystemException;
+
+import java.util.Hashtable;
+import java.io.File;
+
+public abstract class AbstractMessageReceiver implements IMessageReceiver
+{
+  private static final String CLASS_NAME = "AbstractMessageReceiver";
+  protected MessageContext messageContext = null;
+  protected ChannelInfo channelInfo = null;
+
+  public AbstractMessageReceiver()
+  {
+  }
+
+  public void init(MessageContext messageContext)
+  {
+    this.messageContext = messageContext;
+  }
+
+  public void receiveMessage() throws ChannelException,SystemException
+  {
+    try
+    {
+      GNTransportPayload transportPayLoad = (GNTransportPayload)messageContext.getAttribute(
+                              IMessageContext.INBOUND_MESSAGE);
+      channelInfo = (ChannelInfo)messageContext.getAttribute(IMessageContext.CHANNEL_INFO);
+
+      Hashtable header = transportPayLoad.getHeader();
+      String[] dataContent = transportPayLoad.getData();
+      byte[] payLoad = transportPayLoad.getFileContent();
+
+      SecurityInfo  securityInfo      = channelInfo.getSecurityProfile();
+      PackagingInfo packagingInfo     = channelInfo.getPackagingProfile();
+      FlowControlInfo flowControlInfo = channelInfo.getFlowControlInfo();
+
+      Package unProcessPackage = new Package(header,dataContent,payLoad);
+      //To Decrypt And Verify.
+      Package decryptedPackage = decryptAndVerify(securityInfo,unProcessPackage);
+      //To Perform FlowControl to handle unZip/join Split package
+      Package flowControlPackage = performPackageFlowControl(flowControlInfo,decryptedPackage);
+      //Unpackage the package. Call Base Packaging to UnPackage.
+      Package unpackagePackage = performUnPackaging(packagingInfo,flowControlPackage);
+      invokeListener(unpackagePackage);
+    }
+    catch (Exception ex)
+    {
+      ChannelLogger.errorLog(CLASS_NAME,"receiveMessage()",
+        "[Unable to Process Receive Message]",ex);
+      throw new ChannelException("["+CLASS_NAME+"][receiveMessage()]"+
+        "[Unable to Process Receive Message]");
+    }
+  }
+
+  public abstract Package decryptAndVerify(SecurityInfo secInfo,Package encryPackage)
+    throws SecurityServiceException;
+
+  public abstract Package performPackageFlowControl(FlowControlInfo info,Package packageData)
+    throws FlowControlException,Exception;
+
+  public abstract Package performUnPackaging(PackagingInfo packagingInfo,Package packageData)
+    throws PackagingException;
+
+  public abstract String[] getDefaultHeader(Hashtable header)
+    throws Exception;
+
+  public void invokeListener(Package finalPackage) throws Exception
+  {
+    if (finalPackage != null)
+    {
+      // Get the Default Header in String[]
+      String[] defaultHeader = getDefaultHeader(finalPackage.getHeader());
+
+      // Get Additional Header in Hashtable, added by Base.Packaging (if any).
+      Hashtable additionalHeader = (Hashtable)finalPackage.getValue(
+                IPackagingConstants.ADDITIONAL_HEADER);		//Get Additional Header
+      String[] unPackdataContent = finalPackage.getDataContent();
+      File[] unpackagedFiles = finalPackage.getFileContent();
+      String eventID = defaultHeader[0];
+      IReceiveMessageHandler listener = MessageHandlerRegistry.getHandlerRegistry(
+      ).getReceiveMessageHandler(eventID);
+      //Invoke BL to Process this Unpackaged data.
+      listener.handlerMessage(defaultHeader,unPackdataContent,unpackagedFiles,
+                              additionalHeader);
+    }
+    else
+      ChannelLogger.infoLog(CLASS_NAME,"performUnPackaging()","[FinalPackage is NULL]");
+  }
+
+}

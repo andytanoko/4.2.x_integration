@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RulesContainer>
+	<ConversionName>Excel</ConversionName>
+	<OutputFileExt>xml</OutputFileExt>
+	<Read>
+		<ExcelRules>
+			<DataStartRow>17</DataStartRow>
+			<DataStartCol>1</DataStartCol>
+			<DataEndCol>16</DataEndCol>
+			<Root NAME="purchaseOrder"/>
+			<Element NAME="header" TYPE="NON_DETAIL" LEVEL="1" OCCURRENCE="1">
+				<Element NAME="version" ROW="1" COLUMN="2"/>
+				<Element NAME="document" ROW="3" COLUMN="2"/>
+				<Element NAME="partnerID" ROW="5" COLUMN="2"/>
+				<Element NAME="recDate">@now</Element>
+			</Element>
+			<Element NAME="records" TYPE="NON_DETAIL" LEVEL="1" OCCURRENCE="1"/>
+			<Element NAME="record" TYPE="DETAIL" LEVEL="2" OCCURRENCE="0">
+				<Element NAME="item"/>
+				<Element NAME="cust_no"/>
+				<Element NAME="supplier_no"/>
+				<Element NAME="unit_price"/>
+				<Element NAME="quantity"/>
+				<Element NAME="amt"/>
+				<Element NAME="rec_date"/>
+				<Element NAME="cd"/>
+				<Element NAME="remarks"/>
+				<Element NAME="cust"/>
+				<Element NAME="po_no"/>
+				<Element NAME="currency"/>
+				<Element NAME="area_code"/>
+				<Element NAME="brand"/>
+				<Element NAME="ship_to_code"/>
+				<Element NAME="store"/>
+			</Element>
+		</ExcelRules>
+	</Read>
+	<Write>
+		<XSLTRules>
+			<xsl:transform version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+				<xsl:output indent="yes"/>
+				<xsl:template match="purchaseOrder">
+					<xsl:copy-of select="."/>
+				</xsl:template>
+			</xsl:transform>
+		</XSLTRules>
+	</Write>
+</RulesContainer>

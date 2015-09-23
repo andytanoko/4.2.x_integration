@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <base href="file:///C:\viewroot\i00054_GT_2.0_I4\GTAS\GridTalk\web/gt.css" id="base_tag"/>
+    <link rel="stylesheet" href="gt.css" type="text/css"/>
+    <script id="include_selectUtils" language="JavaScript" src="scripts/selectUtils.js"><!----></script>
+    <script id="include_stdFormMethods" language="JavaScript" src="scripts/stdFormMethods.js"><!----></script>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="save"/>
+        <input type="hidden" name="divertTo"/>
+        <table border="0">
+          <tr id="path_details">
+            <td id="path_label">
+              lbPath
+            </td>
+            <td>
+              <select id="path_value" size="1" name="path" onchange="serverRefresh();">
+                      <option value="">
+                        &nbsp;
+                      </option>
+              </select>
+            </td>
+            <td id="path_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="fileName_details">
+            <td id="fileName_label">
+              lbfileName
+            </td>
+            <td>
+              <select id="fileName_value" size="1" name="fileName">
+                      <option value="">
+                        &nbsp;
+                      </option>
+              </select>
+            </td>
+            <td id="fileName_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="mappingName_details">
+            <td id="mappingName_label">
+              lbmappingName
+            </td>
+            <td>
+              <input id="mappingName_value" type="text" name="id"/>
+            </td>
+            <td id="mappingName_error">
+              &nbsp;
+            </td>
+          </tr>
+		  <tr id="description_details">
+            <td id="description_label">
+              lbdescription
+            </td>
+            <td>
+              <input id="description_value" type="text" name="id"/>
+            </td>
+            <td id="description_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

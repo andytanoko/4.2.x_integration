@@ -1,0 +1,74 @@
+GRIDNODE-GTAS-GLBT-LOG-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+	enterprises				FROM RFC1155-SMI
+	DisplayString				FROM RFC1213-MIB
+	OBJECT-TYPE						FROM RFC-1212;
+
+	
+gridnode	OBJECT IDENTIFIER ::= { enterprises 27955 }
+
+gnProducts	OBJECT IDENTIFIER ::= { gridnode 1 }
+gnGtas		OBJECT IDENTIFIER ::= { gnProducts 1 }
+glbt		OBJECT IDENTIFIER ::= { gnGtas 2 }
+glbtLog	OBJECT IDENTIFIER ::= { glbt 1 }
+
+glbtLogTimestamp OBJECT-TYPE
+    SYNTAX      DisplayString
+    ACCESS  not-accessible
+    STATUS	mandatory
+    DESCRIPTION
+	"GLBT log timestamp"
+    ::= { glbtLog 1 }
+
+glbtLogThread OBJECT-TYPE
+    SYNTAX      DisplayString
+    ACCESS  not-accessible
+    STATUS	mandatory
+    DESCRIPTION
+	"GLBT log thread identifier"
+    ::= { glbtLog 2 }
+
+
+glbtLogLevel OBJECT-TYPE
+    SYNTAX      DisplayString
+    ACCESS  not-accessible
+    STATUS	mandatory
+    DESCRIPTION
+	"GLBT log level"
+    ::= { glbtLog 3 }
+
+glbtLogCategory OBJECT-TYPE
+    SYNTAX      DisplayString
+    ACCESS  not-accessible
+    STATUS	mandatory
+    DESCRIPTION
+	"GLBT component identifier"
+    ::= { glbtLog 4 }
+
+glbtLogTestId OBJECT-TYPE
+    SYNTAX      DisplayString
+    ACCESS  not-accessible
+    STATUS	mandatory
+    DESCRIPTION
+	"GLBT Test Id"
+    ::= { glbtLog 5 }
+
+
+glbtLogTestState OBJECT-TYPE
+    SYNTAX      DisplayString
+    ACCESS  not-accessible
+    STATUS	mandatory
+    DESCRIPTION
+	"GLBT Test state"
+    ::= { glbtLog 6 }
+
+glbtLogMessage OBJECT-TYPE
+    SYNTAX      DisplayString
+    ACCESS  not-accessible
+    STATUS	mandatory
+    DESCRIPTION
+	"GLBT Message"
+    ::= { glbtLog 7 }
+
+END

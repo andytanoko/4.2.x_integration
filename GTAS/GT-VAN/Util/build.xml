@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="dist" name="Util">
+    <description>This is the Util component for GtVan</description>
+    <property environment="env"/>
+	<property file="c:\gtvan-build.properties"/>
+	<property name="build.dir" value="build"/>
+	<property name="dist.dir" value="dist"/>
+
+    <!-- ================================= 
+          target: build              
+         ================================= -->
+	<target name="build">
+		<ant antfile="shared-build.xml" dir="../" inheritall="no" target="build.component">
+			<property name="build.dir" value="${build.dir}"/>
+			<property name="dist.dir" value="${dist.dir}"/>
+			<property file="./project-build.properties"/>
+		</ant>
+	</target>
+	
+	<target name="dist" depends="build" if="dist.dir" >
+	</target>
+
+</project>

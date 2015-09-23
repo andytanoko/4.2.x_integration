@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><!--JBuilder QuickDoc-->
+<HEAD>
+<TITLE>Class com.gridnode.pdip.base.worklist.manager.ejb.GWFWorkListSessionBean</TITLE><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+</HEAD>
+<BODY>
+
+<H2>
+<FONT SIZE="-1">com.gridnode.pdip.base.worklist.manager.ejb</FONT>
+<BR>Class GWFWorkListSessionBean</H2>
+<DL>
+<DT>public class <B>GWFWorkListSessionBean</B><DT>implements SessionBean
+</DL>
+<DL><DD>GWFWorkListSessionBean is a WorkList Data Access Controller Bean. It is essentially responsible to act as WorkListManager, which performs the basic services such as, 1. Insert the WorkItems. 2. Reject WorkItems. 3. Assign WorkItems. The core business logic for tasks's such as assignWorkItems() - are subject to change respective to the version.<DL><DD></DD></DL></DD>
+</DL>
+<DL></DL>
+<TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+<TR BGCOLOR="#CCCCFF"><TD COLSPAN=1><FONT SIZE="+2">
+<B>Method Detail</B>
+</FONT></TD></TR></TABLE>
+
+<H3>insertWorkItem</H3>
+<PRE>
+private void <B>insertWorkItem</B>(GWFWorkListValueEntity&nbsp;entity)</PRE>
+<DL><DD>This Method is responsible to create a WorkItem in worklistvalue table.<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>entity</CODE> - GWFWorkListValueEntity value object.</DD>
+</DL>
+<HR>
+
+<H3>removeWorkItem</H3>
+<PRE>
+public void <B>removeWorkItem</B>(GWFWorkListValueEntity&nbsp;entity)</PRE>
+<DL><DD>This Method is responsible to remove a WorkItem in worklistvalue table.<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>entity</CODE> - GWFWorkListValueEntity value object.</DD>
+</DL>
+<HR>
+
+<H3>updateWorkItem</H3>
+<PRE>
+private void <B>updateWorkItem</B>(GWFWorkListValueEntity&nbsp;entity)</PRE>
+<DL><DD>Updates the WorkItem with the the GWFWorkListValueEntity value object.<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>entity</CODE> - GWFWorkListValueEntity value object.</DD>
+</DL>
+<HR>
+
+<H3>getWorkItems</H3>
+<PRE>
+public Vector <B>getWorkItems</B>(String&nbsp;user)</PRE>
+<DL><DD>Return a Vector of GWFWorkListValueEntity value objects mataching the user criteria.<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>user</CODE> - String User Name.</DD>
+<DT><B>Returns:</B><DD>Vector of GWFWorkListValueEntity.</DD>
+</DL>
+<HR>
+
+<H3>addWorkItem</H3>
+<PRE>
+public void <B>addWorkItem</B>(GWFWorkListValueEntity&nbsp;entity)</PRE>
+<DL><DD>Add's a WorkItem with the values in GWFWorkListValueEntity value object.<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>entity</CODE> - GWFWorkListValueEntity value object.</DD>
+</DL>
+<HR>
+
+<H3>dropWorkItem</H3>
+<PRE>
+public void <B>dropWorkItem</B>(GWFWorkListValueEntity&nbsp;entity)</PRE>
+<DL><DD>Drop's a WorkItem with the values in GWFWorkListValueEntity value object.<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>entity</CODE> - GWFWorkListValueEntity value object.</DD>
+</DL>
+<HR>
+
+<H3>performWorkItem</H3>
+<PRE>
+public void <B>performWorkItem</B>(GWFWorkListValueEntity&nbsp;entity)</PRE>
+<DL><DD>Performs's a WorkItem with the values in GWFWorkListValueEntity value object. This basically represents a user executing the WorkItem.<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>entity</CODE> - GWFWorkListValueEntity value object.</DD>
+</DL>
+<HR>
+
+<H3>rejectWorkItem</H3>
+<PRE>
+public void <B>rejectWorkItem</B>(GWFWorkListValueEntity&nbsp;entity)</PRE>
+<DL><DD>Reject's a WorkItem for the GWFWorkListValueEntity. A workitem is disassociated with the any user when the reject method is called. The user who rejected this workitem., the information is stored in GWFWorkListUserEntity.<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>entity</CODE> - GWFWorkListValueEntity value object.</DD>
+</DL>
+<HR>
+
+<H3>placeWorkItem</H3>
+<PRE>
+public void <B>placeWorkItem</B>(GWFWorkListValueEntity&nbsp;entity)</PRE>
+<DL><DD>This Method places the workItem to a designated User.<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>entity</CODE> - GWFWorkListValueEntity value object.</DD>
+</DL>
+<HR>
+
+<H3>getWorkList</H3>
+<PRE>
+public Vector <B>getWorkList</B>(String&nbsp;user)</PRE>
+<DL><DD>This method returns a Vector of GWFWorkListValueEntity value object's. It queries for all workitem's matching the user as input.<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>user</CODE> - String userName for criteria for retrieval.</DD>
+<DT><B>Returns:</B><DD>Vector list of GWFWorkListValueEntity value object's.</DD>
+</DL>
+<HR>
+
+<H3>clearWorkList</H3>
+<PRE>
+public void <B>clearWorkList</B>(Vector&nbsp;entity)</PRE>
+<DL><DD>Clear's a list of workitems.<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>entity</CODE> - Vector of GWFWorkListValueEntity value object's.</DD>
+</DL>
+<HR>
+
+<H3>assignWorkItems</H3>
+<PRE>
+public Vector <B>assignWorkItems</B>(Vector&nbsp;users)</PRE>
+<DL><DD><DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>users</CODE> - </DD>
+<DT><B>Returns:</B></DL>
+<HR>
+
+</BODY>
+</HTML>

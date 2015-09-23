@@ -1,0 +1,64 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001-2003 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: DBArchiveStartupMDBean.java
+ *
+ ****************************************************************************
+ * Date      	 Author              Changes
+ ****************************************************************************
+ * Sep 19, 2004  Mahesh              Created
+ * Oct 11 2005   Neo Sok Lay         Change for J2EE compliance
+ */
+package com.gridnode.gtas.server.dbarchive.listener.ejb;
+
+import javax.ejb.MessageDrivenBean;
+import javax.ejb.MessageDrivenContext;
+import javax.jms.Message;
+import javax.jms.MessageListener;
+
+import com.gridnode.gtas.server.dbarchive.helpers.Logger;
+import com.gridnode.gtas.server.dbarchive.listener.DBArchiveListener;
+
+public class DBArchiveStartupMDBean implements MessageDrivenBean,MessageListener
+{ 
+  /**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = 4449884804149056883L;
+	private MessageDrivenContext m_context;
+  
+  public void setMessageDrivenContext(MessageDrivenContext ctx)
+  {
+    m_context = ctx;
+  }
+
+  public void ejbCreate()
+  {
+    Logger.log("[DBArchiveStartupMDBean.ejbCreate] Enter");
+  }
+
+  public void ejbRemove()
+  {
+    Logger.log("[DBArchiveStartupMDBean.ejbRemove] Enter");
+  }
+  
+  public void onMessage(Message msg)
+  {
+    Logger.log("[DBArchiveStartupMDBean.onMessage] Enter");
+    try
+    {
+      DBArchiveListener.startListening();
+    }
+    catch(Throwable th)
+    {
+      Logger.err("[DBArchiveStartupMDBean.onMessage] Error ",th);
+    }
+    finally
+    {
+      Logger.log("[DBArchiveStartupMDBean.onMessage] Exit");
+    }
+  }
+}

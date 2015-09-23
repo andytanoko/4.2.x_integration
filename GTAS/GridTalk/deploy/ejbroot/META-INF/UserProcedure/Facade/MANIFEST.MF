@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Created-By: Ant 1.4.1
+Class-Path: ./framework.jar ./base-userprocedure.jar ./gtas-document.jar ./base-xml.jar ./xerces-2.7.1.jar ./castor-0.9.9-xml.jar
+
+
+
+
+
+
+
+
+
+
+
+
+

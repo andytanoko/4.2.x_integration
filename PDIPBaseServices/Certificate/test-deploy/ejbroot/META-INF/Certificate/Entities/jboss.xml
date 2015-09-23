@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+	<secure>false</secure>
+	<resource-managers/>
+	<enterprise-beans>
+		<entity>
+			<ejb-name>CertificateEntity</ejb-name>
+			<local-jndi-name>com.gridnode.pdip.base.certificate.entities.ejb.ICertificateLocalHome</local-jndi-name>
+		</entity>
+	</enterprise-beans>
+</jboss>

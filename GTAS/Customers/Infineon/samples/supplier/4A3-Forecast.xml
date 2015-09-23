@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Pip4A3ThresholdReleaseForecastNotification>
+   <fromRole>
+      <PartnerRoleDescription>
+         <ContactInformation>
+            <contactName>
+               <FreeFormText>YEO M.L.(CONSIGN)</FreeFormText>
+            </contactName>
+            <EmailAddress>702</EmailAddress>
+            <facsimileNumber>
+               <CommunicationsNumber>60-06-2321539 / 2326743</CommunicationsNumber>
+            </facsimileNumber>
+            <telephoneNumber>
+               <CommunicationsNumber>60-06-2325266</CommunicationsNumber>
+            </telephoneNumber>
+         </ContactInformation>
+         <GlobalPartnerRoleClassificationCode>Forecast Owner</GlobalPartnerRoleClassificationCode>
+         <PartnerDescription>
+            <BusinessDescription>
+               <GlobalBusinessIdentifier>123456789</GlobalBusinessIdentifier>
+               <GlobalSupplyChainCode>Electronic Components</GlobalSupplyChainCode>
+            </BusinessDescription>
+            <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+         </PartnerDescription>
+      </PartnerRoleDescription>
+   </fromRole>
+   <GlobalDocumentFunctionCode>Request</GlobalDocumentFunctionCode>
+   <thisDocumentGenerationDateTime>
+      <DateTimeStamp>20021212T202626</DateTimeStamp>
+   </thisDocumentGenerationDateTime>
+   <thisDocumentIdentifier>
+      <ProprietaryDocumentIdentifier>2000007277</ProprietaryDocumentIdentifier>
+   </thisDocumentIdentifier>
+   <ThresholdReleaseForecast>
+      <forecastGenerationDateTime>
+         <DateTimeStamp>20021212T202626</DateTimeStamp>
+      </forecastGenerationDateTime>
+      <ForecastIdentifierReference>
+         <GlobalForecastReferenceTypeCode>Contract number</GlobalForecastReferenceTypeCode>
+         <ProprietaryReferenceIdentifier>2003</ProprietaryReferenceIdentifier>
+      </ForecastIdentifierReference>
+      <ForecastIdentifierReference>
+         <GlobalForecastReferenceTypeCode>Planning number</GlobalForecastReferenceTypeCode>
+         <ProprietaryReferenceIdentifier>beebee</ProprietaryReferenceIdentifier>
+      </ForecastIdentifierReference>
+      <ForecastIdentifierReference>
+         <GlobalForecastReferenceTypeCode>Scheduling agreement number</GlobalForecastReferenceTypeCode>
+         <ProprietaryReferenceIdentifier>ZB</ProprietaryReferenceIdentifier>
+      </ForecastIdentifierReference>
+      <ForecastIdentifierReference>
+         <GlobalForecastReferenceTypeCode>Contract number</GlobalForecastReferenceTypeCode>
+         <ProprietaryReferenceIdentifier>2000007277</ProprietaryReferenceIdentifier>
+      </ForecastIdentifierReference>
+      <GlobalTransportEventCode>Ship</GlobalTransportEventCode>
+      <isFinalForecast>
+         <AffirmationIndicator>Yes</AffirmationIndicator>
+      </isFinalForecast>
+      <PartnerProductForecast>
+         <ForecastPartner>
+            <GlobalPartnerReferenceTypeCode>Sold to</GlobalPartnerReferenceTypeCode>
+            <PartnerDescription>
+               <BusinessDescription>
+                  <businessName>
+                     <FreeFormText>Infineon Technologies (Malaysia) Sdn. Bhd. (56645-D)    </FreeFormText>
+                  </businessName>
+               </BusinessDescription>
+               <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+               <ContactInformation>
+                  <contactName>
+                     <FreeFormText>M04</FreeFormText>
+                  </contactName>
+               </ContactInformation>
+            </PartnerDescription>
+         </ForecastPartner>
+         <ForecastPartner>
+            <GlobalPartnerReferenceTypeCode>Manufactured by</GlobalPartnerReferenceTypeCode>
+            <PartnerDescription>
+               <BusinessDescription>
+                  <businessName>
+                     <FreeFormText>0000011114</FreeFormText>
+                  </businessName>
+               </BusinessDescription>
+               <GlobalPartnerClassificationCode>Manufacturer</GlobalPartnerClassificationCode>
+               <ContactInformation>
+                  <contactName>
+                     <FreeFormText>M04</FreeFormText>
+                  </contactName>
+               </ContactInformation>
+            </PartnerDescription>
+         </ForecastPartner>
+         <ProductForecast>
+            <ForecastProductInventory>
+               <GlobalForecastInventoryTypeCode>Minimum Inventory Target</GlobalForecastInventoryTypeCode>
+               <ProductInventory>400.000</ProductInventory>
+            </ForecastProductInventory>
+            <ForecastProductInventory>
+               <GlobalForecastInventoryTypeCode>Cumulative Quantity Received</GlobalForecastInventoryTypeCode>
+               <ProductInventory>150.000</ProductInventory>
+            </ForecastProductInventory>
+            <ForecastProductInventory>
+               <GlobalForecastInventoryTypeCode>Maximum Inventory Target</GlobalForecastInventoryTypeCode>
+               <ProductInventory>      1000.000</ProductInventory>
+            </ForecastProductInventory>
+            <GlobalProductUnitOfMeasureCode>Piece</GlobalProductUnitOfMeasureCode>
+            <productForecastIdentifier>
+               <ForecastIdentifierReference>
+                  <GlobalForecastReferenceTypeCode>Contract number</GlobalForecastReferenceTypeCode>
+                  <LineNumber>00010</LineNumber>
+                  <ProprietaryReferenceIdentifier>2000007277</ProprietaryReferenceIdentifier>
+               </ForecastIdentifierReference>
+            </productForecastIdentifier>
+            <ProductIdentification>
+               <PartnerProductIdentification>
+                  <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+                  <ProprietaryProductIdentifier>000000000025047699</ProprietaryProductIdentifier>
+                  <revisionIdentifier>
+                     <FreeFormText>FR A6531-C2 AKN (TO218/5L)</FreeFormText>
+                  </revisionIdentifier>
+               </PartnerProductIdentification>
+            </ProductIdentification>
+            <ProductSchedule>
+               <ForecastProductSchedule>
+                  <ForecastPeriod>
+                     <DatePeriod>
+                        <beginDate>
+                           <DateStamp>20021230</DateStamp>
+                        </beginDate>
+                        <endDate>
+                           <DateStamp>20030105</DateStamp>
+                        </endDate>
+                     </DatePeriod>
+                     <GlobalForecastIntervalCode>Week</GlobalForecastIntervalCode>
+                  </ForecastPeriod>
+                  <ForecastProductInventory>
+                     <GlobalForecastInventoryTypeCode>Minimum Inventory Target</GlobalForecastInventoryTypeCode>
+                     <ProductInventory>250</ProductInventory>
+                  </ForecastProductInventory>
+                  <ProductQuantity>100</ProductQuantity>
+                  <scheduleProductForecastIdentifier>
+                     <ForecastIdentifierReference>
+                        <GlobalForecastReferenceTypeCode>Contract number</GlobalForecastReferenceTypeCode>
+                        <ProprietaryReferenceIdentifier>01</ProprietaryReferenceIdentifier>
+                     </ForecastIdentifierReference>
+                  </scheduleProductForecastIdentifier>
+               </ForecastProductSchedule>
+               <ForecastProductSchedule>
+                  <ForecastPeriod>
+                     <DatePeriod>
+                        <beginDate>
+                           <DateStamp>20021230</DateStamp>
+                        </beginDate>
+                        <endDate>
+                           <DateStamp>20030105</DateStamp>
+                        </endDate>
+                     </DatePeriod>
+                     <GlobalForecastIntervalCode>Week</GlobalForecastIntervalCode>
+                  </ForecastPeriod>
+                  <ForecastProductInventory>
+                     <GlobalForecastInventoryTypeCode>Maximum Inventory Target</GlobalForecastInventoryTypeCode>
+                     <ProductInventory>150</ProductInventory>
+                  </ForecastProductInventory>
+                  <ProductQuantity>100</ProductQuantity>
+               </ForecastProductSchedule>
+               <OrderForecastQuantityTypeCode>Discrete Net Demand</OrderForecastQuantityTypeCode>
+            </ProductSchedule>
+            <ProductSchedule>
+               <ForecastProductSchedule>
+                  <ForecastPeriod>
+                     <DatePeriod>
+                        <beginDate>
+                           <DateStamp>20030106</DateStamp>
+                        </beginDate>
+                        <endDate>
+                           <DateStamp>20030112</DateStamp>
+                        </endDate>
+                     </DatePeriod>
+                     <GlobalForecastIntervalCode>Week</GlobalForecastIntervalCode>
+                  </ForecastPeriod>
+                  <ForecastProductInventory>
+                     <GlobalForecastInventoryTypeCode>Minimum Inventory Target</GlobalForecastInventoryTypeCode>
+                     <ProductInventory>125</ProductInventory>
+                  </ForecastProductInventory>
+                  <ProductQuantity>50</ProductQuantity>
+                  <scheduleProductForecastIdentifier>
+                     <ForecastIdentifierReference>
+                        <GlobalForecastReferenceTypeCode>Contract number</GlobalForecastReferenceTypeCode>
+                        <ProprietaryReferenceIdentifier>02</ProprietaryReferenceIdentifier>
+                     </ForecastIdentifierReference>
+                  </scheduleProductForecastIdentifier>
+               </ForecastProductSchedule>
+               <ForecastProductSchedule>
+                  <ForecastPeriod>
+                     <DatePeriod>
+                        <beginDate>
+                           <DateStamp>20030106</DateStamp>
+                        </beginDate>
+                        <endDate>
+                           <DateStamp>20030112</DateStamp>
+                        </endDate>
+                     </DatePeriod>
+                     <GlobalForecastIntervalCode>Week</GlobalForecastIntervalCode>
+                  </ForecastPeriod>
+                  <ForecastProductInventory>
+                     <GlobalForecastInventoryTypeCode>Maximum Inventory Target</GlobalForecastInventoryTypeCode>
+                     <ProductInventory>75</ProductInventory>
+                  </ForecastProductInventory>
+                  <ProductQuantity>50</ProductQuantity>
+               </ForecastProductSchedule>
+               <OrderForecastQuantityTypeCode>Discrete Net Demand</OrderForecastQuantityTypeCode>
+            </ProductSchedule>
+            <ProductSchedule>
+               <ForecastProductSchedule>
+                  <ForecastPeriod>
+                     <DatePeriod>
+                        <beginDate>
+                           <DateStamp>20030113</DateStamp>
+                        </beginDate>
+                        <endDate>
+                           <DateStamp>20030119</DateStamp>
+                        </endDate>
+                     </DatePeriod>
+                     <GlobalForecastIntervalCode>Week</GlobalForecastIntervalCode>
+                  </ForecastPeriod>
+                  <ForecastProductInventory>
+                     <GlobalForecastInventoryTypeCode>Minimum Inventory Target</GlobalForecastInventoryTypeCode>
+                     <ProductInventory>250</ProductInventory>
+                  </ForecastProductInventory>
+                  <ProductQuantity>100</ProductQuantity>
+                  <scheduleProductForecastIdentifier>
+                     <ForecastIdentifierReference>
+                        <GlobalForecastReferenceTypeCode>Contract number</GlobalForecastReferenceTypeCode>
+                        <ProprietaryReferenceIdentifier>03</ProprietaryReferenceIdentifier>
+                     </ForecastIdentifierReference>
+                  </scheduleProductForecastIdentifier>
+               </ForecastProductSchedule>
+               <ForecastProductSchedule>
+                  <ForecastPeriod>
+                     <DatePeriod>
+                        <beginDate>
+                           <DateStamp>20030113</DateStamp>
+                        </beginDate>
+                        <endDate>
+                           <DateStamp>20030119</DateStamp>
+                        </endDate>
+                     </DatePeriod>
+                     <GlobalForecastIntervalCode>Week</GlobalForecastIntervalCode>
+                  </ForecastPeriod>
+                  <ForecastProductInventory>
+                     <GlobalForecastInventoryTypeCode>Maximum Inventory Target</GlobalForecastInventoryTypeCode>
+                     <ProductInventory>150</ProductInventory>
+                  </ForecastProductInventory>
+                  <ProductQuantity>100</ProductQuantity>
+               </ForecastProductSchedule>
+               <OrderForecastQuantityTypeCode>Discrete Net Demand</OrderForecastQuantityTypeCode>
+            </ProductSchedule>
+         </ProductForecast>
+         <ProductForecast>
+            <ForecastProductInventory>
+               <GlobalForecastInventoryTypeCode>Minimum Inventory Target</GlobalForecastInventoryTypeCode>
+               <ProductInventory>320.000</ProductInventory>
+            </ForecastProductInventory>
+            <ForecastProductInventory>
+               <GlobalForecastInventoryTypeCode>Cumulative Quantity Received</GlobalForecastInventoryTypeCode>
+               <ProductInventory>170.000</ProductInventory>
+            </ForecastProductInventory>
+            <ForecastProductInventory>
+               <GlobalForecastInventoryTypeCode>Maximum Inventory Target</GlobalForecastInventoryTypeCode>
+               <ProductInventory>      1000.000</ProductInventory>
+            </ForecastProductInventory>
+            <GlobalProductUnitOfMeasureCode>Inch</GlobalProductUnitOfMeasureCode>
+            <productForecastIdentifier>
+               <ForecastIdentifierReference>
+                  <GlobalForecastReferenceTypeCode>Contract number</GlobalForecastReferenceTypeCode>
+                  <LineNumber>00020</LineNumber>
+                  <ProprietaryReferenceIdentifier>2000007277</ProprietaryReferenceIdentifier>
+               </ForecastIdentifierReference>
+            </productForecastIdentifier>
+            <ProductIdentification>
+               <PartnerProductIdentification>
+                  <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+                  <ProprietaryProductIdentifier>000000000025047707</ProprietaryProductIdentifier>
+                  <revisionIdentifier>
+                     <FreeFormText>FR A6503-C22AKNI/AKNT(TO220/3L STD)</FreeFormText>
+                  </revisionIdentifier>
+               </PartnerProductIdentification>
+            </ProductIdentification>
+            <ProductSchedule>
+               <ForecastProductSchedule>
+                  <ForecastPeriod>
+                     <DatePeriod>
+                        <beginDate>
+                           <DateStamp>20030106</DateStamp>
+                        </beginDate>
+                        <endDate>
+                           <DateStamp>20030112</DateStamp>
+                        </endDate>
+                     </DatePeriod>
+                     <GlobalForecastIntervalCode>Week</GlobalForecastIntervalCode>
+                  </ForecastPeriod>
+                  <ForecastProductInventory>
+                     <GlobalForecastInventoryTypeCode>Minimum Inventory Target</GlobalForecastInventoryTypeCode>
+                     <ProductInventory>140</ProductInventory>
+                  </ForecastProductInventory>
+                  <ProductQuantity>70</ProductQuantity>
+                  <scheduleProductForecastIdentifier>
+                     <ForecastIdentifierReference>
+                        <GlobalForecastReferenceTypeCode>Contract number</GlobalForecastReferenceTypeCode>
+                        <ProprietaryReferenceIdentifier>02</ProprietaryReferenceIdentifier>
+                     </ForecastIdentifierReference>
+                  </scheduleProductForecastIdentifier>
+               </ForecastProductSchedule>
+               <ForecastProductSchedule>
+                  <ForecastPeriod>
+                     <DatePeriod>
+                        <beginDate>
+                           <DateStamp>20030106</DateStamp>
+                        </beginDate>
+                        <endDate>
+                           <DateStamp>20030112</DateStamp>
+                        </endDate>
+                     </DatePeriod>
+                     <GlobalForecastIntervalCode>Week</GlobalForecastIntervalCode>
+                  </ForecastPeriod>
+                  <ForecastProductInventory>
+                     <GlobalForecastInventoryTypeCode>Maximum Inventory Target</GlobalForecastInventoryTypeCode>
+                     <ProductInventory>70</ProductInventory>
+                  </ForecastProductInventory>
+                  <ProductQuantity>70</ProductQuantity>
+               </ForecastProductSchedule>
+               <OrderForecastQuantityTypeCode>Discrete Net Demand</OrderForecastQuantityTypeCode>
+            </ProductSchedule>
+            <ProductSchedule>
+               <ForecastProductSchedule>
+                  <ForecastPeriod>
+                     <DatePeriod>
+                        <beginDate>
+                           <DateStamp>20030113</DateStamp>
+                        </beginDate>
+                        <endDate>
+                           <DateStamp>20030119</DateStamp>
+                        </endDate>
+                     </DatePeriod>
+                     <GlobalForecastIntervalCode>Week</GlobalForecastIntervalCode>
+                  </ForecastPeriod>
+                  <ForecastProductInventory>
+                     <GlobalForecastInventoryTypeCode>Minimum Inventory Target</GlobalForecastInventoryTypeCode>
+                     <ProductInventory>160</ProductInventory>
+                  </ForecastProductInventory>
+                  <ProductQuantity>80</ProductQuantity>
+                  <scheduleProductForecastIdentifier>
+                     <ForecastIdentifierReference>
+                        <GlobalForecastReferenceTypeCode>Contract number</GlobalForecastReferenceTypeCode>
+                        <ProprietaryReferenceIdentifier>03</ProprietaryReferenceIdentifier>
+                     </ForecastIdentifierReference>
+                  </scheduleProductForecastIdentifier>
+               </ForecastProductSchedule>
+               <ForecastProductSchedule>
+                  <ForecastPeriod>
+                     <DatePeriod>
+                        <beginDate>
+                           <DateStamp>20030113</DateStamp>
+                        </beginDate>
+                        <endDate>
+                           <DateStamp>20030119</DateStamp>
+                        </endDate>
+                     </DatePeriod>
+                     <GlobalForecastIntervalCode>Week</GlobalForecastIntervalCode>
+                  </ForecastPeriod>
+                  <ForecastProductInventory>
+                     <GlobalForecastInventoryTypeCode>Maximum Inventory Target</GlobalForecastInventoryTypeCode>
+                     <ProductInventory>80</ProductInventory>
+                  </ForecastProductInventory>
+                  <ProductQuantity>80</ProductQuantity>
+               </ForecastProductSchedule>
+               <OrderForecastQuantityTypeCode>Discrete Net Demand</OrderForecastQuantityTypeCode>
+            </ProductSchedule>
+         </ProductForecast>
+         <ProductForecast>
+            <ForecastProductInventory>
+               <GlobalForecastInventoryTypeCode>Minimum Inventory Target</GlobalForecastInventoryTypeCode>
+               <ProductInventory>470.000</ProductInventory>
+            </ForecastProductInventory>
+            <ForecastProductInventory>
+               <GlobalForecastInventoryTypeCode>Cumulative Quantity Received</GlobalForecastInventoryTypeCode>
+               <ProductInventory>100.000</ProductInventory>
+            </ForecastProductInventory>
+            <ForecastProductInventory>
+               <GlobalForecastInventoryTypeCode>Maximum Inventory Target</GlobalForecastInventoryTypeCode>
+               <ProductInventory>      1000.000</ProductInventory>
+            </ForecastProductInventory>
+            <GlobalProductUnitOfMeasureCode>Degree celsius</GlobalProductUnitOfMeasureCode>
+            <productForecastIdentifier>
+               <ForecastIdentifierReference>
+                  <GlobalForecastReferenceTypeCode>Contract number</GlobalForecastReferenceTypeCode>
+                  <LineNumber>00030</LineNumber>
+                  <ProprietaryReferenceIdentifier>2000007277</ProprietaryReferenceIdentifier>
+               </ForecastIdentifierReference>
+            </productForecastIdentifier>
+            <ProductIdentification>
+               <PartnerProductIdentification>
+                  <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+                  <ProprietaryProductIdentifier>000000000025047702</ProprietaryProductIdentifier>
+                  <revisionIdentifier>
+                     <FreeFormText>FR A6508-C22 AKN(TO220/7L)</FreeFormText>
+                  </revisionIdentifier>
+               </PartnerProductIdentification>
+            </ProductIdentification>
+            <ProductSchedule>
+               <ForecastProductSchedule>
+                  <ForecastPeriod>
+                     <DatePeriod>
+                        <beginDate>
+                           <DateStamp>20021230</DateStamp>
+                        </beginDate>
+                        <endDate>
+                           <DateStamp>20030105</DateStamp>
+                        </endDate>
+                     </DatePeriod>
+                     <GlobalForecastIntervalCode>Week</GlobalForecastIntervalCode>
+                  </ForecastPeriod>
+                  <ForecastProductInventory>
+                     <GlobalForecastInventoryTypeCode>Minimum Inventory Target</GlobalForecastInventoryTypeCode>
+                     <ProductInventory>600</ProductInventory>
+                  </ForecastProductInventory>
+                  <ProductQuantity>200</ProductQuantity>
+                  <scheduleProductForecastIdentifier>
+                     <ForecastIdentifierReference>
+                        <GlobalForecastReferenceTypeCode>Contract number</GlobalForecastReferenceTypeCode>
+                        <ProprietaryReferenceIdentifier>01</ProprietaryReferenceIdentifier>
+                     </ForecastIdentifierReference>
+                  </scheduleProductForecastIdentifier>
+               </ForecastProductSchedule>
+               <ForecastProductSchedule>
+                  <ForecastPeriod>
+                     <DatePeriod>
+                        <beginDate>
+                           <DateStamp>20021230</DateStamp>
+                        </beginDate>
+                        <endDate>
+                           <DateStamp>20030105</DateStamp>
+                        </endDate>
+                     </DatePeriod>
+                     <GlobalForecastIntervalCode>Week</GlobalForecastIntervalCode>
+                  </ForecastPeriod>
+                  <ForecastProductInventory>
+                     <GlobalForecastInventoryTypeCode>Maximum Inventory Target</GlobalForecastInventoryTypeCode>
+                     <ProductInventory>400</ProductInventory>
+                  </ForecastProductInventory>
+                  <ProductQuantity>200</ProductQuantity>
+               </ForecastProductSchedule>
+               <OrderForecastQuantityTypeCode>Discrete Net Demand</OrderForecastQuantityTypeCode>
+            </ProductSchedule>
+            <ProductSchedule>
+               <ForecastProductSchedule>
+                  <ForecastPeriod>
+                     <DatePeriod>
+                        <beginDate>
+                           <DateStamp>20030106</DateStamp>
+                        </beginDate>
+                        <endDate>
+                           <DateStamp>20030112</DateStamp>
+                        </endDate>
+                     </DatePeriod>
+                     <GlobalForecastIntervalCode>Week</GlobalForecastIntervalCode>
+                  </ForecastPeriod>
+                  <ForecastProductInventory>
+                     <GlobalForecastInventoryTypeCode>Minimum Inventory Target</GlobalForecastInventoryTypeCode>
+                     <ProductInventory>240</ProductInventory>
+                  </ForecastProductInventory>
+                  <ProductQuantity>80</ProductQuantity>
+                  <scheduleProductForecastIdentifier>
+                     <ForecastIdentifierReference>
+                        <GlobalForecastReferenceTypeCode>Contract number</GlobalForecastReferenceTypeCode>
+                        <ProprietaryReferenceIdentifier>02</ProprietaryReferenceIdentifier>
+                     </ForecastIdentifierReference>
+                  </scheduleProductForecastIdentifier>
+               </ForecastProductSchedule>
+               <ForecastProductSchedule>
+                  <ForecastPeriod>
+                     <DatePeriod>
+                        <beginDate>
+                           <DateStamp>20030106</DateStamp>
+                        </beginDate>
+                        <endDate>
+                           <DateStamp>20030112</DateStamp>
+                        </endDate>
+                     </DatePeriod>
+                     <GlobalForecastIntervalCode>Week</GlobalForecastIntervalCode>
+                  </ForecastPeriod>
+                  <ForecastProductInventory>
+                     <GlobalForecastInventoryTypeCode>Maximum Inventory Target</GlobalForecastInventoryTypeCode>
+                     <ProductInventory>160</ProductInventory>
+                  </ForecastProductInventory>
+                  <ProductQuantity>80</ProductQuantity>
+               </ForecastProductSchedule>
+               <OrderForecastQuantityTypeCode>Discrete Net Demand</OrderForecastQuantityTypeCode>
+            </ProductSchedule>
+            <ProductSchedule>
+               <ForecastProductSchedule>
+                  <ForecastPeriod>
+                     <DatePeriod>
+                        <beginDate>
+                           <DateStamp>20030113</DateStamp>
+                        </beginDate>
+                        <endDate>
+                           <DateStamp>20030119</DateStamp>
+                        </endDate>
+                     </DatePeriod>
+                     <GlobalForecastIntervalCode>Week</GlobalForecastIntervalCode>
+                  </ForecastPeriod>
+                  <ForecastProductInventory>
+                     <GlobalForecastInventoryTypeCode>Minimum Inventory Target</GlobalForecastInventoryTypeCode>
+                     <ProductInventory>270</ProductInventory>
+                  </ForecastProductInventory>
+                  <ProductQuantity>90</ProductQuantity>
+                  <scheduleProductForecastIdentifier>
+                     <ForecastIdentifierReference>
+                        <GlobalForecastReferenceTypeCode>Contract number</GlobalForecastReferenceTypeCode>
+                        <ProprietaryReferenceIdentifier>03</ProprietaryReferenceIdentifier>
+                     </ForecastIdentifierReference>
+                  </scheduleProductForecastIdentifier>
+               </ForecastProductSchedule>
+               <ForecastProductSchedule>
+                  <ForecastPeriod>
+                     <DatePeriod>
+                        <beginDate>
+                           <DateStamp>20030113</DateStamp>
+                        </beginDate>
+                        <endDate>
+                           <DateStamp>20030119</DateStamp>
+                        </endDate>
+                     </DatePeriod>
+                     <GlobalForecastIntervalCode>Week</GlobalForecastIntervalCode>
+                  </ForecastPeriod>
+                  <ForecastProductInventory>
+                     <GlobalForecastInventoryTypeCode>Maximum Inventory Target</GlobalForecastInventoryTypeCode>
+                     <ProductInventory>180</ProductInventory>
+                  </ForecastProductInventory>
+                  <ProductQuantity>90</ProductQuantity>
+               </ForecastProductSchedule>
+               <OrderForecastQuantityTypeCode>Discrete Net Demand</OrderForecastQuantityTypeCode>
+            </ProductSchedule>
+         </ProductForecast>
+      </PartnerProductForecast>
+   </ThresholdReleaseForecast>
+   <toRole>
+      <PartnerRoleDescription>
+         <ContactInformation>
+            <contactName>
+               <FreeFormText>MR. ALLEN LOW</FreeFormText>
+            </contactName>
+            <EmailAddress>M04</EmailAddress>
+            <facsimileNumber>
+               <CommunicationsNumber>04-6426011</CommunicationsNumber>
+            </facsimileNumber>
+            <telephoneNumber>
+               <CommunicationsNumber>04-6415911</CommunicationsNumber>
+            </telephoneNumber>
+         </ContactInformation>
+         <GlobalPartnerRoleClassificationCode>Forecast Recipient</GlobalPartnerRoleClassificationCode>
+         <PartnerDescription>
+            <BusinessDescription>
+               <GlobalBusinessIdentifier>555555555</GlobalBusinessIdentifier>
+               <GlobalSupplyChainCode>Electronic Components</GlobalSupplyChainCode>
+            </BusinessDescription>
+            <GlobalPartnerClassificationCode>Manufacturer</GlobalPartnerClassificationCode>
+         </PartnerDescription>
+      </PartnerRoleDescription>
+   </toRole>
+</Pip4A3ThresholdReleaseForecastNotification>

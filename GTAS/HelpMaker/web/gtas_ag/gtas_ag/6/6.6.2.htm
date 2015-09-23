@@ -1,0 +1,188 @@
+<html>
+<head>
+<title>6.6.2 Alert Triggers and Criteria Evaluation </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>6.6.2 Alert Triggers and Criteria Evaluation </h3>
+<p><span></span>
+</p>
+<p><span>Alert Triggers exist at 5 levels, from Level 0 to Level 4, with each level having its own defined set of criteria for an Alert Trigger at that level to be in effect. Criteria become more stringent as it goes up a level. Level 1-4 Alert Triggers are applicable only to Alert Types in the Document Event, Processing Errors, and User Specific areas.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><i><span>Criteria Evaluation</span>
+</i>
+</b>
+<b><span>:</span>
+</b>
+</p>
+<p><span>The following table lists the set of criteria evaluated for each level:</span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' width='100%' border='1' cellpadding='0'><tr><td width='10%' valign='top'><p><b><span>Level</span>
+</b>
+</p>
+</td>
+<td width='57%' valign='top'><p><b><span>Criteria</span>
+</b>
+</p>
+</td>
+<td width='31%' valign='top'><p><b><span>Evaluation Sequence</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='10%' valign='top'><p><span>0</span>
+</p>
+</td>
+<td width='57%' valign='top'><p><span>No criterion.</span>
+</p>
+</td>
+<td width='31%' valign='top'><p><span>5</span>
+</p>
+</td>
+</tr>
+<tr><td width='10%' valign='top'><p><span>1</span>
+</p>
+</td>
+<td width='57%' valign='top'><p><span>Document Type</span>
+</p>
+</td>
+<td width='31%' valign='top'><p><span>4</span>
+</p>
+</td>
+</tr>
+<tr><td width='10%' valign='top'><p><span>2</span>
+</p>
+</td>
+<td width='57%' valign='top'><p><span>Document Type + Partner Type</span>
+</p>
+</td>
+<td width='31%' valign='top'><p><span>3</span>
+</p>
+</td>
+</tr>
+<tr><td width='10%' valign='top'><p><span>3</span>
+</p>
+</td>
+<td width='57%' valign='top'><p><span>Document Type + Partner Type + Partner Group</span>
+</p>
+</td>
+<td width='31%' valign='top'><p><span>2</span>
+</p>
+</td>
+</tr>
+<tr><td width='10%' valign='top'><p><span>4</span>
+</p>
+</td>
+<td width='57%' valign='top'><p><span>Document Type + Partner</span>
+</p>
+</td>
+<td width='31%' valign='top'><p><span>1</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><span>Criteria evaluation is done from the highest level (Level 4) to the lowest level (Level 0). Generally, if a match is not found at a level, the next lower level criteria is evaluated and if a match is found then that Alert Trigger will be in effect. Otherwise, the next lower level criteria are again evaluated until a match is found or until the lowest level is reached. If at Level 0, there is an Alert Trigger configured for the relevant Alert Type, then the Level 0 Alert Trigger will be in effect. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>For Level 1-4, the criteria are evaluated against the document relevant for raising the alert. The document fields used for evaluation depends on the Folder that the document is residing in:</span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' width='100%' border='1' cellpadding='0'><tr><td width='24%' valign='top'><p><b><span>Criterion Field</span>
+</b>
+</p>
+</td>
+<td width='37%' valign='top'><p><b><span>Document Folder</span>
+</b>
+</p>
+</td>
+<td width='37%' valign='top'><p><b><span>Document Field</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='24%' valign='top'><p><span>Document Type</span>
+</p>
+</td>
+<td width='37%' valign='top'><p><span>All</span>
+</p>
+</td>
+<td width='37%' valign='top'><p><span>UdocDocType</span>
+</p>
+</td>
+</tr>
+<tr><td width='24%' rowspan='2' valign='top'><p><span>Partner Type</span>
+</p>
+</td>
+<td width='37%' valign='top'><p><span>Inbound</span>
+</p>
+</td>
+<td width='37%' valign='top'><p><span>SenderPartnerType</span>
+</p>
+</td>
+</tr>
+<tr><td width='37%' valign='top'><p><span>Import, Export, Outbound</span>
+</p>
+</td>
+<td width='37%' valign='top'><p><span>RecipientPartnerType</span>
+</p>
+</td>
+</tr>
+<tr><td width='24%' rowspan='2' valign='top'><p><span>Partner Group</span>
+</p>
+</td>
+<td width='37%' valign='top'><p><span>Inbound</span>
+</p>
+</td>
+<td width='37%' valign='top'><p><span>SenderPartnerGroup</span>
+</p>
+</td>
+</tr>
+<tr><td width='37%' valign='top'><p><span>Import, Export, Outbound</span>
+</p>
+</td>
+<td width='37%' valign='top'><p><span>RecipientPartnerGroup</span>
+</p>
+</td>
+</tr>
+<tr><td width='24%' rowspan='2' valign='top'><p><span>Partner</span>
+</p>
+</td>
+<td width='37%' valign='top'><p><span>Inbound</span>
+</p>
+</td>
+<td width='37%' valign='top'><p><span>SenderPartnerId</span>
+</p>
+</td>
+</tr>
+<tr><td width='37%' valign='top'><p><span>Import, Export, Outbound</span>
+</p>
+</td>
+<td width='37%' valign='top'><p><span>RecipientPartnerId</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><img width='662' height='71' alt='Text Box: Enabled/Disabled Alert Triggers:
+After criteria evaluation, an Alert Trigger in effect needs to be enabled before the specified Alert is raised. If the Alert Trigger is not enabled, i.e. disabled, no Alert will be raised.
+
+' src='../images/image034.gif'><br clear='all'></p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<b><span><br clear='all'></span>
+</b>
+</body>
+</html>

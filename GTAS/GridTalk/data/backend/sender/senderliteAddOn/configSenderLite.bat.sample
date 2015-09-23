@@ -1,0 +1,36 @@
+@echo off
+
+:: Specify the folder that contains the document we want to import to GT
+#SET importFolder=D:\3B3\recv\
+SET importFolder=C:\test\inputDoc\
+
+:: Specify the folder that contains the attachment we want to tag along with the import doc
+#SET attachFolder=D:\3B3\recvpdf\
+SET attachFolder=C:\test\attachment\
+
+:: Specify the docType, Partner ID, and own Business Entity
+SET docType=3C3RN
+SET partner=Maxtor
+SET ownBE=DEF
+
+:: Specify the target GT URL, GT listening port, GT login and GT login password
+SET gtURL=127.0.0.1
+SET gtListenPort=6763
+SET gtLogin=admin
+SET gtLoginPw=admin
+
+:: Specify whether to delete document, attachment that has imported into GT.
+:: Remove the -X, -Y to retain the document/attachment in the folder
+SET isDelImportDoc=
+SET isDelAttDoc=
+
+SET isDebug=-Z
+
+:: Specify the SMTP server URL, email recipient in case the failure of import doc into GT
+SET smtpServer=192.168.213.251
+SET emailRecipient=test@gridnode.com
+
+:: To enforce the checking of the existing of the attachment. Specify arbitrary string except 'true' 
+:: to turn off this checking. If it is true, and no attachment can be located, the import doc
+:: will not be imported into GT and the doc will be moved to %importFolder%\noAttachment folder
+SET isEnforceAttachment=true

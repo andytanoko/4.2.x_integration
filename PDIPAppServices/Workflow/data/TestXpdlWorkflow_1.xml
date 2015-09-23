@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Package SYSTEM "data/xpdl.dtd">
+<Package Id="MappingRules">
+<PackageHeader>
+		<XPDLVersion/>
+		<Vendor/>
+		<Created>2002-05-28 11:11:11</Created>
+	</PackageHeader>
+<RedefinableHeader>
+<Author>GTAS</Author>
+<Version>8</Version>
+</RedefinableHeader>
+<Applications>
+		<Application Id="MappingRuleAdapter">
+			<Description>Adapter to call java procedure to perform mapping rule</Description>
+			<FormalParameters>
+				<FormalParameter Id="Param1" Index="1" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.lang.Object"/>
+					</DataType>
+				</FormalParameter>
+				<FormalParameter Id="Param2" Index="2" Mode="OUT">
+					<DataType>
+						<DeclaredType Id="java.util.ArrayList"/>
+					</DataType>
+				</FormalParameter>
+			</FormalParameters>
+			<ExtendedAttributes>
+				<ExtendedAttribute Name="AdapterClass" Value="java.util.Stack"/>
+				<ExtendedAttribute Name="AdapterMethod" Value="push"/>
+			</ExtendedAttributes>
+		</Application>
+	</Applications>
+<WorkflowProcesses>
+<WorkflowProcess Id="MappingRules">
+<ProcessHeader/>
+<FormalParameters>
+				<FormalParameter Id="uid" Index="1" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.lang.Long"/>
+					</DataType>
+				</FormalParameter>
+				<FormalParameter Id="in.gdocs" Index="2" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.util.ArrayList"/>
+					</DataType>
+				</FormalParameter>
+				<FormalParameter Id="out.gdocs" Index="3" Mode="OUT">
+					<DataType>
+						<DeclaredType Id="java.util.ArrayList"/>
+					</DataType>
+				</FormalParameter>
+</FormalParameters>
+<Activities>
+<Activity Id="START">
+					<Description>Start of Process</Description>
+					<Implementation>
+						<No/>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+                            <TransitionRestrictions>
+                                <TransitionRestriction>
+                                  <InlineBlock Begin="NMTOKEN" End="NMTOKEN">
+                                    <BlockName>#PCDATA</BlockName>
+                                    <Description>#PCDATA</Description>
+                                    <Icon>#PCDATA</Icon>
+                                    <Documentation>#PCDATA</Documentation>
+                                  </InlineBlock>
+                                  <Split Type="XOR">
+                                    <TransitionRefs>
+										<TransitionRef Id="START_GT_GD_INBOUND2IMPORT_MR"/>
+										<TransitionRef Id="START_GT_GD_INBOUND2EXPORT_MR"/>
+										<TransitionRef Id="START_GT_GD_OUTBOUND2INBOUND_MR"/>
+									</TransitionRefs>
+                                  </Split>
+                                </TransitionRestriction>
+                            </TransitionRestrictions>
+
+				</Activity>
+<Activity Id="END">
+					<Description>End of Process</Description>
+					<Implementation>
+						<No/>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+<Activity Id="GT_GD_INBOUND2IMPORT_MR">
+					<Description>GridTalk's default header transformation for Inbound to Import</Description>
+					<Implementation>
+						<Tool Id="MappingRuleAdapter" Type="APPLICATION">
+							<ActualParameters>
+								<ActualParameter>in.gdocs</ActualParameter>
+								<ActualParameter>out.gdocs</ActualParameter>
+							</ActualParameters>
+						</Tool>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+<Activity Id="GT_GD_INBOUND2EXPORT_MR">
+					<Description>GridTalk's default header transformation for Inbound to Export</Description>
+					<Implementation>
+						<Tool Id="MappingRuleAdapter" Type="APPLICATION">
+							<ActualParameters>
+								<ActualParameter>in.gdocs</ActualParameter>
+								<ActualParameter>out.gdocs</ActualParameter>
+							</ActualParameters>
+						</Tool>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+<Activity Id="GT_GD_OUTBOUND2INBOUND_MR">
+					<Description>GridTalk's default header transformation for Outbound to Inbound</Description>
+					<Implementation>
+						<Tool Id="MappingRuleAdapter" Type="APPLICATION">
+							<ActualParameters>
+								<ActualParameter>in.gdocs</ActualParameter>
+								<ActualParameter>out.gdocs</ActualParameter>
+							</ActualParameters>
+						</Tool>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+</Activities>
+<Transitions>
+<Transition Id="START_GT_GD_INBOUND2IMPORT_MR" From="START" To="GT_GD_INBOUND2IMPORT_MR">
+					<Condition>contextdata[@uid="0"]</Condition>
+				</Transition>
+<Transition Id="GT_GD_INBOUND2IMPORT_MR_END" From="GT_GD_INBOUND2IMPORT_MR" To="END">
+					<Condition>contextdata[@uid="0"]</Condition>
+				</Transition>
+<Transition Id="START_GT_GD_INBOUND2EXPORT_MR" From="START" To="GT_GD_INBOUND2EXPORT_MR">
+					<Condition>contextdata[@uid="1"]</Condition>
+				</Transition>
+<Transition Id="GT_GD_INBOUND2EXPORT_MR_END" From="GT_GD_INBOUND2EXPORT_MR" To="END">
+					<Condition>contextdata[@uid="1"]</Condition>
+				</Transition>
+<Transition Id="START_GT_GD_OUTBOUND2INBOUND_MR" From="START" To="GT_GD_OUTBOUND2INBOUND_MR">
+					<Condition>contextdata[@uid="2"]</Condition>
+				</Transition>
+<Transition Id="GT_GD_OUTBOUND2INBOUND_MR_END" From="GT_GD_OUTBOUND2INBOUND_MR" To="END">
+					<Condition>contextdata[@uid="2"]</Condition>
+				</Transition>
+</Transitions>
+</WorkflowProcess>
+</WorkflowProcesses>
+</Package>

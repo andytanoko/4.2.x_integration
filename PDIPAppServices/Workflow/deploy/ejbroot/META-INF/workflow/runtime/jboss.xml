@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+    <secure>false</secure>
+    <container-configurations />
+    <resource-managers />
+    <enterprise-beans>
+        <entity>
+		    <ejb-name>GWFRtActivity</ejb-name>
+		    <jndi-name>com.gridnode.pdip.app.workflow.runtime.ejb.IGWFRtActivityHome</jndi-name>
+		    <!--clustered>${node.clustered:False}</clustered--> <!-- #69 TWX 02082008 Remove it to prevent lookup error in node 2 if we are shutting down node 2 due to container will notify all clustered ejb no to receive any more ejb call -->
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+        </entity>
+        <entity>
+		    <ejb-name>GWFRtProcess</ejb-name>
+		    <jndi-name>com.gridnode.pdip.app.workflow.runtime.ejb.IGWFRtProcessHome</jndi-name>
+		    <!--clustered>${node.clustered:False}</clustered--> <!-- #69 TWX 02082008 Remove it to prevent lookup error in node 2 if we are shutting down node 2 due to container will notify all clustered ejb no to receive any more ejb call -->
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+        </entity>
+        <entity>
+           <ejb-name>GWFRtRestriction</ejb-name>
+           <jndi-name>com.gridnode.pdip.app.workflow.runtime.ejb.IGWFRtRestrictionHome</jndi-name>
+           <!--clustered>${node.clustered:False}</clustered--> <!-- #69 TWX 02082008 Remove it to prevent lookup error in node 2 if we are shutting down node 2 due to container will notify all clustered ejb no to receive any more ejb call -->
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+        </entity>
+        <entity>
+             <ejb-name>GWFTransActivationState</ejb-name>
+             <jndi-name>com.gridnode.pdip.app.workflow.runtime.ejb.IGWFTransActivationStateHome</jndi-name>
+             <!--clustered>${node.clustered:False}</clustered--> <!-- #69 TWX 02082008 Remove it to prevent lookup error in node 2 if we are shutting down node 2 due to container will notify all clustered ejb no to receive any more ejb call -->
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+        </entity>
+        <entity>
+		    <ejb-name>GWFRtProcessDoc</ejb-name>
+		    <jndi-name>com.gridnode.pdip.app.workflow.runtime.ejb.IGWFRtProcessDocHome</jndi-name>
+		    <!--clustered>${node.clustered:False}</clustered--> <!-- #69 TWX 02082008 Remove it to prevent lookup error in node 2 if we are shutting down node 2 due to container will notify all clustered ejb no to receive any more ejb call -->
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+        </entity>
+		<entity>
+		    <ejb-name>GWFArchiveProcess</ejb-name>
+		    <jndi-name>com.gridnode.pdip.app.workflow.runtime.ejb.IGWFArchiveProcessHome</jndi-name>
+		    <!--clustered>${node.clustered:False}</clustered--> <!-- #69 TWX 02082008 Remove it to prevent lookup error in node 2 if we are shutting down node 2 due to container will notify all clustered ejb no to receive any more ejb call -->
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+        </entity>
+    </enterprise-beans>
+</jboss>

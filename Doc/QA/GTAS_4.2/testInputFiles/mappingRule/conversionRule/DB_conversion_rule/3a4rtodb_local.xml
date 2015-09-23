@@ -1,0 +1,767 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RulesContainer>
+  <Generated>13-Oct-2003 12:02 PM</Generated>
+  <ConvertorVersion>1000-6001</ConvertorVersion>
+  <ConversionName>XML</ConversionName>
+  <OutputFileExt>xml</OutputFileExt>
+   <Dependencies>
+     <reqlib>
+       <db-lib>
+         <lib>postgresql-8.3-603.jdbc3.jar</lib>
+       </db-lib>
+     </reqlib>
+   </Dependencies>
+   <Write>
+     <DBWriteRules>
+       <Connection>
+         <DBURL>jdbc:postgresql://127.0.0.1:35432/Rosettanet</DBURL>
+         <Username>sa</Username>
+         <Password>supervisor</Password>
+         <DBdriver>org.postgresql.Driver</DBdriver>
+      </Connection>
+      <MetaDataStore overwrite="false">
+        <table name="po_item">
+          <primary name="po_item_from_gbusinessid"/>
+          <primary name="po_item_thisdocumentid"/>
+          <primary name="creation_date"/>
+          <primary name="po_lineitem"/>
+        </table>
+        <table name="purchase_order">
+          <primary name="thisdocumentid"/>
+          <primary name="thisdocgenerationdatetime"/>
+          <primary name="from_gbusinessid"/>
+        </table>
+        <table name="po_delv_schedule">
+          <primary name="po_delv_from_gbusinessid"/>
+          <primary name="po_delv_thisdocumentid"/>
+          <primary name="create_date"/>
+          <primary name="po_delv_po_lineitem"/>
+          <primary name="sublineitem_linenumber"/>
+        </table>
+      </MetaDataStore>
+      <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ConvertorUtil="/com.gridnode.convertor.util.ConvertorUtil" version="1.0">
+        <xsl:output method="xml"/>
+        <xsl:param name="DBCon"/>
+        <xsl:variable name="overwrite" select="false()"/>
+        <xsl:template match="/">
+          <xsl:for-each select="/Pip3A4PurchaseOrderRequest/PurchaseOrder/ProductLineItem/ProductSubLineItem">
+            <xsl:call-template name="DataBase-po_delv_schedule"/>
+          </xsl:for-each>
+          <xsl:for-each select="/Pip3A4PurchaseOrderRequest/PurchaseOrder/ProductLineItem">
+            <xsl:call-template name="DataBase-po_item"/>
+          </xsl:for-each>
+          <xsl:call-template name="DataBase-purchase_order"/>
+          <xsl:copy-of select="."/>
+        </xsl:template>
+        <xsl:template name="DataBase-po_delv_schedule">
+          <xsl:variable xmlns:Map="/java.util.HashMap" name="map" select="Map:new()"></xsl:variable>
+          <!--prod_sublinenum - No mapping-->
+          <!--prod_comments - No mapping-->
+          <!--prod_contractid - No mapping-->
+          <!--prod_pri_gbusinessid - No mapping-->
+          <!--prod_pri_propbusinessid - No mapping-->
+          <!--prod_pri_propdomainid - No mapping-->
+          <!--prod_pri_propidauthority - No mapping-->
+          <!--prod_pri_gpartnerclasscode - No mapping-->
+          <!--prod_sec_gbusinessid - No mapping-->
+          <!--prod_sec_propbusinessid - No mapping-->
+          <!--prod_sec_propdomainid - No mapping-->
+          <!--prod_sec_propidauthority - No mapping-->
+          <!--prod_sec_gpartnerclasscode - No mapping-->
+          <!--prod_countryorigin - No mapping-->
+          <!--prod_custprojectid - No mapping-->
+          <!--prod_gcusttypecode - No mapping-->
+          <!--prod_businessname - No mapping-->
+          <!--prod_gbusinessid - No mapping-->
+          <!--prod_businesstaxid - No mapping-->
+          <!--prod_gcountrycode - No mapping-->
+          <!--prod_propbusinessid - No mapping-->
+          <!--prod_propdomainid - No mapping-->
+          <!--prod_propidauthority - No mapping-->
+          <!--prod_gpartnerclasscode - No mapping-->
+          <!--prod_glocationid - No mapping-->
+          <!--partnerlocid_propdomainid - No mapping-->
+          <!--partnerlocid_propidauthority - No mapping-->
+          <!--partnerlocid_prodlocid - No mapping-->
+          <!--prod_addressline1 - No mapping-->
+          <!--prod_addressline2 - No mapping-->
+          <!--prod_addressline3 - No mapping-->
+          <!--prod_cityname - No mapping-->
+          <!--prod_countrycode - No mapping-->
+          <!--prod_postalcode - No mapping-->
+          <!--prod_postoffbox - No mapping-->
+          <!--prod_regionname - No mapping-->
+          <!--expediterefid - No mapping-->
+          <!--globalactioncode - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;uom&apos;, GlobalProductUnitOfMeasureCode, 1)"/>
+          <!--gpoacknowledgereasoncode - No mapping-->
+          <!--gpofillprioritycode - No mapping-->
+          <!--gpostatuscode - No mapping-->
+          <!--installat_businessname - No mapping-->
+          <!--installat_gbusinessid - No mapping-->
+          <!--installat_probusinessid - No mapping-->
+          <!--installat_prodomainid - No mapping-->
+          <!--installat_proidauthority - No mapping-->
+          <!--installat_contactname - No mapping-->
+          <!--installat_emailaddress - No mapping-->
+          <!--installat_faxnumber - No mapping-->
+          <!--installat_telnumber - No mapping-->
+          <!--installat_gpartnerclasscode - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;isdropship&apos;, isDropShip/AffirmationIndicator, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;requested_quantity&apos;, number(OrderQuantity/requestedQuantity/ProductQuantity), 3)"/>
+          <!--scheduled_shipqty - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipping_accountid&apos;, OrderShippingInformation/CarrierInformation/accountIdentifier/ProprietaryReferenceIdentifier, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipping_gcarriercode&apos;, OrderShippingInformation/CarrierInformation/GlobalCarrierCode, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipping_gfobcode&apos;, OrderShippingInformation/GlobalFreeOnBoardCode, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipping_gshipmenttermcode&apos;, OrderShippingInformation/GlobalShipmentTermsCode, 1)"/>
+          <xsl:if test="OrderShippingInformation/GlobalShippingServiceLevelCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipping_servicelevelcode&apos;, OrderShippingInformation/GlobalShippingServiceLevelCode, 1)"/>
+          </xsl:if>
+          <!--shipping_specfulfillmentreqcode - No mapping-->
+          <!--shipping_packlistreq - No mapping-->
+          <!--shipping_spechandlingcode - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipping_spechandlingtext&apos;, OrderShippingInformation/SpecialHandlingInstruction/specialHandlingText/FreeFormText, 1)"/>
+          <!--originalsch_datestamp - No mapping-->
+          <!--orginalsch_gtransporteventcode - No mapping-->
+          <!--proprietaryinfo - No mapping-->
+          <!--recvqty_datetimestamp - No mapping-->
+          <!--docref_datetimestamp - No mapping-->
+          <!--docref_gdocreftypecode - No mapping-->
+          <!--docref_gpartnerroleclasscode - No mapping-->
+          <!--docref_linenum - No mapping-->
+          <!--docref_propdocumentid - No mapping-->
+          <!--docref_revnum - No mapping-->
+          <!--received_qty - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;requested_datetimestamp&apos;, requestedEvent/TransportationEvent/DateStamp, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;requested_gtransporteventcode&apos;, requestedEvent/TransportationEvent/GlobalTransportEventCode, 1)"/>
+          <!--reqshipfrom_glocationid - No mapping-->
+          <!--reqshipfrom_propdomainid - No mapping-->
+          <!--reqshipfrom_propidauthority - No mapping-->
+          <!--reqshipfrom_prolocationid - No mapping-->
+          <!--requnitprice_currcode - No mapping-->
+          <!--requnitprice_gmamounttypecode - No mapping-->
+          <!--requnitprice_invchargetypecode - No mapping-->
+          <!--requnitprice_monetaryamt - No mapping-->
+          <!--revision_num - No mapping-->
+          <!--scheduled_datestamp - No mapping-->
+          <!--scheduled_gtransporteventcode - No mapping-->
+          <!--shipfrom_gbusinessid - No mapping-->
+          <!--shipfrom_propbusinessid - No mapping-->
+          <!--shipfrom_propdomainid - No mapping-->
+          <!--shipfrom_propidauthority - No mapping-->
+          <!--shipqtyinfo_datetimestamp - No mapping-->
+          <!--shipdocref_datetimestamp - No mapping-->
+          <!--shipdocref_gdocreftypecode - No mapping-->
+          <!--shipdocref_gpartnerroleclasscode - No mapping-->
+          <!--shipdocref_linenum - No mapping-->
+          <!--shipdocref_propdocumentid - No mapping-->
+          <!--shipdocref_revnum - No mapping-->
+          <!--ship_quantity - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_gbusinessid&apos;, shipTo/PartnerDescription/BusinessDescription/GlobalBusinessIdentifier, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_businessname&apos;, shipTo/PartnerDescription/BusinessDescription/businessName/FreeFormText, 1)"/>
+          <!--shipto_propbusinessid - No mapping-->
+          <!--shipto_propdomainid - No mapping-->
+          <!--shipto_propidauthority - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_gpartnerclasscode&apos;, shipTo/PartnerDescription/GlobalPartnerClassificationCode, 1)"/>
+          <!--shipto_contactname - No mapping-->
+          <!--shipto_emailaddress - No mapping-->
+          <!--shipto_faxnumber - No mapping-->
+          <!--shipto_telnumber - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_glocationid&apos;, shipTo/PartnerDescription/PhysicalLocation/GlobalLocationIdentifier, 1)"/>
+          <!--shipto_loc_propdomainid - No mapping-->
+          <!--shipto_loc_propidauthority - No mapping-->
+          <!--shipto_loc_proplocationid - No mapping-->
+          <xsl:if test="shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine1/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_addressline1&apos;, shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine1/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine2/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_addressline2&apos;, shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine2/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine3/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_addressline3&apos;, shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine3/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/cityName/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_cityname&apos;, shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/cityName/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/GlobalCountryCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_countrycode&apos;, shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/GlobalCountryCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/NationalPostalCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_postalcode&apos;, shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/NationalPostalCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/postOfficeBoxIdentifier/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_postoffbox&apos;, shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/postOfficeBoxIdentifier/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/regionName/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_regionname&apos;, shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/regionName/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;sublineitem_linenumber&apos;, subLineItem/LineNumber, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;po_delv_po_lineitem&apos;, ancestor::ProductLineItem/LineNumber, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;create_date&apos;, ancestor::Pip3A4PurchaseOrderRequest/thisDocumentGenerationDateTime/DateTimeStamp, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;po_delv_thisdocumentid&apos;, ancestor::Pip3A4PurchaseOrderRequest/thisDocumentIdentifier/ProprietaryDocumentIdentifier, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;po_delv_from_gbusinessid&apos;, ancestor::Pip3A4PurchaseOrderRequest/fromRole/PartnerRoleDescription/PartnerDescription/BusinessDescription/GlobalBusinessIdentifier, 1)"/>
+          <xsl:value-of xmlns:DBHandler="/com.gridnode.convertor.db.handler.TypeDbHandler" select="DBHandler:insert($DBCon, &apos;po_delv_schedule&apos;, $map, $overwrite)"></xsl:value-of>
+        </xsl:template>
+        <xsl:template name="DataBase-po_item">
+          <xsl:variable xmlns:Map="/java.util.HashMap" name="map" select="Map:new()"></xsl:variable>
+          <!--prod_linenum - No mapping-->
+          <xsl:if test="comments/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prod_comments&apos;, comments/FreeFormText, 1)"/>
+          </xsl:if>
+          <!--prod_contractid - No mapping-->
+          <!--prod_pri_gbusinessid - No mapping-->
+          <!--prod_pri_propbusinessid - No mapping-->
+          <!--prod_pri_propdomainid - No mapping-->
+          <!--prod_pri_idauthority - No mapping-->
+          <!--prod_pri_gpartnerclasscode - No mapping-->
+          <!--prod_sec_gbusinessid - No mapping-->
+          <!--prod_sec_propbusinessid - No mapping-->
+          <!--prod_sec_propdomainid - No mapping-->
+          <!--prod_sec_propidauthority - No mapping-->
+          <!--prod_sec_gpartnerclasscode - No mapping-->
+          <!--prod_countryorigin - No mapping-->
+          <!--docref_datetimestamp - No mapping-->
+          <xsl:if test="DocumentReference/GlobalDocumentReferenceTypeCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;docref_gdocreftypecode&apos;, DocumentReference/GlobalDocumentReferenceTypeCode, 1)"/>
+          </xsl:if>
+          <!--docref_gproleclasscode - No mapping-->
+          <!--docref_linenum - No mapping-->
+          <xsl:if test="DocumentReference/ProprietaryDocumentIdentifier != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;docref_propdocid&apos;, DocumentReference/ProprietaryDocumentIdentifier, 1)"/>
+          </xsl:if>
+          <!--docref_revnum - No mapping-->
+          <!--expediterefid - No mapping-->
+          <!--globalactioncode - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;uom&apos;, GlobalProductUnitOfMeasureCode, 1)"/>
+          <!--gpoacknowledgereasoncode - No mapping-->
+          <!--gpofillprioritycode - No mapping-->
+          <!--gpostatuscode - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;isdropship&apos;, isDropShip/AffirmationIndicator, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;po_lineitem&apos;, LineNumber, 3)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;requested_quantity&apos;, number(OrderQuantity/requestedQuantity/ProductQuantity), 3)"/>
+          <!--schedule_shipqty - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipping_accountid&apos;, OrderShippingInformation/CarrierInformation/accountIdentifier/ProprietaryReferenceIdentifier, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipping_gcarriercode&apos;, OrderShippingInformation/CarrierInformation/GlobalCarrierCode, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipping_gfobcode&apos;, OrderShippingInformation/GlobalFreeOnBoardCode, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipping_gshipmenttermcode&apos;, OrderShippingInformation/GlobalShipmentTermsCode, 1)"/>
+          <xsl:if test="OrderShippingInformation/GlobalShippingServiceLevelCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipping_servicelevelcode&apos;, OrderShippingInformation/GlobalShippingServiceLevelCode, 1)"/>
+          </xsl:if>
+          <!--shipping_specfulfillmentreqcode - No mapping-->
+          <!--shipping_packlistreq - No mapping-->
+          <!--shipping_spechandlingcode - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipping_spechandlingtext&apos;, OrderShippingInformation/SpecialHandlingInstruction/specialHandlingText/FreeFormText, 1)"/>
+          <!--originalsch_datestamp - No mapping-->
+          <!--orginalsch_gtransporteventcode - No mapping-->
+          <!--prodid_gprodid - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_globalpartnerclasscode_1&apos;, ProductIdentification/PartnerProductIdentification[1]/GlobalPartnerClassificationCode, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_propproductid_1&apos;, ProductIdentification/PartnerProductIdentification[1]/ProprietaryProductIdentifier, 1)"/>
+          <!--prodid_revnum_1 - No mapping-->
+          <!--unitprice_currcode - No mapping-->
+          <!--unitprice_gmamounttypecode - No mapping-->
+          <!--unitprice_invchargetypecode - No mapping-->
+          <!--unitprice_monetaryamt - No mapping-->
+          <!--proprietaryinfo - No mapping-->
+          <!--recqty_datetimestamp - No mapping-->
+          <!--recqtydocref_datetimestamp - No mapping-->
+          <!--recqtydocref_typecode - No mapping-->
+          <!--recqtydocref_gpartnerclasscode - No mapping-->
+          <!--recqtydocref_linenum - No mapping-->
+          <!--recqtydocref_propdocumentid - No mapping-->
+          <!--recqtydocref_revnum - No mapping-->
+          <!--received_qty - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;requested_datetimestamp&apos;, requestedEvent/TransportationEvent/DateStamp, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;requested_gtransporteventcode&apos;, requestedEvent/TransportationEvent/GlobalTransportEventCode, 1)"/>
+          <!--reqshipfrom_glocationid - No mapping-->
+          <!--reqshipfrom_propdomainid - No mapping-->
+          <!--reqshipfrom_propidauthority - No mapping-->
+          <!--reqshipfrom_prolocationid - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;requnitprice_currcode&apos;, requestedUnitPrice/FinancialAmount/GlobalCurrencyCode, 1)"/>
+          <!--requnitprice_gmamounttypecode - No mapping-->
+          <!--requnitprice_invchargetypecode - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;requnitprice_monetaryamt&apos;, number(requestedUnitPrice/FinancialAmount/MonetaryAmount), 6)"/>
+          <!--revision_num - No mapping-->
+          <!--scheduled_datestamp - No mapping-->
+          <!--scheduled_gtransporteventcode - No mapping-->
+          <!--shipfrom_gbusinessid - No mapping-->
+          <!--shipfrom_propbusinessid - No mapping-->
+          <!--shipfrom_propdomainid - No mapping-->
+          <!--shipfrom_propidauthority - No mapping-->
+          <!--shipqtyinfo_datetimestamp - No mapping-->
+          <!--shipdocref_datetimestamp - No mapping-->
+          <!--shipdocref_gdocreftypecode - No mapping-->
+          <!--shipdocref_gpartnerroleclasscode - No mapping-->
+          <!--shipdocref_linenum - No mapping-->
+          <!--shipdocref_propdocumentid - No mapping-->
+          <!--shipdocref_revnum - No mapping-->
+          <!--ship_quantity - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_gbusinessid&apos;, shipTo/PartnerDescription/BusinessDescription/GlobalBusinessIdentifier, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_businessname&apos;, shipTo/PartnerDescription/BusinessDescription/businessName/FreeFormText, 1)"/>
+          <!--shipto_propbusinessid - No mapping-->
+          <!--shipto_propdomainid - No mapping-->
+          <!--shipto_propidauthority - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_gpartnerclasscode&apos;, shipTo/PartnerDescription/GlobalPartnerClassificationCode, 1)"/>
+          <!--shipto_contactname - No mapping-->
+          <!--shipto_emailaddress - No mapping-->
+          <!--shipto_faxnumber - No mapping-->
+          <!--shipto_telnumber - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_glocationid&apos;, shipTo/PartnerDescription/PhysicalLocation/GlobalLocationIdentifier, 1)"/>
+          <!--shipto_loc_propdomainid - No mapping-->
+          <!--shipto_loc_propidauthority - No mapping-->
+          <!--shipto_loc_proplocationid - No mapping-->
+          <xsl:if test="shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine1/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_addressline1&apos;, shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine1/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine2/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_addressline2&apos;, shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine2/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine3/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_addressline3&apos;, shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine3/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/cityName/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_cityname&apos;, shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/cityName/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/GlobalCountryCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_countrycode&apos;, shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/GlobalCountryCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/NationalPostalCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_postalcode&apos;, shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/NationalPostalCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/postOfficeBoxIdentifier/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_postoffbox&apos;, shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/postOfficeBoxIdentifier/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/regionName/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_regionname&apos;, shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/regionName/FreeFormText, 1)"/>
+          </xsl:if>
+          <!--gprodsubstitudereasoncode - No mapping-->
+          <!--gproductid - No mapping-->
+          <!--gpartnerclasscode - No mapping-->
+          <!--propproductid - No mapping-->
+          <!--partnerrevisionid - No mapping-->
+          <xsl:if test="TaxExemptStatus/isTaxExempt/AffirmationIndicator != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;istaxexempt&apos;, TaxExemptStatus/isTaxExempt/AffirmationIndicator, 1)"/>
+          </xsl:if>
+          <xsl:if test="TaxExemptStatus/TaxExemption/GlobalTaxExemptionCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;taxexemptcode&apos;, TaxExemptStatus/TaxExemption/GlobalTaxExemptionCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="TaxExemptStatus/TaxExemption/taxExemptionCertificationIdentifier/ProprietaryReferenceIdentifier != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;taxexemptcertid&apos;, TaxExemptStatus/TaxExemption/taxExemptionCertificationIdentifier/ProprietaryReferenceIdentifier, 1)"/>
+          </xsl:if>
+          <!--taxsummary_cityname - No mapping-->
+          <!--citytax_currcode - No mapping-->
+          <!--citytax_gmamounttypecode - No mapping-->
+          <!--citytax_invchargetypecode - No mapping-->
+          <!--citytax_monetaryamt - No mapping-->
+          <!--citytax_taxrate - No mapping-->
+          <!--nationaltax_currcode - No mapping-->
+          <!--nationaltax_gmamounttypecode - No mapping-->
+          <!--nationaltax_invchargetypecode - No mapping-->
+          <!--nationaltax_monetaryamt - No mapping-->
+          <!--nationalbusinesstaxid - No mapping-->
+          <!--nationaltax_countrycode - No mapping-->
+          <!--nationaltax_taxrate - No mapping-->
+          <!--regionaltax_currcode - No mapping-->
+          <!--regionaltax_gmamounttypecode - No mapping-->
+          <!--regionaltax_invchargetypecode - No mapping-->
+          <!--regionaltax_monetaryamt - No mapping-->
+          <!--regionalbusinesstaxid - No mapping-->
+          <!--regionaltax_regionname - No mapping-->
+          <!--regionaltax_taxrate - No mapping-->
+          <xsl:if test="totalLineItemAmount/FinancialAmount/GlobalCurrencyCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;totallineamt_currcode&apos;, totalLineItemAmount/FinancialAmount/GlobalCurrencyCode, 1)"/>
+          </xsl:if>
+          <!--totallineamt_gmamttypecode - No mapping-->
+          <!--totallineamt_invchargetypecode - No mapping-->
+          <xsl:if test="totalLineItemAmount/FinancialAmount/MonetaryAmount != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;totallineamt_monetaryamt&apos;, number(totalLineItemAmount/FinancialAmount/MonetaryAmount), 6)"/>
+          </xsl:if>
+          <!--totalamt_currcode - No mapping-->
+          <!--totalamt_gmamttypecode - No mapping-->
+          <!--totalamt_invchargetypecode - No mapping-->
+          <!--totalamt_monetaryamt - No mapping-->
+          <!--totunitprice_currcode - No mapping-->
+          <!--totunitprice_gmamttypecode - No mapping-->
+          <!--totunitprice_invchargetypecode - No mapping-->
+          <!--totunitprice_monetaryamt - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;creation_date&apos;, ancestor::Pip3A4PurchaseOrderRequest/thisDocumentGenerationDateTime/DateTimeStamp, 1)"/>
+          <xsl:if test="ProductIdentification/PartnerProductIdentification/GlobalPartnerClassificationCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_globalpartnerclasscode_2&apos;, ProductIdentification/PartnerProductIdentification[2]/GlobalPartnerClassificationCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="ProductIdentification/PartnerProductIdentification/ProprietaryProductIdentifier != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_propproductid_2&apos;, ProductIdentification/PartnerProductIdentification[2]/ProprietaryProductIdentifier, 1)"/>
+          </xsl:if>
+          <!--prodid_revnum_2 - No mapping-->
+          <xsl:if test="ProductIdentification/PartnerProductIdentification/GlobalPartnerClassificationCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_globalpartnerclasscode_3&apos;, ProductIdentification/PartnerProductIdentification[3]/GlobalPartnerClassificationCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="ProductIdentification/PartnerProductIdentification/ProprietaryProductIdentifier != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_propproductid_3&apos;, ProductIdentification/PartnerProductIdentification[3]/ProprietaryProductIdentifier, 1)"/>
+          </xsl:if>
+          <!--prodid_revnum_3 - No mapping-->
+          <xsl:if test="ProductIdentification/PartnerProductIdentification/GlobalPartnerClassificationCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_globalpartnerclasscode_4&apos;, ProductIdentification/PartnerProductIdentification[4]/GlobalPartnerClassificationCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="ProductIdentification/PartnerProductIdentification/ProprietaryProductIdentifier != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_propproductid_4&apos;, ProductIdentification/PartnerProductIdentification[4]/ProprietaryProductIdentifier, 1)"/>
+          </xsl:if>
+          <!--prodid_revnum_4 - No mapping-->
+          <xsl:if test="ProductIdentification/PartnerProductIdentification/GlobalPartnerClassificationCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_globalpartnerclasscode_5&apos;, ProductIdentification/PartnerProductIdentification[5]/GlobalPartnerClassificationCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="ProductIdentification/PartnerProductIdentification/ProprietaryProductIdentifier != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_propproductid_5&apos;, ProductIdentification/PartnerProductIdentification[5]/ProprietaryProductIdentifier, 1)"/>
+          </xsl:if>
+          <!--prodid_revnum_5 - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;po_item_thisdocumentid&apos;, ancestor::Pip3A4PurchaseOrderRequest/thisDocumentIdentifier/ProprietaryDocumentIdentifier, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;po_item_from_gbusinessid&apos;, ancestor::Pip3A4PurchaseOrderRequest/fromRole/PartnerRoleDescription/PartnerDescription/BusinessDescription/GlobalBusinessIdentifier, 1)"/>
+          <xsl:if test="ProductIdentification/PartnerProductIdentification/GlobalPartnerClassificationCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_globalpartnerclasscode_6&apos;, ProductIdentification/PartnerProductIdentification[6]/GlobalPartnerClassificationCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="ProductIdentification/PartnerProductIdentification/ProprietaryProductIdentifier != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_propproductid_6&apos;, ProductIdentification/PartnerProductIdentification[6]/ProprietaryProductIdentifier, 1)"/>
+          </xsl:if>
+          <!--prodid_revnum_6 - No mapping-->
+          <xsl:if test="ProductIdentification/PartnerProductIdentification/GlobalPartnerClassificationCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_globalpartnerclasscode_7&apos;, ProductIdentification/PartnerProductIdentification[7]/GlobalPartnerClassificationCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="ProductIdentification/PartnerProductIdentification/ProprietaryProductIdentifier != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_propproductid_7&apos;, ProductIdentification/PartnerProductIdentification[7]/ProprietaryProductIdentifier, 1)"/>
+          </xsl:if>
+          <!--prodid_revnum_7 - No mapping-->
+          <xsl:if test="ProductIdentification/PartnerProductIdentification/GlobalPartnerClassificationCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_globalpartnerclasscode_8&apos;, ProductIdentification/PartnerProductIdentification[8]/GlobalPartnerClassificationCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="ProductIdentification/PartnerProductIdentification/ProprietaryProductIdentifier != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_propproductid_8&apos;, ProductIdentification/PartnerProductIdentification[8]/ProprietaryProductIdentifier, 1)"/>
+          </xsl:if>
+          <!--prodid_revnum_8 - No mapping-->
+          <xsl:if test="ProductIdentification/PartnerProductIdentification/GlobalPartnerClassificationCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_globalpartnerclasscode_9&apos;, ProductIdentification/PartnerProductIdentification[9]/GlobalPartnerClassificationCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="ProductIdentification/PartnerProductIdentification/ProprietaryProductIdentifier != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_propproductid_9&apos;, ProductIdentification/PartnerProductIdentification[9]/ProprietaryProductIdentifier, 1)"/>
+          </xsl:if>
+          <!--prodid_revnum_9 - No mapping-->
+          <xsl:if test="ProductIdentification/PartnerProductIdentification/GlobalPartnerClassificationCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_globalpartnerclasscode_10&apos;, ProductIdentification/PartnerProductIdentification[10]/GlobalPartnerClassificationCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="ProductIdentification/PartnerProductIdentification/ProprietaryProductIdentifier != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;prodid_propproductid_10&apos;, ProductIdentification/PartnerProductIdentification[10]/ProprietaryProductIdentifier, 1)"/>
+          </xsl:if>
+          <!--prodid_revnum_10 - No mapping-->
+          <xsl:value-of xmlns:DBHandler="/com.gridnode.convertor.db.handler.TypeDbHandler" select="DBHandler:insert($DBCon, &apos;po_item&apos;, $map, $overwrite)"></xsl:value-of>
+        </xsl:template>
+        <xsl:template name="DataBase-purchase_order">
+          <xsl:variable xmlns:Map="/java.util.HashMap" name="map" select="Map:new()"></xsl:variable>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;from_contactname&apos;, /Pip3A4PurchaseOrderRequest/fromRole/PartnerRoleDescription/ContactInformation/contactName/FreeFormText, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;from_emailaddress&apos;, /Pip3A4PurchaseOrderRequest/fromRole/PartnerRoleDescription/ContactInformation/EmailAddress, 1)"/>
+          <!--from_faxnumber - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;from_telnumber&apos;, /Pip3A4PurchaseOrderRequest/fromRole/PartnerRoleDescription/ContactInformation/telephoneNumber/CommunicationsNumber, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;from_gpartnerroleclasscode&apos;, /Pip3A4PurchaseOrderRequest/fromRole/PartnerRoleDescription/GlobalPartnerRoleClassificationCode, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;from_gbusinessid&apos;, /Pip3A4PurchaseOrderRequest/fromRole/PartnerRoleDescription/PartnerDescription/BusinessDescription/GlobalBusinessIdentifier, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;from_gsuppchaincode&apos;, /Pip3A4PurchaseOrderRequest/fromRole/PartnerRoleDescription/PartnerDescription/BusinessDescription/GlobalSupplyChainCode, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;from_gpartnerclasscode&apos;, /Pip3A4PurchaseOrderRequest/fromRole/PartnerRoleDescription/PartnerDescription/GlobalPartnerClassificationCode, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;globaldocfunccode&apos;, /Pip3A4PurchaseOrderRequest/GlobalDocumentFunctionCode, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;po_accountname&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/accountName/FreeFormText, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;po_accountnumber&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/AccountNumber, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;acc_bill_businessname&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/BusinessDescription/businessName/FreeFormText, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;acc_bill_businessid&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/BusinessDescription/GlobalBusinessIdentifier, 1)"/>
+          <!--acc_bill_probusinessid - No mapping-->
+          <!--acc_bill_prodomainid - No mapping-->
+          <!--acc_bill_proidauthority - No mapping-->
+          <!--acc_bill_contactname - No mapping-->
+          <!--acc_bill_emailaddress - No mapping-->
+          <!--acc_bill_facsimilenum - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;acc_bill_globlocationid&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/ContactInformation/PhysicalLocation/GlobalLocationIdentifier, 1)"/>
+          <!--acc_bill_loc_prodomainid - No mapping-->
+          <!--acc_bill_loc_proidauthority - No mapping-->
+          <!--acc_bill_loc_prolocid - No mapping-->
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/ContactInformation/PhysicalLocation/PhysicalAddress/addressLine1/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;acc_bill_adressline1&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/ContactInformation/PhysicalLocation/PhysicalAddress/addressLine1/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/ContactInformation/PhysicalLocation/PhysicalAddress/addressLine2/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;acc_bill_adressline2&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/ContactInformation/PhysicalLocation/PhysicalAddress/addressLine2/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/ContactInformation/PhysicalLocation/PhysicalAddress/addressLine3/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;acc_bill_adressline3&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/ContactInformation/PhysicalLocation/PhysicalAddress/addressLine3/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/ContactInformation/PhysicalLocation/PhysicalAddress/cityName/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;acc_bill_cityname&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/ContactInformation/PhysicalLocation/PhysicalAddress/cityName/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/ContactInformation/PhysicalLocation/PhysicalAddress/GlobalCountryCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;acc_bill_countrycode&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/ContactInformation/PhysicalLocation/PhysicalAddress/GlobalCountryCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/ContactInformation/PhysicalLocation/PhysicalAddress/NationalPostalCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;acc_bill_nationalpostalcode&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/ContactInformation/PhysicalLocation/PhysicalAddress/NationalPostalCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/ContactInformation/PhysicalLocation/PhysicalAddress/postOfficeBoxIdentifier/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;acc_bill_postoffbox&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/ContactInformation/PhysicalLocation/PhysicalAddress/postOfficeBoxIdentifier/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/ContactInformation/PhysicalLocation/PhysicalAddress/regionName/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;acc_bill_regionname&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/ContactInformation/PhysicalLocation/PhysicalAddress/regionName/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;acc_bill_telnumber&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/ContactInformation/telephoneNumber/CommunicationsNumber, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;acc_bill_globalpartnerclasscode&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/AccountDescription/billTo/PartnerDescription/GlobalPartnerClassificationCode, 1)"/>
+          <!--acc_cc_cardholdername - No mapping-->
+          <!--acc_cc_creditcardid - No mapping-->
+          <!--acc_cc_expirydate - No mapping-->
+          <!--acc_cc_globalccclassid - No mapping-->
+          <!--acc_cc_proprietarycidid - No mapping-->
+          <!--acc_fin_businessname - No mapping-->
+          <!--acc_fin_businessid - No mapping-->
+          <!--acc_fin_probusinessid - No mapping-->
+          <!--acc_fin_prodomainid - No mapping-->
+          <!--acc_fin_proidauthority - No mapping-->
+          <!--acc_fin_globalpartnerclasscode - No mapping-->
+          <!--acc_fin_globlocationid - No mapping-->
+          <!--acc_fin_loc_prodomainid - No mapping-->
+          <!--acc_fin_loc_proidauthority - No mapping-->
+          <!--acc_fin_loc_prolocid - No mapping-->
+          <!--acc_fin_adressline1 - No mapping-->
+          <!--acc_fin_adressline2 - No mapping-->
+          <!--acc_fin_adressline3 - No mapping-->
+          <!--acc_fin_cityname - No mapping-->
+          <!--acc_fin_countrycode - No mapping-->
+          <!--acc_fin_nationalpostalcode - No mapping-->
+          <!--acc_fin_postoffbox - No mapping-->
+          <!--acc_fin_regionname - No mapping-->
+          <!--acc_fin_globaccclassid - No mapping-->
+          <!--acc_prepaymentchecknum - No mapping-->
+          <!--acc_wiretransferid - No mapping-->
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/comments/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;comments&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/comments/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/ContractInformation/contractIdentifier/ProprietaryDocumentIdentifier != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;contractid&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/ContractInformation/contractIdentifier/ProprietaryDocumentIdentifier, 1)"/>
+          </xsl:if>
+          <!--cont_pri_globalbussinessid - No mapping-->
+          <!--cont_pri_probusinessid - No mapping-->
+          <!--cont_pri_prodomainid - No mapping-->
+          <!--cont_pri_proidauthority - No mapping-->
+          <!--cont_pri_globalpartnerclasscode - No mapping-->
+          <!--cont_sec_globalbussinessid - No mapping-->
+          <!--cont_sec_probusinessid - No mapping-->
+          <!--cont_sec_prodomaiid - No mapping-->
+          <!--cont_sec_proidauthority - No mapping-->
+          <!--cont_sec_globalpartnerclasscode - No mapping-->
+          <!--docref_datetimestamp - No mapping-->
+          <!--docref_typecode - No mapping-->
+          <!--docref_gpartnerroleclasscode - No mapping-->
+          <!--docref_linenum - No mapping-->
+          <!--docref_propdocumentid - No mapping-->
+          <!--docref_revnum - No mapping-->
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/FinancingTerms/GlobalFinanceTermsCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;finterm_fintermcode&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/FinancingTerms/GlobalFinanceTermsCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/FinancingTerms/PaymentTerms/Discounts/discountDay/DayOfMonth != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;finterm_discountsday&apos;, number(/Pip3A4PurchaseOrderRequest/PurchaseOrder/FinancingTerms/PaymentTerms/Discounts/discountDay/DayOfMonth), 3)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/FinancingTerms/PaymentTerms/Discounts/discountDays/CountableAmount != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;finterm_discountdays&apos;, number(/Pip3A4PurchaseOrderRequest/PurchaseOrder/FinancingTerms/PaymentTerms/Discounts/discountDays/CountableAmount), 3)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/FinancingTerms/PaymentTerms/Discounts/discountPercent/PercentAmount != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;finterm_discountpercent&apos;, number(/Pip3A4PurchaseOrderRequest/PurchaseOrder/FinancingTerms/PaymentTerms/Discounts/discountPercent/PercentAmount), 6)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/FinancingTerms/PaymentTerms/GlobalPaymentConditionCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;finterm_paymentconditioncode&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/FinancingTerms/PaymentTerms/GlobalPaymentConditionCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/FinancingTerms/PaymentTerms/netTermsDay/DayOfMonth != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;finterm_nettermsday&apos;, number(/Pip3A4PurchaseOrderRequest/PurchaseOrder/FinancingTerms/PaymentTerms/netTermsDay/DayOfMonth), 3)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/FinancingTerms/PaymentTerms/netTermsDays/CountableAmount != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;finterm_nettermsdays&apos;, number(/Pip3A4PurchaseOrderRequest/PurchaseOrder/FinancingTerms/PaymentTerms/netTermsDays/CountableAmount), 3)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/FinancingTerms/PaymentTerms/percentDue/PercentAmount != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;finterm_percentdue&apos;, number(/Pip3A4PurchaseOrderRequest/PurchaseOrder/FinancingTerms/PaymentTerms/percentDue/PercentAmount), 6)"/>
+          </xsl:if>
+          <!--genserviceadminnum - No mapping-->
+          <!--gconfirmationtypecode - No mapping-->
+          <!--globalgovnprioratingcode - No mapping-->
+          <!--gpoacknowledgereasoncode - No mapping-->
+          <!--globalpochangecode - No mapping-->
+          <!--globalpofillpriocode - No mapping-->
+          <!--globalpostatuscode - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;globalpotypecode&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/GlobalPurchaseOrderTypeCode, 1)"/>
+          <!--govncontractid - No mapping-->
+          <!--installat_businessname - No mapping-->
+          <!--installat_businessid - No mapping-->
+          <!--installat_probusinessid - No mapping-->
+          <!--installat_prodomainid - No mapping-->
+          <!--installat_proidauthority - No mapping-->
+          <!--installat_contactname - No mapping-->
+          <!--installat_emailaddress - No mapping-->
+          <!--installat_faxnumber - No mapping-->
+          <!--installat_telnumber - No mapping-->
+          <!--installat_gpartnerclasscode - No mapping-->
+          <!--installat_glocationid - No mapping-->
+          <!--installat_propdomainid - No mapping-->
+          <!--installat_propidauthority - No mapping-->
+          <!--installat_proplocationid - No mapping-->
+          <!--installat_addressline1 - No mapping-->
+          <!--installat_addressline2 - No mapping-->
+          <!--installat_addressline3 - No mapping-->
+          <!--installat_cityname - No mapping-->
+          <!--installat_countrycode - No mapping-->
+          <!--installat_postalcode - No mapping-->
+          <!--installat_postoffbox - No mapping-->
+          <!--installat_regionname - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;isdropship&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/isDropShip/AffirmationIndicator, 1)"/>
+          <!--ordershipping_accountid - No mapping-->
+          <!--ordershipping_gcarriercode - No mapping-->
+          <!--ordershipping_gfobcode - No mapping-->
+          <!--ordershipping_gshipmenttermscode - No mapping-->
+          <!--ordershipping_servicelevelcode - No mapping-->
+          <!--ordershipping_specfulfillmentreqcode - No mapping-->
+          <!--ordershipping_packlistreq - No mapping-->
+          <!--ordershipping_spechandlingcode - No mapping-->
+          <!--ordershipping_spechandlingtext - No mapping-->
+          <!--originalsch_datestamp - No mapping-->
+          <!--orginalsch_gtransporteventcode - No mapping-->
+          <!--proprietyinfo - No mapping-->
+          <!--podate_datetimestamp - No mapping-->
+          <!--poid_propdocid - No mapping-->
+          <!--recqty_datetimestamp - No mapping-->
+          <!--recqtydocref_datetimestamp - No mapping-->
+          <!--recqtydocref_typecode - No mapping-->
+          <!--recqtydocref_gpartnerclasscode - No mapping-->
+          <!--recqtydocref_linenum - No mapping-->
+          <!--recqtydocref_propdocumentid - No mapping-->
+          <!--recqtydocref_revnum - No mapping-->
+          <!--received_qty - No mapping-->
+          <!--requested_datetimestamp - No mapping-->
+          <!--requested_gtransporteventcode - No mapping-->
+          <!--reqshipfrom_glocationid - No mapping-->
+          <!--reqshipfrom_propdomainid - No mapping-->
+          <!--reqshipfrom_propidauthority - No mapping-->
+          <!--reqshipfrom_prolocationid - No mapping-->
+          <!--revision_number - No mapping-->
+          <!--scheduled_datestamp - No mapping-->
+          <!--scheduled_gtransporteventcode - No mapping-->
+          <!--secbuyer_businessname - No mapping-->
+          <!--secbuyer_gbusinessid - No mapping-->
+          <!--secbuyer_propbusinessid - No mapping-->
+          <!--secbuyer_propdomainid - No mapping-->
+          <!--secbuyer_propidauthority - No mapping-->
+          <!--secbuyer_contactname - No mapping-->
+          <!--secbuyer_emailddress - No mapping-->
+          <!--secbuyer_faxnum - No mapping-->
+          <!--secbuyer_telnum - No mapping-->
+          <!--secbuyer_gpartnerclasscode - No mapping-->
+          <!--secbuyer_glocationid - No mapping-->
+          <!--sec_loc_propdomainid - No mapping-->
+          <!--sec_loc_propidauthority - No mapping-->
+          <!--sec_loc_proplocid - No mapping-->
+          <!--sec_addressline1 - No mapping-->
+          <!--sec_addressline2 - No mapping-->
+          <!--sec_addressline3 - No mapping-->
+          <!--sec_cityname - No mapping-->
+          <!--sec_countrycode - No mapping-->
+          <!--sec_postalcode - No mapping-->
+          <!--sec_postoffbox - No mapping-->
+          <!--sec_regionname - No mapping-->
+          <!--sec_purchaseorderid - No mapping-->
+          <!--shipfrom_gbusinessid - No mapping-->
+          <!--shipfrom_propbusinessid - No mapping-->
+          <!--shipfrom_propdomainid - No mapping-->
+          <!--shipfrom_propidauthority - No mapping-->
+          <!--shipqtyinfo_datetimestamp - No mapping-->
+          <!--shipqtydocref_datetimestamp - No mapping-->
+          <!--shipqtydocref_gdocreftypecode - No mapping-->
+          <!--shipqtydocref_gpartnerroleclasscode - No mapping-->
+          <!--shipqtydocref_linenum - No mapping-->
+          <!--shipqtydocref_propdocumentid - No mapping-->
+          <!--shipqtydocref_revnum - No mapping-->
+          <!--ship_quantity - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_gbusinessid&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/BusinessDescription/GlobalBusinessIdentifier, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_businessname&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/BusinessDescription/businessName/FreeFormText, 1)"/>
+          <!--shipto_propbusinessid - No mapping-->
+          <!--shipto_propdomainid - No mapping-->
+          <!--shipto_propidauthority - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_gpartnerclasscode&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/GlobalPartnerClassificationCode, 1)"/>
+          <!--shipto_contactname - No mapping-->
+          <!--shipto_emailaddress - No mapping-->
+          <!--shipto_faxnumber - No mapping-->
+          <!--shipto_telnumber - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_glocationid&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/PhysicalLocation/GlobalLocationIdentifier, 1)"/>
+          <!--shipto_loc_propdomainid - No mapping-->
+          <!--shipto_loc_propidauthority - No mapping-->
+          <!--shipto_loc_proplocationid - No mapping-->
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine1/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_addressline1&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine1/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine2/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_addressline2&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine2/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine3/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_addressline3&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine3/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/cityName/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_cityname&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/cityName/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/GlobalCountryCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_countrycode&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/GlobalCountryCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/NationalPostalCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_postalcode&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/NationalPostalCode, 1)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/postOfficeBoxIdentifier/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_postoffbox&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/postOfficeBoxIdentifier/FreeFormText, 1)"/>
+          </xsl:if>
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/regionName/FreeFormText != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;shipto_regionname&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/regionName/FreeFormText, 1)"/>
+          </xsl:if>
+          <!--istaxexempt - No mapping-->
+          <!--taxexemptcode - No mapping-->
+          <!--taxexemptcertid - No mapping-->
+          <!--taxsummary_cityname - No mapping-->
+          <!--citytax_currcode - No mapping-->
+          <!--citytax_gmamounttypecode - No mapping-->
+          <!--citytax_invchargetypecode - No mapping-->
+          <!--citytax_monetaryamt - No mapping-->
+          <!--citytax_taxrate - No mapping-->
+          <!--nationaltax_currcode - No mapping-->
+          <!--nationaltax_gmamounttypecode - No mapping-->
+          <!--nationaltax_invchargetypecode - No mapping-->
+          <!--nationaltax_monetaryamt - No mapping-->
+          <!--nationalbusinesstaxid - No mapping-->
+          <!--nationaltax_countrycode - No mapping-->
+          <!--nationaltax_taxrate - No mapping-->
+          <!--regionaltax_currcode - No mapping-->
+          <!--regionaltax_gmamounttypecode - No mapping-->
+          <!--regionaltax_invchargetypecode - No mapping-->
+          <!--regionaltax_monetaryamt - No mapping-->
+          <!--regionalbusinesstaxid - No mapping-->
+          <!--regionaltax_regionname - No mapping-->
+          <!--regionaltax_taxrate - No mapping-->
+          <!--taxtotalamt_currcode - No mapping-->
+          <!--taxtotalamt_gmamttypecode - No mapping-->
+          <!--taxtotalamt_invchargetypecode - No mapping-->
+          <!--taxtotalamt_monetaryamt - No mapping-->
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/totalAmount/FinancialAmount/GlobalCurrencyCode != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;totalamt_currcode&apos;, /Pip3A4PurchaseOrderRequest/PurchaseOrder/totalAmount/FinancialAmount/GlobalCurrencyCode, 1)"/>
+          </xsl:if>
+          <!--totalamt_gmamttypecode - No mapping-->
+          <!--totalamt_invchargetypecode - No mapping-->
+          <xsl:if test="/Pip3A4PurchaseOrderRequest/PurchaseOrder/totalAmount/FinancialAmount/MonetaryAmount != &apos;&apos;">
+            <xsl:value-of select="ConvertorUtil:putValue($map, &apos;totalamt_monetaryamt&apos;, number(/Pip3A4PurchaseOrderRequest/PurchaseOrder/totalAmount/FinancialAmount/MonetaryAmount), 6)"/>
+          </xsl:if>
+          <!--request_docdatetime - No mapping-->
+          <!--request_docid - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;thisdocgenerationdatetime&apos;, /Pip3A4PurchaseOrderRequest/thisDocumentGenerationDateTime/DateTimeStamp, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;thisdocumentid&apos;, /Pip3A4PurchaseOrderRequest/thisDocumentIdentifier/ProprietaryDocumentIdentifier, 1)"/>
+          <!--torole_contactname - No mapping-->
+          <!--torole_emailaddress - No mapping-->
+          <!--torole_faxnumber - No mapping-->
+          <!--torole_telnumber - No mapping-->
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;torole_gpartnerroleclasscode&apos;, /Pip3A4PurchaseOrderRequest/toRole/PartnerRoleDescription/GlobalPartnerRoleClassificationCode, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;torole_gbusinessid&apos;, /Pip3A4PurchaseOrderRequest/toRole/PartnerRoleDescription/PartnerDescription/BusinessDescription/GlobalBusinessIdentifier, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;torole_gsupplychaincode&apos;, /Pip3A4PurchaseOrderRequest/toRole/PartnerRoleDescription/PartnerDescription/BusinessDescription/GlobalSupplyChainCode, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;torole_gpartnerclasscode&apos;, /Pip3A4PurchaseOrderRequest/toRole/PartnerRoleDescription/PartnerDescription/GlobalPartnerClassificationCode, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;sys_date&apos;, /Pip3A4PurchaseOrderRequest/thisDocumentGenerationDateTime/DateTimeStamp, 1)"/>
+          <xsl:value-of select="ConvertorUtil:putValue($map, &apos;status_code&apos;, &apos;P&apos;, 1)"/>
+          <xsl:value-of xmlns:DBHandler="/com.gridnode.convertor.db.handler.TypeDbHandler" select="DBHandler:insert($DBCon, &apos;purchase_order&apos;, $map, $overwrite)"></xsl:value-of>
+        </xsl:template>
+      </xsl:stylesheet>
+    </DBWriteRules>
+  </Write>
+</RulesContainer>

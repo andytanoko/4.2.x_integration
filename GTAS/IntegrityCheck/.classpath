@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="IntegrityCheck/src/inprocess"/>
+	<classpathentry kind="src" path="IntegrityCheck/src/outprocess"/>
+	<classpathentry kind="src" path="ReconcileCheck/src"/>
+	<classpathentry kind="lib" path="IntegrityCheck/lib/app-workflow.jar"/>
+	<classpathentry kind="lib" path="IntegrityCheck/lib/base-rnif.jar"/>
+	<classpathentry kind="lib" path="IntegrityCheck/lib/framework.jar"/>
+	<classpathentry kind="lib" path="IntegrityCheck/lib/gtas-document.jar"/>
+	<classpathentry kind="lib" path="IntegrityCheck/lib/gtas-mapper.jar"/>
+	<classpathentry kind="lib" path="IntegrityCheck/lib/gtas-rnif.jar"/>
+	<classpathentry kind="lib" path="IntegrityCheck/lib/jbossall-client.jar"/>
+	<classpathentry kind="lib" path="IntegrityCheck/lib/xml-parser-apis.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="IntegrityCheck/lib/log4j-1.2.12.jar"/>
+	<classpathentry kind="lib" path="IntegrityCheck/lib/xerces-2.7.1.jar"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>

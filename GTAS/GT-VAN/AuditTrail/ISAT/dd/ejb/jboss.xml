@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+  <secure>false</secure>
+  <resource-managers/>
+  <enterprise-beans>
+    <!-- For listening the AuditTrailData from remote (OTC Plug-in)-->
+    <message-driven>
+      <ejb-name>AuditTrailMDBean</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>queue/gtvan/isat/RemoteEventQueue</destination-jndi-name>
+	  <depends>jboss.j2ee:jndiName=com.gridnode.gtas.audit.tracking.facade.ejb.IAuditTrailManagerHome,service=EJB</depends>
+    </message-driven>
+	
+	<!-- For listening the AuditTrailData from Local (from HTTPBC)-->
+	<message-driven>
+	  <ejb-name>AuditTrailMDBeanForLocal</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>queue/gtvan/isat/LocalEventQueue</destination-jndi-name>
+	  <depends>jboss.j2ee:jndiName=com.gridnode.gtas.audit.tracking.facade.ejb.IAuditTrailManagerHome,service=EJB</depends>
+    </message-driven>
+
+	<!-- For handling the archive-->
+	<message-driven>
+      <ejb-name>AuditTrailArchiveMDBean</ejb-name>
+      <configuration-name>TXM Message Driven Bean</configuration-name>
+      <destination-jndi-name>queue/gtvan/isat/archiveTrailDataQueue</destination-jndi-name>
+	  <depends>jboss.j2ee:jndiName=com.gridnode.gtas.audit.archive.facade.ejb.IAuditTrailArchiveManagerLocalHome,service=EJB</depends>
+    </message-driven>
+	
+	<!-- For handling the notify of achive status from TM plug-in -->
+	<message-driven>
+      <ejb-name>AuditTrailNotifyArchiveMDBean</ejb-name>
+      <configuration-name>TXM Message Driven Bean</configuration-name>
+      <destination-jndi-name>queue/gtvan/isat/archiveNotifyQueue</destination-jndi-name>
+	  <depends>jboss.j2ee:jndiName=com.gridnode.gtas.audit.archive.facade.ejb.IAuditTrailArchiveManagerLocalHome,service=EJB</depends>
+    </message-driven>
+
+	<!-- For handling the delegation of the TM event to the handler-->
+	<session>
+      <ejb-name>AuditTrailManagerBean</ejb-name>
+      <jndi-name>com.gridnode.gtas.audit.tracking.facade.ejb.IAuditTrailManagerHome</jndi-name>
+      <!--clustered>${node.clustered:False}</clustered-->
+      <!--depends>jboss.har:service=ISAT-Hibernate</depends-->
+      <depends>jboss.j2ee:jndiName=com.gridnode.gtas.audit.tracking.facade.ejb.IProcessTransManagerLocalHome,service=EJB</depends>
+    </session>
+
+	<!-- For validating the request to reprocess a doc-->
+	<session>
+      <ejb-name>ReprocessManagerBean</ejb-name>
+      <jndi-name>com.gridnode.gtas.audit.reprocess.facade.ejb.IReprocessManagerHome</jndi-name>
+      <!--clustered>${node.clustered:False}</clustered-->
+      <!--depends>jboss.har:service=ISAT-Hibernate</depends-->
+      <depends>jboss.j2ee:jndiName=com.gridnode.gtas.audit.properties.facade.ejb.IAuditPropertiesManagerHome,service=EJB</depends>
+    </session>
+	
+	<!-- For archiving the obselete entity in transaction monitoring-->
+	<session>
+      <ejb-name>AuditTrailArchiveManagerBean</ejb-name>
+      <jndi-name>com.gridnode.gtas.audit.archive.facade.ejb.IAuditTrailArchiveManagerHome</jndi-name>
+	  <!--depends>jboss.har:service=ISAT-Hibernate</depends-->
+      <depends>jboss.j2ee:jndiName=com.gridnode.gtas.audit.properties.facade.ejb.IAuditPropertiesManagerHome,service=EJB</depends>
+    </session>
+
+	<!-- For archiving the obselete entity in transaction monitoring-->
+	<session>
+      <ejb-name>AuditTrailArchiveManagerBean_local</ejb-name>
+	  <local-jndi-name>com.gridnode.gtas.audit.archive.facade.ejb.IAuditTrailArchiveManagerLocalHome</local-jndi-name>
+	  <!--depends>jboss.har:service=ISAT-Hibernate</depends-->
+      <depends>jboss.j2ee:jndiName=com.gridnode.gtas.audit.properties.facade.ejb.IAuditPropertiesManagerHome,service=EJB</depends>
+    </session>
+	
+    <!--For retrieving the properties required in TM -->
+	<session>
+      <ejb-name>AuditPropertiesManagerBean</ejb-name>
+      <jndi-name>com.gridnode.gtas.audit.properties.facade.ejb.IAuditPropertiesManagerHome</jndi-name>
+    </session>
+
+	<!--For handling Archive Scheduler task-->
+	<session>
+      <ejb-name>ArchiveSchedulerManagerBean</ejb-name>
+      <jndi-name>com.gridnode.gtas.audit.archive.scheduler.facade.ejb.IArchiveSchedulerHome</jndi-name>
+	  <!--depends>jboss.har:service=ISAT-Hibernate</depends-->
+      <depends>jboss.j2ee:jndiName=com.gridnode.gtas.audit.properties.facade.ejb.IAuditPropertiesManagerHome,service=EJB</depends>
+    </session>
+
+	<!--For handling the persistent/update of ProcessTransaction record -->
+	<session>
+      <ejb-name>ProcessTransManagerBean</ejb-name>
+      <local-jndi-name>com.gridnode.gtas.audit.tracking.facade.ejb.IProcessTransManagerLocalHome</local-jndi-name>
+    </session>
+	
+	<session>
+      <ejb-name>ArchiveServiceManagerBean</ejb-name>
+      <jndi-name>com.gridnode.gtas.audit.archive.facade.ejb.IArchiveServiceManagerHome</jndi-name>
+      <local-jndi-name>com.gridnode.gtas.audit.archive.facade.ejb.IArchiveServiceManagerLocalHome</local-jndi-name>
+	  <!--depends>jboss.har:service=ISAT-Hibernate</depends-->
+      <depends>jboss.j2ee:jndiName=com.gridnode.gtas.audit.archive.facade.ejb.IAuditTrailArchiveManagerLocalHome,service=EJB</depends>
+      <depends>jboss.j2ee:jndiName=com.gridnode.gtas.audit.archive.facade.ejb.IArchiveProxyManagerHome,service=EJB</depends>
+    </session>
+  </enterprise-beans>
+</jboss>

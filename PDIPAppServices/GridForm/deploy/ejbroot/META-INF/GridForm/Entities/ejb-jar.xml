@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+	<enterprise-beans>
+		<entity>
+			<display-name>GFDefinition</display-name>
+			<ejb-name>GFDefinition</ejb-name>
+			<local-home>com.gridnode.pdip.app.gridform.entities.ejb.IGFDefinitionLocalHome</local-home>
+			<local>com.gridnode.pdip.app.gridform.entities.ejb.IGFDefinitionLocalObj</local>
+			<ejb-class>com.gridnode.pdip.app.gridform.entities.ejb.GFDefinitionBean</ejb-class>
+			<persistence-type>Bean</persistence-type>
+			<prim-key-class>java.lang.Long</prim-key-class>
+			<reentrant>False</reentrant>
+		</entity>
+		<entity>
+			<display-name>GFTemplate</display-name>
+			<ejb-name>GFTemplate</ejb-name>
+			<local-home>com.gridnode.pdip.app.gridform.entities.ejb.IGFTemplateLocalHome</local-home>
+			<local>com.gridnode.pdip.app.gridform.entities.ejb.IGFTemplateLocalObj</local>
+			<ejb-class>com.gridnode.pdip.app.gridform.entities.ejb.GFTemplateBean</ejb-class>
+			<persistence-type>Bean</persistence-type>
+			<prim-key-class>java.lang.Long</prim-key-class>
+			<reentrant>False</reentrant>
+		</entity>
+	</enterprise-beans>
+	<assembly-descriptor>
+		<container-transaction>
+			<method>
+				<ejb-name>GFDefinition</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
+		<container-transaction>
+			<method>
+				<ejb-name>GFTemplate</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
+	</assembly-descriptor>
+</ejb-jar>

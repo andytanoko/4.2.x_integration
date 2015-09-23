@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>gn-elixir-report-ext</fullname>
+  <class>
+    <path>[../programs/gn-elixir-report-ext/gn-elixir-report-ext.jar]</path>
+  </class>
+  <lastmodsaved>1069416989263</lastmodsaved>
+</library>

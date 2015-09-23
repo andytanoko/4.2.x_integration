@@ -1,0 +1,31 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001-2002 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: IAlertEntityHandler.java
+ *
+ ****************************************************************************
+ * Date           Author              Changes
+ ****************************************************************************
+ * Dec 09 2002   Srinath R         Created
+ * Feb 06 2003    Neo Sok Lay         Add UNKNOWN_MSG_TYPE.
+ */
+
+package com.gridnode.pdip.app.alert.helpers;
+
+public interface IAlertEntityHandler
+{
+  public final String TRIGGER_FAILURE    = "Trigger Attribute has not been set properly";
+  public final String EMAIL_FAILURE      = "Failed to send the e-mail";
+  public final String ALERTLIST_FAILURE  = "Failed to send to the Alert List";
+  public final String LOG_FAILURE        = "Falied to enter details into the log file";
+  public final String EMAIL_SUCCESS      = "Successfully sent the mail";
+  public final String ALERTLIST_SUCCESS  = "Successfully sent to the Alert List";
+  public final String LOG_SUCCESS        = "Successfully entered the details into the log file";
+  public final String EMAIL              = "EMail";
+  public final String LOG                = "Log";
+  public final String ALERT_LIST         = "Alert List";
+  public final String UNKNOWN_MSG_TYPE   = "Unknown Message Type set in message template";
+}

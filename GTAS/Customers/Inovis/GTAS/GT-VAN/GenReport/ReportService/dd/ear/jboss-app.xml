@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--!DOCTYPE jboss-app PUBLIC "-//JBoss//DTD J2EE Application 1.4//EN"
+         "http://www.jboss.org/j2ee/dtd/jboss-app_4_0.dtd"-->
+<jboss-app>
+    <module-order>strict</module-order>
+	<loader-repository>
+		com.gridnode:loader=gtvan-genreport-reportservice.ear
+		<loader-repository-config>
+			java2ParentDelegation=true
+		</loader-repository-config>
+	</loader-repository>
+   <module>
+      <har>gtvan-genreport-reportservice.har</har>
+   </module>
+	<module>
+        <!-- this ejb.jar needs to be changed -->
+		<ejb>gtvan-genreport-reportservice-ejb.jar</ejb>
+	</module>
+	<module>
+		<web>
+	        <!-- this ejb.jar needs to be changed -->
+			<web-uri>gtvan-genreport-reportservice.war</web-uri>
+			<context-root>/gridtalk/van/genreport</context-root>
+		</web>
+	</module>
+   <module>
+	  <service>reportservice-schedule-service.xml</service>
+   </module>
+</jboss-app>

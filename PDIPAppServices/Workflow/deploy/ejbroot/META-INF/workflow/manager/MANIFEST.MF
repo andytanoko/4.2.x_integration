@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Created-By: Ant 1.4.1
+Class-Path: ./framework.jar ./sixpath.jar ./app-workflow.jar ./base-contextdata.jar ./base-appinterface.jar ./base-gwfbase.jar ./base-worklist.jar ./base-time.jar
+
+
+
+

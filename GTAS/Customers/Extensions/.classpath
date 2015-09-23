@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="docx/src"/>
+	<classpathentry kind="lib" path="jar/reqlib/commons-net-2.0.jar"/>
+	<classpathentry kind="lib" path="jar/reqlib/elixir-report-4.0.jar"/>
+	<classpathentry kind="lib" path="jar/reqlib/elxrt.jar"/>
+	<classpathentry kind="lib" path="jar/reqlib/license.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Framework"/>
+	<classpathentry kind="lib" path="programs/gt-ibtransporter/endorsed/jaxrpc.jar"/>
+	<classpathentry kind="var" path="J2EE_HOME/lib/j2ee.jar"/>
+	<classpathentry kind="lib" path="programs/gt-ftp-pull/lib/base-xml.jar"/>
+	<classpathentry kind="lib" path="programs/gt-ftp-pull/lib/framework.jar"/>
+	<classpathentry kind="lib" path="programs/gt-ftp-pull/lib/gn-convertor-1.1.2.jar"/>
+	<classpathentry kind="lib" path="programs/gt-ftp-pull/lib/gtvan-at-common.jar"/>
+	<classpathentry kind="lib" path="programs/gt-ftp-pull/lib/gtvan-httpbc-common.jar"/>
+	<classpathentry kind="lib" path="programs/gt-ftp-pull/lib/gtvan-util.jar"/>
+	<classpathentry kind="lib" path="programs/gt-ftp-push/lib/gtas-document.jar"/>
+	<classpathentry kind="lib" path="programs/gt-ftp-pull/lib/gn-xml-1.1.1.jar"/>
+	<classpathentry kind="lib" path="programs/docx-adaptor/lib/gtas-mapper.jar"/>
+	<classpathentry kind="lib" path="programs/docx-adaptor/gtas-sftpclient-1.0.jar"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>

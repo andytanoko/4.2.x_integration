@@ -1,0 +1,16 @@
+Author: Jagadeesh
+Data: 04-10-2002
+Title: WorkList
+
+        This module allows us to manage and process the WorkList.
+
+    1)  In order to add workitem to the worklist we need to call addWorkItem on GWFWorkListSessionObject.java
+        this is done in testaddWorkItem method of test case GWFWorkListSessionTestCase.java
+
+    2)  In order to remove workitem from the worklist we need to call dropWorkItem on GWFWorkListSessionObject.java
+        this is done in testdropWorkItem method of test case GWFWorkListSessionTestCase.java
+
+    3)  In order to perform workitem from the worklist we need to call performWorkItem on GWFWorkListSessionObject.java
+        this is done in testperformWorkItem method of test case GWFWorkListSessionTestCase.java
+
+

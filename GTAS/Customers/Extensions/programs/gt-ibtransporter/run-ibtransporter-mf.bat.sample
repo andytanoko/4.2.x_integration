@@ -1,0 +1,12 @@
+@echo off
+CALL setcp.bat
+
+REM Send multiple files from a directory into GridTalk
+
+SET PARTNER=<sender_partner_id>
+SET PAYLOAD_DIR=<dir_to_pick_messages>
+
+%GRIDTALK_HOME%\jre150_05\bin\java %JAVA_OPTS% -cp %CLASSPATH% com.gridnode.gridtalk.InboundTransporter "inbound.payload.dir=%PAYLOAD_DIR%" "header.sender.info.sender.id=%PARTNER%"
+
+:end
+endlocal

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE ejb-j2ee-engine SYSTEM "ejb-j2ee-engine.dtd"><ejb-j2ee-engine>
+	<enterprise-beans>
+		<enterprise-bean>
+			<ejb-name>PartnerType</ejb-name>
+			<jndi-name>com.gridnode.pdip.app.partner.entities.ejb.IPartnerTypeLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>PartnerGroup</ejb-name>
+			<jndi-name>com.gridnode.pdip.app.partner.entities.ejb.IPartnerGroupLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>Partner</ejb-name>
+			<jndi-name>com.gridnode.pdip.app.partner.entities.ejb.IPartnerLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+	</enterprise-beans>
+</ejb-j2ee-engine>

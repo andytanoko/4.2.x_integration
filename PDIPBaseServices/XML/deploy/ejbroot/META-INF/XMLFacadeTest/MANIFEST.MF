@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Created-By: Ant 1.3
+Class-Path: ./framework.jar ./base-xml.jar ./xerces-2.7.1.jar ./saxon-9.jar ./dom4j-1.6.1.jar ./isorelax-20041111.jar ./jaxen-1.1b7.jar ./jdom-1.0.jar ./jxl-2.5.7.jar ./msv-20030225.jar ./poi-2.5.1-final-20040804.jar ./relaxngDatatype-20030807.jar ./xsdlib-20030807.jar ./gn-convertor-1.1.3.jar ./gn-xml-1.1.2.jar ./gn-util-1.0.5.jar ./gn-log-1.0.5.jar ./gn-jnfs-1.0.1.jar
+
+
+
+
+
+
+
+

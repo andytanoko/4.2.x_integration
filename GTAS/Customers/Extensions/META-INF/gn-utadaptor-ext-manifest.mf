@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Sealed: true
+Main-Class: com.gridnode.utadaptor.Sender
+Class-Path: xml-apis.jar,saxpath.jar,jdom-b9.jar,jaxen-full-1.0.jar

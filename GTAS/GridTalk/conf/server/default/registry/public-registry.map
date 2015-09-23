@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping>
+	<class name="com.gridnode.gtas.server.bizreg.model.Namespace">
+		<map-to xml="Namespace"/>
+		<field name="type" required="true">
+			<bind-xml node="attribute"/>
+		</field>
+		<field name="value" required="true">
+			<bind-xml node="attribute"/>
+		</field>
+		<field name="description" required="true"/>
+		<field name="taxonomies" collection="array" type="com.gridnode.gtas.server.bizreg.model.Taxonomy" required="false">
+			<bind-xml name="Taxonomy" node="element"/>
+		</field>
+		<field name="fingerprints" collection="array" type="com.gridnode.gtas.server.bizreg.model.Fingerprint" required="false">
+			<bind-xml name="Fingerprint" node="element"/>
+		</field>
+	</class>
+	<class name="com.gridnode.gtas.server.bizreg.model.Fingerprint">
+		<map-to xml="Fingerprint"/>
+		<field name="type" required="true">
+			<bind-xml node="attribute"/>
+		</field>
+		<field name="value" required="true">
+			<bind-xml node="attribute"/>
+		</field>
+		<field name="isTransportProtocol" required="false" type="boolean" get-method="isTransportProtocol" set-method="setTransportProtocol">
+			<bind-xml node="attribute"/>
+		</field>
+		<field name="isZipPayload" required="false" type="boolean" get-method="isZipPayload" set-method="setZipPayload">
+			<bind-xml node="attribute"/>
+		</field>
+		<field name="overviewDescription">
+			<bind-xml name="overviewDescription"/>
+		</field>
+		<field name="overviewUrl">
+			<bind-xml name="overviewUrl"/>
+		</field>
+		<field name="taxonomies" collection="array" type="com.gridnode.gtas.server.bizreg.model.Taxonomy" required="false">
+			<bind-xml name="Taxonomy" node="element"/>
+		</field>
+	</class>
+	<class name="com.gridnode.gtas.server.bizreg.model.Taxonomy">
+		<map-to xml="Taxonomy"/>
+		<field name="key" required="true">
+			<bind-xml node="attribute"/>
+		</field>
+		<field name="value" required="true">
+			<bind-xml node="attribute"/>
+		</field>
+		<field name="name" required="true">
+			<bind-xml node="attribute"/>
+		</field>
+	</class>
+	<class name="com.gridnode.gtas.server.bizreg.model.TechnicalSpecs">
+		<map-to xml="TechnicalSpecifications"/>
+		<field name="namespaces" collection="array" type="com.gridnode.gtas.server.bizreg.model.Namespace">
+			<bind-xml name="Namespace" node="element"/>
+		</field>
+	</class>		 
+</mapping>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+	
+  <!-- Servlet for Java classes -->
+  <servlet>
+   	<servlet-name>CreateScheduleServlet</servlet-name>
+    <servlet-class>com.gridnode.gridtalk.genreport.receive.CreateScheduleServlet</servlet-class>
+  </servlet>
+    
+  <servlet-mapping>
+    <servlet-name>CreateScheduleServlet</servlet-name>
+    <url-pattern>/create_schedule</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+   	<servlet-name>UpdateScheduleServlet</servlet-name>
+    <servlet-class>com.gridnode.gridtalk.genreport.receive.UpdateScheduleServlet</servlet-class>
+  </servlet>
+    
+  <servlet-mapping>
+    <servlet-name>UpdateScheduleServlet</servlet-name>
+    <url-pattern>/update_schedule</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+   	<servlet-name>CreateReportServlet</servlet-name>
+    <servlet-class>com.gridnode.gridtalk.genreport.receive.CreateReportServlet</servlet-class>
+  </servlet>
+    
+  <servlet-mapping>
+    <servlet-name>CreateReportServlet</servlet-name>
+    <url-pattern>/create_report</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+   	<servlet-name>GenerateReportServlet</servlet-name>
+    <servlet-class>com.gridnode.gridtalk.genreport.receive.GenerateReportServlet</servlet-class>
+  </servlet>
+    
+  <servlet-mapping>
+    <servlet-name>GenerateReportServlet</servlet-name>
+    <url-pattern>/generate_report</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+   	<servlet-name>ViewReportServlet</servlet-name>
+    <servlet-class>com.gridnode.gridtalk.genreport.receive.ViewReportServlet</servlet-class>
+  </servlet>
+    
+  <servlet-mapping>
+    <servlet-name>ViewReportServlet</servlet-name>
+    <url-pattern>/view_report</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+   	<servlet-name>HousekeepReportServlet</servlet-name>
+    <servlet-class>com.gridnode.gridtalk.genreport.receive.HousekeepReportServlet</servlet-class>
+  </servlet>
+    
+  <servlet-mapping>
+    <servlet-name>HousekeepReportServlet</servlet-name>
+    <url-pattern>/housekeep_report</url-pattern>
+  </servlet-mapping>
+    
+  <ejb-ref>
+    <ejb-ref-name>ejb/GenReportHandlerBean</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>com.gridnode.gridtalk.genreport.ejb.IGenReportHandlerHome</home>
+	<remote>com.gridnode.gridtalk.genreport.ejb.IGenReportHandler</remote>
+	<ejb-link>GenReportHandlerBean</ejb-link>
+  </ejb-ref>
+
+  <ejb-ref>
+    <ejb-ref-name>ejb/GenScheduleHandlerBean</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>com.gridnode.gridtalk.genreport.ejb.IGenScheduleHandlerHome</home>
+	<remote>com.gridnode.gridtalk.genreport.ejb.IGenScheduleHandler</remote>
+	<ejb-link>GenScheduleHandlerBean</ejb-link>
+  </ejb-ref>
+    
+</web-app>

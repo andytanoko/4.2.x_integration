@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Class-Path: lib/framework.jar 
+ lib/app-workflow.jar 
+ lib/gtas-document.jar 
+ lib/gtas-rnif.jar 
+ lib/gtas-mapper.jar 
+ lib/log4j-1.2.12.jar 
+ lib/jbossall-client.jar 
+ lib/xml-parser-apis.jar 
+ lib/xerces-2.7.1.jar
+ lib/base-rnif.jar
+Implementation-Title: Integrity Check for GTAS
+Implementation-Version: 4.0.0
+Implementation-Vendor: GridNode Pte Ltd

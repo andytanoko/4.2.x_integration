@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+  <enterprise-beans>
+    <entity>
+         <description>Entity Bean ( Container-managed Persistence )</description>
+         <display-name>KeyGenerator</display-name>
+         <ejb-name>KeyGenerator</ejb-name>
+         <home>com.gridnode.pdip.framework.db.keygen.IKeyGeneratorHome</home>
+         <remote>com.gridnode.pdip.framework.db.keygen.IKeyGeneratorObj</remote>
+         <ejb-class>com.gridnode.pdip.framework.db.keygen.KeyGeneratorBean</ejb-class>
+         <persistence-type>Container</persistence-type>
+         <prim-key-class>java.lang.String</prim-key-class>
+         <reentrant>False</reentrant>
+         <cmp-version>2.x</cmp-version>
+	 <abstract-schema-name>KeyGeneratorBean</abstract-schema-name>
+         <cmp-field>
+            <field-name>refName</field-name>
+         </cmp-field>
+         <cmp-field>
+            <field-name>lastRefNum</field-name>
+         </cmp-field>
+         <primkey-field>refName</primkey-field>
+      </entity>
+  </enterprise-beans>
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+        <ejb-name>KeyGenerator</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>RequiresNew</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+</ejb-jar>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+  <secure>false</secure>
+  <container-configurations/>
+  <resource-managers/>
+  <enterprise-beans>
+    <entity>
+      <ejb-name>UserProcedure</ejb-name>
+      <local-jndi-name>com.gridnode.pdip.base.userprocedure.entities.ejb.IUserProcedureLocalHome</local-jndi-name>
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+    </entity>
+    <entity>
+      <ejb-name>ProcedureDefinitionFile</ejb-name>
+      <local-jndi-name>com.gridnode.pdip.base.userprocedure.entities.ejb.IProcedureDefFileLocalHome</local-jndi-name>
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+    </entity>
+  </enterprise-beans>
+</jboss>

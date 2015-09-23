@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head id="xhtml_head">
+    <title id="title">lbGridTalk</title>
+    <base href="file:///C:\views\i00054_GT_2.1_DBArchive\GTAS\GridTalk\web/gt.css" id="base_tag"/>
+    <link id="xhtml_stylesheet" rel="stylesheet" href="gt.css" type="text/css"/>
+    <script id="include_dateTimePicker" language="JavaScript" src="scripts/dateTimePicker.js"><!----></script>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="save"/>
+        <input type="hidden" name="divertTo"/>
+        
+        <h4 id="heading">lbArchiveDocument</h4>
+        <span id="edit_message">
+          lbMessage
+        </span>
+        <br/><br/>
+        <table id="archive_details" border="0" width="100%">
+          <tr id="name_details">
+            <td id="name_label" class="fieldlabel" nowrap="nowrap">
+              lbName
+            </td>
+            <td>
+              <input type="text" id="name_value" name="name"/>
+            </td>
+            <td id="name_error" width="99%">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="description_details">
+            <td id="description_label" class="fieldlabel" nowrap="nowrap">
+              lbDescription
+            </td>
+            <td>
+              <input type="text" id="description_value" name="description"/>
+            </td>
+            <td id="description_error">
+              &nbsp;
+            </td>
+          </tr>
+		  <tr id="archiveType_details">
+            <td id="archiveType_label" class="fieldlabel" nowrap="nowrap">
+              lbArchiveType
+            </td>
+            <td>
+              <select id="archiveType_value" size="1" name="archiveType" onchange="serverRefresh();">
+                <option>&nbsp;</option>
+              </select>
+            </td>
+            <td id="archiveType_error">
+              &nbsp;
+            </td>
+          </tr>
+		  <tr id="enableSearchArchived_details">
+            <td id="enableSearchArchived_label" class="fieldlabel" nowrap="nowrap">
+              lbenableSearchArchived
+            </td>
+            <td>
+              <input type="checkbox" id="enableSearchArchived_value" name="enableSearchArchived" value="true"/>
+            </td>
+            <td id="enableSearchArchived_error">
+              &nbsp;
+            </td>
+          </tr>
+		  <tr id="enableRestoreArchived_details">
+            <td id="enableRestoreArchived_label" class="fieldlabel" nowrap="nowrap">
+              lbenableRestoreArchived
+            </td>
+            <td>
+              <input type="checkbox" id="enableRestoreArchived_value" name="enableRestoreArchived" value="true"/>
+            </td>
+            <td id="enableRestoreArchived_error">
+              &nbsp;
+            </td>
+          </tr>
+		   <tr id="optionMsg_details" >
+            <td colspan="3" valign="top">
+              <span id="optionMsg">
+				lbOptionMsg
+			  </span >
+            </td >
+           </tr >
+          <tr id="fromDate_details">
+            <td id="fromDate_label" class="fieldlabel" nowrap="nowrap">
+              lbFromDate
+            </td>
+            <td>
+              <input type="text" id="fromDate_value" name="fromDate"/>
+              <a href="javascript:NewCal('fromDate_value','yyyyMMdd');">
+                 <img src="images/actions/cal.gif" width="16" height="16" border="0" alt="Pick"/>
+              </a>
+            </td>
+            <td id="fromDate_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="fromTime_details">
+            <td id="fromTime_label" class="fieldlabel" nowrap="nowrap">
+              lbFromTime
+            </td>
+            <td>
+              <input type="text" id="fromTime_value" name="fromTime"/>
+            </td>
+            <td id="fromTime_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="toDate_details">
+            <td id="toDate_label" class="fieldlabel" nowrap="nowrap">
+              lbToDate
+            </td>
+            <td>
+              <input type="text" id="toDate_value" name="toDate"/>
+              <a href="javascript:NewCal('toDate_value','yyyyMMdd');">
+                 <img src="images/actions/cal.gif" width="16" height="16" border="0" alt="Pick"/>
+              </a>
+            </td>
+            <td id="toDate_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="toTime_details">
+            <td id="toTime_label" class="fieldlabel" nowrap="nowrap">
+              lbToTime
+            </td>
+            <td>
+              <input type="text" id="toTime_value" name="toTime"/>
+            </td>
+            <td id="toTime_error">
+              &nbsp;
+            </td>
+          </tr>
+		  <tr id="partner_details">
+            <td id="partner_label" class="fieldlabel" nowrap="nowrap" valign="top">
+              lbPartner
+            </td>
+            <td colspan="2">
+              <div id="partner_value" class="multiselector">
+                Multiselector(allowsOrdering)
+              </div>
+            </td>
+          </tr>
+          <tr id="processDef_details">
+            <td id="processDef_label" class="fieldlabel" nowrap="nowrap" valign="top">
+              lbProcessDef
+            </td>
+            <td colspan="2">
+              <div id="processDef_value" class="multiselector">
+                Multiselector(allowsOrdering)
+              </div>
+            </td>
+          </tr>
+          <tr id="includeIncomplete_details">
+            <td id="includeIncomplete_label" class="fieldlabel" nowrap="nowrap">
+              lbIncludeIncomplete
+            </td>
+            <td>
+              <select id="includeIncomplete_value" size="1" name="includeIncomplete">
+                <option>&nbsp;</option>
+              </select>
+            </td>
+            <td id="includeIncomplete_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="folder_details">
+            <td id="folder_label" class="fieldlabel" nowrap="nowrap">
+              lbFolder
+            </td>
+            <td colspan="2">
+              <div id="folder_value" class="multiselector">
+                Multiselector(allowsOrdering)
+              </div>
+            </td>
+          </tr>
+          <tr id="docType_details">
+            <td id="docType_label" class="fieldlabel" nowrap="nowrap">
+              lbDocType
+            </td>
+            <td colspan="2">
+              <div id="docType_value" class="multiselector">
+                Multiselector(allowsOrdering)
+              </div>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

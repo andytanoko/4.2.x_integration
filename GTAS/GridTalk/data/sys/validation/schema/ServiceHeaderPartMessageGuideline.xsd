@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+	<xsd:element name="ActionControl">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ActionIdentity"/>
+				<xsd:element ref="GlobalDocumentFunctionCode"/>
+				<xsd:element ref="inResponseTo" minOccurs="0"/>
+				<xsd:element ref="PartnerRoute"/>
+				<xsd:element ref="PerformanceControlRequest" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ActionIdentity">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="description" minOccurs="0"/>
+				<xsd:element ref="GlobalBusinessActionCode"/>
+				<xsd:element ref="InstanceIdentifier"/>
+				<xsd:element ref="VersionIdentifier" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="AttemptCount">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:integer">
+				<xsd:minInclusive value="1"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="BusinessDescription">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GlobalBusinessIdentifier"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="BusinessServiceDescription">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GlobalBusinessServiceCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="FreeFormText">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="nonEmptyString">
+					<xsd:attribute ref="xml:lang"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="nonEmptyString">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="GlobalBusinessActionCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalBusinessIdentifier">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:length value="9"/>
+				<xsd:pattern value="\d{9}"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalBusinessServiceCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalBusinessSignalCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalDocumentFunctionCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalPartnerClassificationCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalPartnerRoleClassificationCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalProcessCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalProcessIndicatorCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalTransactionCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InstanceIdentifier">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PartnerDescription">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="BusinessDescription"/>
+				<xsd:element ref="GlobalPartnerClassificationCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PartnerRoleDescription">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GlobalPartnerRoleClassificationCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PartnerRoleRoute">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="fromRole"/>
+				<xsd:element ref="toRole"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PartnerRoute">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="fromPartner"/>
+				<xsd:element ref="toPartner"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PerformanceControlRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="timeToAcknowledgeAcceptance" minOccurs="0"/>
+				<xsd:element ref="timeToAcknowledgeReceipt" minOccurs="0"/>
+				<xsd:element ref="timeToPerform" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ProcessControl">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ProcessIdentity"/>
+				<xsd:element ref="ServiceRoute"/>
+				<xsd:choice>
+					<xsd:element ref="TransactionControl"/>
+				</xsd:choice>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ProcessIdentity">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="description" minOccurs="0"/>
+				<xsd:element ref="GlobalProcessCode"/>
+				<xsd:element ref="GlobalProcessIndicatorCode"/>
+				<xsd:element ref="initiatingPartner"/>
+				<xsd:element ref="InstanceIdentifier"/>
+				<xsd:element ref="VersionIdentifier"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ServiceHeader">
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:element ref="ProcessControl"/>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ServiceRoute">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="fromService"/>
+				<xsd:element ref="toService"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SignalControl">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="inResponseTo"/>
+				<xsd:element ref="InstanceIdentifier"/>
+				<xsd:element ref="PartnerRoute"/>
+				<xsd:element ref="SignalIdentity"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SignalIdentity">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GlobalBusinessSignalCode"/>
+				<xsd:element ref="VersionIdentifier"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TimeDuration">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="15"/>
+				<xsd:maxLength value="20"/>
+				<xsd:pattern value="[\+\-]?\d{8}&#x0054;\d{6}\.\d{3}&#x005a;"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="TransactionControl">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="AttemptCount"/>
+				<xsd:element ref="PartnerRoleRoute"/>
+				<xsd:element ref="TransactionIdentity"/>
+				<xsd:choice>
+					<xsd:element ref="ActionControl"/>
+					<xsd:element ref="SignalControl"/>
+				</xsd:choice>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="TransactionIdentity">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="description" minOccurs="0"/>
+				<xsd:element ref="GlobalTransactionCode"/>
+				<xsd:element ref="InstanceIdentifier"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="VersionIdentifier">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="description">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="FreeFormText"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="fromPartner">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="PartnerDescription"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="fromRole">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="PartnerRoleDescription"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="fromService">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="BusinessServiceDescription"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="inResponseTo">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ActionIdentity"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="initiatingPartner">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GlobalBusinessIdentifier"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="timeToAcknowledgeAcceptance">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="TimeDuration"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="timeToAcknowledgeReceipt">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="TimeDuration"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="timeToPerform">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="TimeDuration"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="toPartner">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="PartnerDescription"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="toRole">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="PartnerRoleDescription"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="toService">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="BusinessServiceDescription"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

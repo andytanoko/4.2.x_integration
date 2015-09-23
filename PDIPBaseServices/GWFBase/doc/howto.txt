@@ -1,0 +1,14 @@
+Author: Mahesh
+Data: 04-10-2002
+Title: GWFBase
+
+        This module consists of entities required for BPSS and XPDL definitions to deploy into
+    database.
+
+    1)  Bpss entities are present in com.gridnode.pdip.base.gwfbase.bpss.model package and the ejb's
+        for that entities are present in com.gridnode.pdip.base.gwfbase.bpss.ejb package.
+
+    2)  Xpdl entities are present in com.gridnode.pdip.base.gwfbase.xpdl.model package and the ejb's
+        for that entities are present in com.gridnode.pdip.base.gwfbase.xpdl.ejb package.
+
+

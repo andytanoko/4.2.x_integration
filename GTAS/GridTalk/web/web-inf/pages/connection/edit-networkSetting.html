@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Edit NetworkSetting</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="save"/>
+        <input type="hidden" name="divertTo"/>
+        <div>
+          <table>
+            <tr id="connectionlevel_details">
+              <td id="connectionlevel_label">
+                lbConnectionLevel
+              </td>
+              <td>
+                <select id="connectionLevel_value" name="connectionlevel" onChange="serverRefresh();">
+                  <option>&nbsp;</option>
+                </select>
+              </td>
+              <td id="connectionLevel_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="keepAliveInterval_details">
+              <td id="keepAliveInterval_label">
+                lbKeepAliveInterval
+              </td>
+              <td>
+                <input id="keepAliveInterval_value" type="text" name="keepAliveInterval" size="4"/>
+                <span id="minutes_1">lbminutes</span>
+              </td>
+              <td id="keepAliveInterval_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="responseTimeout_details">
+              <td id="responseTimeout_label">
+                lbResponseTimeout
+              </td>
+              <td>
+                <input id="responseTimeout_value" type="text" name="responseTimeout" size="4"/>
+                <span id="minutes_2">lbminutes</span>
+              </td>
+              <td id="responseTimeout_error">
+                &nbsp;
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div id="router_section">
+          <h4 id="router_heading">
+            lbLocalJmsRouter
+          </h4>
+          <table>
+            <tr id="localJmsRouter_details">
+              <td id="localJmsRouter_label">
+                lbLocalJmsRouter
+              </td>
+              <td>
+                <input id="localJmsRouter_value" type="text" name="localJmsRouter"/>
+              </td>
+              <td id="localJmsRouter_error">
+                &nbsp;
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div id="proxy_section">
+          <h4 id="proxy_heading">
+            lbHttpProxy
+          </h4>
+          <table>
+            <tr id="httpProxyServer_details">
+              <td id="httpProxyServer_label">
+                lbHttpProxyServer
+              </td>
+              <td>
+                <input id="httpProxyServer_value" type="text" name="httpProxyServer"/>
+              </td>
+              <td id="httpProxyServer_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="httpProxyPort_details">
+              <td id="httpProxyPort_label">
+                lbHttpProxyPort
+              </td>
+              <td>
+                <input id="httpProxyPort_value" type="text" name="httpProxyPort"/>
+              </td>
+              <td id="httpProxyPort_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tgroup id="proxyAuth_section">
+              <tr id="proxyAuthUser_details">
+                <td id="proxyAuthUser_label">
+                  lbProxyAuthUser
+                </td>
+                <td>
+                  <input id="proxyAuthUser_value" type="text" name="proxyAuthUser"/>
+                </td>
+                <td id="proxyAuthUser_error">
+                  &nbsp;
+                </td>
+              </tr>
+              <tr id="proxyAuthPassword_details">
+                <td id="proxyAuthPassword_label">
+                  lbProxyAuthPassword
+                </td>
+                <td>
+                  <input id="proxyAuthPassword_value" type="password" name="proxyAuthPassword"/>
+                </td>
+                <td id="proxyAuthPassword_error">
+                  &nbsp;
+                </td>
+              </tr>
+            </tgroup>
+          </table>
+        </div>
+        <p id="response_error" class="errortext">&nbsp;</p>
+      </form>
+    </div>
+  </body>
+</html>
+

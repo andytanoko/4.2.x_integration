@@ -1,0 +1,177 @@
+<html>
+<head>
+<title>6.3.1 To create a new email message template </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>6.3.1 To create a new email message template </h3>
+<p><span></span>
+</p>
+<p><span>The email message template contains the following fields you will want to modify to create a new Message Template:</span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' width='100%' border='1' cellpadding='0'><tr><td width='17%' valign='top'><p><b><span>Field</span>
+</b>
+</p>
+</td>
+<td width='82%' valign='top'><p><b><span>Explanation</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='17%' valign='top'><p><span>Name</span>
+</p>
+</td>
+<td width='82%' valign='top'><p><span>The name of the Message Template</span>
+</p>
+</td>
+</tr>
+<tr><td width='17%' valign='top'><p><span>Description</span>
+</p>
+</td>
+<td width='82%' valign='top'><p><span>A short description of the Message Template</span>
+</p>
+</td>
+</tr>
+<tr><td width='17%' valign='top'><p><span>From</span>
+</p>
+</td>
+<td width='82%' valign='top'><p><span>The sender email of the email notification</span>
+</p>
+</td>
+</tr>
+<tr><td width='17%' valign='top'><p><span>To</span>
+</p>
+</td>
+<td width='82%' valign='top'><p><span>The recipient(s) email of the email notification</span>
+</p>
+</td>
+</tr>
+<tr><td width='17%' valign='top'><p><span>Cc</span>
+</p>
+</td>
+<td width='82%' valign='top'><p><span>The Cc recipient(s) email of the email notification</span>
+</p>
+</td>
+</tr>
+<tr><td width='17%' valign='top'><p><span>Subject</span>
+</p>
+</td>
+<td width='82%' valign='top'><p><span>The subject of the email notification</span>
+</p>
+</td>
+</tr>
+<tr><td width='17%' valign='top'><p><span>Message</span>
+</p>
+</td>
+<td width='82%' valign='top'><p><span>The message content of the email notification. This content can be a mixture of text and Object Field Reference Tags (eg. </span>
+<span>Document Type : &lt;%GridDocument.U_DOC_DOC_TYPE%&gt;</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><span>Let us create the simple scenario where you can configure alert message to notify the user of the GridTalk license expiry.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><img width='455' height='392' border='0' src='../images/image022.jpg'></p>
+<p></p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>To create a new message template, click Create Message Template. Select the Message Type for the template. You are given the options to determine if the message type in the template is Email, Log, or JMS. Select Email. The screen appears.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>Specify the Content Type. The only content type supported currently is Text, select it.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>Enter Name. For example, GridTalk License Expiry</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>To enter the From field, go to the Object to select </span>
+<span>User</span>
+<span>. You will find that the User object contains the available fields such as “</span>
+<span>admin</span>
+<span>”, “guest” and the names of user accounts that were earlier created. Select “</span>
+<span>Admin</span>
+<span>” for the field. To insert the corresponding Object field reference tag, </span>
+<span>&lt;#USER=admin#&gt;</span>
+<span> in the From field, place the cursor on the From field and click Insert.</span>
+</p>
+<p><span></span>
+</p>
+<p><a name='_Ref78114000'><span>Step 5.<span> </span>
+</span>
+<span>To enter the To field, go to the Object to select User. Select “</span>
+</a>
+<span>guest</span>
+<span>” for the field. To insert the corresponding Object field reference tag, </span>
+<span>&lt;#USER=guest#&gt;</span>
+<span> in the To field, place the cursor on the To field and click Insert.</span>
+</p>
+<pre><span></span>
+</pre>
+<p><span>Step 6.<span> </span>
+</span>
+<span>Repeat Step 5 for the CC field, if each message needs to be copied to other recipients.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 7.<span> </span>
+</span>
+<span>To enter the Subject field, go to the Object to select License. For the License object, see Appendix. Next select “Product_Version” for the field. To insert the corresponding Object field reference tag, </span>
+<span>&lt;%License.PRODUCT_VERSION%&gt;</span>
+<span> in the Subject field, place the cursor on the Subject field and click Insert.</span>
+</p>
+<pre><span></span>
+</pre>
+<p><span>Step 8.<span> </span>
+</span>
+<span>To enter the Message textbox, you may wish to compose the message like “ </span>
+<span>Please be informed</span>
+<span> </span>
+<span>that your license is going to expire on &lt;%License.END_DATE%&gt;</span>
+<span> “. To do this, just type in the textbox. To insert the tag in the message, go to the Object to select License. Select “END_DATE” for the field. Place the cursor on the textbox and click Insert.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='467' height='413' border='0' src='../images/image023.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 9.<span> </span>
+</span>
+<span>To save the new message template, click Save Message Template. The new message template will be displayed in the list table of the Message Templates page. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 10.<span> </span>
+</span>
+<span>To edit the existing or current message template, select the message template and then click on the Edit button<img width='16' height='16' border='0' src='../images/image013.gif'></span>
+<span>.</span>
+<span> Update the entries for the Message Template as necessary. Next click Save Message Template.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 11.<span> </span>
+</span>
+<span>To delete the existing or current message template, tick the Select check box of the message template you want to delete. Click Delete Message Template. The selected message template will be removed from the list.</span>
+</p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RulesContainer>
+	<ConversionName>DelimitedText</ConversionName>
+	<OutputFileExt>xml</OutputFileExt>
+	<Read>
+		<DelimitedTextRules>
+			<Separator>^</Separator>
+			<QuotedStrings>false</QuotedStrings>
+			<FirstFieldIdentifier>false</FirstFieldIdentifier>
+			<Root NAME="DOCUMENT"/>
+			<Element NAME="RECORD" OCCURRENCE="0" LEVEL="1">
+				<Element NAME="KLNO"/>
+				<Element NAME="DO_NUMBER"/>
+				<Element NAME="SITE"/>
+				<Element NAME="COMCODE"/>
+				<Element NAME="PART"/>
+				<Element NAME="QTY"/>
+				<Element NAME="PART_STATUS"/>
+				<Element NAME="KIT_QTY"/>
+				<Element NAME="REMARKS"/>
+				<Element NAME="NOT_USED1"/>
+				<Element NAME="NOT_USED2"/>
+				<Element NAME="NOT_USED3"/>
+			</Element>
+		</DelimitedTextRules>
+	</Read>
+	<Write>
+		<XSLTRules>
+			<xsl:transform version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+				<xsl:output indent="yes"/>
+				<xsl:template match="DOCUMENT">
+					<xsl:variable name="kitlist" select="/DOCUMENT/RECORD[not(KLNO=preceding-sibling::RECORD/KLNO) or not(SITE=preceding-sibling::RECORD/SITE) or not(COMCODE=preceding-sibling::RECORD/COMCODE)]"/>
+					<DOCUMENT>
+						<xsl:for-each select="$kitlist">
+							<KITLIST>
+								<HEADER>
+									<KLNO><xsl:value-of select="KLNO"/></KLNO>
+									<SITE><xsl:value-of select="SITE"/></SITE>
+									<COMCODE><xsl:value-of select="COMCODE"/></COMCODE>
+									<KIT_STATUS>PICK</KIT_STATUS>
+									<INTTIME><xsl:call-template name="getCurrentTime"><xsl:with-param name="timeformat">yyyyMMddHHmmSS</xsl:with-param></xsl:call-template></INTTIME>
+								</HEADER>
+								<ITEMS>
+									<xsl:for-each select="//RECORD[KLNO=current()/KLNO and SITE=current()/SITE and COMCODE=current()/COMCODE]">
+										<ITEM>
+											<PART><xsl:value-of select="PART"/></PART>
+											<QTY><xsl:value-of select="QTY"/></QTY>
+											<PART_STATUS><xsl:value-of select="PART_STATUS"/></PART_STATUS>
+											<KIT_QTY><xsl:value-of select="KIT_QTY"/></KIT_QTY>
+											<DO_NUMBER><xsl:value-of select="DO_NUMBER"/></DO_NUMBER>
+											<REMARKS><xsl:value-of select="REMARKS"/></REMARKS>
+										</ITEM>
+									</xsl:for-each>
+								</ITEMS>
+							</KITLIST>
+						</xsl:for-each>
+					</DOCUMENT>
+				</xsl:template>
+				
+				<xsl:template name="getCurrentTime">
+					<xsl:param name="timeformat"/>
+					<xsl:variable name="nowSimpleDate" select="simpleDateFormat:new($timeformat)" xmlns:simpleDateFormat="/java.text.SimpleDateFormat"/>
+					<xsl:variable name="nowDate" select="date:new()" xmlns:date="/java.util.Date"/>
+					<xsl:variable name="now" select="simpleDateFormat:format($nowSimpleDate, $nowDate)
+					" xmlns:simpleDateFormat="/java.text.SimpleDateFormat"/>
+					<xsl:value-of select="$now"/>
+				</xsl:template>
+			</xsl:transform>
+		</XSLTRules>
+	</Write>
+</RulesContainer>

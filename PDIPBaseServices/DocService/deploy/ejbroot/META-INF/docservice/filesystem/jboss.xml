@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="Cp1252"?>
+<jboss>
+  <secure>false</secure>
+  <container-configurations/>
+  <resource-managers/>
+  <enterprise-beans>
+
+    <entity>
+      <ejb-name>Domain</ejb-name>
+      <local-jndi-name>com.gridnode.pdip.base.docservice.filesystem.ejb.IDomainHome</local-jndi-name>
+    </entity>
+
+    <entity>
+      <ejb-name>Folder</ejb-name>
+      <local-jndi-name>com.gridnode.pdip.base.docservice.filesystem.ejb.IFolderHome</local-jndi-name>
+    </entity>
+
+    <entity>
+      <ejb-name>Document</ejb-name>
+      <local-jndi-name>com.gridnode.pdip.base.docservice.filesystem.ejb.IDocumentHome</local-jndi-name>
+    </entity>
+
+    <entity>
+      <ejb-name>File</ejb-name>
+      <local-jndi-name>com.gridnode.pdip.base.docservice.filesystem.ejb.IFileHome</local-jndi-name>
+    </entity>
+
+  </enterprise-beans>
+</jboss>

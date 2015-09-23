@@ -1,0 +1,175 @@
+<html>
+<head>
+<title>8.3.2 To create a content mapping rule </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>8.3.2 To create a content mapping rule </h3>
+<p></p>
+<p><span>The Content Mapping Rule is used for manipulating the user document. When creating a content mapping rule, you need to specify the type that is used to split, transform or convert a user document.</span>
+</p>
+<p></p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Click Mapping Rules under the Mapping folder.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>Expand the Mapping Rules folder, and click Content. The Content Mapping Rules list view page is displayed.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='623' height='308' border='0' src='../images/image088.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><a name='_Ref78114984'><span>Step 3.<span> </span>
+</span>
+<span>Click Create Mapping Rule. The Mapping Rule detail view page appears. Take note that the Header Transformation checkbox is empty by default.</span>
+</a>
+<span> </span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='440' height='247' border='0' src='../images/image089.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>Enter Name and Description.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 5.<span> </span>
+</span>
+<span>Next select Type. There are three available types such as Convert, Split, and Transform.</span>
+</p>
+<p><span>To use Split and Transform, your user document must be a XML file.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 6.<span> </span>
+</span>
+<span>Specify Source Doc Type by selecting the Document Type from the drop-down list. If the document type you want is not found, click on the <img width='16' height='16' border='0' src='../images/image011.gif'>icon to create a new document type. This indicates the document type for the input user document.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 7.<span> </span>
+</span>
+<span>Specify Target Doc Type by selecting the Document Type from the drop-down list. If the document type you want is not found, click on the <img width='16' height='16' border='0' src='../images/image011.gif'>icon to create a new document type. This indicates the document type for the output user document after the mapping rule is applied.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 8.<span> </span>
+</span>
+<span>Specify Source Doc File Type by selecting the File Type from the drop-down list. If the file type you want is not found, click on the <img width='16' height='16' border='0' src='../images/image011.gif'>icon to create a new file type. This indicates the file type of the input user document.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 9.<span> </span>
+</span>
+<span>Specify Target Doc File Type by selecting the File Type from the drop-down list. If the file type you want is not found, click on the <img width='16' height='16' border='0' src='../images/image011.gif'>icon to create a new file type. This indicates the file type of the output user document after the mapping rule is applied.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 10.<span> </span>
+</span>
+<span>Select the Mapping File from the list box. If the mapping file you want is not listed, click on the <img width='16' height='16' border='0' src='../images/image011.gif'>icon to create a new file type. </span>
+</p>
+<p><span></span>
+</p>
+<p><a name='_Ref78114992'><span>Step 11.<span> </span>
+</span>
+<span>If you have selected Split for Type, you need to define, additionally, the following fields:</span>
+</a>
+</p>
+<p><span></span>
+</p>
+<p><b><span>XPath</span>
+</b>
+</p>
+<p><span>This indicates a set of unique values in the user document that will be used for the splitting.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Param Name</span>
+</b>
+</p>
+<p><span>This indicates the name of a parameter defined in the XSL that is used in the Mapping Rule for splitting. This parameter will contain each unique value extracted from the user document using the specified XPath. </span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Keep Original</span>
+</b>
+</p>
+<p><span>If you want to keep the original XML document in the document folder, tick this checkbox.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 12.<span> </span>
+</span>
+<span>If you have selected Transform for Type, you need to define, additionally, the following fields:</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Transform With Header</span>
+</b>
+</p>
+<p><span>If you want to extract information from the Grid Document into your user document, tick this checkbox and define a parameter GDOC in the XSL.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Transform With Ref Doc</span>
+</b>
+</p>
+<p><span>If you want to reference a Reference Doc in the XSL during transformation, tick this checkbox and define a parameter REFDOC in the XSL.</span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><a name='_Ref134010190'><span>Step 13.<span> </span>
+</span>
+<span>If you have selected Convert for Type, you need to define, additionally, the Mapping Class fields if the type of the Mapping File is Java Binary:</span>
+</a>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 14.<span> </span>
+</span>
+<span>Click Save Mapping Rule. The new mapping file will be displayed in the Mapping Rules list view page.</span>
+</p>
+<p><span></span>
+</p>
+<p>Step 15.<span> </span>
+<span>To add more Content mapping rules, repeat Step 3 through Step 13. If you want to view the mapping file, go to the Content Mapping Rules page where you will see the records listed in the table. Click on the selected mapping rule’s hyperlink under Name in the table. If you wish to update the selected mapping file, click Edit Mapping Rule.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 16.<span> </span>
+</span>
+<span>To edit the Content mapping rule, select the mapping rule and then click on the corresponding Edit button<img width='16' height='16' border='0' src='../images/image013.gif'></span>
+<span>. </span>
+<span>The screen appears. </span>
+<span>Update the entries of the mapping rule as necessary. Click Save Mapping Rule.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='447' height='247' border='0' src='../images/image090.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 17.<span> </span>
+</span>
+<span>To delete the Content mapping rule, tick the Select checkbox of the mapping rule you want to delete. As you see a mark appear in that checkbox, click Delete Mapping Rules. The message box, “Are you sure you wish to delete these Mapping Rules?” will appear. To confirm the deletion, click OK. The selected mapping file will be removed from the Mapping Rules page and the Content Mapping Rules page.</span>
+</p>
+<p></p>
+<span><br clear='all'></span>
+<p></p>
+</body>
+</html>

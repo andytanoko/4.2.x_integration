@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib
+    PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN"
+    "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+
+<taglib>
+  <tlibversion>1.0</tlibversion>
+  <jspversion>1.1</jspversion>
+  <shortname>search</shortname>
+  <info>Search Framework tag library</info>
+  
+<tag>
+    <name>SelectOption</name>
+    <tagclass>com.gridnode.pdip.base.search.taglib.display.SelectOption</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Select Option tag</info>
+    <attribute>
+      <name>dbFieldName</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+</tag>
+<tag>
+    <name>FieldDisplay</name>
+    <tagclass>com.gridnode.pdip.base.search.taglib.display.FieldDisplay</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Field Display Tag</info>
+    <attribute>
+      <name>tableName</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>fieldName</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>field</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>distinct</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>compOperator</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>isFieldValue</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+     <attribute>
+      <name>negate</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+</tag>
+<tag>
+    <name>Query</name>
+    <tagclass>com.gridnode.pdip.base.search.taglib.query.Query</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Query definition Tag</info>
+    <attribute>
+      <name>tableName</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>distinct</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+</tag>
+<tag>
+    <name>ComparisonCondition</name>
+    <tagclass>com.gridnode.pdip.base.search.taglib.query.ComparisonCondition</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Comparison Condition definition Tag</info>
+    <attribute>
+      <name>connector</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>field</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>compOperator</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>value</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>isFieldValue</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>negate</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+</tag>
+<tag>
+    <name>InCondition</name>
+    <tagclass>com.gridnode.pdip.base.search.taglib.query.InCondition</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>In Condition definition Tag</info>
+    <attribute>
+      <name>connector</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>field</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>valueList</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>negate</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+</tag>
+<tag>
+    <name>RangeCondition</name>
+    <tagclass>com.gridnode.pdip.base.search.taglib.query.RangeCondition</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Range Condition definition Tag</info>
+    <attribute>
+      <name>connector</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>field</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>lowValue</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>highValue</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>negate</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+</tag>
+<tag>
+    <name>ResultDisplay</name>
+    <tagclass>com.gridnode.pdip.base.search.taglib.display.ResultDisplay</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Result Display Tag</info>
+    <attribute>
+      <name>resultSet</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>rowId</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+</tag>
+
+</taglib>

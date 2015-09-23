@@ -1,0 +1,12 @@
+package com.gridnode.pdip.framework.db.meta;
+
+import java.rmi.*;
+
+import javax.ejb.*;
+
+public interface IEntityMetaService extends EJBObject
+{
+  public IMetaInfoFactory getMetaInfoFactory() throws RemoteException;
+
+  //can extend for modifying metainfo if requirement arises.
+}

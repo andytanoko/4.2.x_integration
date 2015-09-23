@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for ExportEntityList  -->
+	<class name="com.gridnode.pdip.base.exportconfig.model.ExportEntityList">
+		<map-to xml="Entities"/>
+		<field name="Entities" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection">
+		</field>
+	</class>
+	<!--  Mapping for FileType  -->
+	<class name="com.gridnode.gtas.server.document.model.FileType">
+		<map-to xml="FileType"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="Name" type="string">
+			<xml name="Name" node="element"/>
+		</field>
+		<field name="Description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="ProgramName" type="string">
+			<xml name="ProgramName" node="element"/>
+		</field>
+		<field name="ProgramPath" type="string">
+			<xml name="ProgramPath" node="element"/>
+		</field>
+		<field name="Parameters" type="string">
+			<xml name="Parameters" node="element"/>
+		</field>
+		<field name="WorkingDirectory" type="string">
+			<xml name="WorkingDirectory" node="element"/>
+		</field>
+	</class>
+</mapping>

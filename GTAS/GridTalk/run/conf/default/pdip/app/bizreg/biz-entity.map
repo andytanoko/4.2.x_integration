@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for BusinessEntity  -->
+	<class name="com.gridnode.pdip.app.bizreg.model.BusinessEntity">
+		<map-to xml="BusinessEntity"/>
+		<field name="busEntId" type="string">
+			<xml name="Id" node="attribute"/>
+		</field>
+		<field name="description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="whitePage" type="com.gridnode.pdip.app.bizreg.model.WhitePage">
+			<xml name="WhitePage" node="element"/>
+		</field>
+		<field name="deleted" type="boolean" get-method="isDeleted" set-method="setDeleted">
+			<xml type="boolean" node="attribute"/>
+		</field>
+		<field name="enterpriseId" type="string" required="false">
+			<xml name="EnterpriseId" node="element"/>
+		</field>
+		<field name="state" type="integer" required="false">
+			<xml name="State" node="element"/>
+		</field>
+		<field name="publishable" type="boolean" get-method="isPublishable" set-method="setPublishable" required="false">
+			<xml type="boolean" node="element"/>
+		</field>
+		<field name="syncToServer" type="boolean" get-method="isSyncToServer" set-method="setSyncToServer" required="false">
+			<xml type="boolean" node="element"/>
+		</field>
+		<field name="version" type="double" required="false">
+			<xml name="Version" node="attribute"/>
+		</field>
+		<field name="canDelete" type="boolean" get-method="canDelete" set-method="setCanDelete" required="false">
+			<xml type="boolean" node="attribute"/>
+		</field>
+	</class>
+	<!--  Mapping for WhitePage  -->
+	<class name="com.gridnode.pdip.app.bizreg.model.WhitePage">
+		<map-to xml="WhitePage"/>
+		<field name="businessDesc" type="string" required="false" >
+			<xml name="BusDesc" node="element"/>
+		</field>
+		<field name="dUNS" type="string" required="false" >
+			<xml name="DUNS" node="element"/>
+		</field>
+		<field name="contactPerson" type="string" required="false" >
+			<xml name="ContactPerson" node="element"/>
+		</field>
+		<field name="email" type="string" required="false" >
+			<xml name="Email" node="element"/>
+		</field>
+		<field name="tel" type="string" required="false" >
+			<xml name="Tel" node="attribute"/>
+		</field>
+		<field name="fax" type="string" required="false" >
+			<xml name="Fax" node="element"/>
+		</field>
+		<field name="website" type="string" required="false" >
+			<xml name="Website" node="element"/>
+		</field>
+		<field name="address" type="string" required="false" >
+			<xml name="Address" node="element"/>
+		</field>
+		<field name="zipCode" type="string" required="false" >
+			<xml name="ZipCode" node="element"/>
+		</field>
+		<field name="country" type="string" required="false" >
+			<xml name="Country" node="element"/>
+		</field>
+		<field name="language" type="string" required="false" >
+			<xml name="Language" node="element"/>
+		</field>
+		<field name="pOBox" type="string" required="false" >
+			<xml name="POBox" node="element"/>
+		</field>
+		<!--field name="beUId" type="long" required="false">
+			<xml name="beUID" node="attribute"/>
+		</field-->
+		<field name="globalSupplyChainCode" type="string" required="false" >
+			<xml name="GlobalSupplyChainCode" node="element"/>
+		</field>
+		<field name="city" type="string" required="false" >
+			<xml name="City" node="element"/>
+		</field>
+		<field name="state" type="string" required="false" >
+			<xml name="State" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for DomainIdentifier  -->
+	<class name="com.gridnode.pdip.app.bizreg.model.DomainIdentifier">
+		<map-to xml="DomainIdentifier"/>
+		<field name="domainName" type="string" required="true" >
+			<xml name="domainName" node="attribute"/>
+		</field>
+		<field name="type" type="string" required="true" >
+			<xml name="type" node="attribute"/>
+		</field>
+		<field name="value" type="string" required="true" >
+			<xml name="value" node="attribute"/>
+		</field>
+	</class>	
+</mapping>

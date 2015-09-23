@@ -1,0 +1,13 @@
+package com.gridnode.gtas.server.rnif.act;
+import com.gridnode.gtas.server.rnif.helpers.RnifException;
+
+import java.io.File;
+
+public interface IDigestGenerator
+{
+  byte[] getDigest(File file, String alg)throws RnifException;
+
+  String getEncodedDigest(byte[] digest)throws RnifException;
+
+  byte[] getDecodedDigest(String digestStr)throws RnifException;
+}

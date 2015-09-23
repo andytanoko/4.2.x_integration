@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for ExportEntityList  -->
+	<class name="com.gridnode.pdip.base.exportconfig.model.ExportEntityList">
+		<map-to xml="Entities"/>
+		<field name="Entities" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection">
+		</field>
+	</class>
+	<!--  Mapping for AlertTrigger  -->
+	<class name="com.gridnode.gtas.server.alert.model.AlertTrigger">
+		<map-to xml="AlertTrigger"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="Level" type="integer">
+			<xml name="Level" node="element"/>
+		</field>
+		<field name="AlertUID" type="long">
+			<xml name="AlertUID" node="element"/>
+		</field>
+		<field name="AlertType" type="string">
+			<xml name="AlertType" node="element"/>
+		</field>
+		<field name="DocumentType" type="string">
+			<xml name="DocumentType" node="element"/>
+		</field>
+		<field name="PartnerGroup" type="string">
+			<xml name="PartnerGroup" node="element"/>
+		</field>
+		<field name="PartnerType" type="string">
+			<xml name="PartnerType" node="element"/>
+		</field>
+		<field name="PartnerId" type="string">
+			<xml name="PartnerId" node="element"/>
+		</field>
+		<field name="isEnabled" type="boolean" get-method="isEnabled" set-method="setEnabled">
+			<xml name="isEnabled" node="element"/>
+		</field>
+		<field name="isAttachDoc" type="boolean" get-method="isAttachDoc" set-method="setAttachDoc">
+			<xml name="isAttachDoc" node="element"/>
+		</field>
+		<field name="Recipients" type="string" collection="collection">
+			<xml name="Recipients" node="element"/>
+		</field>
+	</class>
+</mapping>

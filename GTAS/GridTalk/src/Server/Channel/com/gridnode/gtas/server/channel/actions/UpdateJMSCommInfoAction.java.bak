@@ -1,0 +1,154 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001-2002 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: UpdateJMSCommInfoAction.java
+ *
+ ****************************************************************************
+ * Date           Author              Changes
+ ****************************************************************************
+ * Jun 21 2002    Goh Kan Mun         Created
+ * Jul 11 2002    Goh Kan Mun         Modified - Check for Destination Type
+ *                                             - Check for Protocol Type
+ * Aug 06 2002    Jagadeesh           Modified - Changed constructEventResponse to include
+ *                                    Map representation of the Entity
+ */
+package com.gridnode.gtas.server.channel.actions;
+
+import com.gridnode.gtas.model.channel.CommInfoEntityFieldId;
+import com.gridnode.pdip.framework.exceptions.*;
+import com.gridnode.pdip.framework.rpf.ejb.action.*;
+import com.gridnode.pdip.framework.rpf.event.BasicEventResponse;
+import com.gridnode.pdip.framework.rpf.event.EventException;
+import com.gridnode.pdip.framework.rpf.event.IEvent;
+import com.gridnode.pdip.framework.rpf.event.IEventResponse;
+import com.gridnode.pdip.framework.util.ServiceLocator;
+
+import com.gridnode.pdip.app.channel.facade.ejb.IChannelManagerHome;
+import com.gridnode.pdip.app.channel.facade.ejb.IChannelManagerObj;
+import com.gridnode.pdip.app.channel.model.CommInfo;
+import com.gridnode.pdip.app.channel.model.JMSCommInfo;
+
+import com.gridnode.gtas.events.channel.UpdateJMSCommInfoEvent;
+import com.gridnode.gtas.exceptions.IErrorCode;
+import com.gridnode.gtas.server.channel.helpers.ChannelLogger;
+import com.gridnode.gtas.server.rdm.ejb.actions.GridTalkEJBAction;
+
+import java.rmi.RemoteException;
+
+public class UpdateJMSCommInfoAction extends GridTalkEJBAction
+{
+  private static final String CLASSNAME = "UpdateJMSCommInfoAction";
+
+  private JMSCommInfo _jmsCommInfoToUpdate;
+
+  protected void doSemanticValidation(IEvent event) throws Exception
+  {
+    UpdateJMSCommInfoEvent updEvent = (UpdateJMSCommInfoEvent)event;
+    if (updEvent.getDestType() != UpdateJMSCommInfoEvent.QUEUE &&
+       updEvent.getDestType() != UpdateJMSCommInfoEvent.TOPIC)
+      throw new EventException("Destination type not defined: " + updEvent.getDestType());
+    _jmsCommInfoToUpdate = verifyValidJMSCommInfo(updEvent);
+  }
+
+  public IEventResponse perform(IEvent event) throws EventException
+  {
+    CommInfo jmsCommInfoToUpdate = null;
+    IEventResponse response = null;
+    try
+    {
+      jmsCommInfoToUpdate = prepareUpdData((UpdateJMSCommInfoEvent) event);
+      getManager().updateCommInfo(jmsCommInfoToUpdate);
+      jmsCommInfoToUpdate = (CommInfo)getManager().getCommInfo(
+                              (Long)jmsCommInfoToUpdate.getKey());
+      response = constructEventResponse(jmsCommInfoToUpdate, true, null);
+    }
+    catch (BasicTypedException ex)
+    {
+      response = constructEventResponse(jmsCommInfoToUpdate, false, ex);
+    }
+    catch (Throwable ex)
+    {
+      response = constructEventResponse(jmsCommInfoToUpdate, false,
+                   new SystemException(ex));
+    }
+    return response;
+  }
+
+  private JMSCommInfo verifyValidJMSCommInfo(UpdateJMSCommInfoEvent updEvent) throws Exception
+  {
+    try
+    {
+      CommInfo commInfo = (CommInfo) getManager().getCommInfo(updEvent.getUId());
+      if (commInfo.getProtocolType().equals(CommInfo.JMS))
+        return new JMSCommInfo(commInfo);
+      else
+        throw new Exception("Invalid type: " + commInfo.getProtocolType());
+    }
+    catch (FindEntityException ex)
+    {
+      throw new Exception("Invalid JMSCommInfo specified!");
+    }
+
+  }
+
+  private JMSCommInfo prepareUpdData(UpdateJMSCommInfoEvent updEvent) throws Exception
+  {
+    _jmsCommInfoToUpdate.setDescription(updEvent.getDescription());
+    _jmsCommInfoToUpdate.setDestination(updEvent.getDest());
+    _jmsCommInfoToUpdate.setDestType(updEvent.getDestType());
+    _jmsCommInfoToUpdate.setHost(updEvent.getHost());
+    _jmsCommInfoToUpdate.setIsDefaultTpt(false);
+    _jmsCommInfoToUpdate.setName(updEvent.getName());
+    _jmsCommInfoToUpdate.setPassword(updEvent.getPassword());
+    _jmsCommInfoToUpdate.setPort(updEvent.getPort());
+    _jmsCommInfoToUpdate.setProtocolVersion(JMSCommInfo.JMS_VERSION);
+    _jmsCommInfoToUpdate.setTptImplVersion(JMSCommInfo.IMPL_VERSION);
+    _jmsCommInfoToUpdate.setUser(updEvent.getUserName());
+    return _jmsCommInfoToUpdate;
+  }
+
+  private IEventResponse constructEventResponse(
+    CommInfo data, boolean success, TypedException ex)
+  {
+    ChannelLogger.debugLog(CLASSNAME, "constructEventResponse", "Enter: success="+success);
+    BasicEventResponse response = null;
+    Object[] params = null;
+
+    if (data != null)
+    {
+      params = new Object[] { new Long(data.getUId()), new Double(data.getVersion())};
+    }
+
+    if (success)
+    {
+      response = new BasicEventResponse(
+                     IErrorCode.NO_ERROR,
+                     params,
+                     data.convertToMap(data, CommInfoEntityFieldId.getEntityFieldID(), null));
+    }
+    else
+    {
+      ChannelLogger.errorLog(CLASSNAME, "constructEventResponse", "Event Error ", ex);
+      response = new BasicEventResponse(
+                     IErrorCode.UPDATE_ENTITY_ERROR,
+                     params,
+                     ex.getType(),
+                     ex.getLocalizedMessage(),
+                     ex.getStackTraceString());
+    }
+    return response;
+  }
+
+  private IChannelManagerObj getManager() throws ServiceLookupException
+  {
+    return (IChannelManagerObj) ServiceLocator.instance(ServiceLocator.CLIENT_CONTEXT).getObj(
+           IChannelManagerHome.class.getName(),
+           IChannelManagerHome.class,
+           new Object[0]
+           );
+  }
+
+}

@@ -1,0 +1,252 @@
+<?xml version='1.0' encoding='ISO-8859-1'  ?>
+<!DOCTYPE toc PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp TOC Version 1.0//EN" "http://java.sun.com/products/javahelp/toc_1_0.dtd">
+<toc version="1.0">
+  <tocitem text="GridTalk Administration Guide" image="chapter" target="home">
+
+<!-- Chapter 1 -->
+    <tocitem text="1 About the Guide " image="chapter" target="gtas_ag.0">
+      <tocitem text="1.1 Related Documentation " image="topic" target="gtas_ag.1"/>
+      <tocitem text="1.2 References " image="topic" target="gtas_ag.2"/>
+    </tocitem>
+
+<!-- Chapter 2 -->
+    <tocitem text="2 Registration " image="topic" target="gtas_ag.3"/>
+
+<!-- Chapter 3 -->
+    <tocitem text="3 License Expiry and Renewal " image="chapter" target="gtas_ag.4">
+      <tocitem text="3.1 Renewing Expired License " image="topic" target="gtas_ag.5"/>
+      <tocitem text="3.2 Extending License Period or Business Connections " image="topic" target="gtas_ag.6"/>
+    </tocitem>
+
+<!-- Chapter 4 -->
+    <tocitem text="4 Entity Dependency Check " image="topic" target="gtas_ag.7"/>
+
+<!-- Chapter 5 -->
+    <tocitem text="5 User Administration " image="chapter" target="gtas_ag.8">
+      <tocitem text="5.1 Managing Users " image="chapter" target="gtas_ag.9">
+        <tocitem text="5.1.1 To create a new user " image="topic" target="gtas_ag.10"/>
+      </tocitem>
+    </tocitem>
+
+<!-- Chapter 6 -->
+    <tocitem text="6 Alert Notification Centre " image="chapter" target="gtas_ag.11">
+      <tocitem text="6.1 Configuring Alerts " image="chapter" target="gtas_ag.12">
+        <tocitem text="6.1.1 To create a new alert " image="topic" target="gtas_ag.13"/>
+      </tocitem>
+      <tocitem text="6.2 Configuring Actions " image="chapter" target="gtas_ag.14">
+        <tocitem text="6.2.1 To create a new action " image="topic" target="gtas_ag.15"/>
+      </tocitem>
+      <tocitem text="6.3 Configuring Message Templates " image="chapter" target="gtas_ag.16">
+        <tocitem text="6.3.1 To create a new email message template " image="topic" target="gtas_ag.17"/>
+        <tocitem text="6.3.2 To create a new log message template " image="topic" target="gtas_ag.18"/>
+        <tocitem text="6.3.3 To create a new JMS message template " image="topic" target="gtas_ag.19"/>
+      </tocitem>
+      <tocitem text="6.4 Configuring JMS Destinations " image="chapter" target="gtas_ag.20">
+        <tocitem text="6.4.1 To create a new JMS Destination " image="topic" target="gtas_ag.21"/>
+      </tocitem>
+      <tocitem text="6.5 Configuring Response Track Records " image="chapter" target="gtas_ag.22">
+        <tocitem text="6.5.1 To create a new response track record " image="topic" target="gtas_ag.23"/>
+        <tocitem text="6.5.2 The Email Code Reference File " image="topic" target="gtas_ag.24"/>
+      </tocitem>
+      <tocitem text="6.6 Configuring Alert Triggers " image="chapter" target="gtas_ag.25">
+        <tocitem text="6.6.1 Configuration Requirement " image="topic" target="gtas_ag.26"/>
+        <tocitem text="6.6.2 Alert Triggers and Criteria Evaluation " image="topic" target="gtas_ag.27"/>
+        <tocitem text="6.6.3 To trigger an alert level ranked 1 " image="topic" target="gtas_ag.28"/>
+        <tocitem text="6.6.4 To trigger an alert level ranked 2 " image="topic" target="gtas_ag.29"/>
+        <tocitem text="6.6.5 To trigger an alert level ranked 3 " image="topic" target="gtas_ag.30"/>
+        <tocitem text="6.6.6 To trigger an alert level ranked 4 " image="topic" target="gtas_ag.31"/>
+      </tocitem>
+      <tocitem text="6.7 Configuring Email Properties " image="topic" target="gtas_ag.32"/>
+    </tocitem>
+
+<!-- Chapter 7 -->
+    <tocitem text="7 Communication " image="chapter" target="gtas_ag.33">
+      <tocitem text="7.1 Configuring Channels " image="chapter" target="gtas_ag.34">
+        <tocitem text="7.1.1 To create your own channel " image="topic" target="gtas_ag.35"/>
+        <tocitem text="7.1.2 To create a channel for a Partner " image="topic" target="gtas_ag.36"/>
+      </tocitem>
+      <tocitem text="7.2 Configuring Communication Profiles " image="chapter" target="gtas_ag.37">
+        <tocitem text="7.2.1 To create your own communication profile " image="topic" target="gtas_ag.38"/>
+        <tocitem text="7.2.2 To create a communication profile for a Partner " image="topic" target="gtas_ag.39"/>
+      </tocitem>
+      <tocitem text="7.3 Configuring Security Profiles " image="chapter" target="gtas_ag.40">
+        <tocitem text="7.3.1 To create your own security profile " image="topic" target="gtas_ag.41"/>
+        <tocitem text="7.3.2 To create a security profile for a Partner " image="topic" target="gtas_ag.42"/>
+      </tocitem>
+      <tocitem text="7.4 Configuring Packaging Profiles " image="chapter" target="gtas_ag.43">
+        <tocitem text="7.4.1 To create your own packaging profile " image="topic" target="gtas_ag.44"/>
+        <tocitem text="7.4.2 To create a packaging profile for a Partner " image="topic" target="gtas_ag.45"/>
+      </tocitem>
+      <tocitem text="7.5 Importing and exporting Certificates " image="chapter" target="gtas_ag.46">
+        <tocitem text="7.5.1 To Import Own/Partner Certificate " image="topic" target="gtas_ag.47"/>
+        <tocitem text="7.5.2 To download and install the Imported Own/Partner Certificate " image="topic" target="gtas_ag.48"/>
+        <tocitem text="7.5.3 To Export Own/Partner Certificate " image="topic" target="gtas_ag.49"/>
+      </tocitem>
+      <tocitem text="7.6 Certificate Expiry and Notification " image="topic" target="gtas_ag.50"/>
+      <tocitem text="7.7 Schedule Certificate Swapping for Own/Partner certificate " image="chapter" target="gtas_ag.51">
+        <tocitem text="7.7.1 To enable schedule certificate swapping for Own/Partner certificate " image="topic" target="gtas_ag.52"/>
+        <tocitem text="7.7.2 To cancel the schedule certificate swapping for Own/Partner certificate " image="topic" target="gtas_ag.53"/>
+      </tocitem>
+    </tocitem>
+
+<!-- Chapter 8 -->
+    <tocitem text="8 Mapping " image="chapter" target="gtas_ag.54">
+      <tocitem text="8.1 Managing Document Types and File Types " image="chapter" target="gtas_ag.55">
+        <tocitem text="8.1.1 To create a new document type " image="topic" target="gtas_ag.56"/>
+        <tocitem text="8.1.2 To create a new file type " image="topic" target="gtas_ag.57"/>
+      </tocitem>
+      <tocitem text="8.2 Configuring Mapping Files " image="chapter" target="gtas_ag.58">
+        <tocitem text="8.2.1 To create a new XSL mapping file " image="topic" target="gtas_ag.59"/>
+        <tocitem text="8.2.2 To create a new conversion rule mapping file " image="topic" target="gtas_ag.60"/>
+        <tocitem text="8.2.3 To create a new reference doc mapping file " image="topic" target="gtas_ag.61"/>
+        <tocitem text="8.2.4 To create a new DTD mapping file " image="topic" target="gtas_ag.62"/>
+        <tocitem text="8.2.5 To create a new schema mapping file " image="topic" target="gtas_ag.63"/>
+        <tocitem text="8.2.6 To create schema mapping files in batch " image="topic" target="gtas_ag.64"/>
+        <tocitem text="8.2.7 To create a new dictionary mapping file " image="topic" target="gtas_ag.65"/>
+        <tocitem text="8.2.8 To create a new XPath mapping file " image="topic" target="gtas_ag.66"/>
+        <tocitem text="8.2.9 To create a new Java binary mapping file " image="topic" target="gtas_ag.68"/>
+      </tocitem>
+      <tocitem text="8.3 Configuring Mapping Rules " image="chapter" target="gtas_ag.69">
+        <tocitem text="8.3.1 To create a header mapping rule " image="topic" target="gtas_ag.70"/>
+        <tocitem text="8.3.2 To create a content mapping rule " image="topic" target="gtas_ag.71"/>
+      </tocitem>
+      <tocitem text="8.4 Managing Business Certificate Mappings " image="chapter" target="gtas_ag.72">
+        <tocitem text="8.4.1 To create a new Business Certificate Mapping " image="topic" target="gtas_ag.73"/>
+      </tocitem>
+      <tocitem text="8.5 Managing AS2 Doc Type Mappings " image="chapter" target="gtas_ag.74">
+        <tocitem text="8.5.1 To create a new AS2 Doc Type Mapping " image="topic" target="gtas_ag.75"/>
+      </tocitem>
+    </tocitem>
+
+<!-- Chapter 9 -->
+    <tocitem text="9 Process " image="chapter" target="gtas_ag.76">
+      <tocitem text="9.1 Configuring Partner Functions " image="chapter" target="gtas_ag.77">
+        <tocitem text="9.1.1 To create a new partner function " image="topic" target="gtas_ag.78"/>
+      </tocitem>
+      <tocitem text="9.2 Configuring Triggers " image="chapter" target="gtas_ag.79">
+        <tocitem text="9.2.1 To trigger a partner function ranked level 1 " image="topic" target="gtas_ag.80"/>
+        <tocitem text="9.2.2 To trigger a partner function ranked level 2 " image="topic" target="gtas_ag.81"/>
+        <tocitem text="9.2.3 To trigger a partner function ranked level 3 " image="topic" target="gtas_ag.82"/>
+        <tocitem text="9.2.4 To trigger a partner function ranked level 4 " image="topic" target="gtas_ag.83"/>
+      </tocitem>
+      <tocitem text="9.3 Configuring Process Definitions " image="chapter" target="gtas_ag.84">
+        <tocitem text="9.3.1 To create a single action process definition " image="topic" target="gtas_ag.85"/>
+        <tocitem text="9.3.2 To create a double action process definition " image="topic" target="gtas_ag.86"/>
+        <tocitem text="9.3.3 To configure a request or response action " image="topic" target="gtas_ag.87"/>
+      </tocitem>
+      <tocitem text="9.4 Managing Process Instances " image="chapter" target="gtas_ag.88">
+        <tocitem text="9.4.1 To view a process instance " image="topic" target="gtas_ag.89"/>
+        <tocitem text="9.4.2 To cancel a process instance " image="topic" target="gtas_ag.90"/>
+      </tocitem>
+      <tocitem text="9.5 Configuring Process Mappings " image="chapter" target="gtas_ag.91">
+        <tocitem text="9.5.1 To create a new process mapping " image="topic" target="gtas_ag.92"/>
+      </tocitem>
+      <tocitem text="9.6 Configuring Remote Function Calls (RFC) " image="chapter" target="gtas_ag.93">
+        <tocitem text="9.6.1 To create a new RFC " image="topic" target="gtas_ag.94"/>
+      </tocitem>
+      <tocitem text="9.7 Configuring Ports " image="chapter" target="gtas_ag.95">
+        <tocitem text="9.7.1 To create a port using an RFC " image="topic" target="gtas_ag.96"/>
+        <tocitem text="9.7.2 To create a port for export to local file system " image="topic" target="gtas_ag.97"/>
+      </tocitem>
+      <tocitem text="9.8 Configuring Procedure Definition Files " image="chapter" target="gtas_ag.98">
+        <tocitem text="9.8.1 To create a new procedure definition file " image="topic" target="gtas_ag.99"/>
+      </tocitem>
+      <tocitem text="9.9 Configuring User Procedures " image="chapter" target="gtas_ag.100">
+        <tocitem text="9.9.1 To create a new user Procedure " image="topic" target="gtas_ag.101"/>
+      </tocitem>
+    </tocitem>
+
+<!-- Chapter 10 -->
+    <tocitem text="10 Backend Integration " image="chapter" target="gtas_ag.102">
+      <tocitem text="10.1 Configuring Backend Sender " image="chapter" target="gtas_ag.103">
+        <tocitem text="10.1.1 To import the document into GridTalk " image="topic" target="gtas_ag.104"/>
+        <tocitem text="10.1.2 Sender.ini " image="topic" target="gtas_ag.105"/>
+        <tocitem text="10.1.3 Directory.file " image="topic" target="gtas_ag.106"/>
+        <tocitem text="10.1.4 .info file " image="topic" target="gtas_ag.107"/>
+        <tocitem text="10.1.5 Senderlite.jar " image="topic" target="gtas_ag.108"/>
+      </tocitem>
+      <tocitem text="10.2 Configuring Backend Receiver " image="chapter" target="gtas_ag.109">
+        <tocitem text="10.2.1 To export the document into backend system from GridTalk " image="topic" target="gtas_ag.110"/>
+      </tocitem>
+      <tocitem text="10.3 Configuring FTP Backend Integration " image="chapter" target="gtas_ag.111">
+        <tocitem text="10.3.1 To create a User Procedure to perform FTP " image="topic" target="gtas_ag.112"/>
+      </tocitem>
+    </tocitem>
+
+<!-- Chapter 11 -->
+    <tocitem text="11 Web Services " image="chapter" target="gtas_ag.113">
+      <tocitem text="11.1 Creating a User Procedure to invoke a web service " image="chapter" target="gtas_ag.114">
+        <tocitem text="11.1.1 To create a new SOAP-enabled user procedure " image="topic" target="gtas_ag.115"/>
+      </tocitem>
+      <tocitem text="11.2 Backend Web Services Integration " image="topic" target="gtas_ag.116"/>
+      <tocitem text="11.3 Front Web Services Integration " image="chapter" target="gtas_ag.118">
+        <tocitem text="11.3.1 Web service for depositing doc " image="topic" target="gtas_ag.119"/>
+        <tocitem text="11.3.2 Web service for retrieving doc " image="topic" target="gtas_ag.120"/>
+      </tocitem>
+      <tocitem text="11.4 Using Web Service Gateway " image="chapter" target="gtas_ag.121">
+        <tocitem text="11.4.1 To create a new web service " image="topic" target="gtas_ag.122"/>
+        <tocitem text="11.4.2 To assign the web service to the partner " image="topic" target="gtas_ag.123"/>
+      </tocitem>
+    </tocitem>
+
+<!-- Chapter 12 -->
+    <tocitem text="12 Internal Scheduler " image="chapter" target="gtas_ag.125">
+      <tocitem text="12.1 Configuring Scheduled Task " image="chapter" target="gtas_ag.126">
+        <tocitem text="12.1.1 To schedule a one-time job " image="topic" target="gtas_ag.127"/>
+        <tocitem text="12.1.2 To schedule a daily job " image="topic" target="gtas_ag.128"/>
+        <tocitem text="12.1.3 To schedule an hourly job " image="topic" target="gtas_ag.129"/>
+        <tocitem text="12.1.4 To schedule a minutely jobs " image="topic" target="gtas_ag.130"/>
+        <tocitem text="12.1.5 To schedule a monthly job " image="chapter" target="gtas_ag.131">
+          <tocitem text="12.1.5.1 Type 1 Schedule " image="topic" target="gtas_ag.132"/>
+          <tocitem text="12.1.5.2 Type 2 Schedule " image="topic" target="gtas_ag.133"/>
+          <tocitem text="12.1.5.3 Type 3 Schedule " image="topic" target="gtas_ag.134"/>
+        </tocitem>
+        <tocitem text="12.1.6 To schedule a weekly job " image="topic" target="gtas_ag.135"/>
+      </tocitem>
+    </tocitem>
+
+<!-- Chapter 13 -->
+    <tocitem text="13 Database maintenance and Housekeeping " image="chapter" target="gtas_ag.136">
+      <tocitem text="13.1 Archiving Documents and Processes " image="topic" target="gtas_ag.137"/>
+      <tocitem text="13.2 Restoring Archived Documents and Processes " image="topic" target="gtas_ag.138"/>
+      <tocitem text="13.3 Scheduling Archive jobs " image="topic" target="gtas_ag.139"/>
+      <tocitem text="13.4 Scheduling housekeeping job s " image="topic" target="gtas_ag.140"/>
+    </tocitem>
+
+<!-- Chapter 14 -->
+    <tocitem text="14 Archive Search " image="chapter" target="gtas_ag.141">
+      <tocitem text="14.1 Searching Archived Process Instances " image="topic" target="gtas_ag.142"/>
+      <tocitem text="14.2 Searching Archived Documents " image="topic" target="gtas_ag.143"/>
+      <tocitem text="14.3 Viewing Archived Document Detail s " image="topic" target="gtas_ag.144"/>
+    </tocitem>
+
+<!-- Chapter 15 -->
+    <tocitem text="15 Export and Import Configuration " image="chapter" target="gtas_ag.145">
+      <tocitem text="15.1 Exporting Configuration Data " image="topic" target="gtas_ag.146"/>
+      <tocitem text="15.2 Importing Configuration Data " image="topic" target="gtas_ag.147"/>
+    </tocitem>
+
+<!-- Chapter 16 -->
+    <tocitem text="16 Advanced " image="chapter" target="gtas_ag.148">
+      <tocitem text="16.1 Configuring HTTPS Connections " image="chapter" target="gtas_ag.149">
+        <tocitem text="16.1.1 To enable HTTPS " image="topic" target="gtas_ag.150"/>
+        <tocitem text="16.1.2 To import your private certificate " image="topic" target="gtas_ag.151"/>
+        <tocitem text="16.1.3 To get your public certificate for distribution " image="topic" target="gtas_ag.152"/>
+        <tocitem text="16.1.4 To import partner’s certificate " image="topic" target="gtas_ag.153"/>
+        <tocitem text="16.1.5 To change Communication Profile " image="topic" target="gtas_ag.154"/>
+      </tocitem>
+      <tocitem text="16.2 Configuring AS2 Messaging " image="chapter" target="gtas_ag.155">
+        <tocitem text="16.2.1 To enable AS2 messaging with a partner " image="topic" target="gtas_ag.156"/>
+      </tocitem>
+      <tocitem text="16.3 Configuring UCCNet Connections " image="chapter" target="gtas_ag.157">
+        <tocitem text="16.3.1 To create a User Procedure to invoke the UCCnet transport adaptor " image="topic" target="gtas_ag.158"/>
+      </tocitem>
+    </tocitem>
+
+<!-- Chapter 0 -->
+    <tocitem text="Appendix " image="chapter" target="gtas_ag.159">
+      <tocitem text="Default Email Message Templates " image="topic" target="gtas_ag.160"/>
+      <tocitem text="Default Log Message Templates " image="topic" target="gtas_ag.161"/>
+    </tocitem>
+  </tocitem>
+</toc>

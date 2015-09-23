@@ -1,0 +1,35 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001-2005 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: ITxDeliveryTimerHome.java
+ *
+ ****************************************************************************
+ * Date           Author              Changes
+ ****************************************************************************
+ * Jan 12, 2007   i00107              Created
+ */
+
+package com.gridnode.gridtalk.httpbc.ishb.ejb;
+
+import java.rmi.RemoteException;
+
+import javax.ejb.CreateException;
+import javax.ejb.EJBHome;
+
+/**
+ * @author i00107
+ * The Remote interface for the EJB Home of TxDeliveryTimerBean.
+ */
+public interface ITxDeliveryTimerHome extends EJBHome
+{
+  /**
+   * Create the remote interface for TxDeliveryTimerBean.
+   * @return The remote EJB object for TxDeliveryTimerBean.
+   * @throws CreateException
+   * @throws RemoteException
+   */
+  public ITxDeliveryTimer create() throws CreateException, RemoteException;
+}

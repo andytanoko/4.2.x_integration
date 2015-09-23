@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ ****************************************************************************
+ * Date           Author                  Changes
+ ****************************************************************************
+ * Oct 01 2002    Neo Sok Lay             Include packaging and security info.
+ * Dec 31 2003    Neo Sok Lay             Add FlowControlInfo mapping.
+ *                                        Comment off mappings for other classes.
+-->
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for ChannelInfo 
+	<class name="com.gridnode.pdip.app.channel.model.ChannelInfo">
+		<map-to xml="ChannelInfo"/>
+		<field name="name" type="string">
+			<xml node="attribute"/>
+		</field>
+		<field name="referenceId" type="string">
+			<xml node="attribute"/>
+		</field>
+		<field name="version" type="double" required="false">
+			<xml name="Version" node="attribute"/>
+		</field>
+		<field name="description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="tptCommInfo" type="com.gridnode.pdip.app.channel.model.CommInfo">
+			<xml name="TptCommInfo" node="element"/>
+		</field>
+		<field name="tptProtocolType" type="string">
+			<xml name="TptProtocolType" node="element"/>
+		</field>
+		<field name="packagingProfile" type="com.gridnode.pdip.app.channel.model.PackagingInfo">
+			<xml name="PackagingProfile" node="element"/>
+		</field>
+		<field name="securityProfile" type="com.gridnode.pdip.app.channel.model.SecurityInfo">
+			<xml name="PackagingProfile" node="element"/>
+		</field>
+	</class>
+  -->
+	<!--  Mapping for CommInfo 
+	<class name="com.gridnode.pdip.app.channel.model.CommInfo">
+		<map-to xml="CommInfo"/>
+		<field name="name" type="string">
+			<xml node="attribute"/>
+		</field>
+		<field name="refId" type="string">
+			<xml name="RefId" node="attribute"/>
+		</field>
+		<field name="version" type="double">
+			<xml name="Version" node="attribute"/>
+		</field>
+		<field name="description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="host" type="string">
+			<xml name="Host" node="element"/>
+		</field>
+		<field name="port" type="integer">
+			<xml name="Port" node="element"/>
+		</field>
+		<field name="protocolType" type="string">
+			<xml name="ProtocolType" node="element"/>
+		</field>
+		<field name="protocolVersion" type="string">
+			<xml name="ProtocolVersion" node="element"/>
+		</field>
+		<field name="protocolDetailItems" collection="collection" type="com.gridnode.pdip.framework.db.KeyValuePair">
+			<xml name="ProtocolDetailItem" node="element"/>
+		</field>
+		<field name="isDefaultTpt" type="boolean" set-method="setIsDefaultTpt" get-method="isDefaultTpt" >
+			<xml name="IsDefaultTpt" node="element"/>
+		</field>
+		<field name="tptImplVersion" type="string">
+			<xml name="TptImplVersion" node="element"/>
+		</field>
+	</class>
+  -->
+	<!--  Mapping for PackagingInfo 
+	<class name="com.gridnode.pdip.app.channel.model.PackagingInfo">
+		<map-to xml="PackagingProfile"/>
+		<field name="name" type="string">
+			<xml node="attribute"/>
+		</field>
+		<field name="referenceId" type="string">
+			<xml name="RefId" node="attribute"/>
+		</field>
+		<field name="version" type="double">
+			<xml name="Version" node="attribute"/>
+		</field>
+		<field name="description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="envelope" type="string">
+			<xml name="Envelope" node="element"/>
+		</field>
+		<field name="isZip" type="boolean" set-method="setZip" get-method="isZip">
+			<xml name="IsZip" node="element"/>
+		</field>
+		<field name="zipThreshold" type="integer">
+			<xml name="ZipThreshold" node="element"/>
+		</field>
+	</class>
+  -->
+	<!--  Mapping for SecurityInfo
+	<class name="com.gridnode.pdip.app.channel.model.SecurityInfo">
+		<map-to xml="SecurityProfile"/>
+		<field name="name" type="string">
+			<xml node="attribute"/>
+		</field>
+		<field name="referenceId" type="string">
+			<xml name="RefId" node="attribute"/>
+		</field>
+		<field name="version" type="double">
+			<xml name="Version" node="attribute"/>
+		</field>
+		<field name="description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="encryptionType" type="string">
+			<xml name="EncryptionType" node="element"/>
+		</field>
+		<field name="encryptionLevel" type="integer">
+			<xml name="EncryptionLevel" node="element"/>
+		</field>
+		<field name="signatureType" type="string">
+			<xml name="SignatureType" node="element"/>
+		</field>
+		<field name="digestAlgorithm" type="string">
+			<xml name="DigestAlgorithm" node="element"/>
+		</field>
+	</class>
+  -->
+	<!--  Mapping for FlowControlInfo  -->
+	<class name="com.gridnode.pdip.app.channel.model.FlowControlInfo">
+		<map-to xml="FlowControl"/>
+		<field name="zipThreshold" type="integer">
+			<xml name="ZipThreshold" node="element"/>
+		</field>
+		<field name="isZip" type="boolean" set-method="setIsZip" get-method="isZip">
+			<xml name="IsZip" node="element"/>
+		</field>
+		<field name="splitThreshold" type="integer">
+			<xml name="SplitThreshold" node="element"/>
+		</field>
+		<field name="splitSize" type="integer">
+			<xml name="SplitSize" node="element"/>
+		</field>
+		<field name="isSplit" type="boolean" set-method="setIsSplit" get-method="isSplit">
+			<xml name="IsSplit" node="element"/>
+		</field>
+	</class>	
+
+	<!--  Mapping for AS2PackagingInfoExtension  -->
+	<class name="com.gridnode.pdip.app.channel.model.AS2PackagingInfoExtension">
+		<map-to xml="As2PackagingExtension"/>
+		<field name="isAckReq" type="boolean">
+			<xml name="IsAckReq" node="element"/>
+		</field>
+		<field name="isAckSigned" type="boolean">
+			<xml name="IsAckSigned" node="element"/>
+		</field>
+		<field name="isNRRReq" type="boolean">
+			<xml name="IsNRRReq" node="element"/>
+		</field>
+		<field name="isAckSyn" type="boolean">
+			<xml name="IsAckSyn" node="element"/>
+		</field>
+		<field name="returnURL" type="string">
+			<xml name="ReturnURL" node="element"/>
+		</field>
+	</class>
+	
+</mapping>

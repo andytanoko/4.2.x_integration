@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-j2ee-engine SYSTEM "ejb-j2ee-engine.dtd">
+<ejb-j2ee-engine>
+	<enterprise-beans>
+		<enterprise-bean>
+			<ejb-name>ResourceLinkManager</ejb-name>
+			<jndi-name>com.gridnode.gtas.server.enterprise.facade.ejb.IResourceLinkManagerHome</jndi-name>
+			<session-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>SharedResourceManager</ejb-name>
+			<jndi-name>com.gridnode.gtas.server.enterprise.facade.ejb.ISharedResourceManagerHome</jndi-name>
+			<session-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>EnterpriseHierarchyManager</ejb-name>
+			<jndi-name>com.gridnode.gtas.server.enterprise.facade.ejb.IEnterpriseHierarchyManagerHome</jndi-name>
+			<session-props/>
+		</enterprise-bean>
+	</enterprise-beans>
+</ejb-j2ee-engine>

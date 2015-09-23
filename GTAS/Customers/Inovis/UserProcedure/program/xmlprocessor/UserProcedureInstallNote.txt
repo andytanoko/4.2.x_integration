@@ -1,0 +1,183 @@
+
+
+# Objective
+This user procedure aim to resolve the limitation in the Gridmapper which can not perform looping on the column header. It contain both "pre-process" and "post-process" function. For "pre-process" it will generate the format that can be processed by the GridMapper. For the "post-process", it will take the intermediate xml file generated from the GridMapper and produce the final copy of the RN 4A4 document.
+
+This user procedure also can handle the limitation in the Gridmapper to convert from RN 4A5 XML to 4A5 flat file.
+
+13 Feb 2009
+
+# Import procedure definition files
+
+i)   Go to \Process\Procedure Definittion Files\Java Procedure,  and "Create Java Procedure"
+ii)  Follow the screen instruction to import the "inovis-xml-processor.jar"
+
+# Create Java user procedure for "pre-processing" (Generating the header "DET")
+i)   Go to \Process\User Procedure\Java Procedure\Create Java Procedure
+ii)  Fill in the necessary field (the important fields will be covered below)
+
+~~ Procedure Definition File ~~
+1) Select the Procedure Definition file we created previously
+
+~~ Edit Java Procedure Configuration ~~
+1) From the drop down list, select the Classname: "com.inovis.userproc.xml.processor.XMLProcessor"
+2) Select the method "preprocessBackendFile(...)"
+
+~~ Set Return Value Into ~~
+1) Select "Custom Field 02"
+
+~~ Procedure Parameter List ~~
+
+1) udocFullPath
+desc: The full path to the document imported from backend
+Data source: Header Document (GridDoc)
+Data Type: String
+Data Value: Full Doc Path
+
+2) originalUdocFilename
+desc: the filename of the imported document from backend
+Data source: Header Document (GridDoc)
+Data Type: String
+Data Value: Doc. Filename
+
+
+3) delimeter
+desc: delimeter used in the doc frm backend
+Data source: User Defined
+Data Type: String
+Data value: tab
+
+4) header
+desc: header for passing it to GMapper
+Data source: User Defined
+Data Type: String
+Data value: DET
+
+
+# Create Java user procedure for "post-processing" 4A4 (Finalized the RN 4A4 document by adding in <ProductForecast> element)
+
+i)   Go to \Process\User Procedure\Java Procedure\ and "Create Java Procedure"
+ii)  Fill in the necessary field (the important fields will be covered below)
+
+~~ Procedure Definition File ~~
+1) Select the Procedure Definition file we created previously
+
+~~ Edit Java Procedure Configuration ~~
+1) From the drop down list, select the Classname: "com.inovis.userproc.xml.processor.XMLProcessor"
+2) Select the method postProcessRNXML(java.lang.String intermediateXMLFullPath, java.lang.String backendDocFilename, java.lang.String delim, java.lang.String folder)
+
+~~ Procedure Parameter List ~~
+
+1) intermediateXML
+desc: output file from the 4A4 mapping rule
+Data source: Header Document (GridDoc)
+Data Type: String
+Data Value: Full Doc Path
+
+2) originalDocFilename
+desc: the filename of the imported document from backend
+Data source: Header Document (GridDoc)
+Data Type: String
+Data Value: Custom Field 02
+
+
+3) delimeter
+desc: delimeter used in the doc frm backend
+Data source: User Defined
+Data Type: String
+Data value: tab
+
+4) folder
+desc: The folder that contain the original backend doc
+Data source: Header Document (GridDoc)
+Data Type: String
+Data value: Folder
+
+
+5) refXML
+desc: The path to the REF.XML that contain Location ID to Duns mapping
+Data source: User Defined
+Data Type: String
+Data value: <Full Path to the REF.XML>
+
+# Create Java user procedure for "post-processing" IB 4A5 (Finalized the 4A5 flat file by generating the header, and also consolidate all the quantity based on "Customer Item" and "Schedule Date")
+
+i)   Go to \Process\User Procedure\Java Procedure\ and "Create Java Procedure"
+ii)  Fill in the necessary field (the important fields will be covered below)
+
+~~ Procedure Definition File ~~
+1) Select the Procedure Definition file we created previously
+
+~~ Edit Java Procedure Configuration ~~
+1) From the drop down list, select the Classname: "com.inovis.userproc.xml.processor.XML4A5Processor"
+2) Select the method postProcess4A5Flat(java.lang.String filepath, java.lang.String delim)
+
+~~ Procedure Parameter List ~~
+
+1) filepath
+desc: the filepath to the intermediate csv file
+Data source: Header Document (GridDoc)
+Data Type: String
+Data Value: Full Doc Path
+
+
+2) delimeter
+desc: the delim used in the intermediate csv file
+Data source: User Defined
+Data Type: String
+Data value: tab
+
+# Create Java user procedure for "post-processing" IB 4C1 (Finalized the 4C1 flat file by generating the header, and also consolidate all the quantity based on "Customer Item" and "Schedule Date")
+
+i)   Go to \Process\User Procedure\Java Procedure\ and "Create Java Procedure"
+ii)  Fill in the necessary field (the important fields will be covered below)
+
+~~ Procedure Definition File ~~
+1) Select the Procedure Definition file we created previously
+
+~~ Edit Java Procedure Configuration ~~
+1) From the drop down list, select the Classname: "com.inovis.userproc.xml.processor.XML4C1Processor"
+2) Select the method void postProcess4C1Flat(java.lang.String filepath, java.lang.String delim)
+
+~~ Procedure Parameter List ~~
+
+1) filepath
+desc: the filepath to the intermediate csv file
+Data source: Header Document (GridDoc)
+Data Type: String
+Data Value: Full Doc Path
+
+
+2) delimeter
+desc: the delim used in the intermediate csv file
+Data source: User Defined
+Data Type: String
+Data value: tab
+
+#### Partner function configuration for OB 4A4 ####
+Exit To OB
+Save Doc To Sys Folder
+Userprocedure: Pre-process
+Mapping Rule: 4A4 convert from csv to XML
+Userprocedure: Post-process to add <ProductForecast> and <ProductSchedule>
+Save Doc To Sys Folder
+Mapping Rule: Split 4A4
+Save Doc To Sys Folder
+UP: Push To ATX
+Exit To channel
+Exit WF 
+
+
+#### Partner function configuration for IB 4A5 ####
+Mapping Rule: 4A5
+Userprocedure: Post-process
+Exit To Export
+Exit To Port 'DEF'
+Exit WF
+
+#### Partner function configuration for IB 4C1 ####
+Mapping Rule: 4C1
+Userprocedure: Post-process
+Exit To Export
+Exit To Port 'DEF'
+Exit WF

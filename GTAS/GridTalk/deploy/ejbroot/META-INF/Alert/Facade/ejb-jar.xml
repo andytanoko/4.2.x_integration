@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+  <enterprise-beans>
+    <session>
+      <display-name>GridTalkAlertManager</display-name>
+      <ejb-name>GridTalkAlertManager</ejb-name>
+      <home>com.gridnode.gtas.server.alert.facade.ejb.IGridTalkAlertManagerHome</home>
+      <remote>com.gridnode.gtas.server.alert.facade.ejb.IGridTalkAlertManagerObj</remote>
+      <ejb-class>com.gridnode.gtas.server.alert.facade.ejb.GridTalkAlertManagerBean</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+    </session>
+    <message-driven>
+      <ejb-name>AlertRequestMDBean</ejb-name>
+      <ejb-class>com.gridnode.gtas.server.alert.facade.ejb.AlertRequestMDBean</ejb-class>
+      <transaction-type>Container</transaction-type>
+      <message-driven-destination> <!-- TWX change to use durable topic -->
+            <destination-type>javax.jms.Topic</destination-type>
+            <subscription-durability>Durable</subscription-durability>
+      </message-driven-destination>
+      <activation-config>
+      	<activation-config-property>
+      		<activation-config-property-name>messageSelector</activation-config-property-name>
+      		<activation-config-property-value>id='AlertRequest' AND handler='Alert' AND hostid='${hostid:gnode1}'</activation-config-property-value>
+      	</activation-config-property>
+      </activation-config>
+    </message-driven>
+  </enterprise-beans>
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+        <ejb-name>GridTalkAlertManager</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <method>
+        <ejb-name>AlertRequestMDBean</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+</ejb-jar>

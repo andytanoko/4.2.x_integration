@@ -1,0 +1,189 @@
+/**
+* This software is the proprietary information of GridNode Pte Ltd.
+* Use is subjected to license terms.
+*
+* Copyright 2002 (C) GridNode Pte Ltd. All Rights Reserved.
+*
+* File: DefaultMessageReceiver.java
+*
+****************************************************************************
+* Date           Author                  Changes
+****************************************************************************
+* July 17 2003    Jagadeesh             Created.
+*/
+
+package com.gridnode.pdip.app.channel.handler.message;
+
+import com.gridnode.pdip.app.channel.helpers.IPackage;
+import com.gridnode.pdip.app.channel.helpers.Package;
+import com.gridnode.pdip.app.channel.helpers.ChannelLogger;
+
+import com.gridnode.pdip.app.channel.helpers.IReceiveMessageHandler;
+import com.gridnode.pdip.app.channel.helpers.SecurityServiceHandler;
+import com.gridnode.pdip.app.channel.helpers.PackagingServiceHandler;
+import com.gridnode.pdip.app.channel.helpers.FlowControlServiceHandler;
+
+import com.gridnode.pdip.app.channel.handler.MessageHandlerRegistry;
+
+import com.gridnode.pdip.app.channel.model.ChannelInfo;
+import com.gridnode.pdip.app.channel.model.SecurityInfo;
+import com.gridnode.pdip.app.channel.model.PackagingInfo;
+import com.gridnode.pdip.app.channel.model.FlowControlInfo;
+
+import com.gridnode.pdip.app.channel.model.IPackagingInfo;
+
+import com.gridnode.pdip.base.transport.helpers.ITransportConstants;
+import com.gridnode.pdip.base.packaging.helper.IPackagingConstants;
+
+import com.gridnode.pdip.app.channel.exceptions.ChannelException;
+import com.gridnode.pdip.app.channel.exceptions.FlowControlException;
+import com.gridnode.pdip.base.security.exceptions.SecurityServiceException;
+
+import com.gridnode.pdip.base.transport.helpers.GNTransportPayload;
+import com.gridnode.pdip.base.packaging.exceptions.PackagingException;
+
+import java.util.Hashtable;
+import java.io.File;
+
+
+public class DefaultMessageReceiver extends AbstractMessageReceiver
+{
+
+  private static final String CLASS_NAME = "DefaultMessageReceiver";
+
+//	protected ChannelInfo _channelInfo = null;
+
+  public DefaultMessageReceiver()
+  {
+  }
+
+/*	public DefaultMessageReceiver(ChannelInfo channelInfo)
+  {
+    _channelInfo = channelInfo;
+  }
+*/
+
+/*	public void receiveMessage(GNTransportPayload payLoadRecv)
+    throws ChannelException,Exception
+  {
+    try
+    {
+      Hashtable header = payLoadRecv.getHeader();
+      String[]  dataContent  = payLoadRecv.getData();
+      byte[] payLoad = payLoadRecv.getFileContent();
+
+      if (dataContent != null)
+        ChannelLogger.infoLog(CLASS_NAME,"receiveMessage()",
+          "[Data Content String[] is Not Null Length=]["+dataContent.length+"]");
+      else
+        ChannelLogger.infoLog(CLASS_NAME,"receiveMessage()",
+          "[Data Content String[] is NULL]");
+
+      if (payLoad != null)
+        ChannelLogger.infoLog(CLASS_NAME,"receiveMessage()",
+          "[File PayLoad byte[] is Not Null Length=]["+payLoad.length+"]");
+      else
+        ChannelLogger.infoLog(CLASS_NAME,"receiveMessage()",
+          "[File PayLoad is NULL]");
+
+      SecurityInfo  securityInfo      = _channelInfo.getSecurityProfile();
+      PackagingInfo packagingInfo     = _channelInfo.getPackagingProfile();
+      FlowControlInfo flowControlInfo = _channelInfo.getFlowControlInfo();
+
+      Package unProcessPackage = new Package(header,dataContent,payLoad);
+      //To Decrypt And Verify.
+      Package decryptedPackage = decryptAndVerify(securityInfo,unProcessPackage);
+
+      //To Perform FlowControl to handle unZip/join Split package
+      Package flowControlPackage = performPackageFlowControl(flowControlInfo,decryptedPackage);
+      //Package decryptedPackage = SecurityServiceHandler.decryptPackage(securityInfo,
+      //															  unProcessPackage,false); //Decrypt this package.
+      //Package flowControlPackage = FlowControlServiceHandler.performUnPackageFlowControl(
+      //											  			flowControlInfo,decryptedPackage);
+
+      //Unpackage the package. Call Base Packaging to UnPackage.
+      //Package finalPackage = PackagingServiceHandler.
+
+      if (flowControlPackage != null)
+      {
+        // Get the Default Header in String[]
+        String[] defaultHeader = PackagingServiceHandler.getDefaultEnvelopeHeader(
+                                  flowControlPackage.getHeader());
+
+        // Get Additional Header in Hashtable, added by Base.Packaging (if any).
+        Hashtable additionalHeader = (Hashtable)flowControlPackage.getValue(
+                  IPackagingConstants.ADDITIONAL_HEADER);		//Get Additional Header
+        String[] unPackdataContent = flowControlPackage.getDataContent();
+        File[] unpackagedFiles = flowControlPackage.getFileContent();
+        String eventID = defaultHeader[0];
+        IReceiveMessageHandler listener = MessageHandlerRegistry.getHandlerRegistry(
+        ).getReceiveMessageHandler(eventID);
+        //Invoke BL to Process this Unpackaged data.
+        listener.handlerMessage(defaultHeader,unPackdataContent,unpackagedFiles,
+                                additionalHeader);
+      }
+
+    }
+    catch (Exception ex)
+    {
+      ChannelLogger.errorLog(CLASS_NAME,"receiveMessage()",
+                    "[Unable to Process Receive Message]",ex);
+      throw new ChannelException("Could Not Perform Receive ... ");
+    }
+  }
+*/
+
+  public Package decryptAndVerify(SecurityInfo securityInfo,Package packageData)
+    throws SecurityServiceException
+  {
+    try
+    {
+      String[] toDecryptData = packageData.getDataContent();
+      byte[] toDecryptFileContent = packageData.getUnPackFileContent();
+      String[] decryptedData = SecurityServiceHandler.decryptData(securityInfo,toDecryptData);
+      byte[] decryptedFile = SecurityServiceHandler.decryptData(securityInfo,toDecryptFileContent);
+      return new Package(packageData.getHeader(),decryptedData,decryptedFile);
+    }
+    catch (Exception ex)
+    {
+      ChannelLogger.errorLog(CLASS_NAME,"decryptAndVerify()",
+          "[Cannot Perform DecryptAndVerify]",ex);
+      throw new SecurityServiceException("["+CLASS_NAME+"][decryptAndVerify()]"+
+        "[Cannot perform decryptAndVerify(]"+ex.getMessage());
+    }
+  }
+
+  public Package performPackageFlowControl(FlowControlInfo info,Package packageData)
+    throws FlowControlException
+  {
+    try
+    {
+      Package flowControlPackage = FlowControlServiceHandler.performUnPackageFlowControl(
+                                    info,packageData);
+      return flowControlPackage;
+    }
+    catch (Exception ex)
+    {
+      ChannelLogger.errorLog(CLASS_NAME,"performPackageFlowControl()",
+          "[Cannot Perform performPackageFlowControl()]",ex);
+      throw new FlowControlException("["+CLASS_NAME+"][performPackageFlowControl()]"+
+        "[Cannot perform decryptAndVerify(]"+ex.getMessage());
+    }
+  }
+
+
+  public Package performUnPackaging(PackagingInfo packagingInfo,Package packageData)
+    throws PackagingException
+  {
+    /** @todo To call PackagingService at Base Services Layer to perform unpackaging */
+    return PackagingServiceHandler.unpackageEnvelope(packagingInfo.getEnvelope(),packageData);
+  }
+
+  public String[] getDefaultHeader(Hashtable header) throws Exception
+  {
+    String[] defaultHeader = PackagingServiceHandler.getDefaultEnvelopeHeader(header);
+    return defaultHeader;
+  }
+
+
+}

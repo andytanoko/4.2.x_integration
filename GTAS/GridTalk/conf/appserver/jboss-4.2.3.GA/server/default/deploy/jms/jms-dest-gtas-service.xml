@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server>
+ <!-- ==================================================================== -->
+ <!-- GTAS Destinations                                                    -->
+ <!-- ==================================================================== -->
+ <mbean code="org.jboss.mq.server.jmx.Topic"
+	 name="jboss.mq.destination:service=Topic,name=initialiserTopic">
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+ </mbean>
+ <mbean code="org.jboss.mq.server.jmx.Topic"
+	 name="jboss.mq.destination:service=Topic,name=timeMissedTopic">
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean>
+	
+ <mbean code="org.jboss.mq.server.jmx.Topic"
+	 name="jboss.mq.destination:service=Topic,name=entityEventTopic">
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean>
+
+ <mbean code="org.jboss.mq.server.jmx.Topic"
+	 name="jboss.mq.destination:service=Topic,name=notifierTopic">
+	<attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean> 
+
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=activityQueue">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean> 
+
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=processQueue">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean> 
+
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=restrictionQueue">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean> 
+
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=timeScheduleQueue">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean>
+
+  <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=timeInvokeQueue">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean>
+
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=toRouter">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean>
+
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=fromRouter">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+	 <attribute name="RedeliveryDelay">10000</attribute>
+     <!-- unlimited redelivery -->
+     <attribute name="RedeliveryLimit">15</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean>
+
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=channelSend">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean>
+
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=transportFeedback">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean> 
+
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=performWorkitem">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean> 
+
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=receiveDocumentQueue">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean> 
+
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=receiveSignalQueue">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean> 
+
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=sendSignalQueue">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean> 
+
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=sendReqDocQueue">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean> 
+
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=sendResDocQueue">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean> 
+
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=dbarchiveQueue">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean> 
+
+  <!-- end of GTAS destinations -->
+
+</server>

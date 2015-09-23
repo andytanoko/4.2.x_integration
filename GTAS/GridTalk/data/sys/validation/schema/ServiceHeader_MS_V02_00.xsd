@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.rosettanet.org/RNIF/V02.00" xmlns="http://www.rosettanet.org/RNIF/V02.00" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified">
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+	<xsd:element name="ActionControl">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ActionIdentity"/>
+				<xsd:element ref="messageTrackingID"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ActionIdentity">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GlobalBusinessActionCode"/>
+				<xsd:element ref="messageStandard" minOccurs="0"/>
+				<xsd:element ref="standardVersion" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ActivityControl">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="BusinessActivityIdentifier"/>
+				<xsd:element ref="MessageControl"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Attachment">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="description" minOccurs="0"/>
+				<xsd:element ref="GlobalMimeTypeQualifierCode"/>
+				<xsd:element ref="UniversalResourceIdentifier"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="BusinessActivityIdentifier">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="255"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="CountableAmount">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:integer">
+				<xsd:pattern value="\d{1,15}"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="FreeFormText">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="nonEmptyString">
+					<xsd:attribute ref="xml:lang"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="nonEmptyString">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="GlobalBusinessActionCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="255"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalBusinessIdentifier">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:length value="9"/>
+				<xsd:pattern value="\d{9}"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalBusinessServiceCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="255"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalBusinessSignalCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="255"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalMimeTypeQualifierCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalPartnerRoleClassificationCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="255"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalProcessIndicatorCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="255"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalUsageCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="4"/>
+				<xsd:maxLength value="10"/>
+				<xsd:enumeration value="Production"/>
+				<xsd:enumeration value="Test"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="InstanceIdentifier">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="255"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="KnownInitiatingPartner">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="PartnerIdentification"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Manifest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Attachment" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="numberOfAttachments"/>
+				<xsd:element ref="ServiceContentControl"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="MessageControl">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="fromRole"/>
+				<xsd:element ref="fromService"/>
+				<xsd:element ref="inReplyTo" minOccurs="0"/>
+				<xsd:element ref="Manifest"/>
+				<xsd:element ref="toRole"/>
+				<xsd:element ref="toService"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="PartnerIdentification">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="domain" minOccurs="0"/>
+				<xsd:element ref="GlobalBusinessIdentifier"/>
+				<xsd:element ref="locationID" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ProcessControl">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ActivityControl"/>
+				<xsd:element ref="GlobalUsageCode"/>
+				<xsd:element ref="partnerDefinedPIPPayloadBindingId" minOccurs="0"/>
+				<xsd:element ref="pipCode"/>
+				<xsd:element ref="pipInstanceId"/>
+				<xsd:element ref="pipVersion"/>
+				<xsd:element ref="QualityOfServiceSpecification" minOccurs="0"/>
+				<xsd:choice>
+					<xsd:element ref="KnownInitiatingPartner"/>
+					<xsd:element ref="UnknownInitiatingPartner"/>
+				</xsd:choice>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ProprietaryReferenceIdentifier">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="255"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="QualityOfServiceClassificationCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="QualityOfServiceElement">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="QualityOfServiceClassificationCode"/>
+				<xsd:element ref="Value"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="QualityOfServiceSpecification">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="QualityOfServiceElement" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ServiceContentControl">
+		<xsd:complexType>
+			<xsd:choice>
+				<xsd:element ref="ActionIdentity"/>
+				<xsd:element ref="SignalIdentity"/>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="ServiceHeader">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ProcessControl"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="SignalIdentity">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GlobalBusinessSignalCode"/>
+				<xsd:element ref="VersionIdentifier"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="UniformResourceLocator">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="8"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="UniversalResourceIdentifier">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="UnknownInitiatingPartner">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="PartnerIdentification"/>
+				<xsd:element ref="UniformResourceLocator"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Value">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="255"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="VersionIdentifier">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="255"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="description">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="FreeFormText"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="domain">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="FreeFormText"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="fromRole">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GlobalPartnerRoleClassificationCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="fromService">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GlobalBusinessServiceCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="inReplyTo">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ActionControl"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="locationID">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Value"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="messageStandard">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="FreeFormText"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="messageTrackingID">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="InstanceIdentifier"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="numberOfAttachments">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="CountableAmount"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="partnerDefinedPIPPayloadBindingId">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ProprietaryReferenceIdentifier"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="pipCode">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GlobalProcessIndicatorCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="pipInstanceId">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="InstanceIdentifier"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="pipVersion">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="VersionIdentifier"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="standardVersion">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="VersionIdentifier"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="toRole">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GlobalPartnerRoleClassificationCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="toService">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GlobalBusinessServiceCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

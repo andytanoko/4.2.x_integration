@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server>
+ <!-- ==================================================================== -->
+ <!-- GTVan Destinations                                                    -->
+ <!-- ==================================================================== -->
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=gtvan/ishb/TxInQueue">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean> 
+ 
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=gtvan/isat/RemoteEventQueue">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean>	
+
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=gtvan/ishb/TxOutQueue">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean>
+
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=gtvan/isat/LocalEventQueue">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean> 
+
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=gtvan/gtat/reprocessQueue">
+	 <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+ </mbean> 
+ 
+ <!-- Receive the archival/reprocess requeset from the servlet -->
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=gtvan/isat/archiveTrailDataQueue">
+    <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+ </mbean> 
+ 
+ <!-- Receive the archive/restore request from TM and send back the archive/restore status in GT to TM-->
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=gtvan/gtat/archiveQueue">
+    <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+ </mbean> 
+
+ <!-- notify the GT's archive status to TM -->
+  <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=gtvan/isat/archiveNotifyQueue">
+    <attribute name="ReceiversImpl">org.jboss.mq.server.ReceiversImplArrayList</attribute>
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+ </mbean> 
+  <!-- end of GTVan destinations -->
+
+</server>

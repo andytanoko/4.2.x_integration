@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDependency name="DocumentType">
+  <Checker class-name="com.gridnode.gtas.server.partnerprocess.helpers.EntityDependencyChecker"
+           method-name="checkDependentProcessMappingsForDocumentType">
+    <Param type="java.lang.String" getter-method="getName"/>
+  </Checker>
+  <Checker class-name="com.gridnode.gtas.server.partnerprocess.helpers.EntityDependencyChecker"
+           method-name="checkDependentTriggersForDocumentType">
+    <Param type="java.lang.String" getter-method="getName"/>
+  </Checker>
+  <Checker class-name="com.gridnode.gtas.server.mapper.helpers.EntityDependencyChecker"
+           method-name="checkDependentGtMappingRulesForDocumentType">
+    <Param type="java.lang.String" getter-method="getName"/>
+  </Checker>
+  <Checker class-name="com.gridnode.gtas.server.alert.helpers.EntityDependencyChecker"
+           method-name="checkDependentAlertTriggersForDocumentType">
+    <Param type="java.lang.String" getter-method="getName"/>
+  </Checker>
+  <Checker class-name="com.gridnode.gtas.server.docalert.helpers.EntityDependencyChecker"
+           method-name="checkDependentTrackRecordsForDocumentType">
+    <Param type="java.lang.String" getter-method="getName"/>
+  </Checker>
+  <Checker class-name="com.gridnode.gtas.server.document.helpers.EntityDependencyChecker"
+           method-name="checkDependentAS2DocTypeMappingForDocumentType">
+    <Param type="java.lang.String" getter-method="getName"/>
+  </Checker>
+</EntityDependency>

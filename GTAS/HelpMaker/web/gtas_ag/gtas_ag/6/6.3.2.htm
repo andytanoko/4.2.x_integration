@@ -1,0 +1,132 @@
+<html>
+<head>
+<title>6.3.2 To create a new log message template </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>6.3.2 To create a new log message template </h3>
+<p><span></span>
+</p>
+<p><span>The log message template contains the following fields you will want to modify to create a new Message Template:</span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' width='100%' border='1' cellpadding='0'><tr><td width='17%' valign='top'><p><b><span>Field</span>
+</b>
+</p>
+</td>
+<td width='82%' valign='top'><p><b><span>Explanation</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='17%' valign='top'><p><span>Name</span>
+</p>
+</td>
+<td width='82%' valign='top'><p><span>The name of the Message Template</span>
+</p>
+</td>
+</tr>
+<tr><td width='17%' valign='top'><p><span>Location</span>
+</p>
+</td>
+<td width='82%' valign='top'><p><span>The file to log the alert message to (relative to data/alert/log directory)</span>
+</p>
+</td>
+</tr>
+<tr><td width='17%' valign='top'><p><span>Append</span>
+</p>
+</td>
+<td width='82%' valign='top'><p><span>Whether to append the alert message to the log file or overwrite</span>
+</p>
+</td>
+</tr>
+<tr><td width='17%' valign='top'><p><span>Message</span>
+</p>
+</td>
+<td width='82%' valign='top'><p><span>The message content of the alert message</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><span>Let us create the simple scenario where you can configure alert message to log on occasions that document mapping has failed.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>To create a new message template, click Create Message Template. Select the Message Type for the template. You are given the options to determine if the message type in the template is Email, Log, or JMS. Select Log. The screen appears.</span>
+</p>
+<pre><span></span>
+</pre>
+<p align='center'><span><img width='462' height='389' border='0' src='../images/image024.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>Enter Name. For example, Document Mapping Error</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>Enter Location. For example, mapping_errors.log</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>To append each alert message to the log file, tick the Append checkbox.</span>
+</p>
+<pre><span></span>
+</pre>
+<p><span>Step 5.<span> </span>
+</span>
+<span>To enter the Message textbox, you may wish to compose the message like:</span>
+</p>
+<p><span></span>
+</p>
+<p><span>[&lt;%System.CURRENT_DATETIME#yyyy-MM-dd HH:mm:ss.SSS%&gt;] Mapping Rule &lt;%Mapping.NAME%&gt; has failed for document &lt;%GridDocument.U_DOC_FILENAME%&gt;, Message: &lt;%Exception.MESSAGE%&gt;.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>To do this, just type in the Message textbox. To insert the </span>
+<span>System.CURRENT_DATETIME</span>
+<span> tag in the message, go to the Object and select System. Select “CURRENT_DATETIME” for the field. Place the cursor on the textbox and click Insert. You may have to enter the date format yourself before the closing tag. Likewise for </span>
+<span>Mapping.NAME</span>
+<span> and other tags, the text before the “.” is the Object, and the text on the right of “.” will be the Field.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='582' height='424' border='0' src='../images/image025.jpg'></span>
+</p>
+<p align='center'><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 6.<span> </span>
+</span>
+<span>To save the new message template, click Save Message Template. The new message template will be displayed in the list table of the Message Templates page. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 7.<span> </span>
+</span>
+<span>To edit the existing or current message template, select the message template and then click on the Edit button</span>
+<span><img width='16' height='16' border='0' src='../images/image013.gif'>.</span>
+<span> Update the entries for the Message Template as necessary. Next click Save Message Template.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 8.<span> </span>
+</span>
+<span>To delete the existing or current message template, tick the Select check box of the message template you want to delete. Click Delete Message Template. The selected message template will be removed from the list.</span>
+</p>
+<p></p>
+<span><br clear='all'></span>
+<p></p>
+</body>
+</html>

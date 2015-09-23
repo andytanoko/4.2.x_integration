@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+	<secure>false</secure>
+	<container-configurations/>
+	<resource-managers/>
+	<enterprise-beans>
+		<entity>
+			<ejb-name>MappingFile</ejb-name>
+			<local-jndi-name>com.gridnode.pdip.app.mapper.entities.ejb.IMappingFileLocalHome</local-jndi-name>
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+		</entity>
+		<entity>
+			<ejb-name>MappingRule</ejb-name>
+			<local-jndi-name>com.gridnode.pdip.app.mapper.entities.ejb.IMappingRuleLocalHome</local-jndi-name>
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+		</entity>
+		<entity>
+			<ejb-name>XpathMapping</ejb-name>
+			<local-jndi-name>com.gridnode.pdip.app.mapper.entities.ejb.IXpathMappingLocalHome</local-jndi-name>
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+		</entity>
+		<!-- insert other entity beans here -->
+	</enterprise-beans>
+</jboss>

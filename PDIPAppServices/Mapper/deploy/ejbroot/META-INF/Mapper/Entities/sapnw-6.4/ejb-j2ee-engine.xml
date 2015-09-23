@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-j2ee-engine SYSTEM "ejb-j2ee-engine.dtd">
+<ejb-j2ee-engine>
+	<enterprise-beans>
+		<enterprise-bean>
+			<ejb-name>MappingFile</ejb-name>
+			<jndi-name>com.gridnode.pdip.app.mapper.entities.ejb.IMappingFileLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>MappingRule</ejb-name>
+			<jndi-name>com.gridnode.pdip.app.mapper.entities.ejb.IMappingRuleLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>XpathMapping</ejb-name>
+			<jndi-name>com.gridnode.pdip.app.mapper.entities.ejb.IXpathMappingLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+	</enterprise-beans>
+</ejb-j2ee-engine>

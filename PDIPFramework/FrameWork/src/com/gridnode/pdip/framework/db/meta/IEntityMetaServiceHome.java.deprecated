@@ -1,0 +1,10 @@
+package com.gridnode.pdip.framework.db.meta;
+
+import java.rmi.*;
+
+import javax.ejb.*;
+
+public interface IEntityMetaServiceHome extends EJBHome
+{
+  public IEntityMetaServiceObj create() throws CreateException, RemoteException;
+}

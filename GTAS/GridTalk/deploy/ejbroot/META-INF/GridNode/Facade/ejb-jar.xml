@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+  <enterprise-beans>
+    <session>
+      <display-name>GridNodeManager</display-name>
+      <ejb-name>GridNodeManager</ejb-name>
+      <home>com.gridnode.gtas.server.gridnode.facade.ejb.IGridNodeManagerHome</home>
+      <remote>com.gridnode.gtas.server.gridnode.facade.ejb.IGridNodeManagerObj</remote>
+      <ejb-class>com.gridnode.gtas.server.gridnode.facade.ejb.GridNodeManagerBean</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+    </session>
+  </enterprise-beans>
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+        <ejb-name>GridNodeManager</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+	</container-transaction>
+	<container-transaction>
+	  <!--TWX 18032008 To handle the case where a Transaction is required to access two DB schema eg access userdb & appdb at the same tarnsaction -->
+	  <method>
+        <ejb-name>GridNodeManager</ejb-name>
+        <method-name>findGnCategoryByCode</method-name>
+        <method-params>
+            <method-param>java.lang.String</method-param>
+        </method-params>
+      </method>
+	  <method>
+        <ejb-name>GridNodeManager</ejb-name>
+        <method-name>findGnCategoriesByFilter</method-name>
+        <method-params>
+            <method-param>com.gridnode.pdip.framework.db.filter.IDataFilter</method-param>
+        </method-params>
+      </method>
+	  <method>
+        <ejb-name>GridNodeManager</ejb-name>
+        <method-name>findAllGnCategories</method-name>
+        <method-params>
+            <method-param></method-param>
+        </method-params>
+      </method>
+	  <trans-attribute>RequiresNew</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+</ejb-jar>

@@ -1,0 +1,102 @@
+<html>
+<head>
+<title>8.2.2 To create a new conversion rule mapping file </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>8.2.2 To create a new conversion rule mapping file </h3>
+<p></p>
+<p><span>Conversion rules are used to convert data files from one format to another. Currently GridTalk supports the file formats for conversion such as Excel, XML, Positional Text and Delimited Text. It can also extract/write data from/to database. Conversion Rule can be created using a specialized Conversion Rule editor program (GridMapper</span>
+<sup><span>TM</span>
+</sup>
+<span>) or any text-based program. Once created, Conversion Rule can be inserted into GridTalk.</span>
+</p>
+<p></p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Click Mapping. Then click Conversion Rule under Mapping Files. The Conversion Rule Mapping Files list view page is displayed.</span>
+</p>
+<p><span></span>
+</p>
+<p><a name='_Ref78114643'><span>Step 2.<span> </span>
+</span>
+<span>Click Create Mapping File. The Mapping File detail view page is displayed.</span>
+</a>
+<span> </span>
+</p>
+<p><span></span>
+</p>
+<p><a name='_Ref78114460'><span>Step 3.<span> </span>
+</span>
+<span>In the Mapping File detail view page, enter the mandatory fields.</span>
+</a>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>Select Conversion Rule for the Type field.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 5.<span> </span>
+</span>
+<span>Select the file by clicking Browse. The File selector is displayed to select the Conversion Rule file.</span>
+</p>
+<p><span></span>
+</p>
+<p><a name='_Ref78114463'><span>Step 6.<span> </span>
+</span>
+<span>Click Save Mapping File. The new mapping file will be displayed in the Mapping Files and Conversion Rule Mapping Files pages.</span>
+</a>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 7.<span> </span>
+</span>
+<span>To add more Conversion Rule mapping files, repeat Step 2 through Step 6. If you want to view the mapping file, go to the Conversion Rule Mapping Files page where you will see the records listed in the table. Click on the selected mapping file’s hyperlink under Name in the table. If you wish to update the selected mapping file, click Edit Mapping File. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 8.<span> </span>
+</span>
+<span>To edit the Conversion Rule mapping file, select the mapping file and then click on the corresponding Edit button<img width='16' height='16' border='0' src='../images/image013.gif'></span>
+<span>. </span>
+<span>The Mapping File page is displayed.</span>
+<span> Update the entries of the mapping file as necessary. Click Save Mapping File.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 9.<span> </span>
+</span>
+<span>To delete the Conversion Rule mapping file, tick the Select checkbox of the mapping file you want to delete. As you see a mark appear in that checkbox, click Delete Mapping Files. Then you will be prompted to confirm the message box, “Are you sure you wish to delete these Mapping Files?” Click OK. The selected mapping file will be removed from the Mapping Files page and Conversion Rule Mapping Files page.</span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p>To create a Conversion Rule mapping file that uses external libraries:</p>
+<p><b><span></span>
+</b>
+</p>
+<p><span>If your conversion file uses external libraries, you need to perform the following steps in addition to those described above:</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>To find out what libraries your file uses, open the conversion file in an editor and search for the tag “&lt;Dependencies&gt;” under “&lt;RulesContainer&gt;”. All the *.class and *.jar files listed within “&lt;Dependencies&gt;” are your external libraries. This step is optional if you already know the external libraries that are required.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>Copy all these library files into GridTalk’s external library folder, which by default is &lt;GRIDTALK_HOME&gt;/&lt;jboss&gt;/server/default/lib. This path is specified in &lt;GRIDTALK_HOME&gt;/data/GNapps/conf/default/pdip/base/xml/convertor.config</span>
+</p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

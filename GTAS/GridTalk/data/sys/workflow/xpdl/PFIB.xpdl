@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Package SYSTEM "../../validation/dtd/xpdl.dtd"><Package Id="PFIB">
+   <PackageHeader>
+      <XPDLVersion/>
+      <Vendor/>
+      <Created>2004-05-11 16:37:918</Created>
+   </PackageHeader>
+   <RedefinableHeader>
+      <Author>GTAS</Author>
+      <Version>1.00001</Version>
+   </RedefinableHeader>
+   <Applications>
+      <Application Id="FolderAdapter">
+         <Description>Adapter to call java procedure to perform folder exits</Description>
+         <FormalParameters>
+            <FormalParameter Id="Param1" Index="1" Mode="IN">
+               <DataType>
+                  <DeclaredType Id="java.lang.String"/>
+               </DataType>
+            </FormalParameter>
+            <FormalParameter Id="Param2" Index="2" Mode="IN">
+               <DataType>
+                  <DeclaredType Id="java.lang.String"/>
+               </DataType>
+            </FormalParameter>
+            <FormalParameter Id="Param3" Index="3" Mode="IN">
+               <DataType>
+                  <DeclaredType Id="java.util.Collection"/>
+               </DataType>
+            </FormalParameter>
+            <FormalParameter Id="Param4" Index="4" Mode="OUT">
+               <DataType>
+                  <DeclaredType Id="java.util.Collection"/>
+               </DataType>
+            </FormalParameter>
+         </FormalParameters>
+         <ExtendedAttributes>
+            <ExtendedAttribute Name="AdapterClass" Value="com.gridnode.gtas.server.document.helpers.FolderDelegate"/>
+            <ExtendedAttribute Name="AdapterMethod" Value="exit"/>
+         </ExtendedAttributes>
+      </Application>
+      <Application Id="MappingRuleAdapter">
+         <Description>Adapter to call java procedure to perform mapping rule</Description>
+         <FormalParameters>
+            <FormalParameter Id="Param1" Index="1" Mode="IN">
+               <DataType>
+                  <DeclaredType Id="java.lang.String"/>
+               </DataType>
+            </FormalParameter>
+            <FormalParameter Id="Param2" Index="2" Mode="IN">
+               <DataType>
+                  <DeclaredType Id="java.util.Collection"/>
+               </DataType>
+            </FormalParameter>
+            <FormalParameter Id="Param3" Index="3" Mode="OUT">
+               <DataType>
+                  <DeclaredType Id="java.util.Collection"/>
+               </DataType>
+            </FormalParameter>
+         </FormalParameters>
+         <ExtendedAttributes>
+            <ExtendedAttribute Name="AdapterClass" Value="com.gridnode.gtas.server.mapper.helpers.MapperDelegate"/>
+            <ExtendedAttribute Name="AdapterMethod" Value="execute"/>
+         </ExtendedAttributes>
+      </Application>
+      <Application Id="UserProcedureAdapter">
+         <Description>Adapter to call java procedure to perform mapping rule</Description>
+         <FormalParameters>
+            <FormalParameter Id="Param1" Index="1" Mode="IN">
+               <DataType>
+                  <DeclaredType Id="java.lang.String"/>
+               </DataType>
+            </FormalParameter>
+            <FormalParameter Id="Param2" Index="2" Mode="IN">
+               <DataType>
+                  <DeclaredType Id="java.util.Collection"/>
+               </DataType>
+            </FormalParameter>
+            <FormalParameter Id="Param3" Index="3" Mode="OUT">
+               <DataType>
+                  <DeclaredType Id="java.util.Collection"/>
+               </DataType>
+            </FormalParameter>
+         </FormalParameters>
+         <ExtendedAttributes>
+            <ExtendedAttribute Name="AdapterClass" Value="com.gridnode.gtas.server.userprocedure.helpers.UserProcedureDelegate"/>
+            <ExtendedAttribute Name="AdapterMethod" Value="execute"/>
+         </ExtendedAttributes>
+      </Application>
+      <Application Id="AlertAdapter">
+         <Description>Adapter to call java procedure to raise alert</Description>
+         <FormalParameters>
+            <FormalParameter Id="Param1" Index="1" Mode="IN">
+               <DataType>
+                  <DeclaredType Id="java.lang.String"/>
+               </DataType>
+            </FormalParameter>
+            <FormalParameter Id="Param2" Index="2" Mode="IN">
+               <DataType>
+                  <DeclaredType Id="java.lang.String"/>
+               </DataType>
+            </FormalParameter>
+            <FormalParameter Id="Param3" Index="3" Mode="IN">
+               <DataType>
+                  <DeclaredType Id="java.util.Collection"/>
+               </DataType>
+            </FormalParameter>
+            <FormalParameter Id="Param4" Index="4" Mode="OUT">
+               <DataType>
+                  <DeclaredType Id="java.util.Collection"/>
+               </DataType>
+            </FormalParameter>
+         </FormalParameters>
+         <ExtendedAttributes>
+            <ExtendedAttribute Name="AdapterClass" Value="com.gridnode.gtas.server.docalert.helpers.RaiseAlertDelegate"/>
+            <ExtendedAttribute Name="AdapterMethod" Value="raiseAlert"/>
+         </ExtendedAttributes>
+      </Application>
+   </Applications>
+   <WorkflowProcesses>
+      <WorkflowProcess Id="PFIB">
+         <ProcessHeader/>
+         <FormalParameters>
+            <FormalParameter Id="main.gdocs" Index="1" Mode="IN">
+               <DataType>
+                  <DeclaredType Id="java.util.Collection"/>
+               </DataType>
+            </FormalParameter>
+         </FormalParameters>
+         <Activities>
+            <Activity Id="START">
+               <Description>Start of Process</Description>
+               <Implementation>
+                  <No/>
+               </Implementation>
+               <StartMode>
+                  <Automatic/>
+               </StartMode>
+               <FinishMode>
+                  <Automatic/>
+               </FinishMode>
+            </Activity>
+            <Activity Id="END">
+               <Description>End of Process</Description>
+               <Implementation>
+                  <No/>
+               </Implementation>
+               <StartMode>
+                  <Automatic/>
+               </StartMode>
+               <FinishMode>
+                  <Automatic/>
+               </FinishMode>
+            </Activity>
+            <Activity Id="ExitPoint">
+               <Description>Exit Point of All Activities</Description>
+               <Implementation>
+                  <Tool Id="FolderAdapter" Type="APPLICATION">
+                     <ActualParameters>
+                        <ActualParameter>exit</ActualParameter>
+                        <ActualParameter>param</ActualParameter>
+                        <ActualParameter>main.gdocs</ActualParameter>
+                        <ActualParameter>main.gdocs</ActualParameter>
+                     </ActualParameters>
+                     <ExtendedAttributes>
+                        <ExtendedAttribute Name="exit" Value="5"/>
+                        <ExtendedAttribute Name="param" Value=""/>
+                     </ExtendedAttributes>
+                  </Tool>
+               </Implementation>
+               <StartMode>
+                  <Automatic/>
+               </StartMode>
+               <FinishMode>
+                  <Automatic/>
+               </FinishMode>
+               <TransitionRestrictions>
+                  <TransitionRestriction>
+                     <Join Type="AND"/>
+                  </TransitionRestriction>
+               </TransitionRestrictions>
+            </Activity>
+            <Activity Id="ExitToExport1">
+               <Description>Exit to system folder Export</Description>
+               <Implementation>
+                  <Tool Id="FolderAdapter" Type="APPLICATION">
+                     <ActualParameters>
+                        <ActualParameter>exit</ActualParameter>
+                        <ActualParameter>param</ActualParameter>
+                        <ActualParameter>main.gdocs</ActualParameter>
+                        <ActualParameter>fork1.gdocs</ActualParameter>
+                     </ActualParameters>
+                     <ExtendedAttributes>
+                        <ExtendedAttribute Name="exit" Value="4"/>
+                        <ExtendedAttribute Name="param" Value=""/>
+                     </ExtendedAttributes>
+                  </Tool>
+               </Implementation>
+               <StartMode>
+                  <Automatic/>
+               </StartMode>
+               <FinishMode>
+                  <Automatic/>
+               </FinishMode>
+               <ExtendedAttributes/>
+            </Activity>
+            <Activity Id="ExitToPort2">
+               <Description>Exit to port 'DEF'</Description>
+               <Implementation>
+                  <Tool Id="FolderAdapter" Type="APPLICATION">
+                     <ActualParameters>
+                        <ActualParameter>exit</ActualParameter>
+                        <ActualParameter>param</ActualParameter>
+                        <ActualParameter>fork1.gdocs</ActualParameter>
+                        <ActualParameter>fork1.gdocs</ActualParameter>
+                     </ActualParameters>
+                     <ExtendedAttributes>
+                        <ExtendedAttribute Name="exit" Value="6"/>
+                        <ExtendedAttribute Name="param" Value="-1"/>
+                     </ExtendedAttributes>
+                  </Tool>
+               </Implementation>
+               <StartMode>
+                  <Automatic/>
+               </StartMode>
+               <FinishMode>
+                  <Automatic/>
+               </FinishMode>
+               <ExtendedAttributes/>
+            </Activity>
+            <Activity Id="ExitWorkflow3">
+               <Description>Exit workflow</Description>
+               <Implementation>
+                  <Tool Id="FolderAdapter" Type="APPLICATION">
+                     <ActualParameters>
+                        <ActualParameter>exit</ActualParameter>
+                        <ActualParameter>param</ActualParameter>
+                        <ActualParameter>fork1.gdocs</ActualParameter>
+                        <ActualParameter>fork1.gdocs</ActualParameter>
+                     </ActualParameters>
+                     <ExtendedAttributes>
+                        <ExtendedAttribute Name="exit" Value="5"/>
+                        <ExtendedAttribute Name="param" Value=""/>
+                     </ExtendedAttributes>
+                  </Tool>
+               </Implementation>
+               <StartMode>
+                  <Automatic/>
+               </StartMode>
+               <FinishMode>
+                  <Automatic/>
+               </FinishMode>
+               <ExtendedAttributes/>
+            </Activity>
+         </Activities>
+         <Transitions>
+            <Transition Id="START_ExitToExport1" From="START" To="ExitToExport1"/>
+            <Transition Id="ExitToExport1_ExitToPort2" From="ExitToExport1" To="ExitToPort2"/>
+            <Transition Id="ExitToPort2_ExitPoint" From="ExitToPort2" To="ExitPoint"/>
+            <Transition Id="ExitPoint_END" From="ExitPoint" To="END"/>
+         </Transitions>
+      </WorkflowProcess>
+   </WorkflowProcesses>
+</Package>

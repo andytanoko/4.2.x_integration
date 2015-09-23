@@ -1,0 +1,98 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001-2005 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: WorkerKickStart.java
+ *
+ ****************************************************************************
+ * Date           Author              Changes
+ ****************************************************************************
+ * Nov 6, 2006    i00107             Created
+ */
+
+package com.gridnode.gridtalk.httpbc.ishb.workers;
+
+import java.util.Date;
+import java.util.Hashtable;
+
+import com.gridnode.gridtalk.httpbc.common.util.ILogTypes;
+import com.gridnode.util.log.Logger;
+import com.gridnode.util.log.LoggerManager;
+
+/**
+ * @author i00107
+ * This class is to be scheduled to run on certain interval to kick start the
+ * working of transactions.
+ */
+public class WorkerKickStart 
+{
+  private static final Hashtable<String, TransactionWorker> _workersInProgress = 
+    new Hashtable<String, TransactionWorker>();
+  
+  private Logger _logger = LoggerManager.getInstance().getLogger(ILogTypes.TYPE_HTTPBC_ISHB, 
+                                                                 "WorkerKickStart");
+  private String _type;
+  
+  public static final String TYPE_IN = "IN";
+  public static final String TYPE_OUT = "OUT";
+  
+  /**
+   * Constructs a WorkerKickStart schedule worker.
+   * @param type The type of TransactionWorker to kick start by this schedule worker
+   */
+  public WorkerKickStart(String type)
+  {
+    _type = type;
+  }
+  
+  /**
+   * Start performing its action.
+   * @param timeOfCall The time of this call.
+   */
+  public void perform(Date timeOfCall)
+  {
+    Object[] params = new Object[]{timeOfCall};
+    _logger.logMessage("perform", params, "Time to kick start for TransactionWorker type: "+_type);
+    kickStart(_type);
+  }
+
+  /**
+   * Kick start the specified type of TransactionWorker
+   * @param type The TransactionWorker type. Valid values are "IN" and "OUT" only, case-insensitive.
+   * @see #TYPE_IN
+   * @see #TYPE_OUT
+   */
+  private void kickStart(String type)
+  {
+    String mtdName = "kickStart";
+    Object[] params = {type};
+    
+    if (_workersInProgress.containsKey(type))
+    {
+      _logger.logMessage(mtdName, params, "TransactionWorker type "+type+" is already working in progress. Just return.");
+      return;
+    }
+    TransactionWorker worker = null;
+    if (TYPE_IN.equalsIgnoreCase(type))
+    {
+      worker = new IncomingTxWorker();
+    }
+    else if (TYPE_OUT.equalsIgnoreCase(type))
+    {
+      worker = new OutgoingTxWorker();
+    }
+    
+    if (worker != null)
+    {
+      _workersInProgress.put(type, worker);
+      worker.run();
+      _workersInProgress.remove(type);
+    }
+    else
+    {
+      _logger.logMessage(mtdName, params, "Unsupport type.");
+    }
+  }
+}

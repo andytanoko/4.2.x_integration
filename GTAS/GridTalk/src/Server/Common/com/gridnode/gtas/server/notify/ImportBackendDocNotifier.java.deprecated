@@ -1,0 +1,147 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001-2002 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: ImportBackendDocNotifier.java
+ * -- ToBeRemoved --
+ ****************************************************************************
+ * Date           Author              Changes
+ ****************************************************************************
+ * Dec 22 2002    Koh Han Sing        Created
+ * Sep 02 2003    Neo Sok Lay         Use INotification from pdip.framework.
+ */
+package com.gridnode.gtas.server.notify;
+
+import com.gridnode.pdip.framework.config.Configuration;
+import com.gridnode.pdip.framework.config.ConfigurationManager;
+import com.gridnode.pdip.framework.j2ee.ServiceLookup;
+import com.gridnode.pdip.framework.log.Log;
+
+import javax.jms.*;
+import javax.naming.InitialContext;
+
+/**
+ * This class handles broadcasting notifications to a ImportBackendDocNotifier
+ * topic. The notification is too inform interested parties that documents has
+ * been imported from backend.
+ *
+ */
+public class ImportBackendDocNotifier
+{
+  private static final String LOG_CAT             = "IMPORT_BACKEND_DOC_NOTIFIER";
+  private static final String CONFIG_NAME         = "import-backend-doc-notifier";
+  private static final String CONNECTION_JNDI     = "jms.connection.jndi";
+  private static final String NOTIFIER_TOPIC_JNDI = "import-backend-doc-notifier.topic.jndi";
+
+  private TopicConnectionFactory _factory;
+  private TopicConnection _connection;
+  private Topic _topic;
+
+  private static ImportBackendDocNotifier _sender = null;
+  private static final Object _lock = new Object();
+
+  private ImportBackendDocNotifier()
+  {
+    try
+    {
+      //initialise the configurations for sending entity events.
+      Configuration config = ConfigurationManager.getInstance().getConfig(
+                               CONFIG_NAME);
+
+      InitialContext context = ServiceLookup.getInstance(
+                                 ServiceLookup.LOCAL_CONTEXT).getInitialContext();
+      _factory = (TopicConnectionFactory)context.lookup(
+                   config.getString(CONNECTION_JNDI));
+      _topic = (Topic)context.lookup(config.getString(NOTIFIER_TOPIC_JNDI));
+      _connection = _factory.createTopicConnection();
+    }
+    catch (Throwable ex)
+    {
+      Log.err(
+        LOG_CAT,
+        "Error in establish JMS connection! No Notifier configured.",
+        ex);
+    }
+  }
+
+  /**
+   * Get the single instance of the ImportBackendDocNotifier.
+   *
+   * @return An instance of the ImportBackendDocNotifier.
+   */
+  public static ImportBackendDocNotifier getInstance()
+  {
+    if (_sender == null)
+    {
+      synchronized (_lock)
+      {
+        if (_sender == null)
+          _sender = new ImportBackendDocNotifier();
+      }
+    }
+    return _sender;
+  }
+
+  /**
+   * Ask the ImportBackendDocNotifier to broadcast the specified Notification.
+   *
+   * @param notification The Notification to broadcast.
+   */
+  public void broadcast(com.gridnode.pdip.framework.notification.INotification notification)
+    throws Exception
+  {
+    if (_connection == null || _topic == null)
+    {
+      throw new Exception("Notification not sent: Notifier not configured properly");
+    }
+
+    TopicSession session = null;
+    try
+    {
+      session = _connection.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
+      TopicPublisher publisher = session.createPublisher(_topic);
+      ObjectMessage msg = session.createObjectMessage();
+      msg.setObject(notification);
+      publisher.publish(msg);
+      Log.debug(LOG_CAT, "Notification is " + notification);
+    }
+    catch (JMSException ex)
+    {
+      Log.err(LOG_CAT, "Error in broadcast !", ex);
+      throw new Exception(ex.toString());
+    }
+    finally
+    {
+      if (session != null)
+      {
+        try
+        {
+          session.close();
+        }
+        catch (Exception ex)
+        {
+          Log.err(LOG_CAT, "Error in close session !", ex);
+        }
+      }
+    }
+  }
+
+  protected void finalize() throws java.lang.Throwable
+  {
+    if (_connection != null)
+    {
+      try
+      {
+        _connection.close();
+      }
+      catch (Exception ex)
+      {
+        Log.err(LOG_CAT, "Error in close connection !", ex);
+      }
+
+    }
+  }
+
+}

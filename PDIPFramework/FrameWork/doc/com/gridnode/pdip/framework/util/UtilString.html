@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><!--JBuilder QuickDoc-->
+<HEAD>
+<TITLE>Class com.gridnode.pdip.framework.util.UtilString</TITLE><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+</HEAD>
+<BODY>
+
+<H2>
+<FONT SIZE="-1">com.gridnode.pdip.framework.util</FONT>
+<BR>Class UtilString</H2>
+<DL>
+<DT>public class <B>UtilString</B>
+</DL>
+<DL><DD>This software is the proprietary information of GridNode Pte Ltd. Use is subjected to license terms. Copyright 2001-2002 (C) GridNode Pte Ltd. All Rights Reserved. File: Date Author Changes Jun 10 2002 Mahesh Created Jun 13 2002 Mathew Repackaged<DL><DD></DD></DL></DD>
+</DL>
+<DL></DL>
+<TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+<TR BGCOLOR="#CCCCFF"><TD COLSPAN=1><FONT SIZE="+2">
+<B>Method Detail</B>
+</FONT></TD></TR></TABLE>
+
+<H3>join</H3>
+<PRE>
+public static String <B>join</B>(List&nbsp;list,
+                          String&nbsp;delim)</PRE>
+<DL><DD>Creates a string seperated by delimimiter from a List of strings<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>list</CODE> - a list of strings to join</DD>
+<DD><CODE>delim</CODE> - the delimiter character(s) to use. (null value will join with no delimiter)</DD>
+<DT><B>Returns:</B><DD>a String of all values in the list seperated by the delimiter</DD>
+</DL>
+<HR>
+
+<H3>split</H3>
+<PRE>
+public static List <B>split</B>(String&nbsp;str,
+                         String&nbsp;delim)</PRE>
+<DL><DD>Splits a String on a delimiter into a List of Strings.<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>str</CODE> - the String to split</DD>
+<DD><CODE>delim</CODE> - the delimiter character(s) to join on (null will split on whitespace)</DD>
+<DT><B>Returns:</B><DD>a list of Strings</DD>
+</DL>
+<HR>
+
+<H3>strToMap</H3>
+<PRE>
+public static Map <B>strToMap</B>(String&nbsp;str)</PRE>
+<DL><DD>Creates a Map from an encoded name/value pair string<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>str</CODE> - The string to decode and format</DD>
+<DT><B>Returns:</B><DD>a Map of name/value pairs</DD>
+</DL>
+<HR>
+
+<H3>mapToStr</H3>
+<PRE>
+public static String <B>mapToStr</B>(Map&nbsp;map)</PRE>
+<DL><DD>Creates an encoded String from a Map of name/value pairs . name/value pairs should be strings<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>map</CODE> - The Map of name/value pairs</DD>
+<DT><B>Returns:</B><DD>String The encoded String</DD>
+</DL>
+<HR>
+
+</BODY>
+</HTML>

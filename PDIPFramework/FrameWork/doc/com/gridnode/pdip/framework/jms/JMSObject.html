@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><!--JBuilder QuickDoc-->
+<HEAD>
+<TITLE>Class com.gridnode.pdip.framework.jms.JMSObject</TITLE><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+</HEAD>
+<BODY>
+
+<H2>
+<FONT SIZE="-1">com.gridnode.pdip.framework.jms</FONT>
+<BR>Class JMSObject</H2>
+<DL>
+<DT>public class <B>JMSObject</B>
+</DL>
+<DL><DD>This JMSObject is the utility class to send and receive messages to Topic ,Queue<DL><DD></DD></DL></DD>
+</DL>
+<DL></DL>
+<TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+<TR BGCOLOR="#CCCCFF"><TD COLSPAN=1><FONT SIZE="+2">
+<B>Method Detail</B>
+</FONT></TD></TR></TABLE>
+
+<H3>initSession</H3>
+<PRE>
+public void <B>initSession</B>()</PRE>
+<DL><DD>Creates a session with transacted=false and ackType=Session.AUTO_ACKNOWLEDGE<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Throws:</B><DD><CODE>JMSException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>initSession</H3>
+<PRE>
+public void <B>initSession</B>(boolean&nbsp;transacted,
+                        int&nbsp;ackType)</PRE>
+<DL><DD>Creates a session with specified transacted,ackType parameters<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>transacted</CODE> - </DD>
+<DD><CODE>ackType</CODE> - </DD>
+<DT><B>Throws:</B><DD><CODE>JMSException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>initProducer</H3>
+<PRE>
+public void <B>initProducer</B>(String&nbsp;producerDestination)</PRE>
+<DL><DD>Creates QueueSender or TopicPublisher depending upon the type of JMSObject and assumes producerDestination to be Topic or Queue depending upon the type of JMSObject<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>producerDestination</CODE> - can be name of topic or queue</DD>
+<DT><B>Throws:</B><DD><CODE>JMSException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>initProducer</H3>
+<PRE>
+public void <B>initProducer</B>(Destination&nbsp;producerDestination)</PRE>
+<DL><DD>Creates QueueSender or TopicPublisher depending upon the type of JMSObject and assumes producerDestination to be Topic or Queue depending upon the type of JMSObject<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>producerDestination</CODE> - can be topic or queue</DD>
+<DT><B>Throws:</B><DD><CODE>JMSException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>initConsumer</H3>
+<PRE>
+public void <B>initConsumer</B>(String&nbsp;consumerDestination,
+                         MessageListener&nbsp;messageListener)</PRE>
+<DL><DD>Creates QueueSender or TopicPublisher depending upon the type of JMSObject and assumes consumerDestination to be Topic or Queue depending upon the type of JMSObject<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>consumerDestination</CODE> - Topic or Queue</DD>
+<DD><CODE>messageListener</CODE> - </DD>
+<DT><B>Throws:</B><DD><CODE>JMSException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>initConsumer</H3>
+<PRE>
+public void <B>initConsumer</B>(Destination&nbsp;consumerDestination,
+                         MessageListener&nbsp;messageListener)</PRE>
+<DL><DD>Creates QueueReceiver or TopicSubscriber depending upon the type of JMSObject and assumes consumerDestination to be Topic or Queue depending upon the type of JMSObject<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>consumerDestination</CODE> - can be topic or queue</DD>
+<DD><CODE>messageListener</CODE> - </DD>
+<DT><B>Throws:</B><DD><CODE>JMSException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>initConsumer</H3>
+<PRE>
+public void <B>initConsumer</B>(Destination&nbsp;consumerDestination,
+                         String&nbsp;selector,
+                         boolean&nbsp;inhibited,
+                         MessageListener&nbsp;messageListener)</PRE>
+<DL><DD>Creates QueueReceiver or TopicSubscriber depending upon the type of JMSObject and assumes consumerDestination to be Topic or Queue depending upon the type of JMSObject.<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>consumerDestination</CODE> - can be topic or queue</DD>
+<DD><CODE>selector</CODE> - message selector</DD>
+<DD><CODE>inhibited</CODE> - </DD>
+<DD><CODE>messageListener</CODE> - </DD>
+<DT><B>Throws:</B><DD><CODE>JMSException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>sendMessage</H3>
+<PRE>
+public Message <B>sendMessage</B>(Map&nbsp;map)</PRE>
+<DL><DD>Converts the Map object to MapMessage and sends to the destination specified by message producer<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>map</CODE> - </DD>
+<DT><B>Returns:</B><DT><B>Throws:</B><DD><CODE>JMSException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>sendMessage</H3>
+<PRE>
+public void <B>sendMessage</B>(Message&nbsp;message)</PRE>
+<DL><DD>Sends the specified message to the destination specified by the message producer<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>message</CODE> - </DD>
+<DT><B>Throws:</B><DD><CODE>JMSException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>sendMessage</H3>
+<PRE>
+public void <B>sendMessage</B>(String&nbsp;destination,
+                        Message&nbsp;message)</PRE>
+<DL><DD>Sends the specified message to the destination specified by the destination parameter<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>destination</CODE> - can be name of topic or queue depending upon type of JMSObject</DD>
+<DD><CODE>message</CODE> - </DD>
+<DT><B>Throws:</B><DD><CODE>JMSException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>sendMessage</H3>
+<PRE>
+public void <B>sendMessage</B>(Destination&nbsp;destination,
+                        Message&nbsp;message)</PRE>
+<DL><DD>Sends the specified message to the destination specified by the destination parameter<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>destination</CODE> - can be topic or queue depending upon type of JMSObject</DD>
+<DD><CODE>message</CODE> - </DD>
+<DT><B>Throws:</B><DD><CODE>JMSException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>createDestination</H3>
+<PRE>
+public Destination <B>createDestination</B>(String&nbsp;destinationName)</PRE>
+<DL><DD>Creates topic or queue depending upon the type of JMSObject<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>destinationName</CODE> - </DD>
+<DT><B>Returns:</B><DD>topic or queue depending upon the type of JMSObject</DD>
+<DT><B>Throws:</B><DD><CODE>JMSException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>createTempDestination</H3>
+<PRE>
+public Destination <B>createTempDestination</B>()</PRE>
+<DL><DD>Creates temporary topic or queue depending upon the type of JMSObject<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Returns:</B><DD>topic or queue depending upon the type of JMSObject</DD>
+<DT><B>Throws:</B><DD><CODE>JMSException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>getDestination</H3>
+<PRE>
+public Destination <B>getDestination</B>(String&nbsp;destination)</PRE>
+<DL><DD>It will do lookup for the specified destination and returns it<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>destination</CODE> - </DD>
+<DT><B>Returns:</B><DD>Destination object, return value is null if it fails to do lookup</DD>
+</DL>
+<HR>
+
+<H3>getType</H3>
+<PRE>
+public int <B>getType</B>()</PRE>
+<DL><DD>This method returns 0 or 1 where 1 : QUEUE_TYPE 2 : TOPIC_TYPE<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Returns:</B><DD>1 or 2</DD>
+</DL>
+<HR>
+
+</BODY>
+</HTML>

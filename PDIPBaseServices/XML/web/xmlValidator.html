@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>
+xmlConversion
+</title>
+<script language="JavaScript">
+<!--
+function checkVal()
+{
+ document.myfrm.submit();
+}
+ // -->
+</script>
+
+</head>
+<body BGCOLOR="#666699">
+<h1>
+XML Validator Service ...
+</h1>
+<!--action=FileServlet-->
+<form ENCTYPE="multipart/form-data" method="post" action="InterfaceController" name="myfrm">
+<br><br>
+<b>Select the Conversion Service</b> &nbsp;&nbsp;&nbsp
+<br>
+<br>
+<br>
+<b>XML File &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>&nbsp;&nbsp;
+<input type="file" name="SRCFILE">
+<br>
+<b>Dictionary File &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="file" name="RULESFILE">
+<br>
+<b>DTD File &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;
+<input type = "file" name = "OUTPUTFILE" size=20 value="">
+<br>
+
+<input type = hidden name="conversion" value="Validator" >
+<br>
+<br>
+<input type="Submit" name="Submit" value="Submit" >
+&nbsp;&nbsp;
+<input type="Reset" name="Clear" value="Clear">
+<br>
+
+
+</form>
+</body>
+</html>

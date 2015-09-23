@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE server>
+<server>
+	<mbean code="org.jboss.hibernate.jmx.Hibernate" name="jboss.har:service=Hibernate_HttpBc"> 
+        <attribute name="DatasourceName">java:/GtVanDS</attribute> 
+        <attribute name="Dialect">org.hibernate.dialect.PostgreSQLDialect</attribute> 
+        <attribute name="SessionFactoryName">
+            java:/hibernate/HttpBcSessionFactory
+        </attribute>
+        <!-- attribute name="CacheProviderClass">
+        	org.hibernate.cache.TreeCacheProvider
+        </attribute--> 
+            
+        <attribute name="DefaultSchema">gtvan</attribute>
+        <attribute name="ShowSqlEnabled">true</attribute>
+        <!-- attribute name="Username">httpbc</attribute>
+        <attribute name="Password">gthttpbc</attribute-->
+    </mbean>
+</server>

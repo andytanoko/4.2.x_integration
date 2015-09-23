@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+  <secure>false</secure>
+  <resource-managers/>
+  <enterprise-beans>
+    <session>
+      <ejb-name>PostOfficeBean</ejb-name>
+      <jndi-name>com.gridnode.gtas.server.enterprise.post.ejb.IPostOfficeHome</jndi-name>
+    </session>
+    <!-- message-driven>
+      <ejb-name>GridMasterPostmanMDBean</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>topic/gmPostmanTopic</destination-jndi-name>
+    </message-driven>
+    <message-driven>
+      <ejb-name>GridMasterAvailabilityMDBean</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>topic/notifierTopic</destination-jndi-name>
+    </message-driven-->
+  </enterprise-beans>
+</jboss>

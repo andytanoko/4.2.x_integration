@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+  <secure>false</secure>
+  <resource-managers/>
+  <enterprise-beans>
+    <entity>
+      <ejb-name>WebService</ejb-name>
+      <local-jndi-name>com.gridnode.pdip.app.servicemgmt.entities.ejb.IWebServiceLocalHome</local-jndi-name>
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+    </entity>
+    <entity>
+      <ejb-name>ServiceAssignment</ejb-name>
+      <local-jndi-name>com.gridnode.pdip.app.servicemgmt.entities.ejb.IServiceAssignmentLocalHome</local-jndi-name>
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+    </entity>
+  </enterprise-beans>
+</jboss>

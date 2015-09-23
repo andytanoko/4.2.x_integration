@@ -1,0 +1,186 @@
+/**
+* This software is the proprietary information of GridNode Pte Ltd.
+* Use is subjected to license terms.
+*
+* Copyright 2002 (C) GridNode Pte Ltd. All Rights Reserved.
+*
+* File: AbstractMessageSender.java
+*
+****************************************************************************
+* Date           Author                  Changes
+****************************************************************************
+* July 17 2003    Jagadeesh             Created.
+*/
+
+package com.gridnode.pdip.app.channel.handler.message;
+
+import java.io.File;
+import java.util.Hashtable;
+
+import com.gridnode.pdip.app.channel.exceptions.ChannelException;
+import com.gridnode.pdip.app.channel.exceptions.FlowControlException;
+import com.gridnode.pdip.app.channel.handler.jmschannel.DispatchMessage;
+import com.gridnode.pdip.app.channel.helpers.ChannelLogger;
+import com.gridnode.pdip.app.channel.helpers.Package;
+import com.gridnode.pdip.app.channel.model.ChannelInfo;
+import com.gridnode.pdip.app.channel.model.CommInfo;
+import com.gridnode.pdip.app.channel.model.FlowControlInfo;
+import com.gridnode.pdip.app.channel.model.PackagingInfo;
+import com.gridnode.pdip.app.channel.model.SecurityInfo;
+import com.gridnode.pdip.base.packaging.exceptions.PackagingException;
+import com.gridnode.pdip.base.transport.exceptions.InvalidCommInfoException;
+import com.gridnode.pdip.base.transport.exceptions.GNTransportException;
+import com.gridnode.pdip.framework.exceptions.SystemException;
+
+public abstract class AbstractMessageSender implements IMessageSender
+{
+  private static final String CLASS_NAME = "AbstractMessageSender";
+
+  protected MessageContext messageContext = null;
+  protected ChannelInfo channelInfo = null;
+
+  public AbstractMessageSender()
+  {
+  }
+
+  public void init(MessageContext messageContext)
+  {
+    this.messageContext = messageContext;
+  }
+
+  public void sendMessage() throws ChannelException, SystemException
+  {
+
+    DispatchMessage dispatchMessage =
+      (DispatchMessage) messageContext.getAttribute(
+        IMessageContext.OUTBOUND_MESSAGE);
+    channelInfo = dispatchMessage.getChannelInfo();
+    String[] header = dispatchMessage.getHeader();
+    String[] dataContent = dispatchMessage.getData();
+    logMessageInfo("Send Message Header", header);
+    logMessageInfo("Send Message Data", dataContent);
+    File[] payLoad = dispatchMessage.getFile();
+    try
+    {
+      if (channelInfo == null)
+        throw new ChannelException(
+          "["
+            + CLASS_NAME
+            + "][sendMessage()]"
+            + "[Channel to Send Cannot be Null]");
+      PackagingInfo packagingInfo = channelInfo.getPackagingProfile();
+      SecurityInfo securityInfo = channelInfo.getSecurityProfile();
+      FlowControlInfo flowControlInfo = channelInfo.getFlowControlInfo();
+
+      //Get  Default envelope Header
+      Hashtable envelopeHeader =
+        getEnvelopeHeader(header, channelInfo.getName());
+      Package packageData = new Package(envelopeHeader, dataContent, payLoad);
+      //Envelop the content according to envelope type.
+      Package packageEnvlData = performPackaging(packagingInfo, packageData);
+      //To perform FlowControl to handle Zip/Split. The percondition is Zip is Always set to true.
+      Package[] packageFlowData =
+        performPackageFlowControl(flowControlInfo, packageEnvlData);
+      if (packageFlowData != null)
+      {
+        for (int i = 0; i < packageFlowData.length; i++)
+        {
+          Package packageToSend = packageFlowData[i];
+          if (packageToSend != null)
+          {
+            //Perform Encrypt And Sign.
+            Package encryptedPackage =
+              performEncryptAndSign(securityInfo, packageToSend);
+            ChannelLogger.infoLog(
+              CLASS_NAME,
+              "sendMessage()",
+              "PackageHeader["
+                + i
+                + "]=["
+                + encryptedPackage.getHeader()
+                + "]");
+            //Do Transport Send.
+            performChannelSend(channelInfo.getTptCommInfo(), encryptedPackage);
+            encryptedPackage = null;
+            /** @todo Enable this after test - Check if we need to send feedback for every Package Send*/
+            sendFeedback(true, null, header);
+          } else
+            ChannelLogger.infoLog(
+              CLASS_NAME,
+              "sendMessage()",
+              "[Package Returened is Null]");
+        }
+      } else
+        ChannelLogger.infoLog(
+          CLASS_NAME,
+          "sendMessage()",
+          "[No Package to Send]");
+    } catch (Exception ex)
+    {
+      ChannelLogger.errorLog(
+        CLASS_NAME,
+        "sendMessage()",
+        "Cannot Perform Send ...",
+        ex);
+      sendFeedback(false, ex.getLocalizedMessage(), header);
+      throw new ChannelException(
+        CLASS_NAME + "sendMessage()" + "Cannot Perform Send ...",
+        ex);
+    }
+
+  }
+
+  public abstract Hashtable getEnvelopeHeader(
+    String[] header,
+    String channelName)
+    throws Exception;
+
+  public abstract Package performPackaging(
+    PackagingInfo packagingInfo,
+    Package packageData)
+    throws PackagingException;
+
+  public abstract Package[] performPackageFlowControl(
+    FlowControlInfo flowControlInfo,
+    Package packageEnvlData)
+    throws FlowControlException;
+
+  public abstract Package performEncryptAndSign(
+    SecurityInfo securityInfo,
+    Package packageToEncrypt)
+    throws SecurityException;
+
+  public abstract void performChannelSend(
+    CommInfo commInfo,
+    Package encryptedPackage)
+    throws InvalidCommInfoException, GNTransportException;
+
+  public abstract void sendFeedback(
+    boolean isSent,
+    String message,
+    String[] header);
+
+  private void logMessageInfo(String infoMessage, String[] info)
+
+  {
+    if (info != null)
+    {
+      ChannelLogger.debugLog(
+        CLASS_NAME,
+        "logMessageInfo",
+        "[Message Info '" + infoMessage + "']");
+      for (int i = 0; i < info.length; i++)
+      {
+        ChannelLogger.debugLog(
+          CLASS_NAME,
+          "logMessageInfo()",
+          "[" + info[i] + "]");
+      }
+    } else
+      ChannelLogger.infoLog(
+        CLASS_NAME,
+        "logMessageInfo()",
+        "[Message Info was Null for '" + infoMessage + "']");
+  }
+
+}

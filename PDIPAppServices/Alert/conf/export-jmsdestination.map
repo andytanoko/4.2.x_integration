@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ ****************************************************************************
+ * Date           Author                  Changes
+ ****************************************************************************
+ * Jan 11 2006    Tam Wei Xiang             Created.
+-->
+<!-- Data Object XML mapping for JmsDestination-->
+<mapping>
+	<!--  Mapping for ExportEntityList  -->
+	<class name="com.gridnode.pdip.base.exportconfig.model.ExportEntityList">
+		<map-to xml="Entities"/>
+		<field name="Entities" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection">
+		    <xml name="JmsDestination" node="element"/>
+		</field>
+	</class>
+	<class name="com.gridnode.pdip.app.alert.model.JmsDestination">
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="Name" type="string">
+			<xml name="Name" node="element"/>
+		</field>
+		<field name="Type" type="integer">
+			<xml name="Type" node="element"/>
+           </field>
+		<field name="JndiName" type="string">
+			<xml name="JndiName" node="element"/>
+                </field>
+		<field name="DeliveryMode" type="integer">
+			<xml name="DeliveryMode" node="element"/>
+                </field>
+		<field name="Priority" type="integer">
+			<xml name="Priority" node="element"/>
+                </field>
+		<field name="ConnectionFactoryJndi" type="string">
+			<xml name="ConnectionFactoryJndi" node="element"/>
+                </field>
+		<field name="ConnectionUser" type="string">
+			<xml name="ConnectionUser" node="element"/>
+                </field>
+		<field name="ConnectionPassword" type="string">
+			<xml name="ConnectionPassword" node="element"/>
+    </field>
+
+		<field name="LookupProperties" handler="com.gridnode.pdip.framework.db.PropertiesFieldHandler"	 type="string">
+		    <xml name="LookupProperties" node="element" />
+		</field>
+
+		<field name="RetryInterval" type="integer">
+			<xml name="RetryInterval" node="element"/>
+    </field>
+		<field name="MaximumRetries" type="integer">
+			<xml name="MaximumRetries" node="element"/>
+    </field>
+	</class>
+</mapping>

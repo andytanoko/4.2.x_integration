@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GridNodeGroup>
+    <GridNode nodeId="507" name="ACME Inc" category="GNL">
+        <Company>ACME Inc</Company>
+    </GridNode>
+    <GridNode nodeId="509" name="Smith Inc." category="GNL">
+        <Company>Smith Inc.</Company>
+    </GridNode>
+    <GridNode nodeId="521" name="AmpWay Inc." category="GNL">
+        <Company>AmpWay Inc.</Company>
+    </GridNode>
+</GridNodeGroup>

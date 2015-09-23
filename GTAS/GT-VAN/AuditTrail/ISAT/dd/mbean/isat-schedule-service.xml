@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE server>
+<server>
+
+   <!--mbean code="com.gridnode.gtas.audit.tracking.TrailInfoService"
+					name="gtvan.isat:service=TrailInfoService">
+      <depends>jboss.j2ee:url='gtvan-at-isat.ear',service=EARDeployment</depends>
+	  <attribute name="Processing">false</attribute>
+	  <attribute name ="AttemptCount">5</attribute>
+      <attribute name ="TotalRecordForProcessPerCall">50</attribute>
+	  <attribute name="JndiProperties">
+       java.naming.factory.initial=org.jnp.interfaces.NamingContextFactory
+       java.naming.factory.url.pkgs=org.jboss.naming:org.jnp.interfaces
+       java.naming.provider.url=localhost:31099
+      </attribute>
+   </mbean-->
+
+	<mbean code="com.gridnode.gtas.audit.archive.scheduler.ArchiveSchedulerService"
+					name="gtvan.isat:service=ArchiveSchedulerService">
+      <depends>jboss.j2ee:url='gtvan-at-isat.ear',service=EARDeployment</depends>
+	  <attribute name="Processing">false</attribute>
+	  <attribute name ="PreloadTime">60</attribute>
+	  <attribute name="JndiProperties">
+       java.naming.factory.initial=org.jnp.interfaces.NamingContextFactory
+       java.naming.factory.url.pkgs=org.jboss.naming:org.jnp.interfaces
+       java.naming.provider.url=localhost:31099
+      </attribute>
+   </mbean>
+
+   <mbean code="com.gridnode.gtas.audit.archive.ArchiveService"
+					name="gtvan.isat:service=ArchiveService">
+      <depends>jboss.j2ee:url='gtvan-at-isat.ear',service=EARDeployment</depends>
+   </mbean>
+
+   <mbean code="com.gridnode.gtas.audit.archive.cluster.ArchiveSingletonService"
+          name="gtvan.isat:service=ArchiveSingleton">
+   </mbean>
+
+   <!-- ==================================================================== -->
+   <!-- Scheduler Service with HASingleton enabled ScheduleProviders         -->
+   <!-- ==================================================================== -->
+
+   <!--
+    | This is a single schedule Provider which works like the
+    | one in schedule-manager-service.xml
+    |
+    | The key difference is the explicit use of the HASingleton MBean attribute
+    | to make the provider a clustered singleton.
+    | When HASingleton is set to true the MBean will usually declare dependency
+    | on a cluster partition. In this case it is the DefaultPartition.
+    | When not explicitly set the attribute defaults to true.
+    |
+    | The same attribute can also be used for the other schedule providers as well:
+    | DBScheduleProvider and XMLScheduleProvider
+    |
+    |
+    - ->
+   <mbean code="org.jboss.varia.scheduler.SingleScheduleProvider"
+          name="jboss:service=HASingleScheduleProvider">
+      <depends>jboss:service=${jboss.partition.name:DefaultPartition}</depends>
+      <depends>jboss:service=ScheduleManager</depends>
+      <depends>jboss.examples:service=HASchedulableMBeanExample</depends>
+      <attribute name="HASingleton">true</attribute>
+      <attribute name="PartitionName">${jboss.partition.name:DefaultPartition}</attribute>
+      <attribute name="ScheduleManagerName">jboss:service=ScheduleManager</attribute>
+      <attribute name="TargetName">jboss.examples:service=HASingletonMBeanExample</attribute>
+      <attribute name="TargetMethod">hit( NOTIFICATION, DATE, REPETITIONS, SCHEDULER_NAME, java.lang.String )</attribute>
+      <attribute name="DateFormat"></attribute>
+      <attribute name="StartDate">NOW</attribute>
+      <attribute name="Period">10000</attribute>
+      <attribute name="Repetitions">10</attribute>
+   </mbean>
+   <!- - -->
+
+   <!--
+    | This is a Database based schedule Provider. For more
+    | information have a look at the class JavaDoc
+    | For hypersonic
+    | CREATE TABLE Schedule
+    | (
+    |    target VARCHAR(100),
+    |    method_name VARCHAR(100),
+    |    method_signature VARCHAR(100),
+    |    start_date VARCHAR(20),
+    |    period BIGINT,
+    |    repetitions INTEGER,
+    |    date_format VARCHAR(20)
+    | )
+    |
+    | For clustered singleton schedules add the following dependency:
+    | <depends>jboss.ha:service=HASingletonDeployer,type=Barrier</depends>
+    -->
+   <mbean code="org.jboss.varia.scheduler.DBScheduleProvider"
+          name="jboss:service=IsatDBScheduleProvider">
+      <depends optional-attribute-name="ScheduleManagerName">jboss:service=ScheduleManager</depends>
+      <depends>gtvan.isat:service=ArchiveSchedulerService</depends>
+	  <depends>gtvan.isat:service=ArchiveService</depends>
+      <!-- for clustering FYI: only one scheduler being kick off among the cluster node
+      <depends>jboss.ha:service=HASingletonDeployer,type=Barrier</depends>
+      <attribute name="HASingleton">true</attribute>
+      <attribute name="PartitionName">${jboss.partition.name:DefaultPartition}</attribute>
+      -->
+      <attribute name="DataSourceName">java:GtVanDS</attribute>
+      <attribute name="SQLStatement">SELECT "target", "method_name", "method_signature", "start_date", "period", "repetitions", "date_format" FROM "schedule" WHERE "target" LIKE 'gtvan.isat%'</attribute>
+   </mbean>
+</server>

@@ -1,0 +1,204 @@
+/**
+* This software is the proprietary information of GridNode Pte Ltd.
+* Use is subjected to license terms.
+*
+* Copyright 2002 (C) GridNode Pte Ltd. All Rights Reserved.
+*
+* File: BackwardCompatibleMessageReceiver.java
+*
+****************************************************************************
+* Date           Author                  Changes
+****************************************************************************
+* July 17 2003    Jagadeesh             Created.
+*/
+
+
+package com.gridnode.pdip.app.channel.handler.message;
+
+import com.gridnode.pdip.app.channel.helpers.IPackage;
+import com.gridnode.pdip.app.channel.helpers.Package;
+import com.gridnode.pdip.app.channel.helpers.ChannelLogger;
+
+import com.gridnode.pdip.app.channel.helpers.IReceiveMessageHandler;
+import com.gridnode.pdip.app.channel.helpers.SecurityServiceHandler;
+import com.gridnode.pdip.app.channel.helpers.PackagingServiceHandler;
+import com.gridnode.pdip.app.channel.helpers.FlowControlServiceHandler;
+
+import com.gridnode.pdip.app.channel.helpers.GNCompatibleEventRegistry;
+import com.gridnode.pdip.app.channel.handler.MessageHandlerRegistry;
+
+import com.gridnode.pdip.app.channel.exceptions.ChannelException;
+import com.gridnode.pdip.app.channel.exceptions.FlowControlException;
+
+import com.gridnode.pdip.base.security.exceptions.SecurityServiceException;
+import com.gridnode.pdip.base.packaging.exceptions.PackagingException;
+
+
+import com.gridnode.pdip.app.channel.model.ChannelInfo;
+import com.gridnode.pdip.app.channel.model.SecurityInfo;
+import com.gridnode.pdip.app.channel.model.ISecurityInfo;
+import com.gridnode.pdip.app.channel.model.PackagingInfo;
+import com.gridnode.pdip.app.channel.model.FlowControlInfo;
+
+import com.gridnode.pdip.base.transport.helpers.ITransportConstants;
+import com.gridnode.pdip.base.packaging.helper.IPackagingConstants;
+
+import com.gridnode.pdip.base.transport.helpers.GNTransportPayload;
+
+import java.util.Hashtable;
+import java.io.File;
+
+
+public class BackwardCompatibleMessageReceiver extends DefaultMessageReceiver
+{
+  private static final String CLASS_NAME = "BackwardCompatibleMessageReceiver";
+
+  public BackwardCompatibleMessageReceiver()
+  {
+  }
+
+  public Package decryptAndVerify(SecurityInfo securityInfo,Package packageToDecrypt)
+    throws SecurityServiceException
+  {
+    try
+    {
+      String eventId = (String)packageToDecrypt.getHeader().get(ITransportConstants.EVENT_ID);
+      SecurityInfo gnsecurityInfo = getBackwardCompatibleSecurityInfo(eventId,securityInfo);
+      String[] decryptData = performDataDecryption(eventId,
+                             packageToDecrypt.getDataContent(),
+                             gnsecurityInfo
+                             );
+      byte[] decryptedFile = perfromFileDecryption(packageToDecrypt.getHeader(),
+             packageToDecrypt.getUnPackFileContent(),
+             gnsecurityInfo);
+      return new Package(packageToDecrypt.getHeader(),decryptData,decryptedFile);
+    }
+    catch (Exception ex)
+    {
+      ChannelLogger.errorLog(CLASS_NAME,"decryptAndVerify()",
+          "[Cannot Perform DecryptAndVerify]",ex);
+      throw new SecurityServiceException("["+CLASS_NAME+"][decryptAndVerify()]"+
+        "[Cannot perform decryptAndVerify(]"+ex.getMessage());
+    }
+
+
+  }
+
+  public Package performPackageFlowControl(FlowControlInfo info,Package packageData)
+    throws FlowControlException
+  {
+    try
+    {
+      String eventId = (String)packageData.getHeader().get(ITransportConstants.EVENT_ID);
+      info = getBackwardCompatibleFlowControlInfo(eventId,info);
+      return super.performPackageFlowControl(info,packageData);
+    }
+    catch (Exception ex)
+    {
+      ChannelLogger.errorLog(CLASS_NAME,"performPackageFlowControl()",
+          "[Cannot Perform performPackageFlowControl()]",ex);
+      throw new FlowControlException("["+CLASS_NAME+"][performPackageFlowControl()]"+
+        "[Cannot perform decryptAndVerify(]"+ex.getMessage());
+    }
+
+  }
+
+
+  protected FlowControlInfo getBackwardCompatibleFlowControlInfo(String eventId,
+            FlowControlInfo flowControlInfo) throws Exception
+  {
+    GNCompatibleEventRegistry gnRegistry = GNCompatibleEventRegistry.getInstance();
+    boolean isZip = gnRegistry.isUnzip(eventId);
+    /** @todo This is done only for testing .... */
+    if (flowControlInfo == null)
+      flowControlInfo = new FlowControlInfo();
+    flowControlInfo.setIsZip(isZip);
+    return flowControlInfo;
+  }
+
+  protected SecurityInfo getBackwardCompatibleSecurityInfo(String eventId,
+            SecurityInfo secInfo) throws Exception
+  {
+    GNCompatibleEventRegistry gnRegistry = GNCompatibleEventRegistry.getInstance();
+    boolean toDecryptNone = gnRegistry.isEncryptNone(eventId);
+    boolean toDecryptNoVerify = gnRegistry.isEncryptNoSign(eventId);
+
+    if (toDecryptNone)
+    {
+      secInfo.setEncryptionType(ISecurityInfo.ENCRYPTION_TYPE_NONE);
+      secInfo.setSignatureType(ISecurityInfo.SIGNATURE_TYPE_NONE);
+    }
+
+    if (toDecryptNoVerify)
+    {
+      secInfo.setEncryptionType(ISecurityInfo.ENCRYPTION_TYPE_ASYMMETRIC);
+      secInfo.setSignatureType(ISecurityInfo.SIGNATURE_TYPE_NONE);
+    }
+
+    Long encryptionCertificate  = secInfo.getEncryptionCertificateID();
+    Long verificationCertificate = secInfo.getSignatureEncryptionCertificateID();
+    //Swap the Certificates while receiving from BackwardCompatible
+    ChannelLogger.infoLog(CLASS_NAME,"getBackwardCompatibleSecurityInfo()","[Swaping the"+
+                          "Certificates as Receiving from BackwardCompatible]");
+    secInfo.setEncryptionCertificateID(verificationCertificate);
+    secInfo.setSignatureEncryptionCertificateID(encryptionCertificate);
+    return secInfo;
+  }
+
+  protected String[] performDataDecryption(String eventID,String[] dataContent,
+            SecurityInfo secInfo) throws Exception
+  {
+    GNCompatibleEventRegistry gnRegistry = GNCompatibleEventRegistry.getInstance();
+    boolean toexcludeFirstTow = gnRegistry.isDecryptExcludeFirstTow(eventID);
+    boolean toexcludeFirst = gnRegistry.isDecryptExcludeFirst(eventID);
+    if (toexcludeFirst)
+    {
+      ChannelLogger.infoLog(CLASS_NAME, "performDataDecryption()",
+              "B4 Copying to Exclude First");
+      Boolean returnValue = new Boolean(dataContent[0]);
+      if (returnValue.booleanValue() == true)
+      {
+        String[] decryptArray = new String[dataContent.length - 1];
+        System.arraycopy(dataContent, 1, decryptArray, 0, (dataContent.length - 1));
+        decryptArray = SecurityServiceHandler.decryptData(secInfo,decryptArray);
+        ChannelLogger.infoLog(CLASS_NAME, "performDataDecryption()",
+                "After Copying to Exclude First");
+        System.arraycopy(decryptArray, 0, dataContent, 1, decryptArray.length);
+        for (int i = 0; i < decryptArray.length; i++)
+        ChannelLogger.infoLog(CLASS_NAME, "performDataDecryption()",
+                "Data Content " + dataContent[i]);
+      }
+    }
+    else if (toexcludeFirstTow)
+    {
+      Boolean returnValue = new Boolean(dataContent[1]);
+      if (returnValue.booleanValue() == true)
+      {
+        ChannelLogger.infoLog(CLASS_NAME, "performDataDecryption()",
+                "[B4 Copying to Exclude FirstTwo]");
+        String[] decryptArray = new String[19];
+        System.arraycopy(dataContent, 2, decryptArray, 0, 19);
+        decryptArray = SecurityServiceHandler.decryptData(secInfo,decryptArray);
+        System.arraycopy(decryptArray, 0, dataContent, 2, 19);
+        for (int i = 0; i < dataContent.length; i++)
+        ChannelLogger.infoLog(CLASS_NAME, "performDataDecryption()",
+                "Data Content " + dataContent[i]);
+      }
+    }
+    else
+    {
+      ChannelLogger.infoLog(CLASS_NAME, "performDataDecryption()",
+              "[B4 Performing Normal Decryption]");
+      dataContent = SecurityServiceHandler.decryptData(secInfo,dataContent);
+    }
+    return dataContent;
+  }
+
+
+  protected byte[] perfromFileDecryption(Hashtable header,byte[] fileContent,
+    SecurityInfo secInfo)throws Exception
+  {
+    return SecurityServiceHandler.decryptData(secInfo,fileContent);
+  }
+
+}

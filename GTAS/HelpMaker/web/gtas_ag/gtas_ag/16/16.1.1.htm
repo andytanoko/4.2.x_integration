@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>16.1.1 To enable HTTPS </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>16.1.1 To enable HTTPS </h3>
+<p></p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Locate and open the following file:</span>
+<i> </i>
+<span lang='AF'>&lt;GRIDTALK_HOME&gt;/&lt;jboss&gt;/server/default/deploy/jbossweb-tomcat55.sar/server.xml</span>
+<span>. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>Edit and/or add the following lines if these lines are not there.</span>
+</p>
+<p><span></span>
+</p>
+<p><span><img width='628' height='125' alt='Text Box: <!-- SSL/TLS Connector configuration -->
+<Connector port="443" address="${jboss.bind.address}"
+    maxThreads="100" strategy="ms" maxHttpHeaderSize="8192"
+    emptySessionPath="true" enableLookups="true"
+    scheme="https" secure="true" clientAuth="false" 
+    keystoreFile="${sys.global.dir}/GNapps/gtas/data/keystore/keystore”
+sslProtocol = "TLS" />
+' src='../images/image205.gif'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>Save and exit the editor.</span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+</body>
+</html>

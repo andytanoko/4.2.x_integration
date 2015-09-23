@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+	<secure>false</secure>
+	<container-configurations/>
+	<resource-managers/>
+	<enterprise-beans>
+		<session>
+			<ejb-name>GridTalkClientController</ejb-name>
+			<jndi-name>com.gridnode.gtas.server.rdm.ejb.IGridTalkClientControllerHome</jndi-name>
+			<!--clustered>${node.clustered:False}</clustered--> <!--TWX #1902 set it as non cluster as the GT UI become extremely slow, and not stable -->
+		</session>
+	</enterprise-beans>
+</jboss>

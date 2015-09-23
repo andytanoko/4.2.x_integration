@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+  <secure>false</secure>
+  <resource-managers/>
+  <enterprise-beans>
+    <session>
+      <ejb-name>BusinessRegistryManager</ejb-name>
+      <jndi-name>com.gridnode.pdip.app.bizreg.facade.ejb.IBizRegistryManagerHome</jndi-name>
+    </session>
+    <session>
+      <ejb-name>PublicBusinessRegistryManager</ejb-name>
+      <jndi-name>com.gridnode.pdip.app.bizreg.facade.ejb.IPublicRegistryManagerHome</jndi-name>
+    </session>
+  </enterprise-beans>
+</jboss>

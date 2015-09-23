@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" output="Common/classes" path="Common/src"/>
+	<classpathentry kind="src" path="HCUT/src"/>
+	<classpathentry kind="src" output="GTHB/classes" path="GTHB/src"/>
+	<classpathentry kind="src" output="ISHB/classes" path="ISHB/src"/>
+	<classpathentry kind="src" output="ISHC/classes" path="ISHC/src"/>
+	<classpathentry kind="src" output="test/classes" path="test/src"/>
+	<classpathentry kind="var" path="J2EE_HOME/lib/j2ee.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Util"/>
+	<classpathentry kind="var" path="JUNIT_HOME/junit.jar"/>
+	<classpathentry kind="var" path="JBOSS_HOME/lib/jboss-system.jar"/>
+	<classpathentry kind="var" path="JBOSS_HOME/lib/jboss-jmx.jar"/>
+	<classpathentry kind="var" path="JBOSS_HOME/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="GTHB/reqlib/framework.jar"/>
+	<classpathentry kind="lib" path="ISHB/reqlib/gtas-common.jar" sourcepath="/GridTalk/src/Server/Common"/>
+	<classpathentry kind="lib" path="ISHB/reqlib/gtas-client-user.jar"/>
+	<classpathentry kind="lib" path="ISHB/reqlib/gtas-document.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

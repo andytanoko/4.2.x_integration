@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Model [
+<!ELEMENT Model (Property*,HiddenProperty*,Model*)>
+<!ATTLIST Model Name CDATA #REQUIRED>
+<!ELEMENT Property (#PCDATA)>
+<!ATTLIST Property Name CDATA #REQUIRED>
+<!ELEMENT HiddenProperty (#PCDATA)>
+<!ATTLIST HiddenProperty Name CDATA #REQUIRED>
+]>
+
+<Model Name="Data Source Manager">
+  <Property Name="Name">Data Source Manager</Property>
+  <Model Name="System Data Source">
+    <Property Name="Name">System Data Source</Property>
+    <Model Name="JDBC Data Source">
+      <Property Name="Name">JDBC Data Source</Property>
+      <Property Name="Description">Data Source for JDBC compliance database</Property>
+      <Property Name="Type">JDBC Data Source</Property>
+      <Property Name="Class">sg.com.elixir.reportwriter.datasource.jdbc.JDBCDataSource</Property>
+      <Property Name="DataSource Wizard Class">sg.com.elixir.reportwriter.datasource.jdbc.JDBCDataSourceWizard</Property>
+      <Property Name="JDBC Driver">sun.jdbc.odbc.JdbcOdbcDriver</Property>
+      <Property Name="Database URL"></Property>
+      <Property Name="Username">admin</Property>
+      <Property Name="Password"></Property>
+      <Property Name="SQL"></Property>
+      <Property Name="Maximum No. of Rows"></Property>
+      <Property Name="Callable Statement">false</Property>
+      <Property Name="OUT Type"></Property>
+      <Property Name="IN Parameters"></Property>
+      <Model Name="Dataschema">
+        <Property Name="Name">Dataschema</Property>
+        <Property Name="Object Class">java.sql.ResultSet</Property>
+        <HiddenProperty Name="Counter">0</HiddenProperty>
+        <HiddenProperty Name="Parameter Counter"></HiddenProperty>
+      </Model>
+    </Model>
+    <Model Name="Text Data Source">
+      <Property Name="Name">Text Data Source</Property>
+      <Property Name="Description">Data Source for text file</Property>
+      <Property Name="Type">Text Data Source</Property>
+      <Property Name="Class">sg.com.elixir.reportwriter.datasource.text.TextDataSource</Property>
+      <Property Name="DataSource Wizard Class">sg.com.elixir.reportwriter.datasource.text.TextDataSourceWizard</Property>
+      <Property Name="Filename"></Property>
+      <Property Name="Format">Delimited</Property>
+      <Property Name="First row is field name">false</Property>
+      <Property Name="Delimiter Type">Comma</Property>
+      <Property Name="Delimiter">,</Property>
+      <Property Name=""></Property>
+      <Property Name="TextQualifer">none</Property>
+      <Property Name="Encoding">Cp1252</Property>
+      <Model Name="Dataschema">
+        <Property Name="Name">Dataschema</Property>
+        <Property Name="Object Class">sg.com.elixir.reportwriter.datasource.text.TextRow</Property>
+        <HiddenProperty Name="Counter">0</HiddenProperty>
+        <HiddenProperty Name="Parameter Counter"></HiddenProperty>
+      </Model>
+    </Model>
+    <Model Name="Object Data Source">
+      <Property Name="Name">Object Data Source</Property>
+      <Property Name="Description">Data Source for objects</Property>
+      <Property Name="Type">Object Data Source</Property>
+      <Property Name="Class">sg.com.elixir.reportwriter.datasource.object.ObjectDataSource</Property>
+      <Property Name="DataSource Wizard Class">sg.com.elixir.reportwriter.datasource.object.ObjectDataSourceWizard</Property>
+      <Model Name="Dataschema">
+        <Property Name="Name">Dataschema</Property>
+        <Property Name="Object Class"></Property>
+        <HiddenProperty Name="Counter">0</HiddenProperty>
+        <HiddenProperty Name="Parameter Counter"></HiddenProperty>
+      </Model>
+    </Model>
+    <Model Name="Crosstab Data Source">
+      <Property Name="Name">Crosstab Data Source</Property>
+      <Property Name="Description">Crosstab for any Data Source</Property>
+      <Property Name="Type">Crosstab Data Source</Property>
+      <Property Name="Class">sg.com.elixir.reportwriter.datasource.crosstab.CrosstabDataSource</Property>
+      <Property Name="DataSource Wizard Class">sg.com.elixir.reportwriter.datasource.crosstab.CrosstabDataSourceWizard</Property>
+      <Property Name="Data Source Driver"></Property>
+      <Model Name="Dataschema">
+        <Property Name="Name">Dataschema</Property>
+        <Property Name="Object Class">sg.com.elixir.reportwriter.util.Row</Property>
+        <HiddenProperty Name="Counter">0</HiddenProperty>
+        <HiddenProperty Name="Parameter Counter"></HiddenProperty>
+      </Model>
+      <Model Name="Row Headers">
+        <Property Name="Name">Row Headers</Property>
+        <HiddenProperty Name="Counter">0</HiddenProperty>
+      </Model>
+      <Model Name="Column Headers">
+        <Property Name="Name">Column Headers</Property>
+        <HiddenProperty Name="Counter">0</HiddenProperty>
+      </Model>
+      <Model Name="Values">
+        <Property Name="Name">Values</Property>
+        <HiddenProperty Name="Counter">0</HiddenProperty>
+      </Model>
+    </Model>
+    <Model Name="XML Data Source">
+      <Property Name="Name">XML Data Source</Property>
+      <Property Name="Description">Data Source for XML</Property>
+      <Property Name="Type">XML Data Source</Property>
+      <Property Name="Class">com.elixirtech.report.datasource.xml.XMLDataSource</Property>
+      <Property Name="DataSource Wizard Class">com.elixirtech.report.datasource.xml.XMLDataSourceWizard</Property>
+      <Property Name="Location"></Property>
+      <Property Name="ParentTag"></Property>
+      <Property Name="MarkTag"></Property>
+      <Property Name="Attributes"></Property>
+      <Property Name="Merge"></Property>
+      <Property Name="MergeSeparator"></Property>
+      <Property Name="Encoding">Cp1252</Property>
+      <Model Name="Dataschema">
+        <Property Name="Name">Dataschema</Property>
+        <Property Name="Object Class">com.elixirtech.report.datasource.xml.XMLRowValues</Property>
+        <HiddenProperty Name="Counter">0</HiddenProperty>
+        <HiddenProperty Name="Parameter Counter"></HiddenProperty>
+      </Model>
+    </Model>
+    <Model Name="LDAP (JNDI) Datasoure ">
+      <Property Name="Name">LDAP (JNDI) Datasoure </Property>
+      <Property Name="Description">Data Source for LDAP</Property>
+      <Property Name="Type">LDAP (JNDI) Data Source</Property>
+      <Property Name="Class">com.elixirtech.report.datasource.ldap.LDAPDataSource</Property>
+      <Property Name="DataSource Wizard Class">com.elixirtech.report.datasource.ldap.LDAPDataSourceWizard</Property>
+      <Property Name="Location"></Property>
+      <Property Name="Port">389</Property>
+      <Property Name="DN"></Property>
+      <Property Name="ObjectClasses"></Property>
+      <Property Name="Filter"></Property>
+      <Property Name="Timeout">0</Property>
+      <Property Name="Attributes"></Property>
+      <Property Name="Batchsize">0</Property>
+      <Property Name="Netscape_Bug">false</Property>
+      <Property Name="Authenticate">false</Property>
+      <Property Name="Security_Authoritative">false</Property>
+      <Property Name="Security_Authenticate"></Property>
+      <Property Name="Security_Credentials"></Property>
+      <Property Name="Security_Principle"></Property>
+      <Property Name="Security_Protocol"></Property>
+      <Model Name="Dataschema">
+        <Property Name="Name">Dataschema</Property>
+        <Property Name="Object Class">com.elixirtech.report.datasource.ldap.LDAPRowValues</Property>
+        <HiddenProperty Name="Counter">0</HiddenProperty>
+        <HiddenProperty Name="Parameter Counter"></HiddenProperty>
+      </Model>
+    </Model>
+    <Model Name="EJB Data Source">
+      <Property Name="Name">EJB Data Source</Property>
+      <Property Name="Description">Data Source for Enterprise Java Beans</Property>
+      <Property Name="Type">EJB Data Source</Property>
+      <Property Name="Class">com.elixirtech.report.datasource.ejb.EJBDataSource</Property>
+      <Property Name="DataSource Wizard Class">com.elixirtech.report.datasource.ejb.EJBDataSourceWizard</Property>
+      <Property Name="EJBDataSourceSchema"></Property>
+    </Model>
+  </Model>
+  <Model Name="User Data Source">
+    <Property Name="Name">User Data Source</Property>
+    <Model Name="PDIPDSN">
+      <Property Name="Name">PDIPDSN</Property>
+      <Property Name="Description">Data Source for JDBC compliance database</Property>
+      <Property Name="Type">JDBC Data Source</Property>
+      <Property Name="Class">sg.com.elixir.reportwriter.datasource.jdbc.JDBCDataSource</Property>
+      <Property Name="DataSource Wizard Class">sg.com.elixir.reportwriter.datasource.jdbc.JDBCDataSourceWizard</Property>
+      <Property Name="JDBC Driver">org.gjt.mm.mysql.Driver</Property>
+      <Property Name="Database URL">jdbc:mysql://localhost:3306/userdb</Property>
+      <Property Name="Username">admin</Property>
+      <Property Name="Password"></Property>
+      <Property Name="resource name"></Property>
+      <Property Name="SQL">SELECT DISTINCT
+address.Address, address.EmailId, address.FirstName, address.LastName, address.UID
+FROM address;</Property>
+      <Property Name="Maximum No. of Rows"></Property>
+      <Property Name="Callable Statement">false</Property>
+      <Property Name="OUT Type"></Property>
+      <Property Name="IN Parameters"></Property>
+      <Property Name="Parameters"></Property>
+      <Model Name="Dataschema">
+        <Property Name="Name">Dataschema</Property>
+        <Property Name="Object Class">java.sql.ResultSet</Property>
+        <HiddenProperty Name="Counter">6</HiddenProperty>
+        <HiddenProperty Name="Parameter Counter"></HiddenProperty>
+        <Model Name="Detail0">
+          <Property Name="Name">Detail0</Property>
+          <Property Name="Field Name">Address</Property>
+          <Property Name="Access Method">getString</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">1</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1">
+          <Property Name="Name">Detail1</Property>
+          <Property Name="Field Name">EmailId</Property>
+          <Property Name="Access Method">getString</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">2</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail2">
+          <Property Name="Name">Detail2</Property>
+          <Property Name="Field Name">FirstName</Property>
+          <Property Name="Access Method">getString</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">3</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail3">
+          <Property Name="Name">Detail3</Property>
+          <Property Name="Field Name">LastName</Property>
+          <Property Name="Access Method">getString</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">4</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail4">
+          <Property Name="Name">Detail4</Property>
+          <Property Name="Field Name">UID</Property>
+          <Property Name="Access Method">getInt</Property>
+          <Property Name="Return Type">int</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">5</Property>
+          </Model>
+        </Model>
+      </Model>
+    </Model>
+  </Model>
+</Model>

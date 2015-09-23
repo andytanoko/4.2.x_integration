@@ -1,0 +1,319 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head id="xhtml_head">
+    <title id="title">lbGridTalk</title>
+    <base href="file:///C:\views\i00054_GT_2.1_AlertCenter\GTAS\GridTalk\web/gt.css" id="base_tag"/>
+    <link id="xhtml_stylesheet" rel="stylesheet" href="gt.css" type="text/css"/>
+    <script src="scripts/insertSubstitutionUtils.js" type="text/javascript"><!----></script>
+  </head>
+  <body>
+    <div id="page_content">
+      <form name="entityForm" id="form" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <input type="hidden" id="appendField" name="appendField" value="message"/>
+        <table>
+          <tr id="name_details">
+            <td id="name_label">
+              lbName
+            </td>
+            <td>
+              <input type="text" id="name_value" name="name"/>
+            </td>
+            <td id="name_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="contentType_details">
+            <td id="contentType_label">
+              lbContentType
+            </td>
+            <td>
+              <select id="contentType_value" size="1" name="contentType">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+            </td>
+            <td id="contentType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="messageType_details">
+            <td id="messageType_label">
+              lbMessageType
+            </td>
+            <td>
+              <select id="messageType_value" size="1" name="messageType" onchange="serverRefresh();">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+            </td>
+            <td id="messageType_error">
+              &nbsp;
+            </td>
+          </tr>
+          
+		  <!-- SC: 6 Jan 05, jms alert notification -->
+		  <tr id="jmsDestination_details">
+            <td id="jmsDestination_label">
+              lbJmsDestination
+            </td>
+            <td>
+              <select id="jmsDestination_value" size="1" name="jmsDestination" onchange="serverRefresh();">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+              <a id="jmsDestination_create" href="javascript:divertToMapping('divertCreateJmsDestination');">
+                lbCreateJmsDestination
+              </a>
+            </td>
+            <td id="jmsDestination_error">
+              &nbsp;
+            </td>
+          </tr>
+
+		  <!-- message properties -->
+		  <tr id="messagePropertyRoot">
+		  <td colspan="3">
+		  <table>
+					<tr>
+						<td 
+							colspan="4">
+							<table 
+								cellspacing="0" 
+								border="0">
+								<tr>
+									<th>
+										&nbsp;
+									</th>
+									<th 
+										style="font-weight: bold; color: black">
+										Key
+									</th>
+									<th 
+										style="font-weight: bold; color: black">
+										Type
+									</th>
+									<th 
+										style="font-weight: bold; color: black">
+										Value
+									</th>
+									<th>
+										&nbsp;
+									</th>
+								</tr>
+
+								<!-- value row -->
+								<tr 
+									id="messageProperties_row">
+									<td>
+										<input 
+											id="selected_value" 
+											type="checkbox" 
+											name="selected"/>
+									</td>
+									<td>
+										<input 
+											id="key_value" 
+											type="text" 
+											name="key"/>
+									</td>
+									<td>
+										<select 
+											id="type_value" 
+											size="1" 
+											name="type">
+											<option 
+												value="">
+												&nbsp;
+											</option>
+										</select>
+									</td>
+									<td>
+										<input 
+											id="value_value" 
+											type="text" 
+											name="value"/>
+									</td>
+									<td 
+										id="messageProperties_error">
+										&nbsp;
+									</td>
+								</tr>
+
+								<!-- END: value row -->
+								<tr 
+									id="control_row">
+									
+									<td 
+										align="right" 
+										colspan="5" 
+										nowrap="nowrap" 
+										valign="top">
+										<span 
+											id="removeMessageProperties_parent">
+											<a 
+												id="removeMessageProperties" 
+												href="javascript: void setRemoveUpdateAction();">
+												<img 
+													border="0" 
+													id="removeMessageProperties_icon" 
+													src="images/actions/delete.gif" 
+													style="vertical-align: text-top; margin-right: 3;"/>
+												Remove Property
+											</a>
+											&nbsp;&nbsp;
+										</span>
+										<span 
+											id="addMessageProperties_parent">
+											<a 
+												id="addMessageProperties" 
+												href="javascript: void setAddUpdateAction();">
+												<img 
+													border="0" 
+													id="addMessageProperties_icon" 
+													src="images/actions/filter.gif" 
+													style="vertical-align: text-top; margin-right: 3;"/>
+												Add Property
+											</a>
+											&nbsp;&nbsp;
+										</span>
+										<input 
+											name="updateAction" 
+											type="hidden" 
+											value=""/>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+		    </td>
+		  </tr>
+		  <!-- END: SC: 6 Jan 05, jms alert notification -->
+
+          <tr id="location_details">
+            <td id="location_label">
+              lbLocation
+            </td>
+            <td>
+              <input id="location_value" type="text" name="location"/>
+            </td>
+            <td id="location_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="append_details">
+            <td id="append_label">
+              lbAppend
+            </td>
+            <td>
+              <input id="append_value" type="checkbox" name="append" value="true"/>
+            </td>
+            <td id="append_error">
+              &nbsp;
+            </td>
+          </tr>
+          
+          <tr id="fromAddr_details">
+            <td id="fromAddr_label">
+              lbFromAddr
+            </td>
+            <td>
+              <input type="text" id="fromAddr_value" name="fromAddr" onfocus="setAppendField('fromAddr');"/>
+            </td>
+            <td id="fromAddr_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="toAddr_details">
+            <td id="toAddr_label">
+              lbToAddr
+            </td>
+            <td>
+              <input type="text" id="toAddr_value" name="toAddr" onfocus="setAppendField('toAddr');"/>
+            </td>
+            <td id="toAddr_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="ccAddr_details">
+            <td id="ccAddr_label">
+              lbCcAddr
+            </td>
+            <td>
+              <input type="text" id="ccAddr_value" name="ccAddr" onfocus="setAppendField('ccAddr');"/>
+            </td>
+            <td id="ccAddr_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="subject_details">
+            <td id="subject_label">
+              lbSubject
+            </td>
+            <td>
+              <input type="text" id="subject_value" name="subject" onfocus="setAppendField('subject');"/>
+            </td>
+            <td id="subject_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="message_details">
+            <td id="message_label" valign="top">
+              lbMessage
+            </td>
+            <td>
+              <textarea id="message_value" name="message" rows="20" cols="80" onfocus="setAppendField('message');">
+                &nbsp;
+              </textarea>
+            </td>
+            <td id="message_error" valign="top">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="substitutionList_details">
+            <td/>
+            <td align="center">
+              <table>
+                <tr>
+                  <td id="object_label">
+                    lbObject
+                  </td>
+                  <td>
+                    <select id="object_value" size="1" name="object" onchange="serverRefresh();">
+                      <option value="">
+                        &nbsp;
+                      </option>
+                    </select>
+                  </td>
+                  <td id="field_label">
+                    lbField
+                  </td>
+                  <td>
+                    <select id="field_value" size="1" name="field">
+                      <option value="">
+                        &nbsp;
+                      </option>
+                    </select>
+                  </td>
+                  <td>
+                    <a id="insert_button" href="javascript:append();">
+                      lbInsert
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-j2ee-engine SYSTEM "ejb-j2ee-engine.dtd">
+<ejb-j2ee-engine>
+	<enterprise-beans>
+		<enterprise-bean>
+			<ejb-name>LicenseStateMonitorMDBean_Partner</ejb-name>
+			<message-props>
+				<destination-name>timeInvokeQueue</destination-name>
+                                <connection-factory-name>GNQueueConnectionFactory</connection-factory-name>
+				<property>
+					<property-name>MaxSize</property-name>
+					<property-value>100</property-value>
+				</property>
+			</message-props>
+		</enterprise-bean>
+	</enterprise-beans>
+</ejb-j2ee-engine>

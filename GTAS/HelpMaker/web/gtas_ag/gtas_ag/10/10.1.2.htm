@@ -1,0 +1,155 @@
+<html>
+<head>
+<title>10.1.2 Sender.ini </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>10.1.2 Sender.ini </h3>
+<p><span></span>
+</p>
+<p><span>The </span>
+<span>sender.ini</span>
+<span> file is an XML file that is used in the backend sender for importing the document into GridTalk. It specifies the communication properties with GridTalk, the email settings for error case reporting, and the default location to pick up the documents to be imported.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The following shows a sample of a sender.ini:</span>
+</p>
+<p><span><img width='621' height='245' alt='Text Box: <Init>
+ <Property key="PORT_NAME">PORT0001</Property>
+  <Property key="GT_IP">192.168.213.190</Property> 
+  <Property key="GT_PORT_NUMBER">6763</Property> 
+  <Property key="USER_NAME">admin</Property>
+  <Property key="PASSWORD">admin</Property>
+  <Property key="BIZ_ENT_ID">DEF</Property>
+  <Property key="SMTP">192.168.213.251</Property>
+  <Property key="EMAIL">admin@gridnode.com</Property>
+  <Property key="HOST_DIR">c:\orders</Property>
+  <Property key="ATTACHMENT_DIR">c:\orders\attachments</Property>
+  <Property key="LOCKFILE">lock</Property>
+  <Property key="TIMEOUT">5</Property>
+  <Property key="COMMAND_FILE">preprocess.sh %FILENAME</Property>
+</Init>
+
+
+' src='../images/image143.gif'></span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' width='648' border='0' cellpadding='0'><tr><td width='144' colspan='2' valign='top'><p><b><u><span>Property key</span>
+</u>
+</b>
+</p>
+</td>
+<td width='504' valign='top'><p><b><u><span>Usage Description</span>
+</u>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='144' colspan='2' valign='top'><p><span>PORT_NAME</span>
+</p>
+</td>
+<td width='504' valign='top'><p><span>An arbitrary name for this configuration. Mandatory.</span>
+</p>
+</td>
+</tr>
+<tr><td width='143' valign='top'><p><span>GT_IP</span>
+</p>
+</td>
+<td width='505' colspan='2' valign='top'><p><span>IP address or host name of the GridTalk to send the files to. Mandatory.</span>
+</p>
+</td>
+</tr>
+<tr><td width='143' valign='top'><p><span>GT_PORT_NUMBER </span>
+</p>
+</td>
+<td width='505' colspan='2' valign='top'><p><span>GridTalk backend listening port, default configured in GridTalk is 6763. Mandatory.</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' colspan='2' valign='top'><p>USER_NAME</p>
+</td>
+<td width='504' valign='top'><p>User name required to login to GridTalk during import. The user name must be a valid user defined in GridTalk. Mandatory.</p>
+</td>
+</tr>
+<tr><td width='144' colspan='2' valign='top'><p><span>PASSWORD</span>
+</p>
+</td>
+<td width='504' valign='top'><p><span>User password required to login to GridTalk. Mandatory, <i>use the Tool “maskedPass.bat” under &lt;GRIDTALK_HOME&gt;/bin/admin to generate the masked password.</i>
+</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' colspan='2' valign='top'><p><span>BIZ_ENT_ID</span>
+</p>
+</td>
+<td width='504' valign='top'><p><span>The Business Entity ID of the user. Mandatory.</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' colspan='2' valign='top'><p><span>SMTP</span>
+</p>
+</td>
+<td width='504' valign='top'><p><span>SMTP server used to send error emails.</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' colspan='2' valign='top'><p><span>EMAIL</span>
+</p>
+</td>
+<td width='504' valign='top'><p><span>Email address of the person to receive the error emails. Optional.</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' colspan='2' valign='top'><p><span>HOST_DIR </span>
+</p>
+</td>
+<td width='504' valign='top'><p><span>Directory for picking up the documents to send. Applicable only if directory.file is not specified in command line option.</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' colspan='2' valign='top'><p><span>ATTACHMENT_DIR</span>
+</p>
+</td>
+<td width='504' valign='top'><p><span>Directory for picking up the attachments to send with the documents, if any. Applicable only if directory.file is not specified in command line option.</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' colspan='2' valign='top'><p><span>LOCKFILE </span>
+</p>
+</td>
+<td width='504' valign='top'><p><span>Name of the file that will be created to lock the directory while import is in progress. Mandatory.</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' colspan='2' valign='top'><p><span>TIMEOUT</span>
+</p>
+</td>
+<td width='504' valign='top'><p><span>Time limit (in minutes) to prevent staled lock situation by a sender process that has been terminated abnormally. Mandatory.</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' colspan='2' valign='top'><p><span>COMMAND_FILE </span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+</td>
+<td width='504' valign='top'><p><span>Specify an external program/script to be executed before sending the files into GridTalk, the string &quot;;%FILENAME&quot;; represents the filename of the file to be imported. If there are multiple files in the HOST_DIR (or Directory in directory.file), each of the files will be processed by this external program. Optional.</span>
+</p>
+</td>
+</tr>
+<tr height='0'><td width='143'></td>
+<td width='1'></td>
+<td width='504'></td>
+</tr>
+</table>
+<b><span><br clear='all'></span>
+</b>
+<p><b><span></span>
+</b>
+</p>
+</body>
+</html>

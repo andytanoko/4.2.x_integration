@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+	<secure>false</secure>
+	<container-configurations/>
+	<resource-managers>
+	</resource-managers>
+	<enterprise-beans>
+		<entity>
+			<ejb-name>iCalAlarm</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.time.entities.ejb.IiCalAlarmHome</jndi-name>
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+		</entity>
+		<entity>
+			<ejb-name>iCalEvent</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.time.entities.ejb.IiCalEventHome</jndi-name>
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+		</entity>
+		<entity>
+			<ejb-name>iCalTodo</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.time.entities.ejb.IiCalTodoHome</jndi-name>
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+		</entity>
+<!--
+		<entity>
+			<ejb-name>iCalProperty</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.time.entities.ejb.IiCalPropertyHome</jndi-name>
+		</entity>
+
+		<entity>
+			<ejb-name>iCalInt</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.time.entities.ejb.IiCalIntHome</jndi-name>
+		</entity>
+
+		<entity>
+			<ejb-name>iCalDate</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.time.entities.ejb.IiCalDateHome</jndi-name>
+		</entity>
+
+		<entity>
+			<ejb-name>iCalString</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.time.entities.ejb.IiCalStringHome</jndi-name>
+		</entity>
+-->
+		<entity>
+			<ejb-name>iCalText</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.time.entities.ejb.IiCalTextHome</jndi-name>
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+		</entity>
+
+	</enterprise-beans>
+</jboss>

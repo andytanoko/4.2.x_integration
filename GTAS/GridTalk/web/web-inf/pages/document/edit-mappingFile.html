@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <base href="file:///C:\viewroot\i00054_GT_2.0_I4\GTAS\GridTalk\web/gt.css" id="base_tag"/>
+    <link rel="stylesheet" href="gt.css" type="text/css"/>
+    <script id="include_stdFormMethods" language="JavaScript" src="scripts/stdFormMethods.js"><!----></script>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="" enctype="multipart/form-data">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="cancel"/>
+        <input type="hidden" name="divertTo"/>
+        <table border="0">
+          <tr id="name_details">
+            <td id="name_label">
+              lbName
+            </td>
+            <td>
+              <input type="text" id="name_value" name="name"/>
+            </td>
+            <td id="name_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="description_details">
+            <td id="description_label">
+              lbDescription
+            </td>
+            <td>
+              <input type="text" id="description_value" name="description"/>
+            </td>
+            <td id="description_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="type_details">
+            <td id="type_label">
+              lbType
+            </td>
+            <td>
+              <select id="type_value" name="type" onchange="serverRefresh();">
+                <option value="">&nbsp;</option>
+              </select>
+            </td>
+            <td id="type_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="subPath_details">
+            <td id="subPath_label">
+              lbSubPath
+            </td>
+            <td>
+              <input type="text" id="subPath_value" name="subPath"/>
+            </td>
+            <td id="subPath_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="filename_details">
+            <td id="filename_label" valign="top">
+              lbFilename
+            </td>
+            <td valign="top">
+              <div id="filename_value" class="multifiles">
+                Multifiles()
+              </div>
+            </td>
+            <td id="filename_error" valign="top">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

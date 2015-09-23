@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for ExportEntityList  -->
+	<class name="com.gridnode.pdip.base.exportconfig.model.ExportEntityList">
+		<map-to xml="Entities"/>
+		<field name="Entities" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection"/>
+	</class>
+	<!--  Mapping for Partner Function  -->
+	<class name="com.gridnode.gtas.server.partnerfunction.model.PartnerFunction">
+		<map-to xml="PartnerFunction"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="PartnerFunctionId" type="string">
+			<xml name="PartnerFunctionId" node="element"/>
+		</field>
+		<field name="Description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="TriggerOn" type="integer">
+			<xml name="TriggerOn" node="element"/>
+		</field>
+		<field name="WorkflowActivities" type="com.gridnode.gtas.server.partnerfunction.model.WorkflowActivity" collection="collection">
+			<xml name="WorkflowActivity" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for WorkflowActivity  -->
+	<class name="com.gridnode.gtas.server.partnerfunction.model.WorkflowActivity">
+		<map-to xml="WorkflowActivity"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="ActivityType" type="integer">
+			<xml name="ActivityType" node="element"/>
+		</field>
+		<field name="Description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="ParamList" type="java.lang.Object" collection="vector">
+			<xml name="Param" node="element"/>
+		</field>
+	</class>
+</mapping>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jardesc>
+<jar path="C:/Release/GTAS/Backend/sender/sender.jar"/>
+<options buildIfNeeded="true" compress="true" descriptionLocation="/GridTalk/projects/backend-sender.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" useSourceFolders="false"/>
+<manifest generateManifest="false" mainClassHandleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.backend.sender{Sender.java[Sender" manifestLocation="/GridTalk/src/Server/Backend/META-INF/backend-sender.mf" manifestVersion="1.0" reuseManifest="true" saveManifest="true" usesManifest="true">
+<sealing sealJar="true">
+<packagesToSeal/>
+<packagesToUnSeal/>
+</sealing>
+</manifest>
+<selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.backend.util{BackendIni.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.server.backend.openapi.core{APIConfig.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.backend.sender{Locker.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.server.backend.openapi.core{APIServiceInterface.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.backend.util{Queue.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.backend.util{StreamGobbler.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.backend.util{InitManager.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.backend.exception{CreateDirectoryException.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.backend.exception{MoveFileException.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.server.backend.openapi.core{IAPICallback.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.server.backend.openapi.core{APIServiceCore.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.backend.util{CommandExecutor.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.backend.sender{DirReader.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.backend.util{BackendIniReader.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.server.backend.openapi.net"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.server.backend.openapi.core{CallbackListener.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.backend.sender{Sender.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.backend.util{Log.java"/>
+<file path="/GridTalk/src/Server/Backend/META-INF/javamail.default.providers"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.backend.exception{FileInUseException.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.server.backend.openapi.core{APIAuthenticator.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.backend.exception{SendFileException.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.backend.util{XMLAppend.java"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.server.backend.openapi.core{APIParams.java"/>
+<file path="/GridTalk/src/Server/Backend/META-INF/javamail.default.address.map"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.backend.util{IBackendIniReader.java"/>
+<file path="/GridTalk/src/Server/Backend/META-INF/javamail.charset.map"/>
+<javaElement handleIdentifier="=GridTalk/src\/Server\/Backend&lt;com.gridnode.gtas.backend.exception{ConnectException.java"/>
+<file path="/GridTalk/src/Server/Backend/META-INF/mailcap"/>
+</selectedElements>
+</jardesc>

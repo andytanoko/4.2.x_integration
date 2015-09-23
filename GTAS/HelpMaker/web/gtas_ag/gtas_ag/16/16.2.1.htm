@@ -1,0 +1,121 @@
+<html>
+<head>
+<title>16.2.1 To enable AS2 messaging with a partner </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>16.2.1 To enable AS2 messaging with a partner </h3>
+<p></p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Import one or more partner certificates into your GridTalk. Please note that the partner may use an encryption certificate that is different from the signature certificate. In this case, both certificates need to be imported.</span>
+</p>
+<p><span></span>
+</p>
+<p><a name='_Ref78115633'><span>Step 2.<span> </span>
+</span>
+<span>Next configure Partner channel. To do this, you need to configure packaging, security and communication profiles. Follow the steps A, B and C.</span>
+</a>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Step A: </span>
+</b>
+</p>
+<p><span>For configuring packaging profile, choose AS2 for the packaging type. </span>
+</p>
+<p><span>When AS2 is selected, the first extension field, that is, Is Acknowledgement Required checkbox is displayed by default. </span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='447' height='241' border='0' src='../images/image207.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Configure the other extension fields accordingly to your specific requirement.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='446' height='315' border='0' src='../images/image208.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Step B: </span>
+</b>
+</p>
+<p><span>For configuring security profile, if any security action (encryption, signature or compression) is intended, choose “S/MIME” for each of the intended actions. Then specify the corresponding parameters such as encryption algorithm, signature algorithm, etc. Refer to Chapter 7.3 for more details on encryption configurations.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='424' height='347' border='0' src='../images/image209.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>But if more than one security action is selected, specify the action sequence using the dropdown list next to the Sequence field. The Sequence options are self-explained.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='430' height='354' border='0' src='../images/image210.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Step C: </span>
+</b>
+</p>
+<p><span>For configuring communication profile, simply select and key in the HTTP URL.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>After you have done with the above steps, create a new channel that refers to the profiles you have just created. If you want to create more channels that are needed by this partner, repeat the same steps as above.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>Configure Partner business entity. Assign all channels in Step 2 to this Business Entity. Click “domain identifier” tab, choose “AS2 identifiers” and supply a valid AS2 identifier (Take note that it is advised to use only English letters and numbers and to avoid special characters).</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='596' height='135' border='0' src='../images/image211.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>Configure Partner. Among the list of channels, choose one as the default channel. This channel will be used if you do not configure a trigger for a particular document type and for this partner, or you do not specify which channel to use in that trigger configuration. If only AS2 is applicable to this partner, choose an AS2 channel as the default Channel.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 5.<span> </span>
+</span>
+<span>Proceed to configure Import Trigger. By doing so, you need to specify the retry count and retry interval as well as to specify which channel to use in case the partner has multiple channels. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>For a typical configuration, just create a level 4 trigger for a particular document type and the intended partner, specify the retry count and retry interval, and among the list of channels that belong to this partner, select the channel that corresponds to the chosen document type. For example, the channel that encrypts the message has to be chosen for the document type such as “AS2_Encrypted_Message”</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='447' height='282' border='0' src='../images/image212.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 6.<span> </span>
+</span>
+<span>Create certificate mapping. Choose the partner. Select partner’s signature certificate for Partner Certificate and your encryption certificate for Own Certificate.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 7.<span> </span>
+</span>
+<span>If you need to send AS2 message over SSL to the partner, import the root certificate of the partner SSL certificate into GridTalk Truststore. Refer to Chapter 7.5 for more details.</span>
+</p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

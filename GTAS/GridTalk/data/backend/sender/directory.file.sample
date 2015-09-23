@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Directory>
+    <!-- defines the directories info-->
+    <Location> 
+      <!-- arbitrary name for associating this set of directories settings-->
+	<Name>Orders for Partner 00001000</Name>
+      <!-- directory for picking up the documents to send-->
+	<Directory>c:\orders\00001000</Directory>
+      <!-- directory for picking up the attachments to send-->
+	<AttachmentDir>c:\orders\00001000\attachment</AttachmentDir>
+      <!-- path to the info file-->
+	<InfoFile>c>\orders\info\00001000.info</InfoFile>
+    </Location> 
+
+    <!-- insert other directories info if necessary-->
+</Directory>

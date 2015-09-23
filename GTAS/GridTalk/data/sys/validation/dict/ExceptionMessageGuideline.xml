@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dictionary>
+	<GlobalPartnerRoleClassificationCode>
+       	<value>Product Seller</value> 
+            <value>Product Trader</value> 
+            <value>Sale Lead Orginator</value> 
+            <value>Sale Lead Processor</value> 
+            <value>Marketing Activity Initiator</value> 
+            <value>Marketing Activity Information User</value> 
+            <value>Sales Marketing Claim Requester</value> 
+            <value>Sales Marketing Claim Processor</value> 
+            <value>Sales Marketing Claimant</value> 
+            <value>Return Requester</value> 
+            <value>Return Provider</value> 
+            <value>Return Receiver</value> 
+            <value>Financier</value> 
+            <value>Payer</value> 
+            <value>Payee</value> 
+            <value>Catalog Distributor</value> 
+            <value>Catalog Producer</value> 
+            <value>Anonymous Buyer</value> 
+            <value>Product Information Distributor</value> 
+            <value>Product Information User</value> 
+            <value>Buyer</value> 
+            <value>Seller</value> 
+            <value>Customer Manager</value> 
+            <value>Product Supplier</value> 
+            <value>Sales Facilitator</value> 
+            <value>Supplier</value> 
+            <value>Shipment Information User</value> 
+            <value>Claim Requester</value> 
+            <value>Transport Service Provider</value> 
+            <value>Appointment Provider</value> 
+            <value>In-transit Information User</value> 
+            <value>Consignee</value> 
+            <value>Shipment Requester</value> 
+	</GlobalPartnerRoleClassificationCode>
+	<GlobalSupplyChainCode>
+		<value>Information Technology</value>
+		<value>Electronic Components</value>
+	</GlobalSupplyChainCode>
+<!-- 
+	<GlobalPartnerClassificationCode>
+		<value>Carrier</value>
+		<value>Distributor</value>
+		<value>End User</value>
+		<value>End User Government</value>
+		<value>Financier</value>
+		<value>Manufacturer</value>
+		<value>Retailer</value>
+		<value>Shopper</value>
+		<value>Freight Forwarder</value>
+	</GlobalPartnerClassificationCode> 
+--> 
+</dictionary>

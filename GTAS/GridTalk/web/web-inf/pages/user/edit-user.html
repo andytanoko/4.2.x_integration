@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Edit User</title>
+    <base href="file:///C:\views\i00054_GT_2.0_I8_2\GTAS\GridTalk\web/gt.css" id="base_tag"/>
+    <link rel="stylesheet" href="gt.css" type="text/css"/>
+    <script id="include_selectUtils" language="JavaScript" src="scripts/selectUtils.js"><!----></script>
+    <script id="include_stdFormMethods" language="JavaScript" src="scripts/stdFormMethods.js"><!----></script>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <script type="text/javascript"><!--
+            function resetLogins()
+            {
+              document.entityForm.elements['loginAttempts_value'].value='0';
+            }
+          --></script>
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="cancel"/>
+        <input type="hidden" name="divertTo"/>
+        <table border="1" width="100%" id="tabTable">
+          <tr>
+            <td nowrap="nowrap" width="1%" class="activeTab" id="details_tab">
+              lbAccountDetails
+            </td>
+            <td nowrap="nowrap" width="1%" id="state_tab" class="inactiveTab">
+              lbAccountState
+            </td>
+            <td nowrap="nowrap" width="1%" id="password_tab" class="inactiveTab">
+              lbPassword
+            </td>
+            <td width="99%" class="nullTab">
+              &nbsp;
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" id="details_tab_panel">
+              <div>
+                <table>
+                  <tr>
+                    <td valign="top">
+                      <table>
+                        <tr>
+                          <td id="userId_label">
+                            lbUserId
+                          </td>
+                          <td>
+                            <input type="text" id="userId_value" name="userId"/>
+                          </td>
+                          <td id="userId_error">
+                            &nbsp;
+                          </td>
+                        </tr>
+                        <tr>
+                          <td id="userName_label">
+                            lbUserName
+                          </td>
+                          <td>
+                            <input type="text" id="userName_value" name="userName"/>
+                          </td>
+                          <td id="userName_error">
+                            &nbsp;
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td id="phone_label">
+                            lbPhone
+                          </td>
+                          <td>
+                            <input type="text" id="phone_value" name="phone"/>
+                          </td>
+                          <td id="phone_error">
+                            &nbsp;
+                          </td>
+                        </tr>
+                        <tr>
+                          <td id="email_label">
+                            lbEmail
+                          </td>
+                          <td>
+                            <input type="text" id="email_value" name="email"/>
+                          </td>
+                          <td id="email_error">
+                            &nbsp;
+                          </td>
+                        </tr>
+                        <tr>
+                          <td id="property_label">
+                            lb
+                          </td>
+                          <td>
+                            <input type="text" id="property_value" name="property"/>
+                          </td>
+                          <td id="property_error">
+                            &nbsp;
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="3">
+                            <br/>
+                          </td>
+                        </tr>
+                        <tr id="roles_detail">
+                          <td id="roles_label" valign="top">
+                            lbRoles
+                          </td>
+                          <td>
+                            <div id="roles_value" class="multiselector">
+                              Multiselector()
+                            </div>
+                          </td>
+                          <td id="roles_error"></td>
+                        </tr>
+                        <tr id="bes_detail">
+                          <td id="bes_label" valign="top">
+                            lbBes
+                          </td>
+                          <td>
+                            <div id="bes_value" class="multiselector">
+                              Multiselector()
+                            </div>
+                            <a id="bes_create" href="javascript:divertToMapping('divertCreateBusinessEntity');">
+                              lbCreateBusinessEntity
+                            </a>
+                          </td>
+                          <td id="bes_error"></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" id="state_tab_panel">
+              <div id="profile_value">
+                <table>
+                  <tr>
+                    <td id="state_label">
+                      lbState
+                    </td>
+                    <td>
+                      <select size="1" id="state_value" name="state">
+                      </select>
+                    </td>
+                    <td id="state_error">
+                      &nbsp;
+                    </td>
+                  </tr>
+                  <tr>
+                    <td id="lastLoginTime_label">
+                      lbLastLoginTime
+                    </td>
+                    <td id="lastLoginTime_value">
+                      XXX
+                    </td>
+                  </tr>
+                  <tr>
+                    <td id="lastLogoutTime_label">
+                      lbLastLogoutTime
+                    </td>
+                    <td id="lastLogoutTime_value">
+                      XXX
+                    </td>
+                  </tr>
+                  <tr>
+                    <td id="frozen_label">
+                      lbFrozen
+                    </td>
+                    <td>
+                      <select id="frozen_value" name="frozen">
+                      </select>
+                    </td>
+                    <td id="frozen_error">
+                      &nbsp;
+                    </td>
+                  </tr>
+                  <tr id="freezeTime_details">
+                    <td id="freezeTime_label">
+                      lbFreezeTime
+                    </td>
+                    <td id="freezeTime_value">
+                      XXX
+                    </td>
+                  </tr>
+                  <tr>
+                    <td id="loginAttempts_label">
+                      lbLoginAttempts
+                    </td>
+                    <td>
+                      <input readonly="readonly" id="loginAttempts_value" type="text" size="3" value="0" name="loginAttempts"/>
+                      &nbsp;
+                      <a id="reset_logins" href="javascript:resetLogins()">
+                        <img id="reset_icon" src="images/actions/resetLoginAttempts.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+                        lbReset
+                      </a>
+                    </td>
+                    <td id="loginAttempts_error">
+                      &nbsp;
+                    </td>
+                  </tr>
+                  <tr>
+                    <td id="created_label">
+                      lbCreated
+                    </td>
+                    <td id="created_value">
+                      XXX
+                    </td>
+                  </tr>
+                  <tr>
+                    <td id="createdBy_label">
+                      lbCreatedBy
+                    </td>
+                    <td id="createdBy_value">
+                      XXX
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" id="password_tab_panel">
+              <div>
+                <table>
+                  <tr id="password_details">
+                    <td id="password_label">
+                      lbPassword
+                    </td>
+                    <td>
+                      <input type="password" id="password_value" name="password"/>
+                    </td>
+                    <td id="password_error">
+                      &nbsp;
+                    </td>
+                  </tr>
+                  <tr id="newPassword_details">
+                    <td id="newPassword_label">
+                      lbConfirm Password
+                    </td>
+                    <td>
+                      <input type="password" id="newPassword_value" name="newPassword"/>
+                    </td>
+                    <td id="newPassword_error">
+                      &nbsp;
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

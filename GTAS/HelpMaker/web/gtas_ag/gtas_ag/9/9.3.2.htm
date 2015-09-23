@@ -1,0 +1,220 @@
+<html>
+<head>
+<title>9.3.2 To create a double action process definition </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>9.3.2 To create a double action process definition </h3>
+<p><span></span>
+</p>
+<p><span>The double-action process performs both the Request and the Response. The Request allows you to configure the initial Request message. The Response allows you to configure the Response message.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Click Process. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>Click Process Definition. This will bring you to the page where you need to complete the General, From and To panes.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>First go to the General pane and enter the Name for the new process definition.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>If the process is a synchronous PIP, tick the Is Synchronous checkbox. Otherwise, leave it as unchecked.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 5.<span> </span>
+</span>
+<span>Select Double Action Process for the Process Type field.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='459' height='493' border='0' src='../images/image108.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 6.<span> </span>
+</span>
+<span>Click Edit Request Action Configurations to configure the request action settings. Click Edit Response Action Configurations to configure the response action settings. Refer to “To configure a request or response action” for more details.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 7.<span> </span>
+</span>
+<span>In the General pane, enter the rest of the following fields:</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Action Timeout</span>
+</b>
+</p>
+<p><span>This field is the time for the recipient to complete the action and send the Response document</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>RNIF Version</span>
+</b>
+</p>
+<p><span>This field provides RNIF1.1 or RNIF2.0 to select. This version affects the packaging and transport of the message. <b>RNIF2.0</b>
+ compiles to RosettaNet Implementation Framework: Core Specifications version V02.00. <b>RNIF1.1</b>
+ implements RosettaNet Implementation Framework Specification version 1.1 dated 8 Nov 1999.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>PIP Process Code</span>
+</b>
+</p>
+<p><span>This field represents the PIP alphanumeric designation (e.g ‘3C3’)</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>PIP Version</span>
+</b>
+</p>
+<p><span>This field specifies the version of the PIP. The value must be obtained from the PIP Version Identifier element in the corresponding PIP specification.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Usage Code</span>
+</b>
+</p>
+<p><span>This field gives Test or Production to choose depending on use.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 8.<span> </span>
+</span>
+<span>Next go to the From pane to complete the following fields.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Partner Class Code</span>
+</b>
+</p>
+<p><span>This field represents the partner classifications, which are described in the Global Partner Classification Code element of the Service Header Part Message Guideline of the RNIF1.1 specifications. For RNIF2.0 messages, this field is not used.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Partner Role Class Code</span>
+</b>
+</p>
+<p><span>From Role Name column of the PIP specification’s Partner Role Descriptions table</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Business Service Code </span>
+</b>
+</p>
+<p><span>From Network Component in FSV column of the PIP specification’s Network Component Specification table</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 9.<span> </span>
+</span>
+<span>Proceed to the To panel to complete the following fields.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Partner Class Code</span>
+</b>
+</p>
+<p><span>This field represents the partner classifications, which are described in the Global Partner Classification Code element of the Service Header Part Message Guideline of the RNIF1.1 specifications. For RNIF2.0 messages, this field is not used.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Partner Role Class Code</span>
+</b>
+</p>
+<p><span>To Role Name column of the PIP specification’s Partner Role Descriptions table</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Business Service Code</span>
+</b>
+</p>
+<p><span>To Network Component in FSV column of the PIP specification’s Network Component Specification table</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 10.<span> </span>
+</span>
+<span>Lastly go to the Document Identifier panel to complete the following fields.</span>
+</p>
+<p><b><span></span>
+</b>
+</p>
+<p><b><span>Request Document Identifier</span>
+</b>
+</p>
+<p><span>This field represents the XPath to the unique document ID of the request document </span>
+</p>
+<p><span></span>
+</p>
+<p><span>For example, </span>
+</p>
+<p><i><span>//Pip3A4PurchaseOrderRequest/thisDocumentIdentifier/ ProprietaryDocumentIdentifier</span>
+</i>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Response Document Identifier</span>
+</b>
+</p>
+<p><span>This field represents the XPath to the unique document ID of the response document</span>
+</p>
+<p><span></span>
+</p>
+<p><span>For example, </span>
+</p>
+<p><i><span>//Pip3A4PurchaseOrderConfirmation/thisDocumentIdentifier ProprietaryDocumentIdentifier</span>
+</i>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Response Document Request Document Identifier</span>
+</b>
+</p>
+<p><span>This field represents the XPath, in the response document, to the document ID that refers to the request document, to which the response document is responding. </span>
+</p>
+<p><span>For example, </span>
+</p>
+<p><i><span>//Pip3A4PurchaseOrderConfirmation/requestingDocumentIdentifier/ProprietaryDocumentIdentifier</span>
+</i>
+</p>
+<p><span></span>
+</p>
+<p><b><span>User Tracking Identifier</span>
+</b>
+</p>
+<p><span>This optional field represents the XPath to an element whose value the user selects to identify the process instance. Unlike the process instance ID, which uniquely identifies a process instance, the ID extracted according to this XPath may not be unique. If carefully chosen, however, it helps the user track process instances by providing a user-friendlier identifier. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>For example,</span>
+</p>
+<p><i><span>//Pip3A4PurchaseOrderRequest/thisDocumentIdentifier/ProprietaryDocumentIdentifier</span>
+</i>
+</p>
+<p><span></span>
+</p>
+<p><span>See Chapter 9.4.1 for more explanation on the purpose of using this field.</span>
+</p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

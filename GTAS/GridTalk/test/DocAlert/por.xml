@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<POR>
+  <PONumber>1234567890</PONumber>
+  <PODate>20030124T1710</PODate>
+  <PORDate>20030207T1000</PORDate>
+  <VendorCode>V0001</VendorCode>
+  <BuyerCode>B1000</BuyerCode>
+  <Item>
+    <ItemCode>P8788</ItemCode>
+    <UnitPrice>200</UnitPrice>
+    <Currency>SGD</Currency>
+    <Status>Confirmed</Status>
+  </Item>
+</POR>

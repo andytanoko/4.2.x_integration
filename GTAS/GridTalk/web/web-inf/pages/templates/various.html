@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <base href="file:///C:\views\i00054_GT_2.1_ExportConfiguration_2\GTAS\GridTalk\web/gt.css" id="base_tag"/>
+    <link rel="stylesheet" href="gt.css" type="text/css"/>
+  </head>
+  <body bgcolor="eeeeee">
+    <!-- Button content used as a template for creating simple button links by the
+         createButtonLink() method in AbstractRenderer -->
+    <span id="button_content">
+      <a id="button_anchor" href="javascript: void(0);">
+        <img  id="button_icon"
+              src="images/actions/new.gif"
+              border="0"
+              style="vertical-align: text-top; margin-right: 3;"/>
+        lbLabel
+      </a>
+      &nbsp;&nbsp;
+    </span>
+    <hr/>
+    <div id="dateField_content" style="border: thin groove;">
+      <input id="dateField_value" type="hidden"/>
+      <table>
+        <tr>
+          <td id="dateField_date" nowrap="nowrap" align="right">
+            <input id="dateField_year_value" type="text" size="4" maxlength="4"/>    
+            &nbsp;-&nbsp;
+            <select id="dateField_month_value" size="1">
+              <option>lbMonths</option>
+            </select>
+            &nbsp;-&nbsp;
+            <select id="dateField_day_value" size="1">
+              <option>lbDays</option>
+            </select>    
+          </td>
+         </tr>
+         <tr>
+          <td id="dateField_time" nowrap="nowrap" align="right">
+            <select id="dateField_hour_value" size="1">
+              <option>lbHours</option>
+            </select>
+            &nbsp;:&nbsp;  
+            <select id="dateField_minute_value" size="1">
+              <option>lbMinutes</option>
+            </select>
+            &nbsp;:&nbsp;
+            <select id="dateField_second_value" size="1">
+              <option>lbSeconds</option>
+            </select>    
+          </td>
+        </tr>
+      </table>
+    </div>
+    
+    <hr/>
+    
+    <div id="mheReference_content" class="mheReference">
+      <span id="mheReference_header">
+        <span id="mheReference_error" class="errortext">lbError</span><br/>
+        <input id="mheReference_selectAll" type="checkbox" class="checkbox"/>
+        <span id="mheReference_label" class="fieldLabel">lbMheReference</span>
+      </span>
+      <div id="mheReference_table">
+        <span id="mheReference_entityType_details">
+          <img  id="mheReference_entity_group_expander"
+              src="images/controls/sectionIsClosed.gif"
+              border="0"
+              class="sectionExpander"/>
+          <input id="mheReference_entityType_value" type="checkbox" class="checkbox"/>
+          <span id="mheReference_entityType_label" class="mherEntityTypeLabel">
+            lbEntityType
+          </span>
+          <br/>
+        </span>
+        <div id="mheReference_entity_group" class="hiddenSection">
+          <span id="mheReference_entity_details">
+            <img  src="images/tree/blank.gif"
+                  border="0"
+            /><img  src="images/controls/entity.gif"
+                  border="0"
+                  style="margin-right: 0px;"
+            /><input id="mheReference_entity_value" type="checkbox" class="checkbox" style="margin-left: 0;"/>
+            <span id="mheReference_entity_label" class="mherEntityLabel">
+              lbDescription
+            </span>
+            <br/>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <hr/>
+
+    <!-- An nbsp that can be cloned. (Workaround for nbsp serialisation problem) -->
+    <span id="nbsp_parent">&nbsp;</span>
+    
+    <hr/>
+    
+    <div id="section_header">
+      <img id="section_expander"
+            src="images/controls/sectionIsClosed.gif"
+            border="0"
+            class="sectionExpander"/>
+      <span id="section_label" class="fieldlabel">lbSection</span>
+    </div>
+    <div id="section_content" class="hiddenSection">
+        &nbsp;
+    </div>
+  </body>
+</html>

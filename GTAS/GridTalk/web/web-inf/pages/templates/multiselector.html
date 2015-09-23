@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <base href="file:///C:\views\i00054_GT_2.0_I8_2\GTAS\GridTalk\web/gt.css" id="base_tag"/>
+    <link rel="stylesheet" href="gt.css" type="text/css"/>
+    <script id="include_selectUtils" type="text/javascript" src="scripts/selectUtils.js"><!----></script>
+    <script id="include_stdFormMethods" type="text/javascript" src="scripts/stdFormMethods.js"><!----></script>
+  </head>
+  <body>
+    <form name="entityForm" action="">
+      <table id="multiselector_content" border="0" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td align="center">
+            <table border="0" cellspacing="0" cellpadding="0" width="99%">
+              <tr>
+                <td id="multiselector_error" class="errortext" colspan="3">
+                </td>
+              </tr>
+              <tr>
+                <td valign="middle" width="48%" class="multiselectorParent">
+                  <select id="multiselector_left" name="multiselectorLeft" multiple="multiple" size="4" class="multiselectorChoice" style="width: 100%;">
+                    <option>Augustus</option>
+                    <option>Tiberius</option>
+                    <option>Gaius</option>
+                    <option>Claudius</option>
+                  </select>
+                </td>
+                <td width="2%" valign="top">
+                  <table border="0" height="100%">
+                    <tr>
+                      <td align="center">
+                        <img  src="images/arrows/rightArrow.gif" border="0"
+                              onclick="doTransfer('multiselectorLeft','multiselectorRight');"
+                              style="cursor: e-resize;"
+                              id="multiselector_include" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="center">
+                        <img  src="images/arrows/leftArrow.gif" border="0"
+                              onclick="doTransfer('multiselectorRight','multiselectorLeft');"
+                              style="cursor: w-resize;"
+                              id="multiselector_exclude" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="center">
+                        <img  src="images/arrows/upArrow.gif" border="0"
+                              onclick="moveSelectedOptions('multiselectorRight',true);"
+                              style="cursor: n-resize;"
+                              id="multiselector_moveUp" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="center">
+                        <img  src="images/arrows/downArrow.gif" border="0"
+                              onclick="moveSelectedOptions('multiselectorRight',false);"
+                              style="cursor: s-resize;"
+                              id="multiselector_moveDown" />
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td valign="middle" width="48%" rowspan="2" class="multiselectorParent">
+                  <select id="multiselector_right" name="multiselectorRight" multiple="multiple" size="4" style="width: 100%;">
+                  </select>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

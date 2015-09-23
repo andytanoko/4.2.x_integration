@@ -1,0 +1,64 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001-2002 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: IResourceNodeLocalHome.java
+ *
+ ****************************************************************************
+ * Date           Author              Changes
+ ****************************************************************************
+ * Aug 01 2002    Neo Sok Lay         Created
+ */
+package com.gridnode.gtas.server.enterprise.entities.ejb;
+
+import com.gridnode.gtas.server.enterprise.model.ResourceNode;
+import com.gridnode.pdip.framework.db.entity.IEntity;
+import com.gridnode.pdip.framework.db.filter.IDataFilter;
+
+import java.rmi.RemoteException;
+import java.util.Collection;
+import javax.ejb.EJBLocalHome;
+import javax.ejb.CreateException;
+import javax.ejb.FinderException;
+
+/**
+ * LocalHome interface for ResourceNodeBean
+ *
+ * @author Neo Sok Lay
+ *
+ * @version 2.0 I4
+ * @since 2.0 I4
+ */
+public interface IResourceNodeLocalHome
+       extends EJBLocalHome
+{
+  /**
+   * Create a new ResourceNode.
+   *
+   * @param bizEntity The ResourceNode entity.
+   * @return EJBLocalObject as a proxy to ResourceNodeBean for the created ResourceNode.
+   */
+  public IResourceNodeLocalObj create(IEntity bizEntity)
+    throws CreateException;
+
+  /**
+   * Load a ResourceNodeBean
+   *
+   * @param primaryKey The primary key to the ResourceNode record
+   * @return EJBLocalObject as a proxy to the loaded ResourceNodeBean.
+   */
+  public IResourceNodeLocalObj findByPrimaryKey(Long primaryKey)
+    throws FinderException;
+
+  /**
+   * Find ResourceNode records, using a data filter.
+   *
+   * @param filter The data filter.
+   * @return A Collection of the IResourceNodeLocalObjs for the found BusinessEntities.
+   */
+  public Collection findByFilter(IDataFilter filter)
+    throws FinderException;
+
+}

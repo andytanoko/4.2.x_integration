@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-jar PUBLIC "-//Sun Microsystems, Inc.//DTD Enterprise JavaBeans 2.0//EN" "http://java.sun.com/dtd/ejb-jar_2_0.dtd">
+<ejb-jar>
+    <enterprise-beans>
+
+        <entity>
+            <display-name>Domain</display-name>
+            <ejb-name>Domain</ejb-name>
+            <local-home>com.gridnode.pdip.base.docservice.filesystem.ejb.IDomainHome</local-home>
+            <local>com.gridnode.pdip.base.docservice.filesystem.ejb.IDomainObj</local>
+            <ejb-class>com.gridnode.pdip.base.docservice.filesystem.ejb.DomainBean</ejb-class>
+            <persistence-type>Bean</persistence-type>
+            <prim-key-class>java.lang.Long</prim-key-class>
+            <reentrant>False</reentrant>
+        </entity>
+
+        <entity>
+            <display-name>Folder</display-name>
+            <ejb-name>Folder</ejb-name>
+            <local-home>com.gridnode.pdip.base.docservice.filesystem.ejb.IFolderHome</local-home>
+            <local>com.gridnode.pdip.base.docservice.filesystem.ejb.IFolderObj</local>
+            <ejb-class>com.gridnode.pdip.base.docservice.filesystem.ejb.FolderBean</ejb-class>
+            <persistence-type>Bean</persistence-type>
+            <prim-key-class>java.lang.Long</prim-key-class>
+            <reentrant>False</reentrant>
+        </entity>
+
+        <entity>
+            <display-name>Document</display-name>
+            <ejb-name>Document</ejb-name>
+            <local-home>com.gridnode.pdip.base.docservice.filesystem.ejb.IDocumentHome</local-home>
+            <local>com.gridnode.pdip.base.docservice.filesystem.ejb.IDocumentObj</local>
+            <ejb-class>com.gridnode.pdip.base.docservice.filesystem.ejb.DocumentBean</ejb-class>
+            <persistence-type>Bean</persistence-type>
+            <prim-key-class>java.lang.Long</prim-key-class>
+            <reentrant>False</reentrant>
+        </entity>
+
+        <entity>
+            <display-name>File</display-name>
+            <ejb-name>File</ejb-name>
+            <local-home>com.gridnode.pdip.base.docservice.filesystem.ejb.IFileHome</local-home>
+            <local>com.gridnode.pdip.base.docservice.filesystem.ejb.IFileObj</local>
+            <ejb-class>com.gridnode.pdip.base.docservice.filesystem.ejb.FileBean</ejb-class>
+            <persistence-type>Bean</persistence-type>
+            <prim-key-class>java.lang.Long</prim-key-class>
+            <reentrant>False</reentrant>
+        </entity>
+
+    </enterprise-beans>
+
+    <assembly-descriptor>
+
+        <container-transaction>
+            <method>
+                <ejb-name>Domain</ejb-name>
+                <method-name>*</method-name>
+            </method>
+            <trans-attribute>Required</trans-attribute>
+        </container-transaction>
+
+        <container-transaction>
+            <method>
+                <ejb-name>Folder</ejb-name>
+                <method-name>*</method-name>
+            </method>
+            <trans-attribute>Required</trans-attribute>
+        </container-transaction>
+
+        <container-transaction>
+            <method>
+                <ejb-name>Document</ejb-name>
+                <method-name>*</method-name>
+            </method>
+            <trans-attribute>Required</trans-attribute>
+        </container-transaction>
+
+        <container-transaction>
+            <method>
+                <ejb-name>File</ejb-name>
+                <method-name>*</method-name>
+            </method>
+            <trans-attribute>Required</trans-attribute>
+        </container-transaction>
+
+    </assembly-descriptor>
+</ejb-jar>

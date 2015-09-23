@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Pip3A4PurchaseOrderRequest SYSTEM "3A4_MS_V02_02_PurchaseOrderRequest.dtd">
+
+<Pip3A4PurchaseOrderRequest>
+  
+    
+  <fromRole>
+    
+        
+    <PartnerRoleDescription>
+      
+            
+      <ContactInformation>
+        
+                
+        <contactName>
+          
+                    
+          <FreeFormText>Chee, Yit Leng</FreeFormText>
+          
+                
+        </contactName>
+        
+                
+        <EmailAddress>Not Available</EmailAddress>
+        
+                
+        <telephoneNumber>
+          
+                    
+          <CommunicationsNumber>604-433-4008</CommunicationsNumber>
+          
+                
+        </telephoneNumber>
+        
+            
+      </ContactInformation>
+      
+            
+      <GlobalPartnerRoleClassificationCode>Buyer</GlobalPartnerRoleClassificationCode>
+      
+            
+      <PartnerDescription>
+        
+                
+        <BusinessDescription>
+          
+                    
+          <GlobalBusinessIdentifier>047897855</GlobalBusinessIdentifier>
+          
+                    
+          <GlobalSupplyChainCode>Electronic Components</GlobalSupplyChainCode>
+          
+                
+        </BusinessDescription>
+        
+                
+        <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+        
+            
+      </PartnerDescription>
+      
+        
+    </PartnerRoleDescription>
+    
+    
+  </fromRole>
+  
+    
+  <GlobalDocumentFunctionCode>Request</GlobalDocumentFunctionCode>
+  
+    
+  <PurchaseOrder>
+    
+        
+    <FinancingTerms>
+      
+            
+      <GlobalFinanceTermsCode>Terms established/determined by TPA</GlobalFinanceTermsCode>
+      
+            
+      <PaymentTerms>
+        
+                
+        <GlobalPaymentConditionCode>Receipt of goods</GlobalPaymentConditionCode>
+        
+                
+        <netTermsDays>
+          
+                    
+          <CountableAmount>60</CountableAmount>
+          
+                
+        </netTermsDays>
+        
+                
+        <percentDue>
+          
+                    
+          <PercentAmount>100</PercentAmount>
+          
+                
+        </percentDue>
+        
+            
+      </PaymentTerms>
+      
+        
+    </FinancingTerms>
+    
+        
+    <GlobalPurchaseOrderTypeCode>Replenishment</GlobalPurchaseOrderTypeCode>
+    
+        
+    <isDropShip>
+      
+            
+      <AffirmationIndicator>No</AffirmationIndicator>
+      
+        
+    </isDropShip>
+    
+        
+    <ProductLineItem>
+      
+            
+      <comments>
+        
+                
+        <FreeFormText>Confirmation control key:A - New Buy__Serial Number:__Tracking ID:__Machine ID:__Machine Location Name :__Original ISC Receipt PO:__Original ISC Receipt PO Line:__</FreeFormText>
+        
+            
+      </comments>
+      
+            
+      <GlobalProductUnitOfMeasureCode>Pallet</GlobalProductUnitOfMeasureCode>
+      
+            
+      <isDropShip>
+        
+                
+        <AffirmationIndicator>No</AffirmationIndicator>
+        
+            
+      </isDropShip>
+      
+            
+      <LineNumber>00010</LineNumber>
+      
+            
+      <OrderQuantity>
+        
+                
+        <requestedQuantity>
+          
+                    
+          <ProductQuantity>1</ProductQuantity>
+          
+                
+        </requestedQuantity>
+        
+            
+      </OrderQuantity>
+      
+            
+      <OrderShippingInformation>
+        
+                
+        <CarrierInformation>
+          
+                    
+          <accountIdentifier>
+            
+                        
+            <ProprietaryReferenceIdentifier>Intel</ProprietaryReferenceIdentifier>
+            
+                    
+          </accountIdentifier>
+          
+                    
+          <GlobalCarrierCode>None</GlobalCarrierCode>
+          
+                
+        </CarrierInformation>
+        
+                
+        <GlobalFreeOnBoardCode>Destination</GlobalFreeOnBoardCode>
+        
+                
+        <GlobalShipmentTermsCode>DDU</GlobalShipmentTermsCode>
+        
+                
+        <GlobalShippingServiceLevelCode>Standard Service</GlobalShippingServiceLevelCode>
+        
+                
+        <SpecialHandlingInstruction>
+          
+                    
+          <specialHandlingText>
+            
+                        
+            <FreeFormText>NA</FreeFormText>
+            
+                    
+          </specialHandlingText>
+          
+                
+        </SpecialHandlingInstruction>
+        
+            
+      </OrderShippingInformation>
+      
+            
+      <ProductIdentification>
+        
+                
+        <PartnerProductIdentification>
+          
+                    
+          <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+          
+                    
+          <ProprietaryProductIdentifier>433976017</ProprietaryProductIdentifier>
+          
+                
+        </PartnerProductIdentification>
+        
+                
+        <PartnerProductIdentification>
+          
+                    
+          <GlobalPartnerClassificationCode>Manufacturer</GlobalPartnerClassificationCode>
+          
+                    
+          <ProprietaryProductIdentifier>DRU-AG UD-2 UNIT</ProprietaryProductIdentifier>
+          
+                
+        </PartnerProductIdentification>
+        
+                
+        <PartnerProductIdentification>
+          
+                    
+          <GlobalPartnerClassificationCode>Manufacturer</GlobalPartnerClassificationCode>
+          
+                    
+          <ProprietaryProductIdentifier>DESCRIPTION: DESIPAK,TYREK(SMT)</ProprietaryProductIdentifier>
+          
+                
+        </PartnerProductIdentification>
+        
+            
+      </ProductIdentification>
+      
+            
+      <ProductSubLineItem>
+        
+                
+        <GlobalProductUnitOfMeasureCode>Pallet</GlobalProductUnitOfMeasureCode>
+        
+                
+        <isDropShip>
+          
+                    
+          <AffirmationIndicator>No</AffirmationIndicator>
+          
+                
+        </isDropShip>
+        
+                
+        <OrderQuantity>
+          
+                    
+          <requestedQuantity>
+            
+                        
+            <ProductQuantity>1</ProductQuantity>
+            
+                    
+          </requestedQuantity>
+          
+                
+        </OrderQuantity>
+        
+                
+        <OrderShippingInformation>
+          
+                    
+          <CarrierInformation>
+            
+                        
+            <accountIdentifier>
+              
+                            
+              <ProprietaryReferenceIdentifier>Intel</ProprietaryReferenceIdentifier>
+              
+                        
+            </accountIdentifier>
+            
+                        
+            <GlobalCarrierCode>None</GlobalCarrierCode>
+            
+                    
+          </CarrierInformation>
+          
+                    
+          <GlobalFreeOnBoardCode>Destination</GlobalFreeOnBoardCode>
+          
+                    
+          <GlobalShipmentTermsCode>DDU</GlobalShipmentTermsCode>
+          
+                    
+          <GlobalShippingServiceLevelCode>Standard Service</GlobalShippingServiceLevelCode>
+          
+                    
+          <SpecialHandlingInstruction>
+            
+                        
+            <specialHandlingText>
+              
+                            
+              <FreeFormText>NA</FreeFormText>
+              
+                        
+            </specialHandlingText>
+            
+                    
+          </SpecialHandlingInstruction>
+          
+                
+        </OrderShippingInformation>
+        
+                
+        <requestedEvent>
+          
+                    
+          <TransportationEvent>
+            
+                        
+            <DateStamp>20110511Z</DateStamp>
+            
+                        
+            <GlobalTransportEventCode>Dock</GlobalTransportEventCode>
+            
+                    
+          </TransportationEvent>
+          
+                
+        </requestedEvent>
+        
+                
+        <subLineItem>
+          
+                    
+          <LineNumber>1</LineNumber>
+          
+                
+        </subLineItem>
+        
+            
+      </ProductSubLineItem>
+      
+            
+      <requestedEvent>
+        
+                
+        <TransportationEvent>
+          
+                    
+          <DateStamp>20110511Z</DateStamp>
+          
+                    
+          <GlobalTransportEventCode>Dock</GlobalTransportEventCode>
+          
+                
+        </TransportationEvent>
+        
+            
+      </requestedEvent>
+      
+            
+      <requestedUnitPrice>
+        
+                
+        <FinancialAmount>
+          
+                    
+          <GlobalCurrencyCode>USD</GlobalCurrencyCode>
+          
+                    
+          <MonetaryAmount>26.5</MonetaryAmount>
+          
+                
+        </FinancialAmount>
+        
+            
+      </requestedUnitPrice>
+      
+            
+      <totalLineItemAmount>
+        
+                
+        <FinancialAmount>
+          
+                    
+          <GlobalCurrencyCode>USD</GlobalCurrencyCode>
+          
+                    
+          <MonetaryAmount>26.5</MonetaryAmount>
+          
+                
+        </FinancialAmount>
+        
+            
+      </totalLineItemAmount>
+      
+        
+    </ProductLineItem>
+    
+        
+    <totalAmount>
+      
+            
+      <FinancialAmount>
+        
+                
+        <GlobalCurrencyCode>USD</GlobalCurrencyCode>
+        
+                
+        <MonetaryAmount>26.5</MonetaryAmount>
+        
+            
+      </FinancialAmount>
+      
+        
+    </totalAmount>
+    
+    
+  </PurchaseOrder>
+  
+    
+  <thisDocumentGenerationDateTime>
+    
+        
+    <DateTimeStamp>20110420T203142.000Z</DateTimeStamp>
+    
+    
+  </thisDocumentGenerationDateTime>
+  
+    
+  <thisDocumentIdentifier>
+    
+        
+    <ProprietaryDocumentIdentifier>1000000001</ProprietaryDocumentIdentifier>
+    
+    
+  </thisDocumentIdentifier>
+  
+    
+  <toRole>
+    
+        
+    <PartnerRoleDescription>
+      
+            
+      <GlobalPartnerRoleClassificationCode>Seller</GlobalPartnerRoleClassificationCode>
+      
+            
+      <PartnerDescription>
+        
+                
+        <BusinessDescription>
+          
+                    
+          <GlobalBusinessIdentifier>595143512</GlobalBusinessIdentifier>
+          
+                    
+          <GlobalSupplyChainCode>Electronic Components</GlobalSupplyChainCode>
+          
+                
+        </BusinessDescription>
+        
+                
+        <GlobalPartnerClassificationCode>Manufacturer</GlobalPartnerClassificationCode>
+        
+            
+      </PartnerDescription>
+      
+        
+    </PartnerRoleDescription>
+    
+    
+  </toRole>
+  
+
+</Pip3A4PurchaseOrderRequest>
+

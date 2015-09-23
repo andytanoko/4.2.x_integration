@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>Xerces</fullname>
+  <class>
+    <path>[../../../PDIPFramework/reqlib/xerces-1.4.2.jar]</path>
+  </class>
+</library>
+

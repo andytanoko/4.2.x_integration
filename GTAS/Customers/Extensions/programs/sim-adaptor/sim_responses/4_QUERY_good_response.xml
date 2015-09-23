@@ -1,0 +1,157 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<uccnet:envelope communicationVersion="2.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fmcg="http://www.ean-ucc.org/schemas/1.3/fmcg" xmlns:hbc="http://www.uccnet.org/schemas/1.3/hbc" xmlns:hardlines="http://www.uccnet.org/schemas/1.3/hardlines" xmlns:produce="http://www.uccnet.org/schemas/1.3/produce" xmlns:uccnet="http://www.uccnet.org/schemas/2.2/uccnet" xmlns:eanucc="http://www.ean-ucc.org/schemas/1.3/eanucc" xmlns:otc="http://www.uccnet.org/schemas/1.3/otc"  xsi:schemaLocation="http://www.uccnet.org/schemas/2.2/uccnet http://www.testregistry.net/xmlschema/uccnet/2.2/Envelope.xsd ">
+<messageHeader>
+  <messageIdentifier>
+    <value>36436805</value>
+  </messageIdentifier>
+  <userId>UCCNET_SYSTEM</userId>
+  <representingParty>
+    <gln>0614141800001</gln>
+  </representingParty>
+</messageHeader>
+<body>
+<response>
+<acknowledge>
+<acknowledgement>
+<acknowledgementHeader type="PROCESSED" success="TRUE" duplicate="FALSE">
+  <entityIdentification>
+    <uniqueCreatorIdentification>16-Oct-2003 9:36</uniqueCreatorIdentification>
+    <globalLocationNumber>
+      <gln>0474636000008</gln>
+    </globalLocationNumber>
+  </entityIdentification>
+  <messageIdentifier>
+    <value>16-Oct-2003 9:36</value>
+  </messageIdentifier>
+</acknowledgementHeader>
+<subdocumentValid success="TRUE">
+<documentIdentifier>
+  <typedEntityIdentification type="TRANSACTION">
+    <entityIdentification>
+      <uniqueCreatorIdentification>KWm3d wlquery001</uniqueCreatorIdentification>
+      <globalLocationNumber>
+        <gln>0474636000008</gln>
+      </globalLocationNumber>
+    </entityIdentification>
+  </typedEntityIdentification>
+</documentIdentifier>
+<subdocumentValid success="TRUE">
+<documentIdentifier>
+  <typedEntityIdentification type="QUERY_COMMAND">
+    <entityIdentification>
+      <uniqueCreatorIdentification>KWm3d wlquery002</uniqueCreatorIdentification>
+      <globalLocationNumber>
+        <gln>0474636000008</gln>
+      </globalLocationNumber>
+    </entityIdentification>
+  </typedEntityIdentification>
+</documentIdentifier>
+<resultList showDetails="TRUE">
+<notification topic="CATALOGUE_ITEM_NOTIFICATION" type="ROUTED_DOCUMENT">
+<entityIdentification>
+<uniqueCreatorIdentification>812955</uniqueCreatorIdentification>
+<globalLocationNumber>
+<gln>0614141800001</gln>
+</globalLocationNumber>
+</entityIdentification>
+<sequenceId>812955</sequenceId>
+<notificationStatus value="PROCESSED"/>
+<userId>RetailerL</userId>
+<initiatingPartyIdentification>
+<initiatingTradingPartner>
+<globalLocationNumber>
+<gln>0488222000006</gln>
+</globalLocationNumber>
+</initiatingTradingPartner>
+<initiatingParty>
+<globalLocationNumber>
+<gln>0488222000006</gln>
+</globalLocationNumber>
+</initiatingParty>
+	
+      </initiatingPartyIdentification>
+<notificationDetail>
+<transactionInformation>
+<entityIdentification>
+<uniqueCreatorIdentification>1066243561481</uniqueCreatorIdentification>
+<globalLocationNumber>
+<gln>0614141800001</gln>
+</globalLocationNumber>
+</entityIdentification>
+<transactionDateAndTime>
+<date>2003-10-15</date>
+<time timeZone="EDT">
+<value>14:46:01</value>
+</time>
+</transactionDateAndTime>
+<transactionType>XML</transactionType>
+<transactionStatusCode>SUCCEEDED</transactionStatusCode>
+</transactionInformation>
+<eanucc:catalogueItemNotification xmlns:eanucc="http://www.ean-ucc.org/schemas/1.3/eanucc" xmlns:uccnet="http://www.uccnet.org/schemas/2.2/uccnet" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" creationDate="2003-03-01T12:00:00.000-00:00" documentStatus="ORIGINAL" isReload="false" xsi:type="uccnet:CatalogueItemNotificationType">        <catalogueItem>         <catalogueItemState state="REGISTERED"/>         <tradeItem>          <tradeItemUnitDescriptor>BASE_UNIT_OR_EACH</tradeItemUnitDescriptor>          <tradeItemIdentification>           <gtin>00048822299912</gtin>           <additionalTradeItemIdentification xsi:type="uccnet:AlternateTradeItemIdentificationType">            <uccnet:eanuccType>UP</uccnet:eanuccType>            <uccnet:eanuccCode>048822299912</uccnet:eanuccCode>           </additionalTradeItemIdentification>          </tradeItemIdentification>          <tradeItemInformation>           <informationProviderOfTradeItem>            <informationProvider>             <gln>0488222000006</gln>            </informationProvider>            <nameOfInformationProvider>MERTON3 SUPPLY2</nameOfInformationProvider>           </informationProviderOfTradeItem>           <targetMarketInformation>            <targetMarketCountryCode>840</targetMarketCountryCode>            <targetMarketDescription language="en-US">             <text>US</text>            </targetMarketDescription>           </targetMarketInformation>           <classificationCategoryCode>            <classificationCategoryCode>0</classificationCategoryCode>            <classificationCategoryDefinition>IGNORE</classificationCategoryDefinition>            <classificationCategoryName>IGNORE</classificationCategoryName>            <additionalClassification>             <additionalClassificationAgencyName>UDEX</additionalClassificationAgencyName>             <additionalClassificationCategoryCode>03.0117.0291</additionalClassificationCategoryCode>             <additionalClassificationCategoryDescription>DOG FOOD</additionalClassificationCategoryDescription>            </additionalClassification>           </classificationCategoryCode>           <tradeItemDescriptionInformation>            <brandName>Merton3 Dog Food</brandName>            <descriptionShort>             <description language="en-US">              <text>Chunky Beef</text>             </description>            </descriptionShort>            <functionalName>             <description language="en-US">              <text>Beef Dog Food</text>             </description>            </functionalName>            <tradeItemDescription>             <longDescription language="en-US">              <longText>Chunks of beef in a rich gravy, with just a hint of rosemary</longText>             </longDescription>            </tradeItemDescription>           </tradeItemDescriptionInformation>           <tradingPartnerNeutralTradeItemInformation>            <tradeItemUnitIndicator>             <isTradeItemABaseUnit>true</isTradeItemABaseUnit>             <isTradeItemAConsumerUnit>true</isTradeItemAConsumerUnit>             <isTradeItemADespatchUnit>true</isTradeItemADespatchUnit>             <isTradeItemAnInvoiceUnit>true</isTradeItemAnInvoiceUnit>             <isTradeItemAnOrderableUnit>true</isTradeItemAnOrderableUnit>             <isTradeItemAVariableUnit>false</isTradeItemAVariableUnit>            </tradeItemUnitIndicator>            <brandOwnerOfTradeItem>             <brandOwner>              <gln>0488222000006</gln>             </brandOwner>             <nameOfBrandOwner>MERTON3 SUPPLY2</nameOfBrandOwner>            </brandOwnerOfTradeItem>            <packagingMarking>             <isPackagingMarkedAsRecyclable>true</isPackagingMarkedAsRecyclable>             <isPackagingMarkedReturnable>false</isPackagingMarkedReturnable>             <isPackagingMarkedWithExpirationDate>true</isPackagingMarkedWithExpirationDate>             <isPackagingMarkedWithGreenDot>true</isPackagingMarkedWithGreenDot>             <isPackagingMarkedWithIngredients>true</isPackagingMarkedWithIngredients>            </packagingMarking>            <tradeItemCountryOfOrigin>             <countryOfOrigin>US</countryOfOrigin>            </tradeItemCountryOfOrigin>            <tradeItemDateInformation>             <effectiveDate>2003-10-02</effectiveDate>             <lastChangeDateTime>2003-03-01T12:00:00.000-00:00</lastChangeDateTime>             <publicationDate>2003-08-27</publicationDate>             <startAvailabilityDateTime>2003-08-27T12:00:00.000-00:00</startAvailabilityDateTime>            </tradeItemDateInformation>            <tradeItemMarking>             <hasBatchNumber>true</hasBatchNumber>             <isNonSoldTradeItemReturnable>false</isNonSoldTradeItemReturnable>             <isTradeItemMarkedAsRecyclable>true</isTradeItemMarkedAsRecyclable>            </tradeItemMarking>            <tradeItemMeasurements>             <depth>              <measurementValue unitOfMeasure="IN">3</measurementValue>             </depth>             <grossWeight>              <measurementValue unitOfMeasure="OZ">14</measurementValue>             </grossWeight>             <height>              <measurementValue unitOfMeasure="IN">5</measurementValue>             </height>             <isNetContentDeclarationIndicated>true</isNetContentDeclarationIndicated>             <width>              <measurementValue unitOfMeasure="IN">3</measurementValue>             </width>                         <netContent>                          <measurementValue unitOfMeasure="OZ">12</measurementValue>                         </netContent>             <netWeight>              <measurementValue unitOfMeasure="OZ">12</measurementValue>             </netWeight>            </tradeItemMeasurements>           </tradingPartnerNeutralTradeItemInformation>          </tradeItemInformation>         </tradeItem>         <dataRecipient>0474636000008</dataRecipient>          <sourceDataPool>0614141800001</sourceDataPool>         </catalogueItem>        <catalogueItemNotificationIdentification>         <uniqueCreatorIdentification>MERTON3 SUPPLY2 CIN 082322</uniqueCreatorIdentification>         <contentOwner>          <gln>0488222000006</gln>         </contentOwner>        </catalogueItemNotificationIdentification>        <uccnet:notificationTopic topic="NEW_ITEM"/>       </eanucc:catalogueItemNotification>
+</notificationDetail>
+</notification>
+<notification topic="CATALOGUE_ITEM_NOTIFICATION" type="ROUTED_DOCUMENT">
+<entityIdentification>
+<uniqueCreatorIdentification>813735</uniqueCreatorIdentification>
+<globalLocationNumber>
+<gln>0614141800001</gln>
+</globalLocationNumber>
+</entityIdentification>
+<sequenceId>813735</sequenceId>
+<notificationStatus value="READ"/>
+<userId>RetailerL</userId>
+<initiatingPartyIdentification>
+<initiatingTradingPartner>
+<globalLocationNumber>
+<gln>0488222000006</gln>
+</globalLocationNumber>
+</initiatingTradingPartner>
+<initiatingParty>
+<globalLocationNumber>
+<gln>0488222000006</gln>
+</globalLocationNumber>
+</initiatingParty>
+	
+      </initiatingPartyIdentification>
+<notificationDetail>
+<transactionInformation>
+<entityIdentification>
+<uniqueCreatorIdentification>1066248850094</uniqueCreatorIdentification>
+<globalLocationNumber>
+<gln>0614141800001</gln>
+</globalLocationNumber>
+</entityIdentification>
+<transactionDateAndTime>
+<date>2003-10-15</date>
+<time timeZone="EDT">
+<value>16:14:10</value>
+</time>
+</transactionDateAndTime>
+<transactionType>XML</transactionType>
+<transactionStatusCode>SUCCEEDED</transactionStatusCode>
+</transactionInformation>
+<eanucc:catalogueItemNotification xmlns:eanucc="http://www.ean-ucc.org/schemas/1.3/eanucc" xmlns:uccnet="http://www.uccnet.org/schemas/2.2/uccnet" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" creationDate="2003-10-15T16:14:09.550" documentStatus="ORIGINAL" isReload="false" xsi:type="uccnet:CatalogueItemNotificationType">
+<catalogueItem>
+<catalogueItemState state="REGISTERED"/>
+<tradeItem>                           <tradeItemUnitDescriptor>BASE_UNIT_OR_EACH</tradeItemUnitDescriptor>                                    <tradeItemIdentification>                              <gtin>00048822299929</gtin>             <additionalTradeItemIdentification xsi:type="uccnet:AlternateTradeItemIdentificationType">           <uccnet:eanuccType>UP</uccnet:eanuccType>           <uccnet:eanuccCode>048822299929</uccnet:eanuccCode>          </additionalTradeItemIdentification>                                        </tradeItemIdentification>                                                      <tradeItemInformation>                              <informationProviderOfTradeItem>                                 <informationProvider>                                    <gln>0488222000006</gln>                                 </informationProvider>                                 <nameOfInformationProvider>MERTON3 SUPPLY2</nameOfInformationProvider>                              </informationProviderOfTradeItem>                              <targetMarketInformation>                                 <targetMarketCountryCode>840</targetMarketCountryCode>                                 <targetMarketDescription language="en-US">                                    <text>US</text>                                 </targetMarketDescription>                              </targetMarketInformation>                              <classificationCategoryCode>                                 <classificationCategoryCode>0</classificationCategoryCode>                                 <classificationCategoryDefinition>IGNORE</classificationCategoryDefinition>                                 <classificationCategoryName>IGNORE</classificationCategoryName>                                 <additionalClassification>                                    <additionalClassificationAgencyName>UDEX</additionalClassificationAgencyName>                                    <additionalClassificationCategoryCode>03.0117.0291</additionalClassificationCategoryCode>                                    <additionalClassificationCategoryDescription>DOG FOOD</additionalClassificationCategoryDescription>                                 </additionalClassification>                              </classificationCategoryCode>                              <tradeItemDescriptionInformation>                                 <brandName>Merton3 Dog Food</brandName>                                 <descriptionShort>                                    <description language="en-US">                                       <text>Chunky Beef</text>                                    </description>                                 </descriptionShort>                                 <functionalName>                                    <description language="en-US">                                       <text>Beef Dog Food</text>                                    </description>                                 </functionalName>                                 <tradeItemDescription>                                    <longDescription language="en-US">                                       <longText>Chunks of beef in a rich gravy, with just a hint of rosemary</longText>                                    </longDescription>                                 </tradeItemDescription>                              </tradeItemDescriptionInformation>                              <tradingPartnerNeutralTradeItemInformation>                                 <tradeItemUnitIndicator>                                    <isTradeItemABaseUnit>true</isTradeItemABaseUnit>                                    <isTradeItemAConsumerUnit>true</isTradeItemAConsumerUnit>                                    <isTradeItemADespatchUnit>true</isTradeItemADespatchUnit>                                    <isTradeItemAnInvoiceUnit>true</isTradeItemAnInvoiceUnit>                                    <isTradeItemAnOrderableUnit>true</isTradeItemAnOrderableUnit>                                    <isTradeItemAVariableUnit>false</isTradeItemAVariableUnit>                                 </tradeItemUnitIndicator>                                 <brandOwnerOfTradeItem>                                    <brandOwner>                                       <gln>0488222000006</gln>                                    </brandOwner>                                    <nameOfBrandOwner>MERTON3 SUPPLY2</nameOfBrandOwner>                                 </brandOwnerOfTradeItem>                                 <packagingMarking>                                    <isPackagingMarkedAsRecyclable>true</isPackagingMarkedAsRecyclable>                                    <isPackagingMarkedReturnable>false</isPackagingMarkedReturnable>                                    <isPackagingMarkedWithExpirationDate>true</isPackagingMarkedWithExpirationDate>                                    <isPackagingMarkedWithGreenDot>true</isPackagingMarkedWithGreenDot>                                    <isPackagingMarkedWithIngredients>true</isPackagingMarkedWithIngredients>                                 </packagingMarking>                                 <tradeItemCountryOfOrigin>                                    <countryOfOrigin>US</countryOfOrigin>                                 </tradeItemCountryOfOrigin>                                 <tradeItemDateInformation>                                    <effectiveDate>2003-07-15</effectiveDate>                                    <lastChangeDateTime>2003-07-15T12:00:00.000-00:00</lastChangeDateTime>                                    <publicationDate>2003-07-15</publicationDate>                                    <startAvailabilityDateTime>2003-07-15T12:00:00.000-00:00</startAvailabilityDateTime>                                 </tradeItemDateInformation>                                 <tradeItemMarking>                                    <hasBatchNumber>true</hasBatchNumber>                                    <isNonSoldTradeItemReturnable>false</isNonSoldTradeItemReturnable>                                    <isTradeItemMarkedAsRecyclable>true</isTradeItemMarkedAsRecyclable>                                 </tradeItemMarking>                                 <tradeItemMeasurements>                                    <depth>                                       <measurementValue unitOfMeasure="IN">3</measurementValue>                                    </depth>                                    <grossWeight>                                       <measurementValue unitOfMeasure="OZ">14</measurementValue>                                    </grossWeight>                                    <height>                                       <measurementValue unitOfMeasure="IN">5</measurementValue>                                    </height>                                    <isNetContentDeclarationIndicated>false</isNetContentDeclarationIndicated>                                    <width>                                       <measurementValue unitOfMeasure="IN">3</measurementValue>                                    </width>            <netContent>             <measurementValue unitOfMeasure="OZ">12</measurementValue>            </netContent>            <netWeight>             <measurementValue unitOfMeasure="OZ">12</measurementValue>            </netWeight>                                 </tradeItemMeasurements>                              </tradingPartnerNeutralTradeItemInformation>                           </tradeItemInformation>                        </tradeItem>
+<dataRecipient>0474636000008</dataRecipient>
+<sourceDataPool>0614141800001</sourceDataPool>
+</catalogueItem>
+<catalogueItemNotificationIdentification>
+<uniqueCreatorIdentification>CIN1066248849550</uniqueCreatorIdentification>
+<contentOwner>
+<gln>0614141800001</gln>
+</contentOwner>
+</catalogueItemNotificationIdentification>
+<uccnet:notificationTopic topic="NEW_ITEM"/>
+</eanucc:catalogueItemNotification>
+</notificationDetail>
+</notification>
+</resultList>
+</subdocumentValid>
+</subdocumentValid>
+</acknowledgement>
+</acknowledge>
+</response>
+</body>
+</uccnet:envelope>

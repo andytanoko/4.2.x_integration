@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>
+      lbGridTalk
+    </title>
+    <base href="file:///C:\views\GT_2.1_UiEnhancements\GTAS\GridTalk\web/gt.css" id="base_tag"/>
+    <link rel="stylesheet" href="gt.css" type="text/css"/>
+    <script type="text/javascript" src="scripts/tableUtils.js"><!----></script>
+  </head>
+  <body>
+    <div id="page_content">
+      <div id="listview_content">
+        <form id="listview_form" name="multiEntityForm" method="post" action="">
+          <input type="hidden" id="listview_refresh" name="refreshListview" value=""/>
+          <h4 id="listview_heading">
+              lbListviewHeading
+          </h4>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr valign="top" align="left">
+              <td colspan="2">
+                <table border="0" cellspacing="0" cellpadding="3">
+                  <tr valign="bottom">
+                    <td align="left" id="button_cell" nowrap="nowrap">
+                      <span id="refresh_details">
+                        <a id="manual_refresh" href="">
+                          <img id="refresh_icon" src="images/actions/refresh.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+                          lbRefresh
+                        </a>
+                        &nbsp;&nbsp;
+                      </span>
+                      <span id="delete_details">
+                        <a id="delete_submit" href="javascript:submitMultipleEntities('delete','');">
+                          <img id="delete_icon" src="images/actions/delete.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+                          lbDelete
+                        </a>
+                        &nbsp;&nbsp;
+                      </span>
+                      <span id="create_details">
+                        <a id="create" href="">
+                          <img id="create_icon" src="images/actions/new.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+                          lbCreate
+                        </a>
+                        &nbsp;&nbsp;
+                      </span>
+                    </td>
+                    <td align="right"><!-- --></td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                  </tr>
+                </table>
+                <table id="listview_table" border="0" cellspacing="0" cellpadding="5" width="100%">
+                  <thead>
+                    <tr id="column_header_row" valign="top">
+                      <th id="select_header_cell" width="20" align="center" nowrap="nowrap" style="white-space: nowrap;" class="listheader">
+                        <input type="checkbox" class="checkbox" style="border: 0px; margin: 0px; padding: 0px; height: 12px;"/>lbSelect
+                      </th>
+                      <th id="edit_header_cell" width="20" align="center" nowrap="nowrap" class="listheader">
+                        lbEdit
+                      </th>
+                      <th id="column_header_cell" nowrap="nowrap" align="left" class="listheader">
+                        lbColumnHeaderCell
+                      </th>
+                      <th align="center" nowrap="nowrap" class="listheader">
+                        lbColumnHeaderCell
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody id="listview_body">
+                    <tr id="detail_row" valign="top">
+                      <td width="20" id="selection_cell" align="center" class="lvscell">
+                        <input id="selection_input" type="checkbox" name="uid" value="1" onclick="highlightRows('listview_body');" class="checkbox"/>
+                      </td>
+                      <td width="20" id="edit_cell" align="center" class="lvdcell">
+                        <a id="edit_link" href="">
+                          <img src="images/actions/edit.gif" border="0" alt="Edit" width="16" height="16"/>
+                        </a>
+                      </td>
+                      <td id="viewlink_cell" align="left" class="lvdcell">
+                        <a id="view_link" href="">
+                          lbViewLinkCell
+                        </a>
+                      </td>
+                      <td id="default_cell" align="left" class="lvdcell">
+                        lbDetailCell
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr valign="bottom">
+              <td align="right" id="pager_cell" nowrap="nowrap">
+                <br/>
+                <span id="page_number" class="explanatory">
+                  lbPageNumber
+                </span>
+                &nbsp;
+                <span id="row_number" class="explanatory">
+                  lbRowNumber
+                </span>
+                &nbsp;
+                <span id="page_first_parent">
+                  <a id="page_first" href="void javascript:changePage(_refreshUrl,'first');">
+                    <img id="first_icon" src="images/arrows/first.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+                  </a>
+                </span>
+                <span id="page_prev_parent">
+                  <a id="page_prev" href="void javascript:changePage(_refreshUrl,'prev');">
+                    <img id="prev_icon" src="images/arrows/prev.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+                  </a>
+                </span>
+                &nbsp;
+                <span id="page_n_parent">&nbsp;<a id="page_n" href="void javascript:changePage(_refreshUrl,'n');">
+                    lbN
+                </a></span>
+                &nbsp;
+                <span id="page_next_parent">
+                  <a id="page_next" href="void javascript:changePage(_refreshUrl,'next');">
+                    <img id="next_icon" src="images/arrows/next.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+                  </a>
+                </span>
+                <span id="page_last_parent">
+                  <a id="page_last" href="void javascript:changePage(_refreshUrl,'last');">
+                    <img id="last_icon" src="images/arrows/last.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+                  </a>
+                </span>
+              </td>
+              <td align="right"><!-- --></td>
+            </tr>
+          </table>
+          <input type="hidden" name="method" value="refresh"/>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

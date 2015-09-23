@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dictionary>
+	<GlobalPartnerRoleClassificationCode>
+                <value>Account Supplier</value>
+                <value>Account User</value>
+                <value>Anonymous Buyer</value>
+                <value>Appointment Provider</value>
+                <value>Authorizer</value>
+                <value>Buyer</value>
+                <value>Catalog Distributor</value>
+                <value>Catalog Producer</value>
+                <value>Change Requester</value>
+                <value>Change Review Forum</value>
+                <value>Claim Requester</value>
+                <value>Consignee</value>
+                <value>Credit Provider</value>
+                <value>Credit Reference Requester</value>
+                <value>Customer Manager</value>
+                <value>Customer</value>
+                <value>Decision Stakeholder</value>
+                <value>Delivery Appointment Provider</value>
+                <value>Delivery Appointment Requester</value>
+                <value>Demand Creator</value>
+                <value>Failure Report Administrator</value>
+                <value>Financing Processor</value>
+                <value>Forecast Owner</value>
+                <value>Forecast Recipient</value>
+                <value>Implementation Plan Creator</value>
+                <value>In-transit Information User</value>
+                <value>Invoice Provider</value>
+                <value>Invoice Receiver</value>
+                <value>Invoice Reject Provider</value>
+                <value>Invoice Reject Receiver</value>
+                <value>Marketing Activity Information User</value>
+                <value>Marketing Activity Initiator</value>
+                <value>Payee</value>
+                <value>Payer</value>
+                <value>PIP Failure Notifier</value>
+                <value>Product Distributor</value>
+                <value>Product Information Distributor</value>
+                <value>Product Information Subscriber</value>
+                <value>Product Information User</value>
+                <value>Product Provider</value>
+                <value>Product Supplier</value>
+                <value>Receiver</value>
+                <value>Return Requester</value>
+                <value>Sales Facilitator</value>
+                <value>Sales Lead Originator</value>
+                <value>Sales Lead Processor</value>
+                <value>Sales Marketing Claim Processor</value>
+                <value>Sales Marketing Claimant</value>
+                <value>Sales Marketing Program Reimbursement Recipient</value>
+                <value>Sales Marketing Program Reimburser</value>
+                <value>Seller</value>
+                <value>Shipment Information User</value>
+                <value>Shipment Requester</value>
+                <value>ShipmentController</value>
+                <value>Shipper</value>
+                <value>Solution Provider</value>
+                <value>Solution Requester</value>
+                <value>Specification Provider</value>
+                <value>Specification User</value>
+                <value>Stakeholder</value>
+                <value>Status Requester</value>
+                <value>Status Responder</value>
+                <value>Supplier</value>
+                <value>Tender Information User</value>
+                <value>Transport Service Provider</value>
+	</GlobalPartnerRoleClassificationCode>
+	<GlobalBusinessServiceCode>
+	        <value>Product Information Distributor Service</value>
+	        <value>Customer Manager Service</value>
+	        <value>Seller Service</value>
+	        <value>Product Information Subscriber Service</value>
+	        <value>Product Supplier Service</value>
+	        <value>Customer Service</value>
+	        <value>Sales Facilitator Service</value>
+	        <value>Supplier Service</value>
+	        <value>Buyer Service</value>
+	        <value>PIP Failure Notifier Service</value>
+	        <value>Failure Report Administrator Service</value>
+	        <value>Shipper Service</value>
+	        <value>Receiver Service</value>
+	        <value>Product Information User Service</value>
+	        <value>Product Information Distributor Agent</value>
+	</GlobalBusinessServiceCode>
+	<GlobalBusinessActionCode>
+		<value>Advance Shipment Notification Action</value>
+		<value>Purchase Order Update Notification Action</value>
+		<value>Return Product Request</value>
+		<value>Return Product Response</value>
+		<value>Pending Return Notification</value>
+		<value>Return Result</value>
+		<value>Inspection Result Notification</value>
+		<value>Invoice Notification</value>
+		<value>Invoice Reject Notification</value>
+		<value>Financing Request</value>
+		<value>Financing Response</value>
+		<value>Remittance Advice Notification</value>
+		<value>Billing Statement Notification</value>
+		<value>Transportation Projection Notification</value>
+		<value>Advance Shipment Notification</value>
+		<value>Shipper's Manifest Notification</value>
+		<value>Shipment Status Notification</value>
+		<value>Shipment Status Query</value>
+		<value>Shipment Status Response</value>
+		<value>Shipment Change Request</value>
+		<value>Shipment Change Confirmation</value>
+		<value>Delivery Exception Notification</value>
+		<value>Delivery Appointment Response</value>
+		<value>Delivery Appointment Request</value>
+		<value>Shipment Receipt Notification</value>
+		<value>Transportation Claim Response</value>
+		<value>Transportation Claim Request</value>
+		<value>Create Remittance Advice</value>
+		<value>Marketing Information Query</value>
+		<value>Marketing Information Response</value>
+		<value>Sales Promotion and Rebate Information Query</value>
+		<value>Sales Promotion and Rebate Information Response</value>
+		<value>Product Lifecycle Query</value>
+		<value>Lifecycle Information Response</value>
+		<value>Product Discontinuation Information Query</value>
+		<value>Product Discontinuation Information Response</value>
+		<value>Quote Request</value>
+		<value>Quote Response</value>
+		<value>Account Request</value>
+		<value>Account Setup Acknowledgment</value>
+		<value>Account Change Request</value>
+		<value>Account Change Response</value>
+		<value>Credit Reference Query</value>
+		<value>Credit Reference Response</value>
+		<value>Basic Product Information Change</value>
+		<value>Change Basic Product Information Acceptance</value>
+		<value>Product Marketing Information Change</value>
+		<value>Change Product Marketing Information Confirmation</value>
+		<value>Product Sales Promotion and Rebate Information Change</value>
+		<value>Change Product Sales Promotion and Rebate Information Confirmation</value>
+		<value>Product Technical Information Change</value>
+		<value>Change Product Technical Information Confirmation</value>
+		<value>Product Lifecycle Information Change</value>
+		<value>Change Product Lifecycle Information Confirmation</value>
+		<value>Optional Product Information Query</value>
+		<value>Optional Product Information Response</value>
+		<value>Product Resource Update</value>
+		<value>Product Information Notification</value>
+		<value>Purchase Order Status Notification</value>
+		<value>Stock Keeping Unit Creation Notification</value>
+		<value>Subscription Request</value>
+		<value>Subscription Cancellation</value>
+		<value>Subscription Change</value>
+		<value>Subscription Confirmation</value>
+		<value>Purchase Order Request Action</value>
+		<value>Purchase Order Confirmation Action</value>
+		<value>Purchase Order Change</value>
+		<value>Purchase Order Cancellation</value>
+		<value>Purchase Order Status Query</value>
+		<value>Purchase Order Status Response</value>
+		<value>Price and Availability Query</value>
+		<value>Price and Availability Response</value>
+		<value>Product Information Query</value>
+		<value>Product Information Response</value>
+		<value>Technical Information Query</value>
+		<value>Technical Information Response</value>
+		<value>Shopping Cart Transfer</value>
+		<value>Shopping Cart Transfer Acceptance</value>
+		<value>Failure Notification Action</value>
+		<value>Purchase Order Acceptance Notification</value>
+		<value>Product List Notification</value>
+		<value>Design Registration Request</value>
+		<value>Design Registration Confirmation</value>
+		<value>Win Claim Request</value>
+		<value>Win Claim Response</value>
+		<value>Registration Status Notification</value>
+		<value>Registration Status Query</value>
+		<value>Registration Status Response</value>
+		<value>Blanket Ship From Stock And Debit Authorization Notification</value>
+		<value>Ship From Stock And Debit Authorization Status Response</value>
+		<value>Ship From Stock And Debit Authorization Status Query</value>
+		<value>Open Ship From Stock And Debit Authorization Status Notification</value>
+		<value>Ship From Stock And Debit Authorization Response</value>
+		<value>Ship From Stock And Debit Authorization Request</value>
+		<value>Ship From Stock And Debit Claim Request</value>
+		<value>Ship From Stock And Debit Claim Response</value>
+		<value>Ship From Stock And Debit Claim Status Notification</value>
+		<value>Updated Authorization Status Notification</value>
+		<value>Engineering Change Request</value>
+		<value>Engineering Change Response</value>
+		<value>Engineering Change Response Notification</value>
+		<value>Engineering Change Approval Request</value>
+		<value>Engineering Change Approval Response</value>
+		<value>Engineering Change Order Notification</value>
+		<value>Engineering Change Implementation Plan Notification</value>
+	</GlobalBusinessActionCode>
+	<GlobalProcessCode>
+		<value>Manage Product Information Subscriptions</value>
+		<value>Distribute New Product Information</value>
+		<value>Query Product Information</value>
+		<value>Query Technical Information</value>
+		<value>Distribute Product Stock Keeping Unit</value>
+		<value>Query Price and Availability</value>
+		<value>Transfer Shopping Cart</value>
+		<value>Manage Purchase Order</value>
+		<value>Query Order Status</value>
+		<value>Distribute Order Status</value>
+		<value>Notification of Failure</value>
+		<value>Return Product</value>
+		<value>Obtain Financing Approval</value>
+		<value>Reconcile Invoice</value>
+		<value>Process Payment</value>
+		<value>Distribute Transportation Projection</value>
+		<value>Notify of Advance Shipment</value>
+		<value>Notify of Shipment Status</value>
+		<value>Query Shipment Status</value>
+		<value>Change Shipment</value>
+		<value>Notify of Delivery Exception</value>
+		<value>Create Delivery Appointment</value>
+		<value>Notify of Shipment Receipt</value>
+		<value>Create Transportation Claim</value>
+		<value>Query Marketing Information</value>
+		<value>Query Sales Promotion and Rebate Information</value>
+		<value>Query Product Lifecycle Information</value>
+		<value>Query Product Discontinuation Information</value>
+		<value>Provide Quote</value>
+		<value>Request Account Setup</value>
+		<value>Maintain Account</value>
+		<value>Request Credit Reference</value>
+		<value>Change Basic Product Information</value>
+		<value>Change Marketing Information</value>
+		<value>Change Sales Promotion and Rebate Information</value>
+		<value>Change Product Technical Information</value>
+		<value>Change Product Lifecycle Information</value>
+		<value>Query Optional Product Information</value>
+		<value>Notify of Purchase Order Acceptance</value>
+		<value>Distribute Product List</value>
+		<value>Request Design Registration</value>
+		<value>Request Design Win</value>
+		<value>Distribute Registration Status</value>
+		<value>Request Ship from Stock and Debit Authorization</value>
+		<value>Notify of Blanket Ship from Stock and Debit Authorization</value>
+		<value>Distribute Open Ship from Stock and Debit Authorization Status</value>
+		<value>Query Ship from Stock and Debit Authorization Status</value>
+		<value>Create Ship from Stock and Debit Claim</value>
+		<value>Notify of Ship from Stock and Debit Claim Status</value>
+		<value>Query Registration Status</value>
+		<value>Notify of Updated Authorization Status</value>
+		<value>Request Engineering Change</value>
+		<value>Distribute Engineering Change Response</value>
+		<value>Request Engineering Change Order Approval</value>
+		<value>Notify of Engineering Change Order</value>
+		<value>Notify of Engineering Change Implementation Plan</value>
+	</GlobalProcessCode>
+	<GlobalUsageCode>
+		<value>Test</value>
+		<value>Production</value>
+	</GlobalUsageCode>
+</dictionary>

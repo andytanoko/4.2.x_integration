@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Edit GridTalkMappingRule</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="cancel"/>
+        <input type="hidden" name="divertTo"/>
+        <table border="0">
+          <tr id="name_details">
+            <td id="name_label">
+              lbName
+            </td>
+            <td>
+              <input type="text" id="name_value" name="name"/>
+            </td>
+            <td id="name_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="description_details">
+            <td id="description_label">
+              lbDescription
+            </td>
+            <td>
+              <input type="text" id="description_value" name="description"/>
+            </td>
+            <td id="description_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="type_details">
+            <td id="type_label">
+              lbType
+            </td>
+            <td>
+              <select id="type_value" name="type" onchange="serverRefresh();">
+                <option value="">&nbsp;</option>
+              </select>
+            </td>
+            <td id="type_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="headerTransformation_details">
+            <td id="headerTransformation_label">
+              lbHeaderTransform
+            </td>
+            <td>
+              <input id="headerTransformation_value" type="checkbox" name="headerTransformation" value="true" onclick="serverRefresh();"/>
+            </td>
+            <td id="headerTransformation_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="sourceDocType_details">
+            <td id="sourceDocType_label">
+              lbSourceDocType
+            </td>
+            <td>
+              <select id="sourceDocType_value" name="sourceDocType">
+                <option value="">&nbsp;</option>
+              </select>
+              <a id="sourceDocType_create" href="javascript:divertToMapping('divertCreateDocumentType');">
+                lbCreateDocumentType
+              </a>
+            </td>
+            <td id="sourceDocType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="targetDocType_details">
+            <td id="targetDocType_label">
+              lbTargetDocType
+            </td>
+            <td>
+              <select id="targetDocType_value" name="targetDocType">
+                <option value="">&nbsp;</option>
+              </select>
+              <a id="targetDocType_create" href="javascript:divertToMapping('divertCreateDocumentType');">
+                lbCreateDocumentType
+              </a>
+            </td>
+            <td id="targetDocType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="sourceDocFileType_details">
+            <td id="sourceDocFileType_label">
+              lbSourceDocFileType
+            </td>
+            <td>
+              <select id="sourceDocFileType_value" name="sourceDocFileType">
+                <option value="">&nbsp;</option>
+              </select>
+              <a id="sourceDocFileType_create" href="javascript:divertToMapping('divertCreateFileType');">
+                lbCreateFileType
+              </a>
+            </td>
+            <td id="sourceDocFileType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="targetDocFileType_details">
+            <td id="targetDocFileType_label">
+              lbTargetDocFileType
+            </td>
+            <td>
+              <select id="targetDocFileType_value" name="targetDocFileType">
+                <option value="">&nbsp;</option>
+              </select>
+              <a id="targetDocFileType_create" href="javascript:divertToMapping('divertCreateFileType');">
+                lbCreateFileType
+              </a>
+            </td>
+            <td id="targetDocFileType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="mappingFile_details">
+            <td id="mappingFile_label">
+              lbMappingFile
+            </td>
+            <td>
+              <select id="mappingFile_value" name="mappingFileUid" onchange="serverRefresh();">
+                <option value="">&nbsp;</option>
+              </select>
+              <a id="mappingFile_create" href="javascript:divertToMapping('divertCreateMappingFile');">
+                lbCreateMappingFile
+              </a>
+            </td>
+            <td id="mappingFile_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="mappingClass_details">
+			<td id="mappingClass_label">
+			  lbMappingClass
+			</td>
+			<td>
+			  <select id="mappingClass_value" name="mappingClassUid" onchange="serverRefresh();">
+				<option value="">&nbsp;</option>
+			  </select>
+			</td>
+			<td id="mappingFile_error">
+			  &nbsp;
+			</td>
+          </tr>
+          <tr id="transformWithHeader_details">
+            <td id="transformWithHeader_label">
+              lbTransformWithHeader
+            </td>
+            <td>
+              <input type="checkbox" id="transformWithHeader_value" name="transformWithHeader" value="true"/>
+            </td>
+            <td id="transformWithHeader_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="transformWithSource_details">
+            <td id="transformWithSource_label">
+              lbTransformWithSource
+            </td>
+            <td>
+              <input type="checkbox" id="transformWithSource_value" name="transformWithSource" value="true"/>
+            </td>
+            <td id="transformWithSource_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="transformRefDoc_details">
+            <td id="transformRefDoc_label">
+              lbTransformWithRefDoc
+            </td>
+            <td>
+              <input type="checkbox" id="transformRefDoc_value" name="transformRefDoc" value="true" onclick="serverRefresh();"/>
+            </td>
+            <td id="transformRefDoc_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="refDocUid_details">
+            <td id="refDocUid_label">
+              lbRefDocUid
+            </td>
+            <td>
+              <select id="refDocUid_value" name="refDocUid">
+                <option value="">&nbsp;</option>
+              </select>
+              <a id="refDocUid_create" href="javascript:divertToMapping('divertCreateMappingFile');">
+                lbCreateRefDoc
+              </a>
+            </td>
+            <td id="refDocUid_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="xpath_details">
+            <td id="xpath_label">
+              lbXPath
+            </td>
+            <td>
+              <input type="text" id="xpath_value" name="xpath"/>
+            </td>
+            <td id="xpath_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="paramName_details">
+            <td id="paramName_label">
+              lbParamName
+            </td>
+            <td>
+              <input type="text" id="paramName_value" name="paramName"/>
+            </td>
+            <td id="paramName_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="keepOriginal_details">
+            <td id="keepOriginal_label">
+              lbKeepOriginal
+            </td>
+            <td>
+              <input type="checkbox" id="keepOriginal_value" name="keepOriginal" value="true"/>
+            </td>
+            <td id="keepOriginal_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

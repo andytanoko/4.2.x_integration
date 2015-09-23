@@ -1,0 +1,1199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Model [
+<!ELEMENT Model (Property*,HiddenProperty*,Model*)>
+<!ATTLIST Model Name CDATA #REQUIRED>
+<!ELEMENT Property (#PCDATA)>
+<!ATTLIST Property Name CDATA #REQUIRED>
+<!ELEMENT HiddenProperty (#PCDATA)>
+<!ATTLIST HiddenProperty Name CDATA #REQUIRED>
+]>
+
+<Model Name="Data Source Manager">
+  <Property Name="Name">Data Source Manager</Property>
+  <Model Name="System Data Source">
+    <Property Name="Name">System Data Source</Property>
+    <Model Name="JDBC Data Source">
+      <Property Name="Name">JDBC Data Source</Property>
+      <Property Name="Description">Data Source for JDBC compliance database</Property>
+      <Property Name="Type">JDBC Data Source</Property>
+      <Property Name="Class">sg.com.elixir.reportwriter.datasource.jdbc.JDBCDataSource</Property>
+      <Property Name="DataSource Wizard Class">sg.com.elixir.reportwriter.datasource.jdbc.JDBCDataSourceWizard</Property>
+      <Property Name="JDBC Driver">sun.jdbc.odbc.JdbcOdbcDriver</Property>
+      <Property Name="Database URL"></Property>
+      <Property Name="Username">admin</Property>
+      <Property Name="Password"></Property>
+      <Property Name="SQL"></Property>
+      <Property Name="Maximum No. of Rows"></Property>
+      <Property Name="Callable Statement">false</Property>
+      <Property Name="OUT Type"></Property>
+      <Property Name="IN Parameters"></Property>
+      <Property Name="Connection Reuse timeout">0</Property>
+      <Model Name="Dataschema">
+        <Property Name="Name">Dataschema</Property>
+        <Property Name="Object Class">java.sql.ResultSet</Property>
+        <HiddenProperty Name="Counter">0</HiddenProperty>
+        <HiddenProperty Name="Parameter Counter"></HiddenProperty>
+      </Model>
+    </Model>
+    <Model Name="Text Data Source">
+      <Property Name="Name">Text Data Source</Property>
+      <Property Name="Description">Data Source for text file</Property>
+      <Property Name="Type">Text Data Source</Property>
+      <Property Name="Class">sg.com.elixir.reportwriter.datasource.text.TextDataSource</Property>
+      <Property Name="DataSource Wizard Class">sg.com.elixir.reportwriter.datasource.text.TextDataSourceWizard</Property>
+      <Property Name="Filename"></Property>
+      <Property Name="Format">Delimited</Property>
+      <Property Name="First row is field name">false</Property>
+      <Property Name="Delimiter Type">Comma</Property>
+      <Property Name="Delimiter">,</Property>
+      <Property Name=""></Property>
+      <Property Name="TextQualifer">none</Property>
+      <Property Name="Encoding">Cp1252</Property>
+      <Model Name="Dataschema">
+        <Property Name="Name">Dataschema</Property>
+        <Property Name="Object Class">sg.com.elixir.reportwriter.datasource.text.TextRow</Property>
+        <HiddenProperty Name="Counter">0</HiddenProperty>
+        <HiddenProperty Name="Parameter Counter"></HiddenProperty>
+      </Model>
+    </Model>
+    <Model Name="Object Data Source">
+      <Property Name="Name">Object Data Source</Property>
+      <Property Name="Description">Data Source for objects</Property>
+      <Property Name="Type">Object Data Source</Property>
+      <Property Name="Class">sg.com.elixir.reportwriter.datasource.object.ObjectDataSource</Property>
+      <Property Name="DataSource Wizard Class">sg.com.elixir.reportwriter.datasource.object.ObjectDataSourceWizard</Property>
+      <Model Name="Dataschema">
+        <Property Name="Name">Dataschema</Property>
+        <Property Name="Object Class"></Property>
+        <HiddenProperty Name="Counter">0</HiddenProperty>
+        <HiddenProperty Name="Parameter Counter"></HiddenProperty>
+      </Model>
+    </Model>
+    <Model Name="Crosstab Data Source">
+      <Property Name="Name">Crosstab Data Source</Property>
+      <Property Name="Description">Crosstab for any Data Source</Property>
+      <Property Name="Type">Crosstab Data Source</Property>
+      <Property Name="Class">sg.com.elixir.reportwriter.datasource.crosstab.CrosstabDataSource</Property>
+      <Property Name="DataSource Wizard Class">sg.com.elixir.reportwriter.datasource.crosstab.CrosstabDataSourceWizard</Property>
+      <Property Name="Data Source Driver"></Property>
+      <Model Name="Dataschema">
+        <Property Name="Name">Dataschema</Property>
+        <Property Name="Object Class">sg.com.elixir.reportwriter.util.Row</Property>
+        <HiddenProperty Name="Counter">0</HiddenProperty>
+        <HiddenProperty Name="Parameter Counter"></HiddenProperty>
+      </Model>
+      <Model Name="Row Headers">
+        <Property Name="Name">Row Headers</Property>
+        <HiddenProperty Name="Counter">0</HiddenProperty>
+      </Model>
+      <Model Name="Column Headers">
+        <Property Name="Name">Column Headers</Property>
+        <HiddenProperty Name="Counter">0</HiddenProperty>
+      </Model>
+      <Model Name="Values">
+        <Property Name="Name">Values</Property>
+        <HiddenProperty Name="Counter">0</HiddenProperty>
+      </Model>
+    </Model>
+    <Model Name="XML2 Data Source">
+      <Property Name="Name">XML2 Data Source</Property>
+      <Property Name="Description">Data Source for XML2</Property>
+      <Property Name="Type">XML2 Data Source</Property>
+      <Property Name="Class">com.elixirtech.report.datasource.xml2.XMLDatasource</Property>
+      <Property Name="DataSource Wizard Class">com.elixirtech.report.datasource.xml2.ui.XMLDatasourceWizard</Property>
+      <Property Name="Location"></Property>
+      <Property Name="Encoding">Cp1252</Property>
+      <Property Name="RootPath"></Property>
+      <Property Name="ColumnFieldnames"></Property>
+      <Property Name="ColumnPaths"></Property>
+      <Property Name="ColumnMerges"></Property>
+      <Model Name="Dataschema">
+        <Property Name="Name">Dataschema</Property>
+        <Property Name="Object Class">com.elixirtech.report.datasource.xml2.XMLRowValues</Property>
+        <HiddenProperty Name="Counter">0</HiddenProperty>
+        <HiddenProperty Name="Parameter Counter"></HiddenProperty>
+      </Model>
+    </Model>
+    <Model Name="XML Data Source">
+      <Property Name="Name">XML Data Source</Property>
+      <Property Name="Description">Data Source for XML</Property>
+      <Property Name="Type">XML Data Source</Property>
+      <Property Name="Class">com.elixirtech.report.datasource.xml.XMLDataSource</Property>
+      <Property Name="DataSource Wizard Class">com.elixirtech.report.datasource.xml.XMLDataSourceWizard</Property>
+      <Property Name="Location"></Property>
+      <Property Name="ParentTag"></Property>
+      <Property Name="MarkTag"></Property>
+      <Property Name="Attributes"></Property>
+      <Property Name="Merge"></Property>
+      <Property Name="MergeSeparator"></Property>
+      <Property Name="Encoding">Cp1252</Property>
+      <Model Name="Dataschema">
+        <Property Name="Name">Dataschema</Property>
+        <Property Name="Object Class">com.elixirtech.report.datasource.xml.XMLRowValues</Property>
+        <HiddenProperty Name="Counter">0</HiddenProperty>
+        <HiddenProperty Name="Parameter Counter"></HiddenProperty>
+      </Model>
+    </Model>
+    <Model Name="LDAP (JNDI) Datasoure ">
+      <Property Name="Name">LDAP (JNDI) Datasoure </Property>
+      <Property Name="Description">Data Source for LDAP</Property>
+      <Property Name="Type">LDAP (JNDI) Data Source</Property>
+      <Property Name="Class">com.elixirtech.report.datasource.ldap.LDAPDataSource</Property>
+      <Property Name="DataSource Wizard Class">com.elixirtech.report.datasource.ldap.LDAPDataSourceWizard</Property>
+      <Property Name="Location"></Property>
+      <Property Name="Port">389</Property>
+      <Property Name="DN"></Property>
+      <Property Name="ObjectClasses"></Property>
+      <Property Name="Filter"></Property>
+      <Property Name="Timeout">0</Property>
+      <Property Name="Attributes"></Property>
+      <Property Name="Batchsize">0</Property>
+      <Property Name="Netscape_Bug">false</Property>
+      <Property Name="Authenticate">false</Property>
+      <Property Name="Security_Authoritative">false</Property>
+      <Property Name="Security_Authenticate"></Property>
+      <Property Name="Security_Credentials"></Property>
+      <Property Name="Security_Principle"></Property>
+      <Property Name="Security_Protocol"></Property>
+      <Model Name="Dataschema">
+        <Property Name="Name">Dataschema</Property>
+        <Property Name="Object Class">com.elixirtech.report.datasource.ldap.LDAPRowValues</Property>
+        <HiddenProperty Name="Counter">0</HiddenProperty>
+        <HiddenProperty Name="Parameter Counter"></HiddenProperty>
+      </Model>
+    </Model>
+    <Model Name="EJB Data Source">
+      <Property Name="Name">EJB Data Source</Property>
+      <Property Name="Description">Data Source for Enterprise Java Beans</Property>
+      <Property Name="Type">EJB Data Source</Property>
+      <Property Name="Class">com.elixirtech.report.datasource.ejb.EJBDataSource</Property>
+      <Property Name="DataSource Wizard Class">com.elixirtech.report.datasource.ejb.EJBDataSourceWizard</Property>
+      <Property Name="EJBDataSourceSchema"></Property>
+    </Model>
+  </Model>
+  <Model Name="User Data Source">
+    <Property Name="Name">User Data Source</Property>
+    <Model Name="3A8POChgConfirm DSN">
+      <Property Name="Name">3A8POChgConfirm DSN</Property>
+      <Property Name="Description">XML2 Data source for 3A8 PO Change Confirmation</Property>
+      <Property Name="Type">XML2 Data Source</Property>
+      <Property Name="Class">com.elixirtech.report.datasource.xml2.XMLDatasource</Property>
+      <Property Name="DataSource Wizard Class">com.elixirtech.report.datasource.xml2.ui.XMLDatasourceWizard</Property>
+      <Property Name="Location">D:\ElixirReportPro-4.0\odc\samples\3A8-POCR-Confirm.xml</Property>
+      <Property Name="RootPath">//ProductLineItem</Property>
+      <Property Name="ColumnPaths">../GlobalPurchaseOrderTypeCode§../shipTo/PartnerDescription/BusinessDescription/businessName/FreeFormText§../DocumentReference[3]/DateTimeStamp§../DocumentReference[4]/DateTimeStamp§../../requestingDocumentIdentifier/ProprietaryDocumentIdentifier§../DocumentReference[1]/DateTimeStamp§../ContractInformation/primaryContractWith/PartnerDescription/BusinessDescription/PartnerBusinessIdentification/ProprietaryBusinessIdentifier§../../fromRole/PartnerRoleDescription/ContactInformation/contactName/FreeFormText§LineNumber§ProductIdentification/PartnerProductIdentification/ProprietaryProductIdentifier§ProductIdentification/PartnerProductIdentification/revisionIdentifier/FreeFormText§comments/FreeFormText§requestedUnitPrice/FinancialAmount/MonetaryAmount§ProductIdentification/PartnerProductIdentification[2]/revisionIdentifier/FreeFormText§OrderQuantity/requestedQuantity/ProductQuantity§GlobalProductUnitOfMeasureCode§requestedEvent/TransportationEvent/DateStamp§totalLineItemAmount/FinancialAmount/MonetaryAmount§proprietaryInformation/FreeFormText§GlobalPurchaseOrderStatusCode§../totalAmount/FinancialAmount/MonetaryAmount§../comments/FreeFormText§../shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine1/FreeFormText§../shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine2/FreeFormText§../shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/cityName/FreeFormText§../shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/GlobalCountryCode§../shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/NationalPostalCode§../shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/postOfficeBoxIdentifier/FreeFormText§../shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/regionName/FreeFormText§../../fromRole/PartnerRoleDescription/ContactInformation/contactName/FreeFormText§../../fromRole/PartnerRoleDescription/ContactInformation/telephoneNumber/CommunicationsNumber§../../fromRole/PartnerRoleDescription/ContactInformation/facsimileNumber/CommunicationsNumber§../AccountDescription/billTo/PartnerDescription/ContactInformation/contactName/FreeFormText§../../toRole/PartnerRoleDescription/ContactInformation/EmailAddress§../../toRole/PartnerRoleDescription/ContactInformation/contactName/FreeFormText§../OrderShippingInformation/GlobalShipmentTermsCode§../OrderShippingInformation/SpecialHandlingInstruction/specialHandlingText/FreeFormText§../FinancingTerms/PaymentTerms/netTermsDays/CountableAmount§../proprietaryInformation/FreeFormText§../totalAmount/FinancialAmount/GlobalCurrencyCode§../../PurchaseOrder/OrderShippingInformation/packListRequirements/FreeFormText§ </Property>
+      <Property Name="ColumnMerges">No-Merge§No-Merge§Space§No-Merge§No-Merge§No-Merge§Comma§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§Space§Space</Property>
+      <Property Name="Encoding">UTF8</Property>
+      <Property Name="ColumnFieldnames">UsageType§CompanyName§OrderStartDate§OrderEndDate§Document Number§DocumentDateTime§VendorCode§VendorName§ItemNumber§Material§Description§MaterialNotes§UnitPrice§Per§Quantity§UOM§ReqDelDate§NetValue§Remarks§RespondCode§TotalValue§ForwarderDetails§ShiptoAddress1§ShiptoAddress2§shiptoCity§shiptoCountryCode§shiptoPostalcode§shiptoPostBoxId§shiptoRegion§VendorName§VendorTele§VendorFax§BuyerName§Buyer Code§Requestor§DeliveryTerm§ShipmentTerm§PaymentTerm§Note§currency§DeliveryTermText§ </Property>
+      <Model Name="Dataschema">
+        <Property Name="Name">Dataschema</Property>
+        <Property Name="Object Class">com.elixirtech.report.datasource.xml2.XMLRowValues</Property>
+        <HiddenProperty Name="Counter">1245</HiddenProperty>
+        <HiddenProperty Name="Parameter Counter"></HiddenProperty>
+        <Model Name="Detail1204">
+          <Property Name="Name">Detail1204</Property>
+          <Property Name="Field Name">UsageType</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">0</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1205">
+          <Property Name="Name">Detail1205</Property>
+          <Property Name="Field Name">CompanyName</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">1</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1206">
+          <Property Name="Name">Detail1206</Property>
+          <Property Name="Field Name">OrderStartDate</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">2</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1207">
+          <Property Name="Name">Detail1207</Property>
+          <Property Name="Field Name">OrderEndDate</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">3</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1208">
+          <Property Name="Name">Detail1208</Property>
+          <Property Name="Field Name">Document Number</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">4</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1209">
+          <Property Name="Name">Detail1209</Property>
+          <Property Name="Field Name">DocumentDateTime</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">5</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1210">
+          <Property Name="Name">Detail1210</Property>
+          <Property Name="Field Name">VendorCode</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">6</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1211">
+          <Property Name="Name">Detail1211</Property>
+          <Property Name="Field Name">VendorName</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">7</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1212">
+          <Property Name="Name">Detail1212</Property>
+          <Property Name="Field Name">ItemNumber</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">8</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1213">
+          <Property Name="Name">Detail1213</Property>
+          <Property Name="Field Name">Material</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">9</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1214">
+          <Property Name="Name">Detail1214</Property>
+          <Property Name="Field Name">Description</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">10</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1215">
+          <Property Name="Name">Detail1215</Property>
+          <Property Name="Field Name">MaterialNotes</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">11</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1216">
+          <Property Name="Name">Detail1216</Property>
+          <Property Name="Field Name">UnitPrice</Property>
+          <Property Name="Access Method">getDoubleAt</Property>
+          <Property Name="Return Type">double</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">12</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1217">
+          <Property Name="Name">Detail1217</Property>
+          <Property Name="Field Name">Per</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">13</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1218">
+          <Property Name="Name">Detail1218</Property>
+          <Property Name="Field Name">Quantity</Property>
+          <Property Name="Access Method">getDoubleAt</Property>
+          <Property Name="Return Type">double</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">14</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1219">
+          <Property Name="Name">Detail1219</Property>
+          <Property Name="Field Name">UOM</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">15</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1220">
+          <Property Name="Name">Detail1220</Property>
+          <Property Name="Field Name">ReqDelDate</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">16</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1221">
+          <Property Name="Name">Detail1221</Property>
+          <Property Name="Field Name">NetValue</Property>
+          <Property Name="Access Method">getDoubleAt</Property>
+          <Property Name="Return Type">double</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">17</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1222">
+          <Property Name="Name">Detail1222</Property>
+          <Property Name="Field Name">Remarks</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">18</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1223">
+          <Property Name="Name">Detail1223</Property>
+          <Property Name="Field Name">RespondCode</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">19</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1224">
+          <Property Name="Name">Detail1224</Property>
+          <Property Name="Field Name">TotalValue</Property>
+          <Property Name="Access Method">getDoubleAt</Property>
+          <Property Name="Return Type">double</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">20</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1225">
+          <Property Name="Name">Detail1225</Property>
+          <Property Name="Field Name">ForwarderDetails</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">21</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1226">
+          <Property Name="Name">Detail1226</Property>
+          <Property Name="Field Name">ShiptoAddress1</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">22</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1227">
+          <Property Name="Name">Detail1227</Property>
+          <Property Name="Field Name">ShiptoAddress2</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">23</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1228">
+          <Property Name="Name">Detail1228</Property>
+          <Property Name="Field Name">shiptoCity</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">24</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1229">
+          <Property Name="Name">Detail1229</Property>
+          <Property Name="Field Name">shiptoCountryCode</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">25</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1230">
+          <Property Name="Name">Detail1230</Property>
+          <Property Name="Field Name">shiptoPostalcode</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">26</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1231">
+          <Property Name="Name">Detail1231</Property>
+          <Property Name="Field Name">shiptoPostBoxId</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">27</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1232">
+          <Property Name="Name">Detail1232</Property>
+          <Property Name="Field Name">shiptoRegion</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">28</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1233">
+          <Property Name="Name">Detail1233</Property>
+          <Property Name="Field Name">VendorName</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">29</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1234">
+          <Property Name="Name">Detail1234</Property>
+          <Property Name="Field Name">VendorTele</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">30</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1235">
+          <Property Name="Name">Detail1235</Property>
+          <Property Name="Field Name">VendorFax</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">31</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1236">
+          <Property Name="Name">Detail1236</Property>
+          <Property Name="Field Name">BuyerName</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">32</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1237">
+          <Property Name="Name">Detail1237</Property>
+          <Property Name="Field Name">Buyer Code</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">33</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1238">
+          <Property Name="Name">Detail1238</Property>
+          <Property Name="Field Name">Requestor</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">34</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1239">
+          <Property Name="Name">Detail1239</Property>
+          <Property Name="Field Name">DeliveryTerm</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">35</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1240">
+          <Property Name="Name">Detail1240</Property>
+          <Property Name="Field Name">ShipmentTerm</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">36</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1241">
+          <Property Name="Name">Detail1241</Property>
+          <Property Name="Field Name">PaymentTerm</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">37</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1242">
+          <Property Name="Name">Detail1242</Property>
+          <Property Name="Field Name">Note</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">38</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1243">
+          <Property Name="Name">Detail1243</Property>
+          <Property Name="Field Name">currency</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">39</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1244">
+          <Property Name="Name">Detail1244</Property>
+          <Property Name="Field Name">DeliveryTermText</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">40</Property>
+          </Model>
+        </Model>
+      </Model>
+    </Model>
+    <Model Name="3A4POConfirm DSN">
+      <Property Name="Name">3A4POConfirm DSN</Property>
+      <Property Name="Description">XML2 Data source for 3A4 PO Confirmation</Property>
+      <Property Name="Type">XML2 Data Source</Property>
+      <Property Name="Class">com.elixirtech.report.datasource.xml2.XMLDatasource</Property>
+      <Property Name="DataSource Wizard Class">com.elixirtech.report.datasource.xml2.ui.XMLDatasourceWizard</Property>
+      <Property Name="Location">D:\ElixirReportPro-4.0\odc\samples\3A4-POR-Confirm.xml</Property>
+      <Property Name="RootPath">//ProductLineItem</Property>
+      <Property Name="ColumnPaths">../GlobalPurchaseOrderTypeCode§../shipTo/PartnerDescription/BusinessDescription/businessName/FreeFormText§../DocumentReference[3]/DateTimeStamp§../DocumentReference[4]/DateTimeStamp§../../requestingDocumentIdentifier/ProprietaryDocumentIdentifier§../DocumentReference[1]/DateTimeStamp§../ContractInformation/primaryContractWith/PartnerDescription/BusinessDescription/PartnerBusinessIdentification/ProprietaryBusinessIdentifier§../../fromRole/PartnerRoleDescription/ContactInformation/contactName/FreeFormText§LineNumber§ProductIdentification/PartnerProductIdentification/ProprietaryProductIdentifier§ProductIdentification/PartnerProductIdentification/revisionIdentifier/FreeFormText§comments/FreeFormText§requestedUnitPrice/FinancialAmount/MonetaryAmount§ProductIdentification/PartnerProductIdentification[2]/revisionIdentifier/FreeFormText§OrderQuantity/requestedQuantity/ProductQuantity§GlobalProductUnitOfMeasureCode§requestedEvent/TransportationEvent/DateStamp§totalLineItemAmount/FinancialAmount/MonetaryAmount§proprietaryInformation/FreeFormText§GlobalPurchaseOrderStatusCode§../totalAmount/FinancialAmount/MonetaryAmount§../comments/FreeFormText§../shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine1/FreeFormText§../shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/addressLine2/FreeFormText§../shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/cityName/FreeFormText§../shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/GlobalCountryCode§../shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/NationalPostalCode§../shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/postOfficeBoxIdentifier/FreeFormText§../shipTo/PartnerDescription/PhysicalLocation/PhysicalAddress/regionName/FreeFormText§../../fromRole/PartnerRoleDescription/ContactInformation/contactName/FreeFormText§../../fromRole/PartnerRoleDescription/ContactInformation/telephoneNumber/CommunicationsNumber§../../fromRole/PartnerRoleDescription/ContactInformation/facsimileNumber/CommunicationsNumber§../AccountDescription/billTo/PartnerDescription/ContactInformation/contactName/FreeFormText§../../toRole/PartnerRoleDescription/ContactInformation/EmailAddress§../../toRole/PartnerRoleDescription/ContactInformation/contactName/FreeFormText§../OrderShippingInformation/GlobalShipmentTermsCode§../OrderShippingInformation/SpecialHandlingInstruction/specialHandlingText/FreeFormText§../FinancingTerms/PaymentTerms/netTermsDays/CountableAmount§../proprietaryInformation/FreeFormText§../totalAmount/FinancialAmount/GlobalCurrencyCode§../../PurchaseOrder/OrderShippingInformation/packListRequirements/FreeFormText§ </Property>
+      <Property Name="ColumnMerges">No-Merge§No-Merge§Space§No-Merge§No-Merge§No-Merge§Comma§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§No-Merge§Space§Space</Property>
+      <Property Name="Encoding">UTF8</Property>
+      <Property Name="ColumnFieldnames">UsageType§CompanyName§OrderStartDate§OrderEndDate§Document Number§DocumentDateTime§VendorCode§VendorName§ItemNumber§Material§Description§MaterialNotes§UnitPrice§Per§Quantity§UOM§ReqDelDate§NetValue§Remarks§RespondCode§TotalValue§ForwarderDetails§ShiptoAddress1§ShiptoAddress2§shiptoCity§shiptoCountryCode§shiptoPostalcode§shiptoPostBoxId§shiptoRegion§VendorName§VendorTele§VendorFax§BuyerName§Buyer Code§Requestor§DeliveryTerm§ShipmentTerm§PaymentTerm§Note§currency§DeliveryTermText§ </Property>
+      <Model Name="Dataschema">
+        <Property Name="Name">Dataschema</Property>
+        <Property Name="Object Class">com.elixirtech.report.datasource.xml2.XMLRowValues</Property>
+        <HiddenProperty Name="Counter">1327</HiddenProperty>
+        <HiddenProperty Name="Parameter Counter"></HiddenProperty>
+        <Model Name="Detail1286">
+          <Property Name="Name">Detail1286</Property>
+          <Property Name="Field Name">UsageType</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">0</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1287">
+          <Property Name="Name">Detail1287</Property>
+          <Property Name="Field Name">CompanyName</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">1</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1288">
+          <Property Name="Name">Detail1288</Property>
+          <Property Name="Field Name">OrderStartDate</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">2</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1289">
+          <Property Name="Name">Detail1289</Property>
+          <Property Name="Field Name">OrderEndDate</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">3</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1290">
+          <Property Name="Name">Detail1290</Property>
+          <Property Name="Field Name">Document Number</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">4</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1291">
+          <Property Name="Name">Detail1291</Property>
+          <Property Name="Field Name">DocumentDateTime</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">5</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1292">
+          <Property Name="Name">Detail1292</Property>
+          <Property Name="Field Name">VendorCode</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">6</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1293">
+          <Property Name="Name">Detail1293</Property>
+          <Property Name="Field Name">VendorName</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">7</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1294">
+          <Property Name="Name">Detail1294</Property>
+          <Property Name="Field Name">ItemNumber</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">8</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1295">
+          <Property Name="Name">Detail1295</Property>
+          <Property Name="Field Name">Material</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">9</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1296">
+          <Property Name="Name">Detail1296</Property>
+          <Property Name="Field Name">Description</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">10</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1297">
+          <Property Name="Name">Detail1297</Property>
+          <Property Name="Field Name">MaterialNotes</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">11</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1298">
+          <Property Name="Name">Detail1298</Property>
+          <Property Name="Field Name">UnitPrice</Property>
+          <Property Name="Access Method">getDoubleAt</Property>
+          <Property Name="Return Type">double</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">12</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1299">
+          <Property Name="Name">Detail1299</Property>
+          <Property Name="Field Name">Per</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">13</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1300">
+          <Property Name="Name">Detail1300</Property>
+          <Property Name="Field Name">Quantity</Property>
+          <Property Name="Access Method">getDoubleAt</Property>
+          <Property Name="Return Type">double</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">14</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1301">
+          <Property Name="Name">Detail1301</Property>
+          <Property Name="Field Name">UOM</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">15</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1302">
+          <Property Name="Name">Detail1302</Property>
+          <Property Name="Field Name">ReqDelDate</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">16</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1303">
+          <Property Name="Name">Detail1303</Property>
+          <Property Name="Field Name">NetValue</Property>
+          <Property Name="Access Method">getDoubleAt</Property>
+          <Property Name="Return Type">double</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">17</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1304">
+          <Property Name="Name">Detail1304</Property>
+          <Property Name="Field Name">Remarks</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">18</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1305">
+          <Property Name="Name">Detail1305</Property>
+          <Property Name="Field Name">RespondCode</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">19</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1306">
+          <Property Name="Name">Detail1306</Property>
+          <Property Name="Field Name">TotalValue</Property>
+          <Property Name="Access Method">getDoubleAt</Property>
+          <Property Name="Return Type">double</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">20</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1307">
+          <Property Name="Name">Detail1307</Property>
+          <Property Name="Field Name">ForwarderDetails</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">21</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1308">
+          <Property Name="Name">Detail1308</Property>
+          <Property Name="Field Name">ShiptoAddress1</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">22</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1309">
+          <Property Name="Name">Detail1309</Property>
+          <Property Name="Field Name">ShiptoAddress2</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">23</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1310">
+          <Property Name="Name">Detail1310</Property>
+          <Property Name="Field Name">shiptoCity</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">24</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1311">
+          <Property Name="Name">Detail1311</Property>
+          <Property Name="Field Name">shiptoCountryCode</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">25</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1312">
+          <Property Name="Name">Detail1312</Property>
+          <Property Name="Field Name">shiptoPostalcode</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">26</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1313">
+          <Property Name="Name">Detail1313</Property>
+          <Property Name="Field Name">shiptoPostBoxId</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">27</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1314">
+          <Property Name="Name">Detail1314</Property>
+          <Property Name="Field Name">shiptoRegion</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">28</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1315">
+          <Property Name="Name">Detail1315</Property>
+          <Property Name="Field Name">VendorName</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">29</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1316">
+          <Property Name="Name">Detail1316</Property>
+          <Property Name="Field Name">VendorTele</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">30</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1317">
+          <Property Name="Name">Detail1317</Property>
+          <Property Name="Field Name">VendorFax</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">31</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1318">
+          <Property Name="Name">Detail1318</Property>
+          <Property Name="Field Name">BuyerName</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">32</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1319">
+          <Property Name="Name">Detail1319</Property>
+          <Property Name="Field Name">Buyer Code</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">33</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1320">
+          <Property Name="Name">Detail1320</Property>
+          <Property Name="Field Name">Requestor</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">34</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1321">
+          <Property Name="Name">Detail1321</Property>
+          <Property Name="Field Name">DeliveryTerm</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">35</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1322">
+          <Property Name="Name">Detail1322</Property>
+          <Property Name="Field Name">ShipmentTerm</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">36</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1323">
+          <Property Name="Name">Detail1323</Property>
+          <Property Name="Field Name">PaymentTerm</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">37</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1324">
+          <Property Name="Name">Detail1324</Property>
+          <Property Name="Field Name">Note</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">38</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1325">
+          <Property Name="Name">Detail1325</Property>
+          <Property Name="Field Name">currency</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">39</Property>
+          </Model>
+        </Model>
+        <Model Name="Detail1326">
+          <Property Name="Name">Detail1326</Property>
+          <Property Name="Field Name">DeliveryTermText</Property>
+          <Property Name="Access Method">getItemAt</Property>
+          <Property Name="Return Type">java.lang.String</Property>
+          <HiddenProperty Name="Parameter Counter">1</HiddenProperty>
+          <Model Name="Parameter0">
+            <Property Name="Name">Parameter0</Property>
+            <Property Name="Parameter Type">int</Property>
+            <Property Name="Parameter Value">40</Property>
+          </Model>
+        </Model>
+      </Model>
+    </Model>
+  </Model>
+</Model>

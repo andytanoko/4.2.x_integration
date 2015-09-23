@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-j2ee-engine SYSTEM "ejb-j2ee-engine.dtd">
+<ejb-j2ee-engine>
+	<enterprise-beans>
+		<enterprise-bean>
+			<ejb-name>GridNode</ejb-name>
+			<jndi-name>com.gridnode.gtas.server.gridnode.entities.ejb.IGridNodeLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>ConnectionStatus</ejb-name>
+			<jndi-name>com.gridnode.gtas.server.gridnode.entities.ejb.IConnectionStatusLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+	</enterprise-beans>
+</ejb-j2ee-engine>

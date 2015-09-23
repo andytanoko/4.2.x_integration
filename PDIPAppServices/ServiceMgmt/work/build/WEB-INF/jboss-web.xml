@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<jboss-web>
+  <security-domain>java:/jaas/gridtalk-servicemgmt</security-domain>
+  <ejb-ref>
+    <ejb-ref-name>ejb/ServiceMgmtManager</ejb-ref-name>
+    <jndi-name>com.gridnode.pdip.app.servicemgmt.facade.ejb.IServiceMgmtManagerHome</jndi-name>
+  </ejb-ref>
+    
+</jboss-web>
+    

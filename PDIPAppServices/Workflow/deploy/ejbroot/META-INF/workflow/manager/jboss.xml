@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+    <secure>false</secure>
+    <container-configurations />
+    <resource-managers />
+    <enterprise-beans>
+        <session>
+			    <ejb-name>GWFActivityManager</ejb-name>
+			    <jndi-name>com.gridnode.pdip.app.workflow.engine.ejb.IGWFActivityManagerHome</jndi-name>
+			    <!--clustered>${node.clustered:False}</clustered--> <!-- #69 TWX 02082008 Remove it to prevent lookup error in node 2 if we are shutting down node 2 due to container will notify all clustered ejb no to receive any more ejb call -->
+        </session>
+        <session>
+			    <ejb-name>GWFProcessManager</ejb-name>
+			    <jndi-name>com.gridnode.pdip.app.workflow.engine.ejb.IGWFProcessManagerHome</jndi-name>
+			    <!--clustered>${node.clustered:False}</clustered--> <!-- #69 TWX 02082008 Remove it to prevent lookup error in node 2 if we are shutting down node 2 due to container will notify all clustered ejb no to receive any more ejb call -->
+        </session>
+        <session>
+            <ejb-name>GWFRestrictionManager</ejb-name>
+            <jndi-name>com.gridnode.pdip.app.workflow.engine.ejb.IGWFRestrictionManagerHome</jndi-name>
+            <!--clustered>${node.clustered:False}</clustered--> <!-- #69 TWX 02082008 Remove it to prevent lookup error in node 2 if we are shutting down node 2 due to container will notify all clustered ejb no to receive any more ejb call -->
+        </session>
+    </enterprise-beans>
+</jboss>

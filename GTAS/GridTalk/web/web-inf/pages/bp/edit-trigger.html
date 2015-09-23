@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <base href="file:///C:\views\i00054_GT_2.0_I8_2\GTAS\GridTalk\web\gt.css" id="base_tag"/>
+    <link id="xhtml_stylesheet" rel="stylesheet" href="gt.css" type="text/css"/>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <div>
+          <h4 id="heading">
+            lbTrigger
+          </h4>
+          <table>
+            <tr id="triggerType_details">
+              <td id="triggerType_label">
+                lbTriggerType
+              </td>
+              <td>
+                <select id="triggerType_value" size="1" name="triggerType" onchange="serverRefresh();">
+                  <option value="">
+                    &nbsp;
+                  </option>
+                </select>
+              </td>
+              <td id="triggerType_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="triggerLevel_details">
+              <td id="triggerLevel_label">
+                lbTriggerLevel
+              </td>
+              <td>
+                <select id="triggerLevel_value" size="1" name="triggerLevel" onchange="serverRefresh();">
+                  <option value="">
+                    &nbsp;
+                  </option>
+                </select>
+              </td>
+              <td id="triggerLevel_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="partnerFunctionId_details">
+              <td id="partnerFunctionId_label">
+                lbPartnerFunctionId
+              </td>
+              <td>
+                <select id="partnerFunctionId_value" size="1" name="partnerFunctionId">
+                  <option value="">
+                    &nbsp;
+                  </option>
+                </select>
+                <a id="partnerFunctionId_create" href="javascript:divertToMapping('divertCreatePartnerFunction');">
+                  lbCreatePartnerFunction
+                </a>
+              </td>
+              <td id="partnerFunctionId_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="docType_details">
+              <td id="docType_label">
+                lbDocType
+              </td>
+              <td>
+                <select id="docType_value" size="1" name="docType">
+                  <option value="">
+                    &nbsp;
+                  </option>
+                </select>
+                <a id="docType_create" href="javascript:divertToMapping('divertCreateDocumentType');">
+                  lbCreateDocumentType
+                </a>
+              </td>
+              <td id="docType_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="partnerType_details">
+              <td id="partnerType_label">
+                lbPartnerType
+              </td>
+              <td>
+                <select id="partnerType_value" size="1" name="partnerType" onchange="serverRefresh();">
+                  <option value="">
+                    &nbsp;
+                  </option>
+                </select>
+                <a id="partnerType_create" href="javascript:divertToMapping('divertCreatePartnerType');">
+                  lbCreatePartnerType
+                </a>
+              </td>
+              <td id="partnerType_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="partnerGroup_details">
+              <td id="partnerGroup_label">
+                lbPartnerGroup
+              </td>
+              <td>
+                <select id="partnerGroup_value" size="1" name="partnerGroup" onchange="serverRefresh();">
+                  <option value="">
+                    &nbsp;
+                  </option>
+                </select>
+                <a id="partnerGroup_create" href="javascript:divertToMapping('divertCreatePartnerGroup');">
+                  lbCreatePartnerGroup
+                </a>
+              </td>
+              <td id="partnerGroup_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="partnerId_details">
+              <td id="partnerId_label">
+                lbPartnerId
+              </td>
+              <td>
+                <select id="partnerId_value" size="1" name="partnerId" onchange="serverRefresh();">
+                  <option value="">
+                    &nbsp;
+                  </option>
+                </select>
+                <a id="partnerId_create" href="javascript:divertToMapping('divertCreatePartner');">
+                  lbCreatePartner
+                </a>
+              </td>
+              <td id="partnerId_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="channelUid_details">
+              <td id="channelUid_label" class="fieldlabel">
+                lbChannelUid
+              </td>
+              <td>
+                <select id="channelUid_value" size="1" name="channelUid">
+                  <option value="">
+                    &nbsp;
+                  </option>
+                </select>
+              </td>
+              <td id="channelUid_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="isLocalPending_details">
+              <td id="isLocalPending_label">
+                lbIsLocalPending
+              </td>
+              <td>
+                <select id="isLocalPending_value" size="1" name="isLocalPending">
+                  <option value="">
+                    &nbsp;
+                  </option>
+                </select>
+              </td>
+              <td id="isLocalPending_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="numOfRetries_details">
+              <td id="numOfRetries_label">
+                lbNumOfRetries
+              </td>
+              <td>
+                <input id="numOfRetries_value" type="text" name="numOfRetries"/>
+              </td>
+              <td id="numOfRetries_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="retryInterval_details">
+              <td id="retryInterval_label">
+                lbRetryInterval
+              </td>
+              <td>
+                <input id="retryInterval_value" type="text" name="retryInterval"/>
+              </td>
+              <td id="retryInterval_error">
+                &nbsp;
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div id="processDef_details">
+          <h4 id="processDef_heading">
+            lbProcessDef
+          </h4>
+          <table>
+            <tr id="processId_details">
+              <td id="processId_label">
+                lbProcessId
+              </td>
+              <td>
+                <select id="processId_value" size="1" name="processId" onchange="serverRefresh();">
+                  <option value="">
+                    &nbsp;
+                  </option>
+                </select>
+                <a id="processId_create" href="javascript:divertToMapping('divertCreateProcessDef');">
+                  lbCreateProcessDef
+                </a>
+              </td>
+              <td id="processId_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="isRequest_details">
+              <td id="isRequest_label">
+                lbIsRequest
+              </td>
+              <td>
+                <select id="isRequest_value" size="1" name="isRequest">
+                  <option value="">
+                    &nbsp;
+                  </option>
+                </select>
+              </td>
+              <td id="isRequest_error">
+                &nbsp;
+              </td>
+            </tr>
+          </table>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
+

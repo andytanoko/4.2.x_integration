@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+  <secure>false</secure>
+  <resource-managers/>
+  <enterprise-beans>
+    <session>
+      <ejb-name>DocAlertManager</ejb-name>
+      <jndi-name>com.gridnode.gtas.server.docalert.facade.ejb.IDocAlertManagerHome</jndi-name>
+    </session>
+    <message-driven>
+      <ejb-name>ReminderAlertMDBean</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>queue/timeInvokeQueue</destination-jndi-name>
+    </message-driven>
+    <message-driven>
+      <ejb-name>DocumentActivityMDBean</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>topic/notifierTopic</destination-jndi-name>
+	  <mdb-subscription-id>docActivity</mdb-subscription-id>
+      <mdb-client-id>${hostid:gnode1}@docActivity</mdb-client-id>
+	  <!--By enforcing the sequence, we ensure that the JMS server will not deliver the jms msg to the md bean untill all dependence module has deployed since we are using DURABLE TOPIC -->
+	  <depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.gtas.server.docalert.facade.ejb.IDocAlertManagerHome</depends>
+	  <depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.gtas.server.alert.facade.ejb.IGridTalkAlertManagerHome</depends>
+	  <depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.alert.facade.ejb.IAlertManagerHome</depends>
+    </message-driven>
+    <message-driven>
+      <ejb-name>DocAlertRequestMDBean</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>topic/notifierTopic</destination-jndi-name>
+	  <mdb-subscription-id>docAlert</mdb-subscription-id>
+      <mdb-client-id>${hostid:gnode1}@docAlert</mdb-client-id>
+	  <!--By enforcing the sequence, we ensure that the JMS server will not deliver the jms msg to the md bean untill all dependence module has deployed since we are using DURABLE TOPIC -->
+	  <depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.gtas.server.alert.facade.ejb.IGridTalkAlertManagerHome</depends>
+	  <depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.alert.facade.ejb.IAlertManagerHome</depends>
+	  <depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.gtas.server.docalert.facade.ejb.IDocAlertManagerHome</depends>
+    </message-driven>
+  </enterprise-beans>
+</jboss>

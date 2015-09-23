@@ -1,0 +1,11 @@
+Usage notes
+-----------
+
+
+xdoclet
+- this folder is to be placed under the "lib" folder of the ANT engine in order to enable
+  generating of hibernate mapping files in the ANT build file.
+
+com.beust.doclipse_0.7.0.zip
+- unzip the contents under Eclipse\plugins
+- this will enable the xdoclet in eclipse, can be used for hibernate tags, for now.

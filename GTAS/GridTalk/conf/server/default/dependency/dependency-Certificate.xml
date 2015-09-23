@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDependency name="Certificate">
+  <Checker class-name="com.gridnode.pdip.app.channel.helpers.EntityDependencyChecker"
+           method-name="checkDependentSecurityInfosForCertificate">
+    <Param type="java.lang.Long" getter-method="getUId"/>
+  </Checker>
+  <Checker class-name="com.gridnode.gtas.server.partnerprocess.helpers.EntityDependencyChecker"
+           method-name="checkDependentBizCertMappingsForCertificate">
+    <Param type="java.lang.Long" getter-method="getUId"/>
+  </Checker>
+  <Checker class-name="com.gridnode.pdip.base.certificate.helpers.EntityDependencyChecker"
+           method-name="checkDependentReplacementUsage">
+    <Param type="java.lang.Long" getter-method="getUId"/>
+  </Checker>
+</EntityDependency>

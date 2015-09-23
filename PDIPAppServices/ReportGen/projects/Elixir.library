@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>Elixir</fullname>
+  <class>
+    <path>[../../../WorkEnv/jboss-3.0.0_tomcat-4.0.3/server/all/lib/ElixirReport-Lite.jar]</path>
+  </class>
+</library>
+

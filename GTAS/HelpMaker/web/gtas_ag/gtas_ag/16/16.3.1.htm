@@ -1,0 +1,259 @@
+<html>
+<head>
+<title>16.3.1 To create a User Procedure to invoke the UCCnet transport adaptor </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>16.3.1 To create a User Procedure to invoke the UCCnet transport adaptor </h3>
+<p><span></span>
+</p>
+<p><span>In this example, there is a sample Procedure Definition file, </span>
+<span>gn-utadaptor-ext.jar</span>
+<span> that was earlier created. To create it, the User Procedure file is required first.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><img width='640' height='357' border='0' src='../images/image213.jpg'></p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+<p>To create a new Utadaptor-enabled User Procedure:</p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Click User Procedure.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>To create a new user procedure, click Create User Procedure. </span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><img width='375' height='302' border='0' src='../images/image214.jpg'></p>
+<p><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>In the User Procedure detail view page, key in </span>
+<span>gn-utadaptor-ext</span>
+<span> and </span>
+<span>gn-utadaptor-ext</span>
+<span> User Procedure for the Name field and the Description field respectively.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='446' height='127' border='0' src='../images/image215.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>Select Java Procedure for the Procedure Type. Then you have to create new parameters for that type by clicking Edit Java Procedure Configuration. When the user chooses Edit Java Procedure Configuration, GridTalk auto detects and list all available methods (services) in the jar file so that you do not have to know beforehand what is the method and parameters to use. You can use the parameters information here to help them configure the Procedure Parameter List.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='456' height='168' border='0' src='../images/image216.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 5.<span> </span>
+</span>
+<span>Select </span>
+<span>com.Gridnode.utadaptor.Sender</span>
+<span> for the Class Name field.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 6.<span> </span>
+</span>
+<span>Next tick the Execute within Application VM checkbox. Once ticked, it will generate and list down all the available methods.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='467' height='381' border='0' src='../images/image217.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 7.<span> </span>
+</span>
+<span>Select Method Name by clicking its radio button. This field represents one of the methods found in the Class Name. This method is used to not only send the message but also to send the response message back to GridTalk.</span>
+</p>
+<pre><span></span>
+</pre>
+<p><span>Step 8.<span> </span>
+</span>
+<span>Click Save Java Procedure Configuration to save the configuration and to return you to the User Procedure page.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 9.<span> </span>
+</span>
+<span>Proceed to define Return Data Type. This field is the data type of the return value after executing the jar file. Select String.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 10.<span> </span>
+</span>
+<span>Next go to the Procedure Parameter List pane to configure several parameters for that gn-utadaptor-ext user procedure you have created. Click Create Procedure Parameter Configuration. Then enter the inputs as exemplified in the table.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span></span>
+</p>
+<table cellspacing='0' border='1' cellpadding='0'><tr><td width='174' valign='top'><p align='center'><b><span>File</span>
+</b>
+</p>
+</td>
+<td width='139' valign='top'><p align='center'><b><span>Data Source</span>
+</b>
+</p>
+</td>
+<td width='131' valign='top'><p align='center'><b><span>Data Type</span>
+</b>
+</p>
+</td>
+<td width='154' valign='top'><p align='center'><b><span>Data Value</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='174' valign='top'><p align='center'><span>payload.file</span>
+</p>
+</td>
+<td width='139' valign='top'><p align='center'><span>Header Document (GridDoc)</span>
+</p>
+</td>
+<td width='131' valign='top'><p align='center'><span>String</span>
+</p>
+</td>
+<td width='154' valign='top'><pre><span>select “Outbound Payload File”</span>
+</pre>
+</td>
+</tr>
+<tr><td width='174' valign='top'><p align='center'><span>adaptor.dir</span>
+</p>
+</td>
+<td width='139' valign='top'><p align='center'><span>User Defined</span>
+</p>
+</td>
+<td width='131' valign='top'><p align='center'><span>String</span>
+</p>
+</td>
+<td width='154' valign='top'><p><span>full path to “utadaptor “dir under dir </span>
+</p>
+</td>
+</tr>
+<tr><td width='174' valign='top'><p align='center'><span>adaptor.conf</span>
+</p>
+</td>
+<td width='139' valign='top'><p align='center'><span>User Defined</span>
+</p>
+</td>
+<td width='131' valign='top'><p align='center'><span>String</span>
+</p>
+</td>
+<td width='154' valign='top'><p><span>run –adaptor.properties</span>
+</p>
+</td>
+</tr>
+<tr><td width='174' valign='top'><p align='center'><span>response.save.dir</span>
+</p>
+</td>
+<td width='139' valign='top'><p align='center'><span>User Defined </span>
+</p>
+</td>
+<td width='131' valign='top'><p align='center'><span>String</span>
+</p>
+</td>
+<td width='154' valign='top'><p><span>full path to dir to save response messages</span>
+</p>
+</td>
+</tr>
+<tr><td width='174' valign='top'><p align='center'><span>response.file.suffix</span>
+</p>
+</td>
+<td width='139' valign='top'><p align='center'><span>User Defined </span>
+</p>
+</td>
+<td width='131' valign='top'><p align='center'><span>String</span>
+</p>
+</td>
+<td width='154' valign='top'><p><span>resp.xml</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p align='center'><img width='439' height='349' border='0' src='../images/image218.jpg'></p>
+<p><span></span>
+</p>
+<p><span>Step 11.<span> </span>
+</span>
+<span>Click Save User Procedure.</span>
+</p>
+<p><span></span>
+</p>
+<p>To send messages via UtAdaptor User Procedure</p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Go to Communication.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>Configure a Partner Channel with the following profile settings:</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><u><span>Communication Profile</span>
+</u>
+</p>
+<p align='center'><span><img width='455' height='182' border='0' src='../images/image219.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><u><span>Packaging Profile</span>
+</u>
+</p>
+<p align='center'><span><img width='446' height='127' border='0' src='../images/image220.jpg'></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+<p align='center'><u><span>Security Profile</span>
+</u>
+</p>
+<p align='center'><span><img width='445' height='290' border='0' src='../images/image221.jpg'></span>
+</p>
+<p align='center'><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>Save the Channel.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>Assign the new channel to the partner’s business entity. If this is the only channel assigned, set this as the Default Channel for the Partner. Otherwise, configure a Level 4 Import type Trigger for the Partner using this new channel.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 5.<span> </span>
+</span>
+<span>After the above configurations and appropriate configuration for the UtAdaptor program, you may start sending UCCnet messages with your UCCnet partner.</span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

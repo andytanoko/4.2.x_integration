@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDependency name="GridDocument">
+  <Checker class-name="com.gridnode.gtas.server.rnif.helpers.EntityDependencyChecker"
+           method-name="checkDependentProcessInstancesForGridDocument">
+    <Param type="java.lang.Long" getter-method="getRnProfileUid"/>
+    <Param type="java.lang.String" getter-method="getProcessDefId"/>
+    <EntityDescriptorCreator class-name="com.gridnode.gtas.server.rnif.helpers.ProcessInstanceDescriptorCreator"
+                             method-name="createDescriptorList"/>
+  </Checker>
+</EntityDependency>

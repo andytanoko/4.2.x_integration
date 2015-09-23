@@ -1,0 +1,96 @@
+<!DOCTYPE Mapping SYSTEM "XML-DB-MappingFile.dtd">      
+<Mapping root="com.gridnode.pdip.base.docservice.filesystem.model.Domain">
+    <Entity name="com.gridnode.pdip.base.docservice.filesystem.model.Domain" xpath="/Root/Domain" unique="true">
+        <Field name="_domainName">
+            <XPathExpr xpath="/Root/Domain/@name"/>
+        </Field>
+        <Field name="_propertyName">
+            <XPathExpr xpath="/Root/Domain/@propertyname"/>
+        </Field>
+        <Field name="_childCount">
+            <ValueLiteral value="0"/>
+        </Field>
+    </Entity>
+    <Entity name="com.gridnode.pdip.base.docservice.filesystem.model.Folder" xpath="//Domain/Folder">
+        <Field name="_folderName">
+            <XPathExpr xpath="//Domain/Folder/@name"/>
+        </Field>
+        <Field name="_domainId">
+            <ForeignKey entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Domain"
+                        field-name="_uId" relative-xpath=".."/>
+        </Field>
+        <Field name="_parentId">
+            <ValueLiteral value="0"/>
+        </Field>
+        <Field name="_childCount">
+            <ValueLiteral value="100"/>
+        </Field>
+    </Entity>
+    <Entity name="com.gridnode.pdip.base.docservice.filesystem.model.Folder" xpath="//Folder/Folder">
+        <Field name="_folderName">
+            <XPathExpr xpath="//Folder/Folder/@name"/>
+        </Field>
+        <Field name="_domainId">
+            <ForeignKey entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Domain"
+                        field-name="_uId" relative-xpath="ancestor::Domain"/>
+        </Field>
+        <Field name="_parentId">
+            <ForeignKey entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Folder"
+                        field-name="_uId" relative-xpath=".."/>
+        </Field>
+        <Field name="_childCount">
+            <ValueLiteral value="100"/>
+        </Field>
+    </Entity>
+    <Entity name="com.gridnode.pdip.base.docservice.filesystem.model.Document" xpath="//Document">
+        <Field name="_documentName">
+            <XPathExpr xpath="//Document/@name"/>
+        </Field>
+        <Field name="_docType">
+            <XPathExpr xpath="//Document/@type"/>
+        </Field>
+        <Field name="_parentId">
+            <ForeignKey entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Folder"
+                        field-name="_uId" relative-xpath=".."/>
+        </Field>
+        <Field name="_domainId">
+            <ForeignKey entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Domain"
+                        field-name="_uId" relative-xpath="ancestor::Domain"/>
+        </Field>
+        <Field name="_fileCount">
+            <ValueLiteral value="100"/>
+        </Field>
+        <Field name="_author">
+            <XPathExpr xpath="//Document/@author"/>
+        </Field>
+        <Field name="_size">
+            <XPathExpr xpath="//Document/@size"/>
+        </Field>
+        <Field name="_createdOn">
+            <ValueLiteral value="null"/>
+        </Field>
+        <Field name="_lastAccessed">
+            <ValueLiteral value="null"/>
+        </Field>
+    </Entity>
+    <Entity name="com.gridnode.pdip.base.docservice.filesystem.model.File" xpath="//File">
+        <Field name="_fileName">
+            <XPathExpr xpath="//File/@name"/>
+        </Field>
+        <Field name="_isMainFile">
+            <XPathExpr xpath="//File/@type"/>
+        </Field>
+        <Field name="_documentId">
+            <ForeignKey entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Document"
+                        field-name="_uId" relative-xpath=".."/>
+        </Field>
+        <Field name="_parentId">
+            <ForeignKey entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Folder"
+                        field-name="_uId" relative-xpath="../.."/>
+        </Field>
+        <Field name="_domainId">
+            <ForeignKey entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Domain"
+                        field-name="_uId" relative-xpath="ancestor::Domain"/>
+        </Field>
+    </Entity>
+</Mapping>

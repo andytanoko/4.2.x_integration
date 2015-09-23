@@ -1,0 +1,401 @@
+<html>
+<head>
+<title>11.3.1 Web service for depositing doc </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>11.3.1 Web service for depositing doc </h3>
+<p></p>
+<table cellspacing='0' border='1' cellpadding='0'><tr><td width='619' valign='top'><p><span><span></span>
+</span>
+<span> <span>&lt;?</span>
+<span>xml version=&quot;;1.0&quot;; encoding=&quot;;UTF-8&quot;; </span>
+<span>?&gt;</span>
+ </span>
+</p>
+<p><span> <a href='http://localhost:9099/gridtalk/webservice/services/SoapMessageReceiverService?wsdl##'><span>-</span>
+</a>
+ <span>&lt;</span>
+<span>wsdl:definitions</span>
+<span> xmlns:wsdl</span>
+<span>=&quot;;</span>
+<b><span>http://schemas.xmlsoap.org/wsdl/</span>
+</b>
+<span>&quot;;</span>
+<span> </span>
+</span>
+</p>
+<p><span><span> xmlns:mime</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://schemas.xmlsoap.org/wsdl/mime/</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> xmlns:http</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://schemas.xmlsoap.org/wsdl/http/</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> xmlns:soap12</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://schemas.xmlsoap.org/wsdl/soap12/</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> xmlns:ns0</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://exception.soap.transport.base.pdip.gridnode.com/xsd</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> xmlns:ns1</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://exceptions.framework.pdip.gridnode.com/xsd</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> xmlns:wsaw</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://www.w3.org/2006/05/addressing/wsdl</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> xmlns:ns3</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://service.soap.transport.base.pdip.gridnode.com</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> xmlns:ns2</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://model.soap.transport.base.pdip.gridnode.com/xsd</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> xmlns:xs</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://www.w3.org/2001/XMLSchema</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> xmlns:soap</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://schemas.xmlsoap.org/wsdl/soap/</span>
+</b>
+<span><span>&quot;;</span>
+</span>
+<span><span> </span>
+</span>
+</p>
+<p><span><span> targetNamespace</span>
+</span>
+<span><span>=&quot;;</span>
+</span>
+<b><span>http://service.soap.transport.base.pdip.gridnode.com</span>
+</b>
+<span><span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span><span> &lt;</span>
+</span>
+<span><span>wsdl:documentation</span>
+</span>
+<span><span>&gt;</span>
+</span>
+<span><span>SoapMessageReceiverService</span>
+</span>
+<span><span>&lt;/</span>
+</span>
+<span><span>wsdl:documentation</span>
+</span>
+<span><span>&gt;</span>
+</span>
+</p>
+<p><span><span> </span>
+</span>
+<span><a href='http://localhost:9099/gridtalk/webservice/services/SoapMessageReceiverService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:types</span>
+<span>&gt;</span>
+</span>
+</p>
+<p><span><span> </span>
+</span>
+<span><a href='http://localhost:9099/gridtalk/webservice/services/SoapMessageReceiverService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:message name</span>
+<span>=&quot;;</span>
+<b>receiveMessageRequest</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span> <a href='http://localhost:9099/gridtalk/webservice/services/SoapMessageReceiverService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:message</span>
+ <span>name</span>
+<span>=&quot;;</span>
+<b>receiveMessageResponse</b>
+<span>&quot;; /&gt;</span>
+</span>
+</p>
+<p><span><span> </span>
+</span>
+<span><a href='http://localhost:9099/gridtalk/webservice/services/SoapMessageReceiverService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:message name</span>
+<span>=&quot;;</span>
+<b>GtasWsException</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span><a href='http://localhost:9099/gridtalk/webservice/services/SoapMessageReceiverService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:message name</span>
+<span>=&quot;;</span>
+<b>receiveMessage2Request</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span><a href='http://localhost:9099/gridtalk/webservice/services/SoapMessageReceiverService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:message</span>
+ <span>name</span>
+<span>=&quot;;</span>
+<b>receiveMessage2Response</b>
+<span>&quot;; /&gt;</span>
+</span>
+</p>
+<p><span><a href='http://localhost:9099/gridtalk/webservice/services/SoapMessageReceiverService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:portType name</span>
+<span>=&quot;;</span>
+<b>SoapMessageReceiverServicePortType</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span><a href='http://localhost:9099/gridtalk/webservice/services/SoapMessageReceiverService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:binding name</span>
+<span>=&quot;;</span>
+<b>SoapMessageReceiverServiceSOAP11Binding</b>
+<span>&quot;;</span>
+<span> type</span>
+<span>=&quot;;</span>
+<b>ns3:SoapMessageReceiverServicePortType</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span><span> </span>
+</span>
+<span><a href='http://localhost:9099/gridtalk/webservice/services/SoapMessageReceiverService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:binding name</span>
+<span>=&quot;;</span>
+<b>SoapMessageReceiverServiceSOAP12Binding</b>
+<span>&quot;;</span>
+<span> type</span>
+<span>=&quot;;</span>
+<b>ns3:SoapMessageReceiverServicePortType</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span><a href='http://localhost:9099/gridtalk/webservice/services/SoapMessageReceiverService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:binding name</span>
+<span>=&quot;;</span>
+<b>SoapMessageReceiverServiceHttpBinding</b>
+<span>&quot;;</span>
+<span> type</span>
+<span>=&quot;;</span>
+<b>ns3:SoapMessageReceiverServicePortType</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span><a href='http://localhost:9099/gridtalk/webservice/services/SoapMessageReceiverService?wsdl##'><span>+</span>
+</a>
+<span>&lt;</span>
+<span>wsdl:service name</span>
+<span>=&quot;;</span>
+<b>SoapMessageReceiverService</b>
+<span>&quot;;&gt;</span>
+</span>
+</p>
+<p><span><span> &lt;/</span>
+</span>
+<span><span>wsdl:definitions</span>
+</span>
+<span><span>&gt;</span>
+</span>
+</p>
+<p><span></span>
+</p>
+</td>
+</tr>
+</table>
+<p><span>The following shows the web services for depositing the document:</span>
+</p>
+<ol start='1' type='a'><li><b><span>receiveMessage2</span>
+</b>
+<span>: Deposit the Inbound document, using DataHandler to transfer files</span>
+</li>
+</ol>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span>As shown below, the table for describing the WSDL file provides the detail of the services available. </span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' border='1' cellpadding='0'><tr><td width='144' valign='top'><p align='center'><b><span>Parameter</span>
+</b>
+</p>
+</td>
+<td width='267' valign='top'><p align='center'><b><span>Data Type</span>
+</b>
+</p>
+</td>
+<td width='69' valign='top'><p align='center'><b><span>Services</span>
+</b>
+</p>
+</td>
+<td width='148' valign='top'><p align='center'><b><span>Description</span>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>msgInfo</span>
+</p>
+</td>
+<td width='267' valign='top'><p><span>ns2:MessageMetaInfo</span>
+</p>
+</td>
+<td width='69' valign='top'><p><span>a</span>
+</p>
+</td>
+<td width='148' valign='top'><p><span>The meta data of the document.</span>
+</p>
+<p><span></span>
+</p>
+<p><i><span>DocType</span>
+</i>
+<span>: This must match the doc type that is configured in the GT</span>
+</p>
+<p><span></span>
+</p>
+<p><i><span>receiver</span>
+</i>
+<span>: This must match one of the configured Business Entity ID </span>
+</p>
+<p><span></span>
+</p>
+</td>
+</tr>
+<tr><td width='144' valign='top'><p><span>receiveMessageParam</span>
+</p>
+</td>
+<td width='267' valign='top'><p><span>xs:base64Binary</span>
+</p>
+</td>
+<td width='69' valign='top'><p><span>a</span>
+</p>
+</td>
+<td width='148' valign='top'><p><span>The handlers to transfer the byte content of the document. </span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Take note that HTTP Basic Authentication is required in order to access the above web services. Access it with the GT login account (with role <b>User</b>
+) in order for the GT to authenticate the web service client.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The GT login account ID has to match the TP ID.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Refer to 5.1.1<span>To create a new user</span>
+ for the creation of GT login account</span>
+</p>
+<p><i><span>Refer to Chapter 5.1.1 To Create a Partner in GridTalk 4.2 User Guide</span>
+</i>
+<span> for creation of TP</span>
+</p>
+<p><span></span>
+</p>
+</body>
+</html>

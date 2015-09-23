@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.rosettanet.org/RNIF/V02.00" xmlns="http://www.rosettanet.org/RNIF/V02.00"  xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified">
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+	<xsd:element name="AffirmationIndicator">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="2"/>
+				<xsd:maxLength value="3"/>
+				<xsd:enumeration value="Yes"/>
+				<xsd:enumeration value="No"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="GlobalBusinessIdentifier">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:length value="9"/>
+				<xsd:pattern value="\d{9}"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DateTimeStamp">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="20"/>
+				<xsd:maxLength value="20"/>
+				<xsd:pattern value="\d{8}&#x0054;\d{6}\.\d{3}&#x005a;"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="DeliveryHeader">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="isSecureTransportRequired"/>
+				<xsd:element ref="messageDateTime"/>
+				<xsd:element ref="messageReceiverIdentification"/>
+				<xsd:element ref="messageSenderIdentification"/>
+				<xsd:element ref="messageTrackingID"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="FreeFormText">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="nonEmptyString">
+					<xsd:attribute ref="xml:lang"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="nonEmptyString">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="InstanceIdentifier">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="255"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="PartnerIdentification">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="domain" minOccurs="0"/>
+				<xsd:element ref="GlobalBusinessIdentifier"/>
+				<xsd:element ref="locationID" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Value">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="255"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="domain">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="FreeFormText"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="isSecureTransportRequired">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="AffirmationIndicator"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="locationID">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="Value"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="messageDateTime">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="DateTimeStamp"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="messageReceiverIdentification">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="PartnerIdentification"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="messageSenderIdentification">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="PartnerIdentification"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="messageTrackingID">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="InstanceIdentifier"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

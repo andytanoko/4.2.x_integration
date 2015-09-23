@@ -1,0 +1,6 @@
+# export PARAM1=path to the sender.ini
+# export PARAM2=optional, path to the directory.file. applicable if required to send files in multiple locations 
+       
+# sample usage: 
+# . $GRIDTALK_HOME/bin/setenv.sh
+# $JAVA_HOME/bin/java -jar sender.jar $PARAM1 $PARAM2

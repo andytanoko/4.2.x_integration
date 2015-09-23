@@ -1,0 +1,113 @@
+<html>
+<head>
+<title>3.4 List View Page </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h2>3.4 List View Page </h2>
+<p><span></span>
+</p>
+<p><span>List view pages present a list of records of the same type. GridTalk has many types of records. Some are associated with your company’s documents, but the majority of the records in GridTalk are configuration information used to define the processes that GridTalk performs on your company’s documents, to define the partners your GridTalk communicates with, and the methods it uses for such communication. Regardless of the record type the list views in which the records appear all have much the same features.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Presented below for your inspection is a typical list view:</span>
+</p>
+<p></p>
+<p align='center'><img src='../images/image012.jpg' width='515' height='359'></p>
+<p><span></span>
+</p>
+<p><span>At the top of the page is a heading that indicates what types of records are contained in the list view. In this case “Mapping Files”. Each row in the table corresponds to a single record.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The names of the columns are shown in the table header, and these names correspond to fields in the record. The first column is labeled “Edit” and each row contains an image. This image is a shortcut that you may click to open the record for editing. When you open a record for editing, its “detail view” will usually appear in a new browser window. . (The use of detail views will be explained later). </span>
+</p>
+<p><span></span>
+</p>
+<p><span>The first column after the Edit column contains an image and some text that is underlined. The contents of this column are also a link, in this case to allow you to open the record for viewing in a new detail view window.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>For some records, the contents of other columns may also be underlined. There are some cases in which this occurs. The first is when the field of the record to which that column corresponds contains a reference to another record, in which case the link will open a detail view of the record referred to in a new window. The second case is where the field contains a file. In this case clicking the link will allow you to either open the file in a new browser window for viewing or download the file to your computer – this depends on the type of the file and the way in which your web browser has been configured. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Above the table are three links. These links (Refresh, Delete, and Create) are standard for most list view pages. Some list view pages have more links where there is a specialized functionality, while some do not show all three of the links.</span>
+</p>
+<p><span></span>
+</p>
+<p><a name='OLE_LINK8'><span>The first link, “Refresh” is used to refresh the list view with the most current information. If for example another user edits one of the records, its details will not be updated until you refresh the list view or go to a different page and return</span>
+</a>
+<span>. For some record types, such as Documents new records might be coming in from an external source, and clicking <u>Refresh</u>
+ will update the list view to show any new records. (This Refresh link works differently to the refresh button provided by your browser. As mentioned earlier in the documentation you should avoid using the browsers refresh button in GridTalk due to the dynamic nature of the GridTalk application. If the documentation asks you to refresh a list view, it means you should use the <u>Refresh</u>
+ link that is provided on the list view page).</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The second link provided is <u>Delete</u>
+. The delete link allows you to remove records from GridTalk. The type of record to be deleted is also indicated by the text of this link. In the screenshot presented it reads “Delete Mapping Files”. Not all records may be erased, and for some list views, the delete link might not be present. To delete a record, or a set of records, they need to be selected. You will note that the leftmost column of the table contains small boxes, with one for each row. These are known as “Checkboxes”. When you click on a checkbox, a tick will appear in it. Clicking a checkbox that has a tick will remove the tick. The checkboxes in the list view page allow you to select a record or group of records. In addition to the checkbox being checked the row in the table will change color. To delete a group of records, you select those records that you wish to delete and having done so click <u>Delete</u>
+, at which point you are presented with what is called a “dialog box” which asks you to confirm that you really wish to delete the specified records. If you did not intend to click delete or you realize that you have selected an incorrect record, you may back out at this point by clicking the “Cancel” button. Clicking “Ok” will cause the delete operation to proceed. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>The screenshot below shows some “Partner Type” records being selected for deletion:</span>
+</p>
+<p></p>
+<p align='center'><img src='../images/image013.jpg' width='578' height='290'></p>
+<p><span></span>
+</p>
+<p><span>You have probably noticed that in addition to the checkboxes in each individual row of the table, there is also one in the header of the table to the left of the column names. This checkbox allows you to select all the rows on the current page of the list view (we will explain more about list view paging shortly). If no records or some but not all records are selected, then clicking the select-all checkbox will cause all records to be selected. However, if all the records are already selected, then clicking the select-all checkbox will cause all to be unselected.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><img src='../images/image014.jpg' width='438' height='111'></p>
+<p><span>As mentioned above, not all records can be deleted. If, for some reason, a record cannot be deleted and you try to delete it, GridTalk will report this to you in an error message. (Any records in the group you selected that could be deleted will have been deleted by the time you see this message telling you about that ones that could not be erased). An example of this is presented in the screenshot below:</span>
+</p>
+<p align='center'></p>
+<p align='center'><img src='../images/image015.jpg' width='299' height='132'></p>
+<p align='center'></p>
+<p><span>(In this screenshot, the “Business Entity” record could not be deleted, as it is a record that is needed for the correct operation of GridTalk. GridTalk created this Business Entity automatically when the GridTalk administrator registered the application. Certain configuration records of various types are also preconfigured into GridTalk and may not be deleted). </span>
+</p>
+<p><span></span>
+</p>
+<p><span>The other reason why we are not allowed to delete a record is that otherwise the GridTalk configuration would not be in a consistent state. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Below is presented an example screenshot that illustrates the error shown when you try to delete a record that has other records referring to it. We call such records “dependencies” as they “depend” on another record.</span>
+</p>
+<p></p>
+<p align='center'><img src='../images/image016.jpg' width='518' height='376'></p>
+<p></p>
+<p><span>If there is more than one record that cannot be deleted from a group that you select, then each will be indicated individually in the error message. Where there are dependencies the types of dependant record, and the descriptions of each individual dependent record are also provided.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>One point to note about the error messages is the little black triangles. These triangles may be clicked to hide or reveal details in much the same manner as the plus symbols in the navigation tree may be clicked to hide or reveal child nodes. When the error is presented to you, the triangle may be pointing to the right, in which case you will need to click it to reveal the hidden “section” containing further details.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The third link in the trio of links located above the table is <u>Create</u>
+. Like the delete link, it also specifies the type of record to be created. When you click on it, another browser window will open containing a “detail view” of a new instance of that record type.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The final elements of interest in the list view are those that relate to paging. To cut down on network traffic and server workload, the list views that have a lot of records are broken up into a number of pages. The paging tools are found below the table of records. The current page and the number of pages are shown, as the range of records this relates to. The number of records that show on a page is usually 10, however your GridTalk administrator may have configured a different number.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>To the right of the text displaying the current page information are some arrows, and between the two sets of arrows are some page numbers. These page numbers are all links, with the exception of the one relating to the currently displayed page in the list, which is grayed out. As would be expected, clicking the number will take you to that page. Of the arrows the outermost will take you to the first and last pages, while the inner arrows will take you to the previous and next pages respectively. If you are on the first or last page, two of the arrows will not be clickable and will be grayed out.</span>
+</p>
+<p></p>
+<p align='center'><img src='../images/image017.jpg' width='344' height='33'></p>
+<pre><span></span>
+</pre>
+<pre><span></span>
+</pre>
+<pre><span></span>
+</pre>
+<b><span><br clear='all'></span>
+</b>
+</body>
+</html>

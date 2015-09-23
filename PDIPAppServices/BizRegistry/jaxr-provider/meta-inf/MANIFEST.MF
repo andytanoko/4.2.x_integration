@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Implementation-Title: PDIP BusinessRegistry JAXR Provider Plug-in
+Implementation-Vendor: GridNode Pte Ltd
+Class-Path: castor-0.9.3.9-xml.jar jaxr-api-1.0.jar jaxr-impl-1.0_4.jar saaj-api-1.2.jar saaj-impl-1.2.jar xalan-j_2_4_1.jar xercesImpl-2.5.0.jar xml-apis.jar

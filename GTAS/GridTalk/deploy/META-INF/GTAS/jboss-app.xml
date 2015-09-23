@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-app>
+    <module-order>strict</module-order>
+	<loader-repository>
+		com.gridnode:loader=gtas.ear
+		<loader-repository-config>
+			java2ParentDelegation=true
+		</loader-repository-config>
+	</loader-repository>
+	
+  <module>
+    <service>gtas-schedule-service.xml</service>
+  </module>
+</jboss-app>

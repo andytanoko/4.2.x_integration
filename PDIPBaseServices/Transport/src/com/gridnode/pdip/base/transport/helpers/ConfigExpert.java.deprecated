@@ -1,0 +1,1814 @@
+package com.gridnode.pdip.base.transport.helpers;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+
+import javax.swing.*;
+import javax.swing.border.*;
+
+
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: ConfigExpert.java
+ *
+ * ****************************************************************************
+ * Date           Author              Changes
+ * ****************************************************************************
+ * 31 March 2003  Qingsong            Initial creation for GTAS 2.0
+ */
+
+class URLPanel2 extends JPanel
+{
+  GridBagLayout gridBagLayout1 = new GridBagLayout();
+  TitledBorder titledBorder1;
+  JCheckBox isSyn = new JCheckBox();
+  JLabel jLabel16 = new JLabel();
+  JLabel jLabel15 = new JLabel();
+  JTextField DUNS_S = new JTextField();
+  JTextField DUNS_R = new JTextField();
+  JComboBox PIP = new JComboBox();
+  JTextField pipVersion = new JTextField();
+  JCheckBox isAck = new JCheckBox();
+  JComboBox rn_version = new JComboBox();
+
+  public URLPanel2()
+  {
+    try
+    {
+      jbInit();
+    }
+    catch(Exception ex)
+    {
+      ex.printStackTrace();
+    }
+  }
+  void jbInit() throws Exception
+  {
+    titledBorder1 = new TitledBorder("");
+    this.setLayout(gridBagLayout1);
+    this.setBorder(titledBorder1);
+    isSyn.setText("Sync");
+    jLabel16.setText("DUNS_Receipt");
+    jLabel15.setText("DUNS_Sender");
+    DUNS_S.setMinimumSize(new Dimension(67, 21));
+    DUNS_S.setText("987654321");
+    DUNS_R.setMinimumSize(new Dimension(67, 21));
+    DUNS_R.setText("123456789");
+    pipVersion.setMinimumSize(new Dimension(80, 21));
+    pipVersion.setPreferredSize(new Dimension(80, 21));
+    pipVersion.setText("V02.00");
+    isAck.setText("Ack");
+    this.add(rn_version,                               new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(jLabel15,               new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(DUNS_S,                 new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 67, 0));
+    this.add(jLabel16,              new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    this.add(DUNS_R,                new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    this.add(PIP,            new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.NORTHWEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(pipVersion,            new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(isSyn,            new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.NORTH, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(isAck,            new GridBagConstraints(4, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.NORTHWEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    PIP.addItem("0C1");
+    PIP.addItem("0C2");
+    PIP.addItem("0C3");
+    PIP.addItem("0C4");
+    PIP.addItem("3A4");
+    rn_version.addItem("RNIF 1.1");
+    rn_version.addItem("RNIF 2.0");
+  }
+}
+class URLPanel1 extends JPanel
+{
+  GridBagLayout gridBagLayout1 = new GridBagLayout();
+  TitledBorder titledBorder1;
+  JTextField url = new JTextField();
+  JCheckBox Post = new JCheckBox();
+  JLabel jLabel12 = new JLabel();
+  JTextField timeout = new JTextField();
+  JButton browseFile = new JButton();
+  JTextField file_name = new JTextField();
+  JCheckBox nothread = new JCheckBox();
+
+  URLPanel2 RNP = new URLPanel2();
+  JCheckBox isRNMsg = new JCheckBox();
+  ConfigExpert  expert = null;
+
+  public URLPanel1()
+  {
+    try
+    {
+      jbInit();
+    }
+    catch(Exception ex)
+    {
+      ex.printStackTrace();
+    }
+  }
+  void jbInit() throws Exception
+  {
+    titledBorder1 = new TitledBorder("");
+    timeout.setPreferredSize(new Dimension(40, 21));
+    timeout.setMinimumSize(new Dimension(40, 21));
+    jLabel12.setText("timeout");
+    Post.setText("POST");
+    url.setMinimumSize(new Dimension(160, 21));
+    url.setPreferredSize(new Dimension(160, 21));
+    url.setText("http://www.gridnode.com");
+    this.setLayout(gridBagLayout1);
+    this.setBorder(titledBorder1);
+    browseFile.setText("Browse");
+    browseFile.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        browseFile_actionPerformed(e);
+      }
+    });
+
+    RNP.PIP.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        PIP_actionPerformed(e);
+      }
+    });
+
+    file_name.setMinimumSize(new Dimension(120, 21));
+    file_name.setPreferredSize(new Dimension(120, 21));
+    nothread.setText("no thread");
+
+    isRNMsg.setText("RN Message");
+    isRNMsg.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        isRNMsg_actionPerformed(e);
+      }
+    });
+    this.add(Post,                      new GridBagConstraints(5, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.SOUTH, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(url,             new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(file_name,             new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(browseFile,            new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(jLabel12,            new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(timeout,            new GridBagConstraints(4, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(RNP,             new GridBagConstraints(0, 1, 9, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(nothread,  new GridBagConstraints(6, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.SOUTH, GridBagConstraints.NONE, new Insets(3, 3, 3, 0), 0, 0));
+    this.add(isRNMsg,   new GridBagConstraints(7, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+  }
+  void browseFile_actionPerformed(ActionEvent e)
+  {
+      JFileChooser chooser = new JFileChooser();
+      chooser.setMultiSelectionEnabled(true);
+      if(chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
+      {
+        File[] files = chooser.getSelectedFiles();
+        String filenames="";
+        for(int i = 0; i< files.length ; i++)
+        {
+          if(i != 0)
+           filenames += ";";
+          filenames += files[i].getAbsolutePath();
+        }
+        file_name.setText(filenames);
+      }
+  }
+
+  void PIP_actionPerformed(ActionEvent e)
+  {
+    String name = file_name.getText();
+    if(name == null)
+      name = "";
+    if(name.length() != 0)
+      name += ";";
+    name += RNP.PIP.getSelectedItem();
+    file_name.setText(name);
+  }
+
+  void isRNMsg_actionPerformed(ActionEvent e)
+  {
+      RNP.setVisible(isRNMsg.isSelected());
+      expert.pack();
+  }
+
+  void setFromEngine(RNIFTestEngine testengine)
+  {
+    file_name.setText(testengine.getFile_name());
+    url.setText(testengine.getUrl());
+    Post.setSelected(testengine.isPost());
+    timeout.setText(""+testengine.getTimeout());
+    nothread.setSelected(testengine.isSingleThread());
+    if(testengine.isRNIF1())
+      RNP.rn_version.setSelectedIndex(0);
+    else
+      RNP.rn_version.setSelectedIndex(1);
+    RNP.pipVersion.setText(testengine.getPipversion());
+    RNP.isSyn.setSelected(testengine.isSync());
+    RNP.isAck.setSelected(testengine.isAck());
+    RNP.DUNS_R.setText(""+testengine.getReceiverDuns());
+    RNP.DUNS_S.setText("" + testengine.getSendDuns());
+  }
+
+  void setToEngine(RNIFTestEngine testengine)
+  {
+    testengine.setFile_name(file_name.getText());
+    testengine.setUrl(url.getText());
+    testengine.setPost(Post.isSelected());
+    testengine.setSingleThread(nothread.isSelected());
+
+    testengine.setRNIF1(RNP.rn_version.getSelectedIndex() == 0);
+    testengine.setSync(RNP.isSyn.isSelected());
+    testengine.setPipversion(RNP.pipVersion.getText());
+    testengine.setAck(RNP.isAck.isSelected());
+    testengine.setSendDuns(ConfigExpert.getInt(RNP.DUNS_S.getText()));
+    testengine.setReceiverDuns(ConfigExpert.getInt(RNP.DUNS_R.getText()));
+    testengine.setTimeout(ConfigExpert.getInt(timeout.getText()));
+  }
+}
+ class HTTPSPanel1 extends JPanel
+{
+  GridBagLayout gridBagLayout1 = new GridBagLayout();
+  JTextField trust_store = new JTextField();
+  JLabel jLabel11 = new JLabel();
+  JTextField keystore_password = new JTextField();
+  JLabel jLabel10 = new JLabel();
+  JButton browseKeyStore = new JButton();
+  JTextField keystore_filename = new JTextField();
+  JButton trustStore = new JButton();
+  JLabel jLabel9 = new JLabel();
+  JLabel jLabel7 = new JLabel();
+  JCheckBox auth_client = new JCheckBox();
+  JCheckBox auth_server = new JCheckBox();
+  JCheckBox verfi_host = new JCheckBox();
+  JTextField trust_password = new JTextField();
+  TitledBorder titledBorder1;
+
+  public HTTPSPanel1()
+  {
+    try
+    {
+      jbInit();
+    }
+    catch(Exception ex)
+    {
+      ex.printStackTrace();
+    }
+  }
+  void jbInit() throws Exception
+  {
+    titledBorder1 = new TitledBorder("");
+    verfi_host.setText("verify_host");
+    verfi_host.setToolTipText("");
+    auth_server.setText("auth_server");
+    auth_server.setToolTipText("");
+    auth_client.setText("auth_client");
+    jLabel7.setText("Key Store");
+    jLabel9.setText("password");
+    trustStore.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        trustStore_actionPerformed(e);
+      }
+    });
+    trustStore.setText("Browse");
+    keystore_filename.setMinimumSize(new Dimension(100, 21));
+    keystore_filename.setPreferredSize(new Dimension(100, 21));
+    keystore_filename.setToolTipText("");
+    browseKeyStore.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        browseKeyStore_actionPerformed(e);
+      }
+    });
+    browseKeyStore.setMinimumSize(new Dimension(87, 27));
+    browseKeyStore.setPreferredSize(new Dimension(87, 27));
+    browseKeyStore.setText("Browse");
+    jLabel10.setText("password");
+    keystore_password.setPreferredSize(new Dimension(100, 21));
+    keystore_password.setMinimumSize(new Dimension(100, 21));
+    jLabel11.setText("trust store");
+    this.setLayout(gridBagLayout1);
+    this.setBorder(titledBorder1);
+    trust_store.setMinimumSize(new Dimension(100, 21));
+    trust_store.setPreferredSize(new Dimension(100, 21));
+    trust_password.setMinimumSize(new Dimension(100, 21));
+    trust_password.setPreferredSize(new Dimension(100, 21));
+    this.add(jLabel7,                                           new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(keystore_filename,                                    new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.NORTHWEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(jLabel10,                             new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(trust_store,                         new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(jLabel11,                    new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(keystore_password,             new GridBagConstraints(4, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(auth_server,        new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(auth_client,        new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(jLabel9,       new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(trust_password,        new GridBagConstraints(4, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(browseKeyStore, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.NORTH, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(trustStore, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(verfi_host, new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.SOUTH, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+  }
+
+  void browseKeyStore_actionPerformed(ActionEvent e)
+  {
+      JFileChooser chooser = new JFileChooser();
+      if(chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
+      {
+        keystore_filename.setText(chooser.getSelectedFile().getAbsolutePath());
+      }
+  }
+
+  void trustStore_actionPerformed(ActionEvent e)
+  {
+      JFileChooser chooser = new JFileChooser();
+      if(chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
+      {
+        trust_store.setText(chooser.getSelectedFile().getAbsolutePath());
+      }
+
+  }
+
+  void setFromEngine(RNIFTestEngine testengine)
+  {
+    auth_server.setSelected(testengine.isAuthenticateServer());
+    auth_client.setSelected(testengine.isAuthenticateClient());
+    verfi_host.setSelected(testengine.isVerifyServerHostname());
+    keystore_filename.setText(testengine.getKeyStoreFile());
+    keystore_password.setText(testengine.getKeyStorePassword());
+    trust_store.setText(testengine.getTrustStoreFile());
+    trust_password.setText(testengine.getTrustStorePassword());
+  }
+
+  void setToEngine(RNIFTestEngine testengine)
+  {
+    testengine.setAuthenticateServer(auth_server.isSelected());
+    testengine.setAuthenticateClient(auth_client.isSelected());
+    testengine.setVerifyServerHostname(verfi_host.isSelected());
+    testengine.setKeyStoreFile(keystore_filename.getText());
+    testengine.setKeyStorePassword(keystore_password.getText());
+    testengine.setTrustStoreFile(trust_store.getText());
+    testengine.setTrustStorePassword(trust_password.getText());
+  }
+}
+class LogPanel2 extends JPanel
+{
+ GridBagLayout gridBagLayout1 = new GridBagLayout();
+  JScrollPane jScrollPane1 = new JScrollPane();
+  JButton clear = new JButton();
+  JPanel jPanel5 = new JPanel();
+  ConfigExpert  expert = null;
+  JTextArea mes = new JTextArea();
+  public LogPanel2()
+  {
+    try
+    {
+      jbInit();
+    }
+    catch(Exception ex)
+    {
+      ex.printStackTrace();
+    }
+  }
+  void jbInit() throws Exception
+  {
+    this.setLayout(gridBagLayout1);
+    clear.setHorizontalAlignment(SwingConstants.TRAILING);
+    clear.setText("clear");
+    clear.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        clear_actionPerformed(e);
+      }
+    });
+    this.add(jScrollPane1,  new GridBagConstraints(0, 0, 2, 1, 1.0, 1.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(3, 3, 0, 3), 0, 0));
+    jScrollPane1.getViewport().add(mes, null);
+    this.add(jPanel5,  new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    jPanel5.add(clear, null);
+  }
+
+  void clear_actionPerformed(ActionEvent e)
+  {
+      mes.setText("");
+  }
+}
+class BackendPanel1 extends JPanel
+{
+  GridBagLayout gridBagLayout1 = new GridBagLayout();
+  JButton BrowseA = new JButton();
+  JCheckBox isBackend = new JCheckBox();
+  JTextField back_partnerID = new JTextField();
+  JTextField attachmentFiles = new JTextField();
+  JTextField cmdline = new JTextField();
+  JTextField back_ip = new JTextField();
+  JLabel jLabel26 = new JLabel();
+  JLabel jLabel25 = new JLabel();
+  JLabel jLabel24 = new JLabel();
+  JPasswordField back_pw = new JPasswordField();
+  JLabel jLabel23 = new JLabel();
+  JTextField back_username = new JTextField();
+  JLabel jLabel22 = new JLabel();
+  JLabel jLabel19 = new JLabel();
+  JTextField back_doc = new JTextField();
+  TitledBorder titledBorder1;
+
+  public BackendPanel1()
+  {
+    try
+    {
+      jbInit();
+    }
+    catch(Exception ex)
+    {
+      ex.printStackTrace();
+    }
+  }
+  void jbInit() throws Exception
+  {
+    titledBorder1 = new TitledBorder("");
+    back_doc.setPreferredSize(new Dimension(70, 21));
+    jLabel19.setText("Gridtalk Server");
+    jLabel22.setText("username");
+    back_username.setPreferredSize(new Dimension(63, 21));
+    jLabel23.setText("doc type");
+    back_pw.setPreferredSize(new Dimension(63, 21));
+    jLabel24.setText("partner ID");
+    jLabel25.setText("passwd");
+    jLabel26.setText("Attachment");
+    jLabel26.setPreferredSize(new Dimension(100, 17));
+    jLabel26.setMaximumSize(new Dimension(100, 17));
+    back_ip.setPreferredSize(new Dimension(80, 21));
+    back_ip.setMinimumSize(new Dimension(20, 21));
+    cmdline.setPreferredSize(new Dimension(200, 21));
+    cmdline.setMinimumSize(new Dimension(200, 21));
+    attachmentFiles.setPreferredSize(new Dimension(200, 21));
+    attachmentFiles.setMinimumSize(new Dimension(63, 21));
+    back_partnerID.setPreferredSize(new Dimension(70, 21));
+    back_partnerID.setMinimumSize(new Dimension(63, 21));
+    isBackend.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        isBackend_actionPerformed(e);
+      }
+    });
+    isBackend.setText("Backend");
+    isBackend.setHorizontalTextPosition(SwingConstants.LEFT);
+    BrowseA.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        BrowseA_actionPerformed(e);
+      }
+    });
+    BrowseA.setText("Browse");
+    BrowseA.setActionCommand("BrowseA");
+    this.setLayout(gridBagLayout1);
+    this.setBorder(titledBorder1);
+    this.add(attachmentFiles,                        new GridBagConstraints(1, 3, 3, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    this.add(jLabel22,                        new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    this.add(jLabel23,                    new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    this.add(back_username,                  new GridBagConstraints(1, 1, 3, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 56, 0));
+    this.add(jLabel25,              new GridBagConstraints(4, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    this.add(back_pw,             new GridBagConstraints(5, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 50, 0));
+    this.add(jLabel19,           new GridBagConstraints(0, 0, 2, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    this.add(back_ip,        new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    this.add(jLabel24,        new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    this.add(cmdline,    new GridBagConstraints(4, 3, 2, 1, 0.0, 0.0
+            ,GridBagConstraints.SOUTH, GridBagConstraints.NONE, new Insets(0, 27, 0, 0), 0, 0));
+    this.add(isBackend,   new GridBagConstraints(0, 4, 2, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    this.add(jLabel26,  new GridBagConstraints(0, 5, 2, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    this.add(back_partnerID,  new GridBagConstraints(4, 2, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    this.add(back_doc,        new GridBagConstraints(2, 5, 4, 1, 0.0, 0.0
+            ,GridBagConstraints.SOUTH, GridBagConstraints.NONE, new Insets(0, 0, 0, 54), 104, 0));
+    this.add(BrowseA,  new GridBagConstraints(5, 2, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+  }
+  void BrowseA_actionPerformed(ActionEvent e)
+  {
+      JFileChooser chooser = new JFileChooser();
+      chooser.setMultiSelectionEnabled(true);
+      if(chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
+      {
+        File[] files = chooser.getSelectedFiles();
+        String filenames="";
+        for(int i = 0; i< files.length ; i++)
+        {
+          if(i != 0)
+           filenames += ";";
+          filenames += files[i].getAbsolutePath();
+        }
+        attachmentFiles.setText(filenames);
+      }
+  }
+  void isBackend_actionPerformed(ActionEvent e)
+  {
+
+  }
+
+  void setFromEngine(RNIFTestEngine testengine)
+  {
+    isBackend.setSelected(testengine.isBackend());
+    back_ip.setText(testengine.getBackend_ip());
+    back_partnerID.setText(testengine.getBackend_parterID());
+    //back_port.setText(testengine.getBackend_port());
+    back_username.setText(testengine.getGts_username());
+    back_pw.setText(testengine.getGts_passwd());
+    attachmentFiles.setText(testengine.getBackend_attachment_filename());
+    cmdline.setText(testengine.getCmdline());
+  }
+
+  void setToEngine(RNIFTestEngine testengine)
+  {
+    testengine.setBackend(isBackend.isSelected());
+    testengine.setBackend_doc_type(back_doc.getText());
+    testengine.setBackend_ip(back_ip.getText());
+    //testengine.setBackend_port(back_port.getText());
+    testengine.setBackend_parterID(back_partnerID.getText());
+    testengine.setGts_username(back_username.getText());
+    testengine.setGts_passwd(new String(back_pw.getPassword()));
+    testengine.setBackend_attachment_filename(attachmentFiles.getText());
+    testengine.setCmdline(cmdline.getText());
+  }
+
+}
+ class RNServerPanel1 extends JPanel
+{
+  GridBagLayout gridBagLayout1 = new GridBagLayout();
+  JTextField server_accept = new JTextField();
+  JTextField server_timeout = new JTextField();
+  JTextField server_port = new JTextField();
+  JButton server_start = new JButton();
+  JLabel jLabel28 = new JLabel();
+  JLabel jLabel27 = new JLabel();
+  JCheckBox server_autoAck = new JCheckBox();
+  JLabel jLabel20 = new JLabel();
+  TitledBorder titledBorder1;
+  public RNServerPanel1()
+  {
+    try
+    {
+      jbInit();
+    }
+    catch(Exception ex)
+    {
+      ex.printStackTrace();
+    }
+  }
+  void jbInit() throws Exception
+  {
+    titledBorder1 = new TitledBorder("");
+    jLabel20.setText("server port");
+    server_autoAck.setText("Auto Ack");
+    jLabel27.setText("Accept Times");
+    jLabel28.setText("Time Out");
+    server_start.setText("Start");
+    server_start.setText("Start");
+    server_port.setText("0");
+    server_port.setPreferredSize(new Dimension(40, 21));
+    server_port.setMinimumSize(new Dimension(20, 21));
+    server_timeout.setText("7200");
+    server_timeout.setPreferredSize(new Dimension(40, 21));
+    server_accept.setText("-1");
+    server_accept.setPreferredSize(new Dimension(40, 21));
+    this.setLayout(gridBagLayout1);
+    this.setBorder(titledBorder1);
+    this.add(jLabel20,      new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.SOUTHEAST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(server_port,      new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(jLabel27,     new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(server_accept,    new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(jLabel28,   new GridBagConstraints(4, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(server_timeout,   new GridBagConstraints(5, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(server_autoAck,  new GridBagConstraints(6, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(server_start,  new GridBagConstraints(7, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+  }
+
+  void setFromEngine(RNIFTestEngine testengine)
+  {
+    server_port.setText(""+testengine.getServerPort());
+    server_timeout.setText(""+testengine.getServer_timeout());
+    server_accept.setText(""+testengine.getServer_accept_times());
+    server_autoAck.setSelected(testengine.isAutoAck());
+    if(testengine.isServerStarted())
+        server_start.setText("Stop");
+    else
+        server_start.setText("Start");
+  }
+
+  void setToEngine(RNIFTestEngine testengine)
+  {
+    testengine.setServer_port(ConfigExpert.getInt(server_port.getText()));
+    testengine.setServer_timeout(ConfigExpert.getInt(server_timeout.getText()));
+    testengine.setServer_accept_times(ConfigExpert.getInt(server_accept.getText()));
+    testengine.setAutoAck(server_autoAck.isSelected());
+  }
+}
+class RNPanel2 extends JPanel
+{
+  GridBagLayout gridBagLayout1 = new GridBagLayout();
+  JCheckBox gtas_P = new JCheckBox();
+  JButton set = new JButton();
+  JButton Test = new JButton();
+  JLabel jLabel14 = new JLabel();
+  JTextField Delay = new JTextField();
+  JLabel jLabel13 = new JLabel();
+  JTextField Times = new JTextField();
+  JCheckBox enableProxy = new JCheckBox();
+  JCheckBox enableHTTPS = new JCheckBox();
+  JCheckBox isBackend = new JCheckBox();
+  JCheckBox rnlog = new JCheckBox();
+  JLabel jLabel15 = new JLabel();
+  JTextField ReceiverURL = new JTextField();
+
+
+  public RNPanel2()
+  {
+    try
+    {
+      jbInit();
+    }
+    catch(Exception ex)
+    {
+      ex.printStackTrace();
+    }
+  }
+
+  void jbInit() throws Exception
+  {
+    Test.setText("Test");
+    Test.setText("Send");
+    set.setText("Set");
+    gtas_P.setText("GTAS PACK");
+    this.setLayout(gridBagLayout1);
+    jLabel14.setText("Times");
+    ReceiverURL.setPreferredSize(new Dimension(160, 21));
+    ReceiverURL.setMinimumSize(new Dimension(160, 21));
+    jLabel15.setText("ReceiverURL");
+    Delay.setMinimumSize(new Dimension(60, 21));
+    Delay.setPreferredSize(new Dimension(60, 21));
+    jLabel13.setText("Delay(ms)");
+    Times.setMinimumSize(new Dimension(20, 21));
+    Times.setPreferredSize(new Dimension(20, 21));
+    enableProxy.setText("proxy");
+    enableHTTPS.setText("https");
+    isBackend.setText("Backend");
+    rnlog.setText("log");
+    this.add(enableHTTPS,   new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    this.add(enableProxy,    new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    this.add(jLabel15,            new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(ReceiverURL,            new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(gtas_P,     new GridBagConstraints(4, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+
+    this.add(isBackend,   new GridBagConstraints(5, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(rnlog,   new GridBagConstraints(6, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+
+    this.add(jLabel13,             new GridBagConstraints(7, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(Delay,             new GridBagConstraints(8, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(jLabel14,         new GridBagConstraints(9, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(Times,       new GridBagConstraints(10, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(set,          new GridBagConstraints(11, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 0, 3, 3), 0, 0));
+    this.add(Test,          new GridBagConstraints(12, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.SOUTHEAST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+
+  }
+}
+class RNPanel1 extends JPanel
+{
+  GridBagLayout gridBagLayout1 = new GridBagLayout();
+  ProxyPanel1 PROXYP = new ProxyPanel1();
+  HTTPSPanel1 HTTPSP = new HTTPSPanel1();
+  URLPanel1 URLP = new URLPanel1();
+  BackendPanel1 BackendP = new BackendPanel1();
+  RNServerPanel1 RNServerP = new RNServerPanel1();
+  RNPanel2 CMDP = new RNPanel2();
+  LogPanel2 RNLOGP = new LogPanel2();
+  ConfigExpert  expert = null;
+
+  public RNPanel1()
+  {
+    try
+    {
+      jbInit();
+    }
+    catch(Exception ex)
+    {
+      ex.printStackTrace();
+    }
+  }
+  void jbInit() throws Exception
+  {
+    this.setLayout(gridBagLayout1);
+    this.add(URLP,     new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(HTTPSP,     new GridBagConstraints(0, 1, 1, 1, 1.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(PROXYP,     new GridBagConstraints(0, 2, 1, 1, 1.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(BackendP,    new GridBagConstraints(0, 3, 1, 1, 1.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(RNServerP,    new GridBagConstraints(0, 4, 1, 1, 1.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(RNLOGP,        new GridBagConstraints(0, 5, 1, 1, 1.0, 1.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(CMDP,       new GridBagConstraints(0, 6, 1, 1, 1.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(3, 3, 3, 3), 0, 0));
+
+   CMDP.set.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        set_actionPerformed(e);
+      }
+    });
+    CMDP.Test.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        Test_actionPerformed(e);
+      }
+    });
+    CMDP.enableProxy.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        enableProxy_actionPerformed(e);
+      }
+    });
+    CMDP.enableHTTPS.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        enableHTTPS_actionPerformed(e);
+      }
+    });
+    CMDP.isBackend.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        isBackend_actionPerformed(e);
+      }
+    });
+    CMDP.rnlog.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        rnlog_actionPerformed(e);
+      }
+    });
+    RNServerP.server_start.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        server_start_actionPerformed(e);
+      }
+    });
+
+    URLP.isRNMsg.setSelected(true);
+    HTTPSP.setVisible(false);
+    PROXYP.setVisible(false);
+    BackendP.setVisible(false);
+    RNLOGP.setVisible(false);
+  }
+
+ void set_actionPerformed(ActionEvent e)
+  {
+      setToEngine();
+  }
+
+  void Test_actionPerformed(ActionEvent e)
+  {
+    setToEngine();
+    ConfigExpert.testengine.TestRNIF();
+  }
+
+  void rnlog_actionPerformed(ActionEvent e)
+  {
+      RNLOGP.setVisible(CMDP.rnlog.isSelected());
+      expert.pack();
+  }
+
+  void isBackend_actionPerformed(ActionEvent e)
+  {
+      BackendP.setVisible(CMDP.isBackend.isSelected());
+      expert.pack();
+  }
+
+  void enableHTTPS_actionPerformed(ActionEvent e)
+  {
+      HTTPSP.setVisible(CMDP.enableHTTPS.isSelected());
+      expert.pack();
+  }
+
+  void enableProxy_actionPerformed(ActionEvent e)
+  {
+      PROXYP.setVisible(CMDP.enableProxy.isSelected());
+      expert.pack();
+  }
+
+  void server_start_actionPerformed(ActionEvent e)
+  {
+      RNIFTestEngine testengine = ConfigExpert.testengine;
+      if(!testengine.isServerStarted())
+      {
+        setToEngine();
+        testengine.startServer();
+        RNServerP.server_port.setText(""+testengine.getServerPort());
+        RNServerP.server_start.setText("Stop");
+      }
+      else
+      {
+        testengine.stopServer();
+        RNServerP.server_start.setText("Start");
+      }
+  }
+
+  void setFromEngine()
+  {
+    RNIFTestEngine testengine = ConfigExpert.testengine;
+    CMDP.Delay.setText(""+testengine.getDelay());
+    CMDP.Times.setText("" + testengine.getTimes());
+    CMDP.gtas_P.setSelected(testengine.isGTASPackage());
+    CMDP.ReceiverURL.setText(testengine.getReceiverURL());
+
+    URLP.setFromEngine(testengine);
+    PROXYP.setFromEngine(testengine);
+    HTTPSP.setFromEngine(testengine);
+    BackendP.setFromEngine(testengine);
+    RNServerP.setFromEngine(testengine);
+    HTTPSP.setVisible(testengine.isServer_https());
+  }
+
+  void setToEngine()
+  {
+    RNIFTestEngine testengine = ConfigExpert.testengine;
+    testengine.setDelay(ConfigExpert.getInt(CMDP.Delay.getText()));
+    testengine.setTimes(ConfigExpert.getInt(CMDP.Times.getText()));
+    testengine.setGTASPackage(CMDP.gtas_P.isSelected());
+    testengine.setReceiverURL(CMDP.ReceiverURL.getText());
+
+    URLP.setToEngine(testengine);
+    PROXYP.setToEngine(testengine);
+    HTTPSP.setToEngine(testengine);
+    RNServerP.setToEngine(testengine);
+    BackendP.setToEngine(testengine);
+    testengine.parseFileName();
+    testengine.setServer_https(HTTPSP.isVisible());
+  }
+}
+class ProxyPanel1 extends JPanel
+{
+   GridBagLayout gridBagLayout1 = new GridBagLayout();
+  JTextField proxy_ip = new JTextField();
+  JLabel fd = new JLabel();
+  JTextField username = new JTextField();
+  JLabel jLabel8 = new JLabel();
+  JTextField proxy_port = new JTextField();
+  JLabel jLabel4 = new JLabel();
+  JTextField password = new JTextField();
+  JLabel jLabel3 = new JLabel();
+  JCheckBox noresetProxy = new JCheckBox();
+  JLabel jLabel2 = new JLabel();
+  JTextField proxy_pac = new JTextField();
+  TitledBorder titledBorder1;
+
+  public ProxyPanel1()
+  {
+    try
+    {
+      jbInit();
+    }
+    catch(Exception ex)
+    {
+      ex.printStackTrace();
+    }
+  }
+  void jbInit() throws Exception
+  {
+    titledBorder1 = new TitledBorder("");
+    jLabel2.setText("Proxy IP");
+    noresetProxy.setText("no reset Proxy");
+    jLabel3.setText("Port");
+    jLabel4.setText("PAC");
+    proxy_port.setMinimumSize(new Dimension(32, 21));
+    proxy_port.setText("8080");
+    jLabel8.setText("Password");
+    fd.setText("userName");
+    this.setLayout(gridBagLayout1);
+    this.setBorder(titledBorder1);
+    proxy_pac.setMinimumSize(new Dimension(200, 21));
+    proxy_pac.setPreferredSize(new Dimension(200, 21));
+    proxy_ip.setMinimumSize(new Dimension(100, 21));
+    proxy_ip.setPreferredSize(new Dimension(100, 21));
+    username.setMinimumSize(new Dimension(100, 21));
+    username.setPreferredSize(new Dimension(100, 21));
+    password.setMinimumSize(new Dimension(100, 21));
+    password.setPreferredSize(new Dimension(100, 21));
+    this.add(jLabel2,          new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(proxy_ip,         new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.NORTHWEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(proxy_port,           new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(fd,           new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(jLabel4,      new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(noresetProxy,        new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(proxy_pac,        new GridBagConstraints(2, 0, 2, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(jLabel3,    new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(username,    new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(jLabel8,    new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(password,  new GridBagConstraints(3, 2, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+  }
+
+  void setFromEngine(RNIFTestEngine testengine)
+  {
+    username.setText(testengine.getUsername());
+    password.setText(testengine.getPassword());
+    proxy_pac.setText(testengine.getProxy_pac());
+    proxy_ip.setText(testengine.getProxy_url());
+    proxy_port.setText(testengine.getProxy_port());
+    noresetProxy.setSelected(testengine.isNotSetProxy());
+  }
+
+  void setToEngine(RNIFTestEngine testengine)
+  {
+    testengine.setUsername(username.getText());
+    testengine.setPassword(password.getText());
+    testengine.setProxy_pac(proxy_pac.getText());
+    testengine.setProxy_url(proxy_ip.getText());
+    testengine.setProxy_port(proxy_port.getText());
+    testengine.setNotSetProxy(noresetProxy.isSelected());
+  }
+
+}
+class NetWorkPanel2 extends JPanel
+{
+  GridBagLayout gridBagLayout1 = new GridBagLayout();
+  JCheckBox gtas_P = new JCheckBox();
+  JButton set = new JButton();
+  JButton Test = new JButton();
+  JLabel jLabel14 = new JLabel();
+  JLabel jLabel15 = new JLabel();
+  JTextField ReceiverURL = new JTextField();
+  JTextField Delay = new JTextField();
+  JLabel jLabel13 = new JLabel();
+  JTextField Times = new JTextField();
+  JCheckBox enableProxy = new JCheckBox();
+  JCheckBox enableHTTPS = new JCheckBox();
+
+  public NetWorkPanel2()
+  {
+    try
+    {
+      jbInit();
+    }
+    catch(Exception ex)
+    {
+      ex.printStackTrace();
+    }
+  }
+  void jbInit() throws Exception
+  {
+    Test.setText("Test");
+    set.setText("Set");
+    gtas_P.setText("GTAS PACK");
+    this.setLayout(gridBagLayout1);
+    jLabel14.setText("Times");
+    Delay.setMinimumSize(new Dimension(60, 21));
+    ReceiverURL.setPreferredSize(new Dimension(160, 21));
+    ReceiverURL.setMinimumSize(new Dimension(160, 21));
+    jLabel15.setText("ReceiverURL");
+    Delay.setPreferredSize(new Dimension(60, 21));
+
+    jLabel13.setText("Delay(ms)");
+    Times.setMinimumSize(new Dimension(20, 21));
+    Times.setPreferredSize(new Dimension(20, 21));
+    enableProxy.setText("proxy");
+    enableHTTPS.setText("https");
+    this.add(enableHTTPS,  new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    this.add(enableProxy,   new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    this.add(jLabel15,            new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(ReceiverURL,            new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(gtas_P,    new GridBagConstraints(4, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(jLabel13,            new GridBagConstraints(5, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(Delay,            new GridBagConstraints(6, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(jLabel14,        new GridBagConstraints(7, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(Times,      new GridBagConstraints(8, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(set,         new GridBagConstraints(9, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(Test,         new GridBagConstraints(10, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.SOUTHEAST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+  }
+}
+class NetWorkPanel1 extends JPanel
+{
+  GridBagLayout gridBagLayout1 = new GridBagLayout();
+  URLPanel1 URLP = new URLPanel1();
+  HTTPSPanel1 HTTPSP = new HTTPSPanel1();
+  ProxyPanel1 PROXYP = new ProxyPanel1();
+  NetWorkPanel2 CMDP = new NetWorkPanel2();
+  ConfigExpert  expert = null;
+  public NetWorkPanel1()
+  {
+    try
+    {
+      jbInit();
+    }
+    catch(Exception ex)
+    {
+      ex.printStackTrace();
+    }
+  }
+  void jbInit() throws Exception
+  {
+    this.setLayout(gridBagLayout1);
+    this.add(URLP,   new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(HTTPSP,    new GridBagConstraints(0, 1, 1, 1, 1.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(PROXYP,   new GridBagConstraints(0, 2, 1, 1, 1.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(CMDP,   new GridBagConstraints(0, 3, 1, 1, 1.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(3, 3, 3, 3), 0, 0));
+    CMDP.set.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        set_actionPerformed(e);
+      }
+    });
+    CMDP.Test.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        Test_actionPerformed(e);
+      }
+    });
+    CMDP.enableProxy.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        enableProxy_actionPerformed(e);
+      }
+    });
+    CMDP.enableHTTPS.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        enableHTTPS_actionPerformed(e);
+      }
+    });
+    URLP.RNP.setVisible(false);
+    HTTPSP.setVisible(false);
+    PROXYP.setVisible(false);
+  }
+
+  void set_actionPerformed(ActionEvent e)
+  {
+    setToEngine();
+  }
+
+  void Test_actionPerformed(ActionEvent e)
+  {
+    setToEngine();
+    ConfigExpert.testengine.TestNetwork();
+  }
+
+  void enableHTTPS_actionPerformed(ActionEvent e)
+  {
+      HTTPSP.setVisible(CMDP.enableHTTPS.isSelected());
+      expert.pack();
+  }
+  void enableProxy_actionPerformed(ActionEvent e)
+  {
+      PROXYP.setVisible(CMDP.enableProxy.isSelected());
+      expert.pack();
+  }
+
+  void setFromEngine()
+  {
+    RNIFTestEngine testengine = ConfigExpert.testengine;
+
+    CMDP.gtas_P.setSelected(testengine.isGTASPackage());
+    CMDP.ReceiverURL.setText(testengine.getReceiverURL());
+
+    CMDP.Delay.setText(""+testengine.getDelay());
+    CMDP.Times.setText("" + testengine.getTimes());
+
+    URLP.setFromEngine(testengine);
+    PROXYP.setFromEngine(testengine);
+    HTTPSP.setFromEngine(testengine);
+  }
+
+  void setToEngine()
+  {
+    RNIFTestEngine testengine = ConfigExpert.testengine;
+    URLP.setToEngine(testengine);
+    PROXYP.setToEngine(testengine);
+    HTTPSP.setToEngine(testengine);
+    testengine.setGTASPackage(CMDP.gtas_P.isSelected());
+    testengine.setReceiverURL(CMDP.ReceiverURL.getText());
+    testengine.setDelay(ConfigExpert.getInt(CMDP.Delay.getText()));
+    testengine.setTimes(ConfigExpert.getInt(CMDP.Times.getText()));
+    testengine.parseFileName();
+  }
+
+}
+class LogPanel1 extends JPanel
+{
+  GridBagLayout gridBagLayout1 = new GridBagLayout();
+  JScrollPane jScrollPane1 = new JScrollPane();
+  JButton clear = new JButton();
+  JCheckBox log_header = new JCheckBox();
+  JPanel jPanel5 = new JPanel();
+  JComboBox log_level = new JComboBox();
+  ConfigExpert  expert = null;
+  JTextArea mes = new JTextArea();
+  public LogPanel1()
+  {
+    try
+    {
+      jbInit();
+    }
+    catch(Exception ex)
+    {
+      ex.printStackTrace();
+    }
+  }
+  void jbInit() throws Exception
+  {
+    this.setLayout(gridBagLayout1);
+    clear.setHorizontalAlignment(SwingConstants.TRAILING);
+    clear.setText("clear");
+    log_header.setText("log Header");
+    clear.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        clear_actionPerformed(e);
+      }
+    });
+    log_header.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        log_header_actionPerformed(e);
+      }
+    });
+    log_level.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        log_level_actionPerformed(e);
+      }
+    });
+    this.add(jScrollPane1, new GridBagConstraints(0, 0, 3, 1, 1.0, 1.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(3, 3, 0, 3), 0, 0));
+    jScrollPane1.getViewport().add(mes, null);
+    this.add(jPanel5, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    jPanel5.add(clear, null);
+    this.add(log_header, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(log_level, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    log_level.addItem("DEBUG");
+    log_level.addItem("INFO");
+    log_level.addItem("ERROR");
+  }
+
+  void clear_actionPerformed(ActionEvent e)
+  {
+      mes.setText("");
+  }
+
+  void log_header_actionPerformed(ActionEvent e)
+  {
+      setToEngine();
+  }
+
+  void log_level_actionPerformed(ActionEvent e)
+  {
+    setToEngine();
+  }
+
+  void setToEngine()
+  {
+    ConfigExpert.context.setLogheader(log_header.isSelected());
+    ConfigExpert.context.setLoglevel(log_level.getSelectedIndex());
+  }
+
+  void setFromEngine()
+  {
+    log_header.setSelected(ConfigExpert.context.getLogheader());
+    log_level.setSelectedIndex(ConfigExpert.context.getLoglevel());
+  }
+}
+class CertificatePanel1 extends JPanel
+{
+  GridBagLayout gridBagLayout1 = new GridBagLayout();
+  ConfigExpert  expert = null;
+  TitledBorder titledBorder1;
+  JTextField trust_password = new JTextField();
+  JTextField trust_store = new JTextField();
+  JButton browseKeyStore = new JButton();
+  JLabel jLabel10 = new JLabel();
+  JTextField keystore_password = new JTextField();
+  JTextField keystore_filename = new JTextField();
+  GridBagLayout gridBagLayout2 = new GridBagLayout();
+  JButton trustStore = new JButton();
+  JLabel jLabel9 = new JLabel();
+  JComboBox cmdline = new JComboBox();
+  JCheckBox PKCS12 = new JCheckBox();
+  JLabel jLabel1 = new JLabel();
+  JTextField PrivateKeyT = new JTextField();
+  JButton PrivateB = new JButton();
+  JTextField CertificateT = new JTextField();
+  JButton CertB = new JButton();
+  JTextField CSRT = new JTextField();
+  JButton CSRB = new JButton();
+  JTextField attachmentFiles = new JTextField();
+  JButton Test = new JButton();
+  JButton set = new JButton();
+  JCheckBox PEM = new JCheckBox();
+
+  public CertificatePanel1()
+  {
+    try
+    {
+      jbInit();
+    }
+    catch(Exception ex)
+    {
+      ex.printStackTrace();
+    }
+  }
+  void jbInit() throws Exception
+  {
+    titledBorder1 = new TitledBorder("");
+    this.setLayout(gridBagLayout1);
+    this.setBorder(titledBorder1);
+    trust_password.setPreferredSize(new Dimension(100, 21));
+    trust_password.setMinimumSize(new Dimension(100, 21));
+    trust_store.setPreferredSize(new Dimension(100, 21));
+    trust_store.setMinimumSize(new Dimension(100, 21));
+    browseKeyStore.setText("KeyStore");
+    browseKeyStore.setPreferredSize(new Dimension(87, 27));
+    browseKeyStore.setMinimumSize(new Dimension(87, 27));
+    browseKeyStore.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        browseKeyStore_actionPerformed(e);
+      }
+    });
+    jLabel10.setText("password");
+    keystore_password.setMinimumSize(new Dimension(100, 21));
+    keystore_password.setPreferredSize(new Dimension(100, 21));
+    keystore_filename.setToolTipText("");
+    keystore_filename.setPreferredSize(new Dimension(100, 21));
+    keystore_filename.setMinimumSize(new Dimension(100, 21));
+    trustStore.setText("KeyStore2");
+    trustStore.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        trustStore_actionPerformed(e);
+      }
+    });
+    jLabel9.setText("password");
+    PKCS12.setText("PKCS12");
+    jLabel1.setText("Alias");
+    PrivateKeyT.setMinimumSize(new Dimension(80, 21));
+    PrivateKeyT.setPreferredSize(new Dimension(100, 21));
+    PrivateKeyT.setToolTipText("");
+    PrivateB.setText("Private");
+    PrivateB.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        PrivateB_actionPerformed(e);
+      }
+    });
+    CertB.setText("Certificate");
+    CertB.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        CertB_actionPerformed(e);
+      }
+    });
+    CSRB.setText("CSR");
+    CSRB.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        CSRB_actionPerformed(e);
+      }
+    });
+    attachmentFiles.setMinimumSize(new Dimension(60, 21));
+    attachmentFiles.setPreferredSize(new Dimension(60, 21));
+    CertificateT.setMinimumSize(new Dimension(80, 21));
+    CertificateT.setPreferredSize(new Dimension(80, 21));
+    CSRT.setMinimumSize(new Dimension(80, 21));
+    CSRT.setPreferredSize(new Dimension(80, 21));
+    cmdline.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        cmdline_actionPerformed(e);
+      }
+    });
+    Test.setText("Test");
+    Test.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        Test_actionPerformed(e);
+      }
+    });
+    set.setText("Set");
+    set.addActionListener(new java.awt.event.ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        set_actionPerformed(e);
+      }
+    });
+    PEM.setText("PEM");
+    this.add(cmdline,                                              new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+
+
+
+
+
+    this.add(jLabel1,                       new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(PrivateKeyT,                    new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(PrivateB,                   new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(CertificateT,                   new GridBagConstraints(4, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(CertB,                  new GridBagConstraints(5, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(CSRT,                 new GridBagConstraints(6, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(CSRB,                new GridBagConstraints(7, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(keystore_filename,               new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(browseKeyStore,              new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.SOUTHWEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(jLabel9,             new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 0, 3, 3), 0, 0));
+    this.add(keystore_password,               new GridBagConstraints(4, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(trust_store,             new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(2, 3, 2, 0), 0, 0));
+    this.add(trustStore,            new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(jLabel10,          new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 6, 4, 0), 0, 0));
+    this.add(trust_password,              new GridBagConstraints(3, 2, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(attachmentFiles,           new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(3, 3, 3, 3), 0, 0));
+    this.add(Test,   new GridBagConstraints(7, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    this.add(set, new GridBagConstraints(6, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    this.add(PKCS12, new GridBagConstraints(5, 0, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 3, 3, 3), 0, 0));
+    this.add(PEM,  new GridBagConstraints(8, 1, 1, 1, 0.0, 0.0
+            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+    cmdline.addItem("list");
+    cmdline.addItem("import");
+    cmdline.addItem("export");
+    cmdline.addItem("delete");
+    cmdline.addItem("append");
+    cmdline.addItem("convert");
+    cmdline.addItem("selfsign");
+    cmdline.addItem("csr");
+    cmdline.addItem("signcsr");
+  }
+
+  void browseKeyStore_actionPerformed(ActionEvent e)
+  {
+      String cmd = (String)cmdline.getSelectedItem();
+      JFileChooser chooser = new JFileChooser();
+      int op = 0;
+      if(cmd.equals("list") || cmd.equals("export") || cmd.equals("convert") || cmd.equals("csr") || cmd.equals("signcsr"))
+      {
+        op = chooser.showOpenDialog(this);
+      }
+      else  if(cmd.equals("import") || cmd.equals("append") || cmd.equals("delete") || cmd.equals("selfsign"))
+      {
+        op = chooser.showSaveDialog(this);
+      }
+      else
+        return;
+
+      if(op == JFileChooser.APPROVE_OPTION)
+      {
+        keystore_filename.setText(chooser.getSelectedFile().getAbsolutePath());
+      }
+  }
+
+  void trustStore_actionPerformed(ActionEvent e)
+  {
+      String cmd = (String)cmdline.getSelectedItem();
+      JFileChooser chooser = new JFileChooser();
+      int op = 0;
+      if(cmd.equals("convert") || cmd.equals("append"))
+      {
+        op = chooser.showSaveDialog(this);
+      }
+      else
+        return;
+
+      if(op == JFileChooser.APPROVE_OPTION)
+      {
+        trust_store.setText(chooser.getSelectedFile().getAbsolutePath());
+      }
+  }
+
+  void PrivateB_actionPerformed(ActionEvent e)
+  {
+      String cmd = (String)cmdline.getSelectedItem();
+      JFileChooser chooser = new JFileChooser();
+      int op = 0;
+      if(cmd.equals("import"))
+      {
+        op = chooser.showOpenDialog(this);
+      }
+      else  if(cmd.equals("export"))
+      {
+        op = chooser.showSaveDialog(this);
+      }
+      else
+        return;
+
+      if(op == JFileChooser.APPROVE_OPTION)
+      {
+        PrivateKeyT.setText(chooser.getSelectedFile().getAbsolutePath());
+      }
+  }
+
+  void CertB_actionPerformed(ActionEvent e)
+  {
+      String cmd = (String)cmdline.getSelectedItem();
+      JFileChooser chooser = new JFileChooser();
+      int op = 0;
+      if(cmd.equals("import") || cmd.equals("delete"))
+      {
+        chooser.setMultiSelectionEnabled(true);
+        op = chooser.showOpenDialog(this);
+      }
+      else  if(cmd.equals("export") || cmd.equals("signcsr"))
+      {
+        chooser.setMultiSelectionEnabled(true);
+        op = chooser.showSaveDialog(this);
+      }
+      else
+        return;
+      if(op == JFileChooser.APPROVE_OPTION)
+      {
+        File[] files = chooser.getSelectedFiles();
+        String filenames="";
+        for(int i = 0; i< files.length ; i++)
+        {
+          if(i != 0)
+           filenames += ";";
+          filenames += files[i].getAbsolutePath();
+        }
+        CertificateT.setText(filenames);
+      }
+  }
+
+  void CSRB_actionPerformed(ActionEvent e)
+  {
+      String cmd = (String)cmdline.getSelectedItem();
+      JFileChooser chooser = new JFileChooser();
+      int op = 0;
+      if(cmd.equals("signcsr"))
+      {
+        op = chooser.showOpenDialog(this);
+      }
+      else if(cmd.equals("csr"))
+      {
+        op = chooser.showSaveDialog(this);
+      }
+      else
+        return;
+
+      if(op == JFileChooser.APPROVE_OPTION)
+      {
+        CSRT.setText(chooser.getSelectedFile().getAbsolutePath());
+      }
+  }
+
+  void cmdline_actionPerformed(ActionEvent e)
+  {
+      String cmd = (String)cmdline.getSelectedItem();
+      attachmentFiles.setEnabled(false);
+      PrivateKeyT.setEnabled(false);
+      PrivateB.setEnabled(false);
+      CertificateT.setEnabled(false);
+      CertB.setEnabled(false);
+      CSRB.setEnabled(false);
+      CSRT.setEnabled(false);
+      trustStore.setEnabled(false);
+      trust_store.setEnabled(false);
+      trust_password.setEnabled(false);
+      if(cmd.equals("list"))
+        {
+        }
+      else if(cmd.equals("import"))
+        {
+          PrivateKeyT.setEnabled(true);
+          PrivateB.setEnabled(true);
+          CertificateT.setEnabled(true);
+          CertB.setEnabled(true);
+        }
+      else if(cmd.equals("export"))
+        {
+          attachmentFiles.setEnabled(true);
+          PrivateKeyT.setEnabled(true);
+          PrivateB.setEnabled(true);
+          CertificateT.setEnabled(true);
+          CertB.setEnabled(true);
+        }
+      else if(cmd.equals("delete"))
+        {
+          attachmentFiles.setEnabled(true);
+          CertificateT.setEnabled(true);
+          CertB.setEnabled(true);
+        }
+      else if(cmd.equals("append"))
+        {
+          trustStore.setEnabled(true);
+          trust_store.setEnabled(true);
+          trust_password.setEnabled(true);
+        }
+      else if(cmd.equals("convert"))
+        {
+          trustStore.setEnabled(true);
+          trust_store.setEnabled(true);
+          trust_password.setEnabled(true);
+        }
+      else if(cmd.equals("selfsign"))
+        {
+          attachmentFiles.setEnabled(true);
+        }
+      else if(cmd.equals("csr"))
+        {
+          attachmentFiles.setEnabled(true);
+          CSRB.setEnabled(true);
+          CSRT.setEnabled(true);
+        }
+      else if(cmd.equals("signcsr"))
+        {
+          attachmentFiles.setEnabled(true);
+          CertificateT.setEnabled(true);
+          CertB.setEnabled(true);
+          CSRB.setEnabled(true);
+          CSRT.setEnabled(true);
+        }
+    Test.setText(cmd);
+  }
+
+  void setFromEngine()
+  {
+    RNIFTestEngine testengine = ConfigExpert.testengine;
+    testengine.parseFileName();
+    attachmentFiles.setText(testengine.getBackend_attachment_filename());
+    cmdline.setSelectedItem(testengine.getCmdline());
+    keystore_filename.setText(testengine.getKeyStoreFile());
+    keystore_password.setText(testengine.getKeyStorePassword());
+    trust_store.setText(testengine.getTrustStoreFile());
+    trust_password.setText(testengine.getTrustStorePassword());
+    PEM.setSelected(testengine.isPEMformat());
+    PKCS12.setSelected(testengine.isPkcs12());
+  }
+
+  void setToEngine()
+  {
+    RNIFTestEngine testengine = ConfigExpert.testengine;
+    testengine.setBackend_attachment_filename(attachmentFiles.getText());
+    testengine.setCmdline((String)cmdline.getSelectedItem());
+    testengine.setKeyStoreFile(keystore_filename.getText());
+    testengine.setKeyStorePassword(keystore_password.getText());
+    testengine.setTrustStoreFile(trust_store.getText());
+    testengine.setTrustStorePassword(trust_password.getText());
+    testengine.setPEMformat(PEM.isSelected());
+    testengine.setPkcs12(PKCS12.isSelected());
+    String c = PrivateKeyT.getText();
+    if(c != null && c.length() > 0)
+      c += ";";
+    c += CSRT.getText();
+    if(c != null && c.length() > 0)
+      c += ";";
+    c += CertificateT.getText();
+    testengine.setFile_name(c);
+    testengine.parseFileName();
+  }
+
+  void set_actionPerformed(ActionEvent e)
+  {
+      setToEngine();
+  }
+
+  void Test_actionPerformed(ActionEvent e)
+  {
+    setToEngine();
+    ConfigExpert.testengine.TestCert();
+  }
+}
+ public class ConfigExpert extends JFrame
+{
+  static HttpMessageContext context = HttpMessageContext.getInstance();
+  static RNIFTestEngine     testengine = new RNIFTestEngine(false);
+
+  JPanel contentPane;
+  GridBagLayout gridBagLayout1 = new GridBagLayout();
+  JTabbedPane jTabbedPane1 = new JTabbedPane();
+
+  NetWorkPanel1 Network = new NetWorkPanel1();
+  RNPanel1 RNIF = new RNPanel1();
+  CertificatePanel1 Cert = new CertificatePanel1();
+  LogPanel1 log = new LogPanel1();
+
+  static int getInt(String str)
+  {
+    try
+    {
+      return Integer.parseInt(str);
+    }
+    catch (Exception ex)
+    {
+      return -1;
+    }
+  }
+  
+  public static void main(String args[])
+      throws Exception
+  {
+      context.setLogFileName("GNTool1");
+      context.setLogType(HttpMessageContext.LOG_FILE);
+      ConfigExpert configexpert = null;
+      testengine.parseParameter(new GTConfigFile(args));
+      if(args.length == 0 || (testengine.isLaunchGUI() && !testengine.isHelp))
+      {
+        configexpert = new ConfigExpert();
+        context.setLogger_textarea(configexpert.log.mes);
+        ConfigExpert.testengine.setRnlog(configexpert.RNIF.RNLOGP.mes);
+      }
+      if(args.length > 0)
+        testengine.run();
+      if(configexpert != null)
+      {
+        configexpert.setFromEngine();
+        configexpert.setVisible(true);
+      }
+  }
+
+  //Construct the frame
+  public ConfigExpert()
+  {
+    enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+    try
+    {
+      RNIF.expert = this;
+      Network.expert = this;
+      Cert.expert = this;
+      log.expert = this;
+      RNIF.URLP.expert = this;
+      Network.URLP.expert = this;
+      jbInit();
+      this.pack();
+    }
+    catch(Exception e)
+    {
+      e.printStackTrace();
+    }
+  }
+  //Component initialization
+  private void jbInit() throws Exception
+  {
+    //setIconImage(Toolkit.getDefaultToolkit().createImage(ConfigExpert.class.getResource("[Your Icon]")));
+    contentPane = (JPanel) this.getContentPane();
+    contentPane.setLayout(gridBagLayout1);
+    this.setSize(new Dimension(760, 650));
+    this.setTitle("gntool1");
+    jTabbedPane1.add(RNIF, "RNIF");
+    jTabbedPane1.add(Network,  "Network");
+    jTabbedPane1.add(Cert,  "Certificate");
+    jTabbedPane1.add(log, "log");
+    contentPane.add(jTabbedPane1, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0
+            ,GridBagConstraints.SOUTHEAST, GridBagConstraints.BOTH, new Insets(6, 6, 0, 0), 0, 0));
+  }
+  //Overridden so we can exit when window is closed
+  protected void processWindowEvent(WindowEvent e)
+  {
+    super.processWindowEvent(e);
+    if (e.getID() == WindowEvent.WINDOW_CLOSING)
+    {
+      System.exit(0);
+    }
+  }
+
+  public void setFromEngine()
+  {
+      RNIF.setFromEngine();
+      Network.setFromEngine();
+      Cert.setFromEngine();
+      log.setFromEngine();
+  }
+}

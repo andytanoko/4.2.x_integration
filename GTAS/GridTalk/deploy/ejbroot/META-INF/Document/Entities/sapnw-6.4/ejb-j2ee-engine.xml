@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-j2ee-engine SYSTEM "ejb-j2ee-engine.dtd">
+<ejb-j2ee-engine>
+	<enterprise-beans>
+		<enterprise-bean>
+			<ejb-name>DocumentType</ejb-name>
+			<jndi-name>com.gridnode.gtas.server.document.entities.ejb.IDocumentTypeLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>FileType</ejb-name>
+			<jndi-name>com.gridnode.gtas.server.document.entities.ejb.IFileTypeLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>GridDocument</ejb-name>
+			<jndi-name>com.gridnode.gtas.server.document.entities.ejb.IGridDocumentLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>Attachment</ejb-name>
+			<jndi-name>com.gridnode.gtas.server.document.entities.ejb.IAttachmentLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>AttachmentRegistry</ejb-name>
+			<jndi-name>com.gridnode.gtas.server.document.entities.ejb.IAttachmentRegistryLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+	</enterprise-beans>
+</ejb-j2ee-engine>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="dist" name="Backend">
+    <description>This builds the Backend Sender and Receiver Jar files</description>
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+	<property file="C:/my-build.properties"/>
+	<property file="global-build.properties"/>
+	<property name="package.prefix" value="com/gridnode/gtas/backend"/>
+	<property name="openapi.package.prefix" value="com/gridnode/gtas/server/backend/openapi"/>
+	<property name="openapi.include" value="${openapi.package.prefix}/core/**,${openapi.package.prefix}/net/**"/>
+	<property name="openapi.exclude" value="${openapi.package.prefix}/core/GT**"/>
+	<property name="build.dir" value="../deploy"/>
+	<property name="classes.dir" value="../bin/backend/"/>
+	<property name="source.dir" value="../src/Server/Backend"/>
+	<property name="gtas.deplib.dir" value="${gtas.layer.dir}/GridTalk/deplib"/>
+	<property name="gtas.deploy.dir" value="${gtas.layer.dir}/GridTalk/deploy"/>
+  <!-- 02032006 TWX   add in com.gridnode.gtas.server.backend.model.IPort in receiver.jar
+                    added new property 'IPort'
+                    modified target 'build.jars', 'build' -->
+  <property name="IPort" value="com/gridnode/gtas/server/backend/model/IPort**" />
+
+    <path id="project.classpath">
+        <pathelement location="${classes.dir}"/>
+		<fileset dir="${baseservice.reqlib.dir}">
+			<include name="gn-xml*.jar"/>
+			<include name="gn-log*.jar"/>
+			<include name="jdom*.jar"/>
+			<include name="jaxen*.jar"/>
+		</fileset>
+		<fileset dir="${framework.reqlib.dir}">
+			<include name="xerces*.jar"/>
+			<include name="xml-parser-apis*.jar"/>
+			<include name="log4j*.jar"/>			
+		</fileset>
+		<fileset dir="${gtas.layer.dir}/reqlib">
+            <include name="gridmail*.jar"/>
+		</fileset>
+    	<fileset dir="${gtas.deplib.dir}">
+    		<include name="framework.jar"/>
+    	</fileset>
+    	
+    </path>
+    
+    <target name="init">
+        <mkdir dir="${classes.dir}"/>
+    </target>
+    
+    <target name="clean">
+        <delete dir="${classes.dir}"/>
+    </target>
+
+    <target depends="init" name="build">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac sourcepath="" destdir="${classes.dir}" srcdir="${source.dir}" includes="${package.prefix}/**,${openapi.include},${IPort}"
+               excludes="${openapi.exclude}">
+            <classpath refid="project.classpath"/>
+        </javac>
+    </target>
+
+	<target name="help">
+		<echo message="Please run: $ ant -v -projecthelp"/>
+	</target>
+
+	<target name="build.jars" depends="build">
+	   <delete quiet="true">
+	      <fileset dir="${build.dir}" includes="sender.jar,receiver.jar,senderlite.jar"/>
+	   </delete>
+		<!-- jar receiver jar -->
+		<jar destfile="${build.dir}/receiver.jar"
+			basedir="${classes.dir}" includes="${package.prefix}/**,${openapi.include},${IPort}" excludes="${package.prefix}/sender/**"
+			duplicate="preserve">
+			<zipfileset src="${baseservice.reqlib.dir}/gn-xml-1.1.2.jar" excludes="META-INF/MANIFEST.MF,**/*.contrib*"/>
+			<zipfileset src="${baseservice.reqlib.dir}/gn-log-1.0.5.jar" excludes="META-INF/MANIFEST.MF,**/*.contrib*"/>
+			<zipfileset src="${baseservice.reqlib.dir}/jdom-1.0.jar" excludes="META-INF/**,**/*.contrib*"/>
+			<zipfileset src="${baseservice.reqlib.dir}/jaxen-1.1b7.jar" excludes="META-INF/**,**/*.contrib*"/>
+			<zipfileset src="${framework.reqlib.dir}/xerces-2.7.1.jar" excludes="META-INF/**,**/*.contrib*"/>
+			<zipfileset src="${framework.reqlib.dir}/xml-parser-apis.jar" excludes="META-INF/**,**/*.contrib*"/>
+			<zipfileset src="${framework.reqlib.dir}/log4j-1.2.12.jar" excludes="META-INF/**,**/*.contrib*"/>
+			<zipfileset src="${framework.dir}/deploy/framework.jar" includes="com/gridnode/pdip/framework/util/SystemUtil*"/>
+            <zipfileset src="${gtas.layer.dir}/reqlib/gridmail-1.0.4.jar" excludes="META-INF/**,**/*.contrib*"/>
+            <metainf dir="${source.dir}/META-INF" excludes="*.contrib*"/>
+            <manifest>
+    			<attribute name="Built-By" value="GridNode Pte Ltd."/>
+    			<attribute name="Main-Class" value="com.gridnode.gtas.backend.receiver.Receiver"/>
+            </manifest>
+		</jar>
+
+		<!-- jar sender jar -->
+		<jar destfile="${build.dir}/sender.jar" 
+			basedir="${classes.dir}" includes="${package.prefix}/**,${openapi.include}" 
+			excludes="${package.prefix}/receiver/**,${package.prefix}/**/*SenderLite*"
+			duplicate="preserve">
+			<zipfileset src="${baseservice.reqlib.dir}/gn-xml-1.1.2.jar" excludes="META-INF/MANIFEST.MF,**/*.contrib*"/>
+			<zipfileset src="${baseservice.reqlib.dir}/gn-log-1.0.5.jar" excludes="META-INF/MANIFEST.MF,**/*.contrib*"/>
+			<zipfileset src="${baseservice.reqlib.dir}/jdom-1.0.jar" excludes="META-INF/**,**/*.contrib*"/>
+			<zipfileset src="${baseservice.reqlib.dir}/jaxen-1.1b7.jar" excludes="META-INF/**,**/*.contrib*"/>
+			<zipfileset src="${framework.reqlib.dir}/xerces-2.7.1.jar" excludes="META-INF/**,**/*.contrib*"/>
+			<zipfileset src="${framework.reqlib.dir}/xml-parser-apis.jar" excludes="META-INF/**,**/*.contrib*"/>
+			<zipfileset src="${framework.reqlib.dir}/log4j-1.2.12.jar" excludes="META-INF/**,**/*.contrib*"/>
+			<zipfileset src="${framework.dir}/deploy/framework.jar" includes="com/gridnode/pdip/framework/util/Base64Coder*,com/gridnode/pdip/framework/util/MaskedPass*,com/gridnode/pdip/framework/util/SystemUtil*"/>
+            <zipfileset src="${gtas.layer.dir}/reqlib/gridmail-1.0.4.jar" excludes="META-INF/**,**/*.contrib*"/>
+            <metainf dir="${source.dir}/META-INF" excludes="*.contrib*"/>
+            <manifest>
+    			<attribute name="Built-By" value="GridNode Pte Ltd."/>
+    			<attribute name="Main-Class" value="com.gridnode.gtas.backend.sender.Sender"/>
+            </manifest>
+		</jar>
+
+		<!-- jar sender jar -->
+		<jar destfile="${build.dir}/senderlite.jar" 
+			basedir="${classes.dir}" includes="${package.prefix}/sender/SenderLite*,${package.prefix}/exception/**,${openapi.include}, ${package.prefix}/util/Log.class"
+			duplicate="preserve">
+            <zipfileset src="${gtas.layer.dir}/reqlib/gridmail-1.0.4.jar" excludes="META-INF/**,**/*.contrib*"/>
+			<zipfileset src="${baseservice.reqlib.dir}/gn-log-1.0.5.jar" excludes="META-INF/MANIFEST.MF,**/*.contrib*"/>
+			<zipfileset src="${framework.reqlib.dir}/log4j-1.2.12.jar" excludes="META-INF/**,**/*.contrib*"/>
+			<zipfileset src="${framework.dir}/deploy/framework.jar" includes="com/gridnode/pdip/framework/util/Base64Coder*,com/gridnode/pdip/framework/util/MaskedPass*,com/gridnode/pdip/framework/util/SystemUtil*"/>
+            <metainf dir="${source.dir}/META-INF" excludes="*.contrib*"/>
+            <manifest>
+    			<attribute name="Built-By" value="GridNode Pte Ltd."/>
+    			<attribute name="Main-Class" value="com.gridnode.gtas.backend.sender.SenderLite"/>
+            </manifest>
+		</jar>
+		
+	</target>
+
+	<target name="dist" depends="build.jars">
+      
+	</target>
+	<target name="deploy" depends="build.jars">
+		<delete dir="${gridtalk.home}/backend" failonerror="false"/>
+		<mkdir dir="${gridtalk.home}/backend"/>
+		<mkdir dir="${gridtalk.home}/backend/ibtransporter"/>
+		<mkdir dir="${gridtalk.home}/backend/ibtransporter/endorsed"/>
+		<mkdir dir="${gridtalk.home}/backend/receiver"/>
+		<mkdir dir="${gridtalk.home}/backend/sender"/>
+		<copy todir="${gridtalk.home}/backend/receiver" preservelastmodified="true">
+		      <fileset dir="${gtas.deploy.dir}">
+		        <include name="receiver.jar"/>
+		      </fileset>
+		</copy>
+		<copy todir="${gridtalk.home}/backend/receiver" preservelastmodified="true">
+				      <fileset dir="${gtas.layer.dir}/GridTalk/data/backend/receiver">
+				        <include name="listen.bat.sample"/>
+				      	<include name="listen.sh.sample"/>
+				      </fileset>
+		</copy>
+		<copy todir="${gridtalk.home}/backend/sender" preservelastmodified="true">
+				      <fileset dir="${gtas.deploy.dir}">
+				        <include name="sender.jar"/>
+				      	<include name="senderlite.jar"/>
+				      </fileset>
+		</copy>
+		<copy todir="${gridtalk.home}/backend/sender" preservelastmodified="true">
+						      <fileset dir="${gtas.layer.dir}/GridTalk/data/backend/sender">
+						        <include name="directory.file.sample"/>
+						      	<include name="sample.info.sample"/>
+						      	<include name="send.bat.sample"/>
+						      	<include name="send.sh.sample"/>
+						      	<include name="sender.ini.sample"/>
+						      	<include name="senderlite.bat.sample"/>
+						        <include name="senderlite.sh.sample"/>
+						      </fileset>
+		</copy>
+		<copy todir="${gridtalk.home}/backend/ibtransporter" preservelastmodified="true">
+							  <fileset dir="${gtas.layer.dir}/Customers/Extensions/programs/gt-ibtransporter">
+						        <include name="axis.jar"/>
+						      	<include name="commons.discovery.jar"/>
+						      	<include name="commons.logging.jar"/>
+						      	<include name="gt-ibtransporter.jar"/>
+						      	<include name="inbound-transporter.properties.sample"/>
+						      	<include name="readme.doc"/>
+						        <include name="run-ibtransporter.bat.sample"/>
+							  	<include name="run-ibtransporter.sh.sample"/>
+						        <include name="run-ibtransporter-mf.bat.sample"/>
+							  	<include name="run-ibtransporter-mf.sh.sample"/>
+							  	<include name="setcp.bat"/>
+							  	<include name="setcp.sh"/>
+						      </fileset>
+		</copy>
+		<copy todir="${gridtalk.home}/backend/ibtransporter/endorsed" preservelastmodified="true">
+									  <fileset dir="${gtas.layer.dir}/Customers/Extensions/programs/gt-ibtransporter/endorsed">
+								        <include name="activation.jar"/>
+								      	<include name="jaxrpc.jar"/>
+								      	<include name="mail.jar"/>
+								      	<include name="saaj.jar"/>
+								      	<include name="xerces.jar"/>
+								      	<include name="xml-parser-apis.jar"/>
+								      </fileset>
+		</copy>
+	</target>
+
+</project>

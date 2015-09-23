@@ -1,0 +1,16 @@
+Completed parsing D:\wxtam\svn\42x\4.2.x_integration\GTAS\HelpMaker\..\GridTalk\doc\product\guides\GridTalk4.0_UserGuide.htm
+Start indexing files
+Generating search index to [D:\wxtam\svn\42x\4.2.x_integration\GTAS\HelpMaker\web\gtas_ug\gtas_ugSearch]
+Finish indexing files
+Writing TOC file to [D:\wxtam\svn\42x\4.2.x_integration\GTAS\HelpMaker\web\gtas_ug\gtas_ug_TOC.xml]
+Writing Map file to [D:\wxtam\svn\42x\4.2.x_integration\GTAS\HelpMaker\web\gtas_ug\gtas_ug_MAP.jhm]
+Writing HelpSet file to [D:\wxtam\svn\42x\4.2.x_integration\GTAS\HelpMaker\web\gtas_ug\gtas_ug_hs.hs]
+Complete generating HelpSet
+Completed parsing D:\wxtam\svn\42x\4.2.x_integration\GTAS\HelpMaker\..\GridTalk\doc\product\guides\GridTalk4.0_UserGuide.htm
+Start indexing files
+Generating search index to [D:\wxtam\svn\42x\4.2.x_integration\GTAS\HelpMaker\web\gtas_ug\gtas_ugSearch]
+Finish indexing files
+Writing TOC file to [D:\wxtam\svn\42x\4.2.x_integration\GTAS\HelpMaker\web\gtas_ug\gtas_ug_TOC.xml]
+Writing Map file to [D:\wxtam\svn\42x\4.2.x_integration\GTAS\HelpMaker\web\gtas_ug\gtas_ug_MAP.jhm]
+Writing HelpSet file to [D:\wxtam\svn\42x\4.2.x_integration\GTAS\HelpMaker\web\gtas_ug\gtas_ug_hs.hs]
+Complete generating HelpSet

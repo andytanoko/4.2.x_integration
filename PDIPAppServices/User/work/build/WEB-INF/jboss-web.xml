@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<jboss-web>
+    
+  <ejb-ref>
+    <ejb-ref-name>ejb/UserManager</ejb-ref-name>
+    <jndi-name>com.gridnode.pdip.app.user.facade.ejb.IUserManagerHome</jndi-name>
+  </ejb-ref>
+    
+  <ejb-ref>
+    <ejb-ref-name>ejb/SessionManager</ejb-ref-name>
+    <jndi-name>com.gridnode.pdip.base.session.facade.ejb.ISessionManagerHome</jndi-name>
+  </ejb-ref>
+    
+</jboss-web>
+    

@@ -1,0 +1,39 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: SendMail.java
+ *
+ * ****************************************************************************
+ * Date           Author              Changes
+ * ****************************************************************************
+ * 29 Nov 2002    Srinath	      Creation
+ */
+
+package com.gridnode.pdip.app.alert.helpers;
+
+import com.gridnode.pdip.app.alert.engine.*;
+import com.gridnode.pdip.app.alert.providers.IProviderList;
+import com.gridnode.pdip.framework.mail.MailManager;
+
+import java.util.Hashtable;
+
+public class SendMail
+{
+   public boolean sendMail(String toAddr, String fromAddr, String cc, String subject,
+                String message, String filePath, IProviderList dataHash) throws Throwable
+   {
+      Repository repos = new Repository();
+      fromAddr = repos.format(fromAddr, dataHash);
+      toAddr   = repos.format(toAddr, dataHash);
+      subject  = repos.format(subject, dataHash);
+      cc       = repos.format(cc, dataHash);
+      message  = repos.format(message, dataHash);
+
+      MailManager mail = new MailManager();
+      return mail.send(fromAddr, toAddr, cc,
+                        null, subject, message, filePath);
+   }
+}

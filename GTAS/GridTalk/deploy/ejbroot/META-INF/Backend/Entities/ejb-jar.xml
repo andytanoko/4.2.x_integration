@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+  <enterprise-beans>
+    <entity>
+      <display-name>Port</display-name>
+      <ejb-name>Port</ejb-name>
+      <local-home>com.gridnode.gtas.server.backend.entities.ejb.IPortLocalHome</local-home>
+      <local>com.gridnode.gtas.server.backend.entities.ejb.IPortLocalObj</local>
+      <ejb-class>com.gridnode.gtas.server.backend.entities.ejb.PortBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+    <entity>
+      <display-name>Rfc</display-name>
+      <ejb-name>Rfc</ejb-name>
+      <local-home>com.gridnode.gtas.server.backend.entities.ejb.IRfcLocalHome</local-home>
+      <local>com.gridnode.gtas.server.backend.entities.ejb.IRfcLocalObj</local>
+      <ejb-class>com.gridnode.gtas.server.backend.entities.ejb.RfcBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+  </enterprise-beans>
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+        <ejb-name>Port</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+    <container-transaction>
+      <method>
+        <ejb-name>Rfc</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+</ejb-jar>

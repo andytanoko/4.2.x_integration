@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+    <secure>false</secure>
+    <container-configurations />
+    <resource-managers />
+    <enterprise-beans>
+        <entity>
+		    <ejb-name>WorkListEntity</ejb-name>
+		    <jndi-name>com.gridnode.pdip.base.worklist.entities.ejb.GWFWorkListEntityHome</jndi-name>
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+        </entity>
+        <entity>
+		    <ejb-name>WorkListUserEntity</ejb-name>
+		    <jndi-name>com.gridnode.pdip.base.worklist.entities.ejb.GWFWorkListUserEntityHome</jndi-name>
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+        </entity>
+    </enterprise-beans>
+   </jboss>

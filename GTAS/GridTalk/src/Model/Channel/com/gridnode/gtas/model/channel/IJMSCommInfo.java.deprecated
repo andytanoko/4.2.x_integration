@@ -1,0 +1,54 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2002 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: ICommInfo.java
+ *
+ ****************************************************************************
+ * Date           Author                  Changes
+ ****************************************************************************
+ * Jun 18 002    Goh Kan Mun             Created
+ */
+
+package com.gridnode.gtas.model.channel;
+
+/**
+ * This Interface defines the properties and FieldIds for accessing fields
+ * in CommInfo entity.
+ *
+ * @author Goh Kan Mun
+ *
+ * @version 2.0
+ * @since 2.0
+ */
+
+public interface IJMSCommInfo extends ICommInfo
+{
+  /**
+   * FieldId for Usename of JMS Connection.
+   */
+  public static final Number USERNAME = new Integer(8); // byte[] to be encrypted when save
+
+  /**
+   * FieldId for Password of JMS Connection.
+   */
+  public static final Number PASSWORD = new Integer(9); // byte[] to be encrypted when save
+
+  /**
+   * FieldId for Destination of the JMS connection.
+   */
+  public static final Number DESTINATION = new Integer(10); // byte[] to be encrypted when save
+
+  /**
+   * FieldId for Type of JMS Destination.
+   */
+  public static final Number DESTINATION_TYPE = new Integer(11); // int(10)
+
+  /**
+   * FieldId for Vendor name.
+   */
+  public static final Number VENDOR = new Integer(12); // varchar(30)
+
+}

@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!-- ====================================================================== 
+     Mar 12, 2007 11:04:07 AM                                                        
+
+     project    GridTalk Loopback Tester
+     description GridTalk Loopback Tester
+                   
+     Alain Ah Ming                                                               
+     ====================================================================== -->
+<project name="loopback" default="dist" basedir=".">
+    <description>
+            GridTalk Loopback Tester
+    </description>
+	<property name="build.dir" location="${basedir}/build"/>
+	<property name="dd.dir" location="${basedir}/dd"/>
+	<property name="dist.dir" location="${basedir}/dist"/>
+	<property name="classes.dir" location="${build.dir}/webapps/WEB-INF/classes"/>
+	<property name="lib.dir" location="${basedir}/lib"/>
+	<property name="src.dir" location="${basedir}/src"/>
+
+	<path id="compile.classpath">
+		<fileset dir="${lib.dir}" includes="*.jar"/>
+	</path>
+    <!-- ================================= 
+          target: dist
+         ================================= -->
+    <target name="dist" depends="build,dist.setup" description="--> description">
+		<war 
+			basedir="${build.dir}/webapps"
+			destfile="${dist.dir}/webapps/${ant.project.name}.war" 
+			manifest="${dd.dir}/META-INF/manifest.mf"
+			webxml="${dd.dir}/WEB-INF/web.xml"
+		/>
+    </target>
+	
+	<target name="dist.setup" depends="dist.clean">
+		<mkdir dir="${dist.dir}/glbt"/>
+		<mkdir dir="${dist.dir}/webapps"/>
+    	<copy todir="${dist.dir}/glbt/conf" preservelastmodified="on">
+    		<fileset dir="${basedir}/conf"/>
+   		</copy>
+    	<copy todir="${dist.dir}/glbt/data"  preservelastmodified="on">
+			<fileset dir="${basedir}/data"/>
+   		</copy>
+		<copy todir="${dist.dir}" preservelastmodified="on">
+			<fileset dir="${basedir}/scripts"/>
+		</copy>
+	</target>
+	
+	<target name="dist.clean">
+		<delete includeemptydirs="on" quiet="on">
+			<fileset dir="${dist.dir}/"/>
+		</delete>
+	</target>
+	
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: build               
+         - - - - - - - - - - - - - - - - - -->
+    <target name="build" depends="build.setup">
+    	<javac source="1.5" debug="on" srcdir="${src.dir}" destdir="${classes.dir}"
+        	classpathref="compile.classpath"
+    	/>
+    </target>
+
+	<target name="build.setup" depends="build.clean">
+		<mkdir dir="${classes.dir}"/>
+		<copy todir="${build.dir}/webapps/WEB-INF/lib">
+			<fileset  dir="${lib.dir}" excludes="*servlet.jar"/>
+		</copy>
+	</target>
+	
+	<target name="build.clean">
+		<delete includeemptydirs="on" quiet="on" >
+			<fileset dir="${build.dir}/"/>
+		</delete>
+	</target>
+
+	
+</project>
+

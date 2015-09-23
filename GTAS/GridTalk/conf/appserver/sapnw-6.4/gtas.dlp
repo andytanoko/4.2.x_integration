@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE deploy-project [
+<!ELEMENT deploy-project ( project-dir?,options, tabs)>
+<!ELEMENT project-dir (#PCDATA)>
+<!ELEMENT options (class-path?, tab-transfer)>
+<!ELEMENT class-path (#PCDATA)>
+<!ELEMENT tab-transfer (#PCDATA)>
+<!ELEMENT tabs (tab*)>
+<!ELEMENT tab (#PCDATA)>
+<!ATTLIST tab tab-name CDATA #REQUIRED>]>
+<deploy-project>
+  <tabs>
+    <tab tab-name="Deployer">\gtas\Deployer.xml</tab>
+    <tab tab-name="Server Components">\gtas\ServerComponents.xml</tab>
+  </tabs>
+  <options>
+    <class-path>
+    </class-path>
+    <tab-transfer>
+    </tab-transfer>
+  </options>
+</deploy-project>

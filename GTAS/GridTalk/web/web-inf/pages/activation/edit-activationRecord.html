@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>ActivationRecord</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <table>
+          <tr id="gridNodeId_details">
+            <td id="gridNodeId_label" nowrap="nowrap">
+              lbGridNodeId
+            </td>
+            <td>
+              -
+              <span id="gridNodeId_value">XXX</span>
+            </td>
+            <td id="gridNodeId_error" width="50%">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="gridNodename_details">
+            <td id="gridNodeName_label" nowrap="nowrap">
+              lbGridNodeName
+            </td>
+            <td>
+              -
+              <span id="gridNodeName_value">XXX</span>
+            </td>
+            <td id="gridNodeName_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="activateReason_details">
+            <td id="activateReason_label" valign="top">
+              lbActivateReason
+            </td>
+            <td valign="top">
+              <textarea id="activateReason_value" name="activateReason" cols="50" rows="4">
+                XXX
+              </textarea>
+            </td>
+            <td id="activateReason_error" valign="top">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="requestorBeList_details">
+            <td id="requestorBeList_label" valign="top" nowrap="nowrap">
+              lbRequestorBeList
+            </td>
+            <td colspan="2">
+              <div id="requestorBeList_value" class="multiselector">
+                Multiselector()
+              </div>
+              <a id="requestorBeList_create" href="javascript:divertToMapping('divertCreateBusinessEntity');">
+                lbCreateBusinessEntity
+              </a>
+            </td>
+          </tr>
+          <tr id="approverBeList_details">
+            <td id="approverBeList_label" valign="top" nowrap="nowrap">
+              lbApproverBeList
+            </td>
+            <td colspan="2">
+              <div id="approverBeList_value" class="multiselector">
+                Multiselector()
+              </div>
+              <a id="approverBeList_create" href="javascript:divertToMapping('divertCreateBusinessEntity');">
+                lbCreateBusinessEntity
+              </a>
+            </td>
+          </tr>
+        </table>
+        <div id="requestorBeList_details_2">
+        </div>
+        <div id="approverBeList_details_2">
+        </div>
+        <span id="deny_button">
+          <a id="deny" href="javascript: void(0);" onclick="submitWithMethod('deny',true); return false;">
+            <img id="deny_icon" src="images/actions/deny.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+            lbDeny
+          </a>
+          &nbsp;
+        </span>
+      </form>
+    </div>
+  </body>
+</html>
+

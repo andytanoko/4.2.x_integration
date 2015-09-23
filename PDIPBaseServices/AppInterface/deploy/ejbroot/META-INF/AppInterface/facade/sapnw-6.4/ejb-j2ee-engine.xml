@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-j2ee-engine SYSTEM "ejb-j2ee-engine.dtd">
+<ejb-j2ee-engine>
+	<enterprise-beans>
+		<enterprise-bean>
+			<ejb-name>AppManager</ejb-name>
+			<jndi-name>com.gridnode.pdip.base.appinterface.facade.ejb.IAppManagerHome</jndi-name>
+			<session-props/>
+		</enterprise-bean>
+	</enterprise-beans>
+</ejb-j2ee-engine>

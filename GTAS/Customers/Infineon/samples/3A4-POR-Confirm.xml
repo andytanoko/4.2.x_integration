@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Pip3A4PurchaseOrderConfirmation SYSTEM "3A4_MS_V02_02_PurchaseOrderConfirmation.dtd">
+<Pip3A4PurchaseOrderConfirmation>
+  <fromRole>
+    <PartnerRoleDescription>
+      <ContactInformation>
+        <contactName>
+          <FreeFormText>AKN Technology Bhd</FreeFormText>
+        </contactName>
+        <EmailAddress>Not Used</EmailAddress>
+        <facsimileNumber>
+          <CommunicationsNumber>04-6426011</CommunicationsNumber>
+        </facsimileNumber>
+        <telephoneNumber>
+          <CommunicationsNumber>04-6415911</CommunicationsNumber>
+        </telephoneNumber>
+      </ContactInformation>
+      <GlobalPartnerRoleClassificationCode>Seller</GlobalPartnerRoleClassificationCode>
+      <PartnerDescription>
+        <BusinessDescription>
+          <GlobalBusinessIdentifier>894157064</GlobalBusinessIdentifier>
+        </BusinessDescription>
+        <GlobalPartnerClassificationCode>Manufacturer</GlobalPartnerClassificationCode>
+      </PartnerDescription>
+    </PartnerRoleDescription>
+  </fromRole>
+  <PurchaseOrder>
+    <AccountDescription>
+      <accountName>
+        <FreeFormText />
+      </accountName>
+      <billTo>
+        <PartnerDescription>
+          <BusinessDescription>
+            <GlobalBusinessIdentifier>89421689</GlobalBusinessIdentifier>
+            <businessName>
+              <FreeFormText />
+            </businessName>
+            <PartnerBusinessIdentification>
+              <ProprietaryBusinessIdentifier>0001</ProprietaryBusinessIdentifier>
+              <ProprietaryDomainIdentifier />
+              <ProprietaryIdentifierAuthority>5687</ProprietaryIdentifierAuthority>
+            </PartnerBusinessIdentification>
+          </BusinessDescription>
+          <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+          <ContactInformation>
+            <contactName>
+              <FreeFormText>YEO M.L.(CONSIGN)/06-231 4453</FreeFormText>
+            </contactName>
+            <facsimileNumber>
+              <CommunicationsNumber />
+            </facsimileNumber>
+            <telephoneNumber>
+              <CommunicationsNumber>06-231 4453</CommunicationsNumber>
+            </telephoneNumber>
+            <PhysicalLocation>
+              <PhysicalAddress>
+                <addressLine1>
+                  <FreeFormText />
+                </addressLine1>
+                <addressLine2>
+                  <FreeFormText />
+                </addressLine2>
+                <cityName>
+                  <FreeFormText />
+                </cityName>
+                <GlobalCountryCode />
+                <NationalPostalCode />
+                <postOfficeBoxIdentifier>
+                  <FreeFormText />
+                </postOfficeBoxIdentifier>
+                <regionName>
+                  <FreeFormText />
+                </regionName>
+              </PhysicalAddress>
+            </PhysicalLocation>
+          </ContactInformation>
+        </PartnerDescription>
+      </billTo>
+    </AccountDescription>
+    <comments>
+      <FreeFormText />
+    </comments>
+    <ContractInformation>
+      <contractIdentifier>
+        <ProprietaryDocumentIdentifier>2000008922</ProprietaryDocumentIdentifier>
+      </contractIdentifier>
+      <primaryContractWith>
+        <PartnerDescription>
+          <BusinessDescription>
+            <PartnerBusinessIdentification>
+              <ProprietaryBusinessIdentifier>0000011114</ProprietaryBusinessIdentifier>
+              <ProprietaryDomainIdentifier>Not Used</ProprietaryDomainIdentifier>
+            </PartnerBusinessIdentification>
+          </BusinessDescription>
+        </PartnerDescription>
+      </primaryContractWith>
+    </ContractInformation>
+    <DocumentReference>
+      <DateTimeStamp>20030303T120903.000Z</DateTimeStamp>
+      <GlobalDocumentReferenceTypeCode>Purchase Order</GlobalDocumentReferenceTypeCode>
+      <LineNumber />
+      <ProprietaryDocumentIdentifier>2000008929</ProprietaryDocumentIdentifier>
+    </DocumentReference>
+    <DocumentReference>
+      <DateTimeStamp />
+      <GlobalDocumentReferenceTypeCode>Sales Order</GlobalDocumentReferenceTypeCode>
+      <LineNumber />
+      <ProprietaryDocumentIdentifier />
+    </DocumentReference>
+    <FinancingTerms>
+      <GlobalFinanceTermsCode>Mutually defined/determined by TPA</GlobalFinanceTermsCode>
+      <PaymentTerms>
+        <GlobalPaymentConditionCode />
+        <netTermsDays>
+          <CountableAmount />
+        </netTermsDays>
+        <percentDue>
+          <PercentAmount />
+        </percentDue>
+      </PaymentTerms>
+      <PaymentTerms>
+        <GlobalPaymentConditionCode />
+        <netTermsDays>
+          <CountableAmount />
+        </netTermsDays>
+        <percentDue>
+          <PercentAmount />
+        </percentDue>
+      </PaymentTerms>
+    </FinancingTerms>
+    <GlobalPurchaseOrderStatusCode>Accept</GlobalPurchaseOrderStatusCode>
+    <GlobalPurchaseOrderTypeCode>Consigned order</GlobalPurchaseOrderTypeCode>
+    <isDropShip>
+      <AffirmationIndicator>No</AffirmationIndicator>
+    </isDropShip>
+    <OrderShippingInformation>
+      <GlobalShipmentTermsCode>DDU</GlobalShipmentTermsCode>
+      <packListRequirements>
+        <FreeFormText>Infineon Technologies MAL</FreeFormText>
+      </packListRequirements>
+    </OrderShippingInformation>
+    <ProductLineItem>
+      <buyerLineItem>
+        <LineNumber>00010</LineNumber>
+      </buyerLineItem>
+      <comments>
+        <FreeFormText>APPROVED |  |PUR. SPEC PART A A66510-A0000-Z000-G1-7425 DD 22/9/00 |PUR. SPEC PART B A66502-B0204-Z-J0-7425 DD 10.02.00 |PUR. SPEC PART C A66502-C0204-M010-*-7425 REV A DD 24.4.96 |DRAWING NO : C63078-A6504-C021-02-0006 Rev 2 DD 28.06.02 |  |SHALL THERE ARE ANY CHANGES OF OUR SPECIFICATION/DRAWINGS, WE WILL |NOTIFY YOU THROUGH OUR USDS (UPDATE SPECIFICATIONS/DRAWINGS TO |SUPPLIER) |  |THIS IS BLANKET CR FOR FY 02/03. THE QTY STATED IN THIS CR IS ONLY A |FORECAST QTY. |ACTUAL DELIVERY WILL BE BASED ON THE MIN &amp; MAX LEVEL AGREED. |  |ANY PRICE CHANGE AGREEMENT DURING THE VALITY OF THIS CR SHALL BE |APPLICABLE TO THIS CR. |  |LIABILITY - REFER TO MAL-CA-1999-M011 |</FreeFormText>
+      </comments>
+      <GlobalProductUnitOfMeasureCode>Piece</GlobalProductUnitOfMeasureCode>
+      <GlobalPurchaseOrderStatusCode>Accept</GlobalPurchaseOrderStatusCode>
+      <isDropShip>
+        <AffirmationIndicator>No</AffirmationIndicator>
+      </isDropShip>
+      <LineNumber>00010</LineNumber>
+      <OrderQuantity>
+        <requestedQuantity>
+          <ProductQuantity>888000000.000</ProductQuantity>
+        </requestedQuantity>
+        <scheduledShipQuantity>
+          <ProductQuantity>888000000.000</ProductQuantity>
+        </scheduledShipQuantity>
+      </OrderQuantity>
+      <ProductIdentification>
+        <PartnerProductIdentification>
+          <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+          <ProprietaryProductIdentifier>25065143</ProprietaryProductIdentifier>
+          <revisionIdentifier>
+            <FreeFormText>FR A6504-C22(KOBE/AKNT)TO220/5L STD</FreeFormText>
+          </revisionIdentifier>
+        </PartnerProductIdentification>
+        <PartnerProductIdentification>
+          <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+          <ProprietaryProductIdentifier>25065143</ProprietaryProductIdentifier>
+          <revisionIdentifier>
+            <FreeFormText />
+          </revisionIdentifier>
+        </PartnerProductIdentification>
+      </ProductIdentification>
+      <proprietaryInformation>
+        <FreeFormText />
+      </proprietaryInformation>
+      <requestedEvent>
+        <TransportationEvent>
+          <DateStamp />
+          <GlobalTransportEventCode>Ship</GlobalTransportEventCode>
+        </TransportationEvent>
+      </requestedEvent>
+      <requestedUnitPrice>
+        <FinancialAmount>
+          <GlobalCurrencyCode />
+          <MonetaryAmount />
+        </FinancialAmount>
+      </requestedUnitPrice>
+      <totalLineItemAmount>
+        <FinancialAmount>
+          <GlobalCurrencyCode />
+          <MonetaryAmount />
+        </FinancialAmount>
+      </totalLineItemAmount>
+    </ProductLineItem>
+    <shipTo>
+      <PartnerDescription>
+        <BusinessDescription>
+          <GlobalBusinessIdentifier>89421689</GlobalBusinessIdentifier>
+          <businessName>
+            <FreeFormText>Infineon Technologies (Malaysia) Sdn. Bhd. (56645-D)</FreeFormText>
+          </businessName>
+          <PartnerBusinessIdentification>
+            <ProprietaryBusinessIdentifier />
+            <ProprietaryDomainIdentifier>7000</ProprietaryDomainIdentifier>
+          </PartnerBusinessIdentification>
+        </BusinessDescription>
+        <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+        <ContactInformation>
+          <facsimileNumber>
+            <CommunicationsNumber>60-06-2321539 / 2326743</CommunicationsNumber>
+          </facsimileNumber>
+          <telephoneNumber>
+            <CommunicationsNumber>60-06-2325266</CommunicationsNumber>
+          </telephoneNumber>
+        </ContactInformation>
+        <PhysicalLocation>
+          <PhysicalAddress>
+            <addressLine1>
+              <FreeFormText>Batu Berendam Free Trade Zone</FreeFormText>
+            </addressLine1>
+            <addressLine2>
+              <FreeFormText />
+            </addressLine2>
+            <cityName>
+              <FreeFormText>Melaka</FreeFormText>
+            </cityName>
+            <GlobalCountryCode>MY</GlobalCountryCode>
+            <NationalPostalCode>75350</NationalPostalCode>
+            <postOfficeBoxIdentifier>
+              <FreeFormText>52 75710</FreeFormText>
+            </postOfficeBoxIdentifier>
+            <regionName>
+              <FreeFormText>MK</FreeFormText>
+            </regionName>
+          </PhysicalAddress>
+        </PhysicalLocation>
+      </PartnerDescription>
+    </shipTo>
+    <totalAmount>
+      <FinancialAmount>
+        <GlobalCurrencyCode />
+        <MonetaryAmount />
+      </FinancialAmount>
+    </totalAmount>
+  </PurchaseOrder>
+  <requestingDocumentDateTime>
+    <DateTimeStamp>20030303T000000.000Z</DateTimeStamp>
+  </requestingDocumentDateTime>
+  <requestingDocumentIdentifier>
+    <ProprietaryDocumentIdentifier>2000008922</ProprietaryDocumentIdentifier>
+  </requestingDocumentIdentifier>
+  <thisDocumentGenerationDateTime>
+    <DateTimeStamp>20030411T105804.935Z</DateTimeStamp>
+  </thisDocumentGenerationDateTime>
+  <thisDocumentIdentifier>
+    <ProprietaryDocumentIdentifier>2000008922</ProprietaryDocumentIdentifier>
+  </thisDocumentIdentifier>
+  <toRole>
+    <PartnerRoleDescription>
+      <ContactInformation>
+        <contactName>
+          <FreeFormText />
+        </contactName>
+        <EmailAddress>M04</EmailAddress>
+        <facsimileNumber>
+          <CommunicationsNumber />
+        </facsimileNumber>
+        <telephoneNumber>
+          <CommunicationsNumber>06-231 4453</CommunicationsNumber>
+        </telephoneNumber>
+      </ContactInformation>
+      <GlobalPartnerRoleClassificationCode>Buyer</GlobalPartnerRoleClassificationCode>
+      <PartnerDescription>
+        <BusinessDescription>
+          <GlobalBusinessIdentifier>894211689</GlobalBusinessIdentifier>
+        </BusinessDescription>
+        <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+      </PartnerDescription>
+    </PartnerRoleDescription>
+  </toRole>
+</Pip3A4PurchaseOrderConfirmation>
+

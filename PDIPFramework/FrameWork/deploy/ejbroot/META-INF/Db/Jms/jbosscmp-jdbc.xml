@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jbosscmp-jdbc PUBLIC "-//JBoss//DTD JBOSSCMP-JDBC 4.0//EN" "http://www.jboss.org/j2ee/dtd/jbosscmp-jdbc_4_0.dtd">
+<jbosscmp-jdbc>
+  <defaults>
+    <datasource>java:/userdbdatasource</datasource>
+    <datasource-mapping>PostgreSQL</datasource-mapping>
+    <create-table>false</create-table>
+    <remove-table>false</remove-table>
+    <read-only>false</read-only>
+    <row-locking>true</row-locking>
+    <pk-constraint>true</pk-constraint>
+    <preferred-relation-mapping>foreign-key</preferred-relation-mapping>
+    <read-ahead>
+      <strategy>on-load</strategy>
+       <page-size>500</page-size>
+       <eager-load-group>*</eager-load-group>
+    </read-ahead>
+  </defaults>
+  <enterprise-beans>
+    <entity>
+      <ejb-name>JMSFailedMsg</ejb-name>
+      <datasource>java:/userdbdatasource</datasource>
+      <datasource-mapping>PostgreSQL</datasource-mapping>
+      <create-table>false</create-table>
+      <remove-table>false</remove-table>
+      <read-only>false</read-only>
+      <row-locking>false</row-locking>
+      <pk-constraint>true</pk-constraint>
+      <read-ahead>
+        <strategy>on-load</strategy>
+         <page-size>500</page-size>
+         <eager-load-group>*</eager-load-group>
+      </read-ahead>
+      <table-name>jms_failed_msg</table-name>
+	  
+	  <cmp-field>
+        <field-name>UID</field-name>
+		<column-name>"UID"</column-name>
+      </cmp-field>
+      <cmp-field>
+        <field-name>DestinationType</field-name>
+		<column-name>"DestinationType"</column-name>
+      </cmp-field>
+      <cmp-field>
+        <field-name>JmsConfigProps</field-name>
+		<column-name>"JmsConfigProps"</column-name>
+      </cmp-field>
+      <cmp-field>
+        <field-name>DestName</field-name>
+		<column-name>"DestName"</column-name>
+      </cmp-field>
+	  <cmp-field>
+        <field-name>MsgObj</field-name>
+		<column-name>"MsgObj"</column-name>
+      </cmp-field>
+	  <cmp-field>
+        <field-name>MsgProps</field-name>
+		<column-name>"MsgProps"</column-name>
+      </cmp-field>
+	  <cmp-field>
+        <field-name>CreatedDate</field-name>
+		<column-name>"CreatedDate"</column-name>
+      </cmp-field>
+	  <cmp-field>
+        <field-name>RetryCount</field-name>
+		<column-name>"RetryCount"</column-name>
+      </cmp-field>
+	  
+    </entity>
+  </enterprise-beans>
+</jbosscmp-jdbc>

@@ -1,0 +1,23 @@
+<!ELEMENT Root (Domain*)>
+<!ELEMENT Domain (Folder*)>
+<!ATTLIST Domain 
+    name CDATA #REQUIRED
+    propertyname CDATA #REQUIRED>
+
+<!ELEMENT Folder (Document*)>
+<!ATTLIST Folder 
+    id CDATA #REQUIRED
+    parent-id CDATA #REQUIRED
+    name CDATA #REQUIRED>
+
+<!ELEMENT Document (File+)>
+<!ATTLIST Document 
+    name CDATA #REQUIRED
+    type CDATA #REQUIRED
+    author CDATA #REQUIRED
+    size CDATA #REQUIRED>
+
+<!ELEMENT File EMPTY>
+<!ATTLIST File
+    name CDATA #REQUIRED
+    type CDATA #REQUIRED>

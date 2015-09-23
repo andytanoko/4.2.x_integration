@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <table>
+          <tr id="sentDocType_details">
+            <td id="sentDocType_label">
+              lbSentDocType
+            </td>
+            <td>
+              <select id="sentDocType_value" size="1" name="sentDocType">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+              <a id="sentDocType_create" href="javascript:divertToMapping('divertCreateDocumentType');">
+                lbCreateDocumentType
+              </a>
+            </td>
+            <td id="sentDocType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="sentDocIdXpath_details">
+            <td id="sentDocIdXpath_label">
+              lbSentDocIdXpath
+            </td>
+            <td>
+              <input type="text" id="sentDocIdXpath_value" name="sentDocIdXpath"/>
+            </td>
+            <td id="sentDocIdXpath_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="startTrackDateXpath_details">
+            <td id="startTrackDateXpath_label">
+              lbStartTrackDateXpath
+            </td>
+            <td>
+              <input type="text" id="startTrackDateXpath_value" name="startTrackDateXpath"/>
+            </td>
+            <td id="startTrackDateXpath_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr id="responseDocType_details">
+            <td id="responseDocType_label">
+              lbResponseDocType
+            </td>
+            <td>
+              <select id="responseDocType_value" size="1" name="responseDocType">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+              <a id="responseDocType_create" href="javascript:divertToMapping('divertCreateDocumentType');">
+                lbCreateDocumentType
+              </a>
+            </td>
+            <td id="responseDocType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="responseDocIdXpath_details">
+            <td id="responseDocIdXpath_label">
+              lbResponseDocIdXpath
+            </td>
+            <td>
+              <input type="text" id="responseDocIdXpath_value" name="responseDocIdXpath"/>
+            </td>
+            <td id="responseDocIdXpath_error">
+              &nbsp;
+            </td>
+          </tr>
+
+        </table>
+        <div id="reminderAlerts_details">
+        </div>
+        <table>
+          <tr id="receiveResponseAlert_details">
+            <td id="receiveResponseAlert_label">
+              lbReceiveResponseAlert
+            </td>
+            <td>
+              <select id="receiveResponseAlert_value" size="1" name="receiveResponseAlert">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+              <a id="receiveResponseAlert_create" href="javascript:divertToMapping('divertCreateAlert');">
+                lbCreateAlert
+              </a>
+            </td>
+            <td id="receiveResponseAlert_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="alertRecipientXpath_details">
+            <td id="alertRecipientXpath_label">
+              lbAlertRecipientXpath
+            </td>
+            <td>
+              <input type="text" id="alertRecipientXpath_value" name="alertRecipientXpath"/>
+            </td>
+            <td id="alertRecipientXpath_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="isAttachResponseDoc_details">
+            <td>
+              <br/>
+            </td>
+            <td>
+              <input type="checkbox" id="isAttachResponseDoc_value" name="isAttachResponseDoc" value="true"/>
+              <span id="isAttachResponseDoc_label">
+                lbIsAttachResponseDoc
+              </span>
+            </td>
+            <td id="isAttachResponseDoc_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

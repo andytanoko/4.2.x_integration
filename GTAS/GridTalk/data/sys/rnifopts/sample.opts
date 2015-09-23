@@ -1,0 +1,31 @@
+#
+# The sample.opts is served as a reference for the configuration.
+# To configure for a particular PIP, make a copy of this sample.opts,
+# rename it to <OWN_Business_Entity_ID>.<Trading_Partner_Business_Entity_ID>.<Process_Def_Name>
+#
+
+# Service Header options
+# For ProcessControl.ActivityControl.MessageControl.Manifest.ServiceContentControl.ActionIdentity
+# Set the messageStandard.FreeFormText value
+# If present, will output the tag with the indicated value.
+# If not present or the value is empty, will not output the tag.
+#set.ActionIdentityMessageStandard=some value
+
+# Set the standardVersion.VersionIdentifier value
+# If present and the value is "default", will output the tag with the value from
+# the ProcessControl.pipVersion.VersionIdentifier tag.
+# If present but with some other value other than "default", will output the tag with the indicated value.
+# if not present or the value is empty, will not output the tag
+#set.ActionIdentityVersionIdentifier=default
+
+# Set the Sender/Receiver Domain.
+# if present, it will be ouput as the indicated value.
+# if it is not configured, it will not be output the tag.
+#set.Request.MessageReceiverIDDomain=DUNS
+#set.Request.MessageSenderIDDomain=DUNS
+
+# Set the Sender and Receiver Location ID
+# if present, the LocationID element in DeliveryHeader and ServiceHeader will be replaced with the specified value.
+# if it is not configured, the default value (retrieved from BusinessEntity>WhitePage>Country) will be used instead.
+#set.Request.SenderLocationID=
+#set.Request.ReceiverLocationID=

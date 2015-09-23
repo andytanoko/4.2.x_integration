@@ -1,0 +1,3381 @@
+package com.gridnode.pdip.base.transport.helpers;
+
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketException;
+import java.security.Key;
+import java.security.cert.Certificate;
+import java.security.cert.X509Certificate;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Hashtable;
+import java.util.Random;
+import java.util.Vector;
+
+import javax.net.ServerSocketFactory;
+import javax.swing.JTextArea;
+
+import sun.misc.BASE64Decoder;
+
+import com.gridnode.pdip.base.transport.comminfo.HttpCommInfo;
+import com.gridnode.pdip.base.transport.handler.HTTPSevletTransportHandler;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: RNIFTestEngine.java
+ *
+ * ****************************************************************************
+ * Date           Author              Changes
+ * ****************************************************************************
+ * 31 March 2003  Qingsong            Initial creation for GTAS 2.0
+ */
+
+public class RNIFTestEngine
+{
+  static String PIP_0C1 = "0C1";
+  static String PIP_0C2 = "0C2";
+  static String PIP_0C3 = "0C3";
+  static String PIP_0C4 = "0C4";
+  static String PIP_3A4 = "3A4";
+  static String URL_SENDER = "sender";
+  static String URL_BACKEND = "backend";
+
+  static String CMD_CERT = "cert";
+  static String CMD_NETWORK = "network";
+  static String CMD_RNIF = "rnif";
+  static String CMD_CMD =  "cmd";
+  static String CMD_CLEAR = "clear";
+  static String CMD_INFO = "info";
+  static String CMD_REFRESH = "refresh";
+  static String CMD_ENABLE_LOG  = "logon";
+  static String CMD_DISABLE_LOG  = "logoff";
+  DummyRNServer dummyserver = null;
+  boolean NotSetProxy = false;
+  boolean isHelp = false;
+  boolean isverbose = false;
+  boolean isquiet = false;
+  boolean fromServlet = false;
+  boolean SingleThread = false;
+  boolean Ack = false;
+
+  String  url = "";
+  String  file_name = "";
+  private boolean launchGUI = false;
+  private boolean RNIF1 = false;
+  private String proxy_pac = "";
+  private String proxy_url = "";
+  private String proxy_port = "";
+  private String command = CMD_RNIF;
+  private String username = "";
+  private String password = "";
+  private boolean sync = false;
+  private boolean post = false;
+  private boolean authenticateServer = false;
+  private boolean authenticateClient = false;
+  private boolean verifyServerHostname = false;
+  private String keyStoreFile="";
+  private String keyStorePassword= "";
+  private String trustStoreFile = "";
+  private String trustStorePassword = "";
+  private int timeout = 5;
+  private Vector filenames = new Vector();
+  private Vector attach_filenames = new Vector();
+  private File[] filesArray = null;
+  private File[] attachfileArray = null;
+  private int    file_pos = 0;
+  private int    delay = 0;
+  private int    times = 1;
+  private int sendDuns = 987654321;
+  private int receiverDuns = 123456789;
+  private boolean GTASPackage = false;
+  private String receiverURL = "";
+  private boolean noTransform = false;
+  private boolean backend = false;
+  private String backend_ip = "localhost";
+  private String backend_port = "6763";
+  private String gts_username = "gridtalk";
+  private String gts_passwd = "1.0";
+  private String backend_attachment_filename = "";
+  private String backend_doc_type = "UC";
+  private String backend_parterID = "";
+  private String cmdline = "";
+  private int server_port = -1;
+  private int server_accept_times = 1;
+  private int server_timeout = 0;
+  private boolean autoAck = true;
+  private boolean confirmation = false;
+  private boolean pkcs12= false;
+  private boolean PEMformat = false;
+  private String pipversion = "V02.00";
+  protected JTextArea          rnlog = null;
+  private boolean server_https = false;
+  SSLContext httpsctx = null;
+  KeyManagerFactory httpskmf = null;
+  ServerSocketFactory httpfactory = null;
+  JavaKeyStoreHandler httpshandler = null;
+  private String cert_CN = "GridNode";
+  private String cert_C = "SG";
+  private String cert_O = "GridNode Pte Ltd";
+  private String cert_OU = "GridNode Pte Ltd Primary Certificate";
+  private String cert_email = "gridtalk@gridnode.com";
+  private String cert_L = "Singapore";
+  private long   cert_sn = 1;
+  private long   cert_duration= 30;
+
+
+
+  class StreamGobbler extends Thread
+  {
+    private InputStream is;
+    //private String type;
+    private StringBuffer data;
+    boolean bufferData;
+
+    public String getData()
+    {
+        return data.toString();
+    }
+
+    public StreamGobbler(InputStream is, String type)
+    {
+        this(is, type, false);
+    }
+
+    public StreamGobbler(InputStream is, String type, boolean bufferData)
+    {
+        this.bufferData = false;
+        this.is = is;
+        //this.type = type;
+        data = new StringBuffer();
+        this.bufferData = bufferData;
+    }
+
+    public void run()
+    {
+        try
+        {
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+            String line = null;
+            do
+            {
+                if((line = br.readLine()) == null)
+                    break;
+                if(bufferData)
+                    data.append(String.valueOf(String.valueOf(line)).concat("\r\n"));
+            } while(true);
+        }
+        catch(IOException ioe)
+        {
+            ioe.printStackTrace();
+        }
+    }
+
+    public boolean isDataInStream(String stringSearchedFor)
+    {
+        return data.toString().indexOf(stringSearchedFor) != -1;
+    }
+ }
+
+ class DummyRNServer extends Thread
+ {
+    private ServerSocket server;
+    private int portno = -1;
+    private int times = 1;
+    private int timeout = 0;
+    private boolean isRunning = false;
+    public  boolean isServerRunning()
+    {
+        return isRunning;
+    }
+    public int getPortNo()
+    {
+        return portno;
+    }
+
+    public void stopServer()
+    {
+      try
+      {
+        server.close();
+      }
+      catch (Exception ex)
+      {
+      }
+    }
+
+    public void run()
+    {
+        HttpMessageContext context = HttpMessageContext.getInstance();
+        try
+        {
+          do
+          {
+              if(times <= -2)
+               times = -2;
+              server.setSoTimeout(timeout);
+              isRunning = true;
+              try
+              {
+                    Socket client = server.accept();
+                    times--;
+                    context.Info("DummyRNServer Receive Message:" + client.getInetAddress());
+                    OutputStream out = client.getOutputStream();
+                    InputStream in = client.getInputStream();
+                    byte[] content = null;
+                    GNTransportHeader header = new GNTransportHeader();
+                    int retime = 0;
+                    do
+                    {
+                      String reply = HttpMessageContext.readLine(in);
+                      if(reply.length() == 0)
+                        retime++;
+                      else
+                        {
+                          if(retime == 0)
+                          {
+                            int index = reply.indexOf(":");
+                            if(index >= 0)
+                            {
+                              String key = reply.substring(0, index);
+                              String value = reply.substring(index + 1);
+                              while(value.charAt(0) == ' ')
+                                value = value.substring(1);
+                              header.setProperty(key, value);
+                            }
+                            else
+                              {
+                                if(reply.indexOf("GET") >= 0)
+                                  header.setProperty("Method", "GET");
+                                if(reply.indexOf("POST") >= 0)
+                                  header.setProperty("Method", "POST");
+                              }
+                          }
+                        }
+                    }while(retime< 1);
+                    if(context.getLogheader())
+                        context.Debug("Message Headers\r\n" + header);
+                    if(header.getProperty("Method").equals("POST"))
+                    {
+                      int len = header.getIntProperty("Content-Length");
+                      if(len <= 0)
+                        len = header.getIntProperty("Content-length");
+                      context.Debug("Message content length from Header" + len);
+                      if(len <= 0)
+                        len = in.available();
+                      if(len <= 0)
+                        content = HttpMessageContext.getMessage(in);
+                      else
+                        {
+                          content = new byte[len];
+                          int readlen = 0;
+                          int left = len;
+                          while(left > 0)
+                            {
+                              int b = in.read(content, readlen, left);
+                              left -= b;
+                              readlen += b;
+                            }
+                        }
+                      if(context.getLogheader())
+                        {
+                        /*
+                          FileOutputStream out = new FileOutputStream("c:\\temp.aut");
+                          out.write(content);
+                          out.close();
+                          */
+                          context.Debug("Message content\r\n" + new String(content));
+                        }
+                      }
+                    if(header.getProperty("Method").equals("GET") || header.getProperty("Method").equals("POST") )
+                      messageReceived(header,content, out, client);
+                    in.close();
+                    out.close();
+                    client.close();
+              }
+              catch (InterruptedIOException ex)
+              {
+                  times--;
+              }
+			  catch(Exception ex)
+			  {
+				ex.printStackTrace();
+			  }
+          }while(times > 0 || times <= -1);
+          server.close();
+          isRunning = false;
+        }
+        catch (SocketException ex)
+        {
+          context.Info("DummyRNServer stopped");
+        }
+        catch (IOException ex)
+        {
+          context.Error("DummyRNServer stopped", ex);
+        }
+    }
+    public DummyRNServer(ServerSocketFactory factory, int port, int times, int timeout)
+    {
+      HttpMessageContext context = HttpMessageContext.getInstance();
+      try
+      {
+        if(factory == null)
+          {
+            server = new ServerSocket(port);
+          }
+          else
+          {
+            server = factory.createServerSocket(port);
+          }
+
+        portno = server.getLocalPort();
+        this.times = times;
+        this.timeout = timeout;
+        isRunning = false;
+        context.Info("DummyRNServer started port [" + portno + "] times [" + times +"] timeout [" + timeout + "]");
+      }
+      catch (Exception ex)
+      {
+        context.Error("DummyRNServer started error", ex);
+      }
+    }
+  }
+
+
+  class ExecuteEngine
+ {
+   String command = "";
+   boolean wait = false;
+   public ExecuteEngine(String command, boolean wait)
+    {
+      this.command = command;
+      this.wait = wait;
+    }
+
+   public ExecuteEngine(String command[], boolean wait)
+    {
+      StringBuffer strbuf = new StringBuffer();
+      for(int i = 0; i < command.length; i++)
+      {
+          strbuf.append(command[i]);
+          strbuf.append(" ");
+      }
+      this.command = strbuf.toString();
+      this.wait = wait;
+    }
+
+    public Object[] executeNative()
+    {
+        Object re[] = new Object[2];
+        try
+        {
+            Runtime runtime = Runtime.getRuntime();
+            Process process = null;
+            process = runtime.exec(command);
+            int exitValue = 0;
+            StreamGobbler outputGobbler = new StreamGobbler(process.getInputStream(), "OUTPUT", true);
+            StreamGobbler errorGobbler = new StreamGobbler(process.getErrorStream(), "ERROR", true);
+            outputGobbler.start();
+            errorGobbler.start();
+            if(wait)
+            {
+                exitValue = process.waitFor();
+                re[0] = new Integer(exitValue);
+                re[1] = String.valueOf(outputGobbler.getData()) + String.valueOf(errorGobbler.getData());
+            } else
+            {
+                re[0] = new Integer(exitValue);
+                re[1] = "";
+            }
+        }
+        catch(InterruptedException ex)
+        {
+            re[0] = new Integer(-1);
+            re[1] = ex;
+        }
+        catch(IOException ex)
+        {
+            re[0] = new Integer(-1);
+            re[1] = ex;
+        }
+        return re;
+    }
+ }
+
+  class sendMessageThread extends Thread
+  {
+    Hashtable header = null;
+    byte[] content = null;
+    String url = "";
+    ExecuteEngine execute = null;
+    public void run()
+    {
+        HttpMessageContext context = HttpMessageContext.getInstance();
+        if(execute == null)
+        {
+          context.Debug("sendMessage in thread for " + url);
+          GNHttpConnection connection = new GNHttpConnection(url, isAuthenticateServer(),isAuthenticateClient(),isVerifyServerHostname(), getKeyStoreFile() , getKeyStorePassword(),getTrustStoreFile(),getTrustStorePassword(), getTimeout());
+          if(context.getLogheader())
+          {
+            GNTransportHeader h = new GNTransportHeader(header);
+            context.Debug("sendMessage Header\r\n" + h);
+            if(content != null)
+              context.Debug("sendMessage Content\r\n" + new String(content));
+          }
+          try
+          {
+            if(isPost())
+                connection.doPost(header,content);
+            else
+                connection.doGet(header);
+            context.Info("sendMessage OK in thread for " + url);
+          }
+          catch (Exception ex)
+          {
+            context.Error("sendMessage Fails in thread for " + url,  ex);
+          }
+        }
+        else
+        {
+                Object[] result = execute.executeNative();
+                int rec = ((Integer)result[0]).intValue();
+                if(rec == -1)
+                    context.Error("Execute Command line: " + getCmdline() + " fail ", (Exception)result[1]);
+                else
+                {
+                    context.Debug("Execute Command line: " + getCmdline() + " finish " + (String)result[1]);
+                }
+        }
+    }
+
+    public sendMessageThread(ExecuteEngine execute)
+    {
+      this.execute = execute;
+    }
+
+    public sendMessageThread(String url, Hashtable header, byte[] content)
+    {
+      this.url = url;
+      this.header = header;
+      this.content = content;
+    }
+  }
+
+
+  public RNIFTestEngine(boolean fromServlet)
+  {
+    this.fromServlet = fromServlet;
+  }
+
+  protected void parseFileName()
+  {
+    filenames = HttpMessageContext.string2Vector(file_name, ';');
+    attach_filenames = HttpMessageContext.string2Vector(backend_attachment_filename, ';');
+    filesArray = prepareFileArray(filenames);
+    attachfileArray = prepareFileArray(attach_filenames);
+  }
+
+  public void sendNextFile()
+  {
+    file_pos++;
+    try
+	{
+		sendFile(file_pos-1);
+	}
+	catch(Exception ex)
+	{
+	  ex.printStackTrace();
+	}
+  }
+
+  public void resetFilePos()
+  {
+    file_pos = 0;
+  }
+
+  public boolean hasFinishedSendFile()
+  {
+    return file_pos >= filenames.size();
+  }
+
+  public byte[] prepareFile(File file,GNTransportHeader header) throws Exception
+  {
+    HttpMessageContext context = HttpMessageContext.getInstance();
+    byte[] content = null;
+    header.removeAllProperty();
+    try
+    {
+      content = HttpMessageContext.getMessage(new FileInputStream(file.getAbsolutePath()));
+    }
+    catch (Exception ex)
+    {
+      context.Error("Cannot load message from file", ex);
+      return null;
+    }
+
+    if(!isNoTransform() && !isBackend())
+    {
+        if(isRNIF1())
+        {
+          context.Debug("RNIF 1.1 message");
+          logRNMsg("RNIF 1.1 message");
+          header.setContentType("application/x-rosettanet-agent; version=1.0");
+        }
+        else
+        {
+          context.Debug("RNIF 2.0 message");
+          logRNMsg("RNIF 2.0 message");
+          HTTPSevletTransportHandler handler = new HTTPSevletTransportHandler();
+          header.setType("multipart/related");
+          header.setRNVersion("RosettaNet/V02.00");
+          header.setRNSyncMessage(isSync());
+          if(content != null && content.length > 2 && content[0] == '-' && content[1] == '-')
+          {
+            context.Debug("remove boundary");
+            content = handler.translateIncomingMimeMessage(header, content);
+          }
+          if(content != null && content.length > 2)
+            content = handler.translateOutgoingMimeMessage(header, content);
+        }
+        if(content != null)
+          header.setIntProperty("Content-Length",content.length);
+    }
+    if(isGTASPackage())
+    {
+      content = generateGTASMessage(getReceiverURL(),header.getProperties(),content);
+      header.removeAllProperty();
+    }
+    return content;
+  }
+
+  public void sendFile(int fileno) throws Exception
+  {
+    HttpMessageContext context = HttpMessageContext.getInstance();
+    byte[] content = null;
+    String afilenname = "";
+    GNTransportHeader header = new GNTransportHeader();
+    if(fileno >= 0 && fileno < filenames.size())
+      {
+        afilenname = (String)filenames.get(fileno);
+        content = prepareFile(filesArray[fileno], header);
+      }
+    if(content == null)
+      {
+        if(isRNIFCommand())
+          {
+            context.Debug("Cannot Load file from " + afilenname);
+            return;
+          }
+      }
+      else
+        context.Debug("file loaded from " + afilenname);
+    sendMessage(header.getProperties(), content);
+    if(isRNIFCommand())
+      {
+        context.Info("Sending RNIF message for " + url + " .......");
+        logRNMsg("Sending RNIF message for " + url + " .......");
+      }
+    else
+      context.Info("Testing Network connection for " + url + "......");
+  }
+
+  protected File getFileFromName(String afilenname)
+  {
+      if(PIP_3A4.equals(afilenname) || PIP_0C1.equals(afilenname) || PIP_0C2.equals(afilenname) || PIP_0C3.equals(afilenname) || PIP_0C4.equals(afilenname))
+      {
+        if(isBackend())
+          return HttpMessageContext.saveToTempFile(getRNPIPMessageFromTemplate(afilenname, getPipversion(),  ""+getSendDuns(), ""+getReceiverDuns(), isAck(), isConfirmation(),"","", "", "").getBytes());
+        else
+          return HttpMessageContext.saveToTempFile(getRNMessageFromTemplate(afilenname, getPipversion(), ""+getSendDuns(), ""+getReceiverDuns(), "","",  isAck(), isConfirmation(), "", "", "", ""));
+      }
+      else
+        return new File(afilenname);
+  }
+
+  protected File[] prepareFileArray(Vector files)
+    {
+        HttpMessageContext context = HttpMessageContext.getInstance();
+        if(files == null || files.size() <= 0)
+         return new File[0];
+        File fileArray[] = new File[files.size()];
+        for(int i = 0; i < files.size(); i++)
+            {
+              String afilename = (String)files.get(i);
+              File afile = getFileFromName(afilename);
+              context.Debug("prepareFileArray: " + (i+1) + "/" + files.size() + "[" +  afile.getAbsolutePath() + "]");
+              if(context.getLogheader())
+              {
+                try
+                {
+                  byte[] content = HttpMessageContext.getMessage(new FileInputStream(afile));
+                  context.Debug("Content:" + new String(content));
+                }
+                catch (Exception ex)
+                {
+                  context.Error("can not log content", ex);
+                }
+              }
+              fileArray[i] = afile;
+            }
+        return fileArray;
+    }
+
+  protected String prepareFileName(File[] files)
+  {
+    String filename= "";
+    if(files == null || files.length <= 0)
+      return filename;
+    for(int i = 0; i< files.length; i++)
+    {
+      if(i != 0)
+        filename += ";";
+      filename += files[i].getAbsolutePath();
+    }
+    return filename;
+  }
+
+  public void Sendingonebyone()
+  {
+    HttpMessageContext context = HttpMessageContext.getInstance();
+    resetFilePos();
+    do
+    {
+      context.Info("Sending File[" + file_pos + "]");
+      sendNextFile();
+      context.Debug("Wait for " + getDelay() + " ms");
+      HttpMessageContext.waitForaWhile(getDelay());
+    }while(!hasFinishedSendFile());
+  }
+
+  public void logRNMsg(String msg, Throwable ex)
+  {
+    logRNMsg(msg + HttpMessageContext.getInstance().Exception2String(ex));
+  }
+
+  public void logRNMsg(String msg)
+  {
+    if(getRnlog() != null)
+    {
+        getRnlog().append(msg + "\r\n");
+    }
+  }
+
+  public void executeCmd(String cmdline)//for backend
+  {
+      HttpMessageContext context = HttpMessageContext.getInstance();
+      context.Debug("Execute Command line: \r\n" + cmdline);
+      sendMessageThread mes = new sendMessageThread(new ExecuteEngine(cmdline, true));
+      if(isSingleThread())
+        mes.run();
+      else
+        mes.start();
+  }
+
+  public void batchbackSending()
+  {
+     String cmd = getCmdline();
+     String cmdline = cmd + " -I " + getBackend_ip() + " -O " + getBackend_port() + " -N " + getGts_username() + " -W " + getGts_passwd() + " -D " + getBackend_doc_type()  + " -P " + getBackend_parterID()
+            + " -F \"" + prepareFileName(filesArray) + "\"";
+     if(attachfileArray != null && attachfileArray.length > 0)
+        cmdline += " -A \"" + prepareFileName(attachfileArray) + "\"";
+     executeCmd(cmdline);
+  }
+
+
+  public void routerSending()
+  {
+    HttpMessageContext context = HttpMessageContext.getInstance();
+    if(isRNIFCommand() && filenames.size() == 0 && getCmdline().length() <= 0)
+    {
+      context.Error("no file selected", null);
+      return;
+    }
+    for(int i = 0; i< getTimes(); i++)
+    {
+      if(isBackend())
+        batchbackSending();
+      else
+        Sendingonebyone();
+      context.Debug("Finish Sending File round [" +  (i + 1) + "]");
+      if(i != getTimes() -1)
+        HttpMessageContext.waitForaWhile(getDelay());
+    }
+  }
+
+  public void TestNetwork()
+  {
+    //HttpMessageContext context = HttpMessageContext.getInstance();
+    parseFileName();
+    if(!isNotSetProxy() && !isBackend())
+    {
+      GNHttpConnection.setHttp_proxy(proxy_pac, proxy_url, proxy_port, username, password);
+    }
+    command = CMD_NETWORK;
+    routerSending();
+  }
+
+
+  public void TestRNIF()
+  {
+    //HttpMessageContext context = HttpMessageContext.getInstance();
+    parseFileName();
+    if(!isNotSetProxy() && !isBackend())
+    {
+      GNHttpConnection.setHttp_proxy(proxy_pac, proxy_url, proxy_port, username, password);
+    }
+    command = CMD_RNIF;
+    routerSending();
+  }
+
+  public void sendMessage(Hashtable header, byte[] content)
+  {
+    sendMessageThread mes = new sendMessageThread(url, header, content);
+    if(isSingleThread())
+      mes.run();
+    else
+      mes.start();
+  }
+
+  public boolean isNetworkCommand()
+  {
+    return CMD_NETWORK.equals(getCommand());
+  }
+
+  public boolean isClearCommand()
+  {
+    return CMD_CLEAR.equals(getCommand());
+  }
+
+  public boolean isInfoCommand()
+  {
+    return CMD_INFO.equals(getCommand());
+  }
+
+  public boolean isCmdCommand()
+  {
+    return CMD_CMD.equals(getCommand());
+  }
+
+  public boolean isCertCommand()
+  {
+    return CMD_CERT.equals(getCommand());
+  }
+
+  public boolean isRefreshCommand()
+  {
+    return CMD_REFRESH.equals(getCommand());
+  }
+
+  public boolean isEnableStringLogCommand()
+  {
+    return CMD_ENABLE_LOG.equals(getCommand());
+  }
+
+  public boolean isDisableStringLogCommand()
+  {
+    return CMD_DISABLE_LOG.equals(getCommand());
+  }
+
+  public boolean isRNIFCommand()
+  {
+    return CMD_RNIF.equals(getCommand());
+  }
+
+  public void parseParameter(GTConfigFile config)
+  {
+      HttpMessageContext context = HttpMessageContext.getInstance();
+      context.setLogType(HttpMessageContext.LOG_SYSTEM);
+      context.setLoglevel(config.getIntProperty("log", 1));
+      context.setLogheader(config.getBooleanProperty("lh", false));
+      if(config.getBooleanProperty("clear", false))
+        context.resetLoggerBuffer();
+      setFile_name(config.getProperty("c"));
+      setUrl(config.getProperty("u"));
+      setIsverbose(config.getBooleanProperty("v", false));
+      setIsquiet(config.getBooleanProperty("q", false));
+      setIsHelp(config.getBooleanProperty("h", false));
+      setLaunchGUI(config.getBooleanProperty("gui", false));
+      setRNIF1(config.getIntProperty("r", 2) == 1);
+      setPipversion(config.getProperty("pv", "V02.00"));
+      setNotSetProxy(config.getBooleanProperty("np", false));
+      setProxy_pac(config.getProperty("pac"));
+      setProxy_url(config.getProperty("pu"));
+      setProxy_port(config.getProperty("pp"));
+      setCommand(config.getProperty("command", CMD_CERT));
+      if(config.getBooleanProperty("info"))
+        setCommand(CMD_INFO);
+      else if(config.getBooleanProperty("network"))
+        setCommand(CMD_NETWORK);
+      else if(config.getBooleanProperty("rnif"))
+        setCommand(CMD_RNIF);
+      else if(config.getBooleanProperty("refresh"))
+        setCommand(CMD_REFRESH);
+      else if(config.getBooleanProperty("cert"))
+        setCommand(CMD_CERT);
+      setUsername(config.getProperty("user"));
+      setPassword(config.getProperty("passwd"));
+      setSync(config.getBooleanProperty("sync", false));
+      setPost(config.getBooleanProperty("p", false));
+      setAuthenticateServer(config.getBooleanProperty("as", false));
+      setAuthenticateClient(config.getBooleanProperty("ac", false));
+      setVerifyServerHostname(config.getBooleanProperty("vh", false));
+      setTrustStoreFile(config.getProperty("tf", JavaKeyStoreHandler.getTructStoreName("")));
+      setTrustStorePassword(config.getProperty("tp", JavaKeyStoreHandler.getTructStorePassword("")));
+
+      if(isCertCommand())
+      {
+        setKeyStoreFile(config.getProperty("keystore"));
+        if(!HttpMessageContext.emptyString(getKeyStoreFile()) && getKeyStoreFile().equals("ca"))
+          setKeyStoreFile(JavaKeyStoreHandler.getTructStoreName(""));
+        setKeyStorePassword(config.getProperty("password", JavaKeyStoreHandler.getTructStorePassword("")));
+        setCert_CN(config.getProperty("cn","GridNode"));
+        setCert_C(config.getProperty("country","SG"));
+        setCert_O(config.getProperty("o","GridNode Pte Ltd"));
+        setCert_OU(config.getProperty("ou","GridNode Pte Ltd Primary Certificate"));
+        setCert_OU(config.getProperty("l","singapore"));
+        setCert_email(config.getProperty("email","gridtalk@gridnode.com"));
+        setCert_sn((long)config.getIntProperty("sn",(int)getRadomNo()));
+        setCert_duration(config.getIntProperty("duration",365));
+      }
+      else
+      {
+        setKeyStoreFile(config.getProperty("keystore"));
+        setKeyStorePassword(config.getProperty("password"));
+      }
+
+      setTimeout(config.getIntProperty("t", 5));
+      setDelay(config.getIntProperty("delay", 0));
+      setTimes(config.getIntProperty("times", 1));
+      setSingleThread(config.getBooleanProperty("st", false));
+      setSendDuns(config.getIntProperty("ds", 987654321));
+      setReceiverDuns(config.getIntProperty("dr", 123456789));
+      setAck(config.getBooleanProperty("ack", false));
+      setGTASPackage(config.getBooleanProperty("gtas", false));
+      setReceiverURL(config.getProperty("ur"));
+      setNoTransform(config.getBooleanProperty("nt", false));
+      setPkcs12(config.getBooleanProperty("pkcs12", false));
+      setPEMformat(config.getBooleanProperty("pem", false));
+      if(isRNIFCommand())
+        setPost(true);
+      if(isCertCommand())
+        setCmdline(config.getProperty("cmd", "list"));
+      else
+        setCmdline(config.getProperty("cmd", "java -cp \"senderlite.jar;sender.jar\" com.gridnode.backend.sender.SenderLite"));
+      if(!HttpMessageContext.emptyString(config.getProperty("lf")))
+      {
+        context.setLogFileName(config.getProperty("lf"));
+        context.setLogType(HttpMessageContext.LOG_FILE);
+      }
+      if(isverbose)
+        {
+          context.setLoglevel(0);
+        }
+      if(isquiet)
+        {
+          context.setLoglevel(2);
+          context.setLogType(HttpMessageContext.LOG_NONE);
+        }
+      if(getUrl().equals(URL_SENDER))
+          setUrl(context.getSenderURL());
+      setBackend(getUrl().equals(URL_BACKEND));
+      if(isBackend())
+          setUrl("");
+      setBackend_ip(config.getProperty("bi", "localhost"));
+      setBackend_port(config.getProperty("bp", "6763"));
+      setGts_username(config.getProperty("bu", "gridtalk"));
+      setGts_passwd(config.getProperty("bpw", "1.0"));
+      setBackend_attachment_filename(config.getProperty("alias"));
+      setBackend_doc_type(config.getProperty("bd", "UC"));
+      setBackend_parterID(config.getProperty("bid"));
+
+      setServer_port(config.getIntProperty("serverp", -1));
+      setServer_accept_times(config.getIntProperty("servera", -1));
+      setServer_timeout(config.getIntProperty("servert", 0));
+      setServer_https(config.getBooleanProperty("https", false));
+      setAutoAck(config.getBooleanProperty("autoack", true));
+  }
+
+  public void PrintInfo()
+  {
+    HttpMessageContext  context = HttpMessageContext.getInstance();
+    context.Info(context.toString());
+  }
+
+  public void TestCert()
+  {
+    HttpMessageContext  context = HttpMessageContext.getInstance();
+    parseFileName();
+    command = CMD_CERT;
+    try
+    {
+      String tructname = getKeyStoreFile();
+      String tructpass = JavaKeyStoreHandler.getTructStorePassword(getKeyStorePassword());
+      JavaKeyStoreHandler handler = new JavaKeyStoreHandler();
+      if(isPkcs12())
+        handler.setPKCS12Keystore();
+      handler.open(tructname, tructpass);
+      if(getCmdline().equals("list"))
+      {
+          context.Info(handler.toString());
+      }
+      else if(getCmdline().equals("import"))
+      {
+          if(filenames.size() == 1)
+          {
+            String certfile = (String)filenames.get(0);
+            X509Certificate  acert = JavaKeyStoreHandler.loadCertificate(certfile);
+            String alias = handler.insert(backend_attachment_filename, acert);
+            context.Info("certificate " + certfile + " has been imported into " + tructname + " as " + alias);
+          }
+          else
+          {
+            String keyfile = (String)filenames.get(0);
+            String message = "key " + keyfile + " and certificate ";
+            Key  akey = JavaKeyStoreHandler.loadPrivateKey(keyfile);
+            X509Certificate[] certchain = new X509Certificate[filenames.size() -1];
+            for(int i = 1; i < filenames.size(); i++)
+            {
+              String cerfile = (String)filenames.get(i);
+              certchain[i - 1] = JavaKeyStoreHandler.loadCertificate(cerfile);
+              message += " " + cerfile;
+            }
+            String alias = handler.insert(backend_attachment_filename, akey, certchain);
+            context.Info(message + " have been imported into " + tructname + " as " + alias);
+          }
+          handler.write();
+      }
+      else if(getCmdline().equals("rename"))
+      {
+          String alias = (String)attach_filenames.get(0);
+          String newalias = (String)attach_filenames.get(1);
+          handler.renameAlias(alias, newalias);
+          context.Info(alias + " has been renamed to "  + newalias + " in " + tructname);
+          handler.write();
+      }
+      else if(getCmdline().equals("convert"))
+      {
+          if(getTrustStoreFile().equals(tructname))
+          {
+            context.Info(getTrustStoreFile() + " cannot be converted to itself");
+            return;
+          }
+          JavaKeyStoreHandler handler1 = new JavaKeyStoreHandler();
+          if(!isPkcs12())
+            handler1.setPKCS12Keystore();
+          handler1.open(getTrustStoreFile(), JavaKeyStoreHandler.getTructStorePassword(getTrustStorePassword()));
+          handler1.append(handler);
+          handler1.write();
+          if(isPkcs12())
+            context.Info("PKCS12 " + getKeyStoreFile() + " has been converted to JKS " + getTrustStoreFile());
+          else
+            context.Info("JKS " + getKeyStoreFile() + " has been converted to PKCS12 " + getTrustStoreFile());
+      }
+      else if(getCmdline().equals("append"))
+      {
+          if(getTrustStoreFile().equals(tructname))
+          {
+            context.Info(getTrustStoreFile() + " cannot be appended to itself");
+            return;
+          }
+          JavaKeyStoreHandler handler1 = new JavaKeyStoreHandler();
+          if(isPkcs12())
+            handler1.setPKCS12Keystore();
+          handler1.open(getTrustStoreFile(), JavaKeyStoreHandler.getTructStorePassword(getTrustStorePassword()));
+          handler.append(handler1);
+          handler.write();
+          context.Info(getTrustStoreFile() + " has been appended to " + tructname);
+      }
+      else if(getCmdline().equals("genkey"))
+      {
+          String issuer = "CN=" + getCert_CN() + ", C=" + getCert_C() + ", O=" + getCert_O() + ", OU=" + getCert_OU()+ ", L=" + getCert_L();
+          Date from = new Date();
+          Date to =   new Date(from.getTime() + 1000L * 3600L * 24L * getCert_duration());
+          String alias = handler.genSelfSignCertificate((String)attach_filenames.get(0), issuer, getCert_sn(), from, to);
+          if(!JavaKeyStoreHandler.emptyString(alias))
+            context.Info("Self signed cert has been generated into " + tructname + " as " + alias);
+          else
+            context.Info("Self signed cert cannot be generated into " + tructname);
+          handler.write();
+      }
+      else if(getCmdline().equals("export"))
+      {
+          String alias = "";
+          if(attach_filenames != null && attach_filenames.size() > 0)
+            alias = (String)attach_filenames.get(0);
+          else
+            alias = (String)handler.getAlias().get(0);
+          String format = "";
+          if(isPEMformat())
+            format = "in PEM format";
+          if(filenames.size() == 1)
+          {
+            String certfile = (String)filenames.get(0);
+            if(!isPEMformat())
+              JavaKeyStoreHandler.writeCertificate(certfile, handler.getCert(alias));
+            else
+              JavaKeyStoreHandler.writeBytes(certfile, JavaKeyStoreHandler.writePEMCertificate(handler.getCert(alias)));
+            context.Info("certificate of " + alias + " in " +  tructname + " has been exported " + format + " as " + certfile);
+          }
+          else
+          {
+            String keyfile = (String)filenames.get(0);
+            if(!isPEMformat())
+              JavaKeyStoreHandler.writePrivateKey(keyfile, handler.getKey(alias));
+            else
+              JavaKeyStoreHandler.writeBytes(keyfile, JavaKeyStoreHandler.writePEMPrivateKey(handler.getKey(alias)));
+            context.Info("Privatekey of " + alias + " in " +  tructname + " has been exported " + format + " as " + keyfile);
+            Certificate[] certs = handler.getCertChain(alias);
+            int size = filenames.size() -1;
+            if(size > certs.length)
+              size = certs.length;
+            for(int i = 0; i < size; i++)
+            {
+              String certfile = (String)filenames.get(i+1);
+              if(!isPEMformat())
+                JavaKeyStoreHandler.writeCertificate(certfile, certs[i]);
+              else
+                JavaKeyStoreHandler.writeBytes(certfile, JavaKeyStoreHandler.writePEMCertificate(certs[i]));
+              context.Info("certificate of " + alias + " in " +  tructname + " has been exported " + format + " as " + certfile);
+            }
+          }
+      }
+      else if(getCmdline().equals("signcsr"))
+      {
+          String format = "";
+          if(isPEMformat())
+            format = "in PEM format";
+          String alias = "";
+          if(attach_filenames != null && attach_filenames.size() > 0)
+            alias = (String)attach_filenames.get(0);
+          else
+            alias = (String)handler.getAlias().get(0);
+          String csrname = (String)filenames.get(0);
+          String certname = (String)filenames.get(1);
+          Certificate acert = handler.genSignCertificate(alias, JavaKeyStoreHandler.loadCSR(csrname));
+          if(!isPEMformat())
+            {
+              JavaKeyStoreHandler.writeCertificate(certname, acert);
+            }
+          else
+            {
+              JavaKeyStoreHandler.writeBytes(certname, JavaKeyStoreHandler.writeCertificate(acert));
+            }
+          context.Info("Certificate " + certname + " has been generated " + format + " from CSR " + csrname + " by " + alias);
+      }
+      else if(getCmdline().equals("csr"))
+      {
+          String format = "";
+          if(isPEMformat())
+            format = "in PEM format";
+          String alias = "";
+          if(attach_filenames != null && attach_filenames.size() > 0)
+            alias = (String)attach_filenames.get(0);
+          else
+            alias = (String)handler.getAlias().get(0);
+          String csrfile = (String)filenames.get(0);
+          if(handler.containsAlias(alias))
+          {
+            if(!isPEMformat())
+              handler.writeCSR(alias, csrfile);
+            else
+              JavaKeyStoreHandler.writeBytes(csrfile, JavaKeyStoreHandler.writePEMCSR(handler.getCSR(alias)));
+            context.Info("CSR " + csrfile + " has been generated " + format + " for " + alias);
+          }
+          else
+            context.Info("CSR " + csrfile + " cannot be generated " + format + " for " + alias);
+      }
+      else if(getCmdline().equals("delete"))
+      {
+          for(int i = 0; i < attach_filenames.size();i++)
+          {
+              String alias = (String)attach_filenames.get(i);
+              if(!handler.deleteAliasFromkeyStore(alias))
+              {
+                context.Info(alias + " cannot be deleted from " + tructname);
+              }
+              else
+              {
+                context.Info(alias + " has been deleted from " + tructname);
+              }
+          }
+          for(int i = 0; i < filenames.size();i++)
+          {
+              String certfile = (String)filenames.get(i);
+              if(!handler.deleteCertificateFromkeyStore(certfile))
+              {
+                context.Info(certfile + " cannot be deleted from " + tructname);
+              }
+              else
+              {
+                context.Info(certfile + " has been deleted from " + tructname);
+              }
+          }
+          handler.write();
+      }
+    }
+    catch (Exception ex)
+    {
+       context.Error("Keystore action failed:", ex);
+    }
+   }
+
+  public void run()
+  {
+    HttpMessageContext  context = HttpMessageContext.getInstance();
+    if(checkMandatoryParam())
+    {
+      if(getServer_port() != -1)
+        startServer();
+
+      if(isIsHelp())
+      {
+        context.Info(printHelp());
+        return;
+      }
+      if(!isLaunchGUI())
+      {
+        parseFileName();
+        if(isNetworkCommand())
+            TestNetwork();
+        else if(isRNIFCommand())
+            TestRNIF();
+        else if(isCmdCommand())
+            routerSending();
+        else if(isInfoCommand())
+            PrintInfo();
+        else if(isCertCommand())
+            TestCert();
+        if(isFromServlet())
+        {
+          if(isClearCommand())
+              context.resetLoggerBuffer();
+          else if(isRefreshCommand())
+              context.initConfig(context.getConfig());
+          else if(isEnableStringLogCommand())
+              context.setEnableLoggerBuffer(true);
+          else if(isDisableStringLogCommand())
+              context.setEnableLoggerBuffer(false);
+        }
+      }
+    }
+    else
+       context.Info(printHelp());
+  }
+
+  public String printHelp()
+   {
+      StringBuffer buffer = new StringBuffer();
+      buffer.append("gntool1 version 0.1 Usage:\r\n");
+      //buffer.append("  java -jar gntool1.jar \r\n");
+      buffer.append("    -h        this help\r\n");
+      if(isFromServlet())
+          {
+            buffer.append("    -command  [network|rnif|clear|info|refresh|cert] testing network or cert(default)\r\n");
+            buffer.append("    -info     command info\r\n");
+            buffer.append("    -network  command network\r\n");
+            buffer.append("    -rnif     command rnif\r\n");
+            buffer.append("    -cert     command cert\r\n");
+          }
+      //else
+      //   ;//buffer.append("    -command  [network|rnif|info|cert] testing network or cert(default)\r\n");
+      if(isFromServlet())
+        {
+          buffer.append("    -refresh    command refresh\r\n");
+          buffer.append("    -clear      clear previous log messages\r\n");
+        }
+      else
+         buffer.append("    -gui      launch gui and set para from args\r\n");
+
+      buffer.append("    -log      [0|1|2]log level\r\n");
+      buffer.append("    -lh       log header\r\n");
+      buffer.append("    -lf       log file\r\n");
+      buffer.append("    -v        verbose (prints out more stuff)\r\n");
+      buffer.append("    -q        quiet (supress output)\r\n\r\n");
+      if(isRNIFCommand())
+      {
+          buffer.append("    -c        \"file1;0C1;0C2;0C3;0C4;3A4\"  content files\r\n");
+          buffer.append("    -u        destination(url, sender, backend)\r\n");
+          buffer.append("    -r        [1|2] uses RNIF1 or RNIF2 headers\r\n");
+          buffer.append("    -pv       pip version(V02.00) \r\n");
+          buffer.append("    -t        timeout (5)\r\n\r\n");
+
+          buffer.append("    -p        POST to the URL for testing network \r\n\r\n");
+
+          buffer.append("    -np       Not Reset proxy\r\n");
+          buffer.append("    -pac      proxy automatic configuation URL\r\n");
+          buffer.append("    -pu       proxy url\r\n");
+          buffer.append("    -pp       proxy port\r\n");
+          buffer.append("    -user     proxy auth username\r\n");
+          buffer.append("    -passwd   proxy auth password\r\n\r\n\r\n");
+
+          buffer.append("    -as       auth server     - for HTTPS\r\n");
+          buffer.append("    -ac       auth client     - for HTTPS\r\n");
+          buffer.append("    -vh       verify HostName - for HTTPS\r\n");
+          buffer.append("    -keystore Key Store file name - for HTTPS\r\n");
+          buffer.append("    -password Key Store password - for HTTPS\r\n");
+          buffer.append("    -tf       trusted Store file name - for HTTPS\r\n");
+          buffer.append("    -tp       trusted Store password - for HTTPS\r\n\r\n");
+
+          buffer.append("    -ds       sender   Duns(987654321)\r\n");
+          buffer.append("    -dr       receiver Duns(123456789)\r\n");
+          buffer.append("    -ack      RN Ack message\r\n");
+          buffer.append("    -sync     synchronous rosettnat message\r\n\r\n");
+
+          buffer.append("    -bi       gridtalk server IP(localhost)\r\n");
+          buffer.append("    -bp       gridtalk server backend port(6763)\r\n");
+          buffer.append("    -bu       gridtalk server login username(gridtalk)\r\n");
+          buffer.append("    -bpw      gridtalk server login passwd(1.0)\r\n");
+          buffer.append("    -alias    gridtalk server backend attach files\r\n");
+          buffer.append("    -bd       gridtalk server backend document type(UC)\r\n");
+          buffer.append("    -bid      gridtalk server backend partner ID\r\n\r\n");
+
+          buffer.append("    -gtas     gtas package message(for sender)\r\n");
+          buffer.append("    -nt       no transformation of message\r\n\r\n");
+
+          buffer.append("    -ur       Receipt URL for gtas sender\r\n\r\n");
+
+          buffer.append("    -https    https server\r\n");
+          buffer.append("    -severp   rn server port -1(-1 no server, 0 radom)\r\n");
+          buffer.append("    -severa   rn server accept times -1(-1 no limitation)\r\n");
+          buffer.append("    -severt   rn server time out 0\r\n");
+          buffer.append("    -autoack  rn server auto acknoledge\r\n\r\n");
+
+          buffer.append("    -cmd      Execute command line\r\n");
+          buffer.append("              java -cp \"senderlite.jar;sender.jar\" com.gridnode.backend.sender.SenderLite\r\n");
+
+          buffer.append("    -st       single thread mode\r\n");
+          buffer.append("    -delay    delay for sending next file (0 ms)\r\n");
+          buffer.append("    -times    total times for sending (1)\r\n");
+      }
+    else if(isNetworkCommand())
+    {
+          buffer.append("    -c        \"file1;0C1;0C2;0C3;0C4;3A4\"  content files\r\n");
+          buffer.append("    -u        destination(url, sender, backend)\r\n");
+          buffer.append("    -r        [1|2] uses RNIF1 or RNIF2 headers\r\n");
+          buffer.append("    -pv       pip version(V02.00) \r\n");
+          buffer.append("    -t        timeout (5)\r\n\r\n");
+
+          buffer.append("    -p        POST to the URL for testing network \r\n\r\n");
+
+          buffer.append("    -np       Not Reset proxy\r\n");
+          buffer.append("    -pac      proxy automatic configuation URL\r\n");
+          buffer.append("    -pu       proxy url\r\n");
+          buffer.append("    -pp       proxy port\r\n");
+          buffer.append("    -user     proxy auth username\r\n");
+          buffer.append("    -passwd   proxy auth password\r\n\r\n\r\n");
+
+          buffer.append("    -as       auth server     - for HTTPS\r\n");
+          buffer.append("    -ac       auth client     - for HTTPS\r\n");
+          buffer.append("    -vh       verify HostName - for HTTPS\r\n");
+          buffer.append("    -keystore Key Store file name - for HTTPS\r\n");
+          buffer.append("    -password Key Store password - for HTTPS\r\n");
+          buffer.append("    -tf       trusted Store file name - for HTTPS\r\n");
+          buffer.append("    -tp       trusted Store password - for HTTPS\r\n\r\n");
+
+          buffer.append("    -ds       sender   Duns(987654321)\r\n");
+          buffer.append("    -dr       receiver Duns(123456789)\r\n");
+          buffer.append("    -ack      RN Ack message\r\n");
+          buffer.append("    -sync     synchronous rosettnat message\r\n\r\n");
+
+          buffer.append("    -bi       gridtalk server IP(localhost)\r\n");
+          buffer.append("    -bp       gridtalk server backend port(6763)\r\n");
+          buffer.append("    -bu       gridtalk server login username(gridtalk)\r\n");
+          buffer.append("    -bpw      gridtalk server login passwd(1.0)\r\n");
+          buffer.append("    -alias    gridtalk server backend attach files\r\n");
+          buffer.append("    -bd       gridtalk server backend document type(UC)\r\n");
+          buffer.append("    -bid      gridtalk server backend partner ID\r\n\r\n");
+
+          buffer.append("    -gtas     gtas package message(for sender)\r\n");
+          buffer.append("    -nt       no transformation of message\r\n\r\n");
+
+          buffer.append("    -ur       Receipt URL for gtas sender\r\n\r\n");
+
+          buffer.append("    -cmd      Execute command line\r\n");
+          buffer.append("              java -cp \"senderlite.jar;sender.jar\" com.gridnode.backend.sender.SenderLite\r\n");
+
+          buffer.append("    -st       single thread mode\r\n");
+          buffer.append("    -delay    delay for sending next file (0 ms)\r\n");
+          buffer.append("    -times    total times for sending (1)\r\n");
+    }
+    else if(isCertCommand())
+    {
+          buffer.append("    -cmd      cert command[list|import|export|delete|append|convert|genkey|csr|signcsr|rename]\r\n");
+          buffer.append("              list ,import, export, delete certs in keystore,append, convert keystore, \r\n");
+          buffer.append("              generate selfsign certs, generate csr,sign a csr\r\n");
+          buffer.append("    -pem      PEM (base64 DER) format (for Apache Server) of Certificate, Privatekey, CSR\r\n\r\n");
+          buffer.append("    -alias    alias for certificate manipulation\r\n");
+          buffer.append("    -c        certificate/key filenames\r\n");
+          buffer.append("    -keystore key store file name\r\n");
+          buffer.append("    -password key store password (" + JavaKeyStoreHandler.getTructStorePassword("") + ")\r\n");
+          buffer.append("    -tf       destination key store name for convertion\r\n");
+          buffer.append("    -tp       destination key store password for convertion(" + JavaKeyStoreHandler.getTructStorePassword("") + ")\r\n");
+          buffer.append("    -pkcs12   pkcs12 keystore supported by org.bouncycastle.jce.provider.BouncyCastleProvider\r\n\r\n");
+          buffer.append("    -cn       common name for self signed certificate(GridNode)\r\n");
+          buffer.append("    -country  country name for self signed certificate(SG)\r\n");
+          buffer.append("    -o        organization Name for self signed certificate(GridNode Pte Ltd)\r\n");
+          buffer.append("    -ou       organization Unit for self signed certificate(GridNode Pte Ltd Primary Certificate)\r\n");
+          buffer.append("    -l        locality name for self signed certificate (Singapore)\r\n");
+          buffer.append("    -sn       serial no for self signed certificate (radom)\r\n");
+          buffer.append("    -duration duration(days) for self signed certificate(365)\r\n");
+
+          buffer.append("Examples:\r\n");
+          buffer.append("list certs:\r\n");
+          buffer.append("     -cmd list -keystore keystore_filename -password password [-pkcs12]\r\n\r\n");
+          buffer.append("list certs in trusted java key store:\r\n");
+          buffer.append("     -cmd list -keystore ca\r\n\r\n");
+          buffer.append("rename alias of certs in key store:\r\n");
+          buffer.append("     -cmd rename -alias alias;newalias -keystore keystore_filename -password password [-pkcs12]\r\n\r\n");
+          buffer.append("import certs to Key Store:\r\n");
+          buffer.append("     -cmd import -c cert_filename -keystore keystore_filename -password password [-pkcs12]\r\n\r\n");
+          buffer.append("import privatekey and certs to Key Store:\r\n");
+          buffer.append("     -cmd import -c privatekey_filename[;cert_filename]* -keystore keystore_filename -password password [-pkcs12]\r\n\r\n");
+          buffer.append("export cert from Key Store:\r\n");
+          buffer.append("     -cmd export -alias cert_alias -c cert_filename -keystore keystore_filename -password password [-pkcs12] [-pem]\r\n\r\n");
+          buffer.append("export privatekey and certs from Key Store:\r\n");
+          buffer.append("     -cmd export -alias cert_alias -c privatekey_filename[;cert_filename]* -keystore keystore_filename -password password [-pkcs12] [-pem]\r\n\r\n");
+          buffer.append("delete certs from Key Store:\r\n");
+          buffer.append("     -cmd delete -alias cert_alias* -c cert_filename* -keystore keystore_filename -password password [-pkcs12]\r\n\r\n");
+          buffer.append("create self signed CA cert to Key Store:\r\n");
+          buffer.append("     -cmd genkey -alias cert_alias -keystore keystore_filename -password password  -cn commonname -country  countryname -o organizationName  -ou organizationUnit -l localityname  -sn serialno -duration days[-pkcs12]\r\n\r\n");
+          buffer.append("create CSR from Key Store:\r\n");
+          buffer.append("     -cmd csr -alias cert_alias -c csr_filename -keystore keystore_filename -password password [-pkcs12] [-pem]\r\n\r\n");
+          buffer.append("create certificate from CSR :\r\n");
+          buffer.append("     -cmd signcsr -alias ca_alias -c csr_filename;certificate_filename -keystore keystore_filename -password password [-pkcs12] [-pem]\r\n\r\n");
+          buffer.append("append a key store to another keystore:\r\n");
+          buffer.append("     -cmd append -keystore keystore_filename1 -password password1 -tf keystore_filename2 -tp password2 [-pkcs12]\r\n\r\n");
+          buffer.append("convert PKCS12 to JKS:\r\n");
+          buffer.append("     -cmd convert -keystore pkcs12_keystore_filename -password pkcs12_password -tf java_keystore_filename -tp java_password -pkcs12\r\n\r\n");
+          buffer.append("convert JKS to PKCS12:\r\n");
+          buffer.append("     -cmd convert -keystore java_keystore_filename -password java_password -tf pkcs12_keystore_filename -tp pkcs12_password\r\n\r\n");
+    }
+    return buffer.toString();
+   }
+
+  public boolean checkMandatoryParam()
+  {
+      boolean isparamOK = true;
+      try
+      {
+          if(isHelp)
+            isparamOK = false;
+          return isparamOK;
+      }
+      catch(Exception ex)
+      {
+          isparamOK = false;
+          ex.printStackTrace();
+      }
+      return isparamOK;
+  }
+
+  byte[] genResponse()
+  {
+    StringBuffer buff = new StringBuffer();
+    if(isSync())
+      buff.append("HTTP/1.0 200 OK\r\n");
+    else
+      buff.append("HTTP/1.0 202 Accepted\r\n");
+    buff.append("Date: Fri, 28 Feb 2003 11:58:37 GMT\r\n");
+    buff.append("Server: DummyRNServer/0.1 (Windows 2000 5.0 x86)\r\n");
+    buff.append("Content-Type: text/html\r\n");
+    buff.append("Connection: close\r\n\r\n");
+    buff.append("<pre>message received</pre>\r\n\r\n");
+    return buff.toString().getBytes();
+  }
+
+  byte[] genGetResponse()
+  {
+    StringBuffer buff = new StringBuffer();
+    buff.append("HTTP/1.0 200 OK\r\n");
+    buff.append("Date: Fri, 28 Feb 2003 11:58:37 GMT\r\n");
+    buff.append("Server: DummyRNServer/0.1 (Windows 2000 5.0 x86)\r\n");
+    buff.append("Content-Type: text/html\r\n");
+    buff.append("Connection: close\r\n\r\n");
+    buff.append("<pre>You have reached the gntool1 DummyRNServer, Please use Post</pre>\r\n\r\n");
+    return buff.toString().getBytes();
+  }
+
+  boolean isRequestMessage(String msg)
+  {
+    return (msg.indexOf("Purchase Order Request Action") > 0 ||
+            msg.indexOf("Asynchronous Test Notification Action") > 0 ||
+            msg.indexOf("Asynchronous Test Request Action") > 0 ||
+            msg.indexOf("Synchronous Test Notification Action") > 0 ||
+            msg.indexOf("Synchronous Test Query Action") > 0);
+  }
+
+  boolean isConfirmationMessage(String msg)
+  {
+    return (msg.indexOf("Purchase Order Confirmation Action") > 0 ||
+            msg.indexOf("Asynchronous Test Confirmation") > 0 ||
+            msg.indexOf("Synchronous Test Response Action") > 0);
+  }
+
+  boolean isAckMessage(String msg)
+  {
+    return (msg.indexOf("Receipt Acknowledgment") > 0);
+  }
+
+  boolean isTwoAction(String pip)
+  {
+    if(PIP_0C2.equals(pip) || PIP_0C4.equals(pip) || PIP_3A4.equals(pip))
+      return true;
+    else
+      return false;
+  }
+
+  public String getRequestServiceContent(String msg)
+  {
+    return getRequestPart(msg, "Content-Location: RN-Service-Content");
+  }
+
+  public String getRequestServiceHeader(String msg)
+  {
+    return getRequestPart(msg, "Content-Location: RN-Service-Header");
+  }
+
+  public String getRequestDeliverHeader(String msg)
+  {
+    return getRequestPart(msg, "Content-Location: RN-Delivery-Header");
+  }
+
+  public String getRequestPreamble(String msg)
+  {
+    return getRequestPart(msg, "Content-Location: RN-Preamble");
+  }
+
+  public String getRequestPart(String msg, String contentstr)
+  {
+    HttpMessageContext context = HttpMessageContext.getInstance();
+    String contentTypeStr = "Content-Type: application/xml";
+    String transferstr = "Content-Transfer-Encoding:";
+
+    int index = msg.indexOf(contentstr);
+    msg = msg.substring(msg.lastIndexOf(contentTypeStr, index));
+
+    String transfer = msg.substring(msg.indexOf(transferstr) + transferstr.length());
+    msg = msg.substring(msg.indexOf("\n\n") + 2);
+    msg.trim();
+    index = msg.indexOf("\n\n");
+    if(index > 0)
+    {
+      msg = msg.substring(0, index);
+    }
+    else
+    {
+      msg = msg.substring(0,msg.lastIndexOf("\n"));
+    }
+    msg.trim();
+    try
+    {
+      transfer = transfer.substring(1, transfer.indexOf("\n"));
+      transfer.trim();
+      context.Debug("getRequestPart:Transfer encoding:[" + transfer + "]");
+      if(transfer.equalsIgnoreCase("base64"))
+      {
+        context.Debug("getRequestPart: try base64 decode");
+        BASE64Decoder base64 = new BASE64Decoder();
+        msg =  convertMsg(base64.decodeBuffer(msg));
+      }
+    }
+    catch (Exception ex)
+    {
+      context.Debug("getRequestPart: not base64 encoded");
+    }
+
+    if(context.getLogheader())
+      context.Debug("getRequestPart: content:" + contentstr + "\r\n "+ msg);
+    return msg;
+  }
+
+  public String convertMsg(byte[] content)
+  {
+    if(content == null)
+      return "";
+    InputStreamReader r = new InputStreamReader(new ByteArrayInputStream(content));
+    StringWriter w = new StringWriter();
+    try
+    {
+      while(true)
+      {
+        int a = r.read();
+        if(a == -1)
+          break;
+        if(a != '\r')
+          w.write((char)a);
+      }
+    }
+    catch (Exception ex)
+    {
+      ex.printStackTrace();
+    }
+    return w.toString();
+  }
+
+  public void messageReceived(GTConfigFile header, byte[] content, OutputStream out, Socket sock) throws Exception
+  {
+    HttpMessageContext context = HttpMessageContext.getInstance();
+
+    boolean backisSyn = isSync();
+    setSync(new GNTransportHeader(header.getProperties()).isRNSyncMessage());
+    try
+    {
+      if(header.getProperty("Method").equals("GET"))
+      {
+        context.Debug("GET from:" + sock.toString());
+        out.write(genGetResponse());
+        out.close();
+        return;
+      }
+      byte[] response = genResponse();
+      byte[] ack = null;
+      byte[] reply = null;
+      boolean isRequest = false;
+      boolean isConfirmation = false;
+      boolean isAcknlodge = false;
+      boolean isTwoActionPIP = false;
+      String msg = convertMsg(content);
+
+      //String serviceheader = context.parseItem(msg, "ServiceHeader");
+      String serviceheader = getRequestServiceHeader(msg);
+      //String DeliveryHeader = context.parseItem(msg, "DeliveryHeader");
+      String DeliveryHeader = getRequestDeliverHeader(msg);
+      String servicecontent = getRequestServiceContent(msg);
+
+      String duns_sender =   HttpMessageContext.parseItem(HttpMessageContext.parseItem(DeliveryHeader, "messageSenderIdentification"), "GlobalBusinessIdentifier");
+      String duns_recei =   HttpMessageContext.parseItem(HttpMessageContext.parseItem(DeliveryHeader, "messageReceiverIdentification"), "GlobalBusinessIdentifier");
+      String requestingID = HttpMessageContext.parseItem(HttpMessageContext.parseItem(servicecontent, "thisDocumentIdentifier"), "ProprietaryDocumentIdentifier");
+      String requestingTime = HttpMessageContext.parseItem(HttpMessageContext.parseItem(servicecontent, "thisDocumentGenerationDateTime"), "DateTimeStamp");
+
+      String messageTracking = HttpMessageContext.parseItem(HttpMessageContext.parseItem(DeliveryHeader, "messageTrackingID"), "InstanceIdentifier");
+      String pipinstance     = HttpMessageContext.parseItem(HttpMessageContext.parseItem(serviceheader, "pipInstanceId"), "InstanceIdentifier");
+      String pip = HttpMessageContext.parseItem(serviceheader, "GlobalProcessIndicatorCode");
+      String msgtype = HttpMessageContext.parseItem(serviceheader, "ServiceContentControl");
+      String fromrole = HttpMessageContext.parseItem(servicecontent, "fromRole");
+      String torole = HttpMessageContext.parseItem(servicecontent, "toRole");
+      if(context.getLogheader())
+      {
+        context.Debug("fromRole:\r\n" + fromrole);
+        context.Debug("toRole:\r\n" + torole);
+      }
+      isAcknlodge = isAckMessage(msgtype);
+      isTwoActionPIP = isTwoAction(pip);
+      if(!isAcknlodge)
+        {
+          isRequest = isRequestMessage(msgtype);
+          if(!isRequest)
+           isConfirmation = isConfirmationMessage(msgtype);
+        }
+
+      context.Info("messageReceived: PIP[" +  pip+"] trackingID[" + messageTracking + "] pipinstance[" + pipinstance+"] from " + duns_sender + " to " + duns_recei + " reqesting id [" + requestingID +"]" + " reqesting time [" + requestingTime +"]" );
+      logRNMsg("messageReceived: PIP[" +  pip+"] trackingID[" + messageTracking + "] pipinstance[" + pipinstance+"] from " + duns_sender + " to " + duns_recei + " reqesting id [" + requestingID +"]" + " reqesting time [" + requestingTime +"]" );
+      GNTransportHeader ackhead = new GNTransportHeader();
+      GNTransportHeader replyhead = new GNTransportHeader();
+      File aFile = HttpMessageContext.saveToTempFile(getRNMessageFromTemplate(pip, getPipversion(), duns_recei, duns_sender, pipinstance,messageTracking, true, isConfirmation, "","", "", ""));
+      if(aFile != null)
+        ack = prepareFile(aFile, ackhead);
+
+      if(isTwoActionPIP && isRequest)
+      {
+          aFile = HttpMessageContext.saveToTempFile(getRNMessageFromTemplate(pip, getPipversion(), duns_recei, duns_sender, pipinstance,messageTracking, false, true, requestingID, requestingTime, torole, fromrole));
+          if(aFile != null)
+          {
+            reply = prepareFile(aFile, replyhead);
+          }
+      }
+      context.Info("messageReceived: twoAction["+ isTwoActionPIP +"] request[" + isRequest + "] iaAck[" + isAcknlodge + "]");
+      logRNMsg("messageReceived: twoAction["+ isTwoActionPIP +"] request[" + isRequest + "] iaAck[" + isAcknlodge + "]");
+      if(isAcknlodge)
+      {
+            context.Info("messageReceived: send HTTP response for Ack message");
+            logRNMsg("messageReceived: send HTTP response for Ack message");
+            out.write(response);
+            out.close();
+      }
+      else
+      {
+          if(!isSync())
+            {
+              context.Info("messageReceived: send HTTP response for Asyn message");
+              logRNMsg("messageReceived: send HTTP response for Asyn message");
+              out.write(response);
+              out.close();
+              sock.close();
+              if(context.getLogheader())
+                  context.Debug("messageReceived: response" + new String(response));
+              context.Info("messageReceived: send Ack for Asyn message");
+              logRNMsg("messageReceived: send Ack for Asyn message");
+              HttpMessageContext.waitForaWhile(getDelay());
+              sendMessage(ackhead.getProperties(), ack);
+              if(isTwoActionPIP && isRequest)
+              {
+                  HttpMessageContext.waitForaWhile(getDelay());
+                  context.Info("messageReceived: send Reply for Asyn two action pips message");
+                  logRNMsg("messageReceived: send Reply for Asyn two action pips message");
+                  sendMessage(replyhead.getProperties(), reply);
+              }
+              else
+              {
+                context.Info("messageReceived: not send Reply twoAction["+ isTwoActionPIP +"] request[" + isRequest + "]");
+                logRNMsg("messageReceived: not send Reply twoAction["+ isTwoActionPIP +"] request[" + isRequest + "]");
+              }
+            }
+            else
+            {
+              if(isRequest && isTwoActionPIP)
+                {
+                  ack = reply;
+                  ackhead = new GNTransportHeader(replyhead.getProperties());
+                  context.Info("messageReceived: send reply for syn two action pips message");
+                  logRNMsg("messageReceived: send reply for syn two action pips message");
+                }
+                else
+                  {
+                    context.Info("messageReceived: send ack for syn message");
+                    logRNMsg("messageReceived: send ack for syn message");
+                  }
+                if(isRequest)
+                {
+                    out.write(ackhead.toString().getBytes());
+                    out.write("\r\n".getBytes());
+                    if(context.getLogheader())
+                      context.Debug("messageReceived: response" + new String(ack));
+                    out.write(ack);
+                    out.close();
+                }
+            }
+      }
+    }
+    catch (Exception ex)
+    {
+        context.Error("messageReceived cannot handle it", ex);
+    }
+    setSync(backisSyn);
+  }
+
+  public static void main(String[] args) throws Exception
+  {
+    RNIFTestEngine RNIFTestEngine1 = new RNIFTestEngine(false);
+    FileInputStream in = new FileInputStream("c:\\Ack_-180470813848293.dat");
+    byte[] content = new byte[in.available()];
+    in.read(content);
+    RNIFTestEngine1.messageReceived(new GTConfigFile(), content, System.out, null);
+  }
+
+  public String getFile_name()
+  {
+    return file_name;
+  }
+  public void setFile_name(String file_name)
+  {
+    this.file_name = file_name;
+  }
+  public boolean isIsHelp()
+  {
+    return isHelp;
+  }
+  public void setIsHelp(boolean isHelp)
+  {
+    this.isHelp = isHelp;
+  }
+  public boolean isIsquiet()
+  {
+    return isquiet;
+  }
+  public void setIsquiet(boolean isquiet)
+  {
+    this.isquiet = isquiet;
+  }
+  public boolean isIsverbose()
+  {
+    return isverbose;
+  }
+  public void setIsverbose(boolean isverbose)
+  {
+    this.isverbose = isverbose;
+  }
+  public String getUrl()
+  {
+    return url;
+  }
+  public void setUrl(String url)
+  {
+    this.url = url;
+  }
+  public void setLaunchGUI(boolean launchGUI)
+  {
+    this.launchGUI = launchGUI;
+  }
+  public boolean isLaunchGUI()
+  {
+    return launchGUI;
+  }
+  public void setRNIF1(boolean RNIF1)
+  {
+    this.RNIF1 = RNIF1;
+  }
+  public boolean isRNIF1()
+  {
+    return RNIF1;
+  }
+  public void setProxy_pac(String proxy_pac)
+  {
+    this.proxy_pac = proxy_pac;
+  }
+  public String getProxy_pac()
+  {
+    return proxy_pac;
+  }
+  public void setProxy_url(String proxy_url)
+  {
+    this.proxy_url = proxy_url;
+  }
+  public String getProxy_url()
+  {
+    return proxy_url;
+  }
+  public void setProxy_port(String proxy_port)
+  {
+    this.proxy_port = proxy_port;
+  }
+  public String getProxy_port()
+  {
+    return proxy_port;
+  }
+  public void setCommand(String command)
+  {
+    this.command = command;
+  }
+  public String getCommand()
+  {
+    return command;
+  }
+  public void setUsername(String username)
+  {
+    this.username = username;
+  }
+  public String getUsername()
+  {
+    return username;
+  }
+  public void setPassword(String password)
+  {
+    this.password = password;
+  }
+  public String getPassword()
+  {
+    return password;
+  }
+  public void setSync(boolean sync)
+  {
+    this.sync = sync;
+  }
+  public boolean isSync()
+  {
+    return sync;
+  }
+  public void setPost(boolean post)
+  {
+    this.post = post;
+  }
+  public boolean isPost()
+  {
+    return post;
+  }
+  public boolean isAuthenticateClient()
+  {
+    return authenticateClient;
+  }
+  public boolean isAuthenticateServer()
+  {
+    return authenticateServer;
+  }
+  public void setAuthenticateClient(boolean authenticateClient)
+  {
+    this.authenticateClient = authenticateClient;
+  }
+  public void setAuthenticateServer(boolean authenticateServer)
+  {
+    this.authenticateServer = authenticateServer;
+  }
+  public boolean isVerifyServerHostname()
+  {
+    return verifyServerHostname;
+  }
+  public void setVerifyServerHostname(boolean verifyServerHostname)
+  {
+    this.verifyServerHostname = verifyServerHostname;
+  }
+  public String getKeyStoreFile()
+  {
+    return keyStoreFile;
+  }
+  public String getKeyStorePassword()
+  {
+    return keyStorePassword;
+  }
+  public void setKeyStoreFile(String keyStoreFile)
+  {
+    this.keyStoreFile = keyStoreFile;
+  }
+  public void setKeyStorePassword(String keyStorePassword)
+  {
+    this.keyStorePassword = keyStorePassword;
+  }
+  public String getTrustStoreFile()
+  {
+    return trustStoreFile;
+  }
+  public String getTrustStorePassword()
+  {
+    return trustStorePassword;
+  }
+  public void setTrustStoreFile(String trustStoreFile)
+  {
+    this.trustStoreFile = trustStoreFile;
+  }
+  public void setTrustStorePassword(String trustStorePassword)
+  {
+    this.trustStorePassword = trustStorePassword;
+  }
+  public void setTimeout(int timeout)
+  {
+    this.timeout = timeout;
+  }
+  public int getTimeout()
+  {
+    return timeout;
+  }
+  public void setDelay(int delay)
+  {
+    this.delay = delay;
+  }
+  public int getDelay()
+  {
+    return delay;
+  }
+  public void setTimes(int times)
+  {
+    this.times = times;
+  }
+  public int getTimes()
+  {
+    return times;
+  }
+  public boolean isFromServlet()
+  {
+    return fromServlet;
+  }
+  public void setFromServlet(boolean fromServlet)
+  {
+    this.fromServlet = fromServlet;
+  }
+  public boolean isSingleThread()
+  {
+    return SingleThread;
+  }
+  public void setSingleThread(boolean SingleThread)
+  {
+    this.SingleThread = SingleThread;
+  }
+  public void setSendDuns(int sendDuns)
+  {
+    this.sendDuns = sendDuns;
+  }
+  public int getSendDuns()
+  {
+    return sendDuns;
+  }
+  public void setReceiverDuns(int receiverDuns)
+  {
+    this.receiverDuns = receiverDuns;
+  }
+  public int getReceiverDuns()
+  {
+    return receiverDuns;
+  }
+
+  protected long getRadomNo()
+  {
+    return new Random().nextLong();
+  }
+
+  protected String getPipInstanceID()
+  {
+    //20030314T055302.206Z
+    SimpleDateFormat formatter = new SimpleDateFormat ("yyyyMMdd'T'hhmmss'.'SSS'Z'");
+    Date   currentTime_1 = new Date();
+    return formatter.format(currentTime_1);
+  }
+
+  protected String getRNSHMessageFromTemplate(String pip, String pipversion, String s_Duns, String r_Duns, String pipinstance, String messageTracking, boolean isAck, boolean isConfirmation)
+  {
+          //String pipversion1 = pipversion.replace('.','_');
+          StringBuffer msg = new StringBuffer();
+          String FromGlobalPartnerRoleClassificationCode = "Buyer";
+          String FromGlobalBusinessServiceCode = "Buyer Service";
+
+          String ToGlobalPartnerRoleClassificationCode = "Seller";
+          String ToGlobalBusinessServiceCode = "Seller Service";
+          String locationID = "RNSTT";
+
+          String BusinessActivityIdentifier = "Request Purchase Order";
+          String requestaction = "Purchase Order Request Action";
+          String confirmationaction = "Purchase Order Confirmation Action";
+          String ackationaction = "Receipt Acknowledgment";
+
+          if(pipinstance == null || pipinstance.length() ==0)
+            pipinstance = getPipInstanceID();
+
+          if(messageTracking == null || messageTracking.length() ==0)
+            messageTracking = getPipInstanceID();
+
+          if(PIP_3A4.equals(pip))
+          {
+            FromGlobalPartnerRoleClassificationCode = "Buyer";
+            FromGlobalBusinessServiceCode = "Buyer Service";
+            ToGlobalPartnerRoleClassificationCode = "Seller";
+            ToGlobalBusinessServiceCode = "Seller Service";
+
+            BusinessActivityIdentifier = "Request Purchase Order";
+            requestaction = "Purchase Order Request Action";
+            confirmationaction = "Purchase Order Confirmation Action";
+          }
+          else if(PIP_0C1.equals(pip) || PIP_0C2.equals(pip) || PIP_0C3.equals(pip) || PIP_0C4.equals(pip))
+          {
+            FromGlobalPartnerRoleClassificationCode = "Initiator";
+            FromGlobalBusinessServiceCode = "Initiator Service";
+            ToGlobalPartnerRoleClassificationCode = "Responder";
+            ToGlobalBusinessServiceCode = "Responder Service";
+            if(PIP_0C1.equals(pip))
+            {
+              BusinessActivityIdentifier = "Distribute Asynchronous Test Notification";
+              requestaction = "Asynchronous Test Notification Action";
+            }
+            else if(PIP_0C2.equals(pip))
+            {
+              if(!isConfirmation)
+                BusinessActivityIdentifier = "Asynchronous Test Request";
+              else
+                BusinessActivityIdentifier = "Asynchronous Test Confirmation";
+              requestaction = "Asynchronous Test Request Action";
+              confirmationaction = "Asynchronous Test Confirmation Action";
+            }
+            else if(PIP_0C3.equals(pip))
+            {
+              BusinessActivityIdentifier = "Distribute Synchronous Test Notification";
+              requestaction = "Synchronous Test Notification Action";
+            }
+            else if(PIP_0C4.equals(pip))
+            {
+              if(!isConfirmation)
+                BusinessActivityIdentifier = "Synchronous Test Query";
+              else
+                BusinessActivityIdentifier = "Synchronous Test Response";
+              requestaction = "Synchronous Test Query Action";
+              confirmationaction = "Synchronous Test Response Action";
+            }
+          }
+
+          if((isAck || isConfirmation) &&  (!isAck || !isConfirmation))
+            {
+              locationID = "CUT";
+              String temp = FromGlobalPartnerRoleClassificationCode;
+              FromGlobalPartnerRoleClassificationCode = ToGlobalPartnerRoleClassificationCode;
+              ToGlobalPartnerRoleClassificationCode = temp;
+
+              temp = FromGlobalBusinessServiceCode;
+              FromGlobalBusinessServiceCode = ToGlobalBusinessServiceCode;
+              ToGlobalBusinessServiceCode = temp;
+
+              temp = s_Duns;
+              s_Duns = r_Duns;
+              r_Duns = temp;
+            }
+
+            msg.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
+            msg.append("<!DOCTYPE ServiceHeader SYSTEM \"ServiceHeader_MS_V02_00.dtd\">\r\n");
+
+            msg.append("<ServiceHeader> <ProcessControl> <ActivityControl>\r\n");
+            msg.append("<BusinessActivityIdentifier>" + BusinessActivityIdentifier + "</BusinessActivityIdentifier><MessageControl><fromRole>\r\n");
+            msg.append("<GlobalPartnerRoleClassificationCode>" + FromGlobalPartnerRoleClassificationCode +"</GlobalPartnerRoleClassificationCode> </fromRole> \r\n");
+            msg.append("<fromService> <GlobalBusinessServiceCode>" + FromGlobalBusinessServiceCode +"</GlobalBusinessServiceCode> </fromService> \r\n");
+            if(isAck)
+            {
+              if(!isConfirmation)
+                msg.append("<inReplyTo><ActionControl><ActionIdentity><GlobalBusinessActionCode>" + requestaction + "</GlobalBusinessActionCode></ActionIdentity>\r\n");
+              else
+                msg.append("<inReplyTo><ActionControl><ActionIdentity><GlobalBusinessActionCode>" + confirmationaction + "</GlobalBusinessActionCode></ActionIdentity>\r\n");
+              msg.append("<messageTrackingID><InstanceIdentifier>" + messageTracking + "</InstanceIdentifier></messageTrackingID></ActionControl></inReplyTo>\r\n");
+            }
+            else if(isConfirmation)
+            {
+                msg.append("<inReplyTo><ActionControl><ActionIdentity><GlobalBusinessActionCode>" + requestaction + "</GlobalBusinessActionCode></ActionIdentity>\r\n");
+                msg.append("<messageTrackingID><InstanceIdentifier>" + messageTracking + "</InstanceIdentifier></messageTrackingID></ActionControl></inReplyTo>\r\n");
+            }
+
+            msg.append("<Manifest> <numberOfAttachments> <CountableAmount>0</CountableAmount> \r\n");
+            msg.append("</numberOfAttachments> <ServiceContentControl>\r\n");
+            if(isAck)
+              msg.append("<SignalIdentity><GlobalBusinessSignalCode>" + ackationaction + "</GlobalBusinessSignalCode><VersionIdentifier>V02.00</VersionIdentifier></SignalIdentity>\r\n");
+            else if(isConfirmation)
+              msg.append("<ActionIdentity><GlobalBusinessActionCode>" + confirmationaction + "</GlobalBusinessActionCode> </ActionIdentity> \r\n");
+            else
+              msg.append("<ActionIdentity><GlobalBusinessActionCode>" + requestaction + "</GlobalBusinessActionCode> </ActionIdentity> \r\n");
+            msg.append("</ServiceContentControl> </Manifest>\r\n");
+            msg.append("<toRole><GlobalPartnerRoleClassificationCode>" + ToGlobalPartnerRoleClassificationCode +"</GlobalPartnerRoleClassificationCode> </toRole>\r\n");
+            msg.append(" <toService><GlobalBusinessServiceCode>" + ToGlobalBusinessServiceCode +"</GlobalBusinessServiceCode> </toService> </MessageControl></ActivityControl>\r\n");
+            msg.append("<GlobalUsageCode>Test</GlobalUsageCode> \r\n");
+            msg.append("<pipCode><GlobalProcessIndicatorCode>" + pip + "</GlobalProcessIndicatorCode> </pipCode>\r\n");
+            msg.append("<pipInstanceId><InstanceIdentifier>" + pipinstance +"</InstanceIdentifier> </pipInstanceId> \r\n");
+            msg.append("<pipVersion><VersionIdentifier>" + pipversion +"</VersionIdentifier> </pipVersion> \r\n");
+            msg.append("<KnownInitiatingPartner><PartnerIdentification> <domain> <FreeFormText>DUNS</FreeFormText> </domain> \r\n");
+            msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> <locationID> <Value>" +locationID +"</Value> \r\n");
+            msg.append("</locationID> </PartnerIdentification> </KnownInitiatingPartner> </ProcessControl> </ServiceHeader>\r\n");
+
+            msg.append("--70c85e:f3eb16c363:-7fff\r\n");
+            msg.append("Content-Type: application/xml\r\n");
+            msg.append("Content-Transfer-Encoding: binary\r\n");
+            msg.append("Content-ID: \"70c85e:f3eb16c363:-7ffb\"\r\n");
+            msg.append("Content-Location: RN-Service-Content\r\n");
+            msg.append("\r\n");
+        return msg.toString();
+  }
+
+  protected String getRNPIPMessageFromTemplate(String pip, String pipversion, String s_Duns, String r_Duns, boolean isAck, boolean isConfirmation, String requestingID, String requestingTime, String fromrole, String torole)
+  {
+      String pipversion1 = pipversion.replace('.','_');
+      StringBuffer msg = new StringBuffer();
+        if(isAck)
+        {
+              msg.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
+              msg.append("<!DOCTYPE ReceiptAcknowledgment SYSTEM \"AcknowledgmentOfReceipt_MS_V02_00.dtd\">\r\n");
+              msg.append("<ReceiptAcknowledgment/>\r\n");
+        }
+        else if(PIP_3A4.equals(pip))
+        {
+              setSync(false);
+
+              if(isConfirmation)
+              {
+                msg.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
+                msg.append("<!DOCTYPE Pip3A4PurchaseOrderConfirmation SYSTEM \"3A4_MS_" + pipversion1 + "_PurchaseOrderConfirmation.dtd\">\r\n");
+                msg.append("<Pip3A4PurchaseOrderConfirmation> <fromRole>" + fromrole + "</fromRole>\r\n");
+                msg.append("<GlobalDocumentFunctionCode>Request</GlobalDocumentFunctionCode> <PurchaseOrder> \r\n");
+                msg.append("<AccountDescription> <accountName> <FreeFormText>Free Form Text Field</FreeFormText> </accountName> \r\n");
+                msg.append("<AccountNumber>text</AccountNumber> <billTo> <PartnerRoleDescription> <ContactInformation> \r\n");
+                msg.append("<contactName> <FreeFormText>Free Form Text Field</FreeFormText> </contactName> \r\n");
+                msg.append("<EmailAddress>email@mail.kom</EmailAddress> <facsimileNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </facsimileNumber> <telephoneNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </telephoneNumber> <PhysicalAddress> \r\n");
+                msg.append("<addressLine1> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine1> <addressLine2> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine2> <addressLine3> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine3> <cityName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cityName> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + r_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> \r\n");
+                msg.append("</ContactInformation> \r\n");
+                msg.append("<GlobalPartnerRoleClassificationCode>Account Supplier</GlobalPartnerRoleClassificationCode> \r\n");
+                msg.append("<PartnerDescription> <BusinessDescription> <GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> \r\n");
+                msg.append("<businessName> <FreeFormText>Free Form Text Field</FreeFormText> </businessName> \r\n");
+                msg.append("</BusinessDescription> </PartnerDescription> </PartnerRoleDescription> </billTo> <CreditCard> \r\n");
+                msg.append("<cardHolderName> <FreeFormText>Free Form Text Field</FreeFormText> </cardHolderName> \r\n");
+                msg.append("<creditCardIdentifier> <ProprietaryReferenceIdentifier>text</ProprietaryReferenceIdentifier>\r\n");
+                msg.append("</creditCardIdentifier> <expiryDate> <DateStamp>20020509Z</DateStamp> </expiryDate> \r\n");
+                msg.append("<GlobalCreditCardClassificationCode>American Express</GlobalCreditCardClassificationCode> \r\n");
+                msg.append("<ProprietaryCIDIdentifier>text</ProprietaryCIDIdentifier> </CreditCard> <financedBy> <PartnerDescription> \r\n");
+                msg.append("<BusinessDescription> <GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> <businessName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </businessName> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> <PhysicalAddress> <addressLine1> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine1> <addressLine2> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine2> <addressLine3> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine3> <cityName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cityName> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + r_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> \r\n");
+                msg.append("</PartnerDescription> </financedBy> \r\n");
+                msg.append("<GlobalAccountClassificationCode>Checking</GlobalAccountClassificationCode> <prePaymentCheckNumber> \r\n");
+                msg.append("<CheckNumber>text</CheckNumber> </prePaymentCheckNumber> \r\n");
+                msg.append("<WireTransferIdentifier>text</WireTransferIdentifier> </AccountDescription> <comments> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </comments> <ContractInformation> <contractIdentifier> \r\n");
+                msg.append("<ProprietaryDocumentIdentifier>text</ProprietaryDocumentIdentifier> </contractIdentifier> \r\n");
+                msg.append("<primaryContractWith> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+                msg.append("</primaryContractWith> <secondaryContractWith> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+                msg.append("</secondaryContractWith> </ContractInformation> <DocumentReference> \r\n");
+                msg.append("<DateTimeStamp>20020401T010101.001Z</DateTimeStamp> \r\n");
+                msg.append("<GlobalDocumentReferenceTypeCode>Commercial Invoice</GlobalDocumentReferenceTypeCode> \r\n");
+                msg.append("<ProprietaryDocumentIdentifier>text</ProprietaryDocumentIdentifier> </DocumentReference> <FinancingTerms> \r\n");
+                msg.append("<GlobalFinanceTermsCode>Bank transfer</GlobalFinanceTermsCode> <PaymentTerms> <Discounts> \r\n");
+                msg.append("<discountDay> <DayOfMonth>25</DayOfMonth> </discountDay> <discountDays> \r\n");
+                msg.append("<CountableAmount>5</CountableAmount> </discountDays> <discountPercent> \r\n");
+                msg.append("<PercentAmount>100</PercentAmount> </discountPercent> </Discounts> \r\n");
+                msg.append("<GlobalPaymentConditionCode>Acceptance</GlobalPaymentConditionCode> <netTermsDay> \r\n");
+                msg.append("<DayOfMonth>25</DayOfMonth> </netTermsDay> <netTermsDays> <CountableAmount>5</CountableAmount> \r\n");
+                msg.append("</netTermsDays> <percentDue> <PercentAmount>100</PercentAmount> </percentDue> </PaymentTerms> \r\n");
+                msg.append("</FinancingTerms> <generalServicesAdministrationNumber> \r\n");
+                msg.append("<ProprietaryDocumentIdentifier>text</ProprietaryDocumentIdentifier> </generalServicesAdministrationNumber> \r\n");
+                msg.append("<GlobalConfirmationTypeCode>accept with delivery schedule change</GlobalConfirmationTypeCode> \r\n");
+                msg.append("<GlobalGovernmentPriorityRatingCode>Atomic energy</GlobalGovernmentPriorityRatingCode> \r\n");
+                msg.append("<GlobalPurchaseOrderAcknowledgmentReasonCode>Accept with changes</GlobalPurchaseOrderAcknowledgmentReasonCode> \r\n");
+                msg.append("<GlobalPurchaseOrderFillPriorityCode>High</GlobalPurchaseOrderFillPriorityCode> \r\n");
+                msg.append("<GlobalPurchaseOrderStatusCode>Accept</GlobalPurchaseOrderStatusCode> \r\n");
+                msg.append("<GlobalPurchaseOrderTypeCode>Blanket</GlobalPurchaseOrderTypeCode> <governmentContractIdentifier> \r\n");
+                msg.append("<ProprietaryDocumentIdentifier>text</ProprietaryDocumentIdentifier> </governmentContractIdentifier> \r\n");
+                msg.append("<installAt> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> <businessName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </businessName> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> <PhysicalAddress> <addressLine1> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine1> <addressLine2>\r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine2> <addressLine3> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine3> <cityName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cityName> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + r_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> \r\n");
+                msg.append("<ContactInformation> <contactName> <FreeFormText>Free Form Text Field</FreeFormText> </contactName> \r\n");
+                msg.append("<EmailAddress>email@mail.kom</EmailAddress> <facsimileNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </facsimileNumber> <telephoneNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </telephoneNumber> </ContactInformation> \r\n");
+                msg.append("</PartnerDescription> </installAt> <isDropShip> <AffirmationIndicator>yes</AffirmationIndicator> \r\n");
+                msg.append("</isDropShip> <OrderShippingInformation> <CarrierInformation> <accountIdentifier> \r\n");
+                msg.append("<ProprietaryReferenceIdentifier>text</ProprietaryReferenceIdentifier> </accountIdentifier> \r\n");
+                msg.append("<GlobalCarrierCode>DHL_1234</GlobalCarrierCode> </CarrierInformation> \r\n");
+                msg.append("<GlobalFreeOnBoardCode>Destination</GlobalFreeOnBoardCode> \r\n");
+                msg.append("<GlobalShipmentTermsCode>Advance collect</GlobalShipmentTermsCode>\r\n");
+                msg.append("<GlobalShippingServiceLevelCode>9 A.M.</GlobalShippingServiceLevelCode> \r\n");
+                msg.append("<GlobalSpecialFulfillmentRequestCode>Add quantity to make minimum weight requirement</GlobalSpecialFulfillmentRequestCode> <packListRequirements> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </packListRequirements> <SpecialHandlingInstruction> \r\n");
+                msg.append("<GlobalSpecialHandlingCode>15 Minute Window</GlobalSpecialHandlingCode> <specialHandlingText> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </specialHandlingText> </SpecialHandlingInstruction> \r\n");
+                msg.append("</OrderShippingInformation> <ProductLineItem> <buyerLineItem> <LineNumber>10</LineNumber> \r\n");
+                msg.append("</buyerLineItem> <comments> <FreeFormText>Free Form Text Field</FreeFormText> </comments> \r\n");
+                msg.append("<ContractInformation> <contractIdentifier> \r\n");
+                msg.append("<ProprietaryDocumentIdentifier>text</ProprietaryDocumentIdentifier> </contractIdentifier> \r\n");
+                msg.append("<primaryContractWith> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+                msg.append("</primaryContractWith> <secondaryContractWith> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+                msg.append("</secondaryContractWith> </ContractInformation> <countryOfOrigin> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> </countryOfOrigin> <CustomerInformation> \r\n");
+                msg.append("<customerProjectIdentifier> <ProprietaryReferenceIdentifier>text</ProprietaryReferenceIdentifier> \r\n");
+                msg.append("</customerProjectIdentifier> <GlobalCustomerTypeCode>End Customer</GlobalCustomerTypeCode> \r\n");
+                msg.append("<PartnerDescription> <BusinessDescription> <GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> \r\n");
+                msg.append("<businessName> <FreeFormText>Free Form Text Field</FreeFormText> </businessName> \r\n");
+                msg.append("<NationalBusinessTaxIdentifier> <BusinessTaxIdentifier>text</BusinessTaxIdentifier> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> </NationalBusinessTaxIdentifier> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> <PhysicalAddress> <addressLine1> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine1> <addressLine2> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine2> <addressLine3> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine3> <cityName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cityName> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + r_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> \r\n");
+                msg.append("</PartnerDescription> </CustomerInformation> <DocumentLineReference> \r\n");
+                msg.append("<DateTimeStamp>20020401T010101.001Z</DateTimeStamp> \r\n");
+                msg.append("<GlobalDocumentReferenceTypeCode>Commercial Invoice</GlobalDocumentReferenceTypeCode> \r\n");
+                msg.append("<LineNumber>10</LineNumber> <ProprietaryDocumentIdentifier>text</ProprietaryDocumentIdentifier> \r\n");
+                msg.append("</DocumentLineReference> <expediteReferenceIdentifier> \r\n");
+                msg.append("<ProprietaryReferenceIdentifier>text</ProprietaryReferenceIdentifier> </expediteReferenceIdentifier> \r\n");
+                msg.append("<GlobalProductUnitOfMeasureCode>10 Kilogram Drum</GlobalProductUnitOfMeasureCode> \r\n");
+                msg.append("<GlobalPurchaseOrderAcknowledgmentReasonCode>Accept with changes</GlobalPurchaseOrderAcknowledgmentReasonCode> \r\n");
+                msg.append("<GlobalPurchaseOrderFillPriorityCode>High</GlobalPurchaseOrderFillPriorityCode> \r\n");
+                msg.append("<GlobalPurchaseOrderStatusCode>Accept</GlobalPurchaseOrderStatusCode> <installAt> <PartnerDescription> \r\n");
+                msg.append("<BusinessDescription> <GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> <businessName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </businessName> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> <PhysicalAddress> <addressLine1> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine1> <addressLine2> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine2> <addressLine3> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine3> <cityName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cityName> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + r_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> \r\n");
+                msg.append("<ContactInformation> <contactName> <FreeFormText>Free Form Text Field</FreeFormText> </contactName> \r\n");
+                msg.append("<EmailAddress>email@mail.kom</EmailAddress> <facsimileNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </facsimileNumber> <telephoneNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </telephoneNumber> </ContactInformation> \r\n");
+                msg.append("</PartnerDescription> </installAt> <isDropShip> <AffirmationIndicator>yes</AffirmationIndicator> \r\n");
+                msg.append("</isDropShip> <LineNumber>10</LineNumber> <OrderQuantity> <requestedQuantity> \r\n");
+                msg.append("<ProductQuantity>32</ProductQuantity> </requestedQuantity> <scheduledShipQuantity> \r\n");
+                msg.append("<ProductQuantity>32</ProductQuantity> </scheduledShipQuantity> </OrderQuantity> \r\n");
+                msg.append("<OrderShippingInformation> <CarrierInformation> <accountIdentifier> \r\n");
+                msg.append("<ProprietaryReferenceIdentifier>12345</ProprietaryReferenceIdentifier> </accountIdentifier> \r\n");
+                msg.append("<GlobalCarrierCode>SCAC codes to be used.</GlobalCarrierCode> </CarrierInformation> \r\n");
+                msg.append("<GlobalFreeOnBoardCode>Destination</GlobalFreeOnBoardCode> \r\n");
+                msg.append("<GlobalShipmentTermsCode>Advance collect</GlobalShipmentTermsCode> \r\n");
+                msg.append("<GlobalShippingServiceLevelCode>9 A.M.</GlobalShippingServiceLevelCode> \r\n");
+                msg.append("<GlobalSpecialFulfillmentRequestCode>Add quantity to make minimum weight requirement</GlobalSpecialFulfillmentRequestCode> <packListRequirements> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </packListRequirements> <SpecialHandlingInstruction> \r\n");
+                msg.append("<GlobalSpecialHandlingCode>15 Minute Window</GlobalSpecialHandlingCode> <specialHandlingText> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </specialHandlingText> </SpecialHandlingInstruction> \r\n");
+                msg.append("</OrderShippingInformation> <ProductIdentification> \r\n");
+                msg.append("<GlobalProductIdentifier>" + r_Duns + "01234</GlobalProductIdentifier> <PartnerProductIdentification> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> \r\n");
+                msg.append("<ProprietaryProductIdentifier>text</ProprietaryProductIdentifier> <revisionIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </revisionIdentifier> </PartnerProductIdentification> \r\n");
+                msg.append("</ProductIdentification> <ProductSubLineItem> <buyerSubLineItem> <LineNumber>10</LineNumber> \r\n");
+                msg.append("</buyerSubLineItem> <comments> <FreeFormText>Free Form Text Field</FreeFormText> </comments> \r\n");
+                msg.append("<ContractInformation> <contractIdentifier> \r\n");
+                msg.append("<ProprietaryDocumentIdentifier>text</ProprietaryDocumentIdentifier> </contractIdentifier> \r\n");
+                msg.append("<primaryContractWith> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+                msg.append("</primaryContractWith> <secondaryContractWith> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+                msg.append("</secondaryContractWith> </ContractInformation> <countryOfOrigin> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> </countryOfOrigin> <CustomerInformation> \r\n");
+                msg.append("<customerProjectIdentifier> <ProprietaryReferenceIdentifier>text</ProprietaryReferenceIdentifier> \r\n");
+                msg.append("</customerProjectIdentifier> <GlobalCustomerTypeCode>End Customer</GlobalCustomerTypeCode> \r\n");
+                msg.append("<PartnerDescription> <BusinessDescription> <GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> \r\n");
+                msg.append("<businessName> <FreeFormText>Free Form Text Field</FreeFormText> </businessName> \r\n");
+                msg.append("<NationalBusinessTaxIdentifier> <BusinessTaxIdentifier>text</BusinessTaxIdentifier> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> </NationalBusinessTaxIdentifier> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> <PhysicalAddress> <addressLine1> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine1> <addressLine2> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine2> <addressLine3> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine3> <cityName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cityName> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + r_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> \r\n");
+                msg.append("</PartnerDescription> </CustomerInformation> <expediteReferenceIdentifier> \r\n");
+                msg.append("<ProprietaryReferenceIdentifier>text</ProprietaryReferenceIdentifier> </expediteReferenceIdentifier> \r\n");
+                msg.append("<GlobalProductUnitOfMeasureCode>10 Kilogram Drum</GlobalProductUnitOfMeasureCode> \r\n");
+                msg.append("<GlobalPurchaseOrderAcknowledgmentReasonCode>Accept with changes</GlobalPurchaseOrderAcknowledgmentReasonCode> \r\n");
+                msg.append("<GlobalPurchaseOrderFillPriorityCode>High</GlobalPurchaseOrderFillPriorityCode> \r\n");
+                msg.append("<GlobalPurchaseOrderStatusCode>Accept</GlobalPurchaseOrderStatusCode> <installAt> <PartnerDescription> \r\n");
+                msg.append("<BusinessDescription> <GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> <businessName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </businessName> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> <ContactInformation> \r\n");
+                msg.append("<contactName> <FreeFormText>Free Form Text Field</FreeFormText> </contactName> \r\n");
+                msg.append("<EmailAddress>email@mail.kom</EmailAddress> <facsimileNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </facsimileNumber> <telephoneNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </telephoneNumber> </ContactInformation> \r\n");
+                msg.append("</PartnerDescription> </installAt> <isDropShip> <AffirmationIndicator>yes</AffirmationIndicator> \r\n");
+                msg.append("</isDropShip> <OrderQuantity> <requestedQuantity> <ProductQuantity>32</ProductQuantity> \r\n");
+                msg.append("</requestedQuantity> <scheduledShipQuantity> <ProductQuantity>32</ProductQuantity> \r\n");
+                msg.append("</scheduledShipQuantity> </OrderQuantity> <OrderShippingInformation> <CarrierInformation> \r\n");
+                msg.append("<accountIdentifier> <ProprietaryReferenceIdentifier>text</ProprietaryReferenceIdentifier> </accountIdentifier> \r\n");
+                msg.append("<GlobalCarrierCode>SCAC codes to be used.</GlobalCarrierCode> </CarrierInformation> \r\n");
+                msg.append("<GlobalFreeOnBoardCode>Destination</GlobalFreeOnBoardCode> \r\n");
+                msg.append("<GlobalShipmentTermsCode>Advance collect</GlobalShipmentTermsCode>\r\n");
+                msg.append("<GlobalShippingServiceLevelCode>9 A.M.</GlobalShippingServiceLevelCode> \r\n");
+                msg.append("<GlobalSpecialFulfillmentRequestCode>Add quantity to make minimum weight requirement</GlobalSpecialFulfillmentRequestCode> <packListRequirements> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </packListRequirements> <SpecialHandlingInstruction> \r\n");
+                msg.append("<GlobalSpecialHandlingCode>15 Minute Window</GlobalSpecialHandlingCode> <specialHandlingText> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </specialHandlingText> </SpecialHandlingInstruction> \r\n");
+                msg.append("</OrderShippingInformation> <proprietaryInformation> <FreeFormText>Free Form Text Field</FreeFormText> \r\n");
+                msg.append("</proprietaryInformation> <requestedEvent> <TransportationEvent> <DateStamp>20020509Z</DateStamp> \r\n");
+                msg.append("<GlobalTransportEventCode>Dock</GlobalTransportEventCode> </TransportationEvent> </requestedEvent> \r\n");
+                msg.append("<requestedShipFrom> <PhysicalAddress> <GlobalLocationIdentifier>" + r_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("</PhysicalAddress> </requestedShipFrom> <requestedUnitPrice> <FinancialAmount> \r\n");
+                msg.append("<GlobalCurrencyCode>USD</GlobalCurrencyCode> \r\n");
+                msg.append("<GlobalPriceUnitOfMeasureCode>10 Kilogram Drum</GlobalPriceUnitOfMeasureCode> \r\n");
+                msg.append("<MonetaryAmount>1</MonetaryAmount> </FinancialAmount> </requestedUnitPrice> <scheduledEvent> \r\n");
+                msg.append("<TransportationEvent> <DateStamp>20020509Z</DateStamp> \r\n");
+                msg.append("<GlobalTransportEventCode>Dock</GlobalTransportEventCode> </TransportationEvent> </scheduledEvent> \r\n");
+                msg.append("<shipFrom> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> </BusinessDescription> </PartnerDescription> \r\n");
+                msg.append("</shipFrom> <ShippedQuantityInformation> <DateTimeStamp>20020401T010101.001Z</DateTimeStamp> \r\n");
+                msg.append("<DocumentReference> <DateTimeStamp>20020401T010101.001Z</DateTimeStamp> \r\n");
+                msg.append("<GlobalDocumentReferenceTypeCode>Commercial Invoice</GlobalDocumentReferenceTypeCode> \r\n");
+                msg.append("<ProprietaryDocumentIdentifier>text</ProprietaryDocumentIdentifier> </DocumentReference> <shippedQuantity> \r\n");
+                msg.append("<ProductQuantity>32</ProductQuantity> </shippedQuantity> </ShippedQuantityInformation> <shipTo> \r\n");
+                msg.append("<PartnerDescription> <BusinessDescription> <GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> \r\n");
+                msg.append("<businessName> <FreeFormText>Free Form Text Field</FreeFormText> </businessName> \r\n");
+                msg.append("</BusinessDescription> <GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> \r\n");
+                msg.append("<PhysicalAddress> <addressLine1> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine1> \r\n");
+                msg.append("<addressLine2> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine2> <addressLine3> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine3> <cityName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cityName> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + r_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> \r\n");
+                msg.append("<ContactInformation> <contactName> <FreeFormText>Free Form Text Field</FreeFormText> </contactName> \r\n");
+                msg.append("<EmailAddress>email@mail.kom</EmailAddress> <facsimileNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </facsimileNumber> <telephoneNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </telephoneNumber> </ContactInformation> \r\n");
+                msg.append("</PartnerDescription> </shipTo> <subLineItem> <LineNumber>10</LineNumber> </subLineItem> <unitPrice> \r\n");
+                msg.append("<FinancialAmount> <GlobalCurrencyCode>USD</GlobalCurrencyCode> \r\n");
+                msg.append("<GlobalPriceUnitOfMeasureCode>10 Kilogram Drum</GlobalPriceUnitOfMeasureCode> \r\n");
+                msg.append("<MonetaryAmount>1</MonetaryAmount> </FinancialAmount> </unitPrice> </ProductSubLineItem> \r\n");
+                msg.append("<proprietaryInformation> <FreeFormText>Free Form Text Field</FreeFormText> </proprietaryInformation> \r\n");
+                msg.append("<requestedEvent> <TransportationEvent> <DateStamp>20020509Z</DateStamp> \r\n");
+                msg.append("<GlobalTransportEventCode>Dock</GlobalTransportEventCode> </TransportationEvent> </requestedEvent> \r\n");
+                msg.append("<requestedShipFrom> <PhysicalAddress> <GlobalLocationIdentifier>" + r_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("</PhysicalAddress> </requestedShipFrom> <requestedUnitPrice> <FinancialAmount> \r\n");
+                msg.append("<GlobalCurrencyCode>USD</GlobalCurrencyCode> \r\n");
+                msg.append("<GlobalPriceUnitOfMeasureCode>10 Kilogram Drum</GlobalPriceUnitOfMeasureCode> \r\n");
+                msg.append("<MonetaryAmount>1</MonetaryAmount> </FinancialAmount> </requestedUnitPrice> <scheduledEvent> \r\n");
+                msg.append("<TransportationEvent> <DateStamp>20020509Z</DateStamp> \r\n");
+                msg.append("<GlobalTransportEventCode>Dock</GlobalTransportEventCode> </TransportationEvent> </scheduledEvent> \r\n");
+                msg.append("<shipFrom> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> </BusinessDescription> </PartnerDescription> \r\n");
+                msg.append("</shipFrom> <ShippedQuantityInformation> <DateTimeStamp>20020401T010101.001Z</DateTimeStamp> \r\n");
+                msg.append("<DocumentReference> <DateTimeStamp>20020401T010101.001Z</DateTimeStamp> \r\n");
+                msg.append("<GlobalDocumentReferenceTypeCode>Commercial Invoice</GlobalDocumentReferenceTypeCode> \r\n");
+                msg.append("<ProprietaryDocumentIdentifier>text</ProprietaryDocumentIdentifier> </DocumentReference> <shippedQuantity> \r\n");
+                msg.append("<ProductQuantity>32</ProductQuantity> </shippedQuantity> </ShippedQuantityInformation> <shipTo> \r\n");
+                msg.append("<PartnerDescription> <BusinessDescription> <GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> \r\n");
+                msg.append("<businessName> <FreeFormText>Free Form Text Field</FreeFormText> </businessName> \r\n");
+                msg.append("</BusinessDescription> <GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> \r\n");
+                msg.append("<PhysicalAddress> <addressLine1> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine1> \r\n");
+                msg.append("<addressLine2> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine2> <addressLine3> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine3> <cityName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cityName> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + r_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> \r\n");
+                msg.append("<ContactInformation> <contactName> <FreeFormText>Free Form Text Field</FreeFormText> </contactName> \r\n");
+                msg.append("<EmailAddress>email@mail.kom</EmailAddress> <facsimileNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </facsimileNumber> <telephoneNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </telephoneNumber> </ContactInformation> \r\n");
+                msg.append("</PartnerDescription> </shipTo> <SubstituteProductReference> \r\n");
+                msg.append("<GlobalProductSubstitutionReasonCode>Better product</GlobalProductSubstitutionReasonCode> \r\n");
+                msg.append("<ProductIdentification> <GlobalProductIdentifier>" + r_Duns + "01234</GlobalProductIdentifier> \r\n");
+                msg.append("<PartnerProductIdentification> <GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> \r\n");
+                msg.append("<ProprietaryProductIdentifier>text</ProprietaryProductIdentifier> <revisionIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </revisionIdentifier> </PartnerProductIdentification> \r\n");
+                msg.append("</ProductIdentification> </SubstituteProductReference> <TaxExemptStatus> <isTaxExempt> \r\n");
+                msg.append("<AffirmationIndicator>yes</AffirmationIndicator> </isTaxExempt> <TaxExemption> \r\n");
+                msg.append("<GlobalTaxExemptionCode>HiTech Pioneer Status</GlobalTaxExemptionCode> <taxExemptionCertificationIdentifier> \r\n");
+                msg.append("<ProprietaryReferenceIdentifier>text</ProprietaryReferenceIdentifier> </taxExemptionCertificationIdentifier> \r\n");
+                msg.append("</TaxExemption> </TaxExemptStatus> <TaxSummary> <CityTax> <cityName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cityName> <FinancialAmount> \r\n");
+                msg.append("<GlobalCurrencyCode>USD</GlobalCurrencyCode> <MonetaryAmount>1</MonetaryAmount> \r\n");
+                msg.append("</FinancialAmount> <taxRate> <PercentAmount>100</PercentAmount> </taxRate> </CityTax> <NationalTax> \r\n");
+                msg.append("<FinancialAmount> <GlobalCurrencyCode>USD</GlobalCurrencyCode> \r\n");
+                msg.append("<MonetaryAmount>1</MonetaryAmount> </FinancialAmount> <NationalBusinessTaxIdentifier> \r\n");
+                msg.append("<BusinessTaxIdentifier>text</BusinessTaxIdentifier> <GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("</NationalBusinessTaxIdentifier> <taxRate> <PercentAmount>100</PercentAmount> </taxRate> </NationalTax> \r\n");
+                msg.append("<RegionalTax> <FinancialAmount> <GlobalCurrencyCode>USD</GlobalCurrencyCode> \r\n");
+                msg.append("<MonetaryAmount>1</MonetaryAmount> </FinancialAmount> <RegionalBusinessTaxIdentifier> \r\n");
+                msg.append("<BusinessTaxIdentifier>text</BusinessTaxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </RegionalBusinessTaxIdentifier> \r\n");
+                msg.append("<taxRate> <PercentAmount>100</PercentAmount> </taxRate> </RegionalTax> <totalAmount> \r\n");
+                msg.append("<FinancialAmount> <GlobalCurrencyCode>USD</GlobalCurrencyCode> \r\n");
+                msg.append("<MonetaryAmount>1050</MonetaryAmount> </FinancialAmount> </totalAmount> </TaxSummary> \r\n");
+                msg.append("<totalLineItemAmount> <FinancialAmount> <GlobalCurrencyCode>USD</GlobalCurrencyCode> \r\n");
+                msg.append("<MonetaryAmount>1</MonetaryAmount> </FinancialAmount> </totalLineItemAmount> <unitPrice> \r\n");
+                msg.append("<FinancialAmount> <GlobalCurrencyCode>USD</GlobalCurrencyCode> \r\n");
+                msg.append("<GlobalPriceUnitOfMeasureCode>10 Kilogram Drum</GlobalPriceUnitOfMeasureCode> \r\n");
+                msg.append("<MonetaryAmount>1</MonetaryAmount> </FinancialAmount> </unitPrice> </ProductLineItem> \r\n");
+                msg.append("<proprietaryInformation> <FreeFormText>Free Form Text Field</FreeFormText> </proprietaryInformation> \r\n");
+                msg.append("<requestedEvent> <TransportationEvent> <DateStamp>20020509Z</DateStamp> \r\n");
+                msg.append("<GlobalTransportEventCode>Dock</GlobalTransportEventCode> </TransportationEvent> </requestedEvent> \r\n");
+                msg.append("<requestedShipFrom> <PhysicalAddress> <GlobalLocationIdentifier>" + r_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("</PhysicalAddress> </requestedShipFrom> <scheduledEvent> <TransportationEvent> \r\n");
+                msg.append("<DateStamp>20020509Z</DateStamp> <GlobalTransportEventCode>Dock</GlobalTransportEventCode> \r\n");
+                msg.append("</TransportationEvent> </scheduledEvent> <SecondaryBuyer> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> <businessName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </businessName> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> <PhysicalAddress> <addressLine1> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine1> <addressLine2> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine2> <addressLine3> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine3> <cityName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cityName> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + r_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> \r\n");
+                msg.append("<ContactInformation> <contactName> <FreeFormText>Free Form Text Field</FreeFormText> </contactName> \r\n");
+                msg.append("<EmailAddress>email@mail.kom</EmailAddress> <facsimileNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </facsimileNumber> <telephoneNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </telephoneNumber> </ContactInformation> \r\n");
+                msg.append("</PartnerDescription> <secondaryBuyerPurchaseOrderIdentifier> \r\n");
+                msg.append("<ProprietaryDocumentIdentifier>text</ProprietaryDocumentIdentifier> </secondaryBuyerPurchaseOrderIdentifier> \r\n");
+                msg.append("</SecondaryBuyer> <shipFrom> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> </BusinessDescription> </PartnerDescription> \r\n");
+                msg.append("</shipFrom> <shipTo> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> <businessName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </businessName> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> <PhysicalAddress> <addressLine1> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine1> <addressLine2> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine2> <addressLine3> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </addressLine3> <cityName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cityName> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + r_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> \r\n");
+                msg.append("<ContactInformation> <contactName> <FreeFormText>Free Form Text Field</FreeFormText> </contactName> \r\n");
+                msg.append("<EmailAddress>email@mail.kom</EmailAddress> <facsimileNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </facsimileNumber> <telephoneNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </telephoneNumber> </ContactInformation> \r\n");
+                msg.append("</PartnerDescription> </shipTo> <TaxExemptStatus> <isTaxExempt> \r\n");
+                msg.append("<AffirmationIndicator>yes</AffirmationIndicator> </isTaxExempt> <TaxExemption> \r\n");
+                msg.append("<GlobalTaxExemptionCode>Agriculture</GlobalTaxExemptionCode> <taxExemptionCertificationIdentifier> \r\n");
+                msg.append("<ProprietaryReferenceIdentifier>text</ProprietaryReferenceIdentifier> </taxExemptionCertificationIdentifier> \r\n");
+                msg.append("</TaxExemption> </TaxExemptStatus> <TaxSummary> <CityTax> <cityName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cityName> <FinancialAmount> \r\n");
+                msg.append("<GlobalCurrencyCode>USD</GlobalCurrencyCode> <MonetaryAmount>1</MonetaryAmount> \r\n");
+                msg.append("</FinancialAmount> <taxRate> <PercentAmount>100</PercentAmount> </taxRate> </CityTax> <NationalTax> \r\n");
+                msg.append("<FinancialAmount> <GlobalCurrencyCode>USD</GlobalCurrencyCode> \r\n");
+                msg.append("<MonetaryAmount>1</MonetaryAmount> </FinancialAmount> <NationalBusinessTaxIdentifier> \r\n");
+                msg.append("<BusinessTaxIdentifier>text</BusinessTaxIdentifier> <GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("</NationalBusinessTaxIdentifier> <taxRate> <PercentAmount>100</PercentAmount> </taxRate> </NationalTax> \r\n");
+                msg.append("<RegionalTax> <FinancialAmount> <GlobalCurrencyCode>USD</GlobalCurrencyCode> \r\n");
+                msg.append("<MonetaryAmount>1</MonetaryAmount> </FinancialAmount> <RegionalBusinessTaxIdentifier> \r\n");
+                msg.append("<BusinessTaxIdentifier>text</BusinessTaxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </RegionalBusinessTaxIdentifier> \r\n");
+                msg.append("<taxRate> <PercentAmount>100</PercentAmount> </taxRate> </RegionalTax> <totalAmount> \r\n");
+                msg.append("<FinancialAmount> <GlobalCurrencyCode>USD</GlobalCurrencyCode> \r\n");
+                msg.append("<MonetaryAmount>1050</MonetaryAmount> </FinancialAmount> </totalAmount> </TaxSummary> <totalAmount> \r\n");
+                msg.append("<FinancialAmount> <GlobalCurrencyCode>USD</GlobalCurrencyCode> \r\n");
+                msg.append("<MonetaryAmount>1050</MonetaryAmount> </FinancialAmount> </totalAmount> </PurchaseOrder> \r\n");
+                msg.append("<requestingDocumentDateTime> <DateTimeStamp>" + requestingTime +"</DateTimeStamp> \r\n");
+                msg.append("</requestingDocumentDateTime> <requestingDocumentIdentifier> \r\n");
+                msg.append("<ProprietaryDocumentIdentifier>"+ requestingID + "</ProprietaryDocumentIdentifier> </requestingDocumentIdentifier> \r\n");
+                msg.append("<thisDocumentGenerationDateTime> <DateTimeStamp>" + getPipInstanceID() +"</DateTimeStamp> \r\n");
+                msg.append("</thisDocumentGenerationDateTime> <thisDocumentIdentifier> \r\n");
+                msg.append("<ProprietaryDocumentIdentifier>" + getPipInstanceID() +"</ProprietaryDocumentIdentifier> </thisDocumentIdentifier>\r\n");
+                msg.append("<toRole>" + torole  + "</toRole>\r\n");
+                msg.append("</Pip3A4PurchaseOrderConfirmation> \r\n");
+              }
+              else
+              {
+                msg.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
+                msg.append("<!DOCTYPE Pip3A4PurchaseOrderRequest SYSTEM \"3A4_MS_" + pipversion1 + "_PurchaseOrderRequest.dtd\">\r\n");
+                msg.append("<Pip3A4PurchaseOrderRequest> <fromRole> <PartnerRoleDescription> <ContactInformation> \r\n");
+                msg.append("<contactName> <FreeFormText>Free Form Text Field</FreeFormText> </contactName> \r\n");
+                msg.append("<EmailAddress>email@mail.kom</EmailAddress> <facsimileNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </facsimileNumber> <telephoneNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </telephoneNumber> </ContactInformation> \r\n");
+                msg.append("<GlobalPartnerRoleClassificationCode>Buyer</GlobalPartnerRoleClassificationCode> <PartnerDescription>\r\n");
+                msg.append("<BusinessDescription> <GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> \r\n");
+                msg.append("<GlobalSupplyChainCode>Electronic Components</GlobalSupplyChainCode> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+                msg.append("</PartnerRoleDescription> </fromRole> \r\n");
+                msg.append("<GlobalDocumentFunctionCode>Request</GlobalDocumentFunctionCode> <PurchaseOrder> \r\n");
+                msg.append("<AccountDescription> <accountName> <FreeFormText>Free Form Text Field</FreeFormText> \r\n");
+                msg.append("</accountName> <AccountNumber>text</AccountNumber> <billTo> <PartnerRoleDescription> \r\n");
+                msg.append("<ContactInformation> <contactName> <FreeFormText>Free Form Text Field</FreeFormText> \r\n");
+                msg.append("</contactName> <EmailAddress>email@mail.kom</EmailAddress> <facsimileNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </facsimileNumber> <telephoneNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </telephoneNumber> <PhysicalAddress> \r\n");
+                msg.append("<addressLine1> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine1> \r\n");
+                msg.append("<addressLine2> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine2> \r\n");
+                msg.append("<addressLine3> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine3> \r\n");
+                msg.append("<cityName> <FreeFormText>Free Form Text Field</FreeFormText> </cityName> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + s_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> \r\n");
+                msg.append("</ContactInformation> <GlobalPartnerRoleClassificationCode>Account Supplier</GlobalPartnerRoleClassificationCode> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> <businessName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </businessName> </BusinessDescription> \r\n");
+                msg.append("</PartnerDescription> </PartnerRoleDescription> </billTo> <CreditCard> <cardHolderName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cardHolderName> <creditCardIdentifier> \r\n");
+                msg.append("<ProprietaryReferenceIdentifier>text</ProprietaryReferenceIdentifier> </creditCardIdentifier> <expiryDate> \r\n");
+                msg.append("<DateStamp>20020509Z</DateStamp> </expiryDate> \r\n");
+                msg.append("<GlobalCreditCardClassificationCode>American Express</GlobalCreditCardClassificationCode>\r\n");
+                msg.append("<ProprietaryCIDIdentifier>text</ProprietaryCIDIdentifier> \r\n");
+                msg.append("</CreditCard> <financedBy> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> <businessName>\r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </businessName> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> <PhysicalAddress> \r\n");
+                msg.append("<addressLine1> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine1> \r\n");
+                msg.append("<addressLine2> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine2> \r\n");
+                msg.append("<addressLine3> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine3> <cityName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cityName> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + s_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> </PartnerDescription> \r\n");
+                msg.append("</financedBy> <GlobalAccountClassificationCode>Checking</GlobalAccountClassificationCode> \r\n");
+                msg.append("<prePaymentCheckNumber> <CheckNumber>text</CheckNumber> </prePaymentCheckNumber> \r\n");
+                msg.append("<WireTransferIdentifier>text</WireTransferIdentifier> </AccountDescription> <comments> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </comments> <ContractInformation> \r\n");
+                msg.append("<contractIdentifier> <ProprietaryDocumentIdentifier>text</ProprietaryDocumentIdentifier> \r\n");
+                msg.append("</contractIdentifier> <primaryContractWith> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+                msg.append("</primaryContractWith> <secondaryContractWith> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+                msg.append("</secondaryContractWith> </ContractInformation> <DocumentReference> \r\n");
+                msg.append("<DateTimeStamp>20020401T010101.001Z</DateTimeStamp> \r\n");
+                msg.append("<GlobalDocumentReferenceTypeCode>Commercial Invoice</GlobalDocumentReferenceTypeCode> \r\n");
+                msg.append("<ProprietaryDocumentIdentifier>text</ProprietaryDocumentIdentifier> </DocumentReference> \r\n");
+                msg.append("<FinancingTerms> <GlobalFinanceTermsCode>Bank transfer</GlobalFinanceTermsCode> <PaymentTerms> \r\n");
+                msg.append("<Discounts> <discountDay> <DayOfMonth>25</DayOfMonth> </discountDay> <discountDays> \r\n");
+                msg.append("<CountableAmount>5</CountableAmount> </discountDays> <discountPercent> \r\n");
+                msg.append("<PercentAmount>100</PercentAmount> </discountPercent> </Discounts> \r\n");
+                msg.append("<GlobalPaymentConditionCode>Acceptance</GlobalPaymentConditionCode> <netTermsDay> \r\n");
+                msg.append("<DayOfMonth>25</DayOfMonth> </netTermsDay> <netTermsDays> \r\n");
+                msg.append("<CountableAmount>5</CountableAmount> </netTermsDays> <percentDue> \r\n");
+                msg.append("<PercentAmount>100</PercentAmount> </percentDue> </PaymentTerms> </FinancingTerms> \r\n");
+                msg.append("<generalServicesAdministrationNumber> <ProprietaryDocumentIdentifier>text</ProprietaryDocumentIdentifier> \r\n");
+                msg.append("</generalServicesAdministrationNumber> <GlobalGovernmentPriorityRatingCode>Atomic energy</GlobalGovernmentPriorityRatingCode> \r\n");
+                msg.append("<GlobalPurchaseOrderFillPriorityCode>High</GlobalPurchaseOrderFillPriorityCode> \r\n");
+                msg.append("<GlobalPurchaseOrderTypeCode>Blanket</GlobalPurchaseOrderTypeCode> <governmentContractIdentifier> \r\n");
+                msg.append("<ProprietaryDocumentIdentifier>text</ProprietaryDocumentIdentifier> </governmentContractIdentifier> \r\n");
+                msg.append("<installAt> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> <businessName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </businessName> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> <PhysicalAddress> \r\n");
+                msg.append("<addressLine1><FreeFormText>Free Form Text Field</FreeFormText> </addressLine1> \r\n");
+                msg.append("<addressLine2><FreeFormText>Free Form Text Field</FreeFormText> </addressLine2> \r\n");
+                msg.append("<addressLine3> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine3> <cityName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cityName> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + s_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> <ContactInformation> <contactName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </contactName> \r\n");
+                msg.append("<EmailAddress>email@mail.kom</EmailAddress> <facsimileNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </facsimileNumber> <telephoneNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </telephoneNumber> \r\n");
+                msg.append("</ContactInformation> </PartnerDescription> </installAt> <isDropShip> \r\n");
+                msg.append("<AffirmationIndicator>yes</AffirmationIndicator> </isDropShip> <OrderShippingInformation> \r\n");
+                msg.append("<CarrierInformation> <accountIdentifier> \r\n");
+                msg.append("<ProprietaryReferenceIdentifier>text</ProprietaryReferenceIdentifier> </accountIdentifier> \r\n");
+                msg.append("<GlobalCarrierCode>SCAC codes to be used.</GlobalCarrierCode> </CarrierInformation> \r\n");
+                msg.append("<GlobalFreeOnBoardCode>Destination</GlobalFreeOnBoardCode> <GlobalShipmentTermsCode>Advance collect</GlobalShipmentTermsCode> <GlobalShippingServiceLevelCode>9 A.M.</GlobalShippingServiceLevelCode> \r\n");
+                msg.append("<GlobalSpecialFulfillmentRequestCode>Add quantity to make minimum weight requirement</GlobalSpecialFulfillmentRequestCode> <packListRequirements> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </packListRequirements> \r\n");
+                msg.append("<SpecialHandlingInstruction> <GlobalSpecialHandlingCode>15 Minute Window</GlobalSpecialHandlingCode> <specialHandlingText> <FreeFormText>Free Form Text Field</FreeFormText> </specialHandlingText> </SpecialHandlingInstruction> </OrderShippingInformation> \r\n");
+                msg.append("<ProductLineItem> <comments> <FreeFormText>Free Form Text Field</FreeFormText> </comments> \r\n");
+                msg.append("<ContractInformation> <contractIdentifier> \r\n");
+                msg.append("<ProprietaryDocumentIdentifier>text</ProprietaryDocumentIdentifier> </contractIdentifier> \r\n");
+                msg.append("<primaryContractWith> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+                msg.append("</primaryContractWith> <secondaryContractWith> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+                msg.append("</secondaryContractWith> </ContractInformation> <countryOfOrigin> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> </countryOfOrigin> <CustomerInformation> \r\n");
+                msg.append("<customerProjectIdentifier> <ProprietaryReferenceIdentifier>text</ProprietaryReferenceIdentifier> \r\n");
+                msg.append("</customerProjectIdentifier> <GlobalCustomerTypeCode>End Customer</GlobalCustomerTypeCode> \r\n");
+                msg.append("<PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> <businessName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </businessName> <NationalBusinessTaxIdentifier> \r\n");
+                msg.append("<BusinessTaxIdentifier>text</BusinessTaxIdentifier> <GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("</NationalBusinessTaxIdentifier> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> <PhysicalAddress> \r\n");
+                msg.append("<addressLine1> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine1> \r\n");
+                msg.append("<addressLine2> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine2> \r\n");
+                msg.append("<addressLine3> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine3> <cityName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cityName> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + s_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> </PartnerDescription> \r\n");
+                msg.append("</CustomerInformation> <DocumentLineReference> \r\n");
+                msg.append("<DateTimeStamp>20020401T010101.001Z</DateTimeStamp> \r\n");
+                msg.append("<GlobalDocumentReferenceTypeCode>Commercial Invoice</GlobalDocumentReferenceTypeCode> \r\n");
+                msg.append("<LineNumber>10</LineNumber> <ProprietaryDocumentIdentifier>text</ProprietaryDocumentIdentifier> \r\n");
+                msg.append("</DocumentLineReference> <expediteReferenceIdentifier> \r\n");
+                msg.append("<ProprietaryReferenceIdentifier>text</ProprietaryReferenceIdentifier> </expediteReferenceIdentifier> \r\n");
+                msg.append("<GlobalProductUnitOfMeasureCode>10 Kilogram Drum</GlobalProductUnitOfMeasureCode> \r\n");
+                msg.append("<GlobalPurchaseOrderFillPriorityCode>High</GlobalPurchaseOrderFillPriorityCode> <installAt> \r\n");
+                msg.append("<PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> <businessName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </businessName> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> <PhysicalAddress> \r\n");
+                msg.append("<addressLine1> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine1> \r\n");
+                msg.append("<addressLine2> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine2> \r\n");
+                msg.append("<addressLine3> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine3> <cityName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cityName> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + s_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> <ContactInformation> \r\n");
+                msg.append("<contactName> <FreeFormText>Free Form Text Field</FreeFormText> </contactName> \r\n");
+                msg.append("<EmailAddress>email@mail.kom</EmailAddress> <facsimileNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </facsimileNumber> <telephoneNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </telephoneNumber> \r\n");
+                msg.append("</ContactInformation> </PartnerDescription> </installAt> <isDropShip> \r\n");
+                msg.append("<AffirmationIndicator>yes</AffirmationIndicator> </isDropShip> <LineNumber>10</LineNumber> \r\n");
+                msg.append("<OrderQuantity> <requestedQuantity> <ProductQuantity>32</ProductQuantity> </requestedQuantity> \r\n");
+                msg.append("</OrderQuantity> <OrderShippingInformation> <CarrierInformation> <accountIdentifier> \r\n");
+                msg.append("<ProprietaryReferenceIdentifier>text</ProprietaryReferenceIdentifier> </accountIdentifier> \r\n");
+                msg.append("<GlobalCarrierCode>SCAC codes to be used.</GlobalCarrierCode> </CarrierInformation> \r\n");
+                msg.append("<GlobalFreeOnBoardCode>Destination</GlobalFreeOnBoardCode>\r\n");
+                msg.append("<GlobalShipmentTermsCode>Advance collect</GlobalShipmentTermsCode><GlobalShippingServiceLevelCode>9 A.M.</GlobalShippingServiceLevelCode> <GlobalSpecialFulfillmentRequestCode>Add quantity to make minimum weight requirement</GlobalSpecialFulfillmentRequestCode> <packListRequirements> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </packListRequirements> \r\n");
+                msg.append("<SpecialHandlingInstruction> <GlobalSpecialHandlingCode>15 Minute Window</GlobalSpecialHandlingCode> <specialHandlingText> <FreeFormText>Free Form Text Field</FreeFormText> </specialHandlingText> </SpecialHandlingInstruction> \r\n");
+                msg.append("</OrderShippingInformation> <ProductIdentification> \r\n");
+                msg.append("<GlobalProductIdentifier>" + s_Duns + "01234</GlobalProductIdentifier> <PartnerProductIdentification> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> \r\n");
+                msg.append("<ProprietaryProductIdentifier>text</ProprietaryProductIdentifier> <revisionIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </revisionIdentifier> </PartnerProductIdentification> \r\n");
+                msg.append("</ProductIdentification> <ProductSubLineItem> <comments> <FreeFormText>Free Form Text Field</FreeFormText> </comments> <ContractInformation> <contractIdentifier> \r\n");
+                msg.append("<ProprietaryDocumentIdentifier>text</ProprietaryDocumentIdentifier> </contractIdentifier> \r\n");
+                msg.append("<primaryContractWith> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+                msg.append("</primaryContractWith> <secondaryContractWith> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+                msg.append("</secondaryContractWith> </ContractInformation> <countryOfOrigin> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> </countryOfOrigin> <CustomerInformation> \r\n");
+                msg.append("<customerProjectIdentifier> <ProprietaryReferenceIdentifier>text</ProprietaryReferenceIdentifier> \r\n");
+                msg.append("</customerProjectIdentifier> <GlobalCustomerTypeCode>End Customer</GlobalCustomerTypeCode> \r\n");
+                msg.append("<PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> <businessName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </businessName> \r\n");
+                msg.append("<NationalBusinessTaxIdentifier> <BusinessTaxIdentifier>text</BusinessTaxIdentifier> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> </NationalBusinessTaxIdentifier> \r\n");
+                msg.append("</BusinessDescription> <GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> \r\n");
+                msg.append("<PhysicalAddress> <addressLine1> <FreeFormText>Free Form Text Field</FreeFormText> \r\n");
+                msg.append("</addressLine1> <addressLine2> <FreeFormText>Free Form Text Field</FreeFormText> \r\n");
+                msg.append("</addressLine2> <addressLine3> <FreeFormText>Free Form Text Field</FreeFormText> \r\n");
+                msg.append("</addressLine3> <cityName> <FreeFormText>Free Form Text Field</FreeFormText> </cityName>\r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + s_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> \r\n");
+                msg.append("</PartnerDescription> </CustomerInformation> <expediteReferenceIdentifier> \r\n");
+                msg.append("<ProprietaryReferenceIdentifier>text</ProprietaryReferenceIdentifier> </expediteReferenceIdentifier> \r\n");
+                msg.append("<GlobalProductUnitOfMeasureCode>10 Kilogram Drum</GlobalProductUnitOfMeasureCode> \r\n");
+                msg.append("<GlobalPurchaseOrderFillPriorityCode>High</GlobalPurchaseOrderFillPriorityCode> <installAt> \r\n");
+                msg.append("<PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> <businessName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </businessName> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> <ContactInformation> \r\n");
+                msg.append("<contactName> <FreeFormText>Free Form Text Field</FreeFormText> </contactName> \r\n");
+                msg.append("<EmailAddress>email@mail.kom</EmailAddress> <facsimileNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </facsimileNumber> \r\n");
+                msg.append("<telephoneNumber> <CommunicationsNumber>1234567</CommunicationsNumber> \r\n");
+                msg.append("</telephoneNumber> </ContactInformation> </PartnerDescription> </installAt> <isDropShip> \r\n");
+                msg.append("<AffirmationIndicator>yes</AffirmationIndicator> </isDropShip> <OrderQuantity> <requestedQuantity> \r\n");
+                msg.append("<ProductQuantity>32</ProductQuantity> </requestedQuantity> </OrderQuantity> \r\n");
+                msg.append("<OrderShippingInformation> <CarrierInformation> <accountIdentifier> \r\n");
+                msg.append("<ProprietaryReferenceIdentifier>text</ProprietaryReferenceIdentifier> </accountIdentifier> \r\n");
+                msg.append("<GlobalCarrierCode>SCAC codes to be used.</GlobalCarrierCode> </CarrierInformation> \r\n");
+                msg.append("<GlobalFreeOnBoardCode>Destination</GlobalFreeOnBoardCode> <GlobalShipmentTermsCode>Advance collect</GlobalShipmentTermsCode> <GlobalShippingServiceLevelCode>9 A.M.</GlobalShippingServiceLevelCode> \r\n");
+                msg.append("<GlobalSpecialFulfillmentRequestCode>Add quantity to make minimum weight requirement</GlobalSpecialFulfillmentRequestCode> <packListRequirements> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </packListRequirements> \r\n");
+                msg.append("<SpecialHandlingInstruction> <GlobalSpecialHandlingCode>15 Minute Window</GlobalSpecialHandlingCode> <specialHandlingText> <FreeFormText>Free Form Text Field</FreeFormText> </specialHandlingText> </SpecialHandlingInstruction> \r\n");
+                msg.append("</OrderShippingInformation> <proprietaryInformation> <FreeFormText>Free Form Text Field</FreeFormText> </proprietaryInformation> <requestedEvent> <TransportationEvent> \r\n");
+                msg.append("<DateStamp>20020509Z</DateStamp> <GlobalTransportEventCode>Dock</GlobalTransportEventCode> \r\n");
+                msg.append("</TransportationEvent> </requestedEvent> <requestedShipFrom> <PhysicalAddress> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + s_Duns + "0000</GlobalLocationIdentifier> </PhysicalAddress> \r\n");
+                msg.append("</requestedShipFrom> <requestedUnitPrice> <FinancialAmount> \r\n");
+                msg.append("<GlobalCurrencyCode>USD</GlobalCurrencyCode> <GlobalPriceUnitOfMeasureCode>10 Kilogram Drum</GlobalPriceUnitOfMeasureCode> <MonetaryAmount>1</MonetaryAmount> </FinancialAmount> \r\n");
+                msg.append("</requestedUnitPrice> <shipTo> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> <businessName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </businessName> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> <PhysicalAddress> \r\n");
+                msg.append("<addressLine1> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine1> \r\n");
+                msg.append("<addressLine2> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine2> \r\n");
+                msg.append("<addressLine3> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine3> \r\n");
+                msg.append("<cityName> <FreeFormText>Free Form Text Field</FreeFormText> </cityName> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + s_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> \r\n");
+                msg.append("<ContactInformation> <contactName> <FreeFormText>Free Form Text Field</FreeFormText> \r\n");
+                msg.append("</contactName> <EmailAddress>email@mail.kom</EmailAddress> <facsimileNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </facsimileNumber> \r\n");
+                msg.append("<telephoneNumber> <CommunicationsNumber>1234567</CommunicationsNumber> \r\n");
+                msg.append("</telephoneNumber> </ContactInformation> </PartnerDescription> </shipTo> <subLineItem> \r\n");
+                msg.append("<LineNumber>10</LineNumber> </subLineItem> </ProductSubLineItem> <proprietaryInformation> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </proprietaryInformation> <requestedEvent> \r\n");
+                msg.append("<TransportationEvent> <DateStamp>20020509Z</DateStamp> \r\n");
+                msg.append("<GlobalTransportEventCode>Dock</GlobalTransportEventCode> </TransportationEvent> </requestedEvent> \r\n");
+                msg.append("<requestedShipFrom> <PhysicalAddress> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + s_Duns + "0000</GlobalLocationIdentifier> </PhysicalAddress> \r\n");
+                msg.append("</requestedShipFrom> <requestedUnitPrice> <FinancialAmount> \r\n");
+                msg.append("<GlobalCurrencyCode>USD</GlobalCurrencyCode> <GlobalPriceUnitOfMeasureCode>10 Kilogram Drum</GlobalPriceUnitOfMeasureCode> <MonetaryAmount>1</MonetaryAmount> </FinancialAmount> \r\n");
+                msg.append("</requestedUnitPrice> <shipTo> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> <businessName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </businessName> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> <PhysicalAddress> \r\n");
+                msg.append("<addressLine1> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine1> \r\n");
+                msg.append("<addressLine2> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine2> \r\n");
+                msg.append("<addressLine3> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine3> <cityName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cityName> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + s_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> <ContactInformation> \r\n");
+                msg.append("<contactName> <FreeFormText>Free Form Text Field</FreeFormText> </contactName> \r\n");
+                msg.append("<EmailAddress>email@mail.kom</EmailAddress> <facsimileNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </facsimileNumber> <telephoneNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </telephoneNumber> \r\n");
+                msg.append("</ContactInformation> </PartnerDescription> </shipTo> <TaxExemptStatus> <isTaxExempt> \r\n");
+                msg.append("<AffirmationIndicator>yes</AffirmationIndicator> </isTaxExempt> <TaxExemption> \r\n");
+                msg.append("<GlobalTaxExemptionCode>Agriculture</GlobalTaxExemptionCode> <taxExemptionCertificationIdentifier> \r\n");
+                msg.append("<ProprietaryReferenceIdentifier>text</ProprietaryReferenceIdentifier> </taxExemptionCertificationIdentifier> \r\n");
+                msg.append("</TaxExemption> </TaxExemptStatus> <totalLineItemAmount> <FinancialAmount> \r\n");
+                msg.append("<GlobalCurrencyCode>USD</GlobalCurrencyCode> <MonetaryAmount>1</MonetaryAmount> \r\n");
+                msg.append("</FinancialAmount> </totalLineItemAmount> </ProductLineItem> <proprietaryInformation> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </proprietaryInformation> <requestedEvent> \r\n");
+                msg.append("<TransportationEvent> <DateStamp>20020509Z</DateStamp> \r\n");
+                msg.append("<GlobalTransportEventCode>Dock</GlobalTransportEventCode> </TransportationEvent> </requestedEvent> \r\n");
+                msg.append("<requestedShipFrom> <PhysicalAddress> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + s_Duns + "0000</GlobalLocationIdentifier> </PhysicalAddress> \r\n");
+                msg.append("</requestedShipFrom> <SecondaryBuyer> <PartnerDescription> <BusinessDescription> \r\n");
+                msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> <businessName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </businessName> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> <PhysicalAddress> \r\n");
+                msg.append("<addressLine1> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine1> \r\n");
+                msg.append("<addressLine2> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine2> \r\n");
+                msg.append("<addressLine3> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine3> <cityName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cityName> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + s_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> <ContactInformation> <contactName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </contactName> \r\n");
+                msg.append("<EmailAddress>email@mail.kom</EmailAddress> <facsimileNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </facsimileNumber> <telephoneNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </telephoneNumber> \r\n");
+                msg.append("</ContactInformation> </PartnerDescription> <secondaryBuyerPurchaseOrderIdentifier> \r\n");
+                msg.append("<ProprietaryDocumentIdentifier>text</ProprietaryDocumentIdentifier> \r\n");
+                msg.append("</secondaryBuyerPurchaseOrderIdentifier> </SecondaryBuyer> <shipTo> <PartnerDescription> \r\n");
+                msg.append("<BusinessDescription> <GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> <businessName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </businessName> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> <PhysicalAddress> \r\n");
+                msg.append("<addressLine1> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine1> \r\n");
+                msg.append("<addressLine2> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine2> \r\n");
+                msg.append("<addressLine3> <FreeFormText>Free Form Text Field</FreeFormText> </addressLine3> <cityName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </cityName> \r\n");
+                msg.append("<GlobalCountryCode>AD</GlobalCountryCode> \r\n");
+                msg.append("<GlobalLocationIdentifier>" + s_Duns + "0000</GlobalLocationIdentifier> \r\n");
+                msg.append("<NationalPostalCode>" + s_Duns + "</NationalPostalCode> <postOfficeBoxIdentifier> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </postOfficeBoxIdentifier> <regionName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </regionName> </PhysicalAddress> <ContactInformation> <contactName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </contactName> \r\n");
+                msg.append("<EmailAddress>email@mail.kom</EmailAddress> <facsimileNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </facsimileNumber> <telephoneNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </telephoneNumber> \r\n");
+                msg.append("</ContactInformation> </PartnerDescription> </shipTo> <TaxExemptStatus> <isTaxExempt> \r\n");
+                msg.append("<AffirmationIndicator>yes</AffirmationIndicator> </isTaxExempt> <TaxExemption> \r\n");
+                msg.append("<GlobalTaxExemptionCode>Agriculture</GlobalTaxExemptionCode> <taxExemptionCertificationIdentifier> \r\n");
+                msg.append("<ProprietaryReferenceIdentifier>text</ProprietaryReferenceIdentifier> </taxExemptionCertificationIdentifier> \r\n");
+                msg.append("</TaxExemption> </TaxExemptStatus> <totalAmount> <FinancialAmount> \r\n");
+                msg.append("<GlobalCurrencyCode>USD</GlobalCurrencyCode> <MonetaryAmount>1050</MonetaryAmount> \r\n");
+                msg.append("</FinancialAmount> </totalAmount> </PurchaseOrder> <thisDocumentGenerationDateTime> \r\n");
+                msg.append("<DateTimeStamp>" + getPipInstanceID() +"</DateTimeStamp> </thisDocumentGenerationDateTime> \r\n");
+                msg.append("<thisDocumentIdentifier> \r\n");
+                msg.append("<ProprietaryDocumentIdentifier>" + getPipInstanceID() +"</ProprietaryDocumentIdentifier> \r\n");
+                msg.append("</thisDocumentIdentifier> <toRole> <PartnerRoleDescription> <ContactInformation> <contactName> \r\n");
+                msg.append("<FreeFormText>Free Form Text Field</FreeFormText> </contactName> \r\n");
+                msg.append("<EmailAddress>email@mail.kom</EmailAddress> <facsimileNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </facsimileNumber> <telephoneNumber> \r\n");
+                msg.append("<CommunicationsNumber>1234567</CommunicationsNumber> </telephoneNumber> </ContactInformation> \r\n");
+                msg.append("<GlobalPartnerRoleClassificationCode>Seller</GlobalPartnerRoleClassificationCode> <PartnerDescription> \r\n");
+                msg.append("<BusinessDescription> <GlobalBusinessIdentifier>" + r_Duns + "</GlobalBusinessIdentifier> \r\n");
+                msg.append("<GlobalSupplyChainCode>Electronic Components</GlobalSupplyChainCode> </BusinessDescription> \r\n");
+                msg.append("<GlobalPartnerClassificationCode>Broker</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+                msg.append("</PartnerRoleDescription> </toRole> </Pip3A4PurchaseOrderRequest>\r\n");
+              }
+        }
+        else if(PIP_0C1.equals(pip))
+        {
+              setSync(false);
+              msg.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
+              msg.append("<!DOCTYPE Pip0C1AsynchronousTestNotification SYSTEM \"0C1_MS_" + pipversion1 + "_AsynchronousTestNotification.dtd\">\r\n");
+              msg.append("<Pip0C1AsynchronousTestNotification><AsynchronousTest/> <fromRole> <PartnerRoleDescription> <ContactInformation> \r\n");
+              msg.append("<contactName><FreeFormText xml:lang=\"EN\">Jane Doe</FreeFormText></contactName> \r\n");
+              msg.append("<EmailAddress>jdoe@xyz.com</EmailAddress> \r\n");
+              msg.append("<facsimileNumber><CommunicationsNumber>555.5555</CommunicationsNumber> </facsimileNumber> \r\n");
+              msg.append("<telephoneNumber><CommunicationsNumber>555.5556</CommunicationsNumber> </telephoneNumber> \r\n");
+              msg.append("</ContactInformation> \r\n");
+              msg.append("<GlobalPartnerRoleClassificationCode>Initiator</GlobalPartnerRoleClassificationCode> <PartnerDescription> \r\n");
+              msg.append("<BusinessDescription> <GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> \r\n");
+              msg.append("<GlobalSupplyChainCode>Information Technology</GlobalSupplyChainCode> </BusinessDescription>\r\n");
+              msg.append("<GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+              msg.append("</PartnerRoleDescription> </fromRole> \r\n");
+              msg.append("<GlobalDocumentFunctionCode>Request</GlobalDocumentFunctionCode>\r\n");
+              msg.append("<thisDocumentGenerationDateTime> <DateTimeStamp>" + getPipInstanceID() +"</DateTimeStamp> \r\n");
+              msg.append("</thisDocumentGenerationDateTime> <thisDocumentIdentifier> \r\n");
+              msg.append("<ProprietaryDocumentIdentifier>" + getPipInstanceID() +"</ProprietaryDocumentIdentifier> \r\n");
+              msg.append("</thisDocumentIdentifier> <toRole> <PartnerRoleDescription> <ContactInformation> \r\n");
+              msg.append("<contactName><FreeFormText xml:lang=\"EN\">Jane Doe</FreeFormText></contactName> \r\n");
+              msg.append("<EmailAddress>jdoe@xyz.com</EmailAddress> \r\n");
+              msg.append("<facsimileNumber><CommunicationsNumber>555.5555</CommunicationsNumber> </facsimileNumber> \r\n");
+              msg.append("<telephoneNumber><CommunicationsNumber>555.5556</CommunicationsNumber> </telephoneNumber> \r\n");
+              msg.append("</ContactInformation> \r\n");
+              msg.append("<GlobalPartnerRoleClassificationCode>Responder</GlobalPartnerRoleClassificationCode> \r\n");
+              msg.append("<PartnerDescription> <BusinessDescription> \r\n");
+              msg.append("<GlobalBusinessIdentifier>" + r_Duns + "</GlobalBusinessIdentifier> \r\n");
+              msg.append("<GlobalSupplyChainCode>Information Technology</GlobalSupplyChainCode> </BusinessDescription> \r\n");
+              msg.append("<GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+              msg.append("</PartnerRoleDescription> </toRole> </Pip0C1AsynchronousTestNotification>\r\n");
+        }
+        else if(PIP_0C2.equals(pip))
+        {
+              setSync(false);
+              msg.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
+              if(isConfirmation)
+                {
+                  msg.append("<!DOCTYPE Pip0C2AsynchronousTestConfirmation SYSTEM \"0C2_MS_" + pipversion1 + "_AsynchronousTestConfirmation.dtd\">\r\n");
+                  msg.append("<Pip0C2AsynchronousTestConfirmation><AsynchronousTest/>\r\n");
+                  msg.append("<fromRole>" + fromrole + " </fromRole> \r\n");
+
+                  msg.append("<GlobalDocumentFunctionCode>Response</GlobalDocumentFunctionCode> \r\n");
+                  msg.append("<requestingDocumentDateTime> <DateTimeStamp>" + requestingTime +"</DateTimeStamp> </requestingDocumentDateTime>\r\n");
+                  msg.append("<requestingDocumentIdentifier> <ProprietaryDocumentIdentifier>"+ requestingID + "</ProprietaryDocumentIdentifier> </requestingDocumentIdentifier>\r\n");
+                  msg.append("<thisDocumentGenerationDateTime> <DateTimeStamp>" + getPipInstanceID() +"</DateTimeStamp> \r\n");
+                  msg.append("</thisDocumentGenerationDateTime> <thisDocumentIdentifier> \r\n");
+                  msg.append("<ProprietaryDocumentIdentifier>" + getPipInstanceID() +"</ProprietaryDocumentIdentifier></thisDocumentIdentifier>\r\n");
+
+                  msg.append("<toRole>" + torole + "</toRole>\r\n");
+
+                  msg.append("</Pip0C2AsynchronousTestConfirmation>\r\n");
+                }
+              else
+                {
+                  msg.append("<!DOCTYPE Pip0C2AsynchronousTestRequest SYSTEM \"0C2_MS_" + pipversion1 + "_AsynchronousTestRequest.dtd\">\r\n");
+                  msg.append("<Pip0C2AsynchronousTestRequest><AsynchronousTest/><fromRole> <PartnerRoleDescription> <ContactInformation> \r\n");
+                  msg.append("<contactName><FreeFormText xml:lang=\"EN\">Jane Doe Initiator</FreeFormText></contactName> \r\n");
+                  msg.append("<EmailAddress>jdoeinitiator@xyz.com</EmailAddress> \r\n");
+                  msg.append("<facsimileNumber><CommunicationsNumber>555.5555</CommunicationsNumber> </facsimileNumber> \r\n");
+                  msg.append("<telephoneNumber><CommunicationsNumber>555.5556</CommunicationsNumber> </telephoneNumber> \r\n");
+                  msg.append("</ContactInformation> \r\n");
+                  msg.append("<GlobalPartnerRoleClassificationCode>Initiator</GlobalPartnerRoleClassificationCode> <PartnerDescription> \r\n");
+                  msg.append("<BusinessDescription> <GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> \r\n");
+                  msg.append("<GlobalSupplyChainCode>Information Technology</GlobalSupplyChainCode> </BusinessDescription>\r\n");
+                  msg.append("<GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+                  msg.append("</PartnerRoleDescription> </fromRole> \r\n");
+                  msg.append("<GlobalDocumentFunctionCode>Request</GlobalDocumentFunctionCode> \r\n");
+                  msg.append("<thisDocumentGenerationDateTime> <DateTimeStamp>" + getPipInstanceID() +"</DateTimeStamp> \r\n");
+                  msg.append("</thisDocumentGenerationDateTime> <thisDocumentIdentifier> \r\n");
+                  msg.append("<ProprietaryDocumentIdentifier>" + getPipInstanceID() +"</ProprietaryDocumentIdentifier> \r\n");
+                  msg.append("</thisDocumentIdentifier> <toRole> <PartnerRoleDescription> <ContactInformation> \r\n");
+                  msg.append("<contactName><FreeFormText xml:lang=\"EN\">Jane Doe Initiator</FreeFormText></contactName> \r\n");
+                  msg.append("<EmailAddress>jdoeinitiator@xyz.com</EmailAddress> \r\n");
+                  msg.append("<facsimileNumber><CommunicationsNumber>555.5555</CommunicationsNumber> </facsimileNumber> \r\n");
+                  msg.append("<telephoneNumber><CommunicationsNumber>555.5556</CommunicationsNumber> </telephoneNumber> \r\n");
+                  msg.append("</ContactInformation> \r\n");
+                  msg.append("<GlobalPartnerRoleClassificationCode>Responder</GlobalPartnerRoleClassificationCode> \r\n");
+                  msg.append("<PartnerDescription> <BusinessDescription> \r\n");
+                  msg.append("<GlobalBusinessIdentifier>" + r_Duns + "</GlobalBusinessIdentifier> \r\n");
+                  msg.append("<GlobalSupplyChainCode>Information Technology</GlobalSupplyChainCode> </BusinessDescription> \r\n");
+                  msg.append("<GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+                  msg.append("</PartnerRoleDescription> </toRole> </Pip0C2AsynchronousTestRequest>\r\n");
+                }
+              }
+        else if(PIP_0C3.equals(pip))
+        {
+              setSync(true);
+              msg.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
+              msg.append("<!DOCTYPE Pip0C3SynchronousTestNotification SYSTEM \"0C3_MS_" + pipversion1 + "_SynchronousTestNotification.dtd\">\r\n");
+              msg.append("<Pip0C3SynchronousTestNotification> <fromRole> <PartnerRoleDescription> <ContactInformation> \r\n");
+              msg.append("<contactName><FreeFormText xml:lang=\"EN\">Jane Doe</FreeFormText></contactName> \r\n");
+              msg.append("<EmailAddress>jdoe@xyz.com</EmailAddress> \r\n");
+              msg.append("<facsimileNumber><CommunicationsNumber>555.5555</CommunicationsNumber> </facsimileNumber> \r\n");
+              msg.append("<telephoneNumber><CommunicationsNumber>555.5556</CommunicationsNumber> </telephoneNumber> \r\n");
+              msg.append("</ContactInformation> \r\n");
+              msg.append("<GlobalPartnerRoleClassificationCode>Initiator</GlobalPartnerRoleClassificationCode> <PartnerDescription> \r\n");
+              msg.append("<BusinessDescription> <GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> \r\n");
+              msg.append("<GlobalSupplyChainCode>Information Technology</GlobalSupplyChainCode> </BusinessDescription>\r\n");
+              msg.append("<GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+              msg.append("</PartnerRoleDescription> </fromRole> \r\n");
+              msg.append("<GlobalDocumentFunctionCode>Request</GlobalDocumentFunctionCode> <SynchronousTest/> \r\n");
+              msg.append("<thisDocumentGenerationDateTime> <DateTimeStamp>" + getPipInstanceID() +"</DateTimeStamp> \r\n");
+              msg.append("</thisDocumentGenerationDateTime> <thisDocumentIdentifier> \r\n");
+              msg.append("<ProprietaryDocumentIdentifier>" + getPipInstanceID() +"</ProprietaryDocumentIdentifier> \r\n");
+              msg.append("</thisDocumentIdentifier> <toRole> <PartnerRoleDescription> <ContactInformation> \r\n");
+              msg.append("<contactName><FreeFormText xml:lang=\"EN\">Jane Doe</FreeFormText></contactName> \r\n");
+              msg.append("<EmailAddress>jdoe@xyz.com</EmailAddress> \r\n");
+              msg.append("<facsimileNumber><CommunicationsNumber>555.5555</CommunicationsNumber> </facsimileNumber> \r\n");
+              msg.append("<telephoneNumber><CommunicationsNumber>555.5556</CommunicationsNumber> </telephoneNumber> \r\n");
+              msg.append("</ContactInformation> \r\n");
+              msg.append("<GlobalPartnerRoleClassificationCode>Responder</GlobalPartnerRoleClassificationCode> \r\n");
+              msg.append("<PartnerDescription> <BusinessDescription> \r\n");
+              msg.append("<GlobalBusinessIdentifier>" + r_Duns + "</GlobalBusinessIdentifier> \r\n");
+              msg.append("<GlobalSupplyChainCode>Information Technology</GlobalSupplyChainCode> </BusinessDescription> \r\n");
+              msg.append("<GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+              msg.append("</PartnerRoleDescription> </toRole> </Pip0C3SynchronousTestNotification>\r\n");
+        }
+        else if(PIP_0C4.equals(pip))
+        {
+              setSync(true);
+              msg.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
+              if(isConfirmation)
+                {
+                  msg.append("<!DOCTYPE Pip0C4SynchronousTestResponse SYSTEM \"0C4_MS_" + pipversion1 + "_SynchronousTestResponse.dtd\">\r\n");
+                  msg.append("<Pip0C4SynchronousTestResponse>\r\n");
+                  msg.append("<fromRole>" + fromrole + "</fromRole> \r\n");
+
+                  msg.append("<GlobalDocumentFunctionCode>Response</GlobalDocumentFunctionCode> \r\n");
+                  msg.append("<requestingDocumentDateTime> <DateTimeStamp>" + requestingTime +"</DateTimeStamp> </requestingDocumentDateTime>\r\n");
+                  msg.append("<requestingDocumentIdentifier> <ProprietaryDocumentIdentifier>"+ requestingID + "</ProprietaryDocumentIdentifier> </requestingDocumentIdentifier>\r\n");
+                  msg.append("<SynchronousTest/> <thisDocumentGenerationDateTime> <DateTimeStamp>" + getPipInstanceID() +"</DateTimeStamp> \r\n");
+                  msg.append("</thisDocumentGenerationDateTime> <thisDocumentIdentifier> \r\n");
+                  msg.append("<ProprietaryDocumentIdentifier>" + getPipInstanceID() +"</ProprietaryDocumentIdentifier></thisDocumentIdentifier>\r\n");
+
+                  msg.append("<toRole>" + torole + "</toRole>\r\n");
+                  msg.append("</Pip0C4SynchronousTestResponse>\r\n");
+                }
+              else
+                {
+                  msg.append("<!DOCTYPE Pip0C4SynchronousTestQuery SYSTEM \"0C4_MS_" + pipversion1 + "_SynchronousTestQuery.dtd\">\r\n");
+                  msg.append("<Pip0C4SynchronousTestQuery> <fromRole> <PartnerRoleDescription> <ContactInformation> \r\n");
+                  msg.append("<contactName><FreeFormText xml:lang=\"EN\">Jane Doe</FreeFormText></contactName> \r\n");
+                  msg.append("<EmailAddress>jdoe@xyz.com</EmailAddress> \r\n");
+                  msg.append("<facsimileNumber><CommunicationsNumber>555.5555</CommunicationsNumber> </facsimileNumber> \r\n");
+                  msg.append("<telephoneNumber><CommunicationsNumber>555.5556</CommunicationsNumber> </telephoneNumber> \r\n");
+                  msg.append("</ContactInformation> \r\n");
+                  msg.append("<GlobalPartnerRoleClassificationCode>Initiator</GlobalPartnerRoleClassificationCode> <PartnerDescription> \r\n");
+                  msg.append("<BusinessDescription> <GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> \r\n");
+                  msg.append("<GlobalSupplyChainCode>Information Technology</GlobalSupplyChainCode> </BusinessDescription>\r\n");
+                  msg.append("<GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+                  msg.append("</PartnerRoleDescription> </fromRole> \r\n");
+                  msg.append("<GlobalDocumentFunctionCode>Request</GlobalDocumentFunctionCode> \r\n");
+                  msg.append("<SynchronousTest/> <thisDocumentGenerationDateTime> <DateTimeStamp>" + getPipInstanceID() +"</DateTimeStamp> \r\n");
+                  msg.append("</thisDocumentGenerationDateTime> <thisDocumentIdentifier> \r\n");
+                  msg.append("<ProprietaryDocumentIdentifier>" + getPipInstanceID() +"</ProprietaryDocumentIdentifier> \r\n");
+                  msg.append("</thisDocumentIdentifier> <toRole> <PartnerRoleDescription> <ContactInformation> \r\n");
+                  msg.append("<contactName><FreeFormText xml:lang=\"EN\">Jane Doe</FreeFormText></contactName> \r\n");
+                  msg.append("<EmailAddress>jdoe@xyz.com</EmailAddress> \r\n");
+                  msg.append("<facsimileNumber><CommunicationsNumber>555.5555</CommunicationsNumber> </facsimileNumber> \r\n");
+                  msg.append("<telephoneNumber><CommunicationsNumber>555.5556</CommunicationsNumber> </telephoneNumber> \r\n");
+                  msg.append("</ContactInformation> \r\n");
+                  msg.append("<GlobalPartnerRoleClassificationCode>Responder</GlobalPartnerRoleClassificationCode> \r\n");
+                  msg.append("<PartnerDescription> <BusinessDescription> \r\n");
+                  msg.append("<GlobalBusinessIdentifier>" + r_Duns + "</GlobalBusinessIdentifier> \r\n");
+                  msg.append("<GlobalSupplyChainCode>Information Technology</GlobalSupplyChainCode> </BusinessDescription> \r\n");
+                  msg.append("<GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode> </PartnerDescription> \r\n");
+                  msg.append("</PartnerRoleDescription> </toRole> </Pip0C4SynchronousTestQuery>\r\n");
+                }
+        }
+        return msg.toString();
+  }
+
+  protected byte[] generateGTASMessage(String receiveURL, Hashtable head, byte[] fileData) throws Exception
+  {
+      HttpCommInfo httpcomminfo = new HttpCommInfo();
+      httpcomminfo.setURL(receiveURL);
+      httpcomminfo.setAuthClient(false);
+      httpcomminfo.setAuthServer(false);
+      httpcomminfo.setVerifyHostname(false);
+      httpcomminfo.setKeystoreFile("");
+      httpcomminfo.setKeystorePassword("");
+      httpcomminfo.setTruststoreFile("");
+      httpcomminfo.setTruststorePassword("");
+      httpcomminfo.setTimeout(getTimeout());
+      GNTransportHeader theader = new GNTransportHeader(head);
+      if(!theader.isGTASMessage() && !theader.isRNMessage())
+      {
+        if(theader.isNativeRNMessage())
+          theader.setRNMessage();
+        else
+          theader.setGTASMessage();
+      }
+      GNTransportPayload payload = new GNTransportPayload(theader.getProperties(), new String[1] , fileData);
+      GNTransportInfo stuff = new GNTransportInfo(httpcomminfo, payload);
+      try
+      {
+        return stuff.save();
+      }
+      catch (Exception ex)
+      {
+        HttpMessageContext.getInstance().Error("Error when generating GTAS Transport Package", ex);
+        return null;
+      }
+  }
+
+
+  protected byte[] getRNMessageFromTemplate(String pip,  String pipversion, String s_Duns, String r_Duns, String pipinstance, String messageTracking, boolean isAck, boolean isConfirmation, String requestingID, String requestingTime, String fromrole, String torole)
+  {
+        if(messageTracking == null || messageTracking.length() ==0)
+            messageTracking = getPipInstanceID();
+        //String pipversion1 = pipversion.replace('.','_');
+        StringBuffer msg = new StringBuffer();
+        msg.append("Content-Type: multipart/related; type=\"application/xml\"; boundary=\"70c85e:f3eb16c363:-7fff\"\r\n");
+        msg.append("Content-ID: \"70c85e:f3eb16c363:-8000\"\r\n");
+        msg.append("\r\n");
+        msg.append("--70c85e:f3eb16c363:-7fff\r\n");
+        msg.append("CONTENT-TYPE: application/xml\r\n");
+        msg.append("CONTENT-TRANSFER-ENCODING: binary\r\n");
+        msg.append("CONTENT-ID: \"70c85e:f3eb16c363:-7ffe\"\r\n");
+        msg.append("CONTENT-LOCATION: RN-Preamble\r\n");
+        msg.append("\r\n");
+        msg.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
+        msg.append("<!DOCTYPE Preamble SYSTEM \"Preamble_MS_V02_00.dtd\">\r\n");
+        msg.append("<Preamble> <standardName> \r\n");
+        msg.append("<GlobalAdministeringAuthorityCode>RosettaNet</GlobalAdministeringAuthorityCode> </standardName> \r\n");
+        msg.append("<standardVersion> <VersionIdentifier>V02.00</VersionIdentifier> </standardVersion> </Preamble>\r\n");
+        msg.append("--70c85e:f3eb16c363:-7fff\r\n");
+        msg.append("Content-Type: application/xml\r\n");
+        msg.append("Content-Transfer-Encoding: binary\r\n");
+        msg.append("Content-ID: \"70c85e:f3eb16c363:-7ffd\"\r\n");
+        msg.append("Content-Location: RN-Delivery-Header\r\n");
+        msg.append("\r\n");
+        msg.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
+        msg.append("<!DOCTYPE DeliveryHeader SYSTEM \"DeliveryHeader_MS_V02_00.dtd\">\r\n");
+        msg.append("<DeliveryHeader> <isSecureTransportRequired> <AffirmationIndicator>No</AffirmationIndicator> \r\n");
+        msg.append("</isSecureTransportRequired> <messageDateTime> \r\n");
+        msg.append("<DateTimeStamp>20030314T055302.186Z</DateTimeStamp> </messageDateTime> \r\n");
+        msg.append("<messageReceiverIdentification> <PartnerIdentification> <domain> \r\n");
+        msg.append("<FreeFormText>DUNS</FreeFormText> </domain> \r\n");
+        msg.append("<GlobalBusinessIdentifier>" + r_Duns + "</GlobalBusinessIdentifier> <locationID> <Value>CUT</Value> \r\n");
+        msg.append("</locationID> </PartnerIdentification> </messageReceiverIdentification> <messageSenderIdentification> \r\n");
+        msg.append("<PartnerIdentification> <domain> <FreeFormText>DUNS</FreeFormText> </domain> \r\n");
+        msg.append("<GlobalBusinessIdentifier>" + s_Duns + "</GlobalBusinessIdentifier> <locationID> <Value>RNSTT</Value> \r\n");
+        msg.append("</locationID> </PartnerIdentification> </messageSenderIdentification> <messageTrackingID> \r\n");
+        msg.append("<InstanceIdentifier>"+ messageTracking +"</InstanceIdentifier> </messageTrackingID> </DeliveryHeader>\r\n");
+        msg.append("--70c85e:f3eb16c363:-7fff\r\n");
+        msg.append("Content-Type: application/xml\r\n");
+        msg.append("Content-Transfer-Encoding: binary\r\n");
+        msg.append("Content-ID: \"70c85e:f3eb16c363:-7ffc\"\r\n");
+        msg.append("Content-Location: RN-Service-Header\r\n");
+        msg.append("\r\n");
+        msg.append(getRNSHMessageFromTemplate(pip, pipversion, s_Duns, r_Duns, pipinstance ,  messageTracking, isAck, isConfirmation));
+        msg.append(getRNPIPMessageFromTemplate(pip, pipversion, s_Duns, r_Duns, isAck, isConfirmation, requestingID, requestingTime, fromrole, torole));
+        msg.append("--70c85e:f3eb16c363:-7fff--\r\n");
+        return msg.toString().getBytes();
+  }
+  public boolean isAck()
+  {
+    return Ack;
+  }
+  public void setAck(boolean Ack)
+  {
+    this.Ack = Ack;
+  }
+  public void setGTASPackage(boolean GTASPackage)
+  {
+    this.GTASPackage = GTASPackage;
+  }
+  public boolean isGTASPackage()
+  {
+    return GTASPackage;
+  }
+  public void setReceiverURL(String receiverURL)
+  {
+    this.receiverURL = receiverURL;
+  }
+  public String getReceiverURL()
+  {
+    return receiverURL;
+  }
+  public boolean isNotSetProxy()
+  {
+    return NotSetProxy;
+  }
+  public void setNotSetProxy(boolean NotSetProxy)
+  {
+    this.NotSetProxy = NotSetProxy;
+  }
+  public void setNoTransform(boolean noTransform)
+  {
+    this.noTransform = noTransform;
+  }
+  public boolean isNoTransform()
+  {
+    return noTransform;
+  }
+  public void setBackend(boolean backend)
+  {
+    this.backend = backend;
+  }
+  public boolean isBackend()
+  {
+    return backend;
+  }
+  public void setBackend_ip(String backend_ip)
+  {
+    this.backend_ip = backend_ip;
+  }
+  public boolean isServerStarted()
+  {
+    if(dummyserver == null)
+     return false;
+    return dummyserver.isServerRunning();
+  }
+
+  public int  getServerPort()
+  {
+    if(isServerStarted())
+    {
+      return dummyserver.getPortNo();
+    }
+    else
+      return -1;
+  }
+  public void startServer()
+  {
+    try
+    {
+      stopServer();
+      if(isServer_https())
+      {
+          httpsctx = SSLContext.getInstance("TLS");
+          httpshandler = new JavaKeyStoreHandler();
+          httpshandler.open(JavaKeyStoreHandler.getTructStoreName(getKeyStoreFile()), JavaKeyStoreHandler.getTructStorePassword(getKeyStorePassword()));
+          httpskmf = KeyManagerFactory.getInstance("SunX509");
+          httpskmf.init(httpshandler.getKs(), JavaKeyStoreHandler.getTructStorePassword(getKeyStorePassword()).toCharArray());
+          httpsctx.init(httpskmf.getKeyManagers(), null, null);
+          httpfactory = httpsctx.getServerSocketFactory();
+      }
+      else
+          httpfactory = null;
+      if(getServer_port() != -1)
+      {
+        dummyserver = new DummyRNServer(httpfactory, getServer_port(), getServer_accept_times(), getServer_timeout());
+        dummyserver.start();
+        HttpMessageContext.waitForaWhile(1000);
+      }
+
+    }
+  catch (Exception ex)
+  {
+    HttpMessageContext.getInstance().Error("Start Server", ex);
+  }
+  }
+
+  public void stopServer()
+  {
+    if(!isServerStarted())
+      return;
+    dummyserver.stopServer();
+    dummyserver  = null;
+  }
+
+  public String getBackend_ip()
+  {
+    return backend_ip;
+  }
+  public void setBackend_port(String backend_port)
+  {
+    this.backend_port = backend_port;
+  }
+  public String getBackend_port()
+  {
+    return backend_port;
+  }
+  public void setGts_username(String gts_username)
+  {
+    this.gts_username = gts_username;
+  }
+  public String getGts_username()
+  {
+    return gts_username;
+  }
+  public void setGts_passwd(String gts_passwd)
+  {
+    this.gts_passwd = gts_passwd;
+  }
+  public String getGts_passwd()
+  {
+    return gts_passwd;
+  }
+  public void setBackend_attachment_filename(String backend_attachment_filename)
+  {
+    this.backend_attachment_filename = backend_attachment_filename;
+  }
+  public String getBackend_attachment_filename()
+  {
+    return backend_attachment_filename;
+  }
+  public void setBackend_doc_type(String backend_doc_type)
+  {
+    this.backend_doc_type = backend_doc_type;
+  }
+  public String getBackend_doc_type()
+  {
+    return backend_doc_type;
+  }
+  public void setBackend_parterID(String backend_parterID)
+  {
+    this.backend_parterID = backend_parterID;
+  }
+  public String getBackend_parterID()
+  {
+    return backend_parterID;
+  }
+  public void setCmdline(String cmdline)
+  {
+    this.cmdline = cmdline;
+  }
+  public String getCmdline()
+  {
+    return cmdline;
+  }
+  public void setServer_port(int server_port)
+  {
+    this.server_port = server_port;
+  }
+  public int getServer_port()
+  {
+    return server_port;
+  }
+  public void setServer_accept_times(int server_accept_times)
+  {
+    this.server_accept_times = server_accept_times;
+  }
+  public int getServer_accept_times()
+  {
+    return server_accept_times;
+  }
+  public void setServer_timeout(int server_timeout)
+  {
+    this.server_timeout = server_timeout;
+  }
+  public int getServer_timeout()
+  {
+    return server_timeout;
+  }
+  public void setAutoAck(boolean autoAck)
+  {
+    this.autoAck = autoAck;
+  }
+  public boolean isAutoAck()
+  {
+    return autoAck;
+  }
+  public void setConfirmation(boolean confirmation)
+  {
+    this.confirmation = confirmation;
+  }
+  public boolean isConfirmation()
+  {
+    return confirmation;
+  }
+  public void setPkcs12(boolean pkcs12)
+  {
+    this.pkcs12 = pkcs12;
+  }
+  public boolean isPkcs12()
+  {
+    return pkcs12;
+  }
+  public void setPEMformat(boolean PEMformat)
+  {
+    this.PEMformat = PEMformat;
+  }
+  public boolean isPEMformat()
+  {
+    return PEMformat;
+  }
+  public void setPipversion(String pipversion)
+  {
+    this.pipversion = pipversion;
+  }
+  public String getPipversion()
+  {
+    return pipversion;
+  }
+  public JTextArea getRnlog()
+  {
+    return rnlog;
+  }
+  public void setRnlog(JTextArea rnlog)
+  {
+    this.rnlog = rnlog;
+  }
+  public void setServer_https(boolean server_https)
+  {
+    this.server_https = server_https;
+  }
+  public boolean isServer_https()
+  {
+    return server_https;
+  }
+  public void setCert_CN(String cert_CN)
+  {
+    this.cert_CN = cert_CN;
+  }
+  public String getCert_CN()
+  {
+    return cert_CN;
+  }
+  public void setCert_C(String cert_C)
+  {
+    this.cert_C = cert_C;
+  }
+  public String getCert_C()
+  {
+    return cert_C;
+  }
+  public void setCert_O(String cert_O)
+  {
+    this.cert_O = cert_O;
+  }
+  public String getCert_O()
+  {
+    return cert_O;
+  }
+  public void setCert_OU(String cert_OU)
+  {
+    this.cert_OU = cert_OU;
+  }
+  public String getCert_OU()
+  {
+    return cert_OU;
+  }
+  public void setCert_email(String cert_email)
+  {
+    this.cert_email = cert_email;
+  }
+  public String getCert_email()
+  {
+    return cert_email;
+  }
+  public void setCert_sn(long cert_sn)
+  {
+    this.cert_sn = cert_sn;
+  }
+  public long getCert_sn()
+  {
+    return cert_sn;
+  }
+  public void setCert_L(String cert_L)
+  {
+    this.cert_L = cert_L;
+  }
+  public String getCert_L()
+  {
+    return cert_L;
+  }
+  public long getCert_duration()
+  {
+    return cert_duration;
+  }
+  public void setCert_duration(long cert_duration)
+  {
+    this.cert_duration = cert_duration;
+  }
+}

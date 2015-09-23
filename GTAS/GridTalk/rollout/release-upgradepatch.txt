@@ -1,0 +1,64 @@
+Procedure to make an upgrade patch (different minor version)
+----------------------------------
+
+1. Use a view for the target version
+   - create a UCMUtility activity in CQ for CI/CO for this upgrade patch.
+   - Do a complete rebuild (if not done yet), following steps 4-7 in release-majorpatch.txt
+
+2. Unzip the release patch zip file for the source version e.g. GridTalk2.3.4.zip
+
+3. Prepare the upgrade properties
+    - Create a GTAS\GridTalk\rollout\upgrade\X_Y_Z-X_A_BS#.properties  (similar to patch.properties)
+      where:
+              X is the major version
+              Y is the source minor version
+              Z is the source build number
+              A is the target minor version
+              B is the target build number
+              # is the upgrade script number (usually is 1 unless more is needed to control the sequence of patching)
+    - Update with entries for configurations, data files, dbscripts, and patches to be executed
+      This can be done by doing directory and content comparison between the contents of GTAS\GridTalk\rollout 
+      folder and the contents of the source release (use the Heatsoft ADCS software which is very handy).
+    - Source control the new upgrade properties
+
+4. Update upgrade.bat
+   - Update curr.ver, curr.build as the source version (X_Y) and build number(Z) respectively
+     Update upgrade.ver, upgrade.build as the target version (X_A) and build number (B) respectively
+     Update num.scripts as 1 (usually)
+
+5. Prepare readme file
+   - Create a readme file for the upgrade under GTAS\GridTalk\rollout\application\docs, 
+     e.g. GridTalk2.3.4-2.4.1-upgrade.txt
+   - Update with details of what's new after upgrade, and the instructions to do the upgrade.
+   - Source control the new readme file.
+
+6. Create the upgrade zip file
+    - Zip all files in GridTalk\rollout to create the new upgrade zip file.
+    - Exclude the following from the zip file:
+      > release*.txt, rollout.bat, patch.properties.template
+      > patch\*.properties
+      > patch\exec\* that are not required by all patches in the upgrade
+      > upgrade\*.properties  (retain the newly created upgrade properties)
+      > application\docs\*.txt that are not relevant to the upgrade 
+        (retain the readme files for source and intermediate versions)
+    - Unzip the release zip file to release distribution folder e.g. D:\Release\dist\GridTalk2.3.4-2.4.1-upgrade
+
+7. Verify the upgrade patch
+    - Choose an existing GridTalk from the source version, set GRIDTALK_HOME environment variable to that GridTalk.
+    - At command prompt> cd to unzipped release folder
+    - At command prompt> upgrade
+      (it is recommended to REM @echo off, remove -quiet flag for ant, and pipe output for the patch so that you can
+       examine if which of the files failed patching.)
+    - If no errors, start the GridTalk and verify login, registration, and features that are new from the upgrade
+    - Verify connectivity, i.e rosettanet gateway, soap b2b messaging, backend webservices, P2P
+
+8. Release the upgrade patch
+   - If everything is ok, zip up the release distribution folder contents, e.g. GridTalk2.3.4-2.4.1-upgrade.zip 
+   - Put the patch on \\raven\sd-build\GridTalk\2.4\upgrade, for example.
+   - Send email to inform SQA that the patch is ready.
+
+9. Check in all modified files 
+   - Complete the CQ activity
+
+
+

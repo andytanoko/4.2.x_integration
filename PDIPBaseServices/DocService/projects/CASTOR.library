@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>CASTOR</fullname>
+  <class>
+    <path>[../../../PDIPFramework/reqlib/castor-0.9.5-xml.jar]</path>
+    <path>[../../../PDIPFramework/reqlib/xercesImpl-2.4.0.jar]</path>
+    <path>[../../../PDIPFramework/reqlib/xmlParserAPIs.jar]</path>
+  </class>
+</library>
+

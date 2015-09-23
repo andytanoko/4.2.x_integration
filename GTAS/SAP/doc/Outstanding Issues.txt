@@ -1,0 +1,108 @@
+Tested functions OK
+- registration
+- import/export config
+- alerts
+- connection setup
+- connect/disconnect GM
+- partner watchlist
+- housekeeping
+- ui navigation
+- configurations
+- process/partner function deploy
+- gridnode search
+- gridnode activation/deactivation
+- import trigger partner function
+- receive trigger partner function
+- exit to port
+- exit to channel
+- raise alert in PF
+- document search
+- conversion rule XML<->CSV
+- XSL transformation
+- rosettanet over http
+- rosettanet over p2p
+- any doc over p2p
+- upload/download doc via GM
+- import cert
+- export cert to trust/key store (no error, not verified since not able to test https)
+- backend sender
+- backend receiver
+- user procedure (Java procedure)
+
+
+Outstanding issues to be resolved for full functionality on SAP WebAS
+
+1. Online help
+   - Header is not displaying
+   - Search is giving error: java.lang.IllegalArgumentException: view is invalid
+	at javax.help.search.MergingSearchEngine.merge(MergingSearchEngine.java:94)
+	at javax.help.tagext.SearchTOCItemTag.addSubHelpSets(SearchTOCItemTag.java:123)
+	at javax.help.tagext.SearchTOCItemTag.doStartTag(SearchTOCItemTag.java:82)
+	at jsp_javax_2e_help_2e_SearchView1133177610112._jspService(jsp_javax_2e_help_2e_SearchView1133177610112.java:27)
+	at com.sap.engine.services.servlets_jsp.server.servlet.JSPServlet.service(JSPServlet.java:537)
+	at com.sap.engine.services.servlets_jsp.server.servlet.JSPServlet.service(JSPServlet.java:186)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:853)
+   - Clicking on Admin Guide root node triggers download instead of displaying the page.
+
+2. Webservices router
+   in JBoss, the authentication is by means of DBloginmodule provided by JBoss. However, this is not available
+   on SAP WebAS. Need to provide a custom login module that can do the same as the JBoss DB login module.
+
+3. JMS message lost (message is not received)
+   Need to revisit message producers to evaluate whether have the case whereby message is lost due to message producer 
+   is no longer active before the message gets delivered to the consumer. (Possible reason)
+   
+   Functions known to having the above problem:
+   - Archive Documents
+
+4. UDDI query
+   - NullPointerException in SUN uddi api. May be need to upgrade to a later api compatible with JDK1.4.2_09
+   [JaxrRegistryService.queryConcepts] Error finding: 
+ javax.xml.registry.JAXRException: java.lang.NullPointerException
+	at com.sun.xml.registry.uddi.RegistryServiceImpl.jaxmSend(Unknown Source)
+	at com.sun.xml.registry.uddi.RegistryServiceImpl.send(Unknown Source)
+	at com.sun.xml.registry.uddi.Processor.processRequest(Unknown Source)
+	at com.sun.xml.registry.uddi.UDDIMapper.findConcepts(Unknown Source)
+	at com.sun.xml.registry.uddi.BusinessQueryManagerImpl.findConcepts(Unknown Source)
+	at com.gridnode.pdip.app.bizreg.pub.provider.jaxr.JaxrClient.findConceptInfos(JaxrClient.java:386)
+	at com.gridnode.pdip.app.bizreg.pub.provider.jaxr.JaxrRegistryService.queryConcepts(JaxrRegistryService.java:398)
+	at com.gridnode.pdip.app.bizreg.facade.ejb.PublicRegistryManagerBean.queryConceptInfos(PublicRegistryManagerBean.java:728)
+	at com.gridnode.pdip.app.bizreg.facade.ejb.IPublicRegistryManagerObjObjectImpl300.queryConceptInfos(IPublicRegistryManagerObjObjectImpl300.java:619)
+	at com.gridnode.pdip.app.bizreg.facade.ejb.IPublicRegistryManagerObj_Stub.queryConceptInfos(IPublicRegistryManagerObj_Stub.java:1117)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:324)
+	at com.sap.engine.services.ejb.session.stateless_sp5.ObjectStubProxyImpl.invoke(ObjectStubProxyImpl.java:187)
+	at $Proxy159.queryConceptInfos(Unknown Source)
+	at com.gridnode.pdip.app.bizreg.search.SearchRegistryHandler.performSearch(SearchRegistryHandler.java:155)
+
+5. Rosettanet over https
+   - unable to init SSL context, probably due to absence of iaik_jce.jar from SAP (needs partner access to SAP marketplace).
+     Refer to: http://help.sap.com/saphelp_nw04/helpdata/en/8d/cb71b8046e6e469bf3dd283104e65b/frameset.htm
+   - export cert to trust/key store may be redundant as may need manual configuration on SAP WebAS.
+
+6. UPC with gn-utadaptor & gtibtransporter (response via SOAP-http)
+   - UPC with gn-utadaptor is working fine
+   - GT cannot process receive from gtibtransporter due to the channel refactoring (broken by the header changes).
+     see GNDB00026249.
+
+Not tested functions
+- Publish with uddi (could not test due to 4)
+- mapping rule - split, convert to/from db
+- Scheduled Task
+- Backend import via Webservices
+- Restore Documents from Archive
+- user procedure (Soap, Shell)
+
+
+GridTalk on SAP portal WebAS
+----------------------------
+There is some problem with the xml libraries. Some applications deployed on the portal (by default) seems to have set the JAXP system properties to
+use the sapxmltoolkit library. The sapxmltoolkit could not render the GridTalk login page correctly. Since the JAXP system properties could not
+be overridden, there is no way to use our own xerces parser without hard referencing it in our code. This workaround has been done to the GridTalk client.
+However, this same problem could potentially affect the functioning of the XML module as we have always beeing using the xerces parser/saxon xslt processor. 
+This potential problem has not been verified on the portal WebAS.
+ 
+
+

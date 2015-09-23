@@ -1,0 +1,9 @@
+. setcp.sh
+
+# Send one file into GridTalk
+
+export PAYLOAD=<full_filepath_of_msg>
+export PARTNER=<sender_partner_id>
+
+$GRIDTALK_HOME/jre150_05/bin/java $JAVA_OPTS -cp $CLASSPATH com.gridnode.gridtalk.InboundTransporter "inbound.payload.file=$PAYLOAD" "header.sender.info.sender.id=$PARTNER"
+

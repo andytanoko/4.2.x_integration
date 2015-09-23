@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+  <secure>false</secure>
+  <container-configurations />
+  <resource-managers />
+  <enterprise-beans>
+    <entity>
+      <ejb-name>FieldMetaInfo</ejb-name>
+      <local-jndi-name>com.gridnode.pdip.framework.db.meta.IFieldMetaInfoLocalHome</local-jndi-name>
+    </entity>
+    <entity>
+      <ejb-name>EntityMetaInfo</ejb-name>
+      <jndi-name>com.gridnode.pdip.framework.db.meta.IEntityMetaInfoHome</jndi-name>
+    </entity>
+    <!--session>
+      <ejb-name>EntityMetaService</ejb-name>
+      <jndi-name>com.gridnode.pdip.framework.db.meta.IEntityMetaServiceHome</jndi-name>
+    </session-->
+  </enterprise-beans>
+</jboss>

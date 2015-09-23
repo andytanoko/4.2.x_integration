@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="package.release" default="package" basedir=".">
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+    <property environment="env"></property>
+
+    <target name="package">
+        <antcall target="package.inovis"/>
+    </target>
+
+    <target name="package.inovis">
+        <delete file="gtas-inovis.zip" quiet="true" failonerror="false"/>
+        <zip destfile="gtas-inovis.zip">
+            <fileset dir="." includes="appserver/**,application/**"
+                             excludes="application/bin/windows/**,application/bin/unix/**,application/db/mysql/**,application/**/*mysql*.*,application/**/unregister.sql"/>
+            <fileset dir="." includes="setup.xml"/>
+            <fileset dir="." includes="application/bin/unix/*.*" excludes="**/setenv.sh,**/setup.sh,**/*mysql*.sh,**/startup.sh,**/shutdown.sh,**/chdbpwd.sh"/>
+            <fileset dir="." includes="jre150_10/**"/>
+        </zip>
+        <zip destfile="gtas-inovis.zip" update="true">
+            <fileset dir="inovis" excludes="patch.*"/>
+        </zip>
+    </target>
+    
+</project>

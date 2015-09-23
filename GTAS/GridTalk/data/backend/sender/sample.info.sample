@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Init>      
+  <!--these define the metainfo associated with the documents to be send.
+      the settings must match the configuration in GridTalk.
+      optional settings: docNum, partnerGroup-->
+  <Property key="docType">UC</Property>
+  <Property key="partnerID">00001000</Property>
+</Init>

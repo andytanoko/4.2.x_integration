@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HousekeepingInfo>
+    <TempFilesDaysToKeep>14</TempFilesDaysToKeep>
+    <LogFilesDaysToKeep>14</LogFilesDaysToKeep>
+	<WfRecordsDaysToKeep>14</WfRecordsDaysToKeep>
+</HousekeepingInfo>

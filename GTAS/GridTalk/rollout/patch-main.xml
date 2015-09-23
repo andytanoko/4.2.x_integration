@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="patch.main" default="start.patch" basedir=".">
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpath="./ant-contrib.jar"/>
+    <taskdef name="var" classname="net.sf.antcontrib.property.Variable" classpath="./ant-contrib.jar"/>
+    <property environment="env"></property>
+	
+    <!-- Main Logic: read gtas.version in GridTalk, find the versions that need to be patched, and patch one by one -->
+    <target name="start.patch">
+	
+	    <!--Set the property in order for us to detect the platform, and provide necessary changes EG on file path etc -->
+	    <condition property="isWindows">
+            <os family="windows" />
+        </condition>
+	
+        <loadfile property="curr.version" srcFile="${gtas.version.file}">
+            <filterchain>
+              <striplinebreaks/>
+            </filterchain>
+        </loadfile>
+        <property name="patch.versions.file" value="./patch/patch-versions-${curr.version}"/>
+        <available property="continue.patch" file="${patch.versions.file}" type="file"/>
+        <if>
+           <equals arg1="${continue.patch}" arg2="true"/>
+           <then>
+                <loadfile property="patch.versions" srcFile="./patch/patch-versions-${curr.version}">
+                    <filterchain>
+                      <striplinebreaks/>
+                    </filterchain>
+                </loadfile>
+                <parallel>
+                  <antcall target="start.db"/>
+                  <sequential>
+                    <antcall target="check.db.status"/>
+                    <foreach list="${patch.versions}" target="patch" param="target.version" delimiter="," inheritAll="true"/>
+                    <antcall target="stop.db"/>
+                  </sequential>
+                </parallel>
+           </then>
+           <else>
+              <echo message="no patch available for your current GridTalk version ${curr.version}"/>
+           </else>
+       </if>
+    </target>
+
+    <!-- Patch to a certain version if the patch properties is available, and update gtas.version with patched version -->
+    <target name="patch" if="target.version">
+        <echo message="Executing patch script for [patch-${target.version}.properties]"/>
+        <var name="next.patch.file" value="./patch/patch-${target.version}.properties"/>
+        <var name="patch.available" unset="true"/>
+        <available property="patch.available" file="${next.patch.file}" type="file"/>
+        <if>
+           <equals arg1="${patch.available}" arg2="true"/>
+           <then>
+        	  <ant antfile="patch.xml" dir="." inheritAll="true">
+        		<property name="patch.properties.file" value="${next.patch.file}"/>
+              </ant>
+              <echo message="${target.version}" file="${gtas.version.file}"/>
+           </then>
+           <else>
+              <echo message="patch script ${next.patch.file} not available"/>
+           </else>
+       </if>
+    </target>
+
+      <!-- =================================================================== -->
+      <!-- Start the database                                                  -->
+      <!-- =================================================================== -->
+      <target name="start.db" if="patch.db">
+        <exec dir="." executable="${db.start.cmd}"/>
+      </target>
+
+      <!-- =================================================================== -->
+      <!-- Stop the database                                                   -->
+      <!-- =================================================================== -->
+      <target name="stop.db" if="patch.db">
+        <exec dir="." executable="${db.stop.cmd}">
+    		<arg value="${db.root.password}"/>
+    	</exec>
+      </target>
+
+      <!-- =================================================================== -->
+      <!-- Check the database alive status                                     -->
+      <!-- =================================================================== -->
+      <target name="check.db.status" if="patch.db">
+        <exec dir="." executable="${db.check.cmd}">
+    		<arg value="${db.root.password}"/>
+    	</exec>
+      </target>
+
+</project>

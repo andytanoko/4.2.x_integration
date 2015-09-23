@@ -1,0 +1,55 @@
+Reference for ACLPolicyTest
+---------------------------
+
+
+ROLE.0 Permissions: AccessPermissionCollection: 4 Permissions
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3 *:[*])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3.0 *:[DATA_TYPE.3])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.1 ACTION.2:[DATA_TYPE.2],ACTION.3:[*])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.0 ACTION.0:[DATA_TYPE.1, DATA_TYPE.0],ACTION.1:[DATA_TYPE.1])
+
+ROLE.0 u ROLE.1 Permissions: AccessPermissionCollection: 7 Permissions
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3 *:[*])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3.0 *:[DATA_TYPE.3])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.1 ACTION.2:[DATA_TYPE.2],ACTION.3:[*])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.0 ACTION.0:[DATA_TYPE.1, DATA_TYPE.0],ACTION.1:[DATA_TYPE.3, DATA_TYPE.1])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3.0.1.* *:[*])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3.0.1 ACTION.3:[DATA_TYPE.0])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3.* ACTION.2:[*])
+
+ROLE.0 u ROLE.1 u ROLE.2 Permissions: AccessPermissionCollection: 8 Permissions
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3 *:[*],ACTION.1:[DATA_TYPE.1])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.2 ACTION.0:[DATA_TYPE.1])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3.0 *:[DATA_TYPE.3])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.1 *:[*],ACTION.2:[DATA_TYPE.2],ACTION.3:[*])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.0 ACTION.0:[DATA_TYPE.1, DATA_TYPE.0],ACTION.1:[DATA_TYPE.3, DATA_TYPE.1])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3.0.1.* *:[*])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3.0.1 ACTION.3:[DATA_TYPE.0])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3.* ACTION.2:[*])
+
+ROLE.0 u ROLE.2 Permissions: AccessPermissionCollection: 5 Permissions
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3 *:[*],ACTION.1:[DATA_TYPE.1])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.2 ACTION.0:[DATA_TYPE.1])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3.0 *:[DATA_TYPE.3])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.1 *:[*],ACTION.2:[DATA_TYPE.2],ACTION.3:[*])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.0 ACTION.0:[DATA_TYPE.1, DATA_TYPE.0],ACTION.1:[DATA_TYPE.1])
+
+ROLE.2 Permissions: AccessPermissionCollection: 3 Permissions
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3 ACTION.1:[DATA_TYPE.1])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.2 ACTION.0:[DATA_TYPE.1])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.1 *:[*],ACTION.2:[DATA_TYPE.2])
+
+ROLE.2 u ROLE.1 Permissions: AccessPermissionCollection: 7 Permissions
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3 ACTION.1:[DATA_TYPE.1])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.2 ACTION.0:[DATA_TYPE.1])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.1 *:[*],ACTION.2:[DATA_TYPE.2])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.0 ACTION.1:[DATA_TYPE.3])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3.0.1.* *:[*])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3.0.1 ACTION.3:[DATA_TYPE.0])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3.* ACTION.2:[*])
+
+ROLE.1 Permissions: AccessPermissionCollection: 4 Permissions
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.0 ACTION.1:[DATA_TYPE.3])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3.0.1.* *:[*])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3.0.1 ACTION.3:[DATA_TYPE.0])
+	(com.gridnode.pdip.base.acl.auth.AccessPermission FEATURE.3.* ACTION.2:[*])

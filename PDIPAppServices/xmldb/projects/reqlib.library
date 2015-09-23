@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>reqlib</fullname>
+  <class>
+    <path>[../../../PDIPFramework/FrameWork/deploy/framework.jar]</path>
+    <path>[../../../PDIPFramework/FrameWork/deploy/framework-file-facade-ejb.jar]</path>
+    <path>[../../../PDIPFramework/FrameWork/deploy/framework-db-metainfo-ejb.jar]</path>
+    <path>[../../../PDIPFramework/FrameWork/deploy/framework-db-keygen-ejb.jar]</path>
+    <path>[../../../PDIPFramework/FrameWork/deploy/framework-db-cursor-ejb.jar]</path>
+  </class>
+</library>
+

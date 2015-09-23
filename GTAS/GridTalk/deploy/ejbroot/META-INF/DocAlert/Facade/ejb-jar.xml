@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+  <enterprise-beans>
+    <session>
+      <display-name>DocAlertManager</display-name>
+      <ejb-name>DocAlertManager</ejb-name>
+      <home>com.gridnode.gtas.server.docalert.facade.ejb.IDocAlertManagerHome</home>
+      <remote>com.gridnode.gtas.server.docalert.facade.ejb.IDocAlertManagerObj</remote>
+      <ejb-class>com.gridnode.gtas.server.docalert.facade.ejb.DocAlertManagerBean</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+    </session>
+    <message-driven>
+      <ejb-name>ReminderAlertMDBean</ejb-name>
+      <ejb-class>com.gridnode.gtas.server.docalert.facade.ejb.ReminderAlertMDBean</ejb-class>
+      <transaction-type>Container</transaction-type>
+      <message-destination-type>javax.jms.Queue</message-destination-type>
+			<activation-config>
+				<activation-config-property>
+					<activation-config-property-name>messageSelector</activation-config-property-name>
+					<activation-config-property-value>Category='ReminderAlert'</activation-config-property-value>
+				</activation-config-property>
+			</activation-config>      
+    </message-driven>
+    <message-driven>
+      <ejb-name>DocumentActivityMDBean</ejb-name>
+      <ejb-class>com.gridnode.gtas.server.docalert.facade.ejb.DocumentActivityMDBean</ejb-class>
+      <transaction-type>Container</transaction-type>
+      <message-driven-destination> <!-- TWX 2 Dec 2007 change to use durable topic -->
+            <destination-type>javax.jms.Topic</destination-type>
+            <subscription-durability>Durable</subscription-durability>
+      </message-driven-destination>
+			<activation-config>
+				<activation-config-property>
+					<activation-config-property-name>messageSelector</activation-config-property-name>
+					<activation-config-property-value>id='DocumentActivity' AND hostid='${hostid:gnode1}'</activation-config-property-value>
+				</activation-config-property>
+			</activation-config>      
+    </message-driven>
+    <message-driven>
+      <ejb-name>DocAlertRequestMDBean</ejb-name>
+      <ejb-class>com.gridnode.gtas.server.docalert.facade.ejb.DocAlertRequestMDBean</ejb-class>
+      <transaction-type>Container</transaction-type>
+      <message-driven-destination> <!-- TWX 2 Dec 2007 change to use durable topic -->
+            <destination-type>javax.jms.Topic</destination-type>
+            <subscription-durability>Durable</subscription-durability>
+      </message-driven-destination>
+			<activation-config>
+				<activation-config-property>
+					<activation-config-property-name>messageSelector</activation-config-property-name>
+					<activation-config-property-value>id='AlertRequest' AND handler='DocAlert' AND hostid='${hostid:gnode1}'</activation-config-property-value>
+				</activation-config-property>
+			</activation-config>      
+    </message-driven>
+  </enterprise-beans>
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+        <ejb-name>DocAlertManager</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <method>
+        <ejb-name>DocumentActivityMDBean</ejb-name>
+        <method-name>onMessage</method-name>
+      </method>
+      <method>
+        <ejb-name>DocAlertRequestMDBean</ejb-name>
+        <method-name>onMessage</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+	<container-transaction>
+      <method>
+        <ejb-name>ReminderAlertMDBean</ejb-name>
+        <method-name>onMessage</method-name>
+      </method>
+      <trans-attribute>NotSupported</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+</ejb-jar>

@@ -1,0 +1,101 @@
+<html>
+<head>
+<title>10.1.3 Directory.file </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>10.1.3 Directory.file </h3>
+<p><span></span>
+</p>
+<p><span>The </span>
+<span>directory.file is an XML file that </span>
+<span>is used when there is a need to pick up files from many different directories. It allows the use of info files for each directory. This is useful for batch import of files for multiple partners and document types.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The following shows a sample of the directory.file:</span>
+</p>
+<p><span><img width='630' height='263' alt='Text Box: <Directory>
+  <Location> 
+	<Name>Orders for Partner 00001000</Name>
+	<Directory>c:\orders\00001000</Directory>
+	<AttachmentDir>c:\orders\00001000\attachment</AttachmentDir>
+	<InfoFile>c>\orders\info\00001000.info</InfoFile>
+    </Location> 
+  <Location> 
+	<Name>Orders for Partner 00001010</Name>
+	<Directory>c:\orders\00001010</Directory>
+	<AttachmentDir>c:\orders\00001010\attachment</AttachmentDir>
+	<InfoFile>c>\orders\info\00001010.info</InfoFile>
+    </Location> 
+    <!-- insert other directories info if necessary-->
+</Directory>
+
+' src='../images/image144.gif'></span>
+</p>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+<table cellspacing='0' width='648' border='0' cellpadding='0'><tr><td width='144' colspan='2' valign='top'><p><b><u><span>XML Tag</span>
+</u>
+</b>
+</p>
+</td>
+<td width='504' valign='top'><p><b><u><span>Usage Description</span>
+</u>
+</b>
+</p>
+</td>
+</tr>
+<tr><td width='144' colspan='2' valign='top'><p><span>&lt;Directory&gt;</span>
+</p>
+</td>
+<td width='504' valign='top'><p><span>Root element of the file. Defines one of more Locations to pick up files.</span>
+</p>
+</td>
+</tr>
+<tr><td width='143' valign='top'><p><span>&lt;Location&gt;</span>
+</p>
+</td>
+<td width='505' colspan='2' valign='top'><p><span>Level 2 element. Defines a location to pick up files.</span>
+</p>
+</td>
+</tr>
+<tr><td width='143' valign='top'><p><span>&lt;Name&gt; </span>
+</p>
+</td>
+<td width='505' colspan='2' valign='top'><p><span>Level 3 element. An arbitrary name for the location.</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' colspan='2' valign='top'><p><span>&lt;Directory&gt; </span>
+</p>
+</td>
+<td width='504' valign='top'><p>Level 3 element. The physical directory to pick up documents.</p>
+</td>
+</tr>
+<tr><td width='144' colspan='2' valign='top'><p><span>&lt;AttachmentDir&gt;</span>
+</p>
+</td>
+<td width='504' valign='top'><p><span>Level 3 element. The physical directory to pick up attachments. Optional.</span>
+</p>
+</td>
+</tr>
+<tr><td width='144' colspan='2' valign='top'><p><span>&lt;InfoFile&gt;</span>
+</p>
+</td>
+<td width='504' valign='top'><p><span>Level 3 element. The information file to apply to all documents picked up in that location. </span>
+</p>
+</td>
+</tr>
+<tr height='0'><td width='143'></td>
+<td width='1'></td>
+<td width='504'></td>
+</tr>
+</table>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

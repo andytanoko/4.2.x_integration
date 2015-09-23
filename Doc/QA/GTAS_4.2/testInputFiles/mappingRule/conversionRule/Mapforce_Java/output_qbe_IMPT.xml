@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tradenet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" date_time="200803050000"
+          xsi:noNamespaceSchemaLocation="D:/andy/QBE_MCI/Maps_Specs/Mapforce_Dev/Int4Schema/TRW4-I~2.XSD">
+	  <msg_ver>040</msg_ver>
+	  <sender_id>VP4T.VP4T001</sender_id>
+	  <message>
+		    <header>
+			      <unique_ref_no>
+				        <cr_uei_no>-</cr_uei_no>
+				        <date>20080305</date>
+				        <seq_no>0</seq_no>
+			      </unique_ref_no>
+			      <declarant_id>VP4T.VP4T001</declarant_id>
+			      <car_type>IPTDEC</car_type>
+			      <dec_type>-</dec_type>
+			      <dec_stmt_ind>true</dec_stmt_ind>
+		    </header>
+		    <transport>
+			      <in_tpt>
+				        <tpt_mode>4</tpt_mode>
+				        <voy_no>1234567890</voy_no>
+				        <vess_name>ABCDEFGHIJKLMNOPQRSTABCDEFGHIJKLMNO</vess_name>
+				        <arrival_date>20101115</arrival_date>
+				        <loading_port>-</loading_port>
+			      </in_tpt>
+		    </transport>
+		    <party>
+			      <declarant>
+				        <person_code>-</person_code>
+				        <person_name>-</person_name>
+				        <person_phone>-</person_phone>
+			      </declarant>
+			      <importer>
+				        <cr_uei_no>-</cr_uei_no>
+				        <name>-</name>
+			      </importer>
+		    </party>
+		    <item>
+			      <seq_no>1</seq_no>
+			      <hs_code>MCG</hs_code>
+			      <item_desc>
+				        <line>INTEREST INTEREST INTEREST INTEREST</line>
+				        <line> INTEREST INTEREST INTEREST INTERES</line>
+				        <line>T INTEREST INTEREST INTEREST INTERE</line>
+				        <line>ST INTEREST INTEREST INTEREST INTER</line>
+				        <line>EST INTEREST INTEREST INTEREST INTE</line>
+			      </item_desc>
+			      <cty_origin>--</cty_origin>
+			      <brand>-</brand>
+			      <item_qty>
+				        <hs_qty>
+					          <qty_value>0</qty_value>
+					          <qty_uom>-</qty_uom>
+				        </hs_qty>
+			      </item_qty>
+		    </item>
+		    <add_info>
+			      <info_name>USER_REF_NO</info_name>
+			      <info_text>CH100415</info_text>
+		    </add_info>
+	  </message>
+</tradenet>

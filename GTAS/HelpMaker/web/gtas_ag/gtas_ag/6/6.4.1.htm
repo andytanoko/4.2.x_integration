@@ -1,0 +1,154 @@
+<html>
+<head>
+<title>6.4.1 To create a new JMS Destination </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>6.4.1 To create a new JMS Destination </h3>
+<p></p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Click JMS Destination. The JMS Destination list view page with the following columns is displayed.</span>
+</p>
+<p><b><span></span>
+</b>
+</p>
+<p><b><span>Edit</span>
+</b>
+</p>
+<p><span>This field allows you to update the properties of the JMS Destination.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Name</span>
+</b>
+</p>
+<p><span>This field indicates the unique arbitrary name to identify each JMS Destination.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Type</span>
+</b>
+</p>
+<p><span>This field indicates the type of the JMS Destination, Queue or Topic.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>JNDI Name</span>
+</b>
+</p>
+<p><span>This field indicates the JNDI lookup name for the Queue or Topic at the target naming server.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>To create a new JMS Destination record, click Create JMS Destination. The JMS Destination detail view page is displayed.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='461' height='504' border='0' src='../images/image030.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>Specify the Name for the JMS Destination. This must be unique among all JMS Destinations already configured in the application.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>Specify the Type of JMS Destination. Select Queue or Topic from the listbox.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 5.<span> </span>
+</span>
+<span>Specify the JNDI Name for lookup of the JMS destination Queue or Topic. This is dependent on the context path used by the target system that serves the lookup for the destination Queue or Topic. For example, JBoss uses “queue/” context path for Queue type destinations, such as “queue/trackProcess”.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 6.<span> </span>
+</span>
+<span>Specify the message Delivery Mode. Select Persistent, Non-Persistent or Default from the listbox. Persistent indicates that the JMS alert message will be guaranteed delivery to the valid destination; Non-Persistent indicates that occasional lost of the JMS alert message is tolerable; Default indicates to use the default setting of the JMS provider, which is usually default to Persistent.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 7.<span> </span>
+</span>
+<span>Specify the message Priority. You may select a value from 0 to 9 or Default from the listbox, with 0 as the lowest priority and 9 as the highest priority, and Default as the default priority which is 4. As a guideline, priorities 0-4 should be used for normal priority, and priorities 5-9 should be used for expedited priority.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 8.<span> </span>
+</span>
+<span>Next, specify the Connection Properties for establishing a JMS connection with the destination JMS system. For this, you need to specify the JNDI name for the JMS Connection Factory. For example, JBoss JMS Connection Factory has a JNDI lookup name of “ConnectionFactory”.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 9.<span> </span>
+</span>
+<span>If the destination JMS system requires authentication for creating JMS connections, you would need to specify the User Name and Password for the authentication.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 10.<span> </span>
+</span>
+<span>Next, specify parameters for performing JNDI lookup for the Connection Factory as well as the JMS destination Queue or Topic. To do this, click Add Lookup Property. This inserts a row under the Lookup Properties where you would specify the Name and Value for the lookup property. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>For Name, select the relevant property names provided in the listbox. Then enter the value for the selected property in the corresponding Value text field on the same row. For more properties, click Add Lookup Property again to specify the value for another property. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>The following are the more commonly used lookup properties:</span>
+</p>
+<p><span>·<span> </span>
+</span>
+<span>java.naming.provider.url</span>
+</p>
+<p><span>·<span> </span>
+</span>
+<span>java.naming.factory.initial</span>
+</p>
+<p><span>·<span> </span>
+</span>
+<span>java.naming.factory.url.pkgs</span>
+</p>
+<p><span></span>
+</p>
+<p><span>To remove a property, tick the checkbox against the relevant property row to remove, and click Remove Lookup Property.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 11.<span> </span>
+</span>
+<span>Specify the Delivery Interval in minutes. The minimum is 1 minute and the default is 5 minutes. This is the time interval for the next delivery time, after a connection or delivery problem, or no more alert messages to be delivered. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 12.<span> </span>
+</span>
+<span>Lastly, specify the Maximum Tries for the connection. You may specify a negative number, 0, or a positive number. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>If a negative number is specified, it indicates that the alert message will be tried indefinitely until it is successfully delivered to the target destination Queue or Topic.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>If 0 is specified, it indicates that the alert messages will not be only delivered to the target destination Queue or Topic. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>If a positive number is specified, it indicates that the alert message will be tried at most for the specified number of times, if it fails to deliver at each previous time.</span>
+</p>
+<p></p>
+<p align='center'><img width='462' height='562' border='0' src='../images/image031.jpg'></p>
+<p></p>
+<span><br clear='all'></span>
+<p></p>
+</body>
+</html>

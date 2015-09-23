@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>ServiceAssignment</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <table>
+          <tr id="userType_details">
+            <td id="userType_label">
+              lbUserType
+            </td>
+            <td>
+              <input id="userType_value" type="text" name="userType"/>
+            </td>
+            <td id="userType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="userName_details">
+            <td id="userName_label">
+              lbUserName
+            </td>
+            <td>
+              <select id="userName_value" size="1" name="userName" class="mandatory">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+              <a id="userName_create" href="javascript:divertToMapping('divertCreatePartner');">
+                lbCreatePartner
+              </a>
+            </td>
+            <td id="userName_error" class="errortext">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="userPassword_details">
+            <td id="userPassword_label">
+              lbUserPassword
+            </td>
+            <td>
+              <input id="userPassword_value" type="password" name="userPassword" size="12" maxlength="12"/>
+            </td>
+            <td id="userPassword_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="webServiceUids_details">
+            <td id="webServiceUids_label" valign="top">
+              lbWebServiceUids
+            </td>
+            <td colspan="2">
+              <div id="webServiceUids_value" class="multiselector">
+                Multiselector(noSort)
+              </div>
+              <a id="webServiceUids_create" href="javascript:divertToMapping('divertCreateWebService');">
+                lbCreateChannelInfo
+              </a>
+            </td>
+          </tr>
+	    </table>
+      </form>
+    </div>
+  </body>
+</html>
+

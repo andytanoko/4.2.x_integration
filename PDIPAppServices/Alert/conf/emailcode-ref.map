@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ ****************************************************************************
+ * Date           Author                  Changes
+ ****************************************************************************
+ * Apr 16 2003    Neo Sok Lay             Created.
+-->
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for EmailCodeRef  -->
+	<class name="com.gridnode.pdip.app.alert.providers.EmailCodeRef">
+		<map-to xml="EmailCodeRef"/>
+		<field name="emailCodes" type="com.gridnode.pdip.app.alert.providers.EmailCode" collection="array">
+			<bind-xml name="EmailCode" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for EmailCode  -->
+	<class name="com.gridnode.pdip.app.alert.providers.EmailCode">
+		<map-to xml="EmailCode"/>
+		<field name="id" type="string" required="true">
+			<bind-xml name="id" node="attribute"/>
+		</field>
+		<field name="userRef" type="string" collection="set">
+			<bind-xml name="UserRef" node="element"/>
+		</field>
+		<field name="roleRef" type="string" collection="set">
+			<bind-xml name="RoleRef" node="element"/>
+		</field>
+		<field name="emailRef" type="string" collection="set">
+			<bind-xml name="EmailRef" node="element"/>
+		</field>
+	</class>
+</mapping>

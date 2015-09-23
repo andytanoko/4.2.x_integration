@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectionProperties isTest="false">
+    <!-- Configurable properties -->
+    <KeepAliveTimeout>3</KeepAliveTimeout>    <!-- Minutes -->
+    <ConnectTimeout>2</ConnectTimeout>        <!-- Minutes -->
+    <ReconnectRetries>10</ReconnectRetries>   <!-- Negative for in-definite retries -->
+    <ReconnectInterval>10</ReconnectInterval> <!-- Seconds -->
+    <AutoConnectOnStartup>false</AutoConnectOnStartup>
+
+    <!-- Non-configurable properties -->
+    <ConnectEventId>0</ConnectEventId>
+    <ConnectAckEventId>1</ConnectAckEventId>
+    <KeepAliveEventId>6</KeepAliveEventId>
+    <KeepAliveAckEventId>7</KeepAliveAckEventId>
+    <RetrievePendingEventId>4</RetrievePendingEventId>
+    <RetrievePendingAckEventId>5</RetrievePendingAckEventId>
+    <RetrievePartnerStatusEventId>1600</RetrievePartnerStatusEventId>
+    <RetrievePartnerStatusAckEventId>1601</RetrievePartnerStatusAckEventId>
+    <OnlineNotificationEventId>1602</OnlineNotificationEventId>
+    <OnlineNotificationAckEventId>1603</OnlineNotificationAckEventId>
+    <DisconnectEventId>2</DisconnectEventId>
+    <DisconnectAckEventId>3</DisconnectAckEventId>
+    <OfflineNotificationEventId>1604</OfflineNotificationEventId>
+    <OfflineNotificationAckEventId>1605</OfflineNotificationAckEventId>
+    <ConfirmAliveEventId>8000</ConfirmAliveEventId>
+    <ConfirmAliveAckEventId>8001</ConfirmAliveAckEventId>
+    <ExpiredNotificationEventId>61200</ExpiredNotificationEventId>
+</ConnectionProperties>

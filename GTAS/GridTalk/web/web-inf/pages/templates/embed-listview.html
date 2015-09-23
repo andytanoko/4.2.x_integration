@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>
+      Embedded Listview Component Template
+    </title>
+    <base href="file:///C:\views\GT_2.1_UiEnhancements\GTAS\GridTalk\web/gt.css" id="base_tag"/>
+    <link rel="stylesheet" href="gt.css" type="text/css"/>
+    <script language="JavaScript" src="scripts/tableUtils.js"><!----></script>
+  </head>
+  <body>
+    <div id="elv_content">
+      <h4 id="elv_header">
+        lbTitle
+      </h4>
+      <div id="elv_index_details">
+        <input type="hidden" name="singleFuid"/>
+        <input type="hidden" name="singleIndex"/>
+        <script><!--
+        function elvDivert(mapping, ref)
+        {
+          document.entityForm.elements['singleFuid'].value = ref;
+          document.entityForm.elements['singleIndex'].value = ref;
+          document.entityForm.elements['divertTo'].value = mapping;
+          submitWithMethod('divert',true);
+        }
+        --></script>
+      </div>
+      <table width="100%" border="0" cellspacing="0" cellpadding="3">
+        <tr valign="bottom">
+          <td align="left">
+            <img src="/images/shim.gif" width="5" height="2"/>
+            <span id="elv_create_details">
+              <a id="elv_create" href="">
+                <img src="images/actions/new.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+                lbCreate
+              </a>
+              &nbsp;
+            </span>
+            <span id="elv_delete_details">
+              <a id="elv_delete" href="">
+                <img src="images/actions/delete.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+                lbDelete
+              </a>
+              &nbsp;
+            </span>
+            <span id="elv_up_details">
+              <a id="elv_up" href="" style="cursor: n-resize;">
+                <img src="images/arrows/upArrow.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+                lbUp
+              </a>
+              &nbsp;
+            </span>
+            <span id="elv_down_details">
+              <a id="elv_down" href="" style="cursor: s-resize;">
+                <img src="images/arrows/downArrow.gif" border="0" style="vertical-align: text-top; margin-right: 3;"/>
+                lbDown
+              </a>
+              &nbsp;
+            </span>
+          </td>
+        </tr>
+      </table>
+      <table id="elv_table" border="0" cellspacing="0" cellpadding="5" width="100%">
+        <thead>
+          <tr id="column_header_row" valign="top">
+            <th id="select_header_cell" width="20" align="center" nowrap="nowrap" style="white-space: nowrap;" class="listheader">
+              <input type="checkbox" class="checkbox" style="border: 0px; margin: 0px; padding: 0px; height: 12px;"/>lbSelect
+            </th>
+            <th id="edit_header_cell" width="20" align="center" class="listheader" nowrap="nowrap">
+              Edit
+            </th>
+            <th id="column_header_cell" align="left" class="listheader" nowrap="nowrap">
+              User ID
+            </th>
+            <th class="listheader" align="left" nowrap="nowrap">
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody id="elv_body">
+          <tr id="detail_row" valign="top">
+            <td width="20" id="selection_cell" align="center" class="lvscell">
+              <input id="selection_input" type="checkbox" name="fuid" value="1" onclick="highlightRows('elv_body');" class="checkbox"/>
+            </td>
+            <td width="20" id="edit_cell" align="center" class="lvdcell">
+              <a id="edit_link" href="">
+                <img src="images/actions/edit.gif" border="0" alt="Edit" width="16" height="16"/>
+              </a>
+            </td>
+            <td id="viewlink_cell" class="lvdcell" align="left">
+              <a id="view_link" href="">
+                gridtalk
+              </a>
+            </td>
+            <td id="default_cell" class="lvdcell" align="left">
+              GridTalk
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

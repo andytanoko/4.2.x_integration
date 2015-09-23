@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+  <enterprise-beans>
+    <message-driven>
+      <ejb-name>ActivationListenerMDBean_CON</ejb-name>
+      <ejb-class>com.gridnode.gtas.server.connection.listener.ejb.ActivationListenerMDBean</ejb-class>
+      <message-selector>id='Activation' AND myRole &lt;&gt; 'approve'</message-selector>
+      <transaction-type>Container</transaction-type>
+      <message-driven-destination>
+        <destination-type>javax.jms.Topic</destination-type>
+        <subscription-durability>NonDurable</subscription-durability>
+      </message-driven-destination>
+    </message-driven>
+    <message-driven>
+      <ejb-name>StartupListenerMDBean_CON</ejb-name>
+      <ejb-class>com.gridnode.gtas.server.connection.listener.ejb.StartupListenerMDBean</ejb-class>
+      <message-selector></message-selector>
+      <transaction-type>Container</transaction-type>
+      <message-driven-destination>
+        <destination-type>javax.jms.Topic</destination-type>
+        <subscription-durability>NonDurable</subscription-durability>
+      </message-driven-destination>
+    </message-driven>
+  </enterprise-beans>
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+        <ejb-name>ActivationListenerMDBean_CON</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <method>
+        <ejb-name>StartupListenerMDBean_CON</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+</ejb-jar>

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head id="xhtml_head">
+    <title id="title">lbGridTalk</title>
+    <base href="file:///C:\viewroot\i00054_GT_2.0_I7\GTAS\GridTalk\web/gt.css" id="base_tag"/>
+    <script type="text/javascript"><!--
+      function getGmtOffset()
+      {
+        try
+        {
+          var date = new Date();
+          var offset = (0 - date.getTimezoneOffset()) * 60 * 1000;
+          return offset;
+        }
+        catch(error)
+        {
+          alert('Error caught by getGmtOffset()\ntype=' + error.type + '\nname=' + error.name);
+          throw error;
+        }
+      }
+
+      function submitGmtOffset()
+      {
+        try
+        {
+          var offset = getGmtOffset();
+          document.entityForm.elements['gmtOffset'].value = new String(offset);
+          document.entityForm.submit();
+        }
+        catch(error)
+        {
+          alert('Error caught by submitGmtOffset()\ntype=' + error.type + '\nname=' + error.name);
+          throw error;
+        }
+      }
+    --></script>
+    <script type="text/javascript" src="scripts/stdFormMethods.js"><!----></script>
+  </head>
+  <body onload="submitGmtOffset();">
+    <form id="gmt_form" name="entityForm" method="get" target="_top">
+      <input id="gmtOffset_value" type="hidden" name="gmtOffset" value="0"/>
+      <input id="isTimeout_value" type="hidden" name="isTimeout" value="false"/>
+    </form>
+  </body>
+</html>

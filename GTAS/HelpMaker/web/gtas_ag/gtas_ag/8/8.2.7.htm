@@ -1,0 +1,119 @@
+<html>
+<head>
+<title>8.2.7 To create a new dictionary mapping file </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>8.2.7 To create a new dictionary mapping file </h3>
+<p></p>
+<p><span>Dictionaries are used to validate the message contents. The dictionary may be imported using the XML/Dictionary configuration view.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The format of the dictionary file is in the form:</span>
+</p>
+<p><span></span>
+</p>
+<p><span> &lt;Dictionary&gt;</span>
+</p>
+<p><span> &lt;<i>elementname</i>
+&gt;</span>
+</p>
+<p><span> &lt;value&gt;<i>value1</i>
+&lt;/value&gt;</span>
+</p>
+<p><span> &lt;value&gt;<i>value2</i>
+&lt;/value&gt;</span>
+</p>
+<p><span> ...</span>
+</p>
+<p><i><span> </span>
+</i>
+<span>&lt;<i>elementname</i>
+&gt;</span>
+</p>
+<p><span> &lt;/dictionary&gt;</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The dictionary contains a list of valid values for each data entity within a message. If the entity appears in the dictionary, its value must match one of the valid values for that entity, otherwise it will fail the dictionary validation.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>For example, any element named <i>elementname</i>
+ in the document must content any of the values <i>value1</i>
+ or <i>value2</i>
+. Otherwise, the dictionary check will be deemed to have failed.</span>
+</p>
+<p></p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Click Mapping. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>Click Dictionary under Mapping Files. The Dictionary Mapping Files list view page is displayed.</span>
+</p>
+<p><span></span>
+</p>
+<p><a name='_Ref78114823'><span>Step 3.<span> </span>
+</span>
+<span>Click Create Mapping File. The Mapping File detail view page is displayed.</span>
+</a>
+<span> </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>In the Mapping File detail view page, enter the mandatory fields.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 5.<span> </span>
+</span>
+<span>Select Dictionary for the Type field.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 6.<span> </span>
+</span>
+<span>Select the file by clicking Browse. The File selector is displayed where you can select a Dictionary file.</span>
+</p>
+<p><span></span>
+</p>
+<p><a name='_Ref78114825'><span>Step 7.<span> </span>
+</span>
+<span>Click Save Mapping File. The new mapping file will be displayed in the Mapping Files or Dictionary Mapping Files list.</span>
+</a>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 8.<span> </span>
+</span>
+<span>To add more Dictionary mapping files, repeat Step 3 through Step 7. If you want to view the mapping file, go to the Dictionary Mapping Files page where you will see the records listed in the table. Click on the selected mapping file’s hyperlink under Name in the table. If you wish to update the selected mapping file, click Edit Mapping File. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 9.<span> </span>
+</span>
+<span>To edit the Dictionary mapping file, select the mapping file and then click on the corresponding Edit button<img width='16' height='16' border='0' src='../images/image013.gif'></span>
+<span>. </span>
+<span>The Mapping File page is displayed.</span>
+<span> Update the entries of the mapping file as necessary. Click Save Mapping File.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 10.<span> </span>
+</span>
+<span>To delete the Dictionary mapping file, tick the Select checkbox of the mapping file you want to delete. As you see a mark appear in that checkbox, click Delete Mapping Files. The message box, “Are you sure you wish to delete these Mapping Files?” will appear. To confirm the deletion, click OK. The selected mapping file will be removed from the Mapping Files page and the Dictionary Mapping Files page.</span>
+</p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Edit Search Query</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="save"/>
+        <input type="hidden" name="divertTo"/>
+        <table>
+          <tr id="name_details">
+            <td id="name_label">
+              lbName
+            </td>
+            <td>
+              <input id="name_value" type="text" name="name"/>
+            </td>
+            <td id="name_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="description_details">
+            <td id="description_label">
+              lbDescription
+            </td>
+            <td>
+              <input id="description_value" type="text" name="description"/>
+            </td>
+            <td id="description_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="createdBy_details">
+            <td id="createdBy_label">
+              lbCreatedBy
+            </td>
+            <td>
+              <input id="createdBy_value" type="text" name="createdBy"/>
+            </td>
+            <td id="createdBy_error">
+              &nbsp;
+            </td>
+          </tr>
+		  <tr id="isPublic_details">
+            <td id="isPublic_label">
+              lbisPublic
+            </td>
+            <td>
+              <input type="checkbox" id="isPublic_value" name="isPublic"/>
+            </td>
+            <td id="isPublic_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+        <br/>
+        <div id="conditions_details">
+          <table cellspacing="0" border="0">
+            <tr>
+              <td>
+                &nbsp;
+              </td>
+              <th id="condition.type_label" style="font-weight: bold; color: black">
+                lbType
+              </th>
+              <th id="condition.fieldOrXpath_label" style="font-weight: bold; color: black">
+                lbFieldOrXpath
+              </th>
+              <th id="condition.operator_label" style="font-weight: bold; color: black">
+                lbOperator
+              </th>
+              <th id="condition.values_label" style="font-weight: bold; color: black">
+                lbValues
+              </th>
+            </tr>
+            <tr id="condition_row">
+              <td>
+                <input id="selected_value" type="checkbox" name="selected"/>
+              </td>
+              <td>
+                <select id="type_value" size="1" name="type" onchange="serverRefresh();">
+                  <option value="">
+                    &nbsp;
+                  </option>
+                </select>
+              </td>
+              <td>
+                <select id="field_value" size="1" name="field">
+                  <option value="">
+                    &nbsp;
+                  </option>
+                </select>
+                <input id="xpath_value" type="text" name="xpath"/>
+              </td>
+              <td>
+                <select id="operator_value" size="1" name="operator">
+                  <option value="">
+                    &nbsp;
+                  </option>
+                </select>
+              </td>
+              <td>
+                <input id="values_value" type="text" name="values"/>
+              </td>
+            </tr>
+
+            <tr id="control_row">
+              <script type="text/javascript"><!--
+                function doConditionUpdateAction(updateAction)
+                {
+                  try
+                  {
+                    var elementName = "updateAction";
+                    document.entityForm.elements[elementName].value = updateAction;
+                    serverRefresh(); 
+                  }
+                  catch(error)
+                  {
+                    alert('Error caught by doConditionUpdateAction('
+                          + updateAction
+                          + ')\ntype=' + error.type
+                          + '\nname=' + error.name );
+                    throw error;
+                  }
+                }
+              // --></script>
+              <td align="right" colspan="5" nowrap="nowrap" valign="top">
+                <span id="removeCondition_parent">
+                  <a id="removeCondition" href="javascript: void doConditionUpdateAction('removeCondition');">
+                    <img border="0" id="removeCondition_icon" src="images/actions/delete.gif" style="vertical-align: text-top; margin-right: 3;"/>
+                    lbRemoveCondition
+                  </a>
+                  &nbsp;&nbsp;
+                </span>
+                <span id="addCondition_parent">
+                  <a id="addCondition" href="javascript: void doConditionUpdateAction('addCondition');">
+                    <img border="0" id="addCondition_icon" src="images/actions/filter.gif" style="vertical-align: text-top; margin-right: 3;"/>
+                    lbAddCondition
+                  </a>
+                  &nbsp;&nbsp;
+                </span>
+                <input name="updateAction" type="hidden" value=""/>
+              </td>
+            </tr>
+          
+          </table>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
+

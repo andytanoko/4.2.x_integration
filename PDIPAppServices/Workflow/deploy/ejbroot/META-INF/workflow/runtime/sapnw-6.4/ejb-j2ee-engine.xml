@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-j2ee-engine SYSTEM "ejb-j2ee-engine.dtd">
+<ejb-j2ee-engine>
+	<enterprise-beans>
+		<enterprise-bean>
+			<ejb-name>GWFRtActivity</ejb-name>
+			<jndi-name>com.gridnode.pdip.app.workflow.runtime.ejb.IGWFRtActivityHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>GWFRtProcess</ejb-name>
+			<jndi-name>com.gridnode.pdip.app.workflow.runtime.ejb.IGWFRtProcessHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>GWFRtRestriction</ejb-name>
+			<jndi-name>com.gridnode.pdip.app.workflow.runtime.ejb.IGWFRtRestrictionHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>GWFTransActivationState</ejb-name>
+			<jndi-name>com.gridnode.pdip.app.workflow.runtime.ejb.IGWFTransActivationStateHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>GWFRtProcessDoc</ejb-name>
+			<jndi-name>com.gridnode.pdip.app.workflow.runtime.ejb.IGWFRtProcessDocHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+	</enterprise-beans>
+</ejb-j2ee-engine>

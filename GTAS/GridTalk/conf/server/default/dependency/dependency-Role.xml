@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDependency name="Role">
+  <Checker class-name="com.gridnode.gtas.server.acl.helpers.EntityDependencyChecker"
+           method-name="checkDependentUsersForRole">
+    <Param type="java.lang.Long" getter-method="getUId"/>
+  </Checker>
+</EntityDependency>

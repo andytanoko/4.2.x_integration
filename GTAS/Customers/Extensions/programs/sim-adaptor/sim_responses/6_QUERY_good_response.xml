@@ -1,0 +1,364 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<uccnet:envelope communicationVersion="2.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fmcg="http://www.ean-ucc.org/schemas/1.3/fmcg" xmlns:hbc="http://www.uccnet.org/schemas/1.3/hbc" xmlns:hardlines="http://www.uccnet.org/schemas/1.3/hardlines" xmlns:produce="http://www.uccnet.org/schemas/1.3/produce" xmlns:uccnet="http://www.uccnet.org/schemas/2.2/uccnet" xmlns:eanucc="http://www.ean-ucc.org/schemas/1.3/eanucc" xmlns:otc="http://www.uccnet.org/schemas/1.3/otc"  xsi:schemaLocation="http://www.uccnet.org/schemas/2.2/uccnet http://www.testregistry.net/xmlschema/uccnet/2.2/Envelope.xsd ">
+<messageHeader>
+  <messageIdentifier>
+    <value>36438775</value>
+  </messageIdentifier>
+  <userId>UCCNET_SYSTEM</userId>
+  <representingParty>
+    <gln>0614141800001</gln>
+  </representingParty>
+</messageHeader>
+<body>
+<response>
+<acknowledge>
+<acknowledgement>
+<acknowledgementHeader type="PROCESSED" success="TRUE" duplicate="FALSE">
+  <entityIdentification>
+    <uniqueCreatorIdentification>16-Oct-2003 10:06</uniqueCreatorIdentification>
+    <globalLocationNumber>
+      <gln>0488222000006</gln>
+    </globalLocationNumber>
+  </entityIdentification>
+  <messageIdentifier>
+    <value>16-Oct-2003 10:06</value>
+  </messageIdentifier>
+</acknowledgementHeader>
+<subdocumentValid success="TRUE">
+<documentIdentifier>
+  <typedEntityIdentification type="TRANSACTION">
+    <entityIdentification>
+      <uniqueCreatorIdentification>KWm3d wlquery001</uniqueCreatorIdentification>
+      <globalLocationNumber>
+        <gln>0488222000006</gln>
+      </globalLocationNumber>
+    </entityIdentification>
+  </typedEntityIdentification>
+</documentIdentifier>
+<subdocumentValid success="TRUE">
+<documentIdentifier>
+  <typedEntityIdentification type="QUERY_COMMAND">
+    <entityIdentification>
+      <uniqueCreatorIdentification>KWm3d wlquery002</uniqueCreatorIdentification>
+      <globalLocationNumber>
+        <gln>0488222000006</gln>
+      </globalLocationNumber>
+    </entityIdentification>
+  </typedEntityIdentification>
+</documentIdentifier>
+<resultList showDetails="TRUE">
+<notification type="ROUTED_DOCUMENT" topic="CATALOGUE_ITEM_PUBLICATION_NOTIFICATION">
+  <entityIdentification>
+    <uniqueCreatorIdentification>813740</uniqueCreatorIdentification>
+    <globalLocationNumber>
+      <gln>0614141800001</gln>
+    </globalLocationNumber>
+  </entityIdentification>
+  <sequenceId>813740</sequenceId>
+  <notificationStatus value="READ"></notificationStatus>
+  <userId>SupplierL</userId>
+  <initiatingPartyIdentification>
+    <initiatingTradingPartner>
+      <globalLocationNumber>
+        <gln>0488222000006</gln>
+      </globalLocationNumber>
+    </initiatingTradingPartner>
+    <initiatingParty>
+      <globalLocationNumber>
+        <gln>0488222000006</gln>
+      </globalLocationNumber>
+    </initiatingParty>
+    <initiatingUser>
+   <userId>SupplierL</userId>
+</initiatingUser>
+
+  </initiatingPartyIdentification>
+  <notificationDetail>
+    <transactionInformation>
+      <entityIdentification>
+        <uniqueCreatorIdentification>1066248850337</uniqueCreatorIdentification>
+        <globalLocationNumber>
+          <gln>0614141800001</gln>
+        </globalLocationNumber>
+      </entityIdentification>
+      <transactionDateAndTime>
+        <date>2003-10-15</date>
+        <time timeZone="EDT">
+          <value>16:14:10</value>
+        </time>
+      </transactionDateAndTime>
+      <transactionType>XML</transactionType>
+      <transactionStatusCode>SUCCEEDED</transactionStatusCode>
+    </transactionInformation>
+<catalogueItemPublication xmlns:uccnet="http://www.uccnet.org/schemas/2.2/uccnet" xmlns:eanucc="http://www.ean-ucc.org/schemas/1.3/eanucc">
+<catalogueItemReference>
+<gtin>00048822299929</gtin>
+<dataSource>0488222000006</dataSource>
+<targetMarket>
+<targetMarketCountryCode>840</targetMarketCountryCode>
+</targetMarket>
+</catalogueItemReference>
+<publishToGLN>0474636000008</publishToGLN>
+</catalogueItemPublication>
+</notificationDetail></notification><notification type="BATCH_INFORMATION" topic="BATCH_SUBMIT">
+  <entityIdentification>
+    <uniqueCreatorIdentification>814992</uniqueCreatorIdentification>
+    <globalLocationNumber>
+      <gln>0488222000006</gln>
+    </globalLocationNumber>
+  </entityIdentification>
+  <sequenceId>814992</sequenceId>
+  <notificationStatus value="ACKNOWLEDGED"></notificationStatus>
+  <userId>SupplierL</userId>
+  <initiatingPartyIdentification>
+    <initiatingTradingPartner>
+      <globalLocationNumber>
+        <gln>0488222000006</gln>
+      </globalLocationNumber>
+    </initiatingTradingPartner>
+    <initiatingParty>
+      <globalLocationNumber>
+        <gln>0488222000006</gln>
+      </globalLocationNumber>
+    </initiatingParty>
+
+		<initiatingUser>
+   <userId>SupplierL</userId>
+</initiatingUser>
+ </initiatingPartyIdentification>
+  <notificationDetail>
+    <transactionInformation>
+      <entityIdentification>
+        <uniqueCreatorIdentification>39601420</uniqueCreatorIdentification>
+        <globalLocationNumber>
+          <gln>0488222000006</gln>
+        </globalLocationNumber>
+      </entityIdentification>
+      <transactionDateAndTime>
+        <date>2003-10-15</date>
+        <time timeZone="EST">
+          <value>16:41:32</value>
+        </time>
+      </transactionDateAndTime>
+      <transactionType>XML</transactionType>
+      <transactionStatusCode>SUCCEEDED</transactionStatusCode>
+    </transactionInformation>
+    <batchDetail batchStatus="WAITING">
+      <entityIdentification>
+         <uniqueCreatorIdentification>15-Oct-2003 16:35</uniqueCreatorIdentification>
+        <globalLocationNumber>
+          <gln>0488222000006</gln>
+        </globalLocationNumber>
+      </entityIdentification>
+    </batchDetail>
+  </notificationDetail>
+</notification>
+<notification type="BATCH_INFORMATION" topic="BATCH_COMPLETE">
+  <entityIdentification>
+    <uniqueCreatorIdentification>814993</uniqueCreatorIdentification>
+    <globalLocationNumber>
+      <gln>0488222000006</gln>
+    </globalLocationNumber>
+  </entityIdentification>
+  <sequenceId>814993</sequenceId>
+  <notificationStatus value="UNREAD"></notificationStatus>
+  <userId>SupplierL</userId>
+  <initiatingPartyIdentification>
+    <initiatingTradingPartner>
+      <globalLocationNumber>
+        <gln>0488222000006</gln>
+      </globalLocationNumber>
+    </initiatingTradingPartner>
+    <initiatingParty>
+      <globalLocationNumber>
+        <gln>0488222000006</gln>
+      </globalLocationNumber>
+    </initiatingParty>
+
+		<initiatingUser>
+   <userId>SupplierL</userId>
+</initiatingUser>
+ </initiatingPartyIdentification>
+  <notificationDetail>
+    <transactionInformation>
+      <entityIdentification>
+        <uniqueCreatorIdentification>39601440</uniqueCreatorIdentification>
+        <globalLocationNumber>
+          <gln>0488222000006</gln>
+        </globalLocationNumber>
+      </entityIdentification>
+      <transactionDateAndTime>
+        <date>2003-10-15</date>
+        <time timeZone="EST">
+          <value>16:41:38</value>
+        </time>
+      </transactionDateAndTime>
+      <transactionType>BATCH</transactionType>
+      <transactionStatusCode>SUCCEEDED</transactionStatusCode>
+    </transactionInformation>
+    <batchDetail batchStatus="COMPLETED">
+      <entityIdentification>
+            <uniqueCreatorIdentification>15-Oct-2003 16:35</uniqueCreatorIdentification>
+        <globalLocationNumber>
+          <gln>0488222000006</gln>
+        </globalLocationNumber>
+      </entityIdentification>
+      <subdocumentValid success="TRUE">
+        <documentIdentifier>
+          <typedEntityIdentification type="TRANSACTION">
+            <entityIdentification>
+              <uniqueCreatorIdentification>m3 rcir2 004</uniqueCreatorIdentification>
+              <globalLocationNumber>
+                <gln>0488222000006</gln>
+              </globalLocationNumber>
+            </entityIdentification>
+          </typedEntityIdentification>
+        </documentIdentifier>
+        <subdocumentValid success="TRUE" validationKey="f1af4003baac597259e2d2b420470de7ce76b9e6">
+          <documentIdentifier>
+            <typedEntityIdentification type="REGISTER_COMMAND">
+              <entityIdentification>
+                <uniqueCreatorIdentification>m3 rcir2 004</uniqueCreatorIdentification>
+                <globalLocationNumber>
+                  <gln>0488222000006</gln>
+                </globalLocationNumber>
+              </entityIdentification>
+            </typedEntityIdentification>
+          </documentIdentifier>
+          <subdocumentValid success="TRUE">
+            <documentIdentifier>
+              <catalogueItemReference>
+                <gtin>00048822299936</gtin>
+                <dataSource>0488222000006</dataSource>
+                <targetMarket>
+                  <targetMarketCountryCode>840</targetMarketCountryCode>
+                </targetMarket>
+              </catalogueItemReference>
+            </documentIdentifier>
+          </subdocumentValid>
+        </subdocumentValid>
+      </subdocumentValid>
+      <subdocumentValid success="TRUE">
+        <documentIdentifier>
+          <typedEntityIdentification type="TRANSACTION">
+            <entityIdentification>
+              <uniqueCreatorIdentification>m3 rcir2 006</uniqueCreatorIdentification>
+              <globalLocationNumber>
+                <gln>0488222000006</gln>
+              </globalLocationNumber>
+            </entityIdentification>
+          </typedEntityIdentification>
+        </documentIdentifier>
+        <subdocumentValid success="TRUE" validationKey="f1af4003baac597259e2d2b420470de7ce76b9e6">
+          <documentIdentifier>
+            <typedEntityIdentification type="REGISTER_COMMAND">
+              <entityIdentification>
+                <uniqueCreatorIdentification>m3 rcir2 007</uniqueCreatorIdentification>
+                <globalLocationNumber>
+                  <gln>0488222000006</gln>
+                </globalLocationNumber>
+              </entityIdentification>
+            </typedEntityIdentification>
+          </documentIdentifier>
+          <subdocumentValid success="TRUE">
+            <documentIdentifier>
+              <catalogueItemReference>
+                <gtin>00048822299943</gtin>
+                <dataSource>0488222000006</dataSource>
+                <targetMarket>
+                  <targetMarketCountryCode>840</targetMarketCountryCode>
+                </targetMarket>
+              </catalogueItemReference>
+            </documentIdentifier>
+          </subdocumentValid>
+        </subdocumentValid>
+      </subdocumentValid>
+      <subdocumentValid success="TRUE">
+        <documentIdentifier>
+          <typedEntityIdentification type="TRANSACTION">
+            <entityIdentification>
+              <uniqueCreatorIdentification>m3 rcir2 009</uniqueCreatorIdentification>
+              <globalLocationNumber>
+                <gln>0488222000006</gln>
+              </globalLocationNumber>
+            </entityIdentification>
+          </typedEntityIdentification>
+        </documentIdentifier>
+        <subdocumentValid success="TRUE" validationKey="f1af4003baac597259e2d2b420470de7ce76b9e6">
+          <documentIdentifier>
+            <typedEntityIdentification type="REGISTER_COMMAND">
+              <entityIdentification>
+                <uniqueCreatorIdentification>m3 rcir2 010</uniqueCreatorIdentification>
+                <globalLocationNumber>
+                  <gln>0488222000006</gln>
+                </globalLocationNumber>
+              </entityIdentification>
+            </typedEntityIdentification>
+          </documentIdentifier>
+          <subdocumentValid success="TRUE">
+            <documentIdentifier>
+              <catalogueItemReference>
+                <gtin>00048822299950</gtin>
+                <dataSource>0488222000006</dataSource>
+                <targetMarket>
+                  <targetMarketCountryCode>840</targetMarketCountryCode>
+                </targetMarket>
+              </catalogueItemReference>
+            </documentIdentifier>
+          </subdocumentValid>
+        </subdocumentValid>
+      </subdocumentValid>
+    </batchDetail>
+  </notificationDetail>
+</notification>
+<notification topic="CATALOGUE_ITEM_CONFIRMATION" type="ROUTED_DOCUMENT">
+<entityIdentification>
+<uniqueCreatorIdentification>819130</uniqueCreatorIdentification>
+<globalLocationNumber>
+<gln>0614141800001</gln>
+</globalLocationNumber>
+</entityIdentification>
+<sequenceId>819130</sequenceId>
+<notificationStatus value="UNREAD"/>
+<userId>SupplierL</userId>
+<initiatingPartyIdentification>
+<initiatingTradingPartner>
+<globalLocationNumber>
+<gln>0474636000008</gln>
+</globalLocationNumber>
+</initiatingTradingPartner>
+<initiatingParty>
+<globalLocationNumber>
+<gln>0474636000008</gln>
+</globalLocationNumber>
+</initiatingParty>
+	
+      </initiatingPartyIdentification>
+<notificationDetail>
+<transactionInformation>
+<entityIdentification>
+<uniqueCreatorIdentification>1066313013115</uniqueCreatorIdentification>
+<globalLocationNumber>
+<gln>0614141800001</gln>
+</globalLocationNumber>
+</entityIdentification>
+<transactionDateAndTime>
+<date>2003-10-16</date>
+<time timeZone="EDT">
+<value>10:03:33</value>
+</time>
+</transactionDateAndTime>
+<transactionType>XML</transactionType>
+<transactionStatusCode>SUCCEEDED</transactionStatusCode>
+</transactionInformation>
+<eanucc:catalogueItemConfirmation xmlns:eanucc="http://www.ean-ucc.org/schemas/1.3/eanucc" xmlns:uccnet="http://www.uccnet.org/schemas/2.2/uccnet" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" creationDate="2003-07-28T12:00:00.000-00:00" documentStatus="ORIGINAL" xsi:type="uccnet:CatalogueItemConfirmationType">        <catalogueItemConfirmationIdentification>         <uniqueCreatorIdentification>kw m3d cic003</uniqueCreatorIdentification>         <contentOwner>          <gln>0474636000008</gln>         </contentOwner>        </catalogueItemConfirmationIdentification>        <catalogueItemReference>         <gtin>00048822299912</gtin>         <dataSource>0488222000006</dataSource>         <targetMarket>          <targetMarketCountryCode>840</targetMarketCountryCode>         </targetMarket>        </catalogueItemReference>        <catalogueItemConfirmationState state="ACCEPTED">         <recipientDataPool>0474636000008</recipientDataPool>         <recipientGLN>0474636000008</recipientGLN>        </catalogueItemConfirmationState>        <uccnet:catalogueItemNotificationReference>         <uniqueCreatorIdentification>MERTON3 SUPPLY2 CIN 082303</uniqueCreatorIdentification>         <globalLocationNumber>          <gln>0488222000006</gln>         </globalLocationNumber>        </uccnet:catalogueItemNotificationReference>       </eanucc:catalogueItemConfirmation>
+</notificationDetail>
+</notification>
+</resultList>
+</subdocumentValid>
+</subdocumentValid>
+</acknowledgement>
+</acknowledge>
+</response>
+</body>
+</uccnet:envelope>

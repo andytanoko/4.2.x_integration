@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDependency name="Alert">
+  <Checker class-name="com.gridnode.gtas.server.alert.helpers.EntityDependencyChecker"
+           method-name="checkDependentAlertTriggersForAlert">
+    <Param type="java.lang.Long" getter-method="getUId"/>
+  </Checker>
+  <Checker class-name="com.gridnode.gtas.server.docalert.helpers.EntityDependencyChecker"
+           method-name="checkDependentTrackRecordsForAlert">
+    <Param type="java.lang.String" getter-method="getName"/>
+  </Checker>
+  <Checker class-name="com.gridnode.gtas.server.partnerfunction.helpers.EntityDependencyChecker"
+           method-name="checkDependentPartnerFunctionsForAlert">
+    <Param type="java.lang.Long" getter-method="getUId"/>
+  </Checker>
+  <Checker class-name="com.gridnode.pdip.base.userprocedure.helpers.EntityDependencyChecker"
+           method-name="checkDependentUserProceduresForAlert">
+    <Param type="java.lang.Long" getter-method="getUId"/>
+  </Checker>
+</EntityDependency>

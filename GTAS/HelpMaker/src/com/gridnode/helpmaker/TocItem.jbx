@@ -1,0 +1,13 @@
+[PropertyInfo]
+chapter,int,false,false, , ,false,<default>
+contentTarget,Vector,false,false, , ,false,<default>
+filename,String,false,false, , ,false,<default>
+image,String,false,false, , ,false,<default>
+target,String,false,false, , ,false,<default>
+text,String,false,false, , ,false,<default>
+url,String,false,false, , ,false,<default>
+[IconNames]
+
+
+
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-j2ee-engine SYSTEM "ejb-j2ee-engine.dtd">
+<ejb-j2ee-engine>
+	<enterprise-beans>
+		<enterprise-bean>
+			<ejb-name>Trigger</ejb-name>
+			<jndi-name>com.gridnode.gtas.server.partnerprocess.entities.ejb.ITriggerLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>ProcessMapping</ejb-name>
+			<jndi-name>com.gridnode.gtas.server.partnerprocess.entities.ejb.IProcessMappingLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>BizCertMapping</ejb-name>
+			<jndi-name>com.gridnode.gtas.server.partnerprocess.entities.ejb.IBizCertMappingLocalHome</jndi-name>
+			<entity-props/>
+		</enterprise-bean>
+	</enterprise-beans>
+</ejb-j2ee-engine>

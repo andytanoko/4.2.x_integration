@@ -1,0 +1,108 @@
+<html>
+<head>
+<title>11.4.1 To create a new web service </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>11.4.1 To create a new web service </h3>
+<p></p>
+<p><span>For own web service configuration, this functionality is used for managing web services that need to be access-controlled.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Go to Web Services tab. The Own Services list view page is displayed by default.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>To create own service, click Create WebService.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><img width='465' height='164' border='0' src='../images/image155.jpg'></p>
+<p><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>In the WebService detail view page, key in the following fields:</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Service Name</span>
+</b>
+</p>
+<p><span>Enter the logical name of the web service you want to create. The logical name should be entered preferably in the non-space delimited string, for example, </span>
+<span>Service1</span>
+<span>. Once done, the name will be referred in the HTTP requests to access the web services. The HTTP request must have the authorization profile for HTTP basic authentication of the partner. The authorization profile should contain the Partner ID (such as the username) and the authentication password assigned to the Partner. Using this HTTP request, you will be able to invoke the web service by providing URL of the following format:</span>
+</p>
+<p><span></span>
+</p>
+<p><b><u><span>http://&lt;gridtalk_ip:port&gt;/gridtalk/wsrouter/invoke?service=&lt;service_name&gt;</span>
+</u>
+</b>
+</p>
+<p><span>(or</span>
+ <b><u><span>https://&lt;gridtalk_ip:port&gt;/gridtalk/wsrouter/invoke?service=&lt;service_name&gt;</span>
+</u>
+</b>
+ <span>for SSL connection )</span>
+</p>
+<pre><span></span>
+</pre>
+<p><b><span>WSDL URL</span>
+</b>
+</p>
+<p><span>Enter the URL so that you can get the WSDL file of the web service. For example: </span>
+<b><u><span>http://mywebservice.hello.com/HelloService.asmx?wsdl</span>
+</u>
+</b>
+<span>, where</span>
+<span>by</span>
+<span> your partner’s web service client would access the WSDL of your web service “Hello</span>
+<span>Service</span>
+<span>” by providing URL of the following format:</span>
+</p>
+<p></p>
+<p><b><u><span>http://&lt;gridtalk_ip:port&gt;/gridtalk/wsrouter/invoke?service=</span>
+</u>
+</b>
+<b><u><span>HelloService</span>
+</u>
+</b>
+</p>
+<p><span>(or</span>
+ <b><u><span>https://&lt;gridtalk_ip:port&gt;/gridtalk/wsrouter/invoke?service=</span>
+</u>
+</b>
+<b><u><span>HelloService</span>
+</u>
+</b>
+ <span>for SSL connection )</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>End Point</span>
+</b>
+</p>
+<p><span>Enter the actual Endpoint URL of the web service. For example,</span>
+</p>
+<p><b><u><span>http://mywebservice.hello.com/HelloService.asmx</span>
+</u>
+</b>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>Once you have finished completing the fields, click Save WebService. The new web service will be added to the Own Services list view page. To modify the details of the selected web service, just click on the Edit <img width='16' height='16' border='0' src='../images/image013.gif'>icon for the record. To delete the selected web service, tick the checkbox against the record and click Delete WebService.</span>
+</p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

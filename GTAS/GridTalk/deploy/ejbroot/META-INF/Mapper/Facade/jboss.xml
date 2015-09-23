@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+	<secure>false</secure>
+	<resource-managers/>
+	<enterprise-beans>
+		<session>
+			<ejb-name>GridTalkMappingManager</ejb-name>
+			<jndi-name>com.gridnode.gtas.server.mapper.facade.ejb.IGridTalkMappingManagerHome</jndi-name>
+			<!--clustered>${node.clustered:False}</clustered--> <!-- #69 TWX 02082008 Remove it to prevent lookup error in node 2 if we are shutting down node 2 due to container will notify all clustered ejb no to receive any more ejb call -->
+		</session>
+	</enterprise-beans>
+</jboss>

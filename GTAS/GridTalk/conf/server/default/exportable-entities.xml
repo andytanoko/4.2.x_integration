@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExportableEntities>
+	<Entity Name="Alert">
+		<Selectable>true</Selectable>
+		<Map>conf/default/pdip/app/alert/export-alert.map</Map>
+	</Entity>
+	<Entity Name="AlertType">
+		<Selectable>false</Selectable>
+		<Map>conf/default/pdip/app/alert/export-alerttype.map</Map>
+	</Entity>
+	<Entity Name="Action">
+		<Selectable>true</Selectable>
+		<Map>conf/default/pdip/app/alert/export-action.map</Map>
+	</Entity>
+	<Entity Name="AlertCategory">
+		<Selectable>true</Selectable>
+		<Map>conf/default/pdip/app/alert/export-alertcategory.map</Map>
+	</Entity>
+	<Entity Name="AlertTrigger">
+		<Selectable>true</Selectable>
+		<Map>conf/default/export-alerttrigger.map</Map>
+	</Entity>
+	<Entity Name="MessageTemplate">
+		<Selectable>true</Selectable>
+		<Map>conf/default/pdip/app/alert/export-messagetemplate.map</Map>
+	</Entity>
+	<!--Entity Name="BizCertMapping">
+		<Selectable>true</Selectable>
+		<Map>conf/default/export-documenttype.map</Map>
+	</Entity-->
+	<Entity Name="DocumentType">
+		<Selectable>true</Selectable>
+		<Map>conf/default/export-documenttype.map</Map>
+	</Entity>
+	<Entity Name="AS2DocTypeMapping">
+		<Selectable>true</Selectable>
+		<Map>conf/default/export-as2doctypemapping.map</Map>
+	</Entity>
+	<!--Entity Name="Feature">
+		<Selectable>true</Selectable>
+		<Map>conf/default/export-documenttype.map</Map>
+	</Entity-->
+	<Entity Name="FileType">
+		<Selectable>true</Selectable>
+		<Map>conf/default/export-filetype.map</Map>
+	</Entity>
+	<Entity Name="GridTalkMappingRule">
+		<Selectable>true</Selectable>
+		<Map>conf/default/export-gridtalkmappingrule.map</Map>
+	</Entity>
+	<Entity Name="MappingFile">
+		<Selectable>true</Selectable>
+		<Map>conf/default/pdip/app/mapper/export-mappingfile.map</Map>
+	</Entity>
+	<Entity Name="Partner">
+		<Selectable>true</Selectable>
+		<Map>conf/default/pdip/app/partner/export-partner.map</Map>
+	</Entity>
+	<Entity Name="PartnerGroup">
+		<Selectable>true</Selectable>
+		<Map>conf/default/pdip/app/partner/export-partnergroup.map</Map>
+	</Entity>
+	<Entity Name="PartnerType">
+		<Selectable>true</Selectable>
+		<Map>conf/default/pdip/app/partner/export-partnertype.map</Map>
+	</Entity>
+	<Entity Name="PartnerFunction">
+		<Selectable>true</Selectable>
+		<Map>conf/default/export-partnerfunction.map</Map>
+	</Entity>
+	<Entity Name="Port">
+		<Selectable>true</Selectable>
+		<Map>conf/default/export-port.map</Map>
+	</Entity>
+	<Entity Name="UserProcedure">
+		<Selectable>true</Selectable>
+		<Map>conf/default/pdip/base/userprocedure/export-userprocedure.map</Map>
+	</Entity>
+	<Entity Name="ProcedureDefFile">
+		<Selectable>true</Selectable>
+		<Map>conf/default/pdip/base/userprocedure/export-proceduredeffile.map</Map>
+	</Entity>
+	<Entity Name="ProcessDef">
+		<Selectable>true</Selectable>
+		<Map>conf/default/pdip/app/rnif/export-processdef.map</Map>
+	</Entity>
+	<Entity Name="ProcessMapping">
+		<Selectable>true</Selectable>
+		<Map>conf/default/export-processmapping.map</Map>
+	</Entity>
+	<Entity Name="Rfc">
+		<Selectable>true</Selectable>
+		<Map>conf/default/export-rfc.map</Map>
+	</Entity>
+	<!--Entity Name="Role">
+		<Selectable>true</Selectable>
+		<Map>conf/default/export-rfc.map</Map>
+	</Entity-->
+	<Entity Name="Trigger">
+		<Selectable>true</Selectable>
+		<Map>conf/default/export-trigger.map</Map>
+	</Entity>
+	<Entity Name="ResponseTrackRecord">
+		<Selectable>true</Selectable>
+		<Map>conf/default/export-responsetrackrecord.map</Map>
+	</Entity>
+	<Entity Name="ReminderAlert">
+		<Selectable>false</Selectable>
+		<Map>conf/default/export-reminderalert.map</Map>
+	</Entity>
+	<Entity Name="JmsDestination">
+		<Selectable>true</Selectable>
+		<Map>conf/default/pdip/app/alert/export-jmsdestination.map</Map>
+	</Entity>
+	<Entity Name="ArchiveMetaInfo">
+		<Selectable>true</Selectable>
+		<Map>conf/default/export-scheduledArchiveTask.map</Map>
+	</Entity>
+</ExportableEntities>

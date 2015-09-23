@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" output="testclasses" path="test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-AppInterface"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-ContextData"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-GWFBase"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-Time"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Base-Worklist"/>
+	<classpathentry kind="var" path="J2EE_HOME/lib/j2ee.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/PDIPFramework/reqlib/junit-3.7.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Framework"/>
+	<classpathentry kind="var" path="VIEW_HOME/PDIPAppServices/reqlib/sixpath.jar"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>

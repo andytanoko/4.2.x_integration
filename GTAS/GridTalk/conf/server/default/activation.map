@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.0.7 NT (http://www.xmlspy.com) by Chee Seng Toh (GridNode Pte Ltd) -->
+<!-- 
+ ****************************************************************************
+ * Date           Author                  Changes
+ ****************************************************************************
+ * Oct 11 2002    Neo Sok Lay             Created.
+-->
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for GridNodeActivation  -->
+	<class name="com.gridnode.gtas.server.activation.model.GridNodeActivation">
+		<map-to xml="GridNodeActivation"/>
+		<field name="activateReason" type="string" required="true">
+			<xml name="ActivateReason" node="element"/>
+		</field>
+		<field name="requestDetails" type="com.gridnode.gtas.server.enterprise.sync.models.SyncGridNode" required="true">
+			<xml name="RequestDetails" node="element"/>
+		</field>
+		<field name="approveDetails" type="com.gridnode.gtas.server.enterprise.sync.models.SyncGridNode" required="false">
+			<xml name="ApproveDetails" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for SearchGridNodeResults  -->
+	<class name="com.gridnode.gtas.server.activation.model.SearchGridNodeResults">
+		<map-to xml="GridNodeGroup"/>
+		<field name="gridNodes" type="com.gridnode.gtas.server.enterprise.sync.models.SyncGridNode" collection="array">
+			<xml name="GridNode" node="element"/>
+		</field>
+	</class>
+</mapping>

@@ -1,0 +1,59 @@
+
+a  {color:ffffff; text-decoration: none;}
+a: hover {color: ffffff; text-decoration: underline;}
+td {color:3b3b3b; font-family: verdana; font-size:11;}
+font {font-family: verdana; font-size:11;}
+fieldset {color:3B3B3B; font-family: verdana; font-size:11;}
+
+
+.select {
+	font-family : Verdana;
+	border : thin groove;
+	background-color : #eeeeee;
+	font-weight : normal;
+	font-size : 11px;
+       }
+
+.text {
+	font-family : Verdana;
+	border : thin groove;
+	background-color : #eeeeee;
+	font-weight : normal;
+	font-size : 11px;
+}
+
+.radio {
+ 	background-color: none;
+       } 
+
+
+.button{
+	font-size: 11px;
+	font-family: Verdana;
+	font-weight: bold;
+	background-color: #eeeeee;
+	border-style: groove;
+	color : #515152;
+       }
+
+.checkbox {
+	border : none;
+	background : transparent;
+}
+TD.Heading {
+	BACKGROUND-COLOR=B2BBE5;
+	border:solid windowtext .5pt;
+	border-color:B2BBE5;
+	font-weight : Bold;
+
+}
+TD.Normal
+{
+border:solid windowtext .5pt;
+border-color:B2BBE5;
+border-top: 0;
+
+}
+
+
+</style>

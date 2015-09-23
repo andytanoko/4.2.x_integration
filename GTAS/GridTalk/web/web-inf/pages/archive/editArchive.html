@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head id="xhtml_head">
+    <title id="title">lbGridTalk</title>
+    <base href="file:///C:\views\i00054_GT_2.1_DBArchive\GTAS\GridTalk\web/gt.css" id="base_tag"/>
+    <link id="xhtml_stylesheet" rel="stylesheet" href="gt.css" type="text/css"/>
+    <script id="include_dateTimePicker" language="JavaScript" src="scripts/dateTimePicker.js"><!----></script>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="save"/>
+        <input type="hidden" name="divertTo"/>
+              
+        <h4 id="heading">lbScheduledArchive</h4>
+        <span id="edit_message">
+          lbMessage
+        </span>
+        <br/><br/>
+        <table id="archive_details" border="0" width="100%">
+         <tr id="archiveId_details">
+            <td id="archiveId_label" class="fieldlabel" nowrap="nowrap">
+              lbArchiveId
+            </td>
+            <td>
+				<input type="text" id="archiveId_value" name="archiveId"/>
+            </td>
+            <td id="archiveId_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="archiveDescription_details">
+            <td id="archiveDescription_label" class="fieldlabel" nowrap="nowrap">
+              lbDescription
+            </td>
+            <td>
+              <input type="text" id="archiveDescription_value" name="archiveDescription"/>
+            </td>
+            <td id="archiveDescription_error">
+              &nbsp;
+            </td>
+          </tr>
+		  <tr id="archiveType_details">
+            <td id="archiveType_label" class="fieldlabel" nowrap="nowrap">
+              lbArchiveType
+            </td>
+            <td>
+              <select id="archiveType_value" size="1" name="archiveType" onchange="serverRefresh();">
+                <option>&nbsp;</option>
+              </select>
+            </td>
+            <td id="archiveType_error">
+              &nbsp;
+            </td>
+          </tr>
+		  <tr id="isEnableSearchArchived_details">
+            <td id="isEnableSearchArchived_label" class="fieldlabel" nowrap="nowrap">
+              lbenableSearchArchived
+            </td>
+            <td>
+              <input type="checkbox" id="isEnableSearchArchived_value" name="isEnableSearchArchived" value="true"/>
+            </td>
+            <td id="isEnableSearchArchived_error">
+              &nbsp;
+            </td>
+          </tr>
+		  <tr id="isEnableRestoreArchived_details">
+            <td id="isEnableRestoreArchived_label" class="fieldlabel" nowrap="nowrap">
+              lbenableRestoreArchived
+            </td>
+            <td>
+              <input type="checkbox" id="isEnableRestoreArchived_value" name="isEnableRestoreArchived" value="true"/>
+            </td>
+            <td id="isEnableRestoreArchived_error">
+              &nbsp;
+            </td>
+          </tr>
+		   <tr id="optionMsg_details" >
+            <td colspan="3" valign="top">
+              <span id="optionMsg">
+				lbOptionMsg
+			  </span >
+            </td >
+           </tr >
+		   
+		   <tr id="isArchiveFrequencyOnce_details">
+            <td id="isArchiveFrequencyOnce_label" class="fieldlabel" nowrap="nowrap">
+              lbisArchiveFrequencyOnce
+            </td>
+            <td>
+              <input type="checkbox" id="isArchiveFrequencyOnce_value" name="isArchiveFrequencyOnce" value="true" onclick="serverRefresh();"/>
+            </td>
+            <td id="isArchiveFrequencyOnce_error">
+              &nbsp;
+            </td>
+          </tr>
+		   
+		  <tr id="archiveRecordOlderThan_details">
+            <td id="archiveRecordOlderThan_label" class="fieldlabel" nowrap="nowrap">
+              lbarchiveRecordOlderThan
+            </td>
+            <td>
+              <input type="text" id="archiveRecordOlderThan_value" name="archiveRecordOlderThan"/>
+            </td>
+            <td id="archiveRecordOlderThan_error">
+              &nbsp;
+            </td>
+          </tr>
+		   
+		  <tr id="optionMsg2_details" >
+            <td colspan="3" valign="top">
+              <span id="optionMsg2">
+				lbOptionMsg2
+			  </span >
+            </td >
+           </tr > 
+		   
+          <tr id="fromStartDate_details">
+            <td id="fromStartDate_label" class="fieldlabel" nowrap="nowrap">
+              lbFromDate
+            </td>
+            <td>
+              <input type="text" id="fromStartDate_value" name="fromStartDate"/>
+              <a href="javascript:NewCal('fromStartDate_value','yyyyMMdd');">
+                 <img src="images/actions/cal.gif" width="16" height="16" border="0" alt="Pick"/>
+              </a>
+            </td>
+            <td id="fromStartDate_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="fromStartTime_details">
+            <td id="fromStartTime_label" class="fieldlabel" nowrap="nowrap">
+              lbFromTime
+            </td>
+            <td>
+              <input type="text" id="fromStartTime_value" name="fromStartTime"/>
+            </td>
+            <td id="fromStartTime_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="toStartDate_details">
+            <td id="toStartDate_label" class="fieldlabel" nowrap="nowrap">
+              lbToDate
+            </td>
+            <td>
+              <input type="text" id="toStartDate_value" name="toStartDate"/>
+              <a href="javascript:NewCal('toStartDate_value','yyyyMMdd');">
+                 <img src="images/actions/cal.gif" width="16" height="16" border="0" alt="Pick"/>
+              </a>
+            </td>
+            <td id="toStartDate_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="toStartTime_details">
+            <td id="toStartTime_label" class="fieldlabel" nowrap="nowrap">
+              lbToTime
+            </td>
+            <td>
+              <input type="text" id="toStartTime_value" name="toStartTime"/>
+            </td>
+            <td id="toStartTime_error">
+              &nbsp;
+            </td>
+          </tr>
+		  <tr id="partnerIDForArchive_details">
+            <td id="partnerIDForArchive_label" class="fieldlabel" nowrap="nowrap" valign="top">
+              lbPartner
+            </td>
+            <td colspan="2">
+              <div id="partnerIDForArchive_value" class="multiselector">
+                Multiselector(allowsOrdering)
+              </div>
+            </td>
+          </tr>
+          <tr id="processDefNameList_details">
+            <td id="processDefNameList_label" class="fieldlabel" nowrap="nowrap" valign="top">
+              lbProcessDef
+            </td>
+            <td colspan="2">
+              <div id="processDefNameList_value" class="multiselector">
+                Multiselector(allowsOrdering)
+              </div>
+            </td>
+          </tr>
+          <tr id="isIncludeIncomplete_details">
+            <td id="isIncludeIncomplete_label" class="fieldlabel" nowrap="nowrap">
+              lbIncludeIncomplete
+            </td>
+            <td>
+              <select id="isIncludeIncomplete_value" size="1" name="isIncludeIncomplete">
+                <option>&nbsp;</option>
+              </select>
+            </td>
+            <td id="isIncludeIncomplete_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="folderList_details">
+            <td id="folderList_label" class="fieldlabel" nowrap="nowrap">
+              lbFolder
+            </td>
+            <td colspan="2">
+              <div id="folderList_value" class="multiselector">
+                Multiselector(allowsOrdering)
+              </div>
+            </td>
+          </tr>
+          <tr id="documentTypeList_details">
+            <td id="documentTypeList_label" class="fieldlabel" nowrap="nowrap">
+              lbDocType
+            </td>
+            <td colspan="2">
+              <div id="documentTypeList_value" class="multiselector">
+                Multiselector(allowsOrdering)
+              </div>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

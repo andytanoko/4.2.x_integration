@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>BorlandXML</fullname>
+  <class>
+    <path>[../../reqLib/borlandxml.jar]</path>
+    <path>[../../reqLib/xerces.jar]</path>
+    <path>[../../reqLib/xml4j.jar]</path>
+    <path>[../../reqLib/jdom.jar]</path>
+  </class>
+</library>
+

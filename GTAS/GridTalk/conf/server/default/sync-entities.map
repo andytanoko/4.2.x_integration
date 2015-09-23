@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ ****************************************************************************
+ * Date           Author                  Changes
+ ****************************************************************************
+ * Oct 01 2002    Neo Sok Lay             Created.
+ * Dec 31 2003    Neo Sok Lay             Add FlowControlInfo for SyncChannel.
+ *                                        Remove Zip & split settings from SyncPackagingInfo.
+-->
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for SyncGridNode  -->
+	<class name="com.gridnode.gtas.server.enterprise.sync.models.SyncGridNode">
+		<map-to xml="GridNode"/>
+		<field name="gridnode.ID" type="string" required="true">
+			<xml name="nodeId" node="attribute"/>
+		</field>
+		<field name="gridnode.name" type="string">
+			<xml name="name" node="attribute"/>
+		</field>
+		<field name="gridnode.category" type="string">
+			<xml name="category" node="attribute"/>
+		</field>
+		<field name="coyProfile.coyName" type="string">
+			<xml name="Company" node="element"/>
+		</field>
+		<field name="businessEntities" type="com.gridnode.gtas.server.enterprise.sync.models.SyncBusinessEntity" collection="array">
+			<xml name="BusinessEntity" node="element"/>
+		</field>
+		<field name="gridnode.activationReason" type="string">
+			<xml name="ActivateReason" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for SyncBusinessEntity  -->
+	<class name="com.gridnode.gtas.server.enterprise.sync.models.SyncBusinessEntity">
+		<map-to xml="BusinessEntity"/>
+		<field name="businessEntity.busEntId" type="string">
+			<xml name="Id" node="attribute"/>
+		</field>
+		<field name="businessEntity.description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="businessEntity.whitePage" type="com.gridnode.pdip.app.bizreg.model.WhitePage">
+			<xml name="WhitePage" node="element"/>
+		</field>
+		<field name="businessEntity.deleted" type="boolean" get-method="isDeleted" set-method="setDeleted">
+			<xml name="deleted" type="boolean" node="attribute"/>
+		</field>
+		<field name="businessEntity.enterpriseId" type="string" required="false">
+			<xml name="EnterpriseId" node="element"/>
+		</field>
+		<field name="businessEntity.state" type="integer" required="false">
+			<xml name="State" node="element"/>
+		</field>
+		<field name="businessEntity.publishable" type="boolean" get-method="isPublishable" set-method="setPublishable" required="false">
+			<xml name="publishable" type="boolean" node="element"/>
+		</field>
+		<field name="businessEntity.syncToServer" type="boolean" get-method="isSyncToServer" set-method="setSyncToServer" required="false">
+			<xml name="syncToServer" type="boolean" node="element"/>
+		</field>
+		<field name="channels" type="com.gridnode.gtas.server.enterprise.sync.models.SyncChannel" collection="array">
+			<xml name="Channel" node="element"/>
+		</field>
+		<field name="businessEntity.domainIdentifiers" type="com.gridnode.pdip.app.bizreg.model.DomainIdentifier" collection="collection">
+			<xml name="DomainIdentifier" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for SyncChannel  -->
+	<class name="com.gridnode.gtas.server.enterprise.sync.models.SyncChannel">
+		<map-to xml="ChannelInfo"/>
+		<field name="channel.name" type="string">
+			<xml name="name" node="attribute"/>
+		</field>
+		<field name="channel.referenceId" type="string">
+			<xml name="referenceId" node="attribute"/>
+		</field>
+		<field name="channel.description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="commProfile" type="com.gridnode.gtas.server.enterprise.sync.models.SyncCommInfo">
+			<xml name="CommProfile" node="element"/>
+		</field>
+		<field name="channel.tptProtocolType" type="string">
+			<xml name="TptProtocolType" node="element"/>
+		</field>
+		<field name="packagingProfile" type="com.gridnode.gtas.server.enterprise.sync.models.SyncPackagingInfo">
+			<xml name="PackagingProfile" node="element"/>
+		</field>
+		<field name="securityProfile" type="com.gridnode.gtas.server.enterprise.sync.models.SyncSecurityInfo">
+			<xml name="SecurityProfile" node="element"/>
+		</field>
+		<field name="channel.isMaster" type="boolean" set-method="setMaster" get-method="isMaster">
+			<xml name="IsMaster" node="element"/>
+		</field>
+		<field name="channel.flowControlInfo" type="com.gridnode.pdip.app.channel.model.FlowControlInfo">
+			<xml name="FlowControl" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for SyncCommInfo  -->
+	<class name="com.gridnode.gtas.server.enterprise.sync.models.SyncCommInfo">
+		<map-to xml="CommInfo"/>
+		<field name="commInfo.name" type="string">
+			<xml name="name" node="attribute"/>
+		</field>
+		<field name="commInfo.refId" type="string">
+			<xml name="RefId" node="attribute"/>
+		</field>
+		<field name="commInfo.description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<!--field name="commInfo.host" type="string">
+			<xml name="Host" node="element"/>
+		</field>
+		<field name="commInfo.port" type="integer">
+			<xml name="Port" node="element"/>
+		</field-->
+		<field name="commInfo.protocolType" type="string">
+			<xml name="ProtocolType" node="element"/>
+		</field>
+		<!--field name="commInfo.protocolVersion" type="string">
+			<xml name="ProtocolVersion" node="element"/>
+		</field>
+		<field name="commInfo.protocolDetailItems" collection="collection" type="com.gridnode.pdip.framework.db.KeyValuePair">
+			<xml name="ProtocolDetailItem" node="element"/>
+		</field-->
+		<field name="commInfo.isDefaultTpt" type="boolean" set-method="setDefaultTpt" get-method="isDefaultTpt">
+			<xml name="IsDefaultTpt" node="element"/>
+		</field>
+		<field name="commInfo.tptImplVersion" type="string">
+			<xml name="TptImplVersion" node="element"/>
+		</field>
+		<field name="commInfo.uRL" type="string">
+			<xml name="URL" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for SyncPackagingInfo  -->
+	<class name="com.gridnode.gtas.server.enterprise.sync.models.SyncPackagingInfo">
+		<map-to xml="PackagingInfo"/>
+		<field name="packagingInfo.name" type="string">
+			<xml name="name" node="attribute"/>
+		</field>
+		<field name="packagingInfo.referenceId" type="string">
+			<xml name="RefId" node="attribute"/>
+		</field>
+		<field name="packagingInfo.description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="packagingInfo.envelope" type="string">
+			<xml name="Envelope" node="element"/>
+		</field>
+    <!--
+		<field name="packagingInfo.isZip" type="boolean" set-method="setZip" get-method="isZip">
+			<xml name="IsZip" node="element"/>
+		</field>
+		<field name="packagingInfo.zipThreshold" type="integer">
+			<xml name="ZipThreshold" node="element"/>
+		</field>
+    -->
+		<field name="packagingInfo.pkgInfoExtension" type="com.gridnode.pdip.app.channel.model.PackagingInfoExtension">
+			<xml name="Extension" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for SyncSecurityInfo  -->
+	<class name="com.gridnode.gtas.server.enterprise.sync.models.SyncSecurityInfo">
+		<map-to xml="SecurityInfo"/>
+		<field name="securityInfo.name" type="string">
+			<xml name="name" node="attribute"/>
+		</field>
+		<field name="securityInfo.referenceId" type="string">
+			<xml name="RefId" node="attribute"/>
+		</field>
+		<field name="securityInfo.description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="securityInfo.encryptionType" type="string">
+			<xml name="EncryptionType" node="element"/>
+		</field>
+		<field name="securityInfo.encryptionLevel" type="integer">
+			<xml name="EncryptionLevel" node="element"/>
+		</field>
+		<field name="securityInfo.signatureType" type="string">
+			<xml name="SignatureType" node="element"/>
+		</field>
+		<field name="securityInfo.digestAlgorithm" type="string">
+			<xml name="DigestAlgorithm" node="element"/>
+		</field>
+		<field name="encryptionCert" type="com.gridnode.gtas.server.enterprise.sync.models.SyncCertificate">
+			<xml name="EncryptionCert" node="element"/>
+		</field>
+		<field name="securityInfo.encryptionAlgorithm" type="string">
+			<xml name="EncryptionAlgorithm" node="element"/>
+		</field>
+	</class>
+	<!--  Mapping for SyncCertificate  -->
+	<class name="com.gridnode.gtas.server.enterprise.sync.models.SyncCertificate">
+		<map-to xml="Certificate"/>
+		<field name="cert.ID" type="integer">
+			<xml name="ID" node="attribute"/>
+		</field>
+		<field name="cert.certName" type="string">
+			<xml name="CertName" node="element"/>
+		</field>
+		<field name="issuerName" type="bytes">
+			<xml name="IssuerName" node="element"/>
+		</field>
+		<field name="serialNumber" type="bytes">
+			<xml name="SerialNumber" node="element"/>
+		</field>
+		<field name="certBytes" type="bytes">
+			<xml name="CertBytes" node="element"/>
+		</field>
+		<field name="cert.isMaster" type="boolean" set-method="setMaster" get-method="isMaster">
+			<xml name="IsMaster" node="element"/>
+		</field>
+	</class>
+</mapping>

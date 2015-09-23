@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>elixir-4.0</fullname>
+  <class>
+    <path>[../jar/core/elixir-report-4.0.jar]</path>
+    <path>[../jar/core/endorsed/xalan.jar]</path>
+    <path>[../jar/core/endorsed/xerces.jar]</path>
+    <path>[../../../../../../ElixirReportPro-4.0/core/license.jar]</path>
+  </class>
+</library>
+

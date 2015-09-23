@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="UserProcedure/ATX/src"/>
+	<classpathentry kind="src" path="UserProcedure/Util/src"/>
+	<classpathentry kind="src" path="UserProcedure/XMLProcessor/src"/>
+	<classpathentry kind="src" path="UserProcedure/ATX/Test/src"/>
+	<classpathentry kind="lib" path="Oracle/appserver/jboss-4.0.5.GA/server/default/lib/ojdbc14_g.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="UserProcedure/ATX/jar/reqlib/framework.jar"/>
+	<classpathentry kind="lib" path="UserProcedure/ATX/jar/reqlib/gtas-document.jar"/>
+	<classpathentry kind="lib" path="UserProcedure/ATX/jar/reqlib/gtvan-at-common.jar"/>
+	<classpathentry kind="lib" path="UserProcedure/ATX/jar/reqlib/gtvan-httpbc-common.jar"/>
+	<classpathentry kind="lib" path="UserProcedure/ATX/jar/reqlib/gtvan-util.jar"/>
+	<classpathentry kind="lib" path="UserProcedure/XMLProcessor/jar/reqlib/gtas-mapper.jar"/>
+	<classpathentry kind="var" path="J2EE_HOME/lib/j2ee.jar"/>
+	<classpathentry kind="var" path="JBOSS_HOME/server/default/lib/log4j.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Framework"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/GridTalk"/>
+	<classpathentry kind="lib" path="UserProcedure/ATX/jar/reqlib/base-xml.jar"/>
+	<classpathentry kind="lib" path="UserProcedure/ATX/jar/reqlib/gn-convertor-1.1.2.jar"/>
+	<classpathentry kind="lib" path="UserProcedure/ATX/jar/reqlib/gn-log-1.0.5.jar"/>
+	<classpathentry kind="lib" path="UserProcedure/ATX/jar/reqlib/gn-xml-1.1.1.jar"/>
+	<classpathentry kind="lib" path="UserProcedure/ATX/jar/reqlib/jdom-1.0.jar"/>
+	<classpathentry kind="lib" path="UserProcedure/ATX/jar/reqlib/saxon-6.5.5.jar"/>
+	<classpathentry kind="lib" path="UserProcedure/ATX/jar/reqlib/xerces-2.7.1.jar"/>
+	<classpathentry kind="lib" path="UserProcedure/ATX/jar/reqlib/gn-ftpclient.jar"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>

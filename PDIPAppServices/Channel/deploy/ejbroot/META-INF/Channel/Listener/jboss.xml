@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+  <enterprise-beans>
+    <message-driven>
+      <ejb-name>ChannelReceiveListenerMessageMDB</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>queue/fromRouter</destination-jndi-name>
+    </message-driven>
+    <message-driven>
+      <ejb-name>ChannelSendListenerMessageMDB</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>queue/channelSend</destination-jndi-name>
+    </message-driven>
+    <message-driven>
+      <ejb-name>ChannelFeedBackListenerMessageMDB</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>queue/transportFeedback</destination-jndi-name>
+    </message-driven>
+    <message-driven>
+      <ejb-name>EntityChangeListenerMDB_Channel</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>topic/entityEventTopic</destination-jndi-name>
+    </message-driven>
+  </enterprise-beans>
+</jboss>

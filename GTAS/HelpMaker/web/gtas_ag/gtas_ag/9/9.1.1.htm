@@ -1,0 +1,155 @@
+<html>
+<head>
+<title>9.1.1 To create a new partner function </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>9.1.1 To create a new partner function </h3>
+<p><span></span>
+</p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Click Process.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>Click Partner Functions. The Partner Functions list view page is displayed. The table list shows the partner function ID, its purpose and how it is triggered.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>To create a new partner function, click Create Partner Function. The screen appears.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><img width='410' height='188' border='0' src='../images/image098.jpg'></p>
+<p align='center'><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>Enter Id. This field identifies the partner function you are creating. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 5.<span> </span>
+</span>
+<span>Enter Description. This field gives the descriptive purpose of that partner function.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 6.<span> </span>
+</span>
+<span>Select Trigger On. This field allows you to select when that partner function can be triggered. The available methods of triggering a particular partner function are Import, Manual Export, Manual Send, and Receive.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Import – this partner function can only be triggered on import of a document. </span>
+</p>
+<p><span>Manual Export – this partner function can only be triggered on manual export of a document. </span>
+</p>
+<p><span>Manual Send – this partner function can only be triggered on a manual send of a document. </span>
+</p>
+<p><span>Receive – this partner function can only be triggered on receiving a document. </span>
+</p>
+<p><span></span>
+</p>
+<p><a name='_Ref134011950'><span>Step 7.<span> </span>
+</span>
+<span>Next go to the Workflow Activities section. To create a workflow activity, click Create Workflow Activity. The screen appears. Enter the following fields for the General section.</span>
+</a>
+</p>
+<p><span></span>
+</p>
+<p align='center'><img width='397' height='197' border='0' src='../images/image099.jpg'></p>
+<p align='center'><span></span>
+</p>
+<p><b><span>Description:</span>
+</b>
+</p>
+<p><span>This field gives the descriptive purpose of that partner function. This field is not enabled for entry.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Activity Type:</span>
+</b>
+</p>
+<p><span>This field allows you to configure one or more workflow activities in the partner function.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 8.<span> </span>
+</span>
+<span>Next proceed to the Suspend section to enter the following fields:</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Dispatch Interval (sec):</span>
+</b>
+</p>
+<p><span>This field allows you to specify the interval after which you can resume the suspended workflow activities.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Dispatch Count:</span>
+</b>
+</p>
+<p><span>This field allows you to specify the number of workflow activities to resume at a time.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The ‘Suspend’ options allow workflow processing to be suspended for a configurable amount of time before continuation. This feature is useful under situations of heavy load e.g. large amount of concurrent incoming documents and there's need to regulate the concurrent execution of workflow processes by limiting the number of concurrent execution of the same workflow activity at any instant. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>An example of usage is to suspend the Export of incoming RosettaNet documents till a later dispatch time, giving resources for processing the return of the RosettaNet Receipt Acknowledgements to the sender. In this case, in the &quot;;Exit to Export&quot;; (or Exit to Port) activity, a Dispatch Interval can be configured to force the processing to proceed several seconds later. This relinquishes resources to another workflow process, which is started for sending RosettaNet Receipt Acknowledgements. The Dispatch Count controls the maximum number of suspended &quot;;Exit to Export&quot;; activities that will be dispatched at each dispatch time. </span>
+</p>
+<p><span></span>
+</p>
+<p><a name='_Ref134011955'><span>Step 9.<span> </span>
+</span>
+<span>Click Save Workflow Activity(s) to save the Workflow Activity.</span>
+</a>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 10.<span> </span>
+</span>
+<span>To add more workflow activities, repeat Step 7 through Step 9. To modify a Workflow Activity, click the Edit button<img width='16' height='16' border='0' src='../images/image013.gif'> against the Workflow Activity you want to change. To delete a Workflow Activity, tick the checkbox for the Workflow Activity and click Delete Workflow Activity.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 11.<span> </span>
+</span>
+<span>To change the order of the workflow activities (this affects the sequence of execution of the workflow), tick the checkbox for the workflow activities to change order, and click the Up or Down accordingly.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 12.<span> </span>
+</span>
+<span>Click Save Partner Function. The newly created partner function will be displayed in the Partner Functions view list page.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 13.<span> </span>
+</span>
+<span>To edit the existing or current partner function, click on the Edit button <img width='16' height='16' border='0' src='../images/image013.gif'></span>
+<span></span>
+<span>next to the partner function you have selected. </span>
+<span>Update the entries of the partner function as necessary. Click Save Partner Function.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 14.<span> </span>
+</span>
+<span>To delete the existing or current partner function, select the check box of the partner function you want to delete. Click Delete Partner Functions. The selected partner function will be removed from the Partner Functions list.</span>
+</p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

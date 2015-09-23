@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  Log4j Configuration                                                  -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<!--
+log4j.category.GN.HTTPBC=DEBUG, V
+log4j.category.GN.Util=DEBUG, V
+log4j.appender.V=com.gridnode.pdip.framework.log.JbossRollingFileZipAppender
+log4j.appender.V.File=${user.dir}/jboss-4.0.5.GA/bin/gtvan/logs/gtvan.log
+log4j.appender.V.layout=org.apache.log4j.PatternLayout
+log4j.appender.V.layout.ConversionPattern= [%d{dd:MM:yy-HH:mm:ss,SSS}] [%5p:%c] [%t] %m%n 
+log4j.appender.V.MaxFileSize=1MB
+log4j.appender.V.MaxBackupIndex=10
+log4j.appender.V.SafeLog=-1
+log4j.appender.V.Append=true
+-->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+   <!-- Zip file rolling appender -->
+   <appender name="gtvan-r" class="com.gridnode.pdip.framework.log.JbossRollingFileZipAppender">
+     <param name="File" value="${applog.home}/gtvan/gtvan.log"/>
+     <param name="MaxFileSize" value="1MB"/>
+     <param name="MaxBackupIndex" value="10"/>
+     <param name="SafeLog" value="-1"/>
+     <param name="Append" value="true"/>
+     <param name="Threshold" value="DEBUG"/>
+     <param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm"/>
+     <layout class="org.apache.log4j.PatternLayout">
+       <param name="ConversionPattern" value="[%d{dd:MM:yy-HH:mm:ss,SSS}][%t][%5p][%c][%X{GnErrorCode}]%m%n"/>
+     </layout>	    
+   </appender>
+
+   <!--
+      SNMPv1 trap appender
+      Instructions to enable sending of SNMP traps from GTAS
+      1.	Configure the following as required:
+      		ManagementHost					: The URL/IP of the SNMP NMS listening to the traps.
+      		ManagementHostTrapListenPort	: Port number of the SNMP NMS listening to the traps.
+	  2.	Uncomment the appender block below.
+	  3.	Uncomment the logger block with gts-snmp appender-ref
+   -->
+   <!--
+   <appender name="gtvan-snmp" class="org.apache.log4j.ext.SNMPTrapAppender">
+      <param name="ImplementationClassName" value="org.apache.log4j.ext.JoeSNMPTrapSender"/>
+	  <param name="ManagementHost" value="127.0.0.1"/>
+	  <param name="ManagementHostTrapListenPort" value="162"/>
+	  <param name="EnterpriseOID" value="1.3.6.1.4.1.27955.0"/>
+	  <param name="LocalIPAddress" value="${host.id}"/>
+	  <param name="LocalTrapSendPort" value="11261"/>
+	  <param name="GenericTrapType" value="6"/>
+	  <param name="SpecificTrapType" value="12345678"/>
+	  <param name="CommunityString" value="public"/>
+	  <param name="ForwardStackTraceWithTrap" value="false"/>
+	  <param name="Threshold" value="ERROR"/>
+	  <layout class="org.apache.log4j.ext.SnmpDelimitedConversionPatternLayout">  
+	     <param name="ConversionPattern" value="%d;1.3.6.1.4.1.27955.1.1.1.1/%t;1.3.6.1.4.1.27955.1.1.1.2/%p;1.3.6.1.4.1.27955.1.1.1.3/%c;1.3.6.1.4.1.27955.1.1.1.4/%m;1.3.6.1.4.1.27955.1.1.1.5/%X{GnErrorCode};1.3.6.1.4.1.27955.1.1.1.6"/>  
+	   </layout>  
+	</appender>
+	-->
+   <!-- ================ -->
+   <!-- Limit categories -->
+   <!-- ================ -->
+   <logger name="GN.HTTPBC">
+    <level value="DEBUG"/>
+    <appender-ref ref="gtvan-r"/>
+	<!-- 
+    <appender-ref ref="gtvan-snmp"/>
+	-->
+   </logger> 
+
+   <logger name="GN.Util">
+    <level value="DEBUG"/>
+    <appender-ref ref="gtvan-r"/>
+   </logger> 
+
+  <logger name="GN.AUDIT">
+    <level value="DEBUG"/>
+    <appender-ref ref="gtvan-r"/>
+   </logger>
+
+   <logger name="GN.GenReport">
+    <level value="DEBUG"/>
+    <appender-ref ref="gtvan-r"/>
+   </logger> 
+
+</log4j:configuration>

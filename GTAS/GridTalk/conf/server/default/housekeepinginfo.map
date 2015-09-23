@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for HousekeepingInfo  -->
+	<class name="com.gridnode.gtas.server.housekeeping.model.HousekeepingInfo">
+		<map-to xml="HousekeepingInfo"/>
+		<field name="TempFilesDaysToKeep" type="integer">
+			<xml name="TempFilesDaysToKeep" node="element"/>
+		</field>
+		<field name="LogFilesDaysToKeep" type="integer">
+			<xml name="LogFilesDaysToKeep" node="element"/>
+		</field>
+		<field name="WfRecordsDaysToKeep" type="integer">
+			<xml name="WfRecordsDaysToKeep" node="element"/>
+		</field>
+	</class>
+</mapping>

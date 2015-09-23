@@ -1,0 +1,201 @@
+<html>
+<head>
+<title>9.3.3 To configure a request or response action </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h3>9.3.3 To configure a request or response action </h3>
+<p><span></span>
+</p>
+<p><span>Both the request and response configurations share the same parameters.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 1.<span> </span>
+</span>
+<span>Click Edit Request Action Configurations. This will bring you to the page where you need to complete the Files, Details, Options and Encryption panes.</span>
+</p>
+<p><span></span>
+</p>
+<p align='center'><span><img width='531' height='467' border='0' src='../images/image109.jpg'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 2.<span> </span>
+</span>
+<span>First go to the Files pane and select the following inputs:</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Message Type</span>
+</b>
+</p>
+<p><span>This field represents the message DTD for the request message.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Diction File</span>
+</b>
+</p>
+<p><span>This field provides dictionary values for validating service content</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>XML Schema</span>
+</b>
+</p>
+<p><span>XML Schema can be used to perform extra validation like field length, etc</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 3.<span> </span>
+</span>
+<span>Next go to Details pane and complete the following fields:</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Business Activity Identifier</span>
+</b>
+</p>
+<p><span>From Service Header. Use Activity Name in PIP Specification’s Business Activity Descriptions table.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Business Action Code</span>
+</b>
+</p>
+<p><span>From ‘Business Action in FSV’ column of the PIP specification’s ‘Business Action – Business Document Mapping’ table.</span>
+</p>
+<p><b><span></span>
+</b>
+</p>
+<p><b><span></span>
+</b>
+</p>
+<p><b><span>Retries</span>
+</b>
+</p>
+<p><span>This field is the number of times to retry before the process fails. </span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Time to Acknowledge (in secs)</span>
+</b>
+</p>
+<p><span>This field is the timeout to receive the request acknowledgement. The timeout is specified in seconds.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 4.<span> </span>
+</span>
+<span>Proceed to the Option pane and complete the following fields:</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Is Authorization Required</span>
+</b>
+</p>
+<p><span>This checkbox specifies if the partner requires explicit authorization to initiate the process.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Is Non-Repudiation Required</span>
+</b>
+</p>
+<p><span>This checkbox specifies if the non-repudiation is required</span>
+.</p>
+<p><span></span>
+</p>
+<p><b><span>Is Secure Transport Required</span>
+</b>
+</p>
+<p><span>This checkbox specifies if the secure transport is required. GridTalk provides the secure transport by default so this option only affects HTTP transport.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Disable DTD</span>
+</b>
+</p>
+<p><span>If set, the DTD validation will be disabled</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Disable Schema</span>
+</b>
+</p>
+<p><span>If ticked, XML Schema validation will be disabled.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Validate At Sender</span>
+</b>
+</p>
+<p><span>If ticked, the outgoing PIP message contents will be validated.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 5.<span> </span>
+</span>
+<span>Proceed to the Encryption pane and complete the following fields:</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Disable Encryption</span>
+</b>
+</p>
+<p><span>If ticked, the message will not be encrypted.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Disable Signature</span>
+</b>
+</p>
+<p><span>If ticked, the message will not be signed.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Digest Algorithm</span>
+</b>
+</p>
+<p><span>This field gives the two options such as MD5 or SHA1 to decide which algorithm to use for generating the RosettaNet/CIDX message digest (used with signatures and in the acknowledge messages).</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Encryption Algorithm</span>
+</b>
+</p>
+<p><span>This field gives the choices of RC2 or 3DES to specify the method of encryption.</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Encryption Algorithm Length</span>
+</b>
+</p>
+<p><span>This field indicates how difficult it will be for the unauthorized users to crack the information. Choosing an encryption key length usually depends on how sensitive or valuable the information is that you're protecting. The larger key length is used to ensure that there is added protection to the information. 3DES supports 168-bit keys while RC2 supports 40-bit, 64-bit, and 128-bit keys.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 6.<span> </span>
+</span>
+<span>Lastly if compression is required, go to Compression pane and complete the following fields:</span>
+</p>
+<p><span></span>
+</p>
+<p><b><span>Is Compression Required</span>
+</b>
+</p>
+<p><span>If ticked, the message contents will be compressed. The compressed algorithm used is ZLIB.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>Step 7.<span> </span>
+</span>
+<span>Click Save Process Action.</span>
+</p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+<p><span></span>
+</p>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Init>
+
+<!--
+For automatic extraction during folder transition, fields that are allowed to be extracted from user document 
+or replaced by a literal value:
+
+   Fieldname                    Key
+---------------------------------------------
+1) Document Number	            6
+2) Document Version             10
+3) Document Type                11
+4) Document Date/Time	        101
+5) Reference Doc. Number        7
+6) Recipient Partner ID         27
+7) Recipient Partner Type       28
+8) Recipient Partner Group      29
+9) Recipient Partner Name       63
+10)Recipient BizEnt ID          30
+11)Recipient BizEnt UUID        92
+12)Recipient BizReg Query URL	93
+13)Sender User ID	            36
+14)Sender User Name	            37
+15)Sender BizEntity ID          38
+16)Sender BizEntity UUID        90
+17)Sender BizReg Query URL      91
+18)User Tracking ID             89
+19)Action Code                  56
+20)Custom Field 01              77
+21)Custom Field 02              78
+22)Custom Field 03              79
+23)Custom Field 04              80
+24)Custom Field 05              81
+25)Custom Field 06              82
+26)Custom Field 07              83
+27)Custom Field 08              84
+28)Custom Field 09              85
+29)Custom Field 10              86
+
+Example:
+	<Property key="101">Pip3A4PurchaseOrderRequest/thisDocumentGenerationDateTime/DateTimeStamp</Property>
+	<Property key="6">Pip3A4PurchaseOrderRequest/thisDocumentIdentifier/ProprietaryDocumentIdentifier</Property>
+
+-->	
+
+<!--
+For extraction during backend import for partner information, fields that are allowed to be extracted from user document
+or replaced by a literal value:
+
+   Fieldname                    Key
+---------------------------------------------
+1) Document Number	            DocNum
+2) Document Type                DocType
+3) Partner Type                 PartnerType
+4) Partner ID                   PartnerId
+
+Example:
+  <Property key="DocType">"SOI"</Property>
+  <Property key="PartnerType">"SU"</Property>
+  <Property key="PartnerId">Test/PartnerId/we</Property>
+  <Property key="DocNum">Test/DocNum</Property>
+-->
+
+</Init>

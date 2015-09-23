@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.rosettanet.org/RNIF/V02.00" xmlns="http://www.rosettanet.org/RNIF/V02.00" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified">
+	<xsd:element name="GlobalAdministeringAuthorityCode">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:enumeration value="RosettaNet"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="Preamble">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="standardName"/>
+				<xsd:element ref="standardVersion"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="VersionIdentifier">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:enumeration value="V02.00"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="standardName">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="GlobalAdministeringAuthorityCode"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="standardVersion">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="VersionIdentifier"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>javax</fullname>
+  <class>
+    <path>[../../../../Apps/Together5.5/lib/javax.jar]</path>
+  </class>
+</library>

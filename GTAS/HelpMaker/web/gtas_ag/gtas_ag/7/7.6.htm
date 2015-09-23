@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>7.6 Certificate Expiry and Notification </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h2>7.6 Certificate Expiry and Notification </h2>
+<p><span></span>
+</p>
+<p><span>The GridTalk application will check routinely on the validity of the certificates in the database. If a certificate has expired or is due to expire in certain number of days’ time, an alert notification will be sent out to you by email. By default, this certificate expiry checking routine is scheduled on installation time and carried out daily at the same time. This schedule may be changed following the steps in Chapter 0. </span>
+</p>
+<p><span></span>
+</p>
+<p><span>The certificate expiry checking routine is implemented using a Java user procedure as shown below:</span>
+</p>
+<p></p>
+<p><img width='553' height='92' border='0' src='../images/image065.jpg'></p>
+<p><span></span>
+</p>
+<p><span>There are three parameters that may be customized:</span>
+</p>
+<p><span>·<span> </span>
+</span>
+<i><span>daysBefore</span>
+</i>
+<span> – the number of days before certificate expire to alert expiry. Default value is 30.</span>
+</p>
+<p><span>·<span> </span>
+</span>
+<i><span>daysAfter</span>
+</i>
+<span> – the number of days after certificate expire to continue the alert notification. Default value is 10.</span>
+</p>
+<p><span>·<span> </span>
+</span>
+<i><span>alertName</span>
+</i>
+<span> – the name of the alert to trigger</span>
+</p>
+<p><span></span>
+</p>
+<p><span>From <i>daysBefore</i>
+ days before the certificate expires until <i>daysAfter</i>
+ days after the certificate expires, each time the check is performed, the specified alert notification will be sent out to target recipient.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The default alert notification is by email and log. The message templates may be found under the respective headings of the Appendix.</span>
+</p>
+<p><span></span>
+</p>
+<span><br clear='all'></span>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for ExportEntityList  -->
+	<class name="com.gridnode.pdip.base.exportconfig.model.ExportEntityList">
+		<map-to xml="Entities"/>
+		<field name="Entities" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection">
+		</field>
+	</class>
+	<!--  Mapping for Port  -->
+	<class name="com.gridnode.gtas.server.backend.model.Port">
+		<map-to xml="Port"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="Name" type="string">
+			<xml name="Name" node="element"/>
+		</field>
+		<field name="Description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="isRfc" type="boolean" get-method="isRfc" set-method="setIsRfc">
+			<xml name="isRfc" node="element"/>
+		</field>
+		<field name="Rfc" type="com.gridnode.gtas.server.backend.model.Rfc">
+			<xml name="Rfc" node="element"/>
+		</field>
+		<field name="HostDir" type="string">
+			<xml name="HostDir" node="element"/>
+		</field>
+		<field name="isDiffFileName" type="boolean" get-method="isDiffFileName" set-method="setIsDiffFileName">
+			<xml name="isDiffFileName" node="element"/>
+		</field>
+		<field name="isOverwrite" type="boolean" get-method="isOverwrite" set-method="setOverwrite">
+			<xml name="isOverwrite" node="element"/>
+		</field>
+		<field name="FileName" type="string">
+			<xml name="FileName" node="element"/>
+		</field>
+		<field name="isAddFileExt" type="boolean" get-method="isAddFileExt" set-method="setIsAddFileExt">
+			<xml name="isAddFileExt" node="element"/>
+		</field>
+		<field name="FileExtType" type="integer">
+			<xml name="FileExtType" node="element"/>
+		</field>
+		<field name="FileExtValue" type="string">
+			<xml name="FileExtValue" node="element"/>
+		</field>
+		<!--field name="AttachmentDir" type="string">
+			<xml name="AttachmentDir" node="element"/>
+		</field-->
+		<field name="isExportGdoc" type="boolean" get-method="isExportGdoc" set-method="setIsExportGdoc">
+			<xml name="isExportGdoc" node="element"/>
+		</field>
+		<field name="StartNumber" type="integer">
+			<xml name="StartNumber" node="element"/>
+		</field>
+		<field name="RolloverNumber" type="integer">
+			<xml name="RolloverNumber" node="element"/>
+		</field>
+		<field name="NextNumber" type="integer">
+			<xml name="NextNumber" node="element"/>
+		</field>
+		<field name="isPadded" type="boolean" get-method="isPadded" set-method="setIsPadded">
+			<xml name="isPadded" node="element"/>
+		</field>
+		<field name="FixedNumberLen" type="integer">
+			<xml name="FixedNumberLen" node="element"/>
+		</field>
+		<field name="fileGrouping" type="integer">
+			<xml name="FileGrouping" node="element"/>
+		</field>
+
+	</class>
+	<!--  Mapping for Rfc  -->
+	<class name="com.gridnode.gtas.server.backend.model.Rfc">
+		<map-to xml="Rfc"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+	</class>
+</mapping>

@@ -1,0 +1,10 @@
+[mysqld]
+basedir=DB_HOME
+datadir=DB_HOME/data
+port=3306
+default-character-set=utf8
+default-collation=utf8_unicode_ci
+max_allowed_packet=200M
+
+[WinMySQLAdmin]
+Server=DB_HOME/bin/mysqld.exe

@@ -1,0 +1,35 @@
+<!ELEMENT Mapping (Entity+)>
+<!ATTLIST Mapping root CDATA #REQUIRED>
+
+<!ELEMENT Entity (Field+)>
+<!ATTLIST Entity
+        name CDATA #REQUIRED
+        xpath CDATA #REQUIRED
+        unique (true | false) "false">
+
+<!ELEMENT Field (ChildEntity | ForeignKey | XPathExpr | ValueLiteral)>
+<!ATTLIST Field
+	name CDATA #REQUIRED
+	format CDATA #IMPLIED
+        position CDATA #IMPLIED>
+
+<!ELEMENT ChildEntity EMPTY>
+<!ATTLIST ChildEntity
+        entity-name CDATA #REQUIRED
+        optional (true | false) "false"
+        multiplicity (true | false) "false"
+        relative-xpath CDATA #REQUIRED>
+
+<!ELEMENT ForeignKey EMPTY>
+<!ATTLIST ForeignKey
+        entity-name CDATA #REQUIRED
+        field-name CDATA #REQUIRED
+        relative-xpath CDATA #REQUIRED>
+
+<!ELEMENT XPathExpr EMPTY>
+<!ATTLIST XPathExpr
+        relative-xpath CDATA #REQUIRED>
+
+<!ELEMENT ValueLiteral EMPTY>
+<!ATTLIST ValueLiteral
+        value CDATA #REQUIRED>

@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Created-By: Ant 1.4.1
+Class-Path: ./framework.jar ./gtas-common.jar ./gtas-user.jar ./gtas-acl.jar ./gtas-partner.jar ./gtas-document.jar ./gtas-gridform.jar ./gtas-mapper.jar ./gtas-channel.jar ./gtas-bizreg.jar ./gtas-enterprise.jar ./base-session.jar ./gtas-locale.jar ./gtas-gridnode.jar ./gtas-certificate.jar ./gtas-partnerfunction.jar ./gtas-userprocedure.jar ./gtas-registration.jar ./gtas-activation.jar ./gtas-connection.jar ./gtas-rnif.jar ./gtas-alert.jar ./gtas-docalert.jar ./gtas-dbarchive.jar ./gtas-exportconfig.jar ./gtas-housekeeping.jar ./gtas-searchquery.jar ./gtas-scheduler.jar ./gtas-servicemgmt.jar

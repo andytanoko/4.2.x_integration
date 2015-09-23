@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-j2ee-engine SYSTEM "ejb-j2ee-engine.dtd">
+<ejb-j2ee-engine>
+	<enterprise-beans>
+		<enterprise-bean>
+			<ejb-name>RnifInitializerMDBean</ejb-name>
+			<message-props>
+				<destination-name>initialiserTopic</destination-name>
+        <connection-factory-name>GNTopicConnectionFactory</connection-factory-name>
+			</message-props>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>RnifInitializerMDBean_onchange</ejb-name>
+			<message-props>
+				<destination-name>entityEventTopic</destination-name>
+        <connection-factory-name>GNTopicConnectionFactory</connection-factory-name>
+			</message-props>
+		</enterprise-bean>
+	</enterprise-beans>
+</ejb-j2ee-engine>

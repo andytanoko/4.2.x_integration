@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDependency name="BusinessEntity">
+  <Checker class-name="com.gridnode.gtas.server.enterprise.helpers.EntityDependencyChecker"
+           method-name="checkDependentPartnersForBusinessEntity">
+    <Param type="java.lang.Long" getter-method="getUId"/>
+  </Checker>
+  <Checker class-name="com.gridnode.gtas.server.enterprise.helpers.EntityDependencyChecker"
+           method-name="checkDependentUsersForBusinessEntity">
+    <Param type="java.lang.Long" getter-method="getUId"/>
+  </Checker>
+</EntityDependency>

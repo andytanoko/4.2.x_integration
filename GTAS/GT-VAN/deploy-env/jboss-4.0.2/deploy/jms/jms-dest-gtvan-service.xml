@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server>
+ <!-- ==================================================================== -->
+ <!-- GTVan Destinations                                                    -->
+ <!-- ==================================================================== -->
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=gtvan/ishb/TxInQueue">
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean> 
+
+  <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=gtvan/isat/RemoteEventQueue">
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean> 	
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=gtvan/ishb/TxOutQueue">
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean> 
+
+ <mbean code="org.jboss.mq.server.jmx.Topic"
+	 name="jboss.mq.destination:service=Queue,name=gtvan/isjb/DeliverTxTopic">
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean> 
+
+ <mbean code="org.jboss.mq.server.jmx.Queue"
+	 name="jboss.mq.destination:service=Queue,name=gtvan/isat/LocalEventQueue">
+    <depends optional-attribute-name="DestinationManager">jboss.mq:service=DestinationManager</depends>
+  </mbean> 
+
+
+  <!-- end of GTVan destinations -->
+
+</server>

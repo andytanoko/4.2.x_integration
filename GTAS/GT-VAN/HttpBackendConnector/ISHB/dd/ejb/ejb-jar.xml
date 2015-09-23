@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar version="2.1"
+	xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+	http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+	<enterprise-beans>
+		<message-driven>
+			<display-name>ISHB Transaction In Listener</display-name>
+			<ejb-name>ISHB_In_SaveTransactionMDBean</ejb-name>
+			<ejb-class>com.gridnode.gridtalk.httpbc.ishb.ejb.SaveTransactionMDBean</ejb-class>
+			<transaction-type>Container</transaction-type>
+			<message-destination-type>javax.jms.Queue</message-destination-type>
+			<ejb-ref>
+				<ejb-ref-name>ejb/TransactionHandlerBean</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.gridnode.gridtalk.httpbc.ishb.ejb.ITransactionHandlerHome</home>
+				<remote>com.gridnode.gridtalk.httpbc.ishb.ejb.ITransactionHandler</remote>
+				<ejb-link>ISHB_TransactionHandlerBean</ejb-link>
+			</ejb-ref>
+		</message-driven>
+		<message-driven>
+			<display-name>ISHB_Incoming_Transaction_Listener</display-name>
+			<ejb-name>ISHB_IncomingTransactionMDBean</ejb-name>
+			<ejb-class>com.gridnode.gridtalk.httpbc.ishb.ejb.IncomingTransactionMDBean</ejb-class>
+			<transaction-type>Container</transaction-type>
+			<message-destination-type>javax.jms.Queue</message-destination-type>
+			<activation-config>
+				<activation-config-property>
+					<activation-config-property-name>messageSelector</activation-config-property-name>
+					<activation-config-property-value>direction='incoming' AND hostid='${hostid:gnode1}'</activation-config-property-value>
+				</activation-config-property>
+			</activation-config>
+		</message-driven>
+		<message-driven>
+			<display-name>ISHB_Outgoing_Transaction_Listener</display-name>
+			<ejb-name>ISHB_OutgoingTransactionMDBean</ejb-name>
+			<ejb-class>com.gridnode.gridtalk.httpbc.ishb.ejb.OutgoingTransactionMDBean</ejb-class>
+			<transaction-type>Container</transaction-type>
+			<message-destination-type>javax.jms.Queue</message-destination-type>
+			<activation-config>
+				<activation-config-property>
+					<activation-config-property-name>messageSelector</activation-config-property-name>
+					<activation-config-property-value>direction='outgoing' AND hostid='${hostid:gnode1}'</activation-config-property-value>
+				</activation-config-property>
+			</activation-config>
+		</message-driven>
+		<!--message-driven>
+			<display-name>ISHB Transaction Out Listener</display-name>
+			<ejb-name>ISHB_Out_SaveTransactionMDBean</ejb-name>
+			<ejb-class>com.gridnode.gridtalk.httpbc.ishb.ejb.SaveTransactionMDBean</ejb-class>
+			<transaction-type>Container</transaction-type>
+			<message-destination-type>javax.jms.Queue</message-destination-type>
+			<ejb-ref>
+				<ejb-ref-name>ejb/TransactionHandlerBean</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.gridnode.gridtalk.httpbc.ishb.ejb.ITransactionHandlerHome</home>
+				<remote>com.gridnode.gridtalk.httpbc.ishb.ejb.ITransactionHandler</remote>
+				<ejb-link>ISHB_TransactionHandlerBean</ejb-link>
+			</ejb-ref>
+		</message-driven-->
+		
+		<session>
+			<display-name>TransactionHandler Session Bean</display-name>
+			<ejb-name>ISHB_TransactionHandlerBean</ejb-name>
+			<home>com.gridnode.gridtalk.httpbc.ishb.ejb.ITransactionHandlerHome</home>
+			<remote>com.gridnode.gridtalk.httpbc.ishb.ejb.ITransactionHandler</remote>
+			<ejb-class>com.gridnode.gridtalk.httpbc.ishb.ejb.TransactionHandlerBean</ejb-class>
+			<session-type>Stateless</session-type>	
+			<transaction-type>Container</transaction-type>
+		</session>
+		<!-- session>
+			<display-name>TxDeliveryTimer Session Bean</display-name>
+			<ejb-name>TxDeliveryTimer</ejb-name>
+			<home>com.gridnode.gridtalk.httpbc.ishb.ejb.ITxDeliveryTimerHome</home>
+			<remote>com.gridnode.gridtalk.httpbc.ishb.ejb.ITxDeliveryTimer</remote>
+			<ejb-class>com.gridnode.gridtalk.httpbc.ishb.ejb.TxDeliveryTimerBean</ejb-class>
+			<session-type>Stateless</session-type>	
+			<transaction-type>Container</transaction-type>
+		</session-->
+	</enterprise-beans>
+	
+	<assembly-descriptor>
+		<!-- container-transaction>
+			<method>
+				<ejb-name>TxDeliveryTimer</ejb-name>
+				<method-name>ejbTimeout</method-name>
+			</method>
+			<trans-attribute>RequiresNew</trans-attribute>
+		</container-transaction>
+		<container-transaction>
+			<method>
+				<ejb-name>TxDeliveryTimer</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction-->
+		<container-transaction>
+			<method>
+				<ejb-name>ISHB_TransactionHandlerBean</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<trans-attribute>RequiresNew</trans-attribute>
+		</container-transaction>
+		<container-transaction>
+			<method>
+				<ejb-name>ISHB_IncomingTransactionMDBean</ejb-name>
+				<method-name>onMessage</method-name>
+			</method>
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
+		<container-transaction>
+			<method>
+				<ejb-name>ISHB_OutgoingTransactionMDBean</ejb-name>
+				<method-name>onMessage</method-name>
+			</method>
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
+	</assembly-descriptor>
+	
+	
+</ejb-jar>

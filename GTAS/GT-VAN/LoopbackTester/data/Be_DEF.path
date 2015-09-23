@@ -1,0 +1,7 @@
+receiver.duns=<DeliveryHeader>,</DeliveryHeader>,<messageReceiverIdentification>,</messageReceiverIdentification>,<GlobalBusinessIdentifier>,</GlobalBusinessIdentifier>
+message.tracking.id=<DeliveryHeader>,</DeliveryHeader>,<messageTrackingID>,</messageTrackingID>,<InstanceIdentifier>,</InstanceIdentifier>
+initiator.duns=<ServiceHeader>,</ServiceHeader>,<KnownInitiatingPartner>,</KnownInitiatingPartner>,<GlobalBusinessIdentifier>, </GlobalBusinessIdentifier>
+pip.id=<pipInstanceId>,</pipInstanceId>,<InstanceIdentifier>,</InstanceIdentifier>
+doc.id=<thisDocumentIdentifier>,</thisDocumentIdentifier>,<ProprietaryDocumentIdentifier>,</ProprietaryDocumentIdentifier>
+sender.duns=<messageSenderIdentification>,</messageSenderIdentification>,<PartnerIdentification>,</PartnerIdentification>,<GlobalBusinessIdentifier>,</GlobalBusinessIdentifier>
+

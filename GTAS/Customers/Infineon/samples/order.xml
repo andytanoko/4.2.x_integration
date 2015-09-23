@@ -1,0 +1,39 @@
+<Orders>
+  <documentIdentifier>1000</documentIdentifier>
+	<order>
+		<company>Company1</company>
+		<location>East</location>	
+		<sale>100000</sale>
+		<period>
+			<start>January</start>
+			<end>Feburary</end>
+		</period>	
+		<period>
+			<start>June</start>
+			<end>July</end>
+		</period>	
+	</order>
+	<order>
+		<company>Company2</company>
+		<location>Central</location>	
+		<sale>30000</sale>
+		<period>
+			<start>March</start>
+			<end>April</end>
+		</period>	
+		<period>
+			<start>June</start>
+			<end>July</end>
+		</period>	
+	</order>
+	<order>
+		<company>Company3</company>
+		<location>North</location>	
+		<sale>23000</sale>
+		<period>
+			<start>March</start>
+			<end>April</end>
+		</period>	
+
+	</order>	
+</Orders>

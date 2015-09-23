@@ -1,0 +1,43 @@
+@echo off
+REM Usage : SenderLite -I "IP" -O "PORT" -N "USERNAME" -W "PASSWORD"
+REM -F "IMPORT_FILE;.." [-A "ATTACHMENT_FILE;.."] [-X] [-Y] [-S "SMTP"]
+REM [-E "EMAIL"] [-D "DOC_TYPE"] [-P "PARTNER_ID"] [-R "RN_PROFILE"]
+REM [-B "BIZ_ENT_ID"] [-U "UNIQUE_DOC_ID"] [-PS "PROCESS_INST_ID"] [-TI "TRACING_ID"] [-Z]
+REM IP              - The IP address of the GridTalk server
+REM PORT            - The listening port on the GridTalk server
+REM USERNAME        - The GridTalk user making the connection to GridTalk server
+REM PASSWORD        - The password of the GridTalk user
+REM IMPORT_FILE     - The full path of the file to be imported to GridTalk. To
+REM                   specify more than one file, use ; to separate them
+REM ATTACHMENT_FILE - The full path of the file to be attached to the import file.
+REM                   To specify more than one file, use ; to separate them
+REM X               - Delete the import files after sending to GridTalk
+REM Y               - Delete the attachment files after sending to GridTalk
+REM SMTP            - The SMTP server to use to send error notifications
+REM EMAIL           - The email to receive error notifications
+REM DOC_TYPE        - The document type of the import file
+REM PARTNER_ID      - The partner ID of the partner to recieve the files
+REM RN_PROFILE      - The rn_profile UID to link the import files to the existing RosettaNet
+REM                   process in GridTalk
+REM BIZ_ENT_ID      - The business entity ID of the user who imports the files
+REM UNIQUE_DOC_ID   - A unique identifier for the document to be imported
+REM PROCESS_INST_ID - The process instance id of the RosettaNet process in GridTalk to
+REM                   1. link the imported file as response message; or
+REM                   2. use as the pip instance identifier of the imported request message
+REM                   This takes precedence over RN_PROFILE if both are specified.
+REM TRACING_ID      - The unique id for tracing the imported document within the GridTalk (to be used only for single import)
+REM Z               - Switch on debugging messages
+
+REM sample usage: 
+REM CALL %GRIDTALK_HOME%\bin\setenv.bat
+REM %JAVA_HOME%\bin\java -jar senderlite.jar -I 127.0.0.1 -O 6763 -N admin -W admin -B DEF -R 1 -S 192.168.213.251 -E admin@gridnode.com -D UC -P 00001000 -F c:\orders\orders.xml -U DOC001 -X
+
+
+REM Change History
+REM 10 Mar 2006   Added new parameter -PS to specify process instance id for:
+REM               1. link response msg (import file) to existing process
+REM               2. the new process initiated by the request msg (import file)
+REM 10 Apr 2007   Added new parameter -TI to specify the unique tracing id for a single imported file.
+REM               This id will be used to trace the imported file throughout GridTalk.
+REM               If not specified, GridTalk will generate one.
+

@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title id="title">lbGridTalk</title>
+    <base href="file:///C:\viewroot\i00054_GT_2.0_I7\GTAS\GridTalk\web/gt.css" id="base_tag"/>
+    <link id="xhtml_stylesheet" rel="stylesheet" href="gt.css" type="text/css"/>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <table>
+          <tr id="processDef_details">
+            <td id="processDef_label">
+              lbProcessDef
+            </td>
+            <td>
+              <select id="processDef_value" size="1" name="processDef" onchange="serverRefresh();">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+              <a id="processDef_create" href="javascript:divertToMapping('divertCreateProcessDef');">
+                lbCreateProcessDef
+              </a>
+            </td>
+            <td id="processDef_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="partnerId_details">
+            <td id="partnerId_label">
+              lbPartnerId
+            </td>
+            <td>
+              <select id="partnerId_value" size="1" name="partnerId" onchange="serverRefresh();" class="mandatory">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+              <a id="partnerId_create" href="javascript:divertToMapping('divertCreatePartner');">
+                lbCreatePartner
+              </a>
+            </td>
+            <td id="partnerId_error" class="errortext">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="isInitiatingRole_details">
+            <td id="isInitiatingRole_label">
+              lbIsInitiatingRole
+            </td>
+            <td>
+              <select size="1" id="isInitiatingRole_value" name="isInitiatingRole" onchange="serverRefresh();" />
+            </td>
+            <td id="isInitiatingRole_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="sendChannelUid_details">
+            <td id="sendChannelUid_label" class="fieldlabel">
+              lbSendChannelUid
+            </td>
+            <td>
+              <select id="sendChannelUid_value" size="1" name="sendChannelUid" class="mandatory">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+              <a id="sendChannelUid_create" href="javascript:divertToMapping('divertCreateChannelInfo');">
+                lbCreateChannelInfo
+              </a>
+            </td>
+            <td id="sendChannelUid_error" class="errortext">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="docType_details">
+            <td id="docType_label">
+              lbDocType
+            </td>
+            <td>
+              <select id="docType_value" size="1" name="docType">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+              <a id="docType_create" href="javascript:divertToMapping('divertCreateDocumentType');">
+                lbCreateDocumentType
+              </a>
+            </td>
+            <td id="docType_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

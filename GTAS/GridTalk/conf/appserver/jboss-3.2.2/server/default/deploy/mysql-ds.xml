@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  JBoss Server Configuration                                           -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<!-- $Id: mysql-ds.xml,v 1.1 2002/07/22 22:57:24 d_jencks Exp $ -->
+<!-- ==================================================================== -->
+<!--  Datasource config for MySQL using 2.0.11 driver                     -->
+<!-- ==================================================================== -->
+
+
+<datasources>
+  <local-tx-datasource>
+    <jndi-name>appdbdatasource</jndi-name>
+    <connection-url>jdbc:mysql://localhost:3306/appdb?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8</connection-url>
+    <driver-class>org.gjt.mm.mysql.Driver</driver-class>
+    <user-name>root</user-name>
+    <password>gtasdb</password>
+    <min-pool-size>20</min-pool-size>
+    <max-pool-size>100</max-pool-size>
+    <blocking-timeout-millis>10000</blocking-timeout-millis>
+    <idle-timeout-minutes>15</idle-timeout-minutes>
+  </local-tx-datasource>
+
+  <local-tx-datasource>
+    <jndi-name>userdbdatasource</jndi-name>
+    <connection-url>jdbc:mysql://localhost:3306/userdb?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8</connection-url>
+    <driver-class>org.gjt.mm.mysql.Driver</driver-class>
+    <user-name>root</user-name>
+    <password>gtasdb</password>
+    <min-pool-size>20</min-pool-size>
+    <max-pool-size>400</max-pool-size>
+    <blocking-timeout-millis>10000</blocking-timeout-millis>
+    <idle-timeout-minutes>15</idle-timeout-minutes>
+  </local-tx-datasource>
+
+</datasources>

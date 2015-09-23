@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+  <secure>false</secure>
+  <resource-managers/>
+  <enterprise-beans>
+    <entity>
+      <ejb-name>GridNode</ejb-name>
+      <local-jndi-name>com.gridnode.gtas.server.gridnode.entities.ejb.IGridNodeLocalHome</local-jndi-name>
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+    </entity>
+    <entity>
+      <ejb-name>ConnectionStatus</ejb-name>
+      <local-jndi-name>com.gridnode.gtas.server.gridnode.entities.ejb.IConnectionStatusLocalHome</local-jndi-name>
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+    </entity>
+  </enterprise-beans>
+</jboss>

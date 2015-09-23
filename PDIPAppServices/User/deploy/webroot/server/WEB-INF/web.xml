@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN"
+"http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
+<web-app>
+  <display-name>Sign On/Off Services</display-name>
+  <description>SignOn/Off</description>
+  <distributable/>
+    
+  <servlet>
+    <servlet-name>SignOnServlet</servlet-name>
+    <display-name>SignOnServlet</display-name>
+    <description>Provides GridNode Application SignOn Service</description>
+    <servlet-class>com.gridnode.pdip.app.user.login.SignOnServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+    
+  <servlet>
+    <servlet-name>SignOffServlet</servlet-name>
+    <display-name>SignOffServlet</display-name>
+    <description>Provides GridNode Application SignOff Service</description>
+    <servlet-class>com.gridnode.pdip.app.user.login.SignOffServlet</servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+    
+  <servlet-mapping>
+    <servlet-name>SignOnServlet</servlet-name>
+    <url-pattern>/servlet/SignOnServlet</url-pattern>
+  </servlet-mapping>
+    
+  <servlet-mapping>
+    <servlet-name>SignOffServlet</servlet-name>
+    <url-pattern>/servlet/SignOffServlet</url-pattern>
+  </servlet-mapping>
+    
+  <ejb-ref>
+    <ejb-ref-name>ejb/UserManager</ejb-ref-name>
+    <ejb-ref-type>Session</ejb-ref-type>
+    <home>com.gridnode.pdip.app.user.facade.ejb.IUserManagerHome</home>
+    <remote>com.gridnode.pdip.app.user.facade.ejb.IUserManagerObj</remote>
+  </ejb-ref>
+    
+  <ejb-ref>
+    <ejb-ref-name>ejb/SessionManager</ejb-ref-name>
+    <ejb-ref-type>Session</ejb-ref-type>
+    <home>com.gridnode.pdip.base.session.facade.ejb.ISessionManagerHome</home>
+    <remote>com.gridnode.pdip.base.session.facade.ejb.ISessionManagerObj</remote>
+  </ejb-ref>
+    
+</web-app>
+    

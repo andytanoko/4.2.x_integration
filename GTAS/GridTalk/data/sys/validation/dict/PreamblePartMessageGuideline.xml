@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dictionary>
+	<VersionIdentifier>
+		<value>1.1</value>
+	</VersionIdentifier>
+	<GlobalAdministeringAuthorityCode>
+		<value>RosettaNet</value>
+	</GlobalAdministeringAuthorityCode>
+	<GlobalUsageCode>
+		<value>Test</value>
+		<value>Product</value>
+	</GlobalUsageCode>
+</dictionary>

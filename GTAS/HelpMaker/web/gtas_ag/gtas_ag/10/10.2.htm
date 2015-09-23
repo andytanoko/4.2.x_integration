@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>10.2 Configuring Backend Receiver </title>
+<link href="../gridnode.css" rel="stylesheet" type="text/css">
+</head>
+<body lang=EN-US link=blue vlink=blue>
+<h2>10.2 Configuring Backend Receiver </h2>
+<p></p>
+<p><span>The receiver.jar file is a simplified backend listener for GridTalk to export files to the backend using a RFC.</span>
+</p>
+<p><span></span>
+</p>
+<p><span>The command line options for the receiver.jar are as follows:</span>
+</p>
+<p><span></span>
+</p>
+<p><span><img width='658' height='69' alt='Text Box: java -jar receiver.jar <listen_port> <gt_ip> <gt_listen_port> [<smtp_host> <email_on_error>] [T<concurr_proc_no>]
+
+
+
+
+' src='../images/image147.gif'></span>
+</p>
+<p><span></span>
+</p>
+<p><span>Where each parameter represents as follows:</span>
+</p>
+<table cellspacing='0' width='648' border='0' cellpadding='0'><tr><td width='156'><p><span>&lt;listen_port&gt;</span>
+</p>
+</td>
+<td width='492'><p><span>Listener Module Listening Port, mandatory, must tally with RFC configuration. 6767 is conventionally used.</span>
+</p>
+</td>
+</tr>
+<tr><td width='156'><p><span>&lt;gt_ip&gt;</span>
+</p>
+</td>
+<td width='492'><p><span>GridTalk IP Address, mandatory </span>
+</p>
+</td>
+</tr>
+<tr><td width='156'><p><span>&lt;gt_listen_port&gt;</span>
+</p>
+</td>
+<td width='492'><p><span>GridTalk Backend Listening Port, mandatory, GridTalk default is 6763</span>
+</p>
+</td>
+</tr>
+<tr><td width='156'><p><span>&lt;smtp_host&gt;</span>
+</p>
+</td>
+<td width='492'><p><span>The SMTP server for sending error email </span>
+</p>
+</td>
+</tr>
+<tr><td width='156'><p><span>&lt;email_on_error&gt;</span>
+</p>
+</td>
+<td width='492'><p><span>Notification Email Address, optional</span>
+</p>
+</td>
+</tr>
+<tr><td width='156'><p><span>T&lt;concur_proc_no&gt;</span>
+</p>
+</td>
+<td width='492'><p><span>The number of concurrent processing allowed, e.g. T20. Optional. Defaults to T10 when not specified.</span>
+</p>
+</td>
+</tr>
+</table>
+<p><span></span>
+</p>
+<p><span></span>
+</p>
+</body>
+</html>

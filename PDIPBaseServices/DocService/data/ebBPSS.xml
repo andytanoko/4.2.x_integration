@@ -1,0 +1,172 @@
+<!-- edited by Kurt Kanaskie (Lucent Technologies) -->
+<!-- Notes from Kurt Kanaskie on 2001-04-17
+     Differences from 099 DTD:
+	binaryCollaboration attribute in Performs
+	fromBinaryCollaboration attribute in Transition
+	toBinaryCollaboration attribute in Transition
+     Differences from original:
+	guard instead of guardExpression
+     See EBXMLSpecification_2001_04_23.dtd for other changes
+-->
+<!DOCTYPE ProcessSpecification SYSTEM "BPSS1.01.dtd">
+<ProcessSpecification name="Simple" version="1.1" uuid="[1234-5678-901234]">
+	<!-- Business Documents -->
+		<BusinessDocument name="Catalog Request"/>
+		<BusinessDocument name="Catalog"/>
+		<BusinessDocument name="Purchase Order"/>
+		<BusinessDocument name="PO Acknowledgement"/>
+		<BusinessDocument name="Credit Request"/>
+		<BusinessDocument name="Credit Confirm"/>
+		<BusinessDocument name="ASN"/>
+		<BusinessDocument name="CreditAdvice"/>
+		<BusinessDocument name="DebitAdvice"/>
+		<BusinessDocument name="Invoice"/>
+		<BusinessDocument name="Payment"/>
+		<BusinessDocument name="Inventory Report Request"/>
+		<BusinessDocument name="Inventory Report"/>
+		<BusinessDocument name="Inventory Report"/>
+	<Package name="Ordering">
+		<!-- First the overall MultiParty Collaboration -->
+		<MultiPartyCollaboration name="DropShip">
+			<BusinessPartnerRole name="Customer">
+				<Performs initiatingRole="requestor"/>
+				<Performs initiatingRole="buyer"/>
+				<Transition fromBusinessState="Catalog Request" toBusinessState="Create Order"/>
+			</BusinessPartnerRole>
+			<BusinessPartnerRole name="Retailer">
+				<Performs respondingRole="provider"/>
+				<Performs respondingRole="seller"/>
+				<Performs initiatingRole="Creditor"/>
+				<Performs initiatingRole="buyer"/>
+				<Performs initiatingRole="Payee"/>
+				<Performs respondingRole="Payor"/>
+				<Performs initiatingRole="requestor"/>
+				<Transition fromBusinessState="Create Order" toBusinessState="Check Credit"/>
+				<Transition fromBusinessState="Check Credit" toBusinessState="Create Order"/>
+			</BusinessPartnerRole>
+			<BusinessPartnerRole name="DropShip Vendor">
+				<Performs respondingRole="seller"/>
+				<Performs initiatingRole="payee"/>
+				<Performs respondingRole="provider"/>
+			</BusinessPartnerRole>
+			<BusinessPartnerRole name="Credit Authority">
+				<Performs respondingRole="credit service"/>
+				<Performs respondingRole="payor"/>
+			</BusinessPartnerRole>
+		</MultiPartyCollaboration>
+		<!-- Now the Binary Collaborations -->
+		<BinaryCollaboration name="Request Catalog">
+			<InitiatingRole name="requestor"/>
+			<RespondingRole name="provider"/>
+			<BusinessTransactionActivity name="Catalog Request" businessTransaction="Catalog Request" fromAuthorizedRole="requestor" toAuthorizedRole="provider"/>
+		</BinaryCollaboration>
+		<BinaryCollaboration name="Firm Order" timeToPerform="P2D">
+			<Documentation>timeToPerform = Period: 2 days from start of transaction</Documentation>
+			<InitiatingRole name="buyer"/>
+			<RespondingRole name="seller"/>
+			<BusinessTransactionActivity name="Create Order" businessTransaction="Create Order" fromAuthorizedRole="buyer" toAuthorizedRole="seller"/>
+		</BinaryCollaboration>
+		<BinaryCollaboration name="Product Fulfillment" timeToPerform="P5D">
+			<Documentation>timeToPerform = Period: 5 days from start of transaction</Documentation>
+			<InitiatingRole name="buyer"/>
+			<RespondingRole name="seller"/>
+			<BusinessTransactionActivity name="Create Order" businessTransaction="Create Order" fromAuthorizedRole="buyer" toAuthorizedRole="seller"/>
+			<BusinessTransactionActivity name="Notify shipment" businessTransaction="Notify of advance shipment" fromAuthorizedRole="buyer" toAuthorizedRole="seller"/>
+			<Start toBusinessState="Create Order"/>
+			<Transition fromBusinessState="Create Order" toBusinessState="Notify shipment"/>
+			<Success fromBusinessState="Notify shipment" conditionGuard="Success"/>
+			<Failure fromBusinessState="Notify shipment" conditionGuard="BusinessFailure"/>
+		</BinaryCollaboration>
+		<BinaryCollaboration name="Inventory Status">
+			<InitiatingRole name="requestor"/>
+			<RespondingRole name="provider"/>
+			<BusinessTransactionActivity name="Inventory Report Request" businessTransaction="Inventory Report Request" fromAuthorizedRole="requestor" toAuthorizedRole="provider"/>
+			<BusinessTransactionActivity name="Inventory Report" businessTransaction="Inventory Report" fromAuthorizedRole="provider" toAuthorizedRole="requestor"/>
+		</BinaryCollaboration>
+		<BinaryCollaboration name="Credit Inquiry">
+			<InitiatingRole name="creditor"/>
+			<RespondingRole name="credit service"/>
+			<BusinessTransactionActivity name="Check Credit" businessTransaction="Check Credit" fromAuthorizedRole="creditor" toAuthorizedRole="credit service"/>
+		</BinaryCollaboration>
+		<BinaryCollaboration name="Credit Payment">
+			<InitiatingRole name="payee"/>
+			<RespondingRole name="payor"/>
+			<BusinessTransactionActivity name="Process Credit Payment" businessTransaction="Process Credit Payment" fromAuthorizedRole="payee" toAuthorizedRole="payor"/>
+		</BinaryCollaboration>
+		<!-- A compound BinaryCollaboration for illustration purposes-->
+		<BinaryCollaboration name="Credit Charge">
+			<InitiatingRole name="charger"/>
+			<RespondingRole name="credit service"/>
+			<CollaborationActivity name="Credit Inquiry" binaryCollaboration="Credit Inquiry" fromAuthorizedRole="charger" toAuthorizedRole="credit service"/>
+			<CollaborationActivity name="Credit Payment" binaryCollaboration="Credit Payment" fromAuthorizedRole="charger" toAuthorizedRole="payor"/>
+			<Transition fromBusinessState="Credit Inquiry" toBusinessState="Credit Payment"/>
+		</BinaryCollaboration>
+		<BinaryCollaboration name="Fulfillment Payment">
+			<InitiatingRole name="payee"/>
+			<RespondingRole name="payor"/>
+			<BusinessTransactionActivity name="Process Payment" businessTransaction="Process Payment" fromAuthorizedRole="payee" toAuthorizedRole="payor"/>
+		</BinaryCollaboration>
+		<!-- Here are all the Business Transactions needed -->
+		<BusinessTransaction name="Catalog Request">
+			<RequestingBusinessActivity name="">
+				<DocumentEnvelope isPositiveResponse="true" businessDocument="Catalog Request"/>
+			</RequestingBusinessActivity>
+			<RespondingBusinessActivity name="">
+				<DocumentEnvelope isPositiveResponse="true" businessDocument="Catalog"/>
+			</RespondingBusinessActivity>
+		</BusinessTransaction>
+		<BusinessTransaction name="Create Order">
+			<RequestingBusinessActivity name="" isNonRepudiationRequired="true" timeToAcknowledgeReceipt="P2D" timeToAcknowledgeAcceptance="P3D">
+				<DocumentEnvelope isPositiveResponse="true" businessDocument="Purchase Order"/>
+			</RequestingBusinessActivity>
+			<RespondingBusinessActivity name="" isNonRepudiationRequired="true" timeToAcknowledgeReceipt="P5D">
+				<DocumentEnvelope isPositiveResponse="true" businessDocument="PO Acknowledgement"/>
+			</RespondingBusinessActivity>
+		</BusinessTransaction>
+		<BusinessTransaction name="Check Credit ">
+			<RequestingBusinessActivity name="">
+				<DocumentEnvelope isPositiveResponse="true" businessDocument="Credit Request"/>
+			</RequestingBusinessActivity>
+			<RespondingBusinessActivity name="">
+				<DocumentEnvelope isPositiveResponse="true" businessDocument="Credit Confirm"/>
+			</RespondingBusinessActivity>
+		</BusinessTransaction>
+		<BusinessTransaction name="Notify of advance shipment">
+			<RequestingBusinessActivity name="">
+				<DocumentEnvelope isPositiveResponse="true" businessDocument="ASN"/>
+			</RequestingBusinessActivity>
+			<RespondingBusinessActivity name="" timeToAcknowledgeReceipt="P2D"/>
+		</BusinessTransaction>
+		<BusinessTransaction name="Process Credit Payment">
+			<RequestingBusinessActivity name="">
+				<DocumentEnvelope isPositiveResponse="true" businessDocument="CreditAdvice"/>
+			</RequestingBusinessActivity>
+			<RespondingBusinessActivity name="">
+				<DocumentEnvelope isPositiveResponse="true" businessDocument="DebitAdvice"/>
+			</RespondingBusinessActivity>
+		</BusinessTransaction>
+		<BusinessTransaction name="Process Payment">
+			<RequestingBusinessActivity name="">
+				<DocumentEnvelope isPositiveResponse="true" businessDocument="Invoice"/>
+			</RequestingBusinessActivity>
+			<RespondingBusinessActivity name="">
+				<DocumentEnvelope isPositiveResponse="true" businessDocument="Payment"/>
+			</RespondingBusinessActivity>
+		</BusinessTransaction>
+		<BusinessTransaction name="Request Inventory Report">
+			<RequestingBusinessActivity name="">
+				<DocumentEnvelope isPositiveResponse="true" businessDocument="Inventory Report Request"/>
+			</RequestingBusinessActivity>
+			<RespondingBusinessActivity name="">
+				<DocumentEnvelope isPositiveResponse="true" businessDocument="Inventory Report"/>
+			</RespondingBusinessActivity>
+		</BusinessTransaction>
+		<BusinessTransaction name="Inventory Report">
+			<RequestingBusinessActivity name="">
+				<DocumentEnvelope isPositiveResponse="true" businessDocument="Inventory Report"/>
+			</RequestingBusinessActivity>
+			<RespondingBusinessActivity name=""/>
+		</BusinessTransaction>
+	</Package>
+</ProcessSpecification>
+                                                             

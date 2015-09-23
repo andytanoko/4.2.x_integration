@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntityDependency name="UserProcedure">
+  <Checker class-name="com.gridnode.gtas.server.partnerfunction.helpers.EntityDependencyChecker"
+           method-name="checkDependentPartnerFunctionsForUserProcedure">
+    <Param type="java.lang.Long" getter-method="getUId"/>
+  </Checker>
+  <Checker class-name="com.gridnode.gtas.server.scheduler.helpers.EntityDependencyChecker"
+           method-name="checkDependentSchedulesForUserProcedure">
+    <Param type="java.lang.String" getter-method="getName"/>
+  </Checker>
+</EntityDependency>

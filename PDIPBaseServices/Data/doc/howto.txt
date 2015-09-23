@@ -1,0 +1,20 @@
+Author: Mahesh
+Data: 04-10-2002
+Title: DataManager
+
+            This module allows us to manage the context data. Using data manager you can
+    create a context and appen,update,remove data with key value pair in this context.
+
+    1)  In order to use this we need to create the context.For example creation of context
+        is done in testCreateContext method of test case DataManagerTestCase.java.
+
+    2)  In order to insert or update data into data into context,we need to map data to a ContextKey ,
+        this is done in testInsertContextData, testUpdataContextData of test case DataManagerTestCase.java.
+
+    3)  In order to remove the data with some key from the context we need to pass contextkey,this
+        is done in testRemoveContextData of test case DataManagerTestCase.java.
+
+    4)  In order to remove complete context we need to pass context uid to removeContext method of
+        datamanager,this is done in testRemoveContext of test case DataManagerTestCase.java.
+
+

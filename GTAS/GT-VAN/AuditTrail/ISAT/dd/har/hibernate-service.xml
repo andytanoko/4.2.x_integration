@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE server>
+
+<server>
+	<mbean code="org.jboss.hibernate.jmx.Hibernate" name="jboss.har:service=ISAT-Hibernate">
+        <attribute name="DatasourceName">java:/GtVanDS</attribute>
+        <attribute name="Dialect">org.hibernate.dialect.PostgreSQLDialect</attribute>
+        <attribute name="SessionFactoryName">
+            java:/hibernate/AuditTrailISATSessionFactory
+        </attribute>
+
+        <attribute name="DefaultSchema">gtvan</attribute>
+        <attribute name="ShowSqlEnabled">true</attribute>
+    </mbean>
+</server>
+
+<!-- <attribute name="CacheProviderClass">org.hibernate.cache.EhCacheProvider</attribute> -->

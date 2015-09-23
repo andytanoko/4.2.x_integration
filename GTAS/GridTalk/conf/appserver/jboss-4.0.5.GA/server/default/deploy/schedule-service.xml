@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE server>
+<server>
+
+   <!--
+    | The Schedule Manager has to be started whenever
+    | schedules are needed.
+    -->
+   <mbean code="org.jboss.varia.scheduler.ScheduleManager"
+          name="jboss:service=ScheduleManager">
+      <attribute name="StartAtStartup">true</attribute>
+      <attribute name="FixedRate">true</attribute>
+   </mbean>
+
+</server>

@@ -1,0 +1,120 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2001 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: EntityMetaInfoLoader.java
+ *
+ ****************************************************************************
+ * Date           Author              Changes
+ ****************************************************************************
+ * Mar 28 2001    Neo Sok Lay         Created
+ * Jun 12 2002    Ang Meng Hua        Added getEntityMetaInfo() method
+ */
+package com.gridnode.pdip.framework.db.meta;
+
+import com.gridnode.pdip.framework.j2ee.*;
+import com.gridnode.pdip.framework.log.Log;
+
+/**
+ * Loads the meta info for entities and fields used in applications.
+ *
+ * @author Neo Sok Lay
+ *
+ * @version 1.0a build 0.9.9.6
+ * @since 1.0a build 0.9.9.6
+ */
+public class EntityMetaInfoLoader
+{
+  private static IMetaInfoFactory _metaInfoFactory;
+
+  static{
+    try{
+        loadMetaInfoFor(null,null);
+    }catch(Exception ex){
+        ex.printStackTrace();
+    }
+  }
+
+  public EntityMetaInfoLoader()
+  {
+  }
+
+  /**
+   * Load the meta info for entities in an application.
+   *
+   * @param appName Name of the application
+   * @param dbName Name of the database to read the meta info
+   * @exception Exception Error in loading of meta info.
+   *
+   * @since 1.0a build 0.9.9.6
+   */
+  public static void loadMetaInfoFor(String appName, String dbName)
+    throws Exception {
+      //System.out.println(appName);
+      //System.out.println(dbName);
+      Log.log(Log.DB, "[EntityMetaInfoLoader.loadMetaInfoFor] Enter");
+        if (_metaInfoFactory == null){
+            IEntityMetaServiceHome home=(IEntityMetaServiceHome)ServiceLookup.getInstance(ServiceLookup.CLIENT_CONTEXT).getHome(IEntityMetaServiceHome.class);
+            IEntityMetaServiceObj remote=home.create();
+            _metaInfoFactory = remote.getMetaInfoFactory();
+        }
+  }
+
+
+  public static IMetaInfoFactory getMetaInfoFactory(){
+      return _metaInfoFactory;
+  }
+
+  public static EntityMetaInfo getEntityMetaInfo(String objectName)
+  {
+    return (EntityMetaInfo)_metaInfoFactory.getEntityMetaInfo(objectName);
+  }
+
+  /**
+   * Find the meta info for an entity.
+   *
+   * @param entity Name of the entity class
+   * @return Meta info found, or <B>null</B> if not found.
+   *
+   * @since 1.0a build 0.9.9.6
+   */
+  public static EntityMetaInfo getMetaInfoFor(String entity)
+  {
+      return (EntityMetaInfo)_metaInfoFactory.getMetaInfoFor(entity);
+  }
+
+  /**
+   * Find the meta info for a field in an entity.
+   *
+   * @param entity Name of the entity class
+   * @param fieldObjName JDO name of the field
+   * @return The field meta info found, or <B>null</B> if not found.
+   *
+   * @since 1.0a build 0.9.9.6
+   */
+  public static FieldMetaInfo getMetaInfoFor(
+    String entity, String fieldObjName)
+  {
+    EntityMetaInfo entityMeta = getMetaInfoFor(entity);
+    if (entityMeta != null)
+    {
+      return entityMeta.findFieldMetaInfo(fieldObjName);
+    }
+    return null;
+  }
+
+  /**
+   * Find the meta info for an entity.
+   *
+   * @param objName JDO Name of the entity
+   * @return Meta info found, or <B>null</B> if not found.
+   *
+   * @since 1.0a build 0.9.9.6
+   */
+  static public EntityMetaInfo findMetaInfoFor(String objName) {
+          return _metaInfoFactory.getEntityMetaInfo(objName);
+  }
+
+}

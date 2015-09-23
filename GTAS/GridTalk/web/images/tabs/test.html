@@ -1,0 +1,156 @@
+<html>
+  
+  <head>
+  
+    <style><!--
+    
+      .fancyTabUp
+      {
+        background-image: URL(backUp.gif);
+        font-weight: bold;
+      }
+      
+      .fancyTabDown
+      {
+        background-image: URL(backDown.gif);
+        text-decoration: underline;
+        cursor: hand;
+        font-size: smaller;
+      }
+    
+    --></style>
+  
+    <script type="text/javascript"><!--  
+      function initFancyTabLookup(rowId)
+      {
+        _selectedFt = document.getElementById('ft2');
+      
+        _cellLookup = new Array();
+        _indexLookup = new Array();
+        
+        var row = document.getElementById(rowId);
+        for(var i=0; i < row.childNodes.length; i++)
+        {       
+          var child = row.childNodes[i];        
+          if( (child.nodeName == 'td') || (child.nodeName == 'TD') )
+          {
+            var index = _cellLookup.length;
+            _cellLookup[index] = child;
+            var id = child.getAttribute('id');
+            if(id)
+            {
+              _indexLookup[id] = index;
+            }
+          }
+        }      
+      }
+    
+      function selectFancyTabById(tabId, isSelected)
+      {
+        if(isSelected)
+        {
+          ;
+        }
+        else
+        {
+          isSelected = false;
+        }
+        var tab = document.getElementById(tabId);
+        selectFancyTab(tab, isSelected);
+      }
+    
+      function selectFancyTab(tab, isSelected)
+      {
+        var tabId = tab.getAttribute('id');
+        var index = _indexLookup[tabId];
+       
+        if(isSelected)
+        {
+          selectFancyTab(_selectedFt, false);
+          
+          var frontIndex = index - 1;
+          var frontImg = (frontIndex == 0) ? 'firstUp.gif' : 'midDownUp.gif';
+          var frontCell = _cellLookup[frontIndex];
+          setCellImage(frontCell, frontImg);
+          
+          var rearIndex = index + 1;
+          var rearImg = (rearIndex == (_cellLookup.length - 1)) ? 'lastUp.gif' : 'midUpDown.gif';
+          var rearCell = _cellLookup[rearIndex];
+          setCellImage(rearCell, rearImg);
+          
+          tab.className = 'fancyTabUp';
+          
+          _selectedFt = tab;
+        }
+        else
+        {       
+          var frontIndex = index - 1;
+          var frontImg = (frontIndex == 0) ? 'firstDown.gif' : 'midDownDown.gif';
+          var frontCell = _cellLookup[frontIndex];
+          setCellImage(frontCell, frontImg);
+          
+          var rearIndex = index + 1;
+          var rearImg = (rearIndex == (_cellLookup.length - 1)) ? 'lastDown.gif' : 'midDownDown.gif';
+          var rearCell = _cellLookup[rearIndex];
+          setCellImage(rearCell, rearImg);
+          
+          tab.className = 'fancyTabDown';
+        }
+      }
+    
+      function setCellImage(cell, src)
+      {
+        for(var i=0; i < cell.childNodes.length; i++)
+        {
+          var child = cell.childNodes[i];
+          if( (child.nodeName == 'img') || (child.nodeName == 'IMG') )
+          {
+            child.setAttribute('src',src);
+          }
+        }
+      }
+      
+    
+    //--></script>
+  
+  
+  </head>
+
+
+  <body onload="initFancyTabLookup('ft_row');">
+
+    <table border="0" cellpadding="0" cellspacing="0">
+    	<tr id="ft_row">
+    		<td><img src="firstDown.gif" border="0"/></td>
+    		  <td class="fancyTabDown" id="ft1" onclick="selectFancyTab(this,true);">First Tab</td>
+    		<td><img src="midDownUp.gif" border="0"/></td>
+    		  <td class="fancyTabUp" id="ft2" onclick="selectFancyTab(this,true);">Second Tab</td>
+    		<td><img src="midUpDown.gif" border="0"/></td>
+    		  <td class="fancyTabDown" id="ft3" onclick="selectFancyTab(this,true);">Third Tab</td>
+    		<td><img src="midDownDown.gif" border="0"/></td>
+    			<td class="fancyTabDown" id="ft4" onclick="selectFancyTab(this,true);">Forth Tab</td>
+    		<td><img src="midDownDown.gif" border="0"/></td>
+    			<td class="fancyTabDown" id="ft5" onclick="selectFancyTab(this,true);">Fifth Tab</td>
+    		<td><img src="midDownDown.gif" border="0"/></td>
+    			<td class="fancyTabDown" id="ft6" onclick="selectFancyTab(this,true);">Sixth Tab</td>
+    		<td><img src="lastDown.gif" border="0"/></td>
+    	</tr>
+    </table>
+    
+    <br/>
+    <table border="1">
+      <tr><td><img src="firstDown.gif" border="0"/></td><td>firstDown.gif</td></tr>
+      <tr><td><img src="firstUp.gif" border="0"/></td><td>firstUp.gif</td></tr>
+      <tr><td><img src="midDownDown.gif" border="0"/></td><td>midDownDown.gif</td></tr>
+      <tr><td><img src="midDownUp.gif" border="0"/></td><td>midDownUp.gif</td></tr>
+      <tr><td><img src="midUpDown.gif" border="0"/></td><td>midUpDown.gif</td></tr>
+      <tr><td><img src="lastDown.gif" border="0"/></td><td>lastDown.gif</td></tr>
+      <tr><td><img src="lastUp.gif" border="0"/></td><td>lastUp.gif</td></tr>
+      <tr><td><img src="backDown.gif" border="0"/></td><td>backDown.gif</td></tr>
+      <tr><td><img src="backUp.gif" border="0"/></td><td>backUp.gif</td></tr>
+    </table>
+
+
+
+  </body>
+</html>

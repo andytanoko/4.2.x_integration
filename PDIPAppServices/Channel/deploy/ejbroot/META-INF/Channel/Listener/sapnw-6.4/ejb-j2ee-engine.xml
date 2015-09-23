@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-j2ee-engine SYSTEM "ejb-j2ee-engine.dtd">
+<ejb-j2ee-engine>
+	<enterprise-beans>
+		<enterprise-bean>
+			<ejb-name>ChannelReceiveListenerMessageMDB</ejb-name>
+			<message-props>
+				<destination-name>fromRouter</destination-name>
+                                <connection-factory-name>GNQueueConnectionFactory</connection-factory-name>
+			</message-props>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>ChannelSendListenerMessageMDB</ejb-name>
+			<message-props>
+				<destination-name>channelSend</destination-name>
+                                <connection-factory-name>GNQueueConnectionFactory</connection-factory-name>
+			</message-props>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>ChannelFeedBackListenerMessageMDB</ejb-name>
+			<message-props>
+				<destination-name>transportFeedback</destination-name>
+                                <connection-factory-name>GNQueueConnectionFactory</connection-factory-name>
+			</message-props>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>EntityChangeListenerMDB_Channel</ejb-name>
+			<message-props>
+				<destination-name>entityEventTopic</destination-name>
+                                <connection-factory-name>GNTopicConnectionFactory</connection-factory-name>
+			</message-props>
+		</enterprise-bean>
+	</enterprise-beans>
+</ejb-j2ee-engine>

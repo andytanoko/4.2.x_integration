@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jms-factories>
+	<application-name>GTAS Connection Factories</application-name>
+	<connection-factory>
+		<connection-factory-type>TopicConnectionFactory</connection-factory-type>
+		<factory-name>GNTopicConnectionFactory</factory-name>
+		<context-factory-type>
+			<link-factory-name>jmsfactory/default/XATopicConnectionFactory</link-factory-name>
+			<initial-context-factory>com.sap.engine.services.jndi.InitialContextFactoryImpl</initial-context-factory>
+			<provider-url>localhost</provider-url>
+			<security-principal>Administrator</security-principal>
+			<security-credentials>admin</security-credentials>
+		</context-factory-type>
+		<client-id/>
+	</connection-factory>
+	<connection-factory>
+		<connection-factory-type>QueueConnectionFactory</connection-factory-type>
+		<factory-name>GNQueueConnectionFactory</factory-name>
+		<context-factory-type>
+			<link-factory-name>jmsfactory/default/XAQueueConnectionFactory</link-factory-name>
+			<initial-context-factory>com.sap.engine.services.jndi.InitialContextFactoryImpl</initial-context-factory>
+			<provider-url>localhost</provider-url>
+			<security-principal>Administrator</security-principal>
+			<security-credentials>admin</security-credentials>
+		</context-factory-type>
+		<client-id/>
+	</connection-factory>
+</jms-factories>

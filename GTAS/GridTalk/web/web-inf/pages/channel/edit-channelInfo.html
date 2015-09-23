@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Edit ChannelInfo</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="cancel"/>
+        <input type="hidden" name="divertTo"/>
+        <div>
+          <h4 id="heading">
+            lbChannelInfo
+          </h4>
+          <table border="0">
+            <tr id="name_details">
+              <td id="name_label">
+                lbName
+              </td>
+              <td>
+                <input type="text" id="name_value" name="name"/>
+              </td>
+              <td id="name_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="description_details">
+              <td id="description_label">
+                lbDescription
+              </td>
+              <td>
+                <input type="text" id="description_value" name="description"/>
+              </td>
+              <td id="description_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="refId_details">
+              <td id="refId_label">
+                lbRefId
+              </td>
+              <td>
+                <span id="refId_value">XXX</span>
+              </td>
+              <td id="refId_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="tptProtocolType_details">
+              <td id="tptProtocolType_label">
+                lbTptProtocolType
+              </td>
+              <td>
+                <select id="tptProtocolType_value" name="tptProtocolType" onchange="serverRefresh();">
+                  <option value="">&nbsp;</option>
+                </select>
+              </td>
+              <td id="tptProtocolType_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="isPartner_details">
+              <td id="isPartner_label">
+                lbIsPartner
+              </td>
+              <td>
+                <input type="checkbox" id="isPartner_value" name="isPartner" value="true" onclick="serverRefresh();"/>
+              </td>
+              <td id="isPartner_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="tptCommInfoUid_details">
+              <td id="tptCommInfoUid_label">
+                lbTptCommInfoUid
+              </td>
+              <td>
+                <select id="tptCommInfoUid_value" name="tptCommInfoUid">
+                  <option value="">&nbsp;</option>
+                </select>
+                <a id="tptCommInfoUid_create" href="javascript:divertToMapping('divertCreateCommInfo');">
+                  lbCreateCommInfo
+                </a>
+              </td>
+              <td id="tptCommInfoUid_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="packagingProfile_details">
+              <td id="packagingProfile_label">
+                lbPackagingProfile
+              </td>
+              <td>
+                <select id="packagingProfile_value" name="packagingProfile">
+                  <option value="">&nbsp;</option>
+                </select>
+                <a id="packagingProfile_create" href="javascript:divertToMapping('divertCreatePackagingInfo');">
+                  lbCreatePackagingInfo
+                </a>
+              </td>
+              <td id="packagingProfile_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="securityProfile_details">
+              <td id="securityProfile_label">
+                lbTptProtocolType
+              </td>
+              <td>
+                <select id="securityProfile_value" name="securityProfile">
+                  <option value="">&nbsp;</option>
+                </select>
+                <a id="securityProfile_create" href="javascript:divertToMapping('divertCreateSecurityInfo');">
+                  lbCreateSecurityInfo
+                </a>
+              </td>
+              <td id="securityProfile_error">
+                &nbsp;
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div id="flowControl_details">
+          <h4 id="flowControl_heading">
+            lbFlowControl
+          </h4>
+          <table border="0">
+            <tr id="isZip_details">
+              <td id="isZip_label">
+                lbIsZip
+              </td>
+              <td>
+                <select id="isZip_value" name="isZip" onchange="serverRefresh();">
+                  <option value="">&nbsp;</option>
+                </select>
+              </td>
+              <td id="isZip_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="zipThreshold_details">
+              <td id="zipThreshold_label">
+                lbZipThreshold
+              </td>
+              <td>
+                 <input type="text" id="zipThreshold_value" name="name"/>
+              </td>
+              <td id="zipThreshold_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="isSplit_details">
+              <td id="isSplit_label">
+                lbIsSplit
+              </td>
+              <td>
+                <select id="isSplit_value" name="isSplit" onchange="serverRefresh();">
+                  <option value="">&nbsp;</option>
+                </select>
+              </td>
+              <td id="isSplit_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="splitSize_details">
+              <td id="splitSize_label">
+                lbSplitSize
+              </td>
+              <td>
+                 <input type="text" id="splitSize_value" name="name"/>
+              </td>
+              <td id="splitSize_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="splitThreshold_details">
+              <td id="splitThreshold_label">
+                lbSplitThreshold
+              </td>
+              <td>
+                 <input type="text" id="splitThreshold_value" name="name"/>
+              </td>
+              <td id="splitThreshold_error">
+                &nbsp;
+              </td>
+            </tr>
+          </table>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
+

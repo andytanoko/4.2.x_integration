@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><!--JBuilder QuickDoc-->
+<HEAD>
+<TITLE>Class com.gridnode.pdip.base.data.facade.ejb.DataManagerBean</TITLE><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+</HEAD>
+<BODY>
+
+<H2>
+<FONT SIZE="-1">com.gridnode.pdip.base.data.facade.ejb</FONT>
+<BR>Class DataManagerBean</H2>
+<DL>
+<DT>public class <B>DataManagerBean</B><DT>implements SessionBean
+</DL>
+<DL><DD>This software is the proprietary information of GridNode Pte Ltd. Use is subjected to license terms. Copyright 2001-2002 (C) GridNode Pte Ltd. All Rights Reserved. Date Author Changes June 27 2002 MAHESH Created<DL><DD></DD></DL></DD>
+</DL>
+<DL></DL>
+<TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+<TR BGCOLOR="#CCCCFF"><TD COLSPAN=1><FONT SIZE="+2">
+<B>Method Detail</B>
+</FONT></TD></TR></TABLE>
+
+<H3>createContextUId</H3>
+<PRE>
+public Long <B>createContextUId</B>()</PRE>
+<DL><DD>This method creates new context uid<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Returns:</B><DD>context uid</DD>
+<DT><B>Throws:</B><DD><CODE>DataException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>setContextData</H3>
+<PRE>
+public void <B>setContextData</B>(Long&nbsp;contextUId,
+                           ContextKey&nbsp;key,
+                           Object&nbsp;objData)</PRE>
+<DL><DD>Sets the data to this context with this ContextKey, if data with that ContextKey already exists then it replaces it.<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>contextUId</CODE> - This is the context uid</DD>
+<DD><CODE>key</CODE> - This is the ContextKey</DD>
+<DD><CODE>objData</CODE> - This is the data</DD>
+<DT><B>Throws:</B><DD><CODE>DataException</CODE> - </DD>
+<DD><CODE>SystemException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>setContextData</H3>
+<PRE>
+public void <B>setContextData</B>(Long&nbsp;contextUId,
+                           HashMap&nbsp;contexDataMap)</PRE>
+<DL><DD>Sets the data to this context where ContextKey and data pair is in HashMap, if data with that ContextKey already exists then it replaces it.<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>contextUId</CODE> - This is the context uid</DD>
+<DD><CODE>contexDataMap</CODE> - This HashMap contains the ContextKey and data pairs</DD>
+<DT><B>Throws:</B><DD><CODE>DataException</CODE> - </DD>
+<DD><CODE>SystemException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>getContextData</H3>
+<PRE>
+public Object <B>getContextData</B>(Long&nbsp;contextUId,
+                             ContextKey&nbsp;key)</PRE>
+<DL><DD>This method reterives the data from this context with the specified ContextKey<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>contextUId</CODE> - This is the context uid</DD>
+<DD><CODE>key</CODE> - This is the ContextKey</DD>
+<DT><B>Returns:</B><DD>the object data for this key</DD>
+<DT><B>Throws:</B><DD><CODE>DataException</CODE> - </DD>
+<DD><CODE>SystemException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>getContextData</H3>
+<PRE>
+public HashMap <B>getContextData</B>(Long&nbsp;contextUId)</PRE>
+<DL><DD>This method reterives the entire context data and returns in the form of HashMap<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>contextUId</CODE> - This is the context uid</DD>
+<DT><B>Returns:</B><DD>ContextKey and data pairs of this context in HashMap</DD>
+<DT><B>Throws:</B><DD><CODE>DataException</CODE> - </DD>
+<DD><CODE>SystemException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>getContextKeys</H3>
+<PRE>
+public Collection <B>getContextKeys</B>(Long&nbsp;contextUId)</PRE>
+<DL><DD>This method returns the ContextKey's in this context<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>contextUId</CODE> - This is the context uid</DD>
+<DT><B>Returns:</B><DD>Collection of ContextKey's in this context</DD>
+<DT><B>Throws:</B><DD><CODE>DataException</CODE> - </DD>
+<DD><CODE>SystemException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>removeContextUId</H3>
+<PRE>
+public void <B>removeContextUId</B>(Long&nbsp;contextUId)</PRE>
+<DL><DD>Removes the context<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>contextUId</CODE> - </DD>
+<DT><B>Throws:</B><DD><CODE>DataException</CODE> - </DD>
+<DD><CODE>SystemException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>removeContextData</H3>
+<PRE>
+public void <B>removeContextData</B>(Long&nbsp;contextUId)</PRE>
+<DL><DD>Removes data in the context<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>contextUId</CODE> - </DD>
+<DT><B>Throws:</B><DD><CODE>DataException</CODE> - </DD>
+<DD><CODE>SystemException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>removeContextData</H3>
+<PRE>
+public void <B>removeContextData</B>(Long&nbsp;contextUId,
+                              Collection&nbsp;contextKeyColl)</PRE>
+<DL><DD>This method removes the context data with the ContextKey's specified in this Collection<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>contextUId</CODE> - This is the context uid</DD>
+<DD><CODE>contextKeyColl</CODE> - This is the collection of ContextKey's</DD>
+<DT><B>Throws:</B><DD><CODE>DataException</CODE> - </DD>
+<DD><CODE>SystemException</CODE> - </DD>
+</DL>
+<HR>
+
+<H3>removeContextData</H3>
+<PRE>
+public void <B>removeContextData</B>(Long&nbsp;contextUId,
+                              ContextKey&nbsp;key)</PRE>
+<DL><DD>This method removes the context data with the ContextKey<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>contextUId</CODE> - This is the context uid</DD>
+<DD><CODE>key</CODE> - This is the ContextKey</DD>
+<DT><B>Throws:</B><DD><CODE>DataException</CODE> - </DD>
+<DD><CODE>SystemException</CODE> - </DD>
+</DL>
+<HR>
+
+</BODY>
+</HTML>

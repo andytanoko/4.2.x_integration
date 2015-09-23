@@ -1,0 +1,62 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<uccnet:envelope communicationVersion="2.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fmcg="http://www.ean-ucc.org/schemas/1.3/fmcg" xmlns:hbc="http://www.uccnet.org/schemas/1.3/hbc" xmlns:hardlines="http://www.uccnet.org/schemas/1.3/hardlines" xmlns:produce="http://www.uccnet.org/schemas/1.3/produce" xmlns:uccnet="http://www.uccnet.org/schemas/2.2/uccnet" xmlns:eanucc="http://www.ean-ucc.org/schemas/1.3/eanucc" xmlns:otc="http://www.uccnet.org/schemas/1.3/otc"  xsi:schemaLocation="http://www.uccnet.org/schemas/2.2/uccnet http://www.testregistry.net/xmlschema/uccnet/2.2/Envelope.xsd ">
+<messageHeader>
+  <messageIdentifier>
+    <value>36436305</value>
+  </messageIdentifier>
+  <userId>UCCNET_SYSTEM</userId>
+  <representingParty>
+    <gln>0614141800001</gln>
+  </representingParty>
+</messageHeader>
+<body>
+<response>
+<acknowledge>
+<acknowledgement>
+<acknowledgementHeader type="PROCESSED" success="TRUE" duplicate="FALSE">
+  <entityIdentification>
+    <uniqueCreatorIdentification>16-Oct-2003 9:16</uniqueCreatorIdentification>
+    <globalLocationNumber>
+      <gln>0488222000006</gln>
+    </globalLocationNumber>
+  </entityIdentification>
+  <messageIdentifier>
+    <value>16-Oct-2003 9:16</value>
+  </messageIdentifier>
+</acknowledgementHeader>
+<subdocumentValid success="TRUE">
+<documentIdentifier>
+  <typedEntityIdentification type="TRANSACTION">
+    <entityIdentification>
+      <uniqueCreatorIdentification>m3 ci0001</uniqueCreatorIdentification>
+      <globalLocationNumber>
+        <gln>0488222000006</gln>
+      </globalLocationNumber>
+    </entityIdentification>
+  </typedEntityIdentification>
+</documentIdentifier>
+<subdocumentValid xmlns:uccnet="http://www.uccnet.org/schemas/2.2/uccnet" xmlns:eanucc="http://www.ean-ucc.org/schemas/1.3/eanucc" validationKey="" success="FALSE">
+<documentIdentifier>
+<typedEntityIdentification type="PUBLICATION_COMMAND">
+<entityIdentification xmlns:hardlines="http://www.uccnet.org/schemas/1.3/hardlines" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">                               <uniqueCreatorIdentification>m3 ci0002</uniqueCreatorIdentification>                               <globalLocationNumber>                         <gln>0488222000006</gln>                               </globalLocationNumber>                   </entityIdentification>
+</typedEntityIdentification>
+</documentIdentifier>
+<subdocumentValid success="FALSE">
+<documentIdentifier>
+<catalogueItemReference>
+<gtin>00048822299967</gtin>
+<dataSource>0488222000006</dataSource>
+<targetMarket>
+<targetMarketCountryCode>840</targetMarketCountryCode>
+</targetMarket>
+</catalogueItemReference>
+</documentIdentifier><errorList>
+<errorInfo type='ERROR'><errorCode>GDSNPUB-000</errorCode><errorMessage><description>Internal Error.</description></errorMessage></errorInfo>
+</errorList></subdocumentValid>
+</subdocumentValid>
+</subdocumentValid>
+</acknowledgement>
+</acknowledge>
+</response>
+</body>
+</uccnet:envelope>

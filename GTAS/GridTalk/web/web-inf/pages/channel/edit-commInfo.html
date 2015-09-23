@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Edit CommInfo</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="cancel"/>
+        <input type="hidden" name="divertTo"/>
+        <table border="0">
+          <tr id="name_details">
+            <td id="name_label">
+              lbName
+            </td>
+            <td>
+              <input type="text" id="name_value" name="name"/>
+            </td>
+            <td id="name_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="description_details">
+            <td id="description_label">
+              lbDescription
+            </td>
+            <td>
+              <input type="text" id="description_value" name="description"/>
+            </td>
+            <td id="description_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="partnerCategory_details">
+            <td id="partnerCategory_label">
+              lbPartnerCategory
+            </td>
+            <td>
+              <span id="partnerCategory_value">XXX</span>
+            </td>
+            <td id="partnerCategory_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="isPartner_details">
+            <td id="isPartner_label">
+              lbIsPartner
+            </td>
+            <td>
+              <input type="checkbox" id="isPartner_value" name="isPartner" value="true"/>
+            </td>
+            <td id="isPartner_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="protocolType_details">
+            <td id="protocolType_label">
+              lbProtocolType
+            </td>
+            <td>
+              <select id="protocolType_value" name="protocolType" onchange="javascript:serverRefresh();">
+                <option value="">&nbsp;</option>
+              </select>
+            </td>
+            <td id="protocolType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="refId_details">
+            <td id="refId_label">
+              lbRefId
+            </td>
+            <td>
+              <span id="refId_value">XXX</span>
+            </td>
+            <td id="refId_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="url_details">
+            <td id="url_label">
+              lbUrl
+            </td>
+            <td>
+              <input type="text" id="url_value" name="url"/>
+            </td>
+            <td id="url_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="url_description_details">
+            <td colspan="3">
+              <pre id="url_description_value">
+                XXX
+              </pre>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

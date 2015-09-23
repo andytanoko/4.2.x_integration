@@ -1,0 +1,137 @@
+<!DOCTYPE DocumentElement SYSTEM "DB-XML-MappingFile.dtd">
+<DocumentElement name="Root">
+    <DocumentElement name="Domain">
+        <Mappings>
+            <ContentModel>
+                <ChildElement element-name="DummyElement" required="true" multiplicity="true"/>
+                <ChildElement element-name="Sample" required="true" multiplicity="false"/>
+            </ContentModel>
+            <Entity name="com.gridnode.pdip.base.docservice.filesystem.model.Domain"/>
+            <Attribute name="name">
+                <EntityField 
+                    entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Domain"
+                    field-name="_domainName"/>
+            </Attribute>
+            <Attribute name="propertyname">
+                <EntityField 
+                    entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Domain"
+                    field-name="_propertyName"/>
+            </Attribute>
+        </Mappings>
+        <DocumentElement name="Sample">
+            <Mappings>
+                <Text>
+                    <ValueLiteral value="sample text"/>
+                </Text>
+            </Mappings>
+        </DocumentElement>
+        <DocumentElement name="DummyElement">
+            <Mappings>
+                <ContentModel>
+                    <ChildElement element-name="Folder" required="false" multiplicity="false"/>
+                </ContentModel>
+                <Attribute name="name">
+                    <ValueLiteral value="test element"/>
+                </Attribute>
+            </Mappings>
+            <DocumentElement name="Folder">
+                <Mappings>
+                    <Entity name="com.gridnode.pdip.base.docservice.filesystem.model.Folder">
+                        <EntityFilter field-name="_domainId">
+                            <ForeignKey 
+                                entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Domain"
+                                field-name="_uId" element-ref=".."/>
+                        </EntityFilter>
+                        <EntityFilter field-name="_parentId">
+                            <ValueLiteral value="0"/>
+                        </EntityFilter>
+                    </Entity>
+                    <Attribute name="name">
+                        <EntityField 
+                            entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Folder"
+                            field-name="_folderName"/>
+                    </Attribute>
+                </Mappings>
+                <DocumentElement name="Folder">
+                    <Mappings>
+                        <Entity name="com.gridnode.pdip.base.docservice.filesystem.model.Folder">
+                            <EntityFilter field-name="_domainId">
+                                <ForeignKey 
+                                    entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Domain"
+                                    field-name="_uId" element-ref="../.."/>
+                            </EntityFilter>
+                            <EntityFilter field-name="_parentId">
+                                <ForeignKey 
+                                    entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Folder"
+                                    field-name="_uId" element-ref=""/>
+                            </EntityFilter>
+                        </Entity>
+                        <Attribute name="name">
+                            <EntityField 
+                                entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Folder"
+                                field-name="_folderName"/>
+                        </Attribute>
+                    </Mappings>
+                </DocumentElement>
+                <DocumentElement name="Document">
+                    <Mappings>
+                        <Entity name="com.gridnode.pdip.base.docservice.filesystem.model.Document">
+                            <EntityFilter field-name="_parentId">
+                                <ForeignKey 
+                                    entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Folder"
+                                    field-name="_uId" element-ref=""/>
+                            </EntityFilter>
+                            <EntityFilter field-name="_domainId">
+                                <ForeignKey 
+                                    entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Domain"
+                                    field-name="_uId" element-ref="../.."/>
+                            </EntityFilter>
+                        </Entity>
+                        <Attribute name="name">
+                            <EntityField 
+                                entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Document"
+                                field-name="_documentName"/>
+                        </Attribute>
+                        <Attribute name="type">
+                            <EntityField 
+                                entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Document"
+                                field-name="_docType"/>
+                        </Attribute>
+                        <Attribute name="author">
+                            <EntityField 
+                                entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Document"
+                                field-name="_author"/>
+                        </Attribute>
+                        <Attribute name="size">
+                            <EntityField 
+                                entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Document"
+                                field-name="_size"/>
+                        </Attribute>
+                    </Mappings>
+                    <DocumentElement name="File">
+                        <Mappings>
+                            <Entity name="com.gridnode.pdip.base.docservice.filesystem.model.File">
+                                <EntityFilter field-name="_documentId">
+                                    <ForeignKey 
+                                        entity-name="com.gridnode.pdip.base.docservice.filesystem.model.Document"
+                                        field-name="_uId" element-ref=""/>
+                                </EntityFilter>
+                            </Entity>
+                            <Attribute name="name">
+                                <EntityField 
+                                    entity-name="com.gridnode.pdip.base.docservice.filesystem.model.File"
+                                    field-name="_fileName"/>
+                            </Attribute>
+                            <Attribute name="type">
+                                <EntityField 
+                                    entity-name="com.gridnode.pdip.base.docservice.filesystem.model.File"
+                                    field-name="_isMainFile"/>
+                            </Attribute>
+                        </Mappings>
+                    </DocumentElement>
+                </DocumentElement>
+            </DocumentElement>
+        </DocumentElement>
+    </DocumentElement>
+</DocumentElement>
+            

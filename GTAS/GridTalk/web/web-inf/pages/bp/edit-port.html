@@ -1,0 +1,282 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Port</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <table>
+          <tr id="name_details">
+            <td id="name_label">
+              lbName
+            </td>
+            <td>
+              <input id="name_value" type="text" name="name"/>
+            </td>
+            <td id="name_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="description_details">
+            <td id="description_label">
+              lbDescription
+            </td>
+            <td>
+              <input id="description_value" type="text" name="description"/>
+            </td>
+            <td id="description_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="isRfc_details">
+            <td id="isRfc_label">
+              lbIsRfc
+            </td>
+            <td>
+              <input id="isRfc_value" type="checkbox" name="isRfc" value="true" onclick="serverRefresh();"/>
+            </td>
+            <td id="isRfc_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="rfc_details">
+            <td id="rfc_label">
+              lbRfc
+            </td>
+            <td>
+              <select id="rfc_value" size="1" name="rfc">
+                <option>&nbsp;</option>
+              </select>
+              <a id="rfc_create" href="javascript:divertToMapping('divertCreateRfc');">
+                lbCreateRfc
+              </a>
+            </td>
+            <td id="rfc_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="hostDir_details">
+            <td id="hostDir_label">
+              lbHostDir
+            </td>
+            <td>
+              <input id="hostDir_value" type="text" name="hostDir"/>
+            </td>
+            <td id="hostDir_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="isOverwrite_details">
+            <td id="isOverwrite_label">
+              lbIsOverwrite
+            </td>
+            <td>
+              <input id="isOverwrite_value" type="checkbox" name="isOverwrite" value="true"/>
+            </td>
+            <td id="isOverwrite_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="isDiffFileName_details">
+            <td id="isDiffFileName_label">
+              lbIsDiffFileName
+            </td>
+            <td>
+              <input id="isDiffFileName_value" type="checkbox" name="isDiffFileName" value="true" onclick="serverRefresh();"/>
+            </td>
+            <td id="isDiffFileName_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="fileName_details">
+            <td id="fileName_label">
+              lbFileName
+            </td>
+            <td>
+              <input id="fileName_value" type="text" name="fileName"/>
+            </td>
+            <td id="fileName_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="isAddFileExt_details">
+            <td id="isAddFileExt_label">
+              lbIsAddFileExt
+            </td>
+            <td>
+              <input id="isAddFileExt_value" type="checkbox" name="isAddFileExt" value="true" onclick="serverRefresh();"/>
+            </td>
+            <td id="isAddFileExt_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="fileExtType_details">
+            <td id="fileExtType_label">
+              lbFileExtType
+            </td>
+            <td>
+              <select id="fileExtType_value" size="1" name="fileExtType" onchange="serverRefresh();">
+                <option>&nbsp;</option>
+              </select>
+            </td>
+            <td id="fileExtType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="fileExtValue_details">
+            <td id="fileExtValue_label">
+              lbFileExtValue
+            </td>
+            <td>
+              <select id="fileExtValue_value" size="1" name="fileExtValue">
+                <option>&nbsp;</option>
+              </select>
+            </td>
+            <td id="fileExtValue_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="startNum_details">
+            <td id="startNum_label">
+              lbStartNum
+            </td>
+            <td>
+              <input id="startNum_value" type="text" name="startNum" onchange="adjustSequenceNum();"/>
+            </td>
+            <td id="startNum_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="rolloverNum_details">
+            <td id="rolloverNum_label">
+              lbRolloverNum
+            </td>
+            <td>
+              <input id="rolloverNum_value" type="text" name="rolloverNum" onchange="adjustSequenceNum();"/>
+            </td>
+            <td id="rolloverNum_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="nextNum_details">
+            <td id="nextNum_label">
+              lbNextNum
+            </td>
+            <td>
+              <script type="text/javascript"><!--
+                function adjustSequenceNum()
+                {
+                  var min = parseInt(document.entityForm.startNum.value, 10);
+                  var max = parseInt(document.entityForm.rolloverNum.value, 10);
+                  var nxt = parseInt(document.entityForm.nextNum.value, 10);
+
+                  min = (min > 0) ? min : 0;
+                  max = (max > 0) ? max : 0;
+                  nxt = (nxt > 0) ? nxt : 0;
+  
+                  if(max < min)
+                  {
+                    max = min;
+                  }
+                  
+                  if(nxt < min)
+                  {
+                    nxt = min;
+                  }
+                  else if(nxt > max)
+                  {
+                    nxt = max;
+                  }
+
+                  document.entityForm.startNum.value = min;
+                  document.entityForm.rolloverNum.value = max;
+                  document.entityForm.nextNum.value = nxt;
+
+                  if(document.getElementById("fixNumLength") != null)
+                  {
+                    var len = parseInt(document.entityForm.fixNumLength.value, 10);
+                    len = (len > 0) ? len : 0;
+
+                    if((max + "").length > len)
+                    {
+                      len = (max + "").length;
+                    }
+
+                    document.entityForm.fixNumLength.value = len;
+                  }
+                }
+              // --></script>
+              <input id="nextNum_value" type="text" name="nextNum" onchange="adjustSequenceNum();"/>
+            </td>
+            <td id="nextNum_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="isPadded_details">
+            <td id="isPadded_label">
+              lbIsPadded
+            </td>
+            <td>
+              <input id="isPadded_value" type="checkbox" name="isPadded" value="true" onclick="serverRefresh();"/>
+            </td>
+            <td id="isPadded_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="fixNumLength_details">
+            <td id="fixNumLength_label">
+              lbFixNumLength
+            </td>
+            <td>
+              <input id="fixNumLength_value" type="text" name="fixNumLength" onchange="adjustSequenceNum();"/>
+            </td>
+            <td id="fixNumLength_error">
+              &nbsp;
+            </td>
+          </tr>
+		  <!-- To improve the GTAS attachment feature modified by Tam Wei Xiang 22 Aug 2005
+          <tr id="attachmentDir_details">
+            <td id="attachmentDir_label">
+              lbAttachmentDir
+            </td>
+            <td>
+              <input id="attachmentDir_value" type="text" name="attachmentDir"/>
+            </td>
+            <td id="attachmentDir_error">
+              &nbsp;
+            </td>
+          </tr> -->
+          <tr id="isExportGdoc_details">
+            <td id="isExportGdoc_label">
+              lbIsExportGdoc
+            </td>
+            <td>
+              <input  id="isExportGdoc_value" type="checkbox" name="isExportGdoc" value="true"/>
+            </td>
+            <td id="isExportGdoc_error">
+              &nbsp;
+            </td>
+          </tr>
+		  <tr id="fileGrouping_details">
+            <td id="fileGrouping_label">
+              lbFileGrouping
+            </td>
+            <td>
+              <select id="fileGrouping_value" size="1" name="fileGrouping">
+              </select>
+            </td>
+            <td id="fileGrouping_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

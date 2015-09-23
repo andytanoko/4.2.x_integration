@@ -1,0 +1,161 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2002 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: UpdateJMSCommInfoEvent.java
+ *
+ ****************************************************************************
+ * Date           Author                  Changes
+ ****************************************************************************
+ * Jun 18 2002    Goh Kan Mun             Created
+ * Jul 05 2002    Goh Kan Mun             Modified - add in new fields.
+ * Oct 04 2002    Ang Meng Hua            Removed RefID, isPartner, PartnerCategoty
+ *                                        and isDisable from event constructor
+ */
+package com.gridnode.gtas.events.channel;
+
+/**
+ * This event class contains the data for creation of a CommInfo.
+ *
+ *
+ * @author Goh Kan Mun
+ *
+ * @version 2.0
+ * @since 2.0
+ */
+
+import com.gridnode.pdip.framework.rpf.event.EventException;
+import com.gridnode.pdip.framework.rpf.event.EventSupport;
+
+public class UpdateJMSCommInfoEvent extends EventSupport
+{
+
+  /**
+   * FieldId for UId.
+   */
+  public static final String UID = "uId";
+
+  /**
+   * FieldId for Name.
+   */
+  public static final String NAME = "Name";
+
+  /**
+   * FieldId for Descrition.
+   */
+  public static final String DESCRIPTION = "Description";
+  /**
+   * FieldId for HostName.
+   */
+  public static final String HOST = "Host Name";
+
+  /**
+   * FieldId for Port Number.
+   */
+  public static final String PORT = "Port Number";
+
+  /**
+   * FieldId for Usename of JMS Connection.
+   */
+  public static final String USERNAME = "User Name";
+
+  /**
+   * FieldId for Password of JMS Connection.
+   */
+  public static final String PASSWORD = "Password";
+
+  /**
+   * FieldId for Destination of the JMS connection.
+   */
+  public static final String DESTINATION = "Destination";
+
+  /**
+   * FieldId for Type of JMS Destination.
+   */
+  public static final String DESTINATION_TYPE = "Destination Type";
+
+  /**
+   * Static value to represent Topic for destination type.
+   */
+  public static final int TOPIC = 1;
+
+  /**
+   * Static value to represent Queue for destination type.
+   */
+  public static final int QUEUE = 2;
+
+  public UpdateJMSCommInfoEvent(
+    Long uId,
+    String name,
+    String description,
+    String hostname,
+    int port,
+    String destinationName,
+    int destinationType,
+    String username,
+    String password)
+    throws EventException
+  {
+    setEventData(DESCRIPTION, description);
+    setEventData(DESTINATION, destinationName);
+    setEventData(DESTINATION_TYPE, new Integer(destinationType));
+    checkSetString(HOST, hostname);
+    checkSetString(NAME, name);
+    setEventData(PASSWORD, password);
+    setEventData(PORT, new Integer(port));
+    setEventData(USERNAME, username);
+    setEventData(UID, uId);
+  }
+
+  public String getDest()
+  {
+    return (String) getEventData(DESTINATION);
+  }
+
+  public int getDestType()
+  {
+    return ((Integer) getEventData(DESTINATION_TYPE)).intValue();
+  }
+
+  public String getHost()
+  {
+    return (String) getEventData(HOST);
+  }
+
+  public String getPassword()
+  {
+    return (String) getEventData(PASSWORD);
+  }
+
+  public int getPort()
+  {
+    return ((Integer) getEventData(PORT)).intValue();
+  }
+
+  public String getUserName()
+  {
+    return (String) getEventData(USERNAME);
+  }
+
+  public Long getUId()
+  {
+    return (Long) getEventData(UID);
+  }
+
+  public String getName()
+  {
+    return (String) getEventData(NAME);
+  }
+
+  public String getDescription()
+  {
+    return (String) getEventData(DESCRIPTION);
+  }
+
+  public String getEventName()
+  {
+    return "java:comp/env/param/event/UpdateJMSCommInfoEvent";
+  }
+}

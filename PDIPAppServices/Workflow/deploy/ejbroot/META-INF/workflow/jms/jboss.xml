@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+    <secure>false</secure>
+    <!-- 
+	   <invoker-proxy-bindings>
+	     <invoker-proxy-binding>
+         <name>workflow-message-driven-bean</name>
+         <invoker-mbean>default</invoker-mbean>
+         <proxy-factory>org.jboss.ejb.plugins.jms.JMSContainerInvoker</proxy-factory>
+         <proxy-factory-config>
+            <JMSProviderAdapterJNDI>DefaultJMSProvider</JMSProviderAdapterJNDI>
+            <ServerSessionPoolFactoryJNDI>StdJMSPool</ServerSessionPoolFactoryJNDI>
+            <MaximumSize>15</MaximumSize>
+            <MaxMessages>1</MaxMessages>
+            <MDBConfig>
+               <ReconnectIntervalSec>10</ReconnectIntervalSec>
+               <DLQConfig>
+                  <DestinationQueue>queue/DLQ</DestinationQueue>
+                  <MaxTimesRedelivered>0</MaxTimesRedelivered>
+                  <TimeToLive>0</TimeToLive>
+               </DLQConfig>
+            </MDBConfig>
+         </proxy-factory-config>
+      </invoker-proxy-binding>
+    </invoker-proxy-bindings>
+    <container-configurations>
+      <container-configuration>
+         <container-name>Standard Workflow Message Driven Bean</container-name>
+         <call-logging>false</call-logging>
+         <invoker-proxy-binding-name>workflow-message-driven-bean</invoker-proxy-binding-name>
+         <container-interceptors>
+            <interceptor>org.jboss.ejb.plugins.ProxyFactoryFinderInterceptor</interceptor>
+            <interceptor>org.jboss.ejb.plugins.LogInterceptor</interceptor>
+            <interceptor>org.jboss.ejb.plugins.RunAsSecurityInterceptor</interceptor>
+            <!- - CMT - ->
+            <interceptor transaction="Container">org.jboss.ejb.plugins.TxInterceptorCMT</interceptor>
+            <interceptor transaction="Container" metricsEnabled="true">org.jboss.ejb.plugins.MetricsInterceptor</interceptor>
+            <interceptor transaction="Container">org.jboss.ejb.plugins.MessageDrivenInstanceInterceptor</interceptor>
+            <!- - BMT - ->
+            <interceptor transaction="Bean">org.jboss.ejb.plugins.MessageDrivenInstanceInterceptor</interceptor>
+            <interceptor transaction="Bean">org.jboss.ejb.plugins.MessageDrivenTxInterceptorBMT</interceptor>
+            <interceptor transaction="Bean" metricsEnabled="true">org.jboss.ejb.plugins.MetricsInterceptor</interceptor>
+            <interceptor>org.jboss.resource.connectionmanager.CachedConnectionInterceptor</interceptor>
+         </container-interceptors>
+         <instance-pool>org.jboss.ejb.plugins.MessageDrivenInstancePool</instance-pool>
+         <instance-cache></instance-cache>
+         <persistence-manager></persistence-manager>
+         <container-pool-conf>
+            <MaximumSize>100</MaximumSize>
+         </container-pool-conf>
+      </container-configuration>
+    </container-configurations>
+    -->
+    <container-configurations />
+    <resource-managers />
+    <enterprise-beans>
+        <message-driven>
+                    <ejb-name>GWFActivityMDBean_BPSS</ejb-name>
+                    <configuration-name>Standard Workflow Message Driven Bean</configuration-name>
+                    <destination-jndi-name>queue/activityQueue</destination-jndi-name>
+					<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.facade.ejb.IGWFWorkflowManagerHome</depends>
+        </message-driven>
+        <message-driven>
+                    <ejb-name>GWFActivityMDBean_XPDL</ejb-name>
+                    <configuration-name>Standard Workflow Message Driven Bean</configuration-name>
+                    <destination-jndi-name>queue/activityQueue</destination-jndi-name>
+					<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.facade.ejb.IGWFWorkflowManagerHome</depends>
+        </message-driven>
+        <message-driven>
+                    <ejb-name>GWFProcessMDBean_BPSS</ejb-name>
+                    <configuration-name>Standard Workflow Message Driven Bean</configuration-name>
+                    <destination-jndi-name>queue/processQueue</destination-jndi-name>
+					<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.facade.ejb.IGWFWorkflowManagerHome</depends>
+        </message-driven>
+        <message-driven>
+                    <ejb-name>GWFProcessMDBean_XPDL</ejb-name>
+                    <configuration-name>Standard Workflow Message Driven Bean</configuration-name>
+                    <destination-jndi-name>queue/processQueue</destination-jndi-name>
+					<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.facade.ejb.IGWFWorkflowManagerHome</depends>
+        </message-driven>
+        <message-driven>
+                    <ejb-name>GWFRestrictionMDBean</ejb-name>
+                    <configuration-name>Standard Workflow Message Driven Bean</configuration-name>
+                    <destination-jndi-name>queue/restrictionQueue</destination-jndi-name>
+					<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.facade.ejb.IGWFWorkflowManagerHome</depends>
+        </message-driven>
+        <message-driven>
+                    <ejb-name>GWFWorklistMDBean</ejb-name>
+                    <configuration-name>Standard Workflow Message Driven Bean</configuration-name>
+                    <destination-jndi-name>queue/performWorkitem</destination-jndi-name>
+					<depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.facade.ejb.IGWFWorkflowManagerHome</depends>
+        </message-driven>
+         <message-driven>
+             <ejb-name>GWFCheckStateMDBean_BPSS</ejb-name>
+             <configuration-name>Standard Workflow Message Driven Bean</configuration-name>
+             <destination-jndi-name>queue/timeInvokeQueue</destination-jndi-name>
+			 <depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.facade.ejb.IGWFWorkflowManagerHome</depends>
+        </message-driven>
+         <message-driven>
+             <ejb-name>GWFCheckStateMDBean_XPDL</ejb-name>
+             <configuration-name>Standard Workflow Message Driven Bean</configuration-name>
+             <destination-jndi-name>queue/timeInvokeQueue</destination-jndi-name>
+			 <depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.facade.ejb.IGWFWorkflowManagerHome</depends>
+        </message-driven>
+         <message-driven>
+             <ejb-name>GWFReceiveDocumentMDBean</ejb-name>
+             <configuration-name>Standard Workflow Message Driven Bean</configuration-name>
+             <destination-jndi-name>queue/receiveDocumentQueue</destination-jndi-name>
+			 <depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.facade.ejb.IGWFWorkflowManagerHome</depends>
+        </message-driven>
+         <message-driven>
+             <ejb-name>GWFReceiveSignalMDBean</ejb-name>
+             <configuration-name>Standard Workflow Message Driven Bean</configuration-name>
+             <destination-jndi-name>queue/receiveSignalQueue</destination-jndi-name>
+			 <depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.facade.ejb.IGWFWorkflowManagerHome</depends>
+        </message-driven>
+         <message-driven>
+             <ejb-name>GWFSendSignalMDBean</ejb-name>
+             <configuration-name>Standard Workflow Message Driven Bean</configuration-name>
+             <destination-jndi-name>queue/sendSignalQueue</destination-jndi-name>
+			 <depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.facade.ejb.IGWFWorkflowManagerHome</depends>
+        </message-driven>
+        <message-driven>
+             <ejb-name>GWFSendReqDocMDBean</ejb-name>
+             <configuration-name>Standard Workflow Message Driven Bean</configuration-name>
+             <destination-jndi-name>queue/sendReqDocQueue</destination-jndi-name>
+			 <depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.facade.ejb.IGWFWorkflowManagerHome</depends>
+        </message-driven>
+         <message-driven>
+             <ejb-name>GWFSendResDocMDBean</ejb-name>
+             <configuration-name>Standard Workflow Message Driven Bean</configuration-name>
+             <destination-jndi-name>queue/sendResDocQueue</destination-jndi-name>
+			 <depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.facade.ejb.IGWFWorkflowManagerHome</depends>
+			 <depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.facade.ejb.IGWFWorkflowManagerHome</depends>
+        </message-driven>
+         <message-driven>
+             <ejb-name>GWFInitialiserMDBean</ejb-name>
+             <configuration-name>Standard Workflow Message Driven Bean</configuration-name>
+             <destination-jndi-name>topic/initialiserTopic</destination-jndi-name>
+			 <depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.workflow.facade.ejb.IGWFWorkflowManagerHome</depends>
+        </message-driven>
+    </enterprise-beans>
+</jboss>

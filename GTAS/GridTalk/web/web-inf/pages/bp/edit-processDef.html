@@ -1,0 +1,355 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Process Definition</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <h4 id="general_heading">
+          lbGeneral
+        </h4>
+        <table>
+          <tr id="defName_details">
+            <td id="defName_label">
+              lbDefName
+            </td>
+            <td>
+              <input type="text" id="defName_value" name="defName"/>
+            </td>
+            <td id="defName_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="isSynchronous_details">
+            <td id="isSynchronous_label">
+              lbIsSynchronous
+            </td>
+            <td>
+              <input type="checkbox" id="isSynchronous_value" name="isSynchronous" value="true"/>
+            </td>
+            <td id="isSynchronous_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="processType_details">
+            <td id="processType_label">
+              lbProcessType
+            </td>
+            <td>
+              <select id="processType_value" size="1" name="processType" onchange="serverRefresh();">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+            </td>
+            <td id="processType_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="requestAct_details">
+            <td/>
+            <td>
+              <a id="requestAct_edit" href="javascript:divertToMapping('divertEditRequestAct');">
+                lbEditRequestAct
+              </a>
+            </td>
+            <td id="requestAct_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="responseAct_details">
+            <td/>
+            <td>
+              <a id="responseAct_edit" href="javascript:divertToMapping('divertEditResponseAct');">
+                lbEditResponseAct
+              </a>
+            </td>
+            <td id="responseAct_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="actionTimeOut_details">
+            <td id="actionTimeOut_label">
+              lbActionTimeOut
+            </td>
+            <td>
+              <input type="text" id="actionTimeOut_value" name="actionTimeOut"/>
+            </td>
+            <td id="actionTimeOut_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="rnifVersion_details">
+            <td id="rnifVersion_label">
+              lbRnifVersion
+            </td>
+            <td>
+              <select id="rnifVersion_value" size="1" name="rnifVersion">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+            </td>
+            <td id="rnifVersion_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="processIndicatorCode_details">
+            <td id="processIndicatorCode_label">
+              lbProcessIndicatorCode
+            </td>
+            <td>
+              <input type="text" id="processIndicatorCode_value" name="processIndicatorCode"/>
+            </td>
+            <td id="processIndicatorCode_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="versionIdentifier_details">
+            <td id="versionIdentifier_label">
+              lbVersionIdentifier
+            </td>
+            <td>
+              <input type="text" id="versionIdentifier_value" name="versionIdentifier"/>
+            </td>
+            <td id="versionIdentifier_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="usageCode_details">
+            <td id="usageCode_label">
+              lbUsageCode
+            </td>
+            <td>
+              <input type="text" id="usageCode_value" name="usageCode"/>
+            </td>
+            <td id="usageCode_error">
+              &nbsp;
+            </td>
+          </tr>
+<!-- 20021224 DDJ: Not implemented yet! May be moved to ProcessAct?
+          <tr id="digestAlgCode_details">
+            <td id="digestAlgCode_label">
+              lbDigestAlgCode
+            </td>
+            <td>
+              <select id="digestAlgCode_value" size="1" name="digestAlgCode">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+            </td>
+            <td id="digestAlgCode_error">
+              &nbsp;
+            </td>
+          </tr>
+-->
+        </table>
+        <h4 id="from_heading">
+          lbFrom
+        </h4>
+        <table>
+          <tr id="fromPartnerClassCode_details">
+            <td id="fromPartnerClassCode_label">
+              lbFromPartnerClassCode
+            </td>
+            <td>
+              <input type="text" id="fromPartnerClassCode_value" name="fromPartnerClassCode"/>
+            </td>
+            <td id="fromPartnerClassCode_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="fromPartnerRoleClassCode_details">
+            <td id="fromPartnerRoleClassCode_label">
+              lbFromPartnerRoleClassCode
+            </td>
+            <td>
+              <input type="text" id="fromPartnerRoleClassCode_value" name="fromPartnerRoleClassCode"/>
+            </td>
+            <td id="fromPartnerRoleClassCode_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="fromBizServiceCode_details">
+            <td id="fromBizServiceCode_label">
+              lbFromBizServiceCode
+            </td>
+            <td>
+              <input type="text" id="fromBizServiceCode_value" name="fromBizServiceCode"/>
+            </td>
+            <td id="fromBizServiceCode_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+        <h4 id="to_heading">
+          lbTo
+        </h4>
+        <table>
+          <tr id="toPartnerClassCode_details">
+            <td id="toPartnerClassCode_label">
+              lbToPartnerClassCode
+            </td>
+            <td>
+              <input type="text" id="toPartnerClassCode_value" name="toPartnerClassCode"/>
+            </td>
+            <td id="toPartnerClassCode_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="toPartnerRoleClassCode_details">
+            <td id="toPartnerRoleClassCode_label">
+              lbToPartnerRoleClassCode
+            </td>
+            <td>
+              <input type="text" id="toPartnerRoleClassCode_value" name="toPartnerRoleClassCode"/>
+            </td>
+            <td id="toPartnerRoleClassCode_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="toBizServiceCode_details">
+            <td id="toBizServiceCode_label">
+              lbToBizServiceCode
+            </td>
+            <td>
+              <input type="text" id="toBizServiceCode_value" name="toBizServiceCode"/>
+            </td>
+            <td id="toBizServiceCode_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+        <h4 id="docIdentifier_heading">
+          lbDocIdentifier
+        </h4>
+        <table>
+          <tr id="requestDocThisDocIdentifier_details">
+            <td id="requestDocThisDocIdentifier_label">
+              lbRequestDocThisDocIdentifier
+            </td>
+            <td>
+              <input type="text" id="requestDocThisDocIdentifier_value" name="requestDocThisDocIdentifier"/>
+            </td>
+            <td id="requestDocThisDocIdentifier_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="responseDocThisDocIdentifier_details">
+            <td id="responseDocThisDocIdentifier_label">
+              lbResponseDocThisDocIdentifier
+            </td>
+            <td>
+              <input type="text" id="responseDocThisDocIdentifier_value" name="responseDocThisDocIdentifier"/>
+            </td>
+            <td id="responseDocThisDocIdentifier_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="responseDocRequestDocIdentifier_details">
+            <td id="responseDocRequestDocIdentifier_label">
+              lbResponseDocRequestDocIdentifier
+            </td>
+            <td>
+              <input type="text" id="responseDocRequestDocIdentifier_value" name="responseDocRequestDocIdentifier"/>
+            </td>
+            <td id="responseDocRequestDocIdentifier_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="userTrackingIdentifier_details">
+            <td id="userTrackingIdentifier_label">
+              lbUserTrackingIdentifier
+            </td>
+            <td>
+              <input type="text" id="userTrackingIdentifier_value" name="userTrackingIdentifier" />
+            </td>
+            <td id="userTrackingIdentifier_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+<!-- 20021224 DDJ: Not implemented yet! May be moved to ProcessAct?
+        <h4 id="options_heading">
+          lbOptions
+        </h4>
+        <table>
+          <tr id="disableDtd_details">
+            <td id="disableDtd_label">
+              lbDisableDtd
+            </td>
+            <td>
+              <input type="checkbox" id="disableDtd_value" name="disableDtd" value="true"/>
+            </td>
+            <td id="disableDtd_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="disableSchema_details">
+            <td id="disableSchema_label">
+              lbDisableSchema
+            </td>
+            <td>
+              <input type="checkbox" id="disableSchema_value" name="disableSchema" value="true"/>
+            </td>
+            <td id="disableSchema_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="disableSignature_details">
+            <td id="disableSignature_label">
+              lbDisableSignature
+            </td>
+            <td>
+              <input type="checkbox" id="disableSignature_value" name="disableSignature" value="true"/>
+            </td>
+            <td id="disableSignature_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="disableEncryption_details">
+            <td id="disableEncryption_label">
+              lbDisableEncryption
+            </td>
+            <td>
+              <input type="checkbox" id="disableEncryption_value" name="disableEncryption" value="true"/>
+            </td>
+            <td id="disableEncryption_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="enableEncryptPayload_details">
+            <td id="enableEncryptPayload_label">
+              lbEnableEncryptPayload
+            </td>
+            <td>
+              <input type="checkbox" id="enableEncryptPayload_value" name="enableEncryptPayload" value="true"/>
+            </td>
+            <td id="enableEncryptPayload_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="validateAtSender_details">
+            <td id="validateAtSender_label">
+              lbValidateAtSender
+            </td>
+            <td>
+              <input type="checkbox" id="validateAtSender_value" name="validateAtSender" value="true"/>
+            </td>
+            <td id="validateAtSender_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+-->
+      </form>
+    </div>
+  </body>
+</html>
+

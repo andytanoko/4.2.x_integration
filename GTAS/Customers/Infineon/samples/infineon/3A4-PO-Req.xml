@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Pip3A4PurchaseOrderRequest>
+   <fromRole>
+      <PartnerRoleDescription>
+         <ContactInformation>
+            <contactName>
+               <FreeFormText>JohnChoo1234</FreeFormText>
+            </contactName>
+            <EmailAddress>M06</EmailAddress>
+            <facsimileNumber>
+               <CommunicationsNumber> </CommunicationsNumber>
+            </facsimileNumber>
+            <telephoneNumber>
+               <CommunicationsNumber>06-232 2398</CommunicationsNumber>
+            </telephoneNumber>
+         </ContactInformation>
+         <GlobalPartnerRoleClassificationCode>Buyer</GlobalPartnerRoleClassificationCode>
+         <PartnerDescription>
+            <BusinessDescription>
+               <GlobalBusinessIdentifier>894211689</GlobalBusinessIdentifier>
+            </BusinessDescription>
+            <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+         </PartnerDescription>
+      </PartnerRoleDescription>
+   </fromRole>
+   <PurchaseOrder>
+      <AccountDescription>
+         <accountName>
+            <FreeFormText/>
+         </accountName>
+         <AccountNumber/>
+         <billTo>
+            <PartnerDescription>
+               <BusinessDescription>
+                  <GlobalBusinessIdentifier>89421689</GlobalBusinessIdentifier>
+                  <businessName>
+                     <FreeFormText>       </FreeFormText>
+                  </businessName>
+                  <PartnerBusinessIdentification>
+                     <ProprietaryBusinessIdentifier>0001</ProprietaryBusinessIdentifier>
+                     <ProprietaryDomainIdentifier> </ProprietaryDomainIdentifier>
+                     <ProprietaryIdentifierAuthority>5687</ProprietaryIdentifierAuthority>
+                  </PartnerBusinessIdentification>
+               </BusinessDescription>
+               <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+               <ContactInformation>
+                  <contactName>
+                     <FreeFormText>JANI.KHOO(CONSIGN)</FreeFormText>
+                  </contactName>
+                  <facsimileNumber>
+                     <CommunicationsNumber> </CommunicationsNumber>
+                  </facsimileNumber>
+                  <telephoneNumber>
+                     <CommunicationsNumber>06-232 2398</CommunicationsNumber>
+                  </telephoneNumber>
+                  <PhysicalLocation>
+                     <PhysicalAddress>
+                        <addressLine1>
+                           <FreeFormText> </FreeFormText>
+                        </addressLine1>
+                        <addressLine2>
+                           <FreeFormText> </FreeFormText>
+                        </addressLine2>
+                        <cityName>
+                           <FreeFormText> </FreeFormText>
+                        </cityName>
+                        <GlobalCountryCode> </GlobalCountryCode>
+                        <NationalPostalCode> </NationalPostalCode>
+                        <postOfficeBoxIdentifier>
+                           <FreeFormText>   </FreeFormText>
+                        </postOfficeBoxIdentifier>
+                        <regionName>
+                           <FreeFormText> </FreeFormText>
+                        </regionName>
+                     </PhysicalAddress>
+                  </PhysicalLocation>
+               </ContactInformation>
+            </PartnerDescription>
+         </billTo>
+      </AccountDescription>
+      <comments>
+         <FreeFormText>ADD1-1 
+ADD2-1
+DIST1-1
+REGION-1
+CITY-1
+COUNTRY-1
+POSTALCODE-1
+POBOX-1
+POBOXPOSTAL-1</FreeFormText>
+      </comments>
+      <ContractInformation>
+         <contractIdentifier>
+            <ProprietaryDocumentIdentifier>2000007326</ProprietaryDocumentIdentifier>
+         </contractIdentifier>
+         <primaryContractWith>
+            <PartnerDescription>
+               <BusinessDescription>
+                  <PartnerBusinessIdentification>
+                     <ProprietaryBusinessIdentifier> </ProprietaryBusinessIdentifier>
+                     <ProprietaryDomainIdentifier> </ProprietaryDomainIdentifier>
+                     <ProprietaryIdentifierAuthority>0000011114</ProprietaryIdentifierAuthority>
+                  </PartnerBusinessIdentification>
+               </BusinessDescription>
+            </PartnerDescription>
+         </primaryContractWith>
+      </ContractInformation>
+      <DocumentReference>
+         <DateTimeStamp>20030211T165400</DateTimeStamp>
+         <GlobalDocumentReferenceTypeCode>Purchase Order</GlobalDocumentReferenceTypeCode>
+         <LineNumber> </LineNumber>
+         <ProprietaryDocumentIdentifier>2000007326</ProprietaryDocumentIdentifier>
+      </DocumentReference>
+      <DocumentReference>
+         <DateTimeStamp>T</DateTimeStamp>
+         <GlobalDocumentReferenceTypeCode>Sales Order</GlobalDocumentReferenceTypeCode>
+         <LineNumber/>
+         <ProprietaryDocumentIdentifier/>
+      </DocumentReference>
+      <DocumentReference>
+         <DateTimeStamp>T</DateTimeStamp>
+         <GlobalDocumentReferenceTypeCode>Purchase Order</GlobalDocumentReferenceTypeCode>
+         <ProprietaryDocumentIdentifier>2000007326</ProprietaryDocumentIdentifier>
+      </DocumentReference>
+      <DocumentReference>
+         <DateTimeStamp>T</DateTimeStamp>
+         <GlobalDocumentReferenceTypeCode>Purchase Order</GlobalDocumentReferenceTypeCode>
+         <ProprietaryDocumentIdentifier>2000007326</ProprietaryDocumentIdentifier>
+      </DocumentReference>
+      <FinancingTerms>
+         <GlobalFinanceTermsCode>Mutually defined / determined by TPA</GlobalFinanceTermsCode>
+         <PaymentTerms>
+            <netTermsDay>
+               <DayOfMonth>60</DayOfMonth>
+            </netTermsDay>
+            <percentDue>
+               <PercentAmount> </PercentAmount>
+            </percentDue>
+         </PaymentTerms>
+         <PaymentTerms>
+            <netTermsDay>
+               <DayOfMonth> </DayOfMonth>
+            </netTermsDay>
+         </PaymentTerms>
+      </FinancingTerms>
+      <GlobalPurchaseOrderTypeCode>Consigned Order</GlobalPurchaseOrderTypeCode>
+      <isDropShip>
+         <AffirmationIndicator>No</AffirmationIndicator>
+      </isDropShip>
+      <OrderShippingInformation>
+         <GlobalShipmentTermsCode>FCA</GlobalShipmentTermsCode>
+         <packListRequirements>
+            <FreeFormText>SIN-SECURIFORCE</FreeFormText>
+         </packListRequirements>
+         <SpecialHandlingInstruction>
+            <specialHandlingText>
+               <FreeFormText>BY ROAD </FreeFormText>
+            </specialHandlingText>
+         </SpecialHandlingInstruction>
+      </OrderShippingInformation>
+      <ProductLineItem>
+         <comments>
+            <FreeFormText>P/N 9635018 FOR TO220-LPL AUTO MOLD AMS-36-M </FreeFormText>
+         </comments>
+         <GlobalProductUnitOfMeasureCode>Piece</GlobalProductUnitOfMeasureCode>
+         <isDropShip>
+            <AffirmationIndicator>No</AffirmationIndicator>
+         </isDropShip>
+         <LineNumber>00010</LineNumber>
+         <OrderQuantity>
+            <requestedQuantity>
+               <ProductQuantity>100.000</ProductQuantity>
+            </requestedQuantity>
+         </OrderQuantity>
+         <ProductIdentification>
+            <PartnerProductIdentification>
+               <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+               <ProprietaryProductIdentifier>000000000000114680</ProprietaryProductIdentifier>
+               <revisionIdentifier>
+                  <FreeFormText>BAUMER IWA 12U9001/S12 SENSOR PNP</FreeFormText>
+               </revisionIdentifier>
+            </PartnerProductIdentification>
+            <PartnerProductIdentification>
+               <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+               <ProprietaryProductIdentifier>000000000000114680</ProprietaryProductIdentifier>
+               <revisionIdentifier>
+                  <FreeFormText>1</FreeFormText>
+               </revisionIdentifier>
+            </PartnerProductIdentification>
+         </ProductIdentification>
+         <proprietaryInformation>
+            <FreeFormText>P/N 9635018 FOR TO220-LPL AUTO MOLD AMS-36-M </FreeFormText>
+         </proprietaryInformation>
+         <requestedEvent>
+            <TransportationEvent>
+               <DateStamp>20030310</DateStamp>
+               <GlobalTransportEventCode>Ship</GlobalTransportEventCode>
+            </TransportationEvent>
+         </requestedEvent>
+         <requestedUnitPrice>
+            <FinancialAmount>
+               <GlobalCurrencyCode> </GlobalCurrencyCode>
+               <MonetaryAmount> </MonetaryAmount>
+            </FinancialAmount>
+         </requestedUnitPrice>
+         <totalLineItemAmount>
+            <FinancialAmount>
+               <GlobalCurrencyCode> </GlobalCurrencyCode>
+               <MonetaryAmount> </MonetaryAmount>
+            </FinancialAmount>
+         </totalLineItemAmount>
+      </ProductLineItem>
+      <ProductLineItem>
+         <comments>
+            <FreeFormText>P/N 9631045 FOR TO220-LPL AUTO MOLD AMS-36-M </FreeFormText>
+         </comments>
+         <GlobalProductUnitOfMeasureCode>Piece</GlobalProductUnitOfMeasureCode>
+         <isDropShip>
+            <AffirmationIndicator>No</AffirmationIndicator>
+         </isDropShip>
+         <LineNumber>00020</LineNumber>
+         <OrderQuantity>
+            <requestedQuantity>
+               <ProductQuantity>100.000</ProductQuantity>
+            </requestedQuantity>
+         </OrderQuantity>
+         <ProductIdentification>
+            <PartnerProductIdentification>
+               <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+               <ProprietaryProductIdentifier>000000000000114680</ProprietaryProductIdentifier>
+               <revisionIdentifier>
+                  <FreeFormText>BAUMER IWA 12U9001/S12 SENSOR PNP</FreeFormText>
+               </revisionIdentifier>
+            </PartnerProductIdentification>
+            <PartnerProductIdentification>
+               <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+               <ProprietaryProductIdentifier>000000000000114680</ProprietaryProductIdentifier>
+               <revisionIdentifier>
+                  <FreeFormText>1</FreeFormText>
+               </revisionIdentifier>
+            </PartnerProductIdentification>
+         </ProductIdentification>
+         <proprietaryInformation>
+            <FreeFormText>P/N 9631045 FOR TO220-LPL AUTO MOLD AMS-36-M </FreeFormText>
+         </proprietaryInformation>
+         <requestedEvent>
+            <TransportationEvent>
+               <DateStamp>20030310</DateStamp>
+               <GlobalTransportEventCode>Ship</GlobalTransportEventCode>
+            </TransportationEvent>
+         </requestedEvent>
+         <requestedUnitPrice>
+            <FinancialAmount>
+               <GlobalCurrencyCode> </GlobalCurrencyCode>
+               <MonetaryAmount> </MonetaryAmount>
+            </FinancialAmount>
+         </requestedUnitPrice>
+         <totalLineItemAmount>
+            <FinancialAmount>
+               <GlobalCurrencyCode> </GlobalCurrencyCode>
+               <MonetaryAmount> </MonetaryAmount>
+            </FinancialAmount>
+         </totalLineItemAmount>
+      </ProductLineItem>
+      <ProductLineItem>
+         <comments>
+            <FreeFormText>SMD CUT AND PUNCH MICROFORM MACHINE </FreeFormText>
+         </comments>
+         <GlobalProductUnitOfMeasureCode>Piece</GlobalProductUnitOfMeasureCode>
+         <isDropShip>
+            <AffirmationIndicator>No</AffirmationIndicator>
+         </isDropShip>
+         <LineNumber>00030</LineNumber>
+         <OrderQuantity>
+            <requestedQuantity>
+               <ProductQuantity>100.000</ProductQuantity>
+            </requestedQuantity>
+         </OrderQuantity>
+         <ProductIdentification>
+            <PartnerProductIdentification>
+               <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+               <ProprietaryProductIdentifier>000000000000114680</ProprietaryProductIdentifier>
+               <revisionIdentifier>
+                  <FreeFormText>BAUMER IWA 12U9001/S12 SENSOR PNP</FreeFormText>
+               </revisionIdentifier>
+            </PartnerProductIdentification>
+            <PartnerProductIdentification>
+               <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+               <ProprietaryProductIdentifier>000000000000114680</ProprietaryProductIdentifier>
+               <revisionIdentifier>
+                  <FreeFormText>1</FreeFormText>
+               </revisionIdentifier>
+            </PartnerProductIdentification>
+         </ProductIdentification>
+         <proprietaryInformation>
+            <FreeFormText>SMD CUT AND PUNCH MICROFORM MACHINE </FreeFormText>
+         </proprietaryInformation>
+         <requestedEvent>
+            <TransportationEvent>
+               <DateStamp>20030310</DateStamp>
+               <GlobalTransportEventCode>Ship</GlobalTransportEventCode>
+            </TransportationEvent>
+         </requestedEvent>
+         <requestedUnitPrice>
+            <FinancialAmount>
+               <GlobalCurrencyCode> </GlobalCurrencyCode>
+               <MonetaryAmount> </MonetaryAmount>
+            </FinancialAmount>
+         </requestedUnitPrice>
+         <totalLineItemAmount>
+            <FinancialAmount>
+               <GlobalCurrencyCode> </GlobalCurrencyCode>
+               <MonetaryAmount> </MonetaryAmount>
+            </FinancialAmount>
+         </totalLineItemAmount>
+      </ProductLineItem>
+      <ProductLineItem>
+         <comments>
+            <FreeFormText>CUT AND PUNCH MICROFORM MACHINE </FreeFormText>
+         </comments>
+         <GlobalProductUnitOfMeasureCode>Piece</GlobalProductUnitOfMeasureCode>
+         <isDropShip>
+            <AffirmationIndicator>No</AffirmationIndicator>
+         </isDropShip>
+         <LineNumber>00040</LineNumber>
+         <OrderQuantity>
+            <requestedQuantity>
+               <ProductQuantity>100.000</ProductQuantity>
+            </requestedQuantity>
+         </OrderQuantity>
+         <ProductIdentification>
+            <PartnerProductIdentification>
+               <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+               <ProprietaryProductIdentifier>000000000000114680</ProprietaryProductIdentifier>
+               <revisionIdentifier>
+                  <FreeFormText>BAUMER IWA 12U9001/S12 SENSOR PNP</FreeFormText>
+               </revisionIdentifier>
+            </PartnerProductIdentification>
+            <PartnerProductIdentification>
+               <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+               <ProprietaryProductIdentifier>000000000000114680</ProprietaryProductIdentifier>
+               <revisionIdentifier>
+                  <FreeFormText>1</FreeFormText>
+               </revisionIdentifier>
+            </PartnerProductIdentification>
+         </ProductIdentification>
+         <proprietaryInformation>
+            <FreeFormText>CUT AND PUNCH MICROFORM MACHINE </FreeFormText>
+         </proprietaryInformation>
+         <requestedEvent>
+            <TransportationEvent>
+               <DateStamp>20030310</DateStamp>
+               <GlobalTransportEventCode>Ship</GlobalTransportEventCode>
+            </TransportationEvent>
+         </requestedEvent>
+         <requestedUnitPrice>
+            <FinancialAmount>
+               <GlobalCurrencyCode> </GlobalCurrencyCode>
+               <MonetaryAmount> </MonetaryAmount>
+            </FinancialAmount>
+         </requestedUnitPrice>
+         <totalLineItemAmount>
+            <FinancialAmount>
+               <GlobalCurrencyCode> </GlobalCurrencyCode>
+               <MonetaryAmount> </MonetaryAmount>
+            </FinancialAmount>
+         </totalLineItemAmount>
+      </ProductLineItem>
+      <ProductLineItem>
+         <comments>
+            <FreeFormText>PUNCH MICROFORM MACHINE </FreeFormText>
+         </comments>
+         <GlobalProductUnitOfMeasureCode>Piece</GlobalProductUnitOfMeasureCode>
+         <isDropShip>
+            <AffirmationIndicator>No</AffirmationIndicator>
+         </isDropShip>
+         <LineNumber>00050</LineNumber>
+         <OrderQuantity>
+            <requestedQuantity>
+               <ProductQuantity>100.000</ProductQuantity>
+            </requestedQuantity>
+         </OrderQuantity>
+         <ProductIdentification>
+            <PartnerProductIdentification>
+               <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+               <ProprietaryProductIdentifier>000000000000114680</ProprietaryProductIdentifier>
+               <revisionIdentifier>
+                  <FreeFormText>BAUMER IWA 12U9001/S12 SENSOR PNP</FreeFormText>
+               </revisionIdentifier>
+            </PartnerProductIdentification>
+            <PartnerProductIdentification>
+               <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+               <ProprietaryProductIdentifier>000000000000114680</ProprietaryProductIdentifier>
+               <revisionIdentifier>
+                  <FreeFormText>1</FreeFormText>
+               </revisionIdentifier>
+            </PartnerProductIdentification>
+         </ProductIdentification>
+         <proprietaryInformation>
+            <FreeFormText>PUNCH MICROFORM MACHINE </FreeFormText>
+         </proprietaryInformation>
+         <requestedEvent>
+            <TransportationEvent>
+               <DateStamp>20030310</DateStamp>
+               <GlobalTransportEventCode>Ship</GlobalTransportEventCode>
+            </TransportationEvent>
+         </requestedEvent>
+         <requestedUnitPrice>
+            <FinancialAmount>
+               <GlobalCurrencyCode> </GlobalCurrencyCode>
+               <MonetaryAmount> </MonetaryAmount>
+            </FinancialAmount>
+         </requestedUnitPrice>
+         <totalLineItemAmount>
+            <FinancialAmount>
+               <GlobalCurrencyCode> </GlobalCurrencyCode>
+               <MonetaryAmount> </MonetaryAmount>
+            </FinancialAmount>
+         </totalLineItemAmount>
+      </ProductLineItem>
+      <ProductLineItem>
+         <comments>
+            <FreeFormText>ESEC 3006 WIRE BONDER </FreeFormText>
+         </comments>
+         <GlobalProductUnitOfMeasureCode>Piece</GlobalProductUnitOfMeasureCode>
+         <isDropShip>
+            <AffirmationIndicator>No</AffirmationIndicator>
+         </isDropShip>
+         <LineNumber>00060</LineNumber>
+         <OrderQuantity>
+            <requestedQuantity>
+               <ProductQuantity>100.000</ProductQuantity>
+            </requestedQuantity>
+         </OrderQuantity>
+         <ProductIdentification>
+            <PartnerProductIdentification>
+               <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+               <ProprietaryProductIdentifier>000000000000114680</ProprietaryProductIdentifier>
+               <revisionIdentifier>
+                  <FreeFormText>BAUMER IWA 12U9001/S12 SENSOR PNP</FreeFormText>
+               </revisionIdentifier>
+            </PartnerProductIdentification>
+            <PartnerProductIdentification>
+               <GlobalPartnerClassificationCode>End User</GlobalPartnerClassificationCode>
+               <ProprietaryProductIdentifier>000000000000114680</ProprietaryProductIdentifier>
+               <revisionIdentifier>
+                  <FreeFormText>1</FreeFormText>
+               </revisionIdentifier>
+            </PartnerProductIdentification>
+         </ProductIdentification>
+         <proprietaryInformation>
+            <FreeFormText>ESEC 3006 WIRE BONDER </FreeFormText>
+         </proprietaryInformation>
+         <requestedEvent>
+            <TransportationEvent>
+               <DateStamp>20030310</DateStamp>
+               <GlobalTransportEventCode>Ship</GlobalTransportEventCode>
+            </TransportationEvent>
+         </requestedEvent>
+         <requestedUnitPrice>
+            <FinancialAmount>
+               <GlobalCurrencyCode> </GlobalCurrencyCode>
+               <MonetaryAmount> </MonetaryAmount>
+            </FinancialAmount>
+         </requestedUnitPrice>
+         <totalLineItemAmount>
+            <FinancialAmount>
+               <GlobalCurrencyCode> </GlobalCurrencyCode>
+               <MonetaryAmount> </MonetaryAmount>
+            </FinancialAmount>
+         </totalLineItemAmount>
+      </ProductLineItem>
+      <proprietaryInformation>
+         <FreeFormText>*** Text changed *** Changed on 03.01.2003</FreeFormText>
+      </proprietaryInformation>
+      <shipTo>
+         <PartnerDescription>
+            <BusinessDescription>
+               <GlobalBusinessIdentifier>89421689</GlobalBusinessIdentifier>
+               <businessName>
+                  <FreeFormText>Infineon Technologies (Malaysia) Sdn. Bhd. (56645-D)    </FreeFormText>
+               </businessName>
+               <PartnerBusinessIdentification>
+                  <ProprietaryBusinessIdentifier/>
+                  <ProprietaryDomainIdentifier>7000</ProprietaryDomainIdentifier>
+                  <ProprietaryIdentifierAuthority> </ProprietaryIdentifierAuthority>
+               </PartnerBusinessIdentification>
+            </BusinessDescription>
+            <GlobalPartnerClassificationCode>Buyer</GlobalPartnerClassificationCode>
+            <ContactInformation>
+               <contactName>
+                  <FreeFormText> </FreeFormText>
+               </contactName>
+               <facsimileNumber>
+                  <CommunicationsNumber>60-06-2321539 / 2326743</CommunicationsNumber>
+               </facsimileNumber>
+               <telephoneNumber>
+                  <CommunicationsNumber>60-06-2325266</CommunicationsNumber>
+               </telephoneNumber>
+            </ContactInformation>
+            <PhysicalLocation>
+               <PhysicalAddress>
+                  <addressLine1>
+                     <FreeFormText>Batu Berendam Free Trade Zone</FreeFormText>
+                  </addressLine1>
+                  <addressLine2>
+                     <FreeFormText> </FreeFormText>
+                  </addressLine2>
+                  <cityName>
+                     <FreeFormText>Melaka</FreeFormText>
+                  </cityName>
+                  <GlobalCountryCode>MY</GlobalCountryCode>
+                  <NationalPostalCode>75350</NationalPostalCode>
+                  <postOfficeBoxIdentifier>
+                     <FreeFormText>52 75710</FreeFormText>
+                  </postOfficeBoxIdentifier>
+                  <regionName>
+                     <FreeFormText>MK</FreeFormText>
+                  </regionName>
+               </PhysicalAddress>
+            </PhysicalLocation>
+         </PartnerDescription>
+      </shipTo>
+      <totalAmount>
+         <FinancialAmount>
+            <GlobalCurrencyCode> </GlobalCurrencyCode>
+            <MonetaryAmount/>
+         </FinancialAmount>
+      </totalAmount>
+   </PurchaseOrder>
+   <thisDocumentGenerationDateTime>
+      <DateTimeStamp>20030403T000000</DateTimeStamp>
+   </thisDocumentGenerationDateTime>
+   <thisDocumentIdentifier>
+      <ProprietaryDocumentIdentifier>2000007326</ProprietaryDocumentIdentifier>
+   </thisDocumentIdentifier>
+   <toRole>
+      <PartnerRoleDescription>
+         <ContactInformation>
+            <contactName>
+               <FreeFormText>MR. ALLEN LOW</FreeFormText>
+            </contactName>
+            <EmailAddress>M04</EmailAddress>
+            <facsimileNumber>
+               <CommunicationsNumber> </CommunicationsNumber>
+            </facsimileNumber>
+            <telephoneNumber>
+               <CommunicationsNumber>04-6415911</CommunicationsNumber>
+            </telephoneNumber>
+         </ContactInformation>
+         <GlobalPartnerRoleClassificationCode>Seller</GlobalPartnerRoleClassificationCode>
+         <PartnerDescription>
+            <BusinessDescription>
+               <GlobalBusinessIdentifier>444444444</GlobalBusinessIdentifier>
+            </BusinessDescription>
+            <GlobalPartnerClassificationCode>Manufacturer</GlobalPartnerClassificationCode>
+         </PartnerDescription>
+      </PartnerRoleDescription>
+   </toRole>
+</Pip3A4PurchaseOrderRequest>

@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Edit or Create AccessRight</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="save"/>
+        <input type="hidden" name="divertTo"/>
+        <table>
+          <tr id="role_details">
+            <td id="role_label">
+              lbRole
+            </td>
+            <td>
+              <select id="role_value" name="role" size="1">
+                <option id="role_null" value="">
+                  &nbsp;
+                </option>
+              </select>
+            </td>
+            <td id="role_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="description_details">
+            <td id="description_label">
+              lbDescription
+            </td>
+            <td>
+              <input id="description_value" type="text" name="description" size="50"/>
+            </td>
+            <td id="description_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="feature_details">
+            <td id="feature_label">
+              lbFeature
+            </td>
+            <td>
+              <select id="feature_value" name="feature" size="1" onChange="serverRefresh();">
+                <option id="feature_null" value="">
+                  &nbsp;
+                </option>
+              </select>
+            </td>
+            <td id="feature_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="actionName_details">
+            <td id="actionName_label">
+              lbAction
+            </td>
+            <td>
+              <select id="actionName_value" name="action" size="1">
+              </select>
+            </td>
+            <td id="actionName_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="dataType_details">
+            <td id="dataType_label">
+              lbDataType
+            </td>
+            <td>
+              <select id="dataType_value" name="dataType" size="1">
+              </select>
+            </td>
+            <td id="dataType_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

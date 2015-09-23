@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Package SYSTEM "../../validation/dtd/xpdl.dtd">
+<Package Id="UserProcedures">
+	<PackageHeader>
+		<XPDLVersion/>
+		<Vendor/>
+		<Created>2002-11-05 13:50:403</Created>
+	</PackageHeader>
+	<RedefinableHeader>
+		<Author>GTAS</Author>
+		<Version>0</Version>
+	</RedefinableHeader>
+	<Applications>
+		<Application Id="UserProcedureAdapter">
+			<Description>Adapter to call java procedure to perform mapping rule</Description>
+			<FormalParameters>
+				<FormalParameter Id="Param1" Index="1" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.lang.String"/>
+					</DataType>
+				</FormalParameter>
+				<FormalParameter Id="Param2" Index="2" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.util.Collection"/>
+					</DataType>
+				</FormalParameter>
+				<FormalParameter Id="Param3" Index="3" Mode="OUT">
+					<DataType>
+						<DeclaredType Id="java.util.Collection"/>
+					</DataType>
+				</FormalParameter>
+			</FormalParameters>
+			<ExtendedAttributes>
+				<ExtendedAttribute Name="AdapterClass" Value="com.gridnode.gtas.server.userprocedure.helpers.UserProcedureDelegate"/>
+				<ExtendedAttribute Name="AdapterMethod" Value="execute"/>
+			</ExtendedAttributes>
+		</Application>
+	</Applications>
+	<WorkflowProcesses>
+		<WorkflowProcess Id="UserProcedures">
+			<ProcessHeader/>
+			<FormalParameters>
+				<FormalParameter Id="uid" Index="1" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.lang.String"/>
+					</DataType>
+				</FormalParameter>
+				<FormalParameter Id="in.gdocs" Index="2" Mode="IN">
+					<DataType>
+						<DeclaredType Id="java.util.Collection"/>
+					</DataType>
+				</FormalParameter>
+				<FormalParameter Id="out.gdocs" Index="3" Mode="OUT">
+					<DataType>
+						<DeclaredType Id="java.util.Collection"/>
+					</DataType>
+				</FormalParameter>
+			</FormalParameters>
+			<Activities>
+				<Activity Id="START">
+					<Description>Start of Process</Description>
+					<Implementation>
+						<No/>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+				<Activity Id="END">
+					<Description>End of Process</Description>
+					<Implementation>
+						<No/>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+				<Activity Id="USER_PROCEDURE">
+					<Description>GridTalk User Procedure</Description>
+					<Implementation>
+						<Tool Id="UserProcedureAdapter" Type="APPLICATION">
+							<ActualParameters>
+								<ActualParameter>uid</ActualParameter>
+								<ActualParameter>in.gdocs</ActualParameter>
+								<ActualParameter>out.gdocs</ActualParameter>
+							</ActualParameters>
+						</Tool>
+					</Implementation>
+					<StartMode>
+						<Automatic/>
+					</StartMode>
+					<FinishMode>
+						<Automatic/>
+					</FinishMode>
+				</Activity>
+			</Activities>
+			<Transitions>
+				<Transition Id="START_USER_PROCEDURE" From="START" To="USER_PROCEDURE"/>
+				<Transition Id="USER_PROCEDURE_END" From="USER_PROCEDURE" To="END"/>
+			</Transitions>
+		</WorkflowProcess>
+	</WorkflowProcesses>
+</Package>

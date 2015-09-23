@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+  <enterprise-beans>
+    <entity>
+      <display-name>ResourceLink</display-name>
+      <ejb-name>ResourceLink</ejb-name>
+      <local-home>com.gridnode.gtas.server.enterprise.entities.ejb.IResourceLinkLocalHome</local-home>
+      <local>com.gridnode.gtas.server.enterprise.entities.ejb.IResourceLinkLocalObj</local>
+      <ejb-class>com.gridnode.gtas.server.enterprise.entities.ejb.ResourceLinkBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+    <entity>
+      <display-name>SharedResource</display-name>
+      <ejb-name>SharedResource</ejb-name>
+      <local-home>com.gridnode.gtas.server.enterprise.entities.ejb.ISharedResourceLocalHome</local-home>
+      <local>com.gridnode.gtas.server.enterprise.entities.ejb.ISharedResourceLocalObj</local>
+      <ejb-class>com.gridnode.gtas.server.enterprise.entities.ejb.SharedResourceBean</ejb-class>
+      <persistence-type>Bean</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+  </enterprise-beans>
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+        <ejb-name>ResourceLink</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+    <container-transaction>
+      <method>
+        <ejb-name>SharedResource</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+</ejb-jar>

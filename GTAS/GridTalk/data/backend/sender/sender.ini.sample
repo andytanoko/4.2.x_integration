@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Init>
+  <!-- PORT_NAME: arbitrary name associated to this set of settings-->
+  <!-- HOST_DIR: directory for picking up the documents to send, 
+                 applicable only if directory.file is not in use-->
+  <!-- GT_IP: defines the GridTalk Host IP address-->
+  <!-- GT_PORT_NUMBER: defines the GridTalk listening port, default 6763-->
+  <!-- USER_NAME: defines the user name. must match a user name define in GridTalk-->
+  <!-- PASSWORD: defines the password assigned to the user-->
+  <!-- BIZ_ENT_ID: defines the Business Entity ID of the user. 
+                   this must match a Business Entity ID define in GridTalk. 
+                   Business Entity ID must be one that is assigned to this user.-->
+  <!-- SMTP: optional, SMTP Host-->
+  <!-- EMAIL: optional, defines the notification email address-->
+  <!-- LOCKFILE: defines the filename for indicating a lock has been acquired on the host directory.
+                 when the lock is acquired, no other send operation is allowed. if the send is 
+                 successful, the file will be deleted to allow other send operation to proceed-->
+  <!-- TIMEOUT: defines the timeout settings in minutes to allow the subsequent send operation 
+                to proceed if time elapsed since last locked time exceeded this timeout value,
+                a new locked file storing the current time will be created-->
+  <!-- COMMAND_FILE: optional, defines the pre-processing script command to trigger before sending-->
+  <!-- ATTACHMENT_DIR: optional, directory for picking up the attachments to send-->
+
+  <Property key="PORT_NAME">PORT0001</Property>
+  <Property key="HOST_DIR">c:\orders\00001000</Property>
+  <Property key="GT_IP">192.168.213.190</Property> 
+  <Property key="GT_PORT_NUMBER">6763</Property> 
+  <Property key="USER_NAME">admin</Property>
+  <Property key="PASSWORD">admin</Property>
+  <Property key="BIZ_ENT_ID">DEF</Property>
+  <Property key="SMTP">192.168.213.251</Property>
+  <Property key="EMAIL">admin@gridnode.com</Property>
+  <Property key="LOCKFILE">lock</Property>
+  <Property key="TIMEOUT">5</Property>
+  <!--Property key="COMMAND_FILE">preprocess.sh %FILENAME %FILENAME_tmp tmp_%FILENAME</Property-->
+  <Property key="ATTACHMENT_DIR">c:\orders\00001000\attachments</Property>
+</Init>
+

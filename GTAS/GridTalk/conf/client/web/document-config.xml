@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<document-config>
+
+  <descriptors>
+    <!--
+          Document Descriptors are specified using the 'document' tag
+          which has several attributes: (Default values for optional fields in [])
+          key       - (Required)  Key that will be used as index for the document
+          uri       - (Required)  Context relative path to the document
+          cache     - ["none"]    Caching method. One of 'none','file','memory'
+          xml       - [true]      Document is xml (including xhtml)
+          preload   - [false]     Load and cache document immediately (cached xml only)
+          validate  - [false]     Validate xml when parsing (@broken)
+    -->
+
+    <!--  Local copies of xhtml DTDs and entity definition files.
+          These arent documents for rendering but the entity resolver makes use of the
+          DocumentFinder to obtain input streams for these when required -->
+    <document key="http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent"
+              cache="none" xml="false" uri="/WEB-INF/xhtml-lat1.ent"/>
+    <document key="http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent"
+              cache="none" xml="false" uri="/WEB-INF/xhtml-special.ent"/>
+    <document key="http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent"
+              cache="none" xml="false" uri="/WEB-INF/xhtml-symbol.ent"/>
+
+    <document key="-//W3C//ENTITIES Latin 1 for XHTML//EN"
+              cache="none" xml="false" uri="/WEB-INF/xhtml-lat1.ent"/>
+    <document key="-//W3C//ENTITIES Special for XHTML//EN"
+              cache="none" xml="false" uri="/WEB-INF/xhtml-special.ent"/>
+    <document key="-//W3C//ENTITIES Symbols for XHTML//EN"
+              cache="none" xml="false" uri="/WEB-INF/xhtml-symbol.ent"/>
+
+    <document key="http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd"
+              cache="none" xml="false" uri="/WEB-INF/xhtml1-frameset.dtd"/>
+    <document key="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+              cache="none" xml="false" uri="/WEB-INF/xhtml1-strict.dtd"/>
+    <document key="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+              cache="none" xml="false" uri="/WEB-INF/xhtml1-transitional.dtd"/>
+
+    <!--  The template document is used by almost every page as the rendering pipeline's
+          'target document' -->
+    <document key="template"                cache="memory" preload="true"
+              uri="/WEB-INF/pages/templates/template.html"/>
+    <document key="detailViewTemplate"      cache="memory" preload="true"
+              uri="/WEB-INF/pages/templates/detailViewTemplate.html"/>
+
+    <!-- Very basic layout document (virtually no content) useful when content is all dynamic -->
+    <document key="blank"                cache="none"  preload="false"
+              uri="/WEB-INF/pages/templates/blank.html"/>
+
+    <!-- Layout for normal listviews -->
+    <document key="templateListview"        cache="memory" preload="true"
+              uri="/WEB-INF/pages/templates/listview.html"/>
+
+    <!-- Layout for ELVs (Embedded ListViews) -->
+    <document key="embedListview"           cache="memory"  preload="false"
+              uri="/WEB-INF/pages/templates/embed-listview.html"/>
+
+    <!-- Layouts used by some shared components -->
+    <document key="multiselector"             cache="memory"  preload="true"
+              uri="/WEB-INF/pages/templates/multiselector.html"/>
+    <document key="multifiles"                cache="memory"  preload="true"
+              uri="/WEB-INF/pages/templates/multifiles.html"/>
+    <document key="exception"                 cache="memory"  preload="false"
+              uri="/WEB-INF/pages/templates/exception.html"/>
+    <document key="partnerWatchList"          cache="memory"  preload="true"
+              uri="/WEB-INF/pages/be/watchList-partner.html"/>
+    <document key="various"                   cache="memory"  preload="true"
+              uri="/WEB-INF/pages/templates/various.html"/>
+
+
+    <!-- Layouts used to manage the frames -->
+    <document key="borderFrame"             cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/frames/borderFrame.html"/>
+    <document key="centreFrame"             cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/frames/centreFrame.html"/>
+    <document key="contentFrame"             cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/frames/contentFrame.html"/>
+    <document key="leftFrame"               cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/frames/leftFrame.html"/>
+    <document key="rightFrame"              cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/frames/rightFrame.html"/>
+    <document key="rootFrame"               cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/frames/rootFrame.html"/>
+
+    <!-- Layouts for the borders in the frames -->
+    <document key="bottomBorder"            cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/borders/bottom.html"/>
+    <document key="bottomLeftBorder"        cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/borders/bottomLeft.html"/>
+    <document key="bottomRightBorder"       cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/borders/bottomRight.html"/>
+    <document key="leftBorder"              cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/borders/left.html"/>
+    <document key="rightBorder"             cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/borders/right.html"/>
+    <document key="topBorder"               cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/borders/top.html"/>
+    <document key="topLeftBorder"           cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/borders/topLeft.html"/>
+    <document key="topRightBorder"          cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/borders/topRight.html"/>
+
+    <!--  Navigation layout documents -->
+    <document key="header"                    cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/headers/header.html"/>
+    <document key="adminHeader"               cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/headers/adminHeader.html"/>
+    <document key="userHeader"                cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/headers/userHeader.html"/>
+    <document key="genericTreeNav"            cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/genericTree-navigator.html"/>
+
+    <document key="emptyHeader"               cache="none"    preload="true"
+              uri="/WEB-INF/pages/navigation/empty-header.html"/>
+    <document key="errorNavigator"            cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/error-navigator.html"/>
+    <document key="processInstanceNavigator"  cache="memory"  preload="true"
+              uri="/WEB-INF/pages/navigation/processInstance-navigator.html"/>
+
+    <!-- GridTalk Screens -->
+    <document key="login"                     cache="memory"  preload="true"
+              uri="/WEB-INF/pages/login/login.html"/>
+    <document key="gmtOffset"                 cache="memory"  preload="true"
+              uri="/WEB-INF/pages/login/getGmtOffset.html"/>
+    <document key="getCertPw"                 cache="none"
+              uri="/WEB-INF/pages/login/getCertPw.html"/>
+    <document key="userUpdate"                cache="memory"  helpKey="gtas_ag.10"
+              uri="/WEB-INF/pages/user/edit-user.html"/>
+    <document key="updateUserUpdate"          cache="memory"  
+              uri="/WEB-INF/pages/user/update-user.html"/>
+    <document key="userView"                  cache="memory"  helpKey="gtas_ag.10"
+              uri="/WEB-INF/pages/user/view-user.html"/>
+    <document key="partnerTypeUpdate"         cache="memory"  helpKey="gtas_ug.28"
+              uri="/WEB-INF/pages/be/edit-partner-type.html"/>
+    <document key="partnerTypeView"           cache="memory"  helpKey="gtas_ug.28"
+              uri="/WEB-INF/pages/be/view-partner-type.html"/>
+    <document key="partnerGroupUpdate"        cache="memory"  helpKey="gtas_ug.30"
+              uri="/WEB-INF/pages/be/edit-partner-group.html"/>
+    <document key="partnerGroupView"          cache="memory"  helpKey="gtas_ug.30"
+              uri="/WEB-INF/pages/be/view-partner-group.html" />
+    <document key="partnerUpdate"             cache="memory"  helpKey="gtas_ug.26"
+              uri="/WEB-INF/pages/be/edit-partner.html"/>
+    <document key="partnerView"               cache="memory"  helpKey="gtas_ug.26"
+              uri="/WEB-INF/pages/be/view-partner.html"/>
+    <document key="accessRightUpdate"         cache="memory"  helpKey="gtas_ag.12"
+              uri="/WEB-INF/pages/acl/edit-access-right.html"/>
+    <document key="accessRightView"           cache="memory"  helpKey="gtas_ag.8"
+              uri="/WEB-INF/pages/acl/view-access-right.html"/>
+    <document key="roleUpdate"                cache="memory"  helpKey="gtas_ag.8"
+              uri="/WEB-INF/pages/acl/edit-role.html"/>
+    <document key="roleView"                  cache="memory"  helpKey="gtas_ag.8"
+              uri="/WEB-INF/pages/acl/view-role.html"/>
+    <document key="documentTypeUpdate"        cache="memory"  helpKey="gtas_ag.56"
+              uri="/WEB-INF/pages/document/edit-document-type.html"/>
+    <document key="documentTypeView"          cache="memory"  helpKey="gtas_ag.56"
+              uri="/WEB-INF/pages/document/view-document-type.html"/>
+    <document key="mappingFileUpdate"         cache="memory"  helpKey="gtas_ag.58"
+              uri="/WEB-INF/pages/document/edit-mappingFile.html"/>
+    <document key="mappingFileView"           cache="memory"  helpKey="gtas_ag.58"
+              uri="/WEB-INF/pages/document/view-mappingFile.html"/>
+    <document key="gridtalkMappingRuleUpdate" cache="memory"  helpKey="gtas_ag.69"
+              uri="/WEB-INF/pages/document/edit-gridTalkMappingRule.html"/>
+    <document key="gridtalkMappingRuleView"   cache="memory"  helpKey="gtas_ag.69"
+              uri="/WEB-INF/pages/document/view-gridTalkMappingRule.html"/>
+    <document key="channelInfoUpdate"         cache="memory"  helpKey="gtas_ag.34"
+              uri="/WEB-INF/pages/channel/edit-channelInfo.html"/>
+    <document key="channelInfoView"           cache="memory"  helpKey="gtas_ag.34"
+              uri="/WEB-INF/pages/channel/view-channelInfo.html"/>
+    <document key="commInfoUpdate"            cache="memory"  helpKey="gtas_ag.37"
+              uri="/WEB-INF/pages/channel/edit-commInfo.html"/>
+    <document key="commInfoView"              cache="memory"  helpKey="gtas_ag.37"
+              uri="/WEB-INF/pages/channel/view-commInfo.html"/>
+    <document key="fileTypeView"              cache="memory"  helpKey="gtas_ag.57"
+              uri="/WEB-INF/pages/document/view-fileType.html"/>
+    <document key="fileTypeUpdate"            cache="memory"  helpKey="gtas_ag.57"
+              uri="/WEB-INF/pages/document/edit-fileType.html"/>
+    <document key="businessEntityView"        cache="memory"  helpKey="gtas_ug.20"
+              uri="/WEB-INF/pages/be/view-businessEntity.html"/>
+    <document key="businessEntityUpdate"      cache="memory"  helpKey="gtas_ug.19"
+              uri="/WEB-INF/pages/be/edit-businessEntity.html"/>
+    <document key="sendBusinessEntityUpdate"  cache="memory"  helpKey="gtas_ug.19"
+              uri="/WEB-INF/pages/be/send-businessEntity.html"/>
+    <document key="gridDocumentUpdate"        cache="memory"  helpKey="gtas_ug.32"
+              uri="/WEB-INF/pages/document/edit-gridDocument.html"/>
+    <document key="gridDocumentView"          cache="memory"  preload="true"  helpKey="gtas_ug.32"
+              uri="/WEB-INF/pages/document/view-gridDocument.html"/>
+    <document key="gridDocumentImport"        cache="memory"  preload="true"  helpKey="gtas_ug.40"
+              uri="/WEB-INF/pages/document/import.html"/>
+    <document key="companyProfileView"        cache="memory"  helpKey="gtas_ug.18"
+              uri="/WEB-INF/pages/gridnode/view-companyProfile.html"/>
+    <document key="companyProfileUpdate"      cache="memory"  helpKey="gtas_ug.18"
+              uri="/WEB-INF/pages/gridnode/edit-companyProfile.html"/>
+    <document key="securityInfoUpdate"        cache="memory"  helpKey="gtas_ag.40"
+              uri="/WEB-INF/pages/channel/edit-securityInfo.html"/>
+    <document key="securityInfoView"          cache="memory"  helpKey="gtas_ag.40"
+              uri="/WEB-INF/pages/channel/view-securityInfo.html"/>
+    <document key="packagingInfoUpdate"       cache="memory"  helpKey="gtas_ag.43"
+              uri="/WEB-INF/pages/channel/edit-packagingInfo.html"/>
+    <document key="packagingInfoView"         cache="memory"  helpKey="gtas_ag.43"
+              uri="/WEB-INF/pages/channel/view-packagingInfo.html"/>
+    <document key="partnerFunctionUpdate"     cache="memory"  helpKey="gtas_ag.77"
+              uri="/WEB-INF/pages/bp/edit-partnerFunction.html"/>
+    <document key="partnerFunctionView"       cache="memory"  helpKey="gtas_ag.77"
+              uri="/WEB-INF/pages/bp/view-partnerFunction.html"/>
+    <document key="workflowActivityUpdate"    cache="memory"  helpKey="gtas_ag.78"
+              uri="/WEB-INF/pages/bp/edit-workflowActivity.html"/>
+    <document key="workflowActivityView"      cache="memory"  helpKey="gtas_ag.78"
+              uri="/WEB-INF/pages/bp/view-workflowActivity.html"/>
+    <document key="registrationInfoUpdate"    cache="none"    helpKey="gtas_ag.3"
+              uri="/WEB-INF/pages/registration/edit-registrationInfo.html"/>
+    <document key="registrationInfoView"      cache="none"    helpKey="gtas_ag.3"
+              uri="/WEB-INF/pages/registration/view-registrationInfo.html"/>
+    <document key="triggerUpdate"             cache="memory"  helpKey="gtas_ag.79"
+              uri="/WEB-INF/pages/bp/edit-trigger.html"/>
+    <document key="triggerView"               cache="memory"  helpKey="gtas_ag.79"
+              uri="/WEB-INF/pages/bp/view-trigger.html"/>
+    <document key="searchGridnodeQueryUpdate" cache="memory"  helpKey="gtas_ug.0"
+              uri="/WEB-INF/pages/activation/edit-searchGridNodeQuery.html"/>
+    <document key="searchGridnodeQueryView"   cache="memory"  helpKey="gtas_ug.0"
+              uri="/WEB-INF/pages/activation/view-searchGridNodeQuery.html"/>
+    <document key="networkSettingUpdate"      cache="none"    helpKey="gtas_ag.0"
+              uri="/WEB-INF/pages/connection/edit-networkSetting.html"/>
+    <document key="networkSettingView"          cache="none"    helpKey="gtas_ag.0"
+              uri="/WEB-INF/pages/connection/view-networkSetting.html"/>
+    <document key="procedureDefFileUpdate"      cache="memory"  helpKey="gtas_ag.98"
+              uri="/WEB-INF/pages/bp/edit-procedureDefFile.html"/>
+    <document key="procedureDefFileView"        cache="memory"  helpKey="gtas_ag.98"
+              uri="/WEB-INF/pages/bp/view-procedureDefFile.html"/>
+    <document key="userProcedureUpdate"         cache="memory"  helpKey="gtas_ag.100"
+              uri="/WEB-INF/pages/bp/edit-userProcedure.html"/>
+    <document key="userProcedureView"           cache="memory"  helpKey="gtas_ag.100"
+              uri="/WEB-INF/pages/bp/view-userProcedure.html"/>
+    <document key="shellExecutableUpdate"       cache="memory"  helpKey="gtas_ag.100"
+              uri="/WEB-INF/pages/bp/edit-shellExecutable.html"/>
+    <document key="shellExecutableView"         cache="memory"  helpKey="gtas_ag.100"
+              uri="/WEB-INF/pages/bp/view-shellExecutable.html"/>
+    <document key="javaProcedureUpdate"         cache="memory"  helpKey="gtas_ag.100"
+              uri="/WEB-INF/pages/bp/edit-javaProcedure.html"/>
+    <document key="javaProcedureView"           cache="memory"  helpKey="gtas_ag.100"
+              uri="/WEB-INF/pages/bp/view-javaProcedure.html"/>    
+    <document key="soapProcedureUpdate"         cache="memory"  helpKey="gtas_ag.100"
+              uri="/WEB-INF/pages/bp/edit-soapProcedure.html"/>
+    <document key="soapProcedureView"           cache="memory"  helpKey="gtas_ag.100"
+              uri="/WEB-INF/pages/bp/view-soapProcedure.html"/>
+    <document key="paramDefUpdate"              cache="memory"  helpKey="gtas_ag.100"
+              uri="/WEB-INF/pages/bp/edit-paramDef.html"/>
+    <document key="paramDefView"                cache="memory"  helpKey="gtas_ag.100"
+              uri="/WEB-INF/pages/bp/view-paramDef.html"/>
+    <document key="returnDefUpdate"             cache="memory"  helpKey="gtas_ag.100"
+              uri="/WEB-INF/pages/bp/edit-returnDef.html"/>
+    <document key="returnDefView"               cache="memory"  helpKey="gtas_ag.100"
+              uri="/WEB-INF/pages/bp/view-returnDef.html"/>
+    <document key="connectionSetupResultUpdate" cache="memory"  helpKey="gtas_ag.0"
+              uri="/WEB-INF/pages/connection/edit-connectionSetupResult.html"/>
+    <document key="connectionSetupResultView"   cache="memory"  helpKey="gtas_ag.0"
+              uri="/WEB-INF/pages/connection/view-connectionSetupResult.html"/>
+    <document key="server"                      cache="memory"
+              uri="/WEB-INF/pages/server/server.html"/>
+    <document key="certPassword"                cache="none"
+              uri="/WEB-INF/pages/server/certPassword.html"/>
+    <document key="activationRecordUpdate"      cache="memory"  helpKey="gtas_ug.0"
+              uri="/WEB-INF/pages/activation/edit-activationRecord.html"/>
+    <document key="activationRecordView"        cache="memory"  helpKey="gtas_ug.0"
+              uri="/WEB-INF/pages/activation/view-activationRecord.html"/>
+    <document key="gridNodeView"                cache="memory"  helpKey="gtas_ug.0"
+              uri="/WEB-INF/pages/gridnode/view-gridNode.html"/>
+    <document key="processMappingUpdate"        cache="memory"  helpKey="gtas_ag.91"
+              uri="/WEB-INF/pages/bp/edit-processMapping.html"/>
+    <document key="processMappingView"          cache="memory"  helpKey="gtas_ag.91"
+              uri="/WEB-INF/pages/bp/view-processMapping.html"/>
+    <document key="processDefUpdate"            cache="memory"  helpKey="gtas_ag.84"
+              uri="/WEB-INF/pages/bp/edit-processDef.html"/>
+    <document key="processDefView"              cache="memory"  helpKey="gtas_ag.84"
+              uri="/WEB-INF/pages/bp/view-processDef.html"/>
+    <document key="processActUpdate"            cache="memory"  helpKey="gtas_ag.87"
+              uri="/WEB-INF/pages/bp/edit-processAct.html"/>
+    <document key="processActView"              cache="memory"  helpKey="gtas_ag.87"
+              uri="/WEB-INF/pages/bp/view-processAct.html"/>
+    <document key="rfcUpdate"                   cache="memory"  helpKey="gtas_ag.93"
+              uri="/WEB-INF/pages/bp/edit-rfc.html"/>
+    <document key="rfcView"                     cache="memory"  helpKey="gtas_ag.93"
+              uri="/WEB-INF/pages/bp/view-rfc.html"/>
+    <document key="portUpdate"                  cache="memory"  helpKey="gtas_ag.95"
+              uri="/WEB-INF/pages/bp/edit-port.html"/>
+    <document key="portView"                    cache="memory"  helpKey="gtas_ag.95"
+              uri="/WEB-INF/pages/bp/view-port.html"/>
+    <document key="bizCertMappingUpdate"        cache="memory"  helpKey="gtas_ag.72"
+              uri="/WEB-INF/pages/bp/edit-bizCertMapping.html"/>
+    <document key="bizCertMappingView"          cache="memory"  helpKey="gtas_ag.72"
+              uri="/WEB-INF/pages/bp/view-bizCertMapping.html"/>
+    <document key="processInstanceView"         cache="memory"  helpKey="gtas_ag.89"
+              uri="/WEB-INF/pages/bp/view-processInstance.html"/>
+    <document key="certificateUpdate"           cache="memory"  helpKey="gtas_ag.47"
+              uri="/WEB-INF/pages/channel/edit-certificate.html"/>
+    <document key="certificateView"             cache="memory"  helpKey="gtas_ag.48"
+              uri="/WEB-INF/pages/channel/view-certificate.html"/>
+    <document key="alertUpdate"                 cache="memory"  helpKey="gtas_ag.12"
+              uri="/WEB-INF/pages/alert/edit-alert.html"/>
+    <document key="alertView"                   cache="memory"  helpKey="gtas_ag.12"
+              uri="/WEB-INF/pages/alert/view-alert.html"/>
+    <document key="actionUpdate"                cache="memory"  helpKey="gtas_ag.14"
+              uri="/WEB-INF/pages/alert/edit-action.html"/>
+    <document key="actionView"                  cache="memory"  helpKey="gtas_ag.14"
+              uri="/WEB-INF/pages/alert/view-action.html"/>
+    <document key="messageTemplateUpdate"       cache="memory"  helpKey="gtas_ag.16"
+              uri="/WEB-INF/pages/alert/edit-messageTemplate.html"/>
+    <document key="messageTemplateView"         cache="memory"  helpKey="gtas_ag.16"
+              uri="/WEB-INF/pages/alert/view-messageTemplate.html"/>
+    <document key="responseTrackRecordUpdate"   cache="memory"  helpKey="gtas_ag.22"
+              uri="/WEB-INF/pages/alert/edit-responseTrackRecord.html"/>
+    <document key="responseTrackRecordView"     cache="memory"  helpKey="gtas_ag.22"
+              uri="/WEB-INF/pages/alert/view-responseTrackRecord.html"/>
+    <document key="reminderAlertUpdate"         cache="memory"  helpKey="gtas_ag.23"
+              uri="/WEB-INF/pages/alert/edit-reminderAlert.html"/>
+    <document key="reminderAlertView"           cache="memory"  helpKey="gtas_ag.23"
+              uri="/WEB-INF/pages/alert/view-reminderAlert.html"/>
+    <document key="alertTriggerUpdate"          cache="memory"  helpKey="gtas_ag.25"
+              uri="/WEB-INF/pages/alert/editAlertTrigger.html"/>
+    <document key="alertTriggerView"            cache="memory"  helpKey="gtas_ag.25"
+              uri="/WEB-INF/pages/alert/viewAlertTrigger.html"/>
+    <document key="archiveDocumentUpdate"       cache="none"    helpKey="gtas_ag.137"
+              uri="/WEB-INF/pages/archive/editArchiveDocument.html"/>
+    <document key="restoreDocumentUpdate"       cache="none"    helpKey="gtas_ag.138"
+              uri="/WEB-INF/pages/archive/editRestoreDocument.html"/>
+    <document key="archiveUpdate"               cache="none"    helpKey="gtas_ag.126"
+              uri="/WEB-INF/pages/archive/editArchive.html"/> 
+    <document key="archiveView"               cache="none"    helpKey="gtas_ag.126"
+              uri="/WEB-INF/pages/archive/viewArchive.html"/>   
+    <document key="exportConfigUpdate"          cache="none"    helpKey="gtas_ag.146"
+              uri="/WEB-INF/pages/exportConfig/editExportConfig.html"/>
+    <document key="importConfigUpdate"          cache="none"    helpKey="gtas_ag.147"
+              uri="/WEB-INF/pages/exportConfig/editImportConfig.html"/>
+    <document key="registryConnectInfoUpdate"   cache="memory"  helpKey="gtas_ug.0"
+              uri="/WEB-INF/pages/be/edit-registryConnectInfo.html"/>
+    <document key="registryConnectInfoView"     cache="memory"  helpKey="gtas_ug.0"
+              uri="/WEB-INF/pages/be/view-registryConnectInfo.html"/>
+    <document key="publishBusinessEntity"       cache="memory"  helpKey="gtas_ug.0"
+              uri="/WEB-INF/pages/be/publish-businessEntity.html"/>
+    <document key="searchRegistryQueryUpdate"   cache="memory"  helpKey="gtas_ug.0"
+              uri="/WEB-INF/pages/be/edit-searchRegistryQuery.html"/>
+    <document key="searchRegistryQueryView"     cache="memory"  helpKey="gtas_ug.0"
+              uri="/WEB-INF/pages/be/view-searchRegistryQuery.html"/>
+    <document key="searchedBusinessEntityView"  cache="memory"  helpKey="gtas_ug.0"
+              uri="/WEB-INF/pages/be/view-searchedBusinessEntity.html"/>
+    <document key="embeddedChannelInfoView"     cache="memory"  helpKey="gtas_ug.0"
+              uri="/WEB-INF/pages/be/view-embeddedChannelInfo.html"/>
+    <document key="searchQueryUpdate"           cache="memory"  helpKey="gtas_ug.49"
+              uri="/WEB-INF/pages/document/edit-searchQuery.html"/>
+    <document key="searchQueryView"             cache="memory"  helpKey="gtas_ug.49"
+              uri="/WEB-INF/pages/document/view-searchQuery.html"/>
+    <document key="houseKeepingUpdate"          cache="memory"  helpKey="gtas_ag.140"
+              uri="/WEB-INF/pages/archive/edit-houseKeeping.html"/>
+    <document key="houseKeepingView"            cache="memory"  helpKey="gtas_ag.140"
+              uri="/WEB-INF/pages/archive/view-houseKeeping.html"/>
+    <!--document key="scheduledArchiveUpdate"         cache="memory"  helpKey="gtas_ag.115"
+              uri="/WEB-INF/pages/scheduler/edit-scheduledArchive.html"/>
+    <document key="scheduledArchiveView"           cache="memory"  helpKey="gtas_ag.115"
+              uri="/WEB-INF/pages/scheduler/view-scheduledArchive.html"/-->
+    <document key="scheduledTaskUpdate"         cache="memory"  helpKey="gtas_ag.126"
+              uri="/WEB-INF/pages/scheduler/edit-scheduledTask.html"/>
+    <document key="scheduledTaskView"           cache="memory"  helpKey="gtas_ag.126"
+              uri="/WEB-INF/pages/scheduler/view-scheduledTask.html"/>
+    <document key="webServiceUpdate"            cache="memory"  helpKey="gtas_ag.121"
+              uri="/WEB-INF/pages/bp/edit-webService.html"/>
+    <document key="webServiceView"              cache="memory"  helpKey="gtas_ag.121"
+              uri="/WEB-INF/pages/bp/view-webService.html"/>
+    <document key="serviceAssignmentUpdate"     cache="memory"  helpKey="gtas_ag.123"
+              uri="/WEB-INF/pages/bp/edit-serviceAssignment.html"/>
+    <document key="serviceAssignmentView"       cache="memory"  helpKey="gtas_ag.123"
+              uri="/WEB-INF/pages/bp/view-serviceAssignment.html"/>
+    <document key="emailConfigUpdate"           cache="memory"  helpKey="gtas_ag.32"
+              uri="/WEB-INF/pages/alert/edit-emailConfig.html"/>
+    <document key="emailConfigView"             cache="memory"  helpKey="gtas_ag.32"
+              uri="/WEB-INF/pages/alert/view-emailConfig.html"/>
+
+    <document key="jmsDestinationUpdate"      cache="memory"  helpKey="gtas_ag.20"
+              uri="/WEB-INF/pages/alert/edit-jmsDestination.html"/>
+    <document key="jmsDestinationView"        cache="memory"  helpKey="gtas_ag.20"
+              uri="/WEB-INF/pages/alert/view-jmsDestination.html"/>
+	
+    <document key="importSchemaUpdate"    cache="none"  helpKey="gtas_ag.64"
+	      uri="/WEB-INF/pages/document/edit-importSchema.html"/>
+
+    <document  key="schemaMappingFileUpdate"    cache="none"  helpKey="gtas_ag.64"
+	          uri="/WEB-INF/pages/document/edit-schemaMappingFile.html"/>
+    <document  key="schemaMappingFileView"    cache="none"  helpKey="gtas_ag.64"
+	          uri="/WEB-INF/pages/document/view-schemaMappingFile.html"/>
+
+    <document  key="embeddedListViewLight"    cache="none" preload="true"
+	          uri="/WEB-INF/pages/templates/embed-listviewLight.html"/>
+	<document key="EsPi-searchQuery"           cache="memory" 
+              uri="/WEB-INF/pages/archive/EsPi-searchQuery.html" />
+	<document key="EsDoc-searchQuery"           cache="memory" 
+              uri="/WEB-INF/pages/archive/EsDoc-searchQuery.html"/>
+	<document key="EsPiDetail"           cache="memory"
+              uri="/WEB-INF/pages/archive/EsPiDetail.html" />
+	<document key="EsPiSearchPage"           cache="memory" helpKey="gtas_ag.142"
+              uri="/WEB-INF/pages/archive/EsPi-SearchPage.html" />
+	<document key="EsDocSearchPage"           cache="memory" helpKey="gtas_ag.143"
+              uri="/WEB-INF/pages/archive/EsDoc-SearchPage.html" />
+    <document key="AuditFileView"           cache="memory"
+              uri="/WEB-INF/pages/archive/AuditFile.html" />
+	<document key="GdocDetailPage"			cache="memory"  helpKey="gtas_ag.144"
+			  uri="/WEB-INF/pages/archive/GdocDetailPage.html" />
+			  
+	<document key="as2DocTypeMappingUpdate"        cache="memory"  helpKey="gtas_ag.74"
+              uri="/WEB-INF/pages/document/edit-as2DocTypeMapping.html"/>
+    <document key="as2DocTypeMappingView"          cache="memory"  helpKey="gtas_ag.74"
+              uri="/WEB-INF/pages/document/view-as2DocTypeMapping.html"/>
+  </descriptors>
+
+</document-config>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>gtas</fullname>
+  <class>
+    <path>[../../../GridTalk/deploy/gtas-docalert.jar]</path>
+    <path>[../../../GridTalk/deploy/gtas-alert.jar]</path>
+    <path>[../../../GridTalk/deploy/gtas-document.jar]</path>
+    <path>[../../../GridTalk/deploy/gtas-mapper.jar]</path>
+    <path>[../../../GridTalk/deploy/gtas-userprocedure.jar]</path>
+    <path>[../../../GridTalk/deploy/gtas-rnif.jar]</path>
+    <path>[../../../GridTalk/deplib/app-alert.jar]</path>
+  </class>
+</library>
+

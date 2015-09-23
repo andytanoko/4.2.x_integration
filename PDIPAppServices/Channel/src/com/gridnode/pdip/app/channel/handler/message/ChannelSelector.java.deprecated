@@ -1,0 +1,265 @@
+/**
+ * This software is the proprietary information of GridNode Pte Ltd.
+ * Use is subjected to license terms.
+ *
+ * Copyright 2002 (C) GridNode Pte Ltd. All Rights Reserved.
+ *
+ * File: ChannelSelector.java
+ *
+ ****************************************************************************
+ * Date           Author                  Changes
+ ****************************************************************************
+ * July 17 2003    Jagadeesh             Created.
+ */
+
+
+package com.gridnode.pdip.app.channel.handler.message;
+
+import com.gridnode.pdip.app.channel.model.ChannelInfo;
+import com.gridnode.pdip.app.channel.helpers.ChannelUtil;
+
+import com.gridnode.pdip.app.channel.helpers.GNCompatibleEventRegistry;
+import com.gridnode.pdip.app.channel.handler.jmschannel.DispatchMessage;
+import com.gridnode.pdip.base.transport.helpers.GNTransportPayload;
+
+import com.gridnode.pdip.base.packaging.helper.IPackagingConstants;
+import com.gridnode.pdip.base.transport.helpers.ITransportConstants;
+
+import java.util.Hashtable;
+
+/**
+ * A Multiplexor for Channels in Gridtalk, a Channel represents an entity that
+ * is capabile to perform Send and Receive operation. A Channel is selected to
+ * perform send or receive operation.
+ *
+ * Channel Selection
+ * -----------------
+ *
+ * 1. Channel Selection for Send : All Messages that needs to be routed to the
+ *    recipent, needs to specify which of the available channels to use.
+ *
+ *    DefaultMessageSender provides a Template for all available send message handlers.
+ *    By extending this Class, the  specilizied class need's to override those
+ *    methods that are specific to them.
+ *
+ *    @see com.gridnode.pdip.app.channel.handler.message.DefaultMessageSender#sendMessage
+ *
+ *    In GridTalk, all Channel's that are BackwardCompatability are required to
+ *    have there Channel's CommInfo Transport implementation Version to be "020000".
+ *
+ *    EventId is the key for selecting a Relay Channel (BackwardCompatible in current GridTalk).
+ *    Note: Relay Channels are not necessarily
+ *
+ * 2. Receive via Channel:
+ *
+ *
+ * @author Jagadeesh.
+ * @version 2.2
+ * @since 2.2
+ *
+ */
+
+public final class ChannelSelector
+{
+	private static final String CLASS_NAME =  "ChannelSelector";
+
+	/**
+	 * A new MessageSender is created, to send the Message via the Channel
+	 * selected to send.Gridtalk can currently Send to 1. Gridtalk Partner
+	 * 2. Backwardcompatible Receiver (GT 1.x) 3. Relay Receiver (GridMaster)
+	 * 4. NonGridTalk Partner.
+ 	 *
+	 * Please refere to Channel Selection documentation above.
+	 *
+	 * @param eventId - EventId used as a Key to select a Relay Channel.
+	 * @param info - ChannelInfo entity used for Sending the Documents.
+	 * @return <code>messageSender</code> Implementation of IMessageSender,
+	 * which perfroms actual send.
+	 * @throws Exception throws Exception when cannot select a Channel.
+	 *
+	 * @version 2.2
+	 * @since 2.2
+	 */
+
+/*	public static IMessageSender getChannelHandlerToSend(String eventId,ChannelInfo info)
+		throws Exception
+	{
+		IMessageSender messageSender = null;
+		boolean toRealy = isRelay(eventId);
+		if (toRealy)
+		{
+		  info = getRelayChannelInfo();
+		}
+		if (isBackwardCompatibleChannel(info))
+		{
+			if (toRealy)
+				messageSender = new BackwardCompatibleRelayMessageSender(info);
+		  else
+				messageSender = new BackwardCompatibleMessageSender(info);
+		}
+		else
+		  messageSender = new DefaultMessageSender(info);
+
+		return messageSender;
+	}
+*/
+
+
+	public static IMessageSender getChannelHandlerToSend(MessageContext msgContext)
+		throws Exception
+	{
+		IMessageSender messageSender = null;
+		DispatchMessage message = (DispatchMessage)msgContext.getAttribute(
+																						IMessageContext.OUTBOUND_MESSAGE);
+		String[] header = message.getHeader();
+		ChannelInfo info = message.getChannelInfo();
+		String eventId = header[0];
+		boolean toRealy = isRelay(eventId);
+		if (toRealy)
+		{
+		  info = getRelayChannelInfo();
+			message.setChannleInfo(info);
+		}
+		if (isBackwardCompatibleChannel(info))
+		{
+			if (toRealy)
+				messageSender = new BackwardCompatibleRelayMessageSender();
+		  else
+				messageSender = new BackwardCompatibleMessageSender();
+		}
+		else
+		  messageSender = new DefaultMessageSender();
+
+		msgContext.setAttribute(IMessageContext.OUTBOUND_MESSAGE,message);
+		messageSender.init(msgContext);
+		return messageSender;
+	}
+
+
+
+	/**
+	 * A new MessageReceiver is created to receive a message. GridTalk can
+	 * receive Messages from 1. GridTalk Partner 2. BackwardCompatible
+	 * Message Sender (GT1.x) 3.RelayMessage Sender (ex:GridMaster) 4. NonGridTalk
+	 * specific Message, but (GridTalk)registered Standerds based Messages
+	 * (ex: Rosettanet,Soap etc.)
+	 *
+	 * @param header Header used to determine which channel to use to process
+	 *  the message received.
+	 * @return implementation of IMessageReceiver.
+	 * @throws Exception throws Exception when cannot select a Channel.
+	 *
+	 * @version 2.2
+	 * @since 2.2
+	 */
+
+/*	public static IMessageReceiver getChannelHandlerToReceive(Hashtable header)
+		throws Exception
+	{
+		ChannelInfo channelToReceive = null;
+		String eventId  = (String)header.get(ITransportConstants.EVENT_ID);
+		String myrefId      = (String)header.get(ITransportConstants.RECEIPENT_NODE_ID);
+    String senderNodeId = (String)header.get(ITransportConstants.SENDER_NODE_ID);
+    String actualFileName = (String)header.get(ITransportConstants.FILE_ID);
+    String channelName = (String)header.get(IPackagingConstants.CHANNEL_NAME);
+
+		/**** If ChannelName and ReceipentNodeId is present use DefaultMessageReceiver */
+/*
+		if (channelName != null && myrefId != null)
+		{
+			channelToReceive =
+				ChannelUtil.getInstance().getChannelInfoByNameAndRefId(channelName,myrefId);
+		  return new DefaultMessageReceiver(channelToReceive);
+		}
+		else if(senderNodeId != null)
+		{
+			if(isRelay(eventId))
+			{
+				channelToReceive = ChannelUtil.getInstance().getRelayChannelInfo();
+				return new BackwardCompatibleRelayMessageReceiver(channelToReceive);
+			}
+			channelToReceive = ChannelUtil.getInstance().getChannelInfoByRefId(senderNodeId);
+			return new BackwardCompatibleMessageReceiver(channelToReceive);
+		}
+		else
+		{
+		  //Invoke OtherMessageHandler
+		}
+		return null;
+	}
+*/
+
+	public static IMessageReceiver getChannelHandlerToReceive(MessageContext msgContext)
+		throws Exception
+	{
+		GNTransportPayload receivedMessage = (GNTransportPayload)msgContext.getAttribute(
+		IMessageContext.INBOUND_MESSAGE);
+		Hashtable header = receivedMessage.getHeader();
+		ChannelInfo channelToReceive = null;
+		IMessageReceiver messageReceiveHandler = null;
+
+		String eventId  = (String)header.get(ITransportConstants.EVENT_ID);
+		String myrefId      = (String)header.get(ITransportConstants.RECEIPENT_NODE_ID);
+    String senderNodeId = (String)header.get(ITransportConstants.SENDER_NODE_ID);
+    String actualFileName = (String)header.get(ITransportConstants.FILE_ID);
+    String channelName = (String)header.get(IPackagingConstants.CHANNEL_NAME);
+
+		/**** If ChannelName and ReceipentNodeId is present use DefaultMessageReceiver */
+		if (channelName != null && myrefId != null)
+		{
+			channelToReceive =
+				ChannelUtil.getInstance().getChannelInfoByNameAndRefId(channelName,myrefId);
+		  msgContext.setAttribute(IMessageContext.CHANNEL_INFO,channelToReceive);
+			messageReceiveHandler = new DefaultMessageReceiver();
+		}
+		else if(senderNodeId != null)
+		{
+			if(isRelay(eventId))
+			{
+				channelToReceive = ChannelUtil.getInstance().getRelayChannelInfo();
+				messageReceiveHandler = new BackwardCompatibleRelayMessageReceiver();
+			}
+			else
+			{
+				channelToReceive = ChannelUtil.getInstance().getChannelInfoByRefId(senderNodeId);
+				messageReceiveHandler =  new BackwardCompatibleMessageReceiver();				
+			}
+			msgContext.setAttribute(IMessageContext.CHANNEL_INFO,channelToReceive);
+		}
+		else
+		{
+		  //Invoke OtherMessageHandler
+		}
+		messageReceiveHandler.init(msgContext);
+		return messageReceiveHandler;
+	}
+
+
+
+
+	/**
+	 *
+	 * @param info
+	 * @return
+	 */
+	private static boolean isBackwardCompatibleChannel(ChannelInfo info)
+	{
+		if (info.getTptCommInfo().getTptImplVersion().startsWith("02"))
+			return true;
+		else
+			return false;
+	}
+
+
+
+	private static boolean isRelay(String eventId)
+	{
+	  return GNCompatibleEventRegistry.getInstance().isRelay(eventId);
+	}
+
+	private static ChannelInfo getRelayChannelInfo() throws Exception
+	{
+		return ChannelUtil.getInstance().getRelayChannelInfo();
+	}
+
+}

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Pip0C2AsynchronousTestConfirmation SYSTEM "0C2_MS_R01_01_AsynchronousTestConfirmation.dtd">
+<Pip0C2AsynchronousTestConfirmation>
+	<AsynchronousTest>
+		<Attachment>
+			<description>
+				<FreeFormText>Text</FreeFormText>
+			</description>
+			<GlobalAttachmentDescriptionCode>Assembly drawings</GlobalAttachmentDescriptionCode>
+			<GlobalMimeTypeQualifierCode>application/activemessage</GlobalMimeTypeQualifierCode>
+			<UniversalResourceIdentifier>Text</UniversalResourceIdentifier>
+		</Attachment>
+	</AsynchronousTest>
+	<fromRole>
+		<PartnerRoleDescription>
+			<ContactInformation>
+				<contactName>
+					<FreeFormText>Text</FreeFormText>
+				</contactName>
+				<EmailAddress>Text</EmailAddress>
+				<facsimileNumber>
+					<CommunicationsNumber>Text</CommunicationsNumber>
+				</facsimileNumber>
+				<telephoneNumber>
+					<CommunicationsNumber>Text</CommunicationsNumber>
+				</telephoneNumber>
+			</ContactInformation>
+			<GlobalPartnerRoleClassificationCode>###_FROM_GPRCC_###</GlobalPartnerRoleClassificationCode>
+			<PartnerDescription>
+				<BusinessDescription>
+					<GlobalBusinessIdentifier>###_SENDER_DUNS_###</GlobalBusinessIdentifier>
+					<GlobalSupplyChainCode>Electronic Components</GlobalSupplyChainCode>
+				</BusinessDescription>
+				<GlobalPartnerClassificationCode>###_FROM_GPCC_###</GlobalPartnerClassificationCode>
+			</PartnerDescription>
+		</PartnerRoleDescription>
+	</fromRole>
+	<GlobalDocumentFunctionCode>Response</GlobalDocumentFunctionCode>
+	<requestingDocumentDateTime>
+		<DateTimeStamp>Text</DateTimeStamp>
+	</requestingDocumentDateTime>
+	<requestingDocumentIdentifier>
+		<ProprietaryDocumentIdentifier>###_REF_DOC_ID_###</ProprietaryDocumentIdentifier>
+	</requestingDocumentIdentifier>
+	<thisDocumentGenerationDateTime>
+		<DateTimeStamp>Text</DateTimeStamp>
+	</thisDocumentGenerationDateTime>
+	<thisDocumentIdentifier>
+		<ProprietaryDocumentIdentifier>###_DOC_ID_###</ProprietaryDocumentIdentifier>
+	</thisDocumentIdentifier>
+	<toRole>
+		<PartnerRoleDescription>
+			<ContactInformation>
+				<contactName>
+					<FreeFormText>Text</FreeFormText>
+				</contactName>
+				<EmailAddress>Text</EmailAddress>
+				<facsimileNumber>
+					<CommunicationsNumber>Text</CommunicationsNumber>
+				</facsimileNumber>
+				<telephoneNumber>
+					<CommunicationsNumber>Text</CommunicationsNumber>
+				</telephoneNumber>
+			</ContactInformation>
+			<GlobalPartnerRoleClassificationCode>###_FROM_GPRCC_###</GlobalPartnerRoleClassificationCode>
+			<PartnerDescription>
+				<BusinessDescription>
+					<GlobalBusinessIdentifier>###_RECEIVER_DUNS_###</GlobalBusinessIdentifier>
+					<GlobalSupplyChainCode>Electronic Components</GlobalSupplyChainCode>
+				</BusinessDescription>
+				<GlobalPartnerClassificationCode>###_TO_GPCC_###</GlobalPartnerClassificationCode>
+			</PartnerDescription>
+		</PartnerRoleDescription>
+	</toRole>
+</Pip0C2AsynchronousTestConfirmation>

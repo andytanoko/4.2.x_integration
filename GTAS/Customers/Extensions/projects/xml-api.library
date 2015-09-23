@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>xml-api</fullname>
+  <class>
+    <path>[../programs/gn-utadaptor-ext/xml-apis.jar]</path>
+    <path>[../programs/gn-utadaptor-ext/jaxen-full-1.0.jar]</path>
+    <path>[../programs/gn-utadaptor-ext/saxpath.jar]</path>
+    <path>[../programs/gn-utadaptor-ext/jdom-b9.jar]</path>
+  </class>
+  <lastmodsaved>1069414526388</lastmodsaved>
+</library>

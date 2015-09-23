@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Edit PackagingInfo</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="method" value="cancel"/>
+        <input type="hidden" name="divertTo"/>
+        <div>
+          <h4 id="heading">
+            lbPackagingInfo
+          </h4>
+          <table border="0">
+            <tr id="name_details">
+              <td id="name_label">
+                lbName
+              </td>
+              <td>
+                <input type="text" id="name_value" name="name"/>
+              </td>
+              <td id="name_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="description_details">
+              <td id="description_label">
+                lbDescription
+              </td>
+              <td>
+                <input type="text" id="description_value" name="description"/>
+              </td>
+              <td id="description_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="partnerCategory_details">
+              <td id="partnerCategory_label">
+                lbPartnerCategory
+              </td>
+              <td>
+                <span id="partnerCategory_value">XXX</span>
+              </td>
+              <td id="partnerCategory_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="isPartner_details">
+              <td id="isPartner_label">
+                lbIsPartner
+              </td>
+              <td>
+                 <input type="checkbox" id="isPartner_value" name="isPartner" value="true"/>
+              </td>
+              <td id="isPartner_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="refId_details">
+              <td id="refId_label">
+                lbRefId
+              </td>
+              <td>
+                <span id="refId_value">XXX</span>
+              </td>
+              <td id="refId_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="envelope_details">
+              <td id="envelope_label">
+                lbEnvelope
+              </td>
+              <td>
+                <select size="1" id="envelope_value" name="envelope" onchange="serverRefresh();">
+                  &nbsp;
+                </select>
+              </td>
+              <td id="envelope_error">
+                &nbsp;
+              </td>
+            </tr>
+<!--
+			<tr id="zip_details">
+              <td id="zip_label">
+                lbZip
+              </td>
+              <td>
+                <input type="checkbox"  id="zip_value" name="zip" value="true" onclick="serverRefresh();"/>
+              </td>
+              <td id="zip_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="zipThreshold_details">
+              <td id="zipThreshold_label">
+                lbZipThreshold
+              </td>
+              <td>
+                 <input type="text" id="zipThreshold_value" name="zipThreshold"/>
+              </td>
+              <td id="zipThreshold_error">
+                &nbsp;
+              </td>
+            </tr>
+-->
+          </table>
+        </div>
+        <div id="as2PackagingInfoExtension_details">
+          <h4 id="as2PackagingInfoExtension_heading">
+            lbAs2PackagingInfoExtension
+          </h4>
+          <table>
+            <tr id="isAckReq_details">
+              <td id="isAckReq_label">
+                lbIsAckReq
+              </td>
+              <td>
+                <input type="checkbox"  id="isAckReq_value" name="isAckReq" value="true" onclick="serverRefresh();"/>
+              </td>
+              <td id="isAckReq_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="isAckSigned_details">
+              <td id="isAckSigned_label">
+                lbIsAckSigned
+              </td>
+              <td>
+                <input type="checkbox"  id="isAckSigned_value" name="isAckSigned" value="true" onclick="serverRefresh();"/>
+              </td>
+              <td id="isAckSigned_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="isNrrReq_details">
+              <td id="isNrrReq_label">
+                lbIsNrrReq
+              </td>
+              <td>
+                <input type="checkbox"  id="isNrrReq_value" name="isNrrReq" value="true"/>
+              </td>
+              <td id="isNrrReq_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="isAckSyn_details">
+              <td id="isAckSyn_label">
+                lbIsAckSyn
+              </td>
+              <td>
+                <input type="checkbox"  id="isAckSyn_value" name="isAckSyn" value="true" onclick="serverRefresh();"/>
+              </td>
+              <td id="isAckSyn_error">
+                &nbsp;
+              </td>
+            </tr>
+            <tr id="returnUrl_details">
+              <td id="returnUrl_label">
+                lbReturnUrl
+              </td>
+              <td>
+                 <input type="text" id="returnUrl_value" name="returnUrl"/>
+              </td>
+              <td id="returnUrl_error">
+                &nbsp;
+              </td>
+            </tr>
+          </table>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
+

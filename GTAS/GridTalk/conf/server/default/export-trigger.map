@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for ExportEntityList  -->
+	<class name="com.gridnode.pdip.base.exportconfig.model.ExportEntityList">
+		<map-to xml="Entities"/>
+		<field name="Entities" type="com.gridnode.pdip.framework.db.entity.IEntity" collection="collection">
+		</field>
+	</class>
+	<!--  Mapping for Trigger  -->
+	<class name="com.gridnode.gtas.server.partnerprocess.model.Trigger">
+		<map-to xml="Trigger"/>
+		<field name="UId" type="long">
+			<xml name="UId" node="element"/>
+		</field>
+		<field name="Level" type="integer">
+			<xml name="Level" node="element"/>
+		</field>
+		<field name="PartnerFunctionId" type="string">
+			<xml name="PartnerFunctionId" node="element"/>
+		</field>
+		<field name="ProcessId" type="string">
+			<xml name="ProcessId" node="element"/>
+		</field>
+		<field name="DocumentType" type="string">
+			<xml name="DocumentType" node="element"/>
+		</field>
+		<field name="PartnerGroup" type="string">
+			<xml name="PartnerGroup" node="element"/>
+		</field>
+		<field name="PartnerType" type="string">
+			<xml name="PartnerType" node="element"/>
+		</field>
+		<field name="PartnerId" type="string">
+			<xml name="PartnerId" node="element"/>
+		</field>
+		<field name="TriggerType" type="integer">
+			<xml name="TriggerType" node="element"/>
+		</field>
+		<field name="isRequest" type="boolean" get-method="isRequest" set-method="setIsRequest">
+			<xml name="isRequest" node="element"/>
+		</field>
+		<field name="NumOfRetries" type="integer">
+			<xml name="NumOfRetries" node="element"/>
+		</field>
+		<field name="RetryInterval" type="integer">
+			<xml name="RetryInterval" node="element"/>
+		</field>
+	</class>
+</mapping>

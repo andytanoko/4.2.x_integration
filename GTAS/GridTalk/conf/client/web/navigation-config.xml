@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<navigation-config>
+
+  <headgroups>
+
+    <navgroup id="hga_default" document="header">
+      <insert document="adminHeader" id="navtabs" from="navtabs"/>
+      <include id="common_header_buttons"/>
+      <navlink id="nl_area"   value="/switchAreaAction.do?navArea=user&amp;method=update" label="navigation.actions.user" clear="true"/>
+      <navlink id="nl_account" value="/userUpdateDispatchAction.do?method=update" label="navigation.actions.account" clear="true"/>
+    
+      <navlink id="nga_administration" requiresAdmin="true" value="/serverDispatchAction.do?method=update" label="navigation.administration"/>
+      <navlink id="nga_communication" requiresAdmin="true" value="/channelInfoListView.do" label="navigation.communication"/>
+      <navlink id="nga_mapping" requiresAdmin="true" value="/documentTypeListView.do" label="navigation.mapping"/>
+      <navlink id="nga_process" requiresAdmin="true" value="/partnerFunctionListView.do" label="navigation.process"/>
+      <navlink id="nga_registry" requiresAdmin="true" value="/businessEntityListView.do" label="navigation.registry"/>
+      <navlink id="nga_partner" requiresAdmin="true" value="/partnerListView.do" label="navigation.partner"/>
+      <navlink id="nga_documents" value="/sysFoldersListView.do?folder=import" label="navigation.document"/>
+      <navlink id="nga_processInstance" value="/processInstanceListView.do" label="navigation.processInstance"/>
+      <navlink id="nga_serviceMgmt" requiresAdmin="true" value="/webServiceListView.do" label="navigation.serviceMgmt"/>
+      <!-- add for estore -->
+      <navlink id="nga_EsSearchPage" requiresAdmin="true" value="/searchEsPiPageDispatchAction.do?method=update&amp;uid=new" label="navigation.EsSearchPage"/>
+
+    </navgroup>
+
+    <navgroup id="hgu_default" document="header">
+      <insert document="userHeader" id="navtabs" from="navtabs"/>
+      <include id="common_header_buttons"/>
+      <navlink id="nl_area" requiresAdmin="true" value="/switchAreaAction.do?navArea=admin" label="navigation.actions.admin" clear="true"/>
+      <navlink id="nl_account" value="/userUpdateDispatchAction.do?method=update" label="navigation.actions.account" clear="true"/>
+    
+      <navlink id="ngu_documents" value="/sysFoldersListView.do?folder=import" label="navigation.document"/>
+      <navlink id="ngu_process" requiresAdmin="true" value="/partnerFunctionListView.do" label="navigation.process"/>
+      <navlink id="ngu_registry" requiresAdmin="true" value="/businessEntityListView.do" label="navigation.registry"/>
+      <navlink id="ngu_partner" requiresAdmin="true" value="/partnerListView.do" label="navigation.partner"/>
+      <navlink id="ngu_processInstance" requiresAdmin="true" value="/processInstanceListView.do" label="navigation.processInstance"/>
+      <navlink id="ngu_serviceMgmt" requiresAdmin="true" value="/webServiceListView.do" label="navigation.serviceMgmt"/>
+    </navgroup>
+    
+    <navgroup id="common_header_buttons">
+      <navlink id="nl_pwl" requiresP2P="true" value="/partnerWatchList.do" label="navigation.actions.pwl" clear="false"/>
+      <navlink id="nl_help" value="/help/altpres/help.jsp?id=gtas_ug.0" label="navigation.actions.help" clear="false"/>
+      <navlink id="nl_logout" value="/logout.do"  label="navigation.actions.logout" clear="false"/>
+    </navgroup>
+
+    <navgroup id="hg_empty" document="emptyHeader">
+      <navlink id="hnav_login" value="/logout.do" label="navigation.actions.login" clear="false"/>
+    </navgroup>
+
+  </headgroups>
+
+  <navgroups>
+
+    <navgroup id="navgroup_error" headgroup="hg_empty" document="errorNavigator">
+      <message id="nav_title" label="navigation.msg.error"/>
+    </navgroup>
+
+    <navgroup id="navgroup_error_noLogin" headgroup="hg_empty" document="errorNavigator">
+      <message id="nav_title" label="navigation.msg.error"/>
+    </navgroup>
+
+    <!--<navgroup id="navgroup_gridform" headgroup="headgroup_default" document="gridformNavigator">
+      <message id="nav_title" label="navigation.gridform"/>
+      <navlink id="nav_definition" value="/definitionListView.do" label="navigation.gridform.definitions"/>
+      <navlink id="nav_template" value="/templateListView.do" label="navigation.gridform.templates"/>
+    </navgroup>-->
+
+    <navgroup id="nga_administration"
+              headgroup="hga_default"
+              headlight="nga_administration"
+              document="genericTreeNav"
+              highlighter="default">
+      <include id="ngs_administration"/>
+    </navgroup>
+
+    <navgroup id="nga_communication"
+              headgroup="hga_default"
+              headlight="nga_communication"
+              document="genericTreeNav"
+              highlighter="default">
+      <include id="ngs_communication"/>
+    </navgroup>
+
+    <navgroup id="nga_mapping"
+              headgroup="hga_default"
+              headlight="nga_mapping"
+              document="genericTreeNav"
+              highlighter="default">
+      <include id="ngs_mapping"/>
+    </navgroup>
+
+    <navgroup id="nga_process"
+              headgroup="hga_default"
+              headlight="nga_process"
+              document="genericTreeNav"
+              highlighter="default">
+      <include id="ngs_process"/>
+    </navgroup>
+
+    <navgroup id="nga_registry"
+              headgroup="hga_default"
+              headlight="nga_registry"
+              document="genericTreeNav"
+              highlighter="default">
+      <include id="ngs_registry"/>
+    </navgroup>
+
+    <navgroup id="nga_partner"
+              headgroup="hga_default"
+              headlight="nga_partner"
+              document="genericTreeNav"
+              highlighter="default">
+      <include id="ngs_partner"/>
+    </navgroup>
+
+    <navgroup id="nga_documents"
+              headgroup="hga_default"
+              headlight="nga_documents"
+              document="genericTreeNav"
+              highlighter="default">
+      <include id="ngs_documents"/>
+    </navgroup>
+
+    <navgroup id="nga_processInstance"
+              headgroup="hga_default"
+              headlight="nga_processInstance"
+              highlighter="processInstance"
+              document="processInstanceNavigator">
+      <include id="ngs_processInstance"/>
+    </navgroup>
+
+    <navgroup id="nga_serviceMgmt"
+              headgroup="hga_default"
+              headlight="nga_serviceMgmt"
+              highlighter="default"
+              document="genericTreeNav">
+      <include id="ngs_serviceMgmt"/>
+    </navgroup>
+
+    <navgroup id="ngu_documents"
+              headgroup="hgu_default"
+              headlight="ngu_documents"
+              document="genericTreeNav"
+              highlighter="default">
+      <include id="ngs_documents"/>
+    </navgroup>
+
+    <navgroup id="ngu_process"
+              headgroup="hgu_default"
+              headlight="ngu_process"
+              document="genericTreeNav"
+              highlighter="default">
+      <include id="ngs_process"/>
+    </navgroup>
+
+    <navgroup id="ngu_registry"
+              headgroup="hgu_default"
+              headlight="ngu_registry"
+              document="genericTreeNav"
+              highlighter="default">
+      <include id="ngs_registry"/>
+    </navgroup>
+
+    <navgroup id="ngu_partner"
+              headgroup="hgu_default"
+              headlight="ngu_partner"
+              document="genericTreeNav"
+              highlighter="default">
+      <include id="ngs_partner"/>
+    </navgroup>
+
+    <navgroup id="ngu_processInstance"
+              headgroup="hgu_default"
+              headlight="ngu_ProcessInstance"
+              highlighter="processInstance"
+              document="processInstanceNavigator">
+      <include id="ngs_processInstance"/>
+    </navgroup>
+
+    <!--  Sometimes the user sees a screen which belongs to an admin group. These mappings
+          allow for this -->
+    <navgroup id="ngu_administration"
+              headgroup="hgu_default"
+              document="genericTreeNav"
+              highlighter="default">
+      <!-- Since their there should we give include the appropriate navgroup??? -->
+      <include id="ngs_documents"/>
+    </navgroup>
+
+    <navgroup id="ngu_communication"
+              headgroup="hgu_default"
+              document="genericTreeNav"
+              highlighter="default">
+      <include id="ngs_documents"/>
+    </navgroup>
+
+    <navgroup id="ngu_mapping"
+              headgroup="hgu_default"
+              document="genericTreeNav"
+              highlighter="default">
+      <include id="ngs_documents"/>
+    </navgroup>
+
+
+	<navgroup id="ngu_serviceMgmt"
+              headgroup="hgu_default"
+              headlight="ngu_serviceMgmt"
+              document="genericTreeNav"
+              highlighter="default">
+      <include id="ngs_serviceMgmt"/>
+    </navgroup>
+	
+    <!-- add for estore -->
+    <navgroup id="nga_EsSearchPage"
+              headgroup="hga_default"
+              headlight="nga_EsSearchPage"
+              document="genericTreeNav"
+              highlighter="default">
+      <include id="ngs_EsSearchPage" />
+    </navgroup>
+
+    <!-- -->
+
+    <!-- -->
+
+
+    <navgroup id="ngs_administration">
+      <navtree id="nt_navTree">
+        <navtreenode id="ntn_administration" label="navigation.administration" ie="true" collapsed="images/navigation/administration.gif">
+          <navtreenode id="ntn_server" label="navigation.administration" value="/serverDispatchAction.do?method=update" collapsed="images/navigation/administration.gif"/>
+          <navtreenode id="ntn_user" value="/userListView.do" label="navigation.administration.user" collapsed="images/entities/user.gif"/>
+          <!--disabled20050315AH <navtreenode id="ntn_role" value="/roleListView.do" label="navigation.administration.role" collapsed="images/entities/role.gif"/>-->
+          <navtreenode id="ntn_registration" value="/registrationInfoDispatchAction.do?method=view" label="navigation.administration.registration" collapsed="images/entities/registrationInfo.gif"/>
+          <navtreenode id="ntn_networkSetting" requiresP2P="true" value="/networkSettingDispatchAction.do?method=view" label="navigation.administration.networkSetting" collapsed="images/entities/networkSetting.gif"/>
+          <navtreenode id="ntn_connectionSetup" requiresP2P="true" value="/connectionSetupResultDispatchAction.do?method=update" label="navigation.administration.connectionSetup" collapsed="images/entities/connectionSetup.gif"/>
+          <navtreenode id="ntn_alert" value="/alertListView.do" label="navigation.administration.alert" collapsed="images/entities/alert.gif">
+            <navtreenode id="ntn_action" value="/actionListView.do" label="navigation.administration.action" collapsed="images/entities/action.gif"/>
+            <navtreenode id="ntn_messageTemplate" value="/messageTemplateListView.do" label="navigation.administration.messageTemplate" collapsed="images/entities/messageTemplate.gif"/>
+            <navtreenode id="ntn_responseTrackRecord" value="/responseTrackRecordListView.do" label="navigation.administration.responseTrackRecord" collapsed="images/entities/responseTrackRecord.gif"/>
+            <navtreenode id="ntn_alertTrigger" value="/alertTriggerListView.do" label="navigation.administration.alertTrigger" collapsed="images/entities/alertTrigger.gif">
+              <navtreenode id="ntn_l0AlertTrigger" value="/alertTriggerListView.do?level=0" label="navigation.administration.alertTrigger.l0AlertTrigger" collapsed="images/entities/alertTrigger.gif"/>
+              <navtreenode id="ntn_l1AlertTrigger" value="/alertTriggerListView.do?level=1" label="navigation.administration.alertTrigger.l1AlertTrigger" collapsed="images/entities/alertTrigger.gif"/>
+              <navtreenode id="ntn_l2AlertTrigger" value="/alertTriggerListView.do?level=2" label="navigation.administration.alertTrigger.l2AlertTrigger" collapsed="images/entities/alertTrigger.gif"/>
+              <navtreenode id="ntn_l3AlertTrigger" value="/alertTriggerListView.do?level=3" label="navigation.administration.alertTrigger.l3AlertTrigger" collapsed="images/entities/alertTrigger.gif"/>
+              <navtreenode id="ntn_l4AlertTrigger" value="/alertTriggerListView.do?level=4" label="navigation.administration.alertTrigger.l4AlertTrigger" collapsed="images/entities/alertTrigger.gif"/>
+            </navtreenode>
+            <navtreenode id="ntn_emailConfig" value="/emailConfigDispatchAction.do?method=view&amp;uid=new" label="navigation.administration.emailConfig" collapsed="images/entities/messageTemplate.gif"/>
+			
+			<!-- SC: jms alert notification -->
+			<navtreenode id="ntn_jmsDestination" value="/jmsDestinationListView.do" label="navigation.administration.jmsDestination" collapsed="images/entities/messageTemplate.gif"/>
+
+          </navtreenode>
+          <navtreenode id="ntn_scheduledTask" value="/scheduledTaskListView.do" label="navigation.administration.scheduledTask" collapsed="images/entities/scheduledTask.gif"/>          
+        </navtreenode>
+      </navtree>
+    </navgroup>
+
+    <navgroup id="ngs_communication">
+      <navtree id="nt_navTree">
+        <navtreenode id="ntn_communication" label="navigation.communication" ie="true" collapsed="images/navigation/communication.gif">
+
+          <navtreenode id="ntn_packaging" value="/packagingInfoListView.do" label="navigation.communication.packaging" collapsed="images/entities/packagingInfo.gif">
+            <navtreenode id="ntn_ownPackaging" value="/packagingInfoListView.do?isPartner=false" label="navigation.communication.packaging.own" collapsed="images/entities/packagingInfo.gif"/>
+            <navtreenode id="ntn_partnerPackaging" value="/packagingInfoListView.do?isPartner=true" label="navigation.communication.packaging.partner" collapsed="images/entities/packagingInfo.gif">
+              <navtreenode id="ntn_gtPartnerPackaging" requiresP2P="true" value="/packagingInfoListView.do?partnerCategory=1" label="navigation.communication.packaging.partner.gtPartner" collapsed="images/entities/packagingInfo.gif"/>
+              <navtreenode id="ntn_otherPartnerPackaging" requiresP2P="true" value="/packagingInfoListView.do?partnerCategory=0" label="navigation.communication.packaging.partner.otherPartner" collapsed="images/entities/packagingInfo.gif"/>
+            </navtreenode>
+          </navtreenode>
+
+          <navtreenode id="ntn_security" value="/securityInfoListView.do" label="navigation.communication.security" collapsed="images/entities/securityInfo.gif">
+            <navtreenode id="ntn_ownSecurity" value="/securityInfoListView.do?isPartner=false" label="navigation.communication.security.own" collapsed="images/entities/securityInfo.gif"/>
+            <navtreenode id="ntn_partnerSecurity" value="/securityInfoListView.do?isPartner=true" label="navigation.communication.security.partner" collapsed="images/entities/securityInfo.gif">
+              <navtreenode id="ntn_gtPartnerSecurity" requiresP2P="true" value="/securityInfoListView.do?partnerCategory=1" label="navigation.communication.security.partner.gtPartner" collapsed="images/entities/securityInfo.gif"/>
+              <navtreenode id="ntn_otherPartnerSecurity" requiresP2P="true" value="/securityInfoListView.do?partnerCategory=0" label="navigation.communication.security.partner.otherPartner" collapsed="images/entities/securityInfo.gif"/>
+            </navtreenode>
+          </navtreenode>
+
+          <navtreenode id="ntn_commInfo" value="/commInfoListView.do" label="navigation.communication.commInfo" collapsed="images/entities/commInfo.gif">
+            <navtreenode id="ntn_ownCommInfo" value="/commInfoListView.do?isPartner=false" label="navigation.communication.commInfo.own" collapsed="images/entities/commInfo.gif"/>
+            <navtreenode id="ntn_partnerCommInfo" value="/commInfoListView.do?isPartner=true" label="navigation.communication.commInfo.partner" collapsed="images/entities/commInfo.gif">
+              <navtreenode id="ntn_gtPartnerCommInfo" requiresP2P="true" value="/commInfoListView.do?partnerCategory=1" label="navigation.communication.commInfo.partner.gtPartner" collapsed="images/entities/commInfo.gif"/>
+              <navtreenode id="ntn_otherPartnerCommInfo" requiresP2P="true" value="/commInfoListView.do?partnerCategory=0" label="navigation.communication.commInfo.partner.otherPartner" collapsed="images/entities/commInfo.gif"/>
+            </navtreenode>
+          </navtreenode>
+
+          <navtreenode id="ntn_channel" value="/channelInfoListView.do" label="navigation.communication.channel" collapsed="images/entities/channelInfo.gif">
+            <navtreenode id="ntn_ownChannel" value="/channelInfoListView.do?isPartner=false" label="navigation.communication.channel.own" collapsed="images/entities/channelInfo.gif"/>
+            <navtreenode id="ntn_partnerChannel" value="/channelInfoListView.do?isPartner=true" label="navigation.communication.channel.partner" collapsed="images/entities/channelInfo.gif">
+              <navtreenode id="ntn_gtPartnerChannel" requiresP2P="true" value="/channelInfoListView.do?partnerCategory=1" label="navigation.communication.channel.partner.gtPartner" collapsed="images/entities/channelInfo.gif"/>
+              <navtreenode id="ntn_otherPartnerChannel" requiresP2P="true" value="/channelInfoListView.do?partnerCategory=0" label="navigation.communication.channel.partner.otherPartner" collapsed="images/entities/channelInfo.gif"/>
+            </navtreenode>
+          </navtreenode>
+
+          <navtreenode id="ntn_certificate" value="/certificateListView.do" label="navigation.communication.certificate" collapsed="images/entities/certificate.gif">
+            <navtreenode id="ntn_ownCertificate" value="/certificateListView.do?isPartner=false" label="navigation.communication.certificate.own" collapsed="images/entities/certificate.gif"/>
+            <navtreenode id="ntn_partnerCertificate" value="/certificateListView.do?isPartner=true" label="navigation.communication.certificate.partner" collapsed="images/entities/certificate.gif"/>
+          </navtreenode>
+        </navtreenode>
+      </navtree>
+    </navgroup>
+
+    <navgroup id="ngs_mapping">
+      <navtree id="nt_navTree">
+        <navtreenode id="ntn_mapping" label="navigation.mapping" ie="true" collapsed="images/navigation/mapping.gif">
+          <navtreenode id="ntn_documentType" value="/documentTypeListView.do" label="navigation.mapping.documentType" collapsed="images/entities/documentType.gif"/>
+          <navtreenode id="ntn_fileType" value="/fileTypeListView.do" label="navigation.mapping.fileType" collapsed="images/entities/fileType.gif"/>
+          <navtreenode id="ntn_MappingFile" value="/mappingFileListView.do" label="navigation.mapping.mappingFile" collapsed="images/entities/mappingFile.gif">
+            <navtreenode id="ntn_xslMappingFile" value="/mappingFileListView.do?type=0" label="navigation.mapping.mappingFile.xslMappingFile" collapsed="images/entities/mappingFile.gif"/>
+            <navtreenode id="ntn_crMappingFile" value="/mappingFileListView.do?type=1" label="navigation.mapping.mappingFile.crMappingFile" collapsed="images/entities/mappingFile.gif"/>
+            <navtreenode id="ntn_rdMappingFile" value="/mappingFileListView.do?type=2" label="navigation.mapping.mappingFile.rdMappingFile" collapsed="images/entities/mappingFile.gif"/>
+            <navtreenode id="ntn_dtdMappingFile" value="/mappingFileListView.do?type=3" label="navigation.mapping.mappingFile.dtdMappingFile" collapsed="images/entities/mappingFile.gif"/>
+            <navtreenode id="ntn_sMappingFile" value="/mappingFileListView.do?type=4" label="navigation.mapping.mappingFile.sMappingFile" collapsed="images/entities/mappingFile.gif"/>
+            <navtreenode id="ntn_dMappingFile" value="/mappingFileListView.do?type=5" label="navigation.mapping.mappingFile.dMappingFile" collapsed="images/entities/mappingFile.gif"/>
+            <navtreenode id="ntn_xpMappingFile" value="/mappingFileListView.do?type=6" label="navigation.mapping.mappingFile.xpMappingFile" collapsed="images/entities/mappingFile.gif"/>
+            <navtreenode id="ntn_jbMappingFile" value="/mappingFileListView.do?type=7" label="navigation.mapping.mappingFile.jbMappingFile" collapsed="images/entities/mappingFile.gif"/>
+          </navtreenode>
+          <navtreenode id="ntn_mappingRule" value="/gridTalkMappingRuleListView.do" label="navigation.mapping.mappingRule" collapsed="images/entities/mappingRule.gif">
+            <navtreenode id="ntn_hMappingRule" value="/gridTalkMappingRuleListView.do?headerTransformation=true" label="navigation.mapping.mappingRule.hMappingRule" collapsed="images/entities/mappingRule.gif"/>
+            <navtreenode id="ntn_cMappingRule" value="/gridTalkMappingRuleListView.do?headerTransformation=false" label="navigation.mapping.mappingRule.cMappingRule" collapsed="images/entities/mappingRule.gif"/>
+          </navtreenode>
+          <navtreenode id="ntn_certMapping" value="/bizCertMappingListView.do" label="navigation.mapping.certMapping" collapsed="images/entities/bizCertMapping.gif" />
+		  <navtreenode id="ntn_as2DocTypeMapping" value="/as2DocTypeMappingListView.do" label="navigation.mapping.as2DocTypeMapping" collapsed="images/entities/documentType.gif"/>
+        </navtreenode>
+      </navtree>
+    </navgroup>
+
+    <navgroup id="ngs_process">
+       <navtree id="nt_navTree">
+        <navtreenode id="ntn_process" label="navigation.process" ie="true" collapsed="images/navigation/process.gif">
+          <navtreenode id="ntn_partnerFunction" value="/partnerFunctionListView.do" label="navigation.process.partnerFunction" collapsed="images/entities/partnerFunction.gif"/>
+          <navtreenode id="ntn_trigger" value="/triggerListView.do" label="navigation.process.trigger" collapsed="images/entities/trigger.gif">
+            <navtreenode id="ntn_l0Trigger" value="/triggerListView.do?triggerLevel=0" label="navigation.process.trigger.l0Trigger" collapsed="images/entities/trigger.gif"/>
+            <navtreenode id="ntn_l1Trigger" value="/triggerListView.do?triggerLevel=1" label="navigation.process.trigger.l1Trigger" collapsed="images/entities/trigger.gif"/>
+            <navtreenode id="ntn_l2Trigger" value="/triggerListView.do?triggerLevel=2" label="navigation.process.trigger.l2Trigger" collapsed="images/entities/trigger.gif"/>
+            <navtreenode id="ntn_l3Trigger" value="/triggerListView.do?triggerLevel=3" label="navigation.process.trigger.l3Trigger" collapsed="images/entities/trigger.gif"/>
+            <navtreenode id="ntn_l4Trigger" value="/triggerListView.do?triggerLevel=4" label="navigation.process.trigger.l4Trigger" collapsed="images/entities/trigger.gif"/>
+          </navtreenode>
+          <navtreenode id="ntn_processDefinition" value="/processDefListView.do" label="navigation.process.processDefinition" collapsed="images/entities/processDef.gif"/>
+          <navtreenode id="ntn_processMapping" value="/processMappingListView.do" label="navigation.process.processMapping" collapsed="images/entities/processMapping.gif"/>
+          <navtreenode id="ntn_rfc" value="/rfcListView.do" label="navigation.process.rfc" collapsed="images/entities/rfc.gif"/>
+          <navtreenode id="ntn_port" value="/portListView.do" label="navigation.process.port" collapsed="images/entities/port.gif"/>
+          <navtreenode id="ntn_procedureDefinitionFile" value="/procedureDefFileListView.do" label="navigation.process.procedureDefinitionFile" collapsed="images/entities/procedureDefFile.gif">
+            <navtreenode id="ntn_seProcedureDefinitionFile" value="/procedureDefFileListView.do?type=1" label="navigation.process.procedureDefinitionFile.seProcedureDefinitionFile" collapsed="images/entities/procedureDefFile.gif"/>
+            <navtreenode id="ntn_jpProcedureDefinitionFile" value="/procedureDefFileListView.do?type=2" label="navigation.process.procedureDefinitionFile.jpProcedureDefinitionFile" collapsed="images/entities/procedureDefFile.gif"/>
+            <navtreenode id="ntn_spProcedureDefinitionFile" value="/procedureDefFileListView.do?type=3" label="navigation.process.procedureDefinitionFile.spProcedureDefinitionFile" collapsed="images/entities/procedureDefFile.gif"/>
+          </navtreenode>
+          <navtreenode id="ntn_userProcedure" value="/userProcedureListView.do" label="navigation.process.userProcedure" collapsed="images/entities/userProcedure.gif">
+            <navtreenode id="ntn_seUserProcedure" value="/userProcedureListView.do?type=1" label="navigation.process.userProcedure.seUserProcedure" collapsed="images/entities/userProcedure.gif"/>
+            <navtreenode id="ntn_jpUserProcedure" value="/userProcedureListView.do?type=2" label="navigation.process.userProcedure.jpUserProcedure" collapsed="images/entities/userProcedure.gif"/>
+            <navtreenode id="ntn_spUserProcedure" value="/userProcedureListView.do?type=3" label="navigation.process.userProcedure.spUserProcedure" collapsed="images/entities/userProcedure.gif"/>
+          </navtreenode>
+        </navtreenode>
+      </navtree>
+    </navgroup>
+
+    <navgroup id="ngs_registry">
+      <navtree id="nt_navTree">
+        <navtreenode id="ntn_registry" label="navigation.registry" ie="true" collapsed="images/navigation/registry.gif">
+          <navtreenode id="ntn_companyProfile" value="/companyProfileDispatchAction.do?method=view" label="navigation.registry.companyProfile" collapsed="images/entities/coyProfile.gif"/>
+          <navtreenode id="ntn_businessEntity" value="/businessEntityListView.do" label="navigation.registry.businessEntity" collapsed="images/entities/businessEntity.gif">
+            <navtreenode id="ntn_ownBusinessEntity" value="/businessEntityListView.do?isPartner=false" label="navigation.registry.businessEntity.own" collapsed="images/entities/businessEntity.gif"/>
+            <navtreenode id="ntn_partnerBusinessEntity" value="/businessEntityListView.do?isPartner=true" label="navigation.registry.businessEntity.partner" collapsed="images/entities/businessEntity.gif">
+              <navtreenode id="ntn_gtPartnerBusinessEntity" requiresP2P="true" value="/businessEntityListView.do?partnerCategory=1" label="navigation.registry.businessEntity.partner.gtPartner" collapsed="images/entities/businessEntity.gif"/>
+              <navtreenode id="ntn_otherPartnerBusinessEntity" requiresP2P="true" value="/businessEntityListView.do?partnerCategory=0" label="navigation.registry.businessEntity.partner.otherPartner" collapsed="images/entities/businessEntity.gif"/>
+            </navtreenode>
+			<navtreenode id="ntn_delBusinessEntity" value="/businessEntityListView.do?isState=1" label="navigation.registry.businessEntity.deleted" collapsed="images/entities/businessEntity.gif"/>
+            <navtreenode id="ntn_registryConnectInfo" requiresUDDI="true" value="/registryConnectInfoListView.do" label="navigation.registry.businessEntity.partner.registryConnectInfo" collapsed="images/entities/businessEntity.gif"/>
+            <navtreenode id="ntn_searchBusinessEntity" requiresUDDI="true" value="/searchRegistryQueryListView.do" label="navigation.registry.businessEntity.partner.search" collapsed="images/entities/businessEntity.gif"/>
+          </navtreenode>
+          <navtreenode id="ntn_gridNodeSearch" requiresP2P="true" value="/searchGridNodeQueryListView.do" label="navigation.registry.gridNodeSearch" collapsed="images/entities/searchGridNodeQuery.gif"/>
+
+          <navtreenode id="ntn_activationRecord" requiresP2P="true" value="/activationRecordListView.do" label="navigation.registry.activationRecord" collapsed="images/entities/activationRecord.gif">
+            <navtreenode id="ntn_activation" value="/activationRecordListView.do?summaryType=activation" label="navigation.registry.activationRecord.activation" collapsed="images/entities/activationRecord.gif">
+              <navtreenode id="ntn_incomingActivation" value="/activationRecordListView.do?filterType=incomingActivation" label="navigation.registry.activationRecord.activation.incomingActivation" collapsed="images/entities/activationRecord.gif"/>
+              <navtreenode id="ntn_outgoingActivation" value="/activationRecordListView.do?filterType=outgoingActivation" label="navigation.registry.activationRecord.activation.outgoingActivation" collapsed="images/entities/activationRecord.gif"/>
+            </navtreenode>
+            <navtreenode id="ntn_deactivation" value="/activationRecordListView.do?summaryType=deactivation" label="navigation.registry.activationRecord.deactivation" collapsed="images/entities/activationRecord.gif">
+              <navtreenode id="ntn_incomingDeactivation" value="/activationRecordListView.do?filterType=incomingDeactivation" label="navigation.registry.activationRecord.deactivation.incomingDeactivation" collapsed="images/entities/activationRecord.gif"/>
+              <navtreenode id="ntn_outgoingDeactivation" value="/activationRecordListView.do?filterType=outgoingDeactivation" label="navigation.registry.activationRecord.deactivation.outgoingDeactivation" collapsed="images/entities/activationRecord.gif"/>
+            </navtreenode>
+            <navtreenode id="ntn_approvedActivation" value="/activationRecordListView.do?filterType=approved" label="navigation.registry.activationRecord.approvedActivation" collapsed="images/entities/activationRecord.gif"/>
+            <navtreenode id="ntn_deniedActivation" value="/activationRecordListView.do?filterType=denied" label="navigation.registry.activationRecord.deniedActivation" collapsed="images/entities/activationRecord.gif"/>
+            <navtreenode id="ntn_abortedActivation" value="/activationRecordListView.do?filterType=aborted" label="navigation.registry.activationRecord.abortedActivation" collapsed="images/entities/activationRecord.gif"/>
+          </navtreenode>
+
+          <navtreenode id="ntn_gridNode" requiresP2P="true" value="/gridNodeListView.do" label="navigation.registry.gridNode" collapsed="images/entities/gridNode.gif">
+            <navtreenode id="ntn_ownGridNode" value="/gridNodeListView.do?state=0" label="navigation.registry.gridNode.ownGridNode" collapsed="images/entities/gridNode.gif"/>
+            <navtreenode id="ntn_activeGridNode" value="/gridNodeListView.do?state=2" label="navigation.registry.gridNode.activeGridNode" collapsed="images/entities/gridNode.gif"/>
+            <navtreenode id="ntn_inactiveGridNode" value="/gridNodeListView.do?state=3" label="navigation.registry.gridNode.inactiveGridNode" collapsed="images/entities/gridNode.gif"/>
+            <navtreenode id="ntn_gmGridNode" value="/gridNodeListView.do?state=4" label="navigation.registry.gridNode.gmGridNode" collapsed="images/entities/gridNode.gif"/>
+          </navtreenode>
+        </navtreenode>
+      </navtree>
+    </navgroup>
+
+    <navgroup id="ngs_partner">
+      <navtree id="nt_navTree">
+        <navtreenode id="ntn_partners" label="navigation.partner" ie="true" collapsed="images/entities/partner.gif">
+          <navtreenode id="ntn_partner" value="/partnerListView.do" label="navigation.partner.partners" collapsed="images/entities/partner.gif"/>
+          <navtreenode id="ntn_partnerType" value="/partnerTypeListView.do" label="navigation.partner.partnerType" collapsed="images/entities/partnerType.gif"/>
+          <navtreenode id="ntn_partnerGroup" value="/partnerGroupListView.do" label="navigation.partner.partnerGroup" collapsed="images/entities/partnerGroup.gif"/>
+        </navtreenode>
+      </navtree>
+    </navgroup>
+
+    <navgroup id="ngs_documents">
+      <navtree id="nt_navTree">
+        <navtreenode id="ntn_documents" label="navigation.document" ie="true" collapsed="images/navigation/allFolder.gif">
+          <navtreenode id="ntn_allDocuments" value="/sysFoldersListView.do" label="navigation.document.all" collapsed="images/entities/gridDocument.gif"/>
+          <navtreenode id="ntn_inbound" value="/sysFoldersListView.do?folder=inbound" label="navigation.document.inbound" collapsed="images/navigation/inbound.gif"/>
+          <navtreenode id="ntn_outbound" value="/sysFoldersListView.do?folder=outbound" label="navigation.document.outbound" collapsed="images/navigation/outbound.gif"/>
+          <navtreenode id="ntn_import" value="/sysFoldersListView.do?folder=import" label="navigation.document.import" collapsed="images/navigation/import.gif"/>
+          <navtreenode id="ntn_export" value="/sysFoldersListView.do?folder=export" label="navigation.document.export" collapsed="images/navigation/export.gif"/>
+          <dynamic-navtreenode id="ntn_search" value="/searchQueryListView.do" label="navigation.document.search" ie="true" collapsed="images/navigation/search.gif" infoClass="com.gridnode.gtas.client.web.document.SearchQueryNavTreeNodeInfo"/>
+        </navtreenode>
+      </navtree>
+    </navgroup>
+
+    <navgroup id="ngs_processInstance">
+      <message id="nav_title" label="navigation.processInstance"/>
+      <dynamic-navlink id="dnl_processInstance" value="/processInstanceListView.do" label="navigation.processInstance"
+                       navRenderer="com.gridnode.gtas.client.web.bp.ProcessInstanceNavRenderer"/>
+    </navgroup>
+
+    <navgroup id="ngs_serviceMgmt">
+      <navtree id="nt_navTree">
+        <navtreenode id="ntn_serviceMgmt" label="navigation.serviceMgmt" ie="true" collapsed="images/entities/partner.gif">
+          <navtreenode id="ntn_webService" value="/webServiceListView.do" label="navigation.serviceMgmt.webServices" collapsed="images/entities/partner.gif"/>
+          <navtreenode id="ntn_serviceAssignment" value="/serviceAssignmentListView.do" label="navigation.serviceMgmt.serviceAssignments" collapsed="images/entities/partnerType.gif"/>
+        </navtreenode>
+      </navtree>
+    </navgroup>
+
+    <!-- add for estore -->
+    <navgroup id="ngs_EsSearchPage">
+      <navtree id="nt_navTree">
+        <navtreenode id="ntn_EsSearchPage" label="navigation.EsSearchPage" ie="true" collapsed="images/navigation/search.gif">
+          <navtreenode id="ntn_PiSearch" value="/searchEsPiPageDispatchAction.do?method=update&amp;uid=new" label="navigation.EsSearchPage.PiSearch" collapsed="images/navigation/search.gif" />
+		  <navtreenode id="ntn_DocSearch" value="/searchEsDocPageDispatchAction.do?method=update&amp;uid=new" label="navigation.EsSearchPage.DocSearch" collapsed="images/navigation/search.gif"/>
+        </navtreenode>
+      </navtree>
+    </navgroup>
+
+  </navgroups>
+
+  <highlighters>
+    <!-- nb:  20030327AH - the HighlighterCreationFactory doesnt yet check the type attribute
+              but is merely hardcoded to always return an instance of Highlighter.
+              To add new type must also refactor that one first (sorry) -->
+    <highlighter  id="default"
+                  type="com.gridnode.gtas.client.web.navigation.Highlighter" />
+    <highlighter  id="processInstance"
+                  type="com.gridnode.gtas.client.web.bp.ProcessInstanceHighlighter"
+                  param="processDefName" />
+  </highlighters>
+
+  <resolvers>
+    <arearesolver id="administration"   suffix="administration"/>
+    <arearesolver id="communication"    suffix="communication"/>
+    <arearesolver id="mapping"          suffix="mapping"/>
+    <arearesolver id="process"          suffix="process"/>
+    <arearesolver id="registry"         suffix="registry"/>
+    <arearesolver id="partner"          suffix="partner"/>
+    <arearesolver id="documents"        suffix="documents"/>
+    <arearesolver id="processInstance"  suffix="processInstance"/>
+    <arearesolver id="serviceMgmt"  suffix="serviceMgmt"/>
+
+    <!-- add for estore -->
+    <arearesolver id="EsSearchPage"     suffix="EsSearchPage" />
+
+    <simpleresolver id="error"          navgroup="error"/>
+    <simpleresolver id="error_noLogin"  navgroup="error_noLogin"/>
+  </resolvers>
+
+  <resolver-mappings>
+    <mapping path="/userListView" id="administration"/>
+    <mapping path="/partnerTypeListView" id="partner"/>
+    <mapping path="/partnerListView" id="partner"/>
+    <mapping path="/partnerGroupListView" id="partner"/>
+    <mapping path="/accessRightListView" id="administration"/>
+    <mapping path="/roleListView" id="administration"/>
+    <mapping path="/featureListView" id="administration"/>
+    <mapping path="/documentTypeListView" id="mapping"/>
+    <mapping path="/fileTypeListView" id="mapping"/>
+    <mapping path="/mappingFileListView" id="mapping"/>
+    <mapping path="/gridTalkMappingRuleListView" id="mapping"/>
+    <mapping path="/channelInfoListView" id="communication"/>
+    <mapping path="/commInfoListView" id="communication"/>
+    <mapping path="/businessEntityListView" id="registry"/>
+    <mapping path="/sysFoldersListView" id="documents"/>
+    <mapping path="/securityInfoListView" id="communication"/>
+    <mapping path="/packagingInfoListView" id="communication"/>
+    <mapping path="/certificateListView" id="communication"/>
+    <mapping path="/partnerFunctionListView" id="process"/>
+    <mapping path="/triggerListView" id="process"/>
+    <mapping path="/searchGridNodeQueryListView" id="registry"/>
+    <mapping path="/procedureDefFileListView" id="process"/>
+    <mapping path="/userProcedureListView" id="process"/>
+    <mapping path="/activationRecordListView" id="registry"/>
+    <mapping path="/gridNodeListView" id="registry"/>
+    <mapping path="/processMappingListView" id="process"/>
+    <mapping path="/processDefListView" id="process"/>
+    <mapping path="/rfcListView" id="process"/>
+    <mapping path="/portListView" id="process"/>
+    <mapping path="/bizCertMappingListView" id="mapping"/>
+    <mapping path="/processInstanceListView" id="processInstance"/>
+    <mapping path="/alertListView" id="administration"/>
+    <mapping path="/actionListView" id="administration"/>
+    <mapping path="/messageTemplateListView" id="administration"/>
+    <mapping path="/responseTrackRecordListView" id="administration"/>
+    <mapping path="/registryConnectInfoListView" id="registry"/>
+    <mapping path="/searchRegistryQueryListView" id="registry"/>
+    <mapping path="/searchQueryListView" id="documents"/>
+    <mapping path="/alertTriggerListView" id="administration"/>
+    <mapping path="/scheduledTaskListView" id="administration"/>
+
+    <mapping path="/serverDispatchAction" id="administration"/>
+    <mapping path="/companyProfileDispatchAction" id="registry"/>
+    <mapping path="/registrationInfoDispatchAction" id="administration"/>
+    <mapping path="/networkSettingDispatchAction" id="administration"/>
+    <mapping path="/connectionSetupResultDispatchAction" id="administration"/>
+	  <mapping path="/webServiceListView" id="serviceMgmt"/>
+	  <mapping path="/serviceAssignmentListView" id="serviceMgmt"/>
+	  <mapping path="/emailConfigDispatchAction" id="administration"/>
+	
+	<mapping path="/jmsDestinationListView" id="administration"/>
+	 
+
+    <!-- add for estore -->
+	<!--
+    <mapping path="/EsPiSearchPageAction" id="EsSearchPage" /> -->
+	<mapping path="/searchEsPiPageDispatchAction" id="EsSearchPage" />
+
+	<mapping path="/searchEsDocPageDispatchAction" id="EsSearchPage" />
+
+  </resolver-mappings>
+
+</navigation-config>

@@ -1,0 +1,31 @@
+<html>
+<head> 
+ 
+<title>Password Encoder - GridNode</title>
+
+</head>
+<script language="Javascript">
+
+  var _app = navigator.appName;
+
+  if ((_app == 'Mozilla')||(_app == 'Netscape')) {
+    document.write('<embed code="com.gridnode.gtas.tool.MaskedPassApplet.class"',
+                   'width="200"',
+                   'height="200"',
+                   'type="application/x-java-applet;version=1.5">');
+    }
+  else if (_app == 'Microsoft Internet Explorer') {
+    document.write('<OBJECT ',
+                   'classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93"',
+                   'width="200"',
+                   'height="200">',
+                   '<PARAM name="code" value="com.gridnode.gtas.tool.MaskedPassApplet.class">',
+                   '</OBJECT>');
+    }
+  else {
+    document.write('<p>Sorry, unsupported browser.</p>');
+    document.write(_app);
+    }
+
+</script>
+</html>

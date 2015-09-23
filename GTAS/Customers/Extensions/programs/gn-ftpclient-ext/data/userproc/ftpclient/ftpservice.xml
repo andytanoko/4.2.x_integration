@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ftpservice provider="com.gridnode.ftp.adaptor.NetCommonsFTPClientManager">
+	<site name="default">
+		<folder>
+			<remote_upload_folder>raggs</remote_upload_folder>
+			<remote_download_folder>raggs</remote_download_folder>
+			<local_upload_folder>c:\test</local_upload_folder>
+      <local_download_folder>C:/GridNode/FTP/SEA_UPS/Singapore</local_download_folder>
+      <remote_move_folder>jaggs</remote_move_folder>
+      <local_upload_move_folder>c:\moveto</local_upload_move_folder>
+      <upload_rename_prefix>xyz</upload_rename_prefix>
+		</folder>
+		<communication>
+			<host>192.168.213.51</host>
+			<port>21</port>
+			<username>i00082</username>
+			<password>home1234</password>
+			<isproxy>false</isproxy>
+			<issocks>false</issocks>
+			<proxy_host>192.168.213.140</proxy_host>
+			<proxy_port>1080</proxy_port>
+			<proxy_username>socksuser</proxy_username>
+			<proxy_password>password</proxy_password>
+			<ispull>true</ispull>
+      <ismove>true</ismove>
+      <isrename>true</isrename>
+			<retry_count>20</retry_count>
+		</communication>
+    <database>
+      <dbsequence_name>userproc_sequence</dbsequence_name>
+      <dbinsert_query>INSERT INTO referencenum (RefName,LastRefNum,MaxRefNum) values ('userproc_sequence',5,99999);</dbinsert_query>
+      <dbselect_query>SELECT LastRefNum,MaxRefNum from referencenum where RefName=?</dbselect_query>
+      <dbupdate_query>UPDATE referencenum set LastRefNum=? where RefName=?</dbupdate_query>
+      <pad_length>5</pad_length>
+    </database>
+
+	</site>
+	<site name="SG">
+	<folder>
+			<remote_upload_folder>raggs</remote_upload_folder>
+			<remote_download_folder>raggs</remote_download_folder>
+			<local_upload_folder>c:\test</local_upload_folder>
+      <local_download_folder>C:/GridNode/FTP/SEA_UPS/Singapore</local_download_folder>
+      <remote_move_folder>jaggs</remote_move_folder>
+      <local_upload_move_folder>c:\moveto</local_upload_move_folder>
+      <upload_rename_prefix>xyz</upload_rename_prefix>
+		</folder>
+		<communication>
+			<host>192.168.213.51</host>
+			<port>21</port>
+			<username>i00082</username>
+			<password>home1234</password>
+			<isproxy>false</isproxy>
+			<issocks>false</issocks>
+			<proxy_host>192.168.213.140</proxy_host>
+			<proxy_port>1080</proxy_port>
+			<proxy_username>socksuser</proxy_username>
+			<proxy_password>password</proxy_password>
+			<ispull>true</ispull>
+      <ismove>true</ismove>
+      <isrename>true</isrename>
+			<retry_count>20</retry_count>
+		</communication>    
+    <database>
+      <dbsequence_name>userproc_sequence1</dbsequence_name>
+      <dbinsert_query>INSERT INTO referencenum (RefName,LastRefNum,MaxRefNum) values ('userproc_sequence1',5,99999);</dbinsert_query>
+      <dbselect_query>SELECT LastRefNum,MaxRefNum from referencenum where RefName=?</dbselect_query>
+      <dbupdate_query>UPDATE referencenum set LastRefNum=? where RefName=?</dbupdate_query>
+      <pad_length>5</pad_length>
+    </database>
+	</site>
+</ftpservice>

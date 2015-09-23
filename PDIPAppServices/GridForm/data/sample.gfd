@@ -1,0 +1,25 @@
+<layout-definition>
+
+  <association>
+    <root-element>sample-test</root-element>
+    <layout-template>E:\sample.html</layout-template>
+    <condition type="xpath-exist">sample-test/subject</condition>
+  </association>
+
+  <source-mappings>
+    <map name="label1" type="a">sample-test/subject</map>
+    <map name="label2" type="a">sample-test/time/slot[1]</map>
+    <map name="field1" type="input">sample-test/schedule/lesson[1]/@date</map>
+    <map name="field2" type="input">sample-test/schedule/lesson[2]/@date</map>
+    <map name="field3" type="input">sample-test/schedule/lesson[3]/@date</map>
+  </source-mappings>
+
+  <source-dependencies>
+    <dependent name="label1" type="addition">
+      <target name="field1"/>
+      <target name="field2"/>
+      <target name="field3"/>
+    </dependent>
+  </source-dependencies>
+
+</layout-definition>

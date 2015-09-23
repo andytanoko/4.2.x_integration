@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+	<secure>false</secure>
+	<resource-managers/>
+	<enterprise-beans>
+		<entity>
+			<ejb-name>GridTalkMappingRule</ejb-name>
+			<local-jndi-name>com.gridnode.gtas.server.mapper.entities.ejb.IGridTalkMappingRuleLocalHome</local-jndi-name>
+			<method-attributes>
+				<method>
+					<method-name>find*</method-name>
+					<read-only>true</read-only>
+				</method>
+				<method>
+					<method-name>get*</method-name>
+					<read-only>true</read-only>
+				</method>
+			</method-attributes>
+		</entity>
+	</enterprise-beans>
+</jboss>

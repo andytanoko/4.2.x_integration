@@ -1,0 +1,2878 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>    
+
+  <!-- ========== Form Bean Definitions =================================== -->
+  <form-beans>
+    <form-bean name="loginActionForm"                 type="com.gridnode.gtas.client.web.login.LoginAForm"/>
+    <form-bean name="getCertPwActionForm"             type="com.gridnode.gtas.client.web.login.GetCertPwAForm"/>
+    <form-bean name="userActionForm"                  type="com.gridnode.gtas.client.web.user.UserAForm"/>
+    <form-bean name="userUpdateActionForm"            type="com.gridnode.gtas.client.web.user.UserUpdateAForm"/>
+    <form-bean name="partnerTypeActionForm"           type="com.gridnode.gtas.client.web.be.PartnerTypeAForm"/>
+    <form-bean name="partnerGroupActionForm"          type="com.gridnode.gtas.client.web.be.PartnerGroupAForm"/>
+    <form-bean name="partnerActionForm"               type="com.gridnode.gtas.client.web.be.PartnerAForm"/>
+    <form-bean name="accessRightActionForm"           type="com.gridnode.gtas.client.web.acl.AccessRightAForm"/>
+    <form-bean name="roleActionForm"                  type="com.gridnode.gtas.client.web.acl.RoleAForm"/>
+    <form-bean name="mappingFileActionForm"           type="com.gridnode.gtas.client.web.document.MappingFileAForm"/>
+    <form-bean name="gridTalkMappingRuleActionForm"   type="com.gridnode.gtas.client.web.document.GridTalkMappingRuleAForm"/>
+    <form-bean name="commInfoActionForm"              type="com.gridnode.gtas.client.web.channel.CommInfoAForm"/>
+    <form-bean name="channelInfoActionForm"           type="com.gridnode.gtas.client.web.channel.ChannelInfoAForm"/>
+    <form-bean name="fileTypeActionForm"              type="com.gridnode.gtas.client.web.document.FileTypeAForm"/>
+    <form-bean name="businessEntityActionForm"        type="com.gridnode.gtas.client.web.be.BusinessEntityAForm"/>
+    <form-bean name="gridDocumentActionForm"          type="com.gridnode.gtas.client.web.document.GridDocumentAForm"/>
+    <form-bean name="importDocumentsActionForm"       type="com.gridnode.gtas.client.web.document.ImportDocumentsAForm"/>
+    <form-bean name="sendBeActionForm"                type="com.gridnode.gtas.client.web.be.SendBeAForm"/>
+    <form-bean name="companyProfileActionForm"        type="com.gridnode.gtas.client.web.gridnode.CompanyProfileAForm"/>
+    <form-bean name="securityInfoActionForm"          type="com.gridnode.gtas.client.web.channel.SecurityInfoAForm"/>
+    <form-bean name="packagingInfoActionForm"         type="com.gridnode.gtas.client.web.channel.PackagingInfoAForm"/>
+    <form-bean name="partnerFunctionActionForm"       type="com.gridnode.gtas.client.web.bp.PartnerFunctionAForm"/>
+    <form-bean name="workflowActivityActionForm"      type="com.gridnode.gtas.client.web.bp.WorkflowActivityAForm"/>
+    <form-bean name="registrationInfoActionForm"      type="com.gridnode.gtas.client.web.registration.RegistrationInfoAForm"/>
+    <form-bean name="triggerActionForm"               type="com.gridnode.gtas.client.web.bp.TriggerAForm"/>
+    <form-bean name="searchGridNodeQueryActionForm"   type="com.gridnode.gtas.client.web.activation.SearchGridNodeQueryAForm"/>
+    <form-bean name="procedureDefFileActionForm"      type="com.gridnode.gtas.client.web.bp.ProcedureDefFileAForm"/>
+    <form-bean name="networkSettingAForm"             type="com.gridnode.gtas.client.web.connection.NetworkSettingAForm"/>
+    <form-bean name="userProcedureActionForm"         type="com.gridnode.gtas.client.web.bp.UserProcedureAForm"/>
+    <form-bean name="shellExecutableActionForm"       type="com.gridnode.gtas.client.web.bp.ShellExecutableAForm"/>
+    <form-bean name="javaProcedureActionForm"         type="com.gridnode.gtas.client.web.bp.JavaProcedureAForm"/>
+    <form-bean name="paramDefActionForm"              type="com.gridnode.gtas.client.web.bp.ParamDefAForm"/>
+    <form-bean name="returnDefActionForm"             type="com.gridnode.gtas.client.web.bp.ReturnDefAForm"/>
+    <form-bean name="connectionSetupResultForm"       type="com.gridnode.gtas.client.web.connection.ConnectionSetupResultAForm"/>
+    <form-bean name="serverForm"                      type="com.gridnode.gtas.client.web.server.ServerAForm"/>
+    <form-bean name="activationRecordForm"            type="com.gridnode.gtas.client.web.activationActivationRecordAForm"/>
+    <form-bean name="gridNodeActionForm"              type="com.gridnode.gtas.client.web.gridnode.GridNodeAForm"/>
+    <form-bean name="processMappingForm"              type="com.gridnode.gtas.client.web.bp.ProcessMappingAForm"/>
+    <form-bean name="processDefForm"                  type="com.gridnode.gtas.client.web.bp.ProcessDefAForm"/>
+    <form-bean name="processActForm"                  type="com.gridnode.gtas.client.web.bp.ProcessActAForm"/>
+    <form-bean name="rfcActionForm"                   type="com.gridnode.gtas.client.web.bp.RfcAForm"/>
+    <form-bean name="portActionForm"                  type="com.gridnode.gtas.client.web.bp.PortAForm"/>
+    <form-bean name="bizCertMappingActionForm"        type="com.gridnode.gtas.client.web.bp.BizCertMappingAForm"/>
+    <form-bean name="certificateActionForm"           type="com.gridnode.gtas.client.web.channel.CertificateAForm"/>
+    <form-bean name="downloadActionForm"              type="com.gridnode.gtas.client.web.download.DownloadAForm"/>
+    <form-bean name="editGridDocumentActionForm"      type="com.gridnode.gtas.client.web.download.EditGridDocumentAForm"/>
+    <form-bean name="saveGridDocumentActionForm"      type="com.gridnode.gtas.client.web.download.SaveGridDocumentAForm"/>
+    <form-bean name="processInstanceActionForm"       type="com.gridnode.gtas.client.web.bp.ProcessInstanceAForm"/>
+    <form-bean name="alertActionForm"                 type="com.gridnode.gtas.client.web.alert.AlertAForm"/>
+    <form-bean name="actionActionForm"                type="com.gridnode.gtas.client.web.alert.ActionAForm"/>
+    <form-bean name="messageTemplateActionForm"       type="com.gridnode.gtas.client.web.alert.MessageTemplateAForm"/>
+    <form-bean name="responseTrackRecordActionForm"   type="com.gridnode.gtas.client.web.alert.ResponseTrackRecordAForm"/>
+    <form-bean name="reminderAlertActionForm"         type="com.gridnode.gtas.client.web.alert.ReminderAlertAForm"/>
+    <form-bean name="certificatePasswordForm"         type="com.gridnode.gtas.client.web.server.CertificatePasswordAForm"/>
+    <form-bean name="alertTriggerActionForm"          type="com.gridnode.gtas.client.web.alert.AlertTriggerAForm"/>
+    <form-bean name="houseKeepingForm"                type="com.gridnode.gtas.client.web.archive.HouseKeepingAForm"/>
+    <form-bean name="archiveDocumentForm"             type="com.gridnode.gtas.client.web.archive.ArchiveDocumentAForm"/>
+    <form-bean name="archiveForm"                     type="com.gridnode.gtas.client.web.archive.ArchiveAForm"/>
+    <form-bean name="restoreDocumentForm"             type="com.gridnode.gtas.client.web.archive.RestoreDocumentAForm"/>
+    <form-bean name="exportConfigForm"                type="com.gridnode.gtas.client.web.exportConfig.ExportConfigAForm"/>
+    <form-bean name="importConfigForm"                type="com.gridnode.gtas.client.web.exportConfig.ImportConfigAForm"/>
+    <form-bean name="registryConnectInfoForm"         type="com.gridnode.gtas.client.web.be.RegistryConnectInfoAForm"/>
+    <form-bean name="publishBusinessEntityForm"       type="com.gridnode.gtas.client.web.be.PublishBusinessEntityAForm"/>
+    <form-bean name="searchedBusinessEntityForm"      type="com.gridnode.gtas.client.web.be.SearchedBusinessEntityAForm"/>
+    <form-bean name="searchRegistryQueryForm"         type="com.gridnode.gtas.client.web.be.SearchRegistryQueryAForm"/>
+    <form-bean name="embeddedChannelInfoForm"         type="com.gridnode.gtas.client.web.be.EmbeddedChannelInfoAForm"/>
+    <form-bean name="searchQueryForm"                 type="com.gridnode.gtas.client.web.be.SearchQueryAForm"/>
+    <form-bean name="scheduledTaskActionForm"         type="com.gridnode.gtas.client.web.scheduler.ScheduledTaskAForm"/>
+    <form-bean name="scheduledArchiveActionForm"      type="com.gridnode.gtas.client.web.scheduler.ScheduledArchiveAForm"/>
+    <form-bean name="webServiceActionForm"            type="com.gridnode.gtas.client.web.bp.WebServiceAForm"/>
+    <form-bean name="serviceAssignmentActionForm"     type="com.gridnode.gtas.client.web.bp.ServiceAssignmentAForm"/>
+    <form-bean name="emailConfigForm"                 type="com.gridnode.gtas.client.web.alert.EmailConfigAForm"/> 
+	
+	<!--TWX -->
+	<form-bean name="importSchemaForm"
+	type="com.gridnode.gtas.client.web.document.ImportSchemaAForm" />
+	<form-bean name="schemaMappingFileForm"
+	type="com.gridnode.gtas.client.web.document.SchemaMappingFileAForm" />
+
+	<!-- add for estore -->
+    <form-bean name="EsSearchPageAForm"               type="com.gridnode.gtas.client.web.backend.EsSearchPageAForm" />
+	<form-bean name="AuditFileAForm"                  type="com.gridnode.gtas.client.web.archive.docforpi.AuditFileAForm" />
+	
+	<!-- add for es search page-->
+	<form-bean name="searchEsPiPageAForm" type="com.gridnode.gtas.client.web.archive.searchpage.EsPiSearchPageAForm" />
+	<form-bean name="searchEsDocPageAForm" type="com.gridnode.gtas.client.web.archive.searchpage.EsDocSearchPageAForm" />
+	<form-bean name="EsPiAForm" type="com.gridnode.gtas.client.web.archive.docforpi.EsPiAForm" />
+
+  </form-beans>
+
+  <global-exceptions>
+    <exception  type="java.lang.Exception"
+                handler="com.gridnode.gtas.client.web.strutsbase.GTExceptionHandler"
+                key="exception"/>
+  </global-exceptions>
+
+  <!-- ========== Global Forward Definitions ============================== -->
+  <global-forwards>
+    <forward name="login" path="/preLogin.do" redirect="true"/>
+    <forward name="reLogin" path="/preLogin.do" redirect="true"/>
+    <forward name="getCertPassword" path="/getCertPw.do" />
+    <forward name="logout" path="/logout.do"/>
+    <forward name="register" path="/registrationInfoDispatchAction.do?method=view" redirect="true"/>
+    <forward name="view" path="/renderingAction.do"/>
+    <forward name="download" path="/downloadAction.do"/>
+    <forward name="editGridDocument" path="/editGridDocumentAction.do"/>
+    <forward name="exception" path="/displayExceptionAction.do"/>
+    <forward name="partnerWatchList" path="/partnerWatchList.do"/>
+    <forward name="blank" path="/blank.html"/>
+    <forward name="navPage" path="/navPageAction.do"/>
+
+    <forward name="initialHeader" path="/blank.html"/>
+    <forward name="initialNav" path="/blank.html"/>
+    <forward name="initialBody" path="/initialBody.do"/>
+    <forward name="navPage" path="/navPageAction.do"/>
+    <forward name="closeWindow" path="/closeWindow.do"/>
+
+    <forward name="area.admin" path="/serverDispatchAction.do?method=update"/>
+    <forward name="area.user" path="/sysFoldersListView.do?folder=import"/>
+
+    <!-- Forwards used by magic links, listviews, diversions et al -->
+    <forward name="createUser" path="/userDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateUser" path="/userDispatchAction.do?method=update" />
+    <forward name="updateUserUpdate" path="/userUpdateDispatchAction.do?method=update" /> <!--User to update own PW -->
+    <forward name="viewUser" path="/userDispatchAction.do?method=view" />
+    <forward name="deleteUser" path="/userDispatchAction.do" />
+
+    <forward name="createRole" path="/roleDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateRole" path="/roleDispatchAction.do?method=update" />
+    <forward name="viewRole" path="/roleDispatchAction.do?method=view" />
+    <forward name="deleteRole" path="/roleDispatchAction.do" />
+
+    <forward name="createPartnerType" path="/partnerTypeDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updatePartnerType" path="/partnerTypeDispatchAction.do?method=update" />
+    <forward name="viewPartnerType" path="/partnerTypeDispatchAction.do?method=view" />
+    <forward name="deletePartnerType" path="/partnerTypeDispatchAction.do" />
+
+    <forward name="createPartnerGroup" path="/partnerGroupDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updatePartnerGroup" path="/partnerGroupDispatchAction.do?method=update" />
+    <forward name="viewPartnerGroup" path="/partnerGroupDispatchAction.do?method=view" />
+    <forward name="deletePartnerGroup" path="/partnerGroupDispatchAction.do" />
+
+    <forward name="createPartner" path="/partnerDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updatePartner" path="/partnerDispatchAction.do?method=update" />
+    <forward name="viewPartner" path="/partnerDispatchAction.do?method=view" />
+    <forward name="deletePartner" path="/partnerDispatchAction.do" />
+
+    <forward name="createDocumentType" path="/documentTypeDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateDocumentType" path="/documentTypeDispatchAction.do?method=update" />
+    <forward name="viewDocumentType" path="/documentTypeDispatchAction.do?method=view" />
+    <forward name="deleteDocumentType" path="/documentTypeDispatchAction.do" />
+	
+	<forward name="createAS2DocTypeMapping" path="/as2DocTypeMappingDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateAS2DocTypeMapping" path="/as2DocTypeMappingDispatchAction.do?method=update" />
+    <forward name="viewAS2DocTypeMapping" path="/as2DocTypeMappingDispatchAction.do?method=view" />
+    <forward name="deleteAS2DocTypeMapping" path="/as2DocTypeMappingDispatchAction.do" />
+
+    <forward name="createGridTalkMappingRule" path="/gridTalkMappingRuleDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateGridTalkMappingRule" path="/gridTalkMappingRuleDispatchAction.do?method=update" />
+    <forward name="viewGridTalkMappingRule" path="/gridTalkMappingRuleDispatchAction.do?method=view" />
+    <forward name="deleteGridTalkMappingRule" path="/gridTalkMappingRuleDispatchAction.do" />
+
+    <forward name="createMappingFile" path="/mappingFileDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateMappingFile" path="/mappingFileDispatchAction.do?method=update" />
+    <forward name="viewMappingFile" path="/mappingFileDispatchAction.do?method=view" />
+    <forward name="deleteMappingFile" path="/mappingFileDispatchAction.do" />
+
+    <forward name="createChannelInfo" path="/channelInfoDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateChannelInfo" path="/channelInfoDispatchAction.do?method=update" />
+    <forward name="viewChannelInfo" path="/channelInfoDispatchAction.do?method=view" />
+    <forward name="deleteChannelInfo" path="/channelInfoDispatchAction.do" />
+
+    <forward name="createCommInfo" path="/commInfoDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateCommInfo" path="/commInfoDispatchAction.do?method=update" />
+    <forward name="viewCommInfo" path="/commInfoDispatchAction.do?method=view" />
+    <forward name="deleteCommInfo" path="/commInfoDispatchAction.do" />
+
+    <forward name="createBusinessEntity" path="/businessEntityDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateBusinessEntity" path="/businessEntityDispatchAction.do?method=update" />
+    <forward name="viewBusinessEntity" path="/businessEntityDispatchAction.do?method=view" />
+    <forward name="deleteBusinessEntity" path="/businessEntityDispatchAction.do" />
+
+    <forward name="createFileType" path="/fileTypeDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateFileType" path="/fileTypeDispatchAction.do?method=update" />
+    <forward name="viewFileType" path="/fileTypeDispatchAction.do?method=view" />
+    <forward name="deleteFileType" path="/fileTypeDispatchAction.do" />
+
+    <forward name="createGridDocument" path="/gridDocumentDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateGridDocument" path="/gridDocumentDispatchAction.do?method=update" />
+    <forward name="viewGridDocument" path="/gridDocumentDispatchAction.do?method=view" />
+    <forward name="deleteGridDocument" path="/gridDocumentDispatchAction.do" />
+
+    <forward name="createSecurityInfo" path="/securityInfoDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateSecurityInfo" path="/securityInfoDispatchAction.do?method=update" />
+    <forward name="viewSecurityInfo" path="/securityInfoDispatchAction.do?method=view" />
+    <forward name="deleteSecurityInfo" path="/securityInfoDispatchAction.do" />
+
+    <forward name="createPackagingInfo" path="/packagingInfoDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updatePackagingInfo" path="/packagingInfoDispatchAction.do?method=update" />
+    <forward name="viewPackagingInfo" path="/packagingInfoDispatchAction.do?method=view" />
+    <forward name="deletePackagingInfo" path="/packagingInfoDispatchAction.do" />
+
+    <forward name="createCertificate" path="/certificateDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateCertificate" path="/certificateDispatchAction.do?method=update" />
+    <forward name="viewCertificate" path="/certificateDispatchAction.do?method=view" />
+    <forward name="deleteCertificate" path="/certificateDispatchAction.do" />
+
+    <forward name="createPartnerFunction" path="/partnerFunctionDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updatePartnerFunction" path="/partnerFunctionDispatchAction.do?method=update" />
+    <forward name="viewPartnerFunction" path="/partnerFunctionDispatchAction.do?method=view" />
+    <forward name="deletePartnerFunction" path="/partnerFunctionDispatchAction.do" />
+
+    <forward name="createActivationRecord" path="/activationRecordDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateActivationRecord" path="/activationRecordDispatchAction.do?method=update" />
+    <forward name="viewActivationRecord" path="/activationRecordDispatchAction.do?method=view" />
+    <forward name="deleteActivationRecord" path="/activationRecordDispatchAction.do" />
+
+    <forward name="createTrigger" path="/triggerDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateTrigger" path="/triggerDispatchAction.do?method=update" />
+    <forward name="viewTrigger" path="/triggerDispatchAction.do?method=view" />
+    <forward name="deleteTrigger" path="/triggerDispatchAction.do" />
+
+    <forward name="createProcedureDefFile" path="/procedureDefFileDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateProcedureDefFile" path="/procedureDefFileDispatchAction.do?method=update" />
+    <forward name="viewProcedureDefFile" path="/procedureDefFileDispatchAction.do?method=view" />
+    <forward name="deleteProcedureDefFile" path="/procedureDefFileDispatchAction.do" />
+
+    <forward name="createUserProcedure" path="/userProcedureDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateUserProcedure" path="/userProcedureDispatchAction.do?method=update" />
+    <forward name="viewUserProcedure" path="/userProcedureDispatchAction.do?method=view" />
+    <forward name="deleteUserProcedure" path="/userProcedureDispatchAction.do" />
+
+    <!-- No create forward for gridNode-->
+    <!-- No update forward for gridNode-->
+    <forward name="viewGridNode" path="/gridNodeDispatchAction.do?method=view" />
+    <!-- No delete forward for gridNode-->
+
+    <forward name="createProcessMapping" path="/processMappingDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateProcessMapping" path="/processMappingDispatchAction.do?method=update" />
+    <forward name="viewProcessMapping" path="/processMappingDispatchAction.do?method=view" />
+    <forward name="deleteProcessMapping" path="/processMappingDispatchAction.do" />
+
+    <forward name="createProcessDef" path="/processDefDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateProcessDef" path="/processDefDispatchAction.do?method=update" />
+    <forward name="viewProcessDef" path="/processDefDispatchAction.do?method=view" />
+    <forward name="deleteProcessDef" path="/processDefDispatchAction.do" />
+
+    <forward name="createRfc" path="/rfcDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateRfc" path="/rfcDispatchAction.do?method=update" />
+    <forward name="viewRfc" path="/rfcDispatchAction.do?method=view" />
+    <forward name="deleteRfc" path="/rfcDispatchAction.do" />
+
+    <forward name="createPort" path="/portDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updatePort" path="/portDispatchAction.do?method=update" />
+    <forward name="viewPort" path="/portDispatchAction.do?method=view" />
+    <forward name="deletePort" path="/portDispatchAction.do" />
+
+    <forward name="createBizCertMapping" path="/bizCertMappingDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateBizCertMapping" path="/bizCertMappingDispatchAction.do?method=update" />
+    <forward name="viewBizCertMapping" path="/bizCertMappingDispatchAction.do?method=view" />
+    <forward name="deleteBizCertMapping" path="/bizCertMappingDispatchAction.do" />
+
+    <!-- No create forward for processInstance-->
+    <!-- No update forward for processInstance-->
+    <forward name="viewProcessInstance" path="/processInstanceDispatchAction.do?method=view" />
+    <forward name="deleteProcessInstance" path="/processInstanceDispatchAction.do" />
+
+    <forward name="createAlert" path="/alertDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateAlert" path="/alertDispatchAction.do?method=update" />
+    <forward name="viewAlert" path="/alertDispatchAction.do?method=view" />
+    <forward name="deleteAlert" path="/alertDispatchAction.do" />
+
+    <forward name="createAction" path="/actionDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateAction" path="/actionDispatchAction.do?method=update" />
+    <forward name="viewAction" path="/actionDispatchAction.do?method=view" />
+    <forward name="deleteAction" path="/actionDispatchAction.do" />
+
+    <forward name="createMessageTemplate" path="/messageTemplateDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateMessageTemplate" path="/messageTemplateDispatchAction.do?method=update" />
+    <forward name="viewMessageTemplate" path="/messageTemplateDispatchAction.do?method=view" />
+    <forward name="deleteMessageTemplate" path="/messageTemplateDispatchAction.do" />
+
+    <forward name="createResponseTrackRecord" path="/responseTrackRecordDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateResponseTrackRecord" path="/responseTrackRecordDispatchAction.do?method=update" />
+    <forward name="viewResponseTrackRecord" path="/responseTrackRecordDispatchAction.do?method=view" />
+    <forward name="deleteResponseTrackRecord" path="/responseTrackRecordDispatchAction.do" />
+
+    <forward name="createReminderAlert" path="/reminderAlertDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateReminderAlert" path="/reminderAlertDispatchAction.do?method=update" />
+    <forward name="viewReminderAlert" path="/reminderAlertDispatchAction.do?method=view" />
+    <forward name="deleteReminderAlert" path="/reminderAlertDispatchAction.do" />
+
+    <forward name="createAlertTrigger" path="/alertTriggerDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateAlertTrigger" path="/alertTriggerDispatchAction.do?method=update" />
+    <forward name="viewAlertTrigger" path="/alertTriggerDispatchAction.do?method=view" />
+    <forward name="deleteAlertTrigger" path="/alertTriggerDispatchAction.do" />
+
+    <forward name="createSearchGridNodeQuery" path="/searchGridNodeQueryDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateSearchGridNodeQuery" path="/searchGridNodeQueryDispatchAction.do?method=update" />
+    <forward name="viewSearchGridNodeQuery" path="/searchGridNodeQueryDispatchAction.do?method=view" />
+    <!-- No delete forward for searchGridNodeQuery -->
+
+    <forward name="createAccessRight" path="/accessRightDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateAccessRight" path="/accessRightDispatchAction.do?method=update" />
+    <forward name="viewAccessRight" path="/accessRightDispatchAction.do?method=view" />
+    <forward name="deleteAccessRight" path="/accessRightDispatchAction.do" />
+    <!-- ... -->
+
+    <forward name="createScheduledTask" path="/scheduledTaskDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateScheduledTask" path="/scheduledTaskDispatchAction.do?method=update" />
+    <forward name="viewScheduledTask" path="/scheduledTaskDispatchAction.do?method=view" />
+    <forward name="deleteScheduledTask" path="/scheduledTaskDispatchAction.do" />
+    
+    <forward name="createScheduledArchive" path="/scheduledArchiveDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateScheduledArchive" path="/scheduledArchiveDispatchAction.do?method=update" />
+    <forward name="viewScheduledArchive" path="/scheduledArchiveDispatchAction.do?method=view" />
+    <forward name="deleteScheduledArchive" path="/scheduledArchiveDispatchAction.do" />
+    
+    <forward name="createArchive" path="/archiveDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateArchive" path="/archiveDispatchAction.do?method=update" />
+    <forward name="viewArchive" path="/archiveDispatchAction.do?method=view" />
+    <forward name="deleteArchive" path="/archiveDispatchAction.do" />
+    
+
+    <forward name="createWebService" path="/webServiceDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateWebService" path="/webServiceDispatchAction.do?method=update" />
+    <forward name="viewWebService" path="/webServiceDispatchAction.do?method=view" />
+    <forward name="deleteWebService" path="/webServiceDispatchAction.do" />
+
+    <forward name="createServiceAssignment" path="/serviceAssignmentDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateServiceAssignment" path="/serviceAssignmentDispatchAction.do?method=update" />
+    <forward name="viewServiceAssignment" path="/serviceAssignmentDispatchAction.do?method=view" />
+    <forward name="deleteServiceAssignment" path="/serviceAssignmentDispatchAction.do" />
+
+	<!-- SC: 16 Jan 06 - jms alert notification -->
+	<forward name="createJmsDestination" path="/JmsDestinationDispatchAction.do?method=update&amp;uid=new" />
+    <forward name="updateJmsDestination" path="/JmsDestinationDispatchAction.do?method=update" />
+    <forward name="viewJmsDestination" path="/JmsDestinationDispatchAction.do?method=view" />
+    <forward name="deleteJmsDestination" path="/JmsDestinationDispatchAction.do" />
+
+    <!-- Added for estore -->
+    <!-- <forward name="viewEsPi" path="/EsPiDispatchAction.do?method=view" /> -->
+
+	<!-- This is temp solution to associated estore doc list. -->
+	<forward name="viewAssocEsDoc" path="/AssocEsDocListView.do" />
+	<forward name="viewAuditFile" path="/AuditFileDispatchAction.do?method=view" />
+	<forward name="viewGdocDetail" path="/GdocDetailDispatchAction.do?method=view" />	<!--Regina Zeng 30112006:Added-->
+    <!-- <forward name="EsSearchPage" path="/EsSearchPageDispatchAction.do" /> -->
+
+  </global-forwards>
+
+
+  <!-- ========== Action Mapping Definitions ============================== -->
+  <action-mappings type="com.gridnode.gtas.client.web.strutsbase.GTActionMapping">
+
+    <!-- The rendering action is our view component (though nothing apart from
+          convienience is stopping from forwarding to something else like a jsp
+          from the action)
+          Note that we set the GTActionMapping populate property to false so that
+          the GTRequestProcessor won't repopulate the form when we forward to this view -->
+    <action path="/renderingAction"
+            type="com.gridnode.gtas.client.web.renderers.RenderingAction">
+      <set-property property="populate" value="false" />
+      <set-property property="requiresGtSession" value="false" />
+    </action>
+
+    <action path="/downloadAction"
+            name="downloadActionForm"
+            scope="request"
+            type="com.gridnode.gtas.client.web.download.DownloadAction">
+    </action>
+
+    <action path="/editGridDocumentAction"
+            name="editGridDocumentActionForm"
+            scope="request"
+            type="com.gridnode.gtas.client.web.download.EditGridDocumentAction">
+      <forward name="saveGridDocument"  path="/saveGridDocumentAction.do" redirect="true"/>
+    </action>
+
+    <action path="/saveGridDocumentAction"
+            name="saveGridDocumentActionForm"
+            scope="request"
+            type="com.gridnode.gtas.client.web.download.SaveGridDocumentAction">
+    </action>
+
+    <action path="/displayExceptionAction"
+            type="com.gridnode.gtas.client.web.error.DisplayExceptionAction">
+      <set-property property="requiresGtSession" value="false" />
+    </action>
+
+    <action path="/preLogin"
+            type="com.gridnode.gtas.client.web.login.PreLoginAction"
+            name="loginActionForm"
+            scope="request"
+            className="com.gridnode.gtas.client.web.login.LoginActionMapping">
+      <set-property property="promptPcp" value="false" />
+      <set-property property="noSecurity" value="true" />
+      <set-property property="requiresGtSession" value="false" />
+
+      <forward name="submit" path="/login.do"/>
+      <forward name="submitGmt" path="/preLogin.do"/>
+    </action>
+
+    <action path="/login"
+            type="com.gridnode.gtas.client.web.login.LoginAction"
+            name="loginActionForm"
+            scope="request"
+            input="/preLogin.do"
+            className="com.gridnode.gtas.client.web.login.LoginActionMapping">
+      <set-property property="promptPcp" value="false" />
+      <set-property property="noSecurity" value="true" />
+      <set-property property="requiresGtSession" value="false" />
+      <set-property property="noP2P" value="true" />
+      <set-property property="noUDDI" value="true" />
+
+      <forward name="success"  path="/rootFrame.do" redirect="true"/>
+      <forward name="failure"  path="/preLogin.do"/>
+    </action>
+
+    <action path="/getCertPw"
+            type="com.gridnode.gtas.client.web.login.GetCertPwAction"
+            name="getCertPwActionForm"
+            scope="request"
+            input="/getCertPw.do">
+      <set-property property="requiresGtSession" value="false" />
+
+      <forward name="success"  path="/preLogin.do" redirect="true"/>
+      <forward name="failure"  path="/getCertPw.do"/>
+      <forward name="submit"   path="/getCertPw.do?submitting=true"/>
+    </action>
+
+    <action path="/logout"
+            type="com.gridnode.gtas.client.web.login.LogoutAction">
+    </action>
+
+    <action path="/partnerWatchList"
+            type="com.gridnode.gtas.client.web.be.PartnerWatchListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTWatchListActionMapping">
+      <set-property property="pwlRefreshInterval" value="120000" />
+      <!--<set-property property="pwlRefreshInterval" value="20000" />-->
+      <set-property property="requiresP2P" value="true" />
+    </action>
+
+    <action path="/switchAreaAction"
+            type="com.gridnode.gtas.client.web.navigation.SwitchAreaAction">
+
+    </action>
+
+    <action path="/initialBody"
+            type="com.gridnode.gtas.client.web.navigation.InitialBodyAction">
+		<!-- sumedh: 2005 Nov 21 -->
+		<forward name="NwInitialBody" path="/NwInitialBody.do" />
+    </action>
+
+    <!-- BorderRenderingAction variants -->
+    <action path="/borderFrame"
+            type="com.gridnode.gtas.client.web.navigation.BorderRenderingAction"
+            className="com.gridnode.gtas.client.web.navigation.BorderRenderingActionMapping">
+      <set-property property="populate" value="false" />
+      <set-property property="document" value="borderFrame" />
+      <set-property property="frames" value="leftFrame,centreFrame,rightFrame" />
+      <set-property property="requiresGtSession" value="false" />
+
+      <forward name="leftFrame" path="/leftFrame.do"/>
+      <forward name="centreFrame" path="/centreFrame.do"/>
+      <forward name="rightFrame" path="/rightFrame.do"/>
+    </action>
+
+    <action path="/centreFrame"
+            type="com.gridnode.gtas.client.web.navigation.BorderRenderingAction"
+            className="com.gridnode.gtas.client.web.navigation.BorderRenderingActionMapping">
+      <set-property property="populate" value="false" />
+      <set-property property="document" value="centreFrame" />
+      <set-property property="frames" value="topBorder,contentFrame,bottomBorder" />
+      <set-property property="requiresGtSession" value="false" />
+
+      <forward name="topBorder" path="/topBorder.do"/>
+      <forward name="contentFrame" path="/contentFrame.do"/>
+      <forward name="bottomBorder" path="/bottomBorder.do"/>
+    </action>
+
+
+    <action path="/contentFrame"
+            type="com.gridnode.gtas.client.web.navigation.BorderRenderingAction"
+            className="com.gridnode.gtas.client.web.navigation.BorderRenderingActionMapping">
+      <set-property property="populate" value="false" />
+      <set-property property="document" value="contentFrame" />
+      <set-property property="frames" value="initialNav,initialBody" />
+      <set-property property="requiresGtSession" value="false" />
+    </action>
+
+    <action path="/leftFrame"
+            type="com.gridnode.gtas.client.web.navigation.BorderRenderingAction"
+            className="com.gridnode.gtas.client.web.navigation.BorderRenderingActionMapping">
+      <set-property property="populate" value="false" />
+      <set-property property="document" value="leftFrame" />
+      <set-property property="frames" value="topLeftBorder,leftBorder,bottomLeftBorder" />
+      <set-property property="requiresGtSession" value="false" />
+
+      <forward name="topLeftBorder" path="/topLeftBorder.do"/>
+      <forward name="leftBorder" path="/leftBorder.do"/>
+      <forward name="bottomLeftBorder" path="/bottomLeftBorder.do"/>
+    </action>
+
+    <action path="/rightFrame"
+            type="com.gridnode.gtas.client.web.navigation.BorderRenderingAction"
+            className="com.gridnode.gtas.client.web.navigation.BorderRenderingActionMapping">
+      <set-property property="populate" value="false" />
+      <set-property property="document" value="rightFrame" />
+      <set-property property="frames" value="topRightBorder,rightBorder,bottomRightBorder" />
+      <set-property property="requiresGtSession" value="false" />
+
+      <forward name="topRightBorder" path="/topRightBorder.do"/>
+      <forward name="rightBorder" path="/rightBorder.do"/>
+      <forward name="bottomRightBorder" path="/bottomRightBorder.do"/>
+    </action>
+
+    <action path="/rootFrame"
+            type="com.gridnode.gtas.client.web.navigation.BorderRenderingAction"
+            className="com.gridnode.gtas.client.web.navigation.BorderRenderingActionMapping">
+      <set-property property="populate" value="false" />
+      <set-property property="document" value="rootFrame" />
+      <set-property property="frames" value="initialHeader,borderFrame" />
+      <set-property property="title" value="gridtalk.title.window" />
+      <set-property property="requiresGtSession" value="false" />
+
+      <forward name="borderFrame" path="/borderFrame.do"/>
+    </action>
+
+    <action path="/bottomBorder"
+            type="com.gridnode.gtas.client.web.navigation.BorderRenderingAction"
+            className="com.gridnode.gtas.client.web.navigation.BorderRenderingActionMapping">
+      <set-property property="populate" value="false" />
+      <set-property property="document" value="bottomBorder" />
+      <set-property property="requiresGtSession" value="false" />
+    </action>
+
+    <action path="/bottomLeftBorder"
+            type="com.gridnode.gtas.client.web.navigation.BorderRenderingAction"
+            className="com.gridnode.gtas.client.web.navigation.BorderRenderingActionMapping">
+      <set-property property="populate" value="false" />
+      <set-property property="document" value="bottomLeftBorder" />
+      <set-property property="requiresGtSession" value="false" />
+    </action>
+
+    <action path="/bottomRightBorder"
+            type="com.gridnode.gtas.client.web.navigation.BorderRenderingAction"
+            className="com.gridnode.gtas.client.web.navigation.BorderRenderingActionMapping">
+      <set-property property="populate" value="false" />
+      <set-property property="document" value="bottomRightBorder" />
+      <set-property property="requiresGtSession" value="false" />
+    </action>
+
+    <action path="/leftBorder"
+            type="com.gridnode.gtas.client.web.navigation.BorderRenderingAction"
+            className="com.gridnode.gtas.client.web.navigation.BorderRenderingActionMapping">
+      <set-property property="populate" value="false" />
+      <set-property property="document" value="leftBorder" />
+      <set-property property="requiresGtSession" value="false" />
+    </action>
+
+    <action path="/rightBorder"
+            type="com.gridnode.gtas.client.web.navigation.BorderRenderingAction"
+            className="com.gridnode.gtas.client.web.navigation.BorderRenderingActionMapping">
+      <set-property property="populate" value="false" />
+      <set-property property="document" value="rightBorder" />
+      <set-property property="requiresGtSession" value="false" />
+    </action>
+
+    <action path="/topBorder"
+            type="com.gridnode.gtas.client.web.navigation.BorderRenderingAction"
+            className="com.gridnode.gtas.client.web.navigation.BorderRenderingActionMapping">
+      <set-property property="populate" value="false" />
+      <set-property property="document" value="topBorder" />
+      <set-property property="requiresGtSession" value="false" />
+    </action>
+
+    <action path="/topLeftBorder"
+            type="com.gridnode.gtas.client.web.navigation.BorderRenderingAction"
+            className="com.gridnode.gtas.client.web.navigation.BorderRenderingActionMapping">
+      <set-property property="populate" value="false" />
+      <set-property property="document" value="topLeftBorder" />
+      <set-property property="requiresGtSession" value="false" />
+    </action>
+
+    <action path="/topRightBorder"
+            type="com.gridnode.gtas.client.web.navigation.BorderRenderingAction"
+            className="com.gridnode.gtas.client.web.navigation.BorderRenderingActionMapping">
+      <set-property property="populate" value="false" />
+      <set-property property="document" value="topRightBorder" />
+      <set-property property="requiresGtSession" value="false" />
+    </action>
+    <!-- End of BorderRenderingAction variants -->
+
+    <action path="/navPageAction"
+            type="com.gridnode.gtas.client.web.navigation.NavPageAction">
+      <set-property property="populate" value="false" />
+    </action>
+
+    <action path="/closeWindow"
+            type="com.gridnode.gtas.client.web.navigation.CloseWindowAction">
+      <set-property property="populate" value="false" />
+      <set-property property="requiresGtSession" value="false" />
+    </action>
+
+
+
+
+    <!-- Action Mappings for listviews -->
+
+    <action path="/userListView" type="com.gridnode.gtas.client.web.user.UserListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/userListView.do" />
+      
+      <set-property property="createForward" value="createUser" />
+      <set-property property="updateForward" value="updateUser" />
+      <set-property property="viewForward" value="viewUser" />
+      <set-property property="deleteForward" value="deleteUser" />
+    </action>
+
+    <action path="/partnerTypeListView" type="com.gridnode.gtas.client.web.be.PartnerTypeListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/partnerTypeListView.do" />
+      
+      <set-property property="createForward" value="createPartnerType" />
+      <set-property property="updateForward" value="updatePartnerType" />
+      <set-property property="viewForward" value="viewPartnerType" />
+      <set-property property="deleteForward" value="deletePartnerType" />
+    </action>
+
+    <action path="/partnerGroupListView" type="com.gridnode.gtas.client.web.be.PartnerGroupListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/partnerGroupListView.do" />
+      
+      <set-property property="createForward" value="createPartnerGroup" />
+      <set-property property="updateForward" value="updatePartnerGroup" />
+      <set-property property="viewForward" value="viewPartnerGroup" />
+      <set-property property="deleteForward" value="deletePartnerGroup" />
+    </action>
+
+    <action path="/partnerListView" type="com.gridnode.gtas.client.web.be.PartnerListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/partnerListView.do" />
+      
+      <set-property property="createForward" value="createPartner" />
+      <set-property property="updateForward" value="updatePartner" />
+      <set-property property="viewForward" value="viewPartner" />
+      <set-property property="deleteForward" value="deletePartner" />
+    </action>
+
+    <action path="/accessRightListView" type="com.gridnode.gtas.client.web.acl.AccessRightListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/accessRightListView.do" />
+      
+      <set-property property="createForward" value="createAccessRight" />
+      <set-property property="updateForward" value="updateAccessRight" />
+      <set-property property="viewForward" value="viewAccessRight" />
+      <set-property property="deleteForward" value="deleteAccessRight" />
+    </action>
+
+    <action path="/roleListView" type="com.gridnode.gtas.client.web.acl.RoleListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/roleListView.do" />
+      
+      <set-property property="createForward" value="createRole" />
+      <set-property property="updateForward" value="updateRole" />
+      <set-property property="viewForward" value="viewRole" />
+      <set-property property="deleteForward" value="deleteRole" />
+    </action>
+
+    <action path="/featureListView" type="com.gridnode.gtas.client.web.acl.FeatureListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/featureListView.do" />
+    </action>
+
+    <action path="/documentTypeListView" type="com.gridnode.gtas.client.web.document.DocumentTypeListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/documentTypeListView.do" />
+      
+      <set-property property="createForward" value="createDocumentType" />
+      <set-property property="updateForward" value="updateDocumentType" />
+      <set-property property="viewForward" value="viewDocumentType" />
+      <set-property property="deleteForward" value="deleteDocumentType" />
+    </action>
+	
+	<action path="/as2DocTypeMappingListView" type="com.gridnode.gtas.client.web.document.AS2DocTypeMappingListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/as2DocTypeMappingListView.do" />
+      
+      <set-property property="createForward" value="createAS2DocTypeMapping" />
+      <set-property property="updateForward" value="updateAS2DocTypeMapping" />
+      <set-property property="viewForward" value="viewAS2DocTypeMapping" />
+      <set-property property="deleteForward" value="deleteAS2DocTypeMapping" />
+    </action>
+
+    <action path="/fileTypeListView" type="com.gridnode.gtas.client.web.document.FileTypeListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/fileTypeListView.do" />
+      
+      <set-property property="createForward" value="createFileType" />
+      <set-property property="updateForward" value="updateFileType" />
+      <set-property property="viewForward" value="viewFileType" />
+      <set-property property="deleteForward" value="deleteFileType" />
+    </action>
+
+    <action path="/mappingFileListView" type="com.gridnode.gtas.client.web.document.MappingFileListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/mappingFileListView.do" />
+      
+      <set-property property="createForward" value="createMappingFile" />
+      <set-property property="updateForward" value="updateMappingFile" />
+      <set-property property="viewForward" value="viewMappingFile" />
+      <set-property property="deleteForward" value="deleteMappingFile" />
+
+	  <forward name="importSchema" path="/importSchemaDispatchAction.do?method=update&amp;uid=new"/>
+    </action>
+
+    <action path="/gridTalkMappingRuleListView" type="com.gridnode.gtas.client.web.document.GridTalkMappingRuleListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/gridTalkMappingRuleListView.do" />
+      
+      <set-property property="createForward" value="createGridTalkMappingRule" />
+      <set-property property="updateForward" value="updateGridTalkMappingRule" />
+      <set-property property="viewForward" value="viewGridTalkMappingRule" />
+      <set-property property="deleteForward" value="deleteGridTalkMappingRule" />
+    </action>
+
+    <action path="/channelInfoListView" type="com.gridnode.gtas.client.web.channel.ChannelInfoListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/channelInfoListView.do" />
+      
+      <set-property property="createForward" value="createChannelInfo" />
+      <set-property property="updateForward" value="updateChannelInfo" />
+      <set-property property="viewForward" value="viewChannelInfo" />
+      <set-property property="deleteForward" value="deleteChannelInfo" />
+    </action>
+
+    <action path="/commInfoListView" type="com.gridnode.gtas.client.web.channel.CommInfoListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/commInfoListView.do" />
+      
+      <set-property property="createForward" value="createCommInfo" />
+      <set-property property="updateForward" value="updateCommInfo" />
+      <set-property property="viewForward" value="viewCommInfo" />
+      <set-property property="deleteForward" value="deleteCommInfo" />
+    </action>
+
+    <action path="/businessEntityListView" type="com.gridnode.gtas.client.web.be.BusinessEntityListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/businessEntityListView.do" />
+      
+      <set-property property="createForward" value="createBusinessEntity" />
+      <set-property property="updateForward" value="updateBusinessEntity" />
+      <set-property property="viewForward" value="viewBusinessEntity" />
+      <set-property property="deleteForward" value="deleteBusinessEntity" />
+      
+      <forward name="invokeSend" path="/sendBeDispatchAction.do?method=update"/>
+      <forward name="invokePublish" path="/publishBusinessEntityDispatchAction.do?method=update&amp;uid=new"/>
+    </action>
+
+    <!-- Nb how the gridDocument listview mapping doesnt follow the naming convention! -->
+    <action path="/sysFoldersListView" type="com.gridnode.gtas.client.web.document.SysFoldersListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="false" /> <!--Users can of course view sys folders , if little else -->
+      <set-property property="refreshUrl" value="/sysFoldersListView.do" />
+      
+      <set-property property="createForward" value="importDocuments" />
+      <set-property property="updateForward" value="updateGridDocument" />
+      <set-property property="viewForward" value="viewGridDocument" />
+      <set-property property="deleteForward" value="deleteGridDocument" />
+      
+      <forward name="importDocuments" path="/sysFoldersDispatchAction.do?method=update&amp;uid=new"/> <!-- Fwd to the import screen -->
+      
+    </action>
+
+    <action path="/securityInfoListView" type="com.gridnode.gtas.client.web.channel.SecurityInfoListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/securityInfoListView.do" />
+      
+      <set-property property="createForward" value="createSecurityInfo" />
+      <set-property property="updateForward" value="updateSecurityInfo" />
+      <set-property property="viewForward" value="viewSecurityInfo" />
+      <set-property property="deleteForward" value="deleteSecurityInfo" />
+    </action>
+
+    <action path="/packagingInfoListView" type="com.gridnode.gtas.client.web.channel.PackagingInfoListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/packagingInfoListView.do" />
+      
+      <set-property property="createForward" value="createPackagingInfo" />
+      <set-property property="updateForward" value="updatePackagingInfo" />
+      <set-property property="viewForward" value="viewPackagingInfo" />
+      <set-property property="deleteForward" value="deletePackagingInfo" />
+    </action>
+
+    <action path="/certificateListView" type="com.gridnode.gtas.client.web.channel.CertificateListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/certificateListView.do" />
+      
+      <set-property property="createForward" value="createCertificate" />
+      <set-property property="updateForward" value="updateCertificate" />
+      <set-property property="viewForward" value="viewCertificate" />
+      <set-property property="deleteForward" value="deleteCertificate" />
+      
+      <forward name="exportKs" path="/certificateDispatchAction.do"/>
+      <forward name="exportTs" path="/certificateDispatchAction.do"/>
+    </action>
+
+    <action path="/partnerFunctionListView" type="com.gridnode.gtas.client.web.bp.PartnerFunctionListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/partnerFunctionListView.do" />
+      
+      <set-property property="createForward" value="createPartnerFunction" />
+      <set-property property="updateForward" value="updatePartnerFunction" />
+      <set-property property="viewForward" value="viewPartnerFunction" />
+      <set-property property="deleteForward" value="deletePartnerFunction" />
+    </action>
+
+    <action path="/triggerListView" type="com.gridnode.gtas.client.web.bp.TriggerListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/triggerListView.do" />
+      
+      <set-property property="createForward" value="createTrigger" />
+      <set-property property="updateForward" value="updateTrigger" />
+      <set-property property="viewForward" value="viewTrigger" />
+      <set-property property="deleteForward" value="deleteTrigger" />
+    </action>
+
+    <action path="/searchGridNodeQueryListView" type="com.gridnode.gtas.client.web.activation.SearchGridNodeQueryListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/searchGridNodeQueryListView.do" />
+      <set-property property="requiresP2P" value="true" />
+      
+      <set-property property="createForward" value="createSearchGridNodeQuery" />
+      <set-property property="updateForward" value="updateSearchGridNodeQuery" />
+      <set-property property="viewForward" value="viewSearchGridNodeQuery" />
+      <set-property property="deleteForward" value="deleteSearchGridNodeQuery" />
+    </action>
+
+    <action path="/procedureDefFileListView" type="com.gridnode.gtas.client.web.bp.ProcedureDefFileListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/procedureDefFileListView.do" />
+      
+      <set-property property="createForward" value="createProcedureDefFile" />
+      <set-property property="updateForward" value="updateProcedureDefFile" />
+      <set-property property="viewForward" value="viewProcedureDefFile" />
+      <set-property property="deleteForward" value="deleteProcedureDefFile" />
+    </action>
+
+    <action path="/userProcedureListView" type="com.gridnode.gtas.client.web.bp.UserProcedureListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/userProcedureListView.do" />
+      
+      <set-property property="createForward" value="createUserProcedure" />
+      <set-property property="updateForward" value="updateUserProcedure" />
+      <set-property property="viewForward" value="viewUserProcedure" />
+      <set-property property="deleteForward" value="deleteUserProcedure" />
+    </action>
+
+    <action path="/activationRecordListView" type="com.gridnode.gtas.client.web.activation.ActivationRecordListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/activationRecordListView.do" />
+      <set-property property="requiresP2P" value="true" />
+      
+      <set-property property="createForward" value="createActivationRecord" />
+      <set-property property="updateForward" value="updateActivationRecord" />
+      <set-property property="viewForward" value="viewActivationRecord" />
+      <set-property property="deleteForward" value="deleteActivationRecord" />
+      
+      <forward name="submit" path="/activationRecordDispatchAction.do"/> <!-- Is this still necessary?? -->
+    </action>
+
+    <action path="/gridNodeListView" type="com.gridnode.gtas.client.web.gridnode.GridNodeListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/gridNodeListView.do" />
+      <set-property property="requiresP2P" value="true" />
+      
+      <set-property property="updateForward" value="updateGridNode" />
+      <set-property property="viewForward" value="viewGridNode" />
+      <set-property property="deleteForward" value="deleteGridNode" />
+      
+      <forward name="invokeDeactivate" path="/gridNodeDispatchAction.do"/>
+    </action>
+
+    <action path="/processMappingListView" type="com.gridnode.gtas.client.web.bp.ProcessMappingListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/processMappingListView.do" />
+      
+      <set-property property="createForward" value="createProcessMapping" />
+      <set-property property="updateForward" value="updateProcessMapping" />
+      <set-property property="viewForward" value="viewProcessMapping" />
+      <set-property property="deleteForward" value="deleteProcessMapping" />
+    </action>
+
+    <action path="/processDefListView" type="com.gridnode.gtas.client.web.bp.ProcessDefListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/processDefListView.do" />
+      
+      <set-property property="createForward" value="createProcessDef" />
+      <set-property property="updateForward" value="updateProcessDef" />
+      <set-property property="viewForward" value="viewProcessDef" />
+      <set-property property="deleteForward" value="deleteProcessDef" />
+    </action>
+
+    <action path="/rfcListView" type="com.gridnode.gtas.client.web.bp.RfcListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/rfcListView.do" />
+      
+      <set-property property="createForward" value="createRfc" />
+      <set-property property="updateForward" value="updateRfc" />
+      <set-property property="viewForward" value="viewRfc" />
+      <set-property property="deleteForward" value="deleteRfc" />
+    </action>
+
+    <action path="/portListView" type="com.gridnode.gtas.client.web.bp.PortListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/portListView.do" />
+      
+      <set-property property="createForward" value="createPort" />
+      <set-property property="updateForward" value="updatePort" />
+      <set-property property="viewForward" value="viewPort" />
+      <set-property property="deleteForward" value="deletePort" />
+    </action>
+
+    <action path="/bizCertMappingListView" type="com.gridnode.gtas.client.web.bp.BizCertMappingListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/bizCertMappingListView.do" />
+      
+      <set-property property="createForward" value="createBizCertMapping" />
+      <set-property property="updateForward" value="updateBizCertMapping" />
+      <set-property property="viewForward" value="viewBizCertMapping" />
+      <set-property property="deleteForward" value="deleteBizCertMapping" />
+    </action>
+
+    <action path="/processInstanceListView" type="com.gridnode.gtas.client.web.bp.ProcessInstanceListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/processInstanceListView.do" />
+      
+      <set-property property="viewForward" value="viewProcessInstance" />
+      <set-property property="deleteForward" value="deleteProcessInstance" />
+      
+      <forward name="invokeAbort" path="/processInstanceDispatchAction.do?method=abort"/>
+    </action>
+
+    <action path="/alertListView" type="com.gridnode.gtas.client.web.alert.AlertListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/alertListView.do" />
+      
+      <set-property property="createForward" value="createAlert" />
+      <set-property property="updateForward" value="updateAlert" />
+      <set-property property="viewForward" value="viewAlert" />
+      <set-property property="deleteForward" value="deleteAlert" />
+    </action>
+
+    <action path="/actionListView" type="com.gridnode.gtas.client.web.alert.ActionListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/actionListView.do" />
+      
+      <set-property property="createForward" value="createAction" />
+      <set-property property="updateForward" value="updateAction" />
+      <set-property property="viewForward" value="viewAction" />
+      <set-property property="deleteForward" value="deleteAction" />
+    </action>
+
+    <action path="/messageTemplateListView" type="com.gridnode.gtas.client.web.alert.MessageTemplateListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/messageTemplateListView.do" />
+      
+      <set-property property="createForward" value="createMessageTemplate" />
+      <set-property property="updateForward" value="updateMessageTemplate" />
+      <set-property property="viewForward" value="viewMessageTemplate" />
+      <set-property property="deleteForward" value="deleteMessageTemplate" />
+    </action>
+
+    <action path="/responseTrackRecordListView" type="com.gridnode.gtas.client.web.alert.ResponseTrackRecordListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/responseTrackRecordListView.do" />
+      
+      <set-property property="createForward" value="createResponseTrackRecord" />
+      <set-property property="updateForward" value="updateResponseTrackRecord" />
+      <set-property property="viewForward" value="viewResponseTrackRecord" />
+      <set-property property="deleteForward" value="deleteResponseTrackRecord" />
+    </action>
+
+    <action path="/alertTriggerListView" type="com.gridnode.gtas.client.web.alert.AlertTriggerListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/alertTriggerListView.do" />
+      
+      <set-property property="createForward" value="createAlertTrigger" />
+      <set-property property="updateForward" value="updateAlertTrigger" />
+      <set-property property="viewForward" value="viewAlertTrigger" />
+      <set-property property="deleteForward" value="deleteAlertTrigger" />
+    </action>
+
+    <action path="/registryConnectInfoListView" type="com.gridnode.gtas.client.web.be.RegistryConnectInfoListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="requiresUDDI" value="true" />
+      <set-property property="refreshUrl" value="/registryConnectInfoListView.do" />
+      <forward name="invokeCreate" path="/registryConnectInfoDispatchAction.do?method=update&amp;uid=new"/>
+      <forward name="invokeUpdate" path="/registryConnectInfoDispatchAction.do?method=update"/>
+      <forward name="invokeDelete" path="/registryConnectInfoDispatchAction.do"/>
+      <forward name="invokeView" path="/registryConnectInfoDispatchAction.do?method=view"/>
+      <!-- forward name="invokePublish" path="/publishBusinessEntityDispatchAction.do?method=update&amp;uid=new"/ -->
+    </action>
+
+    <action path="/searchRegistryQueryListView" type="com.gridnode.gtas.client.web.be.SearchRegistryQueryListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="requiresUDDI" value="true" />
+      <set-property property="refreshUrl" value="/searchRegistryQueryListView.do" />
+      <forward name="invokeCreate" path="/searchRegistryQueryDispatchAction.do?method=update&amp;uid=new"/>
+      <forward name="invokeUpdate" path="/searchRegistryQueryDispatchAction.do?method=update"/>
+      <forward name="invokeDelete" path="/searchRegistryQueryDispatchAction.do"/>
+      <forward name="invokeView" path="/searchRegistryQueryDispatchAction.do?method=view"/>
+    </action>
+
+    <action path="/searchQueryListView" type="com.gridnode.gtas.client.web.document.SearchQueryListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="false" /> <!-- Users can also use this -->
+      <set-property property="refreshUrl" value="/searchQueryListView.do" />
+      <forward name="invokeCreate" path="/searchQueryDispatchAction.do?method=update&amp;uid=new"/>
+      <forward name="invokeUpdate" path="/searchQueryDispatchAction.do?method=update"/>
+      <forward name="invokeDelete" path="/searchQueryDispatchAction.do"/>
+      <forward name="invokeView" path="/searchQueryDispatchAction.do?method=view"/>
+    </action>
+
+    <action path="/scheduledTaskListView" type="com.gridnode.gtas.client.web.scheduler.ScheduledTaskListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/scheduledTaskListView.do" />
+      
+      <set-property property="createForward" value="createScheduledTask" />
+      <set-property property="updateForward" value="updateScheduledTask" />
+      <set-property property="viewForward" value="viewScheduledTask" />
+      <set-property property="deleteForward" value="deleteScheduledTask" />
+    </action>
+    
+    <action path="/scheduledArchiveListView" type="com.gridnode.gtas.client.web.scheduler.ScheduledArchiveListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/scheduledArchiveListView.do" />
+      
+      <set-property property="createForward" value="createScheduledArchive" />
+      <set-property property="updateForward" value="updateScheduledArchive" />
+      <set-property property="viewForward" value="viewScheduledArchive" />
+      <set-property property="deleteForward" value="deleteScheduledArchive" />
+    </action>
+    
+    <action path="/archiveListView" type="com.gridnode.gtas.client.web.archive.ArchiveListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/archiveListView.do" />
+      
+      <set-property property="createForward" value="createArchive" />
+      <set-property property="updateForward" value="updateArchive" />
+      <set-property property="viewForward" value="viewArchive" />
+      <set-property property="deleteForward" value="deleteArchive" />
+    </action>
+
+	<action path="/webServiceListView" type="com.gridnode.gtas.client.web.bp.WebServiceListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/webServiceListView.do" />
+      
+      <set-property property="createForward" value="createWebService" />
+      <set-property property="updateForward" value="updateWebService" />
+      <set-property property="viewForward" value="viewWebService" />
+      <set-property property="deleteForward" value="deleteWebService" />
+    </action>
+
+	<action path="/serviceAssignmentListView" type="com.gridnode.gtas.client.web.bp.ServiceAssignmentListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/serviceAssignmentListView.do" />
+      
+      <set-property property="createForward" value="createServiceAssignment" />
+      <set-property property="updateForward" value="updateServiceAssignment" />
+      <set-property property="viewForward" value="viewServiceAssignment" />
+      <set-property property="deleteForward" value="deleteServiceAssignment" />
+    </action>
+
+    <!-- Action Mappings for the various entity mgmt actions, etc... -->
+
+    <action path="/userDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.user.UserDispatchAction"
+            attribute="userActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/userDispatchAction.do"/>
+      <forward name="listview" path="/userListView.do" redirect="true"/>
+      <forward  name="resumeUpdate"
+                path="/userDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertCreateRole"
+                path="/roleDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreateBusinessEntity"
+                path="/businessEntityDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+    </action>
+    
+    <action path="/userUpdateDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.user.UserUpdateDispatchAction"
+            attribute="userUpdateActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="false" /> <!-- This is page for users (etc) to update pw -->
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/userUpdateDispatchAction.do"/>
+      <forward  name="resumeUpdate"
+                path="/userUpdateDispatchAction.do?method=update"
+                redirect="true"/>
+      <forward name="listview" path="/sysFoldersListView.do" redirect="true"/>
+    </action>
+
+    <action path="/partnerTypeDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.be.PartnerTypeDispatchAction"
+            attribute="partnerTypeActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/partnerTypeDispatchAction.do"/>
+      <forward name="listview" path="/partnerTypeListView.do"/>
+    </action>
+
+    <action path="/partnerGroupDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.be.PartnerGroupDispatchAction"
+            attribute="partnerGroupActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/partnerGroupDispatchAction.do"/>
+      <forward name="listview" path="/partnerGroupListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/partnerGroupDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertCreatePartnerType"
+                path="/partnerTypeDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+    </action>
+
+    <action path="/partnerDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.be.PartnerDispatchAction"
+            attribute="partnerActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/partnerDispatchAction.do"/>
+      <forward name="listview" path="/partnerListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/partnerDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertCreatePartnerType"
+                path="/partnerTypeDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreatePartnerGroup"
+                path="/partnerGroupDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreateBusinessEntity"
+                path="/businessEntityDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreateChannelInfo"
+                path="/channelInfoDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+    </action>
+
+    <action path="/accessRightDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.acl.AccessRightDispatchAction"
+            attribute="accessRightActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/accessRightDispatchAction.do"/>
+      <forward name="listview" path="/accessRightListView.do"/>
+    </action>
+
+    <action path="/roleDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.acl.RoleDispatchAction"
+            attribute="roleActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/roleDispatchAction.do"/>
+      <forward name="listview" path="/roleListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/roleDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertUpdateAccessRight"
+                path="/accessRightDispatchAction.do?method=update"
+                redirect="true"/>
+      <forward  name="divertViewAccessRight"
+                path="/accessRightDispatchAction.do?method=view"
+                redirect="true"/>
+      <forward  name="divertDeleteAccessRight"
+                path="/accessRightDispatchAction.do?method=delete"
+                redirect="false"/>
+    </action>
+
+    <action path="/documentTypeDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.document.DocumentTypeDispatchAction"
+            attribute="documentTypeActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/documentTypeDispatchAction.do"/>
+      <forward name="listview" path="/documentTypeListView.do"/>
+    </action>
+	
+	<action path="/as2DocTypeMappingDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.document.AS2DocTypeMappingDispatchAction"
+            attribute="AS2DocTypeMappingActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+	  
+
+      <forward name="submit" path="/as2DocTypeMappingDispatchAction.do"/>
+      <forward name="listview" path="/as2DocTypeMappingListView.do"/>
+	  <forward  name="resumeUpdate"
+                path="/as2DocTypeMappingDispatchAction.do?method=update"
+                redirect="true"/>
+	  
+	  <forward  name="divertCreatePartnerType"
+                path="/partnerTypeDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+				
+		<forward  name="divertCreateDocumentType"
+                path="/documentTypeDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+	  
+    </action>
+
+    <action path="/fileTypeDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.document.FileTypeDispatchAction"
+            attribute="fileTypeActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/fileTypeDispatchAction.do"/>
+      <forward name="listview" path="/fileTypeListView.do"/>
+    </action>
+
+    <action path="/mappingFileDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.document.MappingFileDispatchAction"
+            attribute="mappingFileActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/mappingFileDispatchAction.do"/>
+      <forward name="listview" path="/mappingFileListView.do"/>
+    </action>
+
+    <action path="/gridTalkMappingRuleDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.document.GridTalkMappingRuleDispatchAction"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/gridTalkMappingRuleDispatchAction.do"/>
+      <forward name="listview" path="/gridTalkMappingRuleListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/gridTalkMappingRuleDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertCreateDocumentType"
+                path="/documentTypeDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreateFileType"
+                path="/fileTypeDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreateMappingFile"
+                path="/mappingFileDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+    </action>
+
+    <action path="/commInfoDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.channel.CommInfoDispatchAction"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/commInfoDispatchAction.do"/>
+      <forward name="listview" path="/commInfoListView.do" redirect="false"/>
+    </action>
+
+    <action path="/channelInfoDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.channel.ChannelInfoDispatchAction"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/channelInfoDispatchAction.do"/>
+      <forward name="listview" path="/channelInfoListView.do" redirect="false"/>
+      <forward  name="resumeUpdate"
+                path="/channelInfoDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertCreateCommInfo"
+                path="/commInfoDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreatePackagingInfo"
+                path="/packagingInfoDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreateSecurityInfo"
+                path="/securityInfoDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+    </action>
+
+    <action path="/businessEntityDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.be.BusinessEntityDispatchAction"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/businessEntityDispatchAction.do"/>
+      <forward name="listview" path="/businessEntityListView.do" redirect="false"/>
+      <forward  name="resumeUpdate"
+                path="/businessEntityDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertCreateChannelInfo"
+                path="/channelInfoDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+    </action>
+
+    <action path="/sysFoldersDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.document.SysFoldersDispatchAction"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="false" /> <!-- User can use sysFolder -->
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/sysFoldersDispatchAction.do"/>
+      <forward name="listview" path="/sysFoldersListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/sysFoldersDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertCreateBusinessEntity"
+                path="/businessEntityDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+
+      <forward  name="divertCreateDocumentType"
+                path="/documentTypeDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+
+      <forward  name="divertCreatePartner"
+                path="/partnerDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+    </action>
+
+    <action path="/gridDocumentDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.document.GridDocumentDispatchAction"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="false" /> <!-- User can see gridDocs -->
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/gridDocumentDispatchAction.do"/>
+      <forward name="listview" path="/sysFoldersListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/gridDocumentDispatchAction.do?method=update"
+                redirect="true"/>
+      <forward name="divertViewProcessInstance" path="/processInstanceDispatchAction.do?method=view"/>
+    </action>
+
+    <action path="/sendBeDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.be.SendBeDispatchAction"
+            attribute="sendBeActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+      <set-property property="requiresP2P" value="true" />
+
+      <forward name="submit" path="/sendBeDispatchAction.do"/>
+      <forward name="listview" path="/businessEntityListView.do?isPartner=false"/>
+      <forward  name="resumeUpdate"
+                path="/sendBeDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertCreateBusinessEntity"
+                path="/businessEntityDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+
+      <forward  name="divertCreateChannelInfo"
+                path="/channelInfoDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+    </action>
+
+    <action path="/companyProfileDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.gridnode.CompanyProfileDispatchAction"
+            attribute="companyProfileActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/companyProfileDispatchAction.do"/>
+      <forward name="listview" path="/companyProfileDispatchAction.do?method=view" redirect="true"/>
+      <forward  name="resumeUpdate"
+                path="/companyProfileDispatchAction.do?method=update"
+                redirect="true"/>
+
+    </action>
+
+    <action path="/securityInfoDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.channel.SecurityInfoDispatchAction"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/securityInfoDispatchAction.do"/>
+      <forward name="listview" path="/securityInfoListView.do" redirect="false"/>
+      <forward  name="resumeUpdate"
+                path="/securityInfoDispatchAction.do?method=update"
+                redirect="true"/>
+
+    </action>
+
+    <action path="/packagingInfoDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.channel.PackagingInfoDispatchAction"
+            scope="session"
+            validate="false">
+      
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/packagingInfoDispatchAction.do"/>
+      <forward name="listview" path="/packagingInfoListView.do" redirect="false"/>
+      <forward  name="resumeUpdate"
+                path="/packagingInfoDispatchAction.do?method=update"
+                redirect="true"/>
+
+    </action>
+
+    <action path="/partnerFunctionDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.bp.PartnerFunctionDispatchAction"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/partnerFunctionDispatchAction.do"/>
+      <forward name="listview" path="/partnerFunctionListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/partnerFunctionDispatchAction.do?method=update"
+                redirect="true"/>
+      <forward  name="resumeView"
+                path="/partnerFunctionDispatchAction.do?method=view"
+                redirect="true"/>
+
+      <forward  name="divertCreateWorkflowActivity"
+                path="/workflowActivityDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+
+      <forward  name="divertUpdateWorkflowActivity"
+                path="/workflowActivityDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertViewWorkflowActivity"
+                path="/workflowActivityDispatchAction.do?method=view"
+                redirect="true"/>
+
+    </action>
+
+    <action path="/workflowActivityDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.bp.WorkflowActivityDispatchAction"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/workflowActivityDispatchAction.do"/>
+      <forward  name="resumeUpdate"
+                path="/workflowActivityDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertCreateGridTalkMappingRule"
+                path="/gridTalkMappingRuleDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreatePort"
+                path="/portDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreateUserProcedure"
+                path="/userProcedureDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreateAlert"
+                path="/alertDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+    </action>
+
+    <action path="/registrationInfoDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.registration.RegistrationInfoDispatchAction"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="false" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/registrationInfoDispatchAction.do"/>
+      <forward name="done" path="/serverDispatchAction.do?method=update" redirect="true"/>
+      <forward name="listview" path="/serverDispatchAction.do?method=update" redirect="true"/>
+      <forward  name="resumeUpdate"
+                path="/registrationInfoDispatchAction.do?method=update"
+                redirect="true"/>
+      <forward  name="resumeView"
+                path="/registrationInfoDispatchAction.do?method=view"
+                redirect="true"/>
+
+      <forward  name="divertUpdateCompanyProfile"
+                path="/companyProfileDispatchAction.do?method=update"
+                redirect="true"/>
+      <forward name="divertChangeCertificatePassword"
+               path="/certificatePasswordDispatchAction.do?method=update"/>
+    </action>
+
+    <action path="/triggerDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.bp.TriggerDispatchAction"
+            name="triggerActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/triggerDispatchAction.do"/>
+      <forward name="listview" path="/triggerListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/triggerDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertCreatePartnerFunction"
+                path="/partnerFunctionDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreateDocumentType"
+                path="/documentTypeDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreatePartnerType"
+                path="/partnerTypeDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreatePartnerGroup"
+                path="/partnerGroupDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreatePartner"
+                path="/partnerDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreateProcessDef"
+                path="/processDefDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+    </action>
+
+    <action path="/searchGridNodeQueryDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.activation.SearchGridNodeQueryDispatchAction"
+            name="searchGridNodeQueryActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+      <set-property property="requiresP2P" value="true" />
+
+      <forward name="submit" path="/searchGridNodeQueryDispatchAction.do"/>
+      <forward name="listview" path="/searchGridNodeQueryListView.do" redirect="true"/>
+      <forward  name="resumeUpdate"
+                path="/searchGridNodeQueryDispatchAction.do?method=update"
+                redirect="true"/>
+      <forward  name="resumeView"
+                path="/searchGridNodeQueryDispatchAction.do?method=view"
+                redirect="true"/>
+
+      <forward  name="divertCreateActivationRecord"
+                path="/activationRecordDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+    </action>
+
+    <action path="/procedureDefFileDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.bp.ProcedureDefFileDispatchAction"
+            attribute="procedureDefFileActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/procedureDefFileDispatchAction.do"/>
+      <forward name="listview" path="/procedureDefFileListView.do"/>
+    </action>
+
+    <action path="/userProcedureDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.bp.UserProcedureDispatchAction"
+            attribute="userProcedureActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/userProcedureDispatchAction.do"/>
+      <forward name="listview" path="/userProcedureListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/userProcedureDispatchAction.do?method=update"
+                redirect="true"/>
+      <forward  name="resumeView"
+                path="/userProcedureDispatchAction.do?method=view"
+                redirect="true"/>
+      <forward  name="divertCreateProcedureDefFile"
+                path="/procedureDefFileDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+
+      <forward  name="divertEditShellExecutable"
+                path="/shellExecutableDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertViewShellExecutable"
+                path="/shellExecutableDispatchAction.do?method=view"
+                redirect="true"/>
+
+      <forward  name="divertEditJavaProcedure"
+                path="/javaProcedureDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertViewJavaProcedure"
+                path="/javaProcedureDispatchAction.do?method=view"
+                redirect="true"/>
+      
+      <forward  name="divertEditSoapProcedure"
+                path="/soapProcedureDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertViewSoapProcedure"
+                path="/soapProcedureDispatchAction.do?method=view"
+                redirect="true"/>
+
+      <forward  name="divertCreateParamDef"
+                path="/paramDefDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+
+      <forward  name="divertUpdateParamDef"
+                path="/paramDefDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertViewParamDef"
+                path="/paramDefDispatchAction.do?method=view"
+                redirect="true"/>
+
+      <forward  name="divertCreateReturnDef"
+                path="/returnDefDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+
+      <forward  name="divertUpdateReturnDef"
+                path="/returnDefDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertViewReturnDef"
+                path="/returnDefDispatchAction.do?method=view"
+                redirect="true"/>
+
+      <forward  name="divertCreateAlert"
+                path="/alertDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+  </action>
+
+    <action path="/shellExecutableDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.bp.ShellExecutableDispatchAction"
+            attribute="shellExecutableActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/shellExecutableDispatchAction.do"/>
+      <forward  name="resumeUpdate"
+                path="/shellExecutableDispatchAction.do?method=update"
+                redirect="true"/>
+    </action>
+
+    <action path="/javaProcedureDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.bp.JavaProcedureDispatchAction"
+            attribute="javaProcedureActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/javaProcedureDispatchAction.do"/>
+      <forward  name="resumeUpdate"
+                path="/javaProcedureDispatchAction.do?method=update"
+                redirect="true"/>
+    </action>
+    
+    <action path="/soapProcedureDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.bp.SoapProcedureDispatchAction"
+            attribute="javaProcedureActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/soapProcedureDispatchAction.do"/>
+      <forward  name="resumeUpdate"
+                path="/soapProcedureDispatchAction.do?method=update"
+                redirect="true"/>
+    </action>
+
+    <action path="/paramDefDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.bp.ParamDefDispatchAction"
+            attribute="paramDefActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/paramDefDispatchAction.do"/>
+      <forward  name="resumeUpdate"
+                path="/paramDefDispatchAction.do?method=update"
+                redirect="true"/>
+    </action>
+
+    <action path="/returnDefDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.bp.ReturnDefDispatchAction"
+            attribute="returnDefActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/returnDefDispatchAction.do"/>
+      <forward  name="resumeUpdate"
+                path="/returnDefDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertCreateAlert"
+                path="/alertDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+    </action>
+
+    <action path="/networkSettingDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.connection.NetworkSettingDispatchAction"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+      <set-property property="requiresP2P" value="true" />
+
+      <forward name="submit" path="/networkSettingDispatchAction.do"/>
+      <forward name="listview" path="/serverDispatchAction.do?method=update" redirect="true"/>
+      <forward  name="resumeUpdate"
+                path="/networkSettingDispatchAction.do?method=update"
+                redirect="true"/>
+    </action>
+
+    <action path="/connectionSetupResultDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.connection.ConnectionSetupResultDispatchAction"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+      <set-property property="requiresP2P" value="true" />
+
+      <forward name="submit" path="/connectionSetupResultDispatchAction.do"/>
+      <forward name="listview" path="/serverDispatchAction.do?method=update" redirect="true"/>
+      <forward  name="resumeUpdate"
+                path="/connectionSetupResultDispatchAction.do?method=update"
+                redirect="true"/>
+    </action>
+
+    <action path="/serverDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.server.ServerDispatchAction"
+            attribute="serverForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/serverDispatchAction.do"/>
+      <forward name="listview" path="/userListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/serverDispatchAction.do?method=update"
+                redirect="true"/>
+      <forward name="divertChangeCertificatePassword"
+               path="/certificatePasswordDispatchAction.do?method=update"/>
+      <forward name="divertHouseKeeping"
+               path="/houseKeepingDispatchAction.do?method=update&amp;uid=new"/>
+      <forward name="divertArchiveDocument"
+               path="/archiveDocumentDispatchAction.do?method=update&amp;uid=new"/>
+      <forward name="divertRestoreDocument"
+               path="/restoreDocumentDispatchAction.do?method=update&amp;uid=new"/>
+	  <forward name="divertScheduledArchive"
+               path="/archiveListView.do"/>
+      <forward name="divertExportConfig"
+               path="/exportConfigDispatchAction.do?method=update&amp;uid=new"/>
+      <forward name="divertImportConfig"
+               path="/importConfigDispatchAction.do?method=update&amp;uid=new"/>
+    </action>
+
+    <action path="/certificatePasswordDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.server.CertificatePasswordDispatchAction"
+            attribute="certificatePasswordForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/certificatePasswordDispatchAction.do"/>
+      <forward  name="resumeUpdate"
+                path="/certificatePasswordDispatchAction.do?method=update"
+                redirect="true"/>
+    </action>
+
+    <action path="/activationRecordDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.activation.ActivationRecordDispatchAction"
+            name="activationRecordActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+      <set-property property="logParameters" value="true"/>
+      <set-property property="requiresP2P" value="true" />
+
+      <forward name="submit" path="/activationRecordDispatchAction.do"/>
+      <forward name="listview" path="/activationRecordListView.do" redirect="true"/>
+      <forward  name="resumeUpdate"
+                path="/activationRecordDispatchAction.do?method=update"
+                redirect="true"/>
+      <forward  name="resumeView"
+                path="/activationRecordDispatchAction.do?method=view"
+                redirect="true"/>
+
+      <forward  name="divertCreateBusinessEntity"
+                path="/businessEntityDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+
+    </action>
+
+    <action path="/gridNodeDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.gridnode.GridNodeDispatchAction"
+            name="gridNodeActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+      <set-property property="requiresP2P" value="true" />
+
+      <forward name="submit" path="/gridNodeDispatchAction.do"/>
+      <forward name="listview" path="/gridNodeListView.do" redirect="true"/>
+      <forward  name="resumeView"
+                path="/gridNodeDispatchAction.do?method=view"
+                redirect="true"/>
+    </action>
+
+    <action path="/processDefDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.bp.ProcessDefDispatchAction"
+            attribute="processDefForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/processDefDispatchAction.do"/>
+      <forward name="listview" path="/processDefListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/processDefDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertEditRequestAct"
+                path="/processActDispatchAction.do?method=update&amp;processType=request"
+                redirect="true"/>
+
+      <forward  name="divertViewRequestAct"
+                path="/processActDispatchAction.do?method=view&amp;processType=request"
+                redirect="true"/>
+
+      <forward  name="divertEditResponseAct"
+                path="/processActDispatchAction.do?method=update&amp;processType=response"
+                redirect="true"/>
+
+      <forward  name="divertViewResponseAct"
+                path="/processActDispatchAction.do?method=view&amp;processType=response"
+                redirect="true"/>
+    </action>
+
+    <action path="/processActDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.bp.ProcessActDispatchAction"
+            attribute="processActForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/processActDispatchAction.do"/>
+      <forward  name="resumeUpdate"
+                path="/processActDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertCreateMsgType"
+                path="/mappingFileDispatchAction.do?method=update&amp;uid=new&amp;type=3"
+                redirect="true"/>
+
+      <forward  name="divertCreateDictFile"
+                path="/mappingFileDispatchAction.do?method=update&amp;uid=new&amp;type=5"
+                redirect="true"/>
+
+      <forward  name="divertCreateXmlSchema"
+                path="/mappingFileDispatchAction.do?method=update&amp;uid=new&amp;type=4"
+                redirect="true"/>
+    </action>
+
+    <action path="/processMappingDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.bp.ProcessMappingDispatchAction"
+            name="processMappingActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/processMappingDispatchAction.do"/>
+      <forward name="listview" path="/processMappingListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/processMappingDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertCreatePartner"
+                path="/partnerDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreateDocumentType"
+                path="/documentTypeDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreateChannelInfo"
+                path="/channelInfoDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreateProcessDef"
+                path="/processDefDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+    </action>
+
+    <action path="/rfcDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.bp.RfcDispatchAction"
+            name="rfcActionForm"
+            scope="session"
+            validate="false">
+    <set-property property="requiresAdmin" value="true" />
+    <set-property property="deferFormCreation" value="true"/>
+
+    <forward name="submit" path="/rfcDispatchAction.do"/>
+    <forward name="listview" path="/rfcListView.do"/>
+    <forward  name="resumeUpdate"
+              path="/rfcDispatchAction.do?method=update"
+              redirect="true"/>
+
+    </action>
+
+    <action path="/portDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.bp.PortDispatchAction"
+            name="portActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/portDispatchAction.do"/>
+      <forward name="listview" path="/portListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/portDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertCreateRfc"
+                      path="/rfcDispatchAction.do?method=update&amp;uid=new"
+                      redirect="true"/>
+    </action>
+
+    <action path="/bizCertMappingDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.bp.BizCertMappingDispatchAction"
+            name="bizCertMappingActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/bizCertMappingDispatchAction.do"/>
+      <forward name="listview" path="/bizCertMappingListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/bizCertMappingDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertCreatePartner"
+                      path="/partnerDispatchAction.do?method=update&amp;uid=new"
+                      redirect="true"/>
+      <forward  name="divertCreateCertificate"
+                      path="/certificateDispatchAction.do?method=update&amp;uid=new"
+                      redirect="true"/>
+    </action>
+
+    <action path="/certificateDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.channel.CertificateDispatchAction"
+            name="certificateActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/certificateDispatchAction.do"/>
+      <forward name="listview" path="/certificateListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/certificateDispatchAction.do?method=update"
+                redirect="true"/>
+
+    </action>
+
+    <action path="/processInstanceDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.bp.ProcessInstanceDispatchAction"
+            name="processInstanceActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="false" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/processInstanceDispatchAction.do"/>
+      <forward name="listview" path="/processInstanceListView.do"/>
+      <!-- 20030220AH pi dont support update so can just say view here, but later may need changes -->
+      <forward  name="resumeUpdate"
+                path="/processInstanceDispatchAction.do?method=view"
+                redirect="true"/>
+
+      <forward  name="divertViewGridDocument"
+                      path="/gridDocumentDispatchAction.do?method=view"
+                      redirect="true"/>
+    </action>
+
+    <action path="/alertDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.alert.AlertDispatchAction"
+            name="alertActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/alertDispatchAction.do"/>
+      <forward name="listview" path="/alertListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/alertDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertCreateAction"
+                      path="/actionDispatchAction.do?method=update&amp;uid=new"
+                      redirect="true"/>
+    </action>
+
+    <action path="/actionDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.alert.ActionDispatchAction"
+            name="actionActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/actionDispatchAction.do"/>
+      <forward name="listview" path="/actionListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/actionDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertCreateMessageTemplate"
+                      path="/messageTemplateDispatchAction.do?method=update&amp;uid=new"
+                      redirect="true"/>
+    </action>
+
+    <action path="/messageTemplateDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.alert.MessageTemplateDispatchAction"
+            name="messageTemplateActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/messageTemplateDispatchAction.do"/>
+      <forward name="listview" path="/messageTemplateListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/messageTemplateDispatchAction.do?method=update"
+                redirect="true"/>
+	  <!-- SC: jms alert notification -->
+	  <forward  name="divertCreateJmsDestination"
+                path="/JmsDestinationDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+    </action>
+
+    <action path="/responseTrackRecordDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.alert.ResponseTrackRecordDispatchAction"
+            name="responseTrackRecordActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/responseTrackRecordDispatchAction.do"/>
+      <forward name="listview" path="/responseTrackRecordListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/responseTrackRecordDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertCreateAlert"
+                      path="/alertDispatchAction.do?method=update&amp;uid=new"
+                      redirect="true"/>
+
+      <forward  name="divertCreateDocumentType"
+                      path="/documentTypeDispatchAction.do?method=update&amp;uid=new"
+                      redirect="true"/>
+
+      <forward  name="divertCreateReminderAlert"
+                path="/reminderAlertDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+
+      <forward  name="divertUpdateReminderAlert"
+                path="/reminderAlertDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertViewReminderAlert"
+                path="/reminderAlertDispatchAction.do?method=view"
+                redirect="true"/>
+    </action>
+
+    <action path="/reminderAlertDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.alert.ReminderAlertDispatchAction"
+            name="reminderAlertActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/reminderAlertDispatchAction.do"/>
+      <forward name="listview" path="/reminderAlertListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/reminderAlertDispatchAction.do?method=update"
+                redirect="true"/>
+    </action>
+
+    <action path="/alertTriggerDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.alert.AlertTriggerDispatchAction"
+            name="alertTriggerActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/alertTriggerDispatchAction.do"/>
+      <forward name="listview" path="/alertTriggerListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/alertTriggerDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertCreateDocumentType"
+                path="/documentTypeDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreateAlert"
+                path="/alertDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreatePartner"
+                path="/partnerDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreatePartnerType"
+                path="/partnerTypeDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreatePartnerGroup"
+                path="/partnerGroupDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreateUser"
+                path="/userDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreateRole"
+                path="/roleDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+    </action>
+
+    <action path="/houseKeepingDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.archive.HouseKeepingDispatchAction"
+            name="houseKeepingForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/houseKeepingDispatchAction.do"/>
+      <forward name="listview" path="/houseKeepingDispatchAction.do"/>
+      <forward  name="resumeUpdate"
+                path="/houseKeepingDispatchAction.do?method=update"
+                redirect="true"/>
+    </action>
+
+    <action path="/archiveDocumentDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.archive.ArchiveDocumentDispatchAction"
+            name="archiveDocumentForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/archiveDocumentDispatchAction.do"/>
+      <forward name="listview" path="/archiveDocumentDispatchAction.do"/>
+      <forward  name="resumeUpdate"
+                path="/archiveDocumentDispatchAction.do?method=update"
+                redirect="true"/>
+    </action>	
+    <action path="/restoreDocumentDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.archive.RestoreDocumentDispatchAction"
+            name="restoreDocumentForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/restoreDocumentDispatchAction.do"/>
+      <forward name="listview" path="/restoreDocumentDispatchAction.do"/>
+      <forward  name="resumeUpdate"
+                path="/restoreDocumentDispatchAction.do?method=update"
+                redirect="true"/>
+    </action>
+	<action path="/archiveDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.archive.ArchiveDispatchAction"
+            name="archiveForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/archiveDispatchAction.do"/>
+      <forward  name="listView"
+                path="/archiveListViewDispatchAction.do"
+                redirect="true"/>
+    </action>
+    <action path="/exportConfigDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.exportConfig.ExportConfigDispatchAction"
+            name="exportConfigForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/exportConfigDispatchAction.do"/>
+      <forward name="listview" path="/exportConfigDispatchAction.do"/>
+      <forward  name="resumeUpdate"
+                path="/exportConfigDispatchAction.do?method=update"
+                redirect="true"/>
+    </action>
+
+    <action path="/importConfigDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.exportConfig.ImportConfigDispatchAction"
+            name="importConfigForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/importConfigDispatchAction.do"/>
+      <forward name="listview" path="/importConfigDispatchAction.do"/>
+      <forward  name="resumeUpdate"
+                path="/importConfigDispatchAction.do?method=update"
+                redirect="true"/>
+    </action>
+
+    <action path="/registryConnectInfoDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.be.RegistryConnectInfoDispatchAction"
+            name="registryConnectInfoForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+      <set-property property="requiresUDDI" value="true" />
+
+      <forward name="submit" path="/registryConnectInfoDispatchAction.do"/>
+      <forward name="listview" path="/registryConnectInfoListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/registryConnectInfoDispatchAction.do?method=update"
+                redirect="true"/>
+    </action>
+
+    <action path="/publishBusinessEntityDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.be.PublishBusinessEntityDispatchAction"
+            name="publishBusinessEntityForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+      <set-property property="requiresUDDI" value="true" />
+
+      <forward name="submit" path="/publishBusinessEntityDispatchAction.do"/>
+      <forward name="listview" path="/businessEntityListView.do?isPartner=false"/>
+      <forward  name="resumeUpdate"
+                path="/publishBusinessEntityDispatchAction.do?method=update"
+                redirect="true"/>
+    </action>
+
+    <action path="/searchedBusinessEntityDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.be.SearchedBusinessEntityDispatchAction"
+            name="searchedBusinessEntityForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+      <set-property property="requiresUDDI" value="true" />
+
+      <forward name="submit" path="/searchedBusinessEntityDispatchAction.do"/>
+      <forward  name="resumeView"
+                path="/searchedBusinessEntityDispatchAction.do?method=view"
+                redirect="true"/>
+
+      <forward  name="configure"
+                path="/searchRegistryQueryDispatchAction.do?method=configureBizEntity"
+                redirect="true"/>
+
+      <forward  name="divertViewEmbeddedChannelInfo"
+                path="/embeddedChannelInfoDispatchAction.do?method=view"
+                redirect="true"/>
+    </action>
+
+    <action path="/searchRegistryQueryDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.be.SearchRegistryQueryDispatchAction"
+            name="searchRegistryQueryForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+      <set-property property="requiresUDDI" value="true" />
+
+      <forward name="submit" path="/searchRegistryQueryDispatchAction.do"/>
+      <forward name="listview" path="/searchRegistryQueryListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/searchRegistryQueryDispatchAction.do?method=update"
+                redirect="true"/>
+      <forward  name="resumeView"
+                path="/searchRegistryQueryDispatchAction.do?method=view"
+                redirect="true"/>
+
+      <forward  name="divertViewSearchedBusinessEntity"
+                path="/searchedBusinessEntityDispatchAction.do?method=view"
+                redirect="true"/>
+    </action>
+
+    <action path="/embeddedChannelInfoDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.be.EmbeddedChannelInfoDispatchAction"
+            name="embeddedChannelInfoForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+      <set-property property="requiresUDDI" value="true" />
+
+      <forward name="submit" path="/embeddedChannelInfoDispatchAction.do"/>
+      <forward  name="resumeView"
+                path="/embeddedChannelInfoDispatchAction.do?method=view"
+                redirect="true"/>
+    </action>
+
+    <action path="/searchQueryDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.document.SearchQueryDispatchAction"
+            name="searchQueryForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="false" /> <!-- User may view result of search query -->
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/searchQueryDispatchAction.do"/>
+      <forward name="listview" path="/searchQueryListView.do"/>
+      <forward  name="resumeUpdate"
+                path="/searchQueryDispatchAction.do?method=update"
+                redirect="true"/>
+    </action>
+
+    <action path="/scheduledTaskDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.scheduler.ScheduledTaskDispatchAction"
+            attribute="scheduledTaskActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+      <forward name="submit" path="/scheduledTaskDispatchAction.do"/>
+      <forward name="listview" path="/scheduledTaskListView.do"/>
+      <forward  name="resumeUpdate"
+                path="//scheduledTaskDispatchAction.do?method=update"
+                redirect="true"/>
+    </action>
+
+	<action path="/scheduledArchiveDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.scheduler.ScheduledArchiveDispatchAction"
+            attribute="scheduledArchiveActionForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+	  <forward  name="divertCreateArchive"
+                path="/archiveDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward name="submit" path="/scheduledArchiveDispatchAction.do"/>
+      <forward name="listview" path="/scheduledArchiveListView.do"/>
+      <forward  name="resumeUpdate"
+                path="//scheduledArchiveDispatchAction.do?method=update"
+                redirect="true"/>
+      
+    </action>
+
+    <action path="/webServiceDispatchAction"
+              parameter="method"
+              type="com.gridnode.gtas.client.web.bp.WebServiceDispatchAction"
+              name="webServiceActionForm"
+              scope="session"
+              validate="false">
+  		<set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+  
+  		<forward name="submit" path="/webServiceDispatchAction.do"/>
+  		<forward name="listview" path="/webServiceListView.do"/>
+  		<forward  name="resumeUpdate"
+  				  path="/webServiceDispatchAction.do?method=update"
+  				  redirect="true"/>
+  
+    </action>
+
+  	<action path="/serviceAssignmentDispatchAction"
+              parameter="method"
+              type="com.gridnode.gtas.client.web.bp.ServiceAssignmentDispatchAction"
+              name="serviceAssignmentActionForm"
+              scope="session"
+              validate="false">
+  		<set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+  
+      <forward  name="divertCreatePartnerType"
+                path="/partnerTypeDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+      <forward  name="divertCreateWebService"
+              path="/serviceAssignmentDispatchAction.do?method=update&amp;uid=new"
+              redirect="true"/>
+  		<forward name="submit" path="/serviceAssignmentDispatchAction.do"/>
+  		<forward name="listview" path="/serviceAssignmentListView.do"/>
+  		<forward  name="resumeUpdate"
+  				  path="/serviceAssignmentDispatchAction.do?method=update"
+  				  redirect="true"/>
+  
+    </action>
+
+    <action path="/emailConfigDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.alert.EmailConfigDispatchAction"
+            name="emailConfigForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+      <forward name="submit" path="/emailConfigDispatchAction.do" />
+      <forward name="listview" path="/serverDispatchAction.do?method=update" redirect="true"/>
+      <forward  name="resumeUpdate"
+                path="/emailConfigDispatchAction.do?method=update"
+                redirect="true"/>
+
+    </action>
+
+	<!-- 10 Nov 05 - sumedh: netweaver porting -->
+	<action path="/NwSysFoldersListView" type="com.gridnode.gtas.client.netweaver.NwSysFoldersListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="false" /> <!--Users can of course view sys folders , if little else -->
+      <set-property property="refreshUrl" value="/NwSysFoldersListView.do" />
+      
+	<!-- uncomment this later -->
+      <set-property property="createForward" value="importDocuments" />
+      <set-property property="updateForward" value="updateGridDocument" />
+      <set-property property="viewForward" value="viewGridDocument" />
+      <set-property property="deleteForward" value="deleteGridDocument" />
+      
+      <forward name="importDocuments" path="/sysFoldersDispatchAction.do?method=update&amp;uid=new"/> <!-- Fwd to the import screen -->
+      
+    </action>
+
+	 <action path="/NwPreLogin"
+            type="com.gridnode.gtas.client.netweaver.login.NwPreLoginAction"
+            name="loginActionForm"
+            scope="request"
+            className="com.gridnode.gtas.client.web.login.LoginActionMapping">
+      <set-property property="promptPcp" value="false" />
+      <set-property property="noSecurity" value="true" />
+      <set-property property="requiresGtSession" value="false" />
+      <set-property property="noP2P" value="true" />
+      <set-property property="noUDDI" value="true" />
+
+      <forward name="submit" path="/NwLogin.do"/>
+      <forward name="submitGmt" path="/NwPreLogin.do"/>
+    </action>
+
+    <action path="/NwLogin"
+            type="com.gridnode.gtas.client.netweaver.login.NwLoginAction"
+            name="loginActionForm"
+            scope="request"
+            input="/NwPreLogin.do"
+            className="com.gridnode.gtas.client.web.login.LoginActionMapping">
+      <set-property property="promptPcp" value="false" />
+      <set-property property="noSecurity" value="true" />
+      <set-property property="requiresGtSession" value="false" />
+      <set-property property="noP2P" value="true" />
+      <set-property property="noUDDI" value="true" />
+
+      <!--<forward name="success"  path="/NwSysFoldersListView.do?folder=inbound" redirect="true"/>-->
+      <forward name="failure"  path="/NwPreLogin.do"/>
+
+	  
+      
+    </action>
+
+	<action path="/NwInitialBody"
+            type="com.gridnode.gtas.client.netweaver.NwInitialBodyAction">
+      <forward name="documents" path="/sysFoldersListView.do?folder=import" />
+      <forward name="process" path="/partnerFunctionListView.do" />
+      <forward name="registry" path="/businessEntityListView.do" />
+      <forward name="partner" path="/partnerListView.do" />
+      <forward name="processInstances" path="/processInstanceListView.do" />	
+    </action>
+
+	<!-- END: 10 Nov 05 - sumedh: netweaver porting -->
+
+
+	<!-- SC: 3 Jan 05: jms alert notification -->
+	<action path="/JmsDestinationDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.alert.JmsDestinationDispatchAction"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="false" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/JmsDestinationDispatchAction.do"/>
+    </action>
+
+	<!-- SC: 16 Jan 05: jms alert notification -->
+	<action path="/jmsDestinationListView" type="com.gridnode.gtas.client.web.alert.JmsDestinationListAction"
+            className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/jmsDestinationListView.do" />
+      
+      <set-property property="createForward" value="createJmsDestination" />
+      <set-property property="updateForward" value="updateJmsDestination" />
+      <set-property property="viewForward" value="viewJmsDestination" />
+      <set-property property="deleteForward" value="deleteJmsDestination" />
+    </action>
+	
+	<!--TWX ACTION MAPPING FOR BATCH IMPORT SCHEMA-->
+	<action path="/importSchemaDispatchAction"
+	        parameter="method"
+	        type="com.gridnode.gtas.client.web.document.ImportSchemaDispatchAction"
+			name="importSchemaForm"
+            scope="session"
+			validate="false">
+	  <set-property property="requiresAdmin" value="true"/>
+      <set-property property="deferFormCreation" value="true"/>
+
+	  <forward name="submit" path="/importSchemaDispatchAction.do"/>
+	  <forward name="listview" path="/mappingFileListView.do?type=4"/>
+      <forward  name="resumeUpdate"
+                path="/importSchemaDispatchAction.do?method=update"
+                redirect="true"/>
+
+      <forward  name="divertUpdateSchemaMappingFile"
+                path="/schemaMappingFileDispatchAction.do?method=update&amp;uid=new"
+                redirect="true"/>
+
+      <forward  name="divertViewSchemaMappingFile"
+                path="/schemaMappingFileDispatchAction.do?method=view"
+                redirect="true"/>
+    </action>
+	
+	<action path="/schemaMappingFileDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.document.SchemaMappingFileDispatchAction"
+            name="schemaMappingFileForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/schemaMappingFileDispatchAction.do"/>
+      <forward  name="resumeUpdate"
+                path="/schemaMappingFileDispatchAction.do?method=update"
+                redirect="true"/>
+    </action>
+	<!-- TWX end-->
+
+    <!-- BEGIN: estore action -->
+
+	<action path="/EsDocSearchPageAction"
+            type="com.gridnode.gtas.client.web.archive.searchpage.EsDocSearchPageAction"
+            scope="session"
+            validate="false"
+            parameter="method">
+      <set-property property="requiresAdmin" value="false" />
+      <set-property property="deferFormCreation" value="true" />
+	  <forward name="submit" path="/EsDocListView.do" />
+    </action>
+
+	<action path="/EsPiSearchPageAction"
+            type="com.gridnode.gtas.client.web.archive.searchpage.EsPiSearchPageAction"
+            scope="session"
+            validate="false"
+            parameter="method">
+      <set-property property="requiresAdmin" value="false" />
+      <set-property property="deferFormCreation" value="true" />
+	  <forward name="submit" path="/EsPiListView.do" />
+    </action>
+
+    <action path="/EsPiListView" type="com.gridnode.gtas.client.web.archive.EsPiListAction"
+        className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/EsPiListView.do" />
+	  <set-property property="viewForward" value="viewAssocEsDoc" />	  
+    </action>
+
+	<action path="/EsPiDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.archive.docforpi.EsPiDispatchAction"
+			name="EsPiAForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="false" />
+      <set-property property="deferFormCreation" value="true"/>
+
+	  <!-- try if it works. -->
+      <forward name="submit" path="/EsPiDispatchAction.do" />
+      <forward name="submit" path="/AssocEsDocListView.do" />
+	  <forward name="resumeUpdate" path="/EsPiDispatchAction.do?method=update" />
+      <forward name="resumeView" path="/EsPiListView.do" redirect="true"/>
+      <!--forward  name="resumeUpdate"
+                path="/EsPiDispatchAction.do?method=view"
+                redirect="true" />
+
+      <forward  name="divertViewEsDoc"
+                      path="/EsDocDispatchAction.do?method=view"
+                      redirect="true"/-->
+    </action>
+
+	<action path="/EsDocListView" type="com.gridnode.gtas.client.web.archive.doc.EsDocListAction"
+        className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/EsDocListView.do" />	
+	  <set-property property="viewForward" value="viewGdocDetail" />
+    </action>
+
+	<action path="/AssocEsDocListView" type="com.gridnode.gtas.client.web.archive.doc.temp.AssocEsDocListAction"
+        className="com.gridnode.gtas.client.web.strutsbase.GTListViewActionMapping">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="refreshUrl" value="/AssocEsDocListView.do" />
+	  <set-property property="viewForward" value="viewGdocDetail" />
+    </action>
+
+    <action path="/GdocDetailDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.archive.doc.temp.GdocDetailDispatchAction"
+			name="GridDocumentAForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="false" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward  name="submit" path="/GdocDetailDispatchAction.do"/>
+      <forward  name="resumeView" path="/GdocDetailDispatchAction.do?method=view" redirect="true"/>
+	  <forward  name="divertToViewAuditFile" path="/AuditFileDispatchAction.do?method=view" redirect="true" />
+	  <forward  name="divertToViewSCert" path="/certificateDispatchAction.do?method=view" redirect="true"/>
+	  <forward  name="divertToViewRCert" path="/certificateDispatchAction.do?method=view" redirect="true"/>
+    </action>
+
+	<action path="/AuditFileDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.archive.docforpi.AuditFileDispatchAction"
+            name="AuditFileAForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="false" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/AuditFileDispatchAction.do"/>
+      <forward name="listview" path="/EsPiListView.do" redirect="true"/>
+      <forward  name="resumeView" path="/GdocDetailDispatchAction.do?method=view" redirect="true"/>
+    </action>
+
+    <!-- END: estore action -->
+	
+	<!-- TWX 24092006 Search Page for estore PI -->
+	<action path="/searchEsPiPageDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.archive.searchpage.SearchEsPiPageDispatchAction"
+            name="searchEsPiPageAForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/searchEsPiPageDispatchAction.do"/>
+	  <forward name="listview" path="/EsPiListView.do" redirect="true"/>
+    </action>
+	
+	<!-- TWX 28092006 Search Page for estore Doc -->
+	<action path="/searchEsDocPageDispatchAction"
+            parameter="method"
+            type="com.gridnode.gtas.client.web.archive.searchpage.SearchEsDocPageDispatchAction"
+            name="searchEsDocPageAForm"
+            scope="session"
+            validate="false">
+      <set-property property="requiresAdmin" value="true" />
+      <set-property property="deferFormCreation" value="true"/>
+
+      <forward name="submit" path="/searchEsDocPageDispatchAction.do"/>
+	  <forward name="listview" path="/EsDocListView.do" redirect="true"/>
+    </action>
+
+  </action-mappings>
+
+  <controller processorClass="com.gridnode.gtas.client.web.strutsbase.GTRequestProcessor"
+              locale="true"
+              contentType="text/html; charset=UTF-8"
+              nocache="true"
+              maxFileSize="128M"
+              bufferSize="8192"
+              debug="5" />
+
+  <!-- ========== Message Resources Definitions =========================== -->
+
+  <message-resources parameter="ApplicationResources"/>
+
+  <!-- ========== Plug Ins Configuration ================================== -->
+
+  <!--  The GlobalInitialiser will create and cache in the ServletContext a GlobalContext
+        object that is used by classes in the ctrl package to share global data -->
+  <plug-in className="com.gridnode.gtas.client.web.strutsbase.GlobalInitialiser">
+    <set-property property="pageSize" value="10"/>
+  </plug-in>
+
+  <plug-in className="com.gridnode.gtas.client.web.xml.DocumentConfigManager">
+    <set-property property="configUrl" value="/WEB-INF/document-config.xml"/>
+  </plug-in>
+
+  <plug-in className="com.gridnode.gtas.client.web.navigation.NavigationConfigManager">
+    <set-property property="configUrl" value="/WEB-INF/navigation-config.xml"/>
+  </plug-in>
+
+</struts-config>

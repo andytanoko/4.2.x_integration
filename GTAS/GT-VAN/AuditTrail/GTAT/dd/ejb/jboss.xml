@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+  <secure>false</secure>
+  <resource-managers/>
+  <enterprise-beans>
+    <message-driven>
+      <ejb-name>TransactionFlowMDBean</ejb-name>
+      <configuration-name>Standard Message Driven Bean</configuration-name>
+      <destination-jndi-name>topic/notifierTopic</destination-jndi-name>
+	  <mdb-subscription-id>transFlow</mdb-subscription-id>
+      <mdb-client-id>${hostid:gnode1}@transFlow</mdb-client-id>
+	  <!--By enforcing the sequence, we ensure that the JMS server will not deliver the jms msg to the md bean untill all dependence module has deployed. -->
+	  <depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.gtas.server.document.facade.ejb.IDocumentManagerHome</depends>
+	  <depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.gtas.server.rnif.facade.ejb.IRnifManagerHome</depends>
+	  <depends>jboss.j2ee:service=EJB,jndiName=com.gridnode.pdip.app.bizreg.facade.ejb.IBizRegistryManagerHome</depends>
+    </message-driven>
+	<message-driven>
+      <ejb-name>ReprocessPIActivityMDBean</ejb-name>
+      <configuration-name>TXM Message Driven Bean</configuration-name>
+      <destination-jndi-name>queue/gtvan/gtat/reprocessQueue</destination-jndi-name>
+    </message-driven>
+	<message-driven>
+      <ejb-name>GTArchiveDelegateMDBean</ejb-name>
+      <configuration-name>TXM Message Driven Bean</configuration-name>
+      <destination-jndi-name>queue/gtvan/gtat/archiveQueue</destination-jndi-name>
+  </message-driven>
+    <session>
+      <ejb-name>ArchiveProxyManagerBean</ejb-name>
+      <jndi-name>com.gridnode.gtas.audit.archive.facade.ejb.IArchiveProxyManagerHome</jndi-name>
+    </session>
+  </enterprise-beans>
+</jboss>

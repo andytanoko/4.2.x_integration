@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="reqlib/commons-io-1.1.jar"/>
+	<classpathentry kind="lib" path="reqlib/dtdparser119.jar"/>
+	<classpathentry exported="true" kind="lib" path="reqlib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="reqlib/jox-1.17b3.jar"/>
+	<classpathentry kind="lib" path="reqlib/log4j-1.2.11.jar"/>
+	<classpathentry kind="lib" path="reqlib/xerces-2.7.1.jar"/>
+	<classpathentry kind="var" path="J2EE_HOME/lib/j2ee.jar"/>
+	<classpathentry kind="lib" path="reqlib/castor-1.1.jar"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>

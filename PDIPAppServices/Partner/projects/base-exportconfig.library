@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<library>
+  <!--JBuilder Library Definition File-->
+  <fullname>base-exportconfig</fullname>
+  <class>
+    <path>[../../../PDIPBaseServices/ExportConfig/deploy/base-exportconfig.jar]</path>
+  </class>
+</library>
+

@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Procedure Definition File</title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="" enctype="multipart/form-data">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <table border="0">
+          <tr id="name_details">
+            <td id="name_label">
+              lbName
+            </td>
+            <td>
+              <input type="text" id="name_value" name="name"/>
+            </td>
+            <td id="name_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="description_details">
+            <td id="description_label">
+              lbDescription
+            </td>
+            <td>
+              <input type="text" id="description_value" name="description"/>
+            </td>
+            <td id="description_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="type_details">
+            <td id="type_label">
+              lbType
+            </td>
+            <td>
+              <select id="type_value" size="1" name="type">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>
+            </td>
+            <td id="type_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="fileName_details">
+            <td id="fileName_label" valign="top">
+              lbFileName
+            </td>
+            <td valign="top">
+              <div id="fileName_value" class="multifiles">
+                Multifiles()
+              </div>
+            </td>
+            <td id="fileName_error" valign="top">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

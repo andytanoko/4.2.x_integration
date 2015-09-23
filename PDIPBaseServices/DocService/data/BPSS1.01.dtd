@@ -1,0 +1,266 @@
+<!-- edited with XML Spy v3.5 (http://www.xmlspy.com) by christopher ferris (sun microsystems, inc) -->
+<!-- =============================================================== -->
+<!--  Editor:   Kurt Kanaskie (Lucent Technologies)                  -->
+<!--  Version:  Version 1.0                                          -->
+<!--  Updated:  2001-05-10                                           -->
+<!--                                                                 -->
+<!--  Public Identifier:                                             -->
+<!--            "-//ebXML//DTD Process Specification ver 1.0//EN"    -->
+<!--                                                                 -->
+<!--  Purpose:                                                       -->
+<!--     The ebXML Specification DTD provides a standard             -->
+<!--     framework by which business systems may be                  -->
+<!--     configured to support execution of business                 -->
+<!--     transactions.  It is based upon prior UN/CEFACT             -->
+<!--     work, specifically the metamodel behind the                 -->
+<!--     UN/CEFACT Unified Modeling Methodology (UMM) defined        -->
+<!--     in the N090R9.1  specification.                                   -->
+<!--                                                                 -->
+<!--     The Specification Schema supports the specification         -->
+<!--     of Business Transactions and the choreography of            -->
+<!--     Business Transactions into Business Collaborations.         -->
+<!--                                                                 -->
+<!--  Notes:                                                         -->
+<!--     time periods are represented using ISO 8601 format          -->
+<!--     (e.g. P2D for 2 Days, P2H30M for 2 Hours 30 Minutes         -->
+<!--                                                                 -->
+<!--     Naming and reference is based on convention that an         -->
+<!--     Element with a name attribute (e.g. AuthorizedRole)         -->
+<!--     is refernced by an attribute in another element with        -->
+<!--     the name in lowerCamelCase (e.g. authorizedRole).           -->
+<!--                                                                 -->
+<!--     fromBusinessState and toBusinessState refer to the          -->
+<!--     the names of a BusinessTransactionActivity,                 -->
+<!--     CollaborationActivity, Fork, and Join, all are targets for  -->
+<!--     from/to in Transition. This deviates from the normal        -->
+<!--     convention of lowerCamelCase attribute name                 -->
+<!--     BusinessState is used as a generic term for:                -->
+<!--     Fork, Join, Success, Failure                                -->
+<!--                                                                 -->
+<!-- Constraints:                                                    -->
+<!--     - attributes location, logicalModel, pattern, specification -->
+<!--	   uri, are of type xsd:anyURI                               -->
+<!--     - attributes timeTo* are of type xsd:duration               -->
+<!--       isSuccess is an expression (e.g. XPath) that results      -->
+<!--       in a boolean true or false based on document name or      -->
+<!--       document content.                                         -->
+<!--                                                                 -->
+<!-- =============================================================== -->
+<!ELEMENT ProcessSpecification (Documentation*, SubstitutionSet*, (Include* | BusinessDocument* | ProcessSpecification* | Package | BinaryCollaboration | BusinessTransaction | MultiPartyCollaboration)*)>
+<!ATTLIST ProcessSpecification
+	name ID #REQUIRED
+	uuid CDATA #REQUIRED
+	version CDATA #REQUIRED
+>
+<!ELEMENT Documentation (#PCDATA)>
+<!ATTLIST Documentation
+	uri CDATA #IMPLIED
+>
+<!ELEMENT Include (Documentation*)>
+<!ATTLIST Include
+	name CDATA #REQUIRED
+	uuid CDATA #REQUIRED
+	uri CDATA #REQUIRED
+	version CDATA #REQUIRED
+>
+<!ELEMENT BusinessDocument (ConditionExpression?, Documentation*)>
+<!ATTLIST BusinessDocument
+	name CDATA #REQUIRED
+	nameID ID #IMPLIED
+	specificationLocation CDATA #IMPLIED
+	specificationElement CDATA #IMPLIED
+>
+<!ELEMENT ConditionExpression (Documentation*)>
+<!ATTLIST ConditionExpression
+	expressionLanguage CDATA #IMPLIED
+	expression CDATA #IMPLIED
+>
+<!ELEMENT SubstitutionSet (DocumentSubstitution | AttributeSubstitution | Documentation)*>
+<!ATTLIST SubstitutionSet
+	name CDATA #IMPLIED
+	nameId IDREF #IMPLIED
+	applyToScope CDATA #IMPLIED
+>
+<!ELEMENT DocumentSubstitution (Documentation*)>
+<!ATTLIST DocumentSubstitution
+	originalBusinessDocument CDATA #IMPLIED
+	originalBusinessDocumentID IDREF #IMPLIED
+	substituteBusinessDocument CDATA #IMPLIED
+	substituteBusinessDocumentId IDREF #IMPLIED
+>
+<!ELEMENT AttributeSubstitution (Documentation*)>
+<!ATTLIST AttributeSubstitution
+	attributeName CDATA #IMPLIED
+	value CDATA #IMPLIED
+>
+<!ELEMENT Package (Documentation*, (Package | BinaryCollaboration | BusinessTransaction | MultiPartyCollaboration)*)>
+<!ATTLIST Package
+	name CDATA #REQUIRED
+	nameID ID #IMPLIED
+>
+<!ELEMENT BinaryCollaboration (Documentation*, InitiatingRole, RespondingRole, (Documentation* | Start | Transition | Success | Failure | BusinessTransactionActivity | CollaborationActivity | Fork | Join)*)>
+<!ATTLIST BinaryCollaboration
+	name CDATA #REQUIRED
+	nameID ID #IMPLIED
+	pattern CDATA #IMPLIED
+	beginsWhen CDATA #IMPLIED
+	endsWhen CDATA #IMPLIED
+	preCondition CDATA #IMPLIED
+	postCondition CDATA #IMPLIED
+	timeToPerform CDATA #IMPLIED
+>
+<!ELEMENT MultiPartyCollaboration (Documentation*, BusinessPartnerRole*)>
+<!ATTLIST MultiPartyCollaboration
+	name CDATA #REQUIRED
+	nameID ID #IMPLIED
+>
+<!ELEMENT InitiatingRole (Documentation*)>
+<!ATTLIST InitiatingRole
+	name CDATA #REQUIRED
+	nameID ID #IMPLIED
+>
+<!ELEMENT RespondingRole (Documentation*)>
+<!ATTLIST RespondingRole
+	name CDATA #REQUIRED
+	nameID ID #IMPLIED
+>
+<!-- A BusinessState is one of Start, Success, Failure, Fork, Join, BusinessTransactionActivity or CollaborationActivity -->
+<!-- fromBusinessState and toBusinessState are fully qualified using XPath -->
+<!ELEMENT Transition (ConditionExpression?, Documentation*)>
+<!ATTLIST Transition
+	onInitiation (true | false) "false"
+	fromBusinessState CDATA #IMPLIED
+	fromBusinessStateIDRef IDREF #IMPLIED
+	toBusinessState CDATA #IMPLIED
+	toBusinessStateIDRef IDREF #IMPLIED
+	conditionGuard (Success | BusinessFailure | TechnicalFailure | AnyFailure) #IMPLIED
+>
+<!-- Start is a special type of Transition in that it only has a destination -->
+<!ELEMENT Start (Documentation*)>
+<!ATTLIST Start
+	toBusinessState CDATA #REQUIRED
+	toBusinessStateIDRef IDREF #IMPLIED
+>
+<!-- Success is a special type of Transition in that it only has a origination -->
+<!ELEMENT Success (ConditionExpression?, Documentation*)>
+<!ATTLIST Success
+	fromBusinessState CDATA #REQUIRED
+	fromBusinessStateIDRef IDREF #IMPLIED
+	conditionGuard (Success | BusinessFailure | TechnicalFailure | AnyFailure) #IMPLIED
+>
+<!-- Failure is a special type of Transition in that it only has a origination -->
+<!ELEMENT Failure (ConditionExpression?, Documentation*)>
+<!ATTLIST Failure
+	fromBusinessState CDATA #REQUIRED
+	fromBusinessStateIDRef IDREF #IMPLIED
+	conditionGuard (Success | BusinessFailure | TechnicalFailure | AnyFailure) #IMPLIED
+>
+<!-- Fork is a special type of BusinessState that can be transitioned to -->
+<!ELEMENT Fork (Documentation*)>
+<!ATTLIST Fork
+	name CDATA #REQUIRED
+	nameID ID #IMPLIED
+>
+<!-- Join is a special type of BusinessState that can be transitioned to -->
+<!ELEMENT Join (Documentation*)>
+<!ATTLIST Join
+	name CDATA #REQUIRED
+	nameID ID #IMPLIED
+	waitForAll (true | false) "true"
+>
+<!-- fromAuthorizedRole and toAuthorizedRole are fully qualified using XPath -->
+<!-- BusinessTransactionActivity is a BusinessState that can be transitioned to -->
+<!ELEMENT BusinessTransactionActivity (Documentation*)>
+<!ATTLIST BusinessTransactionActivity
+	name CDATA #REQUIRED
+	nameID ID #IMPLIED
+	businessTransaction CDATA #REQUIRED
+	businessTransactionIDRef IDREF #IMPLIED
+	fromAuthorizedRole CDATA #REQUIRED
+	fromAuthorizedRoleIDRef IDREF #IMPLIED
+	toAuthorizedRole CDATA #REQUIRED
+	toAuthorizedRoleIDRef IDREF #IMPLIED
+	isConcurrent (true | false) "true"
+	isLegallyBinding (true | false) "true"
+	timeToPerform CDATA #IMPLIED
+>
+<!-- fromAuthorizedRole and toAuthorizedRole are fully qualified using XPath -->
+<!-- CollaborationActivity is a BusinessState that can be transitioned to -->
+<!ELEMENT CollaborationActivity (Documentation*)>
+<!ATTLIST CollaborationActivity
+	name CDATA #REQUIRED
+	nameID ID #IMPLIED
+	fromAuthorizedRole CDATA #REQUIRED
+	fromAuthorizedRoleIDRef IDREF #IMPLIED
+	toAuthorizedRole CDATA #REQUIRED
+	toAuthorizedRoleIDRef IDREF #IMPLIED
+	binaryCollaboration CDATA #REQUIRED
+	binaryCollaborationIDRef IDREF #IMPLIED
+>
+<!ELEMENT BusinessTransaction (Documentation*, RequestingBusinessActivity, RespondingBusinessActivity)>
+<!ATTLIST BusinessTransaction
+	name CDATA #REQUIRED
+	nameID ID #IMPLIED
+	pattern CDATA #IMPLIED
+	beginsWhen CDATA #IMPLIED
+	endsWhen CDATA #IMPLIED
+	isGuaranteedDeliveryRequired (true | false) "false"
+	preCondition CDATA #IMPLIED
+	postCondition CDATA #IMPLIED
+>
+<!ELEMENT RequestingBusinessActivity (Documentation*, DocumentEnvelope)>
+<!ATTLIST RequestingBusinessActivity
+	name CDATA #IMPLIED
+	nameID ID #IMPLIED
+	isAuthorizationRequired (true | false) "false"
+	isIntelligibleCheckRequired (true | false) "false"
+	isNonRepudiationReceiptRequired (true | false) "false"
+	isNonRepudiationRequired (true | false) "false"
+	timeToAcknowledgeAcceptance CDATA #IMPLIED
+	timeToAcknowledgeReceipt CDATA #IMPLIED
+>
+<!ELEMENT RespondingBusinessActivity (Documentation*, DocumentEnvelope*)>
+<!ATTLIST RespondingBusinessActivity
+	name CDATA #IMPLIED
+	nameID ID #IMPLIED
+	isAuthorizationRequired (true | false) "false"
+	isIntelligibleCheckRequired (true | false) "false"
+	isNonRepudiationReceiptRequired (true | false) "false"
+	isNonRepudiationRequired (true | false) "false"
+	timeToAcknowledgeReceipt CDATA #IMPLIED
+>
+<!ELEMENT DocumentEnvelope (Documentation*, Attachment*)>
+<!ATTLIST DocumentEnvelope
+	businessDocument CDATA #REQUIRED
+	businessDocumentIDRef IDREF #IMPLIED
+	isPositiveResponse (true | false) "false"
+	isAuthenticated (true | false) "false"
+	isConfidential (true | false) "false"
+	isTamperProof (true | false) "false"
+>
+<!ELEMENT Attachment (Documentation*)>
+<!ATTLIST Attachment
+	name CDATA #REQUIRED
+	nameID ID #IMPLIED
+	businessDocument CDATA #IMPLIED
+	businessDocumentIDRef IDREF #IMPLIED
+	mimeType CDATA #REQUIRED
+	specification CDATA #IMPLIED
+	version CDATA #IMPLIED
+	isAuthenticated (true | false) "false"
+	isConfidential (true | false) "false"
+	isTamperProof (true | false) "false"
+>
+<!ELEMENT BusinessPartnerRole (Documentation*, Performs*, Transition*)>
+<!ATTLIST BusinessPartnerRole
+	name CDATA #REQUIRED
+	nameID ID #IMPLIED
+>
+<!-- authorizedRole is fully qualified using XPath -->
+<!ELEMENT Performs (Documentation*)>
+<!ATTLIST Performs
+	initiatingRole CDATA #IMPLIED
+	inititiatingRoleIDRef IDREF #IMPLIED
+	respondingRole CDATA #IMPLIED
+	respondingRoleIDRef IDREF #IMPLIED
+>

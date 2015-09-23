@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Data Object XML mapping -->
+<mapping>
+	<!--  Mapping for GridDocument  -->
+	<class name="com.gridnode.gtas.server.document.model.GridDocument">
+		<map-to xml="GridDocument"/>
+		<field name="GdocId" type="long">
+			<xml name="GdocId" node="element"/>
+		</field>
+		<field name="GdocFilename" type="string">
+			<xml name="GdocFilename" node="element"/>
+		</field>
+		<field name="Folder" type="string">
+			<xml name="Folder" node="element"/>
+		</field>
+		<field name="SenderPartnerId" type="string">
+			<xml name="SenderPartnerId" node="element"/>
+		</field>
+		<field name="UdocNum" type="string">
+			<xml name="UdocNum" node="element"/>
+		</field>
+		<field name="RefUdocNum" type="string">
+			<xml name="RefUdocNum" node="element"/>
+		</field>
+		<field name="UdocFilename" type="string">
+			<xml name="UdocFilename" node="element"/>
+		</field>
+		<field name="UdocVersion" type="integer">
+			<xml name="UdocVersion" node="element"/>
+		</field>
+		<field name="UdocDocType" type="string">
+			<xml name="UdocDocType" node="element"/>
+		</field>
+		<field name="UdocFileType" type="string">
+			<xml name="UdocFileType" node="element"/>
+		</field>
+		<field name="SrcFolder" type="string">
+			<xml name="SrcFolder" node="element"/>
+		</field>
+		<field name="NotifyUserEmail" type="string">
+			<xml name="NotifyUserEmail" node="element"/>
+		</field>
+		<field name="UdocFileSize" type="long">
+			<xml name="UdocFileSize" node="element"/>
+		</field>
+		<field name="isExported" type="boolean" get-method="isExported" set-method="setExported">
+			<xml name="isExported" node="element"/>
+		</field>
+		<field name="isViewAckReq" type="boolean" get-method="isViewAckReq" set-method="setViewAckReq">
+			<xml name="isViewAckReq" node="element"/>
+		</field>
+		<field name="isExportAckReq" type="boolean" get-method="isExportAckReq" set-method="setExportAckReq">
+			<xml name="isExportAckReq" node="element"/>
+		</field>
+		<field name="isReceiveAckReq" type="boolean" get-method="isReceiveAckReq" set-method="setReceiveAckReq">
+			<xml name="isReceiveAckReq" node="element"/>
+		</field>
+		<field name="isViewed" type="boolean" get-method="isViewed" set-method="setViewed">
+			<xml name="isViewed" node="element"/>
+		</field>
+		<field name="isSent" type="boolean" get-method="isSent" set-method="setSent">
+			<xml name="isSent" node="element"/>
+		</field>
+		<field name="isLocalPending" type="boolean" get-method="isLocalPending" set-method="setLocalPending">
+			<xml name="isLocalPending" node="element"/>
+		</field>
+		<field name="isExpired" type="boolean" get-method="isExpired" set-method="setExpired">
+			<xml name="isExpired" node="element"/>
+		</field>
+		<field name="isRecAckProcessed" type="boolean" get-method="isRecAckProcessed" set-method="setRecAckProcessed">
+			<xml name="isRecAckProcessed" node="element"/>
+		</field>
+		<field name="isRejected" type="boolean" get-method="isRejected" set-method="setRejected">
+			<xml name="isRejected" node="element"/>
+		</field>
+		<field name="CreateBy" type="string">
+			<xml name="CreateBy" node="element"/>
+		</field>
+		<field name="SenderNodeId" type="long">
+			<xml name="SenderNodeId" node="element"/>
+		</field>
+		<field name="SenderGdocId" type="long">
+			<xml name="SenderGdocId" node="element"/>
+		</field>
+		<field name="SenderRoute" type="string">
+			<xml name="SenderRoute" node="element"/>
+		</field>
+		<field name="SenderPartnerFunction" type="string">
+			<xml name="SenderPartnerFunction" node="element"/>
+		</field>
+		<field name="SenderUserId" type="string">
+			<xml name="SenderUserId" node="element"/>
+		</field>
+		<field name="SenderUserName" type="string">
+			<xml name="SenderUserName" node="element"/>
+		</field>
+		<field name="SenderBizEntityId" type="string">
+			<xml name="SenderBizEntityId" node="element"/>
+		</field>
+		<!-- 01 Oct 03 Added by NSL -->
+		<field name="SenderBizEntityUuid" type="string" required="false">
+			<xml name="SenderBizEntityUuid" node="element"/>
+		</field>
+		<field name="SenderRegistryQueryUrl" type="string" required="false">
+			<xml name="SenderRegistryQueryUrl" node="element"/>
+		</field>
+		<!-- 01 Oct 03 End -->
+		<field name="SenderPartnerType" type="string">
+			<xml name="SenderPartnerType" node="element"/>
+		</field>
+		<field name="SenderPartnerGroup" type="string">
+			<xml name="SenderPartnerGroup" node="element"/>
+		</field>
+		<field name="SenderPartnerName" type="string">
+			<xml name="SenderPartnerName" node="element"/>
+		</field>
+		<field name="RefGdocId" type="long">
+			<xml name="RefGdocId" node="element"/>
+		</field>
+		<field name="RefUdocFilename" type="string">
+			<xml name="RefUdocFilename" node="element"/>
+		</field>
+		<field name="RecipientNodeId" type="long">
+			<xml name="RecipientNodeId" node="element"/>
+		</field>
+		<field name="RecipientPartnerId" type="string">
+			<xml name="RecipientPartnerId" node="element"/>
+		</field>
+		<field name="RecipientPartnerFunction" type="string">
+			<xml name="RecipientPartnerFunction" node="element"/>
+		</field>
+		<field name="EncryptionLevel" type="integer">
+			<xml name="EncryptionLevel" node="element"/>
+		</field>
+		<field name="RecipientPartnerType" type="string">
+			<xml name="RecipientPartnerType" node="element"/>
+		</field>
+		<field name="RecipientPartnerGroup" type="string">
+			<xml name="RecipientPartnerGroup" node="element"/>
+		</field>
+		<field name="RecipientPartnerName" type="string">
+			<xml name="RecipientPartnerName" node="element"/>
+		</field>
+		<field name="RecipientBizEntityId" type="string">
+			<xml name="RecipientBizEntityId" node="element"/>
+		</field>
+		<!-- 01 Oct 03 Added by NSL -->
+		<field name="RecipientBizEntityUuid" type="string" required="false">
+			<xml name="RecipientBizEntityUuid" node="element"/>
+		</field>
+		<field name="RecipientRegistryQueryUrl" type="string" required="false">
+			<xml name="RecipientRegistryQueryUrl" node="element"/>
+		</field>
+		<!-- 01 Oct 03 End -->
+		<field name="RecipientGdocId" type="long">
+			<xml name="RecipientGdocId" node="element"/>
+		</field>
+		<field name="RecipientChannelUid" type="long">
+			<xml name="RecipientChannelUid" node="element"/>
+		</field>
+		<field name="RecipientChannelName" type="string">
+			<xml name="RecipientChannelName" node="element"/>
+		</field>
+		<field name="RecipientChannelProtocol" type="string">
+			<xml name="RecipientChannelProtocol" node="element"/>
+		</field>
+		<field name="PortUid" type="long">
+			<xml name="PortUid" node="element"/>
+		</field>
+		<field name="PortName" type="string">
+			<xml name="PortName" node="element"/>
+		</field>
+		<field name="DateTimeCreate" type="date" required="false">
+			<xml name="DateTimeCreate" node="element"/>
+		</field>
+		<field name="DateTimeSendEnd" type="date" required="false">
+			<xml name="DateTimeSendEnd" node="element"/>
+		</field>
+		<field name="DateTimeReceiveEnd" type="date" required="false">
+			<xml name="DateTimeReceiveEnd" node="element"/>
+		</field>
+		<field name="DateTimeSendStart" type="date" required="false">
+			<xml name="DateTimeSendStart" node="element"/>
+		</field>
+		<field name="DateTimeTransComplete" type="date">
+			<xml name="DateTimeTransComplete" node="element"/>
+		</field>
+		<field name="DateTimeExport" type="date">
+			<xml name="DateTimeExport" node="element"/>
+		</field>
+		<field name="DateTimeImport" type="date">
+			<xml name="DateTimeImport" node="element"/>
+		</field>
+		<field name="DateTimeReceiveStart" type="date">
+			<xml name="DateTimeReceiveStart" node="element"/>
+		</field>
+		<field name="DateTimeView" type="date">
+			<xml name="DateTimeView" node="element"/>
+		</field>
+		<field name="DateTimeRecipientView" type="date">
+			<xml name="DateTimeRecipientView" node="element"/>
+		</field>
+		<field name="DateTimeRecipientExport" type="date">
+			<xml name="DateTimeRecipientExport" node="element"/>
+		</field>
+		<field name="ActivityList" type="com.gridnode.gtas.server.document.model.Activity" collection="collection">
+			<xml name="Activity" node="element"/>
+		</field>
+		<field name="PartnerFunction" type="string">
+			<xml name="PartnerFunction" node="element"/>
+		</field>
+		<field name="ActionCode" type="string">
+			<xml name="ActionCode" node="element"/>
+		</field>
+		<field name="RnProfileUid" type="long">
+			<xml name="RnProfileUid" node="element"/>
+		</field>
+		<field name="ProcessDefId" type="string">
+			<xml name="ProcessDefId" node="element"/>
+		</field>
+		<field name="isRequest" type="boolean" get-method="isRequest" set-method="setIsRequest">
+			<xml name="isRequest" node="element"/>
+		</field>
+		<field name="hasAttachment" type="boolean" get-method="hasAttachment" set-method="setHasAttachment">
+			<xml name="hasAttachment" node="element"/>
+		</field>
+		<field name="isAttachmentLinkUpdated" type="boolean" get-method="isAttachmentLinkUpdated" set-method="setAttachmentLinkUpdated">
+			<xml name="isAttachmentLinkUpdated" node="element"/>
+		</field>
+		<field name="Attachments" type="long" collection="collection">
+			<xml name="AttachmentUid" node="element"/>
+		</field>
+		<field name="UniqueDocIdentifier" type="string">
+			<xml name="UniqueDocIdentifier" node="element"/>
+		</field>
+		<field name="UdocFullPath" type="string">
+			<xml name="UdocFullPath" node="element"/>
+		</field>
+		<field name="ExportedUdocFullPath" type="string">
+			<xml name="ExportedUdocFullPath" node="element"/>
+		</field>
+		<field name="Custom1" type="string">
+			<xml name="Custom1" node="element"/>
+		</field>
+		<field name="Custom2" type="string">
+			<xml name="Custom2" node="element"/>
+		</field>
+		<field name="Custom3" type="string">
+			<xml name="Custom3" node="element"/>
+		</field>
+		<field name="Custom4" type="string">
+			<xml name="Custom4" node="element"/>
+		</field>
+		<field name="Custom5" type="string">
+			<xml name="Custom5" node="element"/>
+		</field>
+		<field name="Custom6" type="string">
+			<xml name="Custom6" node="element"/>
+		</field>
+		<field name="Custom7" type="string">
+			<xml name="Custom7" node="element"/>
+		</field>
+		<field name="Custom8" type="string">
+			<xml name="Custom8" node="element"/>
+		</field>
+		<field name="Custom9" type="string">
+			<xml name="Custom9" node="element"/>
+		</field>
+		<field name="Custom10" type="string">
+			<xml name="Custom10" node="element"/>
+		</field>
+		<field name="ProcessInstanceUid" type="long">
+			<xml name="ProcessInstanceUid" node="element"/>
+		</field>
+		<field name="ProcessInstanceID" type="string">
+			<xml name="ProcessInstanceID" node="element"/>
+		</field>
+		<field name="UserTrackingID" type="string">
+			<xml name="UserTrackingID" node="element"/>
+		</field>	
+		<field name="DocTransStatus" type="string">
+			<xml name="DocTransStatus" node="element"/>
+		</field>	
+		<field name="MessageDigest" type="string">
+			<xml name="MessageDigest" node="element"/>
+		</field>		
+		<field name="AuditFileName" type="string">
+			<xml name="AuditFileName" node="element"/>
+		</field>		
+		<field name="ReceiptAuditFileName" type="string">
+			<xml name="ReceiptAuditFileName" node="element"/>
+		</field>	
+		<!-- 08092006 for estore-->
+		<field name="DocDateGen" type="string">
+			<xml name="DocDateGen" node="element"/>
+		</field>
+		<field name="isOriginalDoc" type="boolean" get-method="isOriginalDoc" set-method="setOriginalDoc">
+			<xml name="isOriginalDoc" node="element"/>
+		</field>
+		<field name="SenderCert" type="long">
+			<xml name="SenderCert" node="element"/>
+		</field>
+		<field name="ReceiverCert" type="long">
+			<xml name="ReceiverCert" node="element"/>
+		</field> 
+		<!--end 08092006 for estore-->
+		<field name="TracingID" type="string">
+			<xml name="TracingID" node="element"/>
+		</field>
+		<field name="IsRead" type="boolean" get-method="isRead" set-method="setRead">
+			<xml name="IsRead" node="element"/>
+		</field>
+	</class>
+	<class name="com.gridnode.gtas.server.document.model.Activity">
+		<map-to xml="Activity"/>
+		<field name="ActivityType" type="string">
+			<xml name="ActivityType" node="element"/>
+		</field>
+		<field name="Description" type="string">
+			<xml name="Description" node="element"/>
+		</field>
+		<field name="DateTime" type="date">
+			<xml name="DateTime" node="element"/>
+		</field>
+	</class>
+</mapping>

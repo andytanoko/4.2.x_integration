@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+                             http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd">
+  <enterprise-beans>
+  <message-driven>
+      <ejb-name>ArchiveMDBean</ejb-name>
+      <ejb-class>com.gridnode.gtas.server.dbarchive.listener.ejb.ArchiveMDBean</ejb-class>
+      <transaction-type>Container</transaction-type>
+      <message-destination-type>javax.jms.Queue</message-destination-type>
+      <activation-config>
+      	<activation-config-property>
+      		<activation-config-property-name>messageSelector</activation-config-property-name>
+      		<activation-config-property-value>Category='DBArchive'</activation-config-property-value>
+      	</activation-config-property>
+      </activation-config>
+    </message-driven>
+  <!-- 
+  <message-driven>
+    <ejb-name>DBArchiveStartupMDBean</ejb-name>
+    <ejb-class>com.gridnode.gtas.server.dbarchive.listener.ejb.DBArchiveStartupMDBean</ejb-class>
+    <message-selector></message-selector>
+    <transaction-type>Container</transaction-type>
+    <message-driven-destination>
+       <destination-type>javax.jms.Topic</destination-type>
+       <subscription-durability>NonDurable</subscription-durability>
+    </message-driven-destination>
+  </message-driven> -->
+  <message-driven>
+    <ejb-name>DBArchiveMDBean</ejb-name>
+    <ejb-class>com.gridnode.gtas.server.dbarchive.listener.ejb.DbArchiveMDBean</ejb-class>
+    <transaction-type>Container</transaction-type>
+    <message-destination-type>javax.jms.Queue</message-destination-type>
+  </message-driven>
+  </enterprise-beans>
+  <assembly-descriptor>
+    <container-transaction>
+      <!-- method>
+        <ejb-name>DBArchiveStartupMDBean</ejb-name>
+        <method-name>*</method-name>
+      </method-->
+      <method>
+        <ejb-name>DBArchiveMDBean</ejb-name>
+        <method-name>onMessage</method-name>
+      </method>
+      <trans-attribute>NotSupported</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+</ejb-jar>

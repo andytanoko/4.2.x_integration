@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ejb-j2ee-engine SYSTEM "ejb-j2ee-engine.dtd">
+<ejb-j2ee-engine>
+	<enterprise-beans>
+		<enterprise-bean>
+			<ejb-name>BackendImportMDBean</ejb-name>
+			<message-props>
+				<destination-name>importBackendDocTopic</destination-name>
+                                <connection-factory-name>GNTopicConnectionFactory</connection-factory-name>
+			</message-props>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>ConnectionMDBean</ejb-name>
+			<message-props>
+				<destination-name>notifierTopic</destination-name>
+                                <connection-factory-name>GNTopicConnectionFactory</connection-factory-name>
+			</message-props>
+		</enterprise-bean>
+		<enterprise-bean>
+			<ejb-name>DocumentResendMDBean</ejb-name>
+			<message-props>
+				<destination-name>timeInvokeQueue</destination-name>
+                                <connection-factory-name>GNQueueConnectionFactory</connection-factory-name>
+			</message-props>
+		</enterprise-bean>
+	</enterprise-beans>
+</ejb-j2ee-engine>

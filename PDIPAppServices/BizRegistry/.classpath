@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry output="jaxr-provider/classes" kind="src" path="jaxr-provider/src"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry output="testclasses" kind="src" path="test"/>
+	<classpathentry kind="lib" path="jaxr-provider/reqlibs/castor-0.9.3.9-xml.jar"/>
+	<classpathentry kind="lib" path="jaxr-provider/reqlibs/jaxr-api-1.0.jar"/>
+	<classpathentry kind="lib" path="jaxr-provider/reqlibs/jaxr-impl-1.0_4.jar"/>
+	<classpathentry kind="lib" path="jaxr-provider/reqlibs/saaj-api-1.2.jar"/>
+	<classpathentry kind="lib" path="jaxr-provider/reqlibs/saaj-impl-1.2.jar"/>
+	<classpathentry kind="lib" path="jaxr-provider/reqlibs/xalan-j_2_4_1.jar"/>
+	<classpathentry kind="lib" path="jaxr-provider/reqlibs/xercesImpl-2.5.0.jar"/>
+	<classpathentry kind="lib" path="jaxr-provider/reqlibs/xml-apis.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Framework"/>
+	<classpathentry kind="var" path="J2EE_HOME/lib/j2ee.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/PDIPFramework/reqlib/junit-3.7.jar"/>
+	<classpathentry kind="output" path="classes"/>
+</classpath>

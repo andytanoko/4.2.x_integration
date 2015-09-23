@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE web-app
+  PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+  "http://java.sun.com/j2ee/dtds/web-app_2_3.dtd">
+
+<web-app>
+  <filter>
+    <filter-name>RestrictPortFilter</filter-name>
+    <filter-class>com.gridnode.gtas.client.web.RestrictPortFilter</filter-class>
+    <init-param>
+      <param-name>enabled</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <init-param>
+      <param-name>unrestrictedPort</param-name>
+      <param-value>9099</param-value>
+    </init-param>
+  </filter>
+
+  <filter>
+    <filter-name>OperationContextFilter</filter-name>
+    <filter-class>com.gridnode.gtas.client.web.strutsbase.OperationContextFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>RestrictPortFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>OperationContextFilter</filter-name>
+    <url-pattern>*.do</url-pattern>
+  </filter-mapping>
+
+  <!--  Standard Action Servlet Configuration (with debugging)  -->
+  <servlet>
+    <servlet-name>action</servlet-name>
+    <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+    <init-param>
+      <param-name>config</param-name>
+      <param-value>/WEB-INF/struts-config.xml</param-value>
+    </init-param>
+    <init-param>
+      <param-name>debug</param-name>
+      <param-value>2</param-value>
+    </init-param>
+    <init-param>
+      <param-name>detail</param-name>
+      <param-value>2</param-value>
+    </init-param>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>directInvokeView</servlet-name>
+    <servlet-class>com.gridnode.gtas.client.web.error.DirectInvokeView</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>emptyDtdServlet</servlet-name>
+    <servlet-class>com.gridnode.gtas.client.web.download.EmptyDtdServlet</servlet-class>
+  </servlet>
+  <!--  Insert all GridForm servlets below here  -->
+  <!--servlet>
+    <servlet-name>displayServlet</servlet-name>
+    <servlet-class>com.gridnode.gtas.client.gridform.web.servlet.DisplayServlet</servlet-class>
+  </servlet-->
+  <!--  Standard Action Servlet Mapping  -->
+  <servlet-mapping>
+    <servlet-name>action</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <!--  Custom Servlet Mappings  -->
+  <servlet-mapping>
+    <servlet-name>directInvokeView</servlet-name>
+    <url-pattern>/servlet/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>emptyDtdServlet</servlet-name>
+    <url-pattern>*.dtd</url-pattern>
+  </servlet-mapping>
+  <!--  Insert all GridForm servlet mappingss below here  -->
+  <!--servlet-mapping>
+    <servlet-name>displayServlet</servlet-name>
+    <url-pattern>/gridform/displayServlet</url-pattern>
+  </servlet-mapping-->
+  <!--  The Usual Welcome File List  -->
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  <!--  Struts Tag Library Descriptors  -->
+  <taglib>
+    <taglib-uri>/WEB-INF/struts-html.tld</taglib-uri>
+    <taglib-location>/WEB-INF/struts-html.tld</taglib-location>
+  </taglib>
+  <taglib>
+    <taglib-uri>/WEB-INF/struts-logic.tld</taglib-uri>
+    <taglib-location>/WEB-INF/struts-logic.tld</taglib-location>
+  </taglib>
+  <taglib>
+    <taglib-uri>/WEB-INF/tiles.tld</taglib-uri>
+    <taglib-location>/WEB-INF/tiles.tld</taglib-location>
+  </taglib>
+  <!--  GridTalk Tag Library Descriptors  -->
+  <ejb-ref>
+    <ejb-ref-name>ejb/GridTalkClientController</ejb-ref-name>
+    <ejb-ref-type>Session</ejb-ref-type>
+    <home>com.gridnode.gtas.server.rdm.ejb.IGridTalkClientControllerHome</home>
+    <remote>com.gridnode.gtas.server.rdm.ejb.IGridTalkClientControllerObj</remote>
+  </ejb-ref>
+</web-app>

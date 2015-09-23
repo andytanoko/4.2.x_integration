@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectionSetupProperties isTest="false">
+    <PreSetupEventId>60</PreSetupEventId>
+    <PreSetupAckEventId>61</PreSetupAckEventId>
+    <SetupEventId>62</SetupEventId>
+    <SetupAckEventId>63</SetupAckEventId>
+    <PostSetupEventId>64</PostSetupEventId>
+    <SetupSendTopic>gmprime</SetupSendTopic>
+    <SetupListenTopic>gtpublic</SetupListenTopic>
+    <MsgFormatVersion>1</MsgFormatVersion>
+    <ServicingRouterPort>443</ServicingRouterPort>
+    <CommInfoVersion>020000</CommInfoVersion>
+    <SendChannelRefId>900</SendChannelRefId>
+    <SendChannelPkgName>CON.SETUP.PKG</SendChannelPkgName>
+    <SendChannelPkgDesc>Packaging Profile for Connection Setup</SendChannelPkgDesc>
+    <SendChannelSecName>CON.SETUP.SEC</SendChannelSecName>
+    <SendChannelSecDesc>Security Profile for Connection Setup</SendChannelSecDesc>
+    <SendChannelCommName>CON.SETUP.COMM</SendChannelCommName>
+    <SendChannelCommDesc>Communication Profile for Connection Setup</SendChannelCommDesc>
+    <SendChannelName>CON.SETUP.CHANNEL</SendChannelName>
+    <SendChannelDesc>Communication Channel for Connection Setup</SendChannelDesc>
+    <SetupListenUser>gtpublic</SetupListenUser>
+    <SetupListenPassword>gridtalk</SetupListenPassword>
+    <MasterChannelPkgName>MPKG</MasterChannelPkgName>
+    <MasterChannelPkgDesc>GridTalk Master Packaging Profile</MasterChannelPkgDesc>
+    <MasterChannelSecName>MSEC</MasterChannelSecName>
+    <MasterChannelSecDesc>GridTalk Master Security Profile</MasterChannelSecDesc>
+    <MasterChannelCommName>MCOMM</MasterChannelCommName>
+    <MasterChannelCommDesc>GridTalk Master Communication Profile</MasterChannelCommDesc>
+    <MasterChannelCommPort>443</MasterChannelCommPort>
+    <MasterChannelName>MC</MasterChannelName>
+    <MasterChannelDesc>GridTalk Master Communication Channel</MasterChannelDesc>
+    <GmChannelPkgName>GM.PKG</GmChannelPkgName>
+    <GmChannelPkgDesc>GridMaster Packaging Profile</GmChannelPkgDesc>
+    <GmChannelSecName>GM.SEC</GmChannelSecName>
+    <GmChannelSecDesc>GridMaster Security Profile</GmChannelSecDesc>
+    <GmChannelCommName>GM.COMM</GmChannelCommName>
+    <GmChannelCommDesc>GridMaster Communication Profile</GmChannelCommDesc>
+    <GmChannelCommPort>443</GmChannelCommPort>
+    <GmChannelName>GMC</GmChannelName>
+    <GmChannelDesc>GridMaster Communication Channel</GmChannelDesc>
+    <GmCategory>GNM</GmCategory>
+</ConnectionSetupProperties>

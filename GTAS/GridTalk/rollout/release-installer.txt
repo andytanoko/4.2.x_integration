@@ -1,0 +1,25 @@
+Procedures for making release for installer
+-------------------------------------------
+
+1. Update User Guide, Administrator Guide, and Installer Guide (if necessary)
+   - Edit the word documents found in GTAS\GridTalk\docs\product
+   - Update onlinehelp based on the updated User and Admin guides using the HelpMaker (Daniel)
+
+2. Create PDFs base on the updated guides
+   - Right-click the word document and click "Convert to Adobe PDF"
+
+3. Follow Steps 1-13 in release-majorpatch.txt to make the release patch
+
+4. Create Installers
+   - zip up the release distribution folder contents, e.g. GridTalk2.4.1.zip
+   - Make installer base on the zip file and User and Admin Guide PDFs (Mahesh)
+
+5. Release the patch and installers
+   - Put the release zip file and installers onto \\raven\sd-build\GridTalk\2.4
+   - Put the PDFs onto \\raven\sd-build\GridTalk\2.4\docs
+   - Send email to inform SQA on the release
+
+6. Follow Steps 15-16 in release-majorpatch.txt to make baseline.
+
+
+

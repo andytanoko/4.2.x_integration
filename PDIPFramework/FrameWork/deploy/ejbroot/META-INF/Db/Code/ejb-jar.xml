@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE ejb-jar PUBLIC
+'-//Sun Microsystems, Inc.//DTD Enterprise JavaBeans 2.0//EN'
+'http://java.sun.com/dtd/ejb-jar_2_0.dtd'>
+
+<ejb-jar>
+  <enterprise-beans>
+    <entity>
+      <description>Entity Bean ( Container-managed Persistence )</description>
+      <display-name>CodeValue</display-name>
+      <ejb-name>CodeValue</ejb-name>
+      <home>com.gridnode.pdip.framework.db.code.ICodeValueHome</home>
+      <remote>com.gridnode.pdip.framework.db.code.ICodeValueObj</remote>
+      <ejb-class>com.gridnode.pdip.framework.db.code.CodeValueBean</ejb-class>
+      <persistence-type>Container</persistence-type>
+      <prim-key-class>java.lang.Long</prim-key-class>
+      <reentrant>False</reentrant>
+      <cmp-version>2.x</cmp-version>
+      <abstract-schema-name>CodeValueBean</abstract-schema-name>
+      <cmp-field>
+        <field-name>UID</field-name>
+      </cmp-field>
+      <cmp-field>
+        <field-name>Code</field-name>
+      </cmp-field>
+      <cmp-field>
+        <field-name>Description</field-name>
+      </cmp-field>
+      <cmp-field>
+        <field-name>EntityType</field-name>
+      </cmp-field>
+	  <cmp-field>
+        <field-name>FieldID</field-name>
+      </cmp-field>
+      <primkey-field>UID</primkey-field>
+      <query>
+        <query-method>
+          <method-name>findByEntityTypeAndFieldID</method-name>
+          <method-params>
+            <method-param>java.lang.String</method-param>
+			<method-param>java.lang.Integer</method-param>
+          </method-params>
+        </query-method>
+        <ejb-ql>
+          <![CDATA[SELECT OBJECT(a) FROM CodeValueBean a WHERE a.EntityType =?1 and a.FieldID=?2]]>
+        </ejb-ql>
+      </query>
+      <query>
+        <query-method>
+          <method-name>findByCodeEntTypeAndFieldID</method-name>
+          <method-params>
+            <method-param>java.lang.String</method-param>
+			<method-param>java.lang.String</method-param>
+			<method-param>java.lang.Integer</method-param>
+          </method-params>
+        </query-method>
+        <ejb-ql>
+          <![CDATA[SELECT OBJECT(a) FROM CodeValueBean a WHERE a.Code =?1 and a.EntityType =?2 and a.FieldID= ?3]]>
+        </ejb-ql>
+      </query>
+    </entity>
+  </enterprise-beans>
+
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+        <ejb-name>CodeValue</ejb-name>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>RequiresNew</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+
+</ejb-jar>

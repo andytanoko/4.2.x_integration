@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jardesc>
+    <jar path="D:/development/GTAS/i00011_GT_2.3_UCCNet/GTAS/Customers/Extensions/jar/gn-utadaptor-ext.jar"/>
+    <options overwrite="false" compress="true" exportErrors="true"
+        exportWarnings="true" saveDescription="true"
+        descriptionLocation="/GridTalk/Customers/Extensions/projects/gn-utadaptor-ext.jardesc"
+        useSourceFolders="false" buildIfNeeded="true"/>
+    <manifest manifestVersion="1.0" usesManifest="true"
+        reuseManifest="true" saveManifest="true"
+        generateManifest="false" manifestLocation="/GridTalk/Customers/Extensions/jar/gn-utadaptor-ext-manifest.mf">
+        <sealing sealJar="true">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false">
+        <javaElement handleIdentifier="=GridTalk/Customers/Extensions/src&lt;com.gridnode.utadaptor"/>
+        <javaElement handleIdentifier="=GridTalk/Customers/Extensions/src&lt;com.gridnode.ext.util"/>
+        <javaElement handleIdentifier="=GridTalk/Customers/Extensions/src&lt;com.gridnode.ext.util.exceptions"/>
+    </selectedElements>
+</jardesc>

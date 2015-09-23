@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <div id="page_content">
+      <form id="form" name="entityForm" method="post" action="">
+        <input id="operation_context" type="hidden" name="operationContextId"/>
+        <input type="hidden" name="divertTo"/>
+        <input type="hidden" name="method" value="save"/>
+        <table>
+          <tr id="smtpServerHost_details">
+            <td id="smtpServerHost_label">
+              lbSmtpServerHost
+            </td>
+            <td>
+              <input type="text" id="smtpServerHost_value" name="smtpServerHost"/>
+            </td>
+            <td id="smtpServerHost_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="smtpServerPort_details">
+            <td id="smtpServerPort_label">
+              lbSmtpServerPort
+            </td>
+            <td>
+              <input type="text" id="smtpServerPort_value" name="smtpServerPort"/>
+            </td>
+            <td id="smtpServerPort_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="authUser_details">
+            <td id="authUser_label">
+              lbAuthUser
+            </td>
+            <td>
+              <input type="text" id="authUser_value" name="authUser"/>
+            </td>
+            <td id="authUser_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="authPassword_details">
+            <td id="authPassword_label">
+              lbAuthPassword
+            </td>
+            <td>
+              <input type="text" id="authPassword_value" name="authPassword"/>
+            </td>
+            <td id="authPassword_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="retryInterval_details">
+            <td id="retryInterval_label">
+              lbRetryInterval
+            </td>
+            <td>
+              <input type="text" id="retryInterval_value" name="retryInterval"/>
+            </td>
+            <td id="retryInterval_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="maxRetries_details">
+            <td id="maxRetries_label">
+              lbMaxRetries
+            </td>
+            <td>
+              <input type="text" id="maxRetries_value" name="maxRetries"/>
+            </td>
+            <td id="maxRetries_error">
+              &nbsp;
+            </td>
+          </tr>
+          <tr id="saveFailedEmails_details">
+            <td id="saveFailedEmails_label">
+              lbSaveFailedEmails
+            </td>
+            <td>
+              <!--<input type="text" id="saveFailedEmails_value" name="saveFailedEmails"/>-->
+              <select id="saveFailedEmails_value" size="1" name="saveFailedEmails">
+                <option value="">
+                  &nbsp;
+                </option>
+              </select>              
+            </td>
+            <td id="saveFailedEmails_error">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </body>
+</html>
+

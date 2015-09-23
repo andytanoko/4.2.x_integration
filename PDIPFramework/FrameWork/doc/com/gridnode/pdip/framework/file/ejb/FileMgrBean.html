@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><!--JBuilder QuickDoc-->
+<HEAD>
+<TITLE>Class com.gridnode.pdip.framework.file.ejb.FileMgrBean</TITLE><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+</HEAD>
+<BODY>
+
+<H2>
+<FONT SIZE="-1">com.gridnode.pdip.framework.file.ejb</FONT>
+<BR>Class FileMgrBean</H2>
+<DL>
+<DT>public class <B>FileMgrBean</B><DT>implements SessionBean
+</DL>
+<DL><DD><DL><DD></DD></DL></DD>
+</DL>
+<DL></DL>
+<TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
+<TR BGCOLOR="#CCCCFF"><TD COLSPAN=1><FONT SIZE="+2">
+<B>Method Detail</B>
+</FONT></TD></TR></TABLE>
+
+<H3>createFolder</H3>
+<PRE>
+public String <B>createFolder</B>(String&nbsp;domain,
+                           String&nbsp;newPath)</PRE>
+<DL><DD>creates a new folder in a webdav server<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>domain</CODE> - The namespace used to identify the application domain (1st level directory) to use</DD>
+<DD><CODE>newPath</CODE> - The path relative to the domain for the new folder</DD>
+<DT><B>Returns:</B><DD>The complete path of the folder created or null if not created</DD>
+</DL>
+<HR>
+
+<H3>createFile</H3>
+<PRE>
+public String <B>createFile</B>(String&nbsp;domain,
+                         String&nbsp;newPath,
+                         byte[]&nbsp;in,
+                         boolean&nbsp;overwrite)</PRE>
+<DL><DD>creates a new file in a webdav server<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>domain</CODE> - The namespace used to identify the application domain (1st level directory) to use</DD>
+<DD><CODE>newPath</CODE> - The path relative to the domain for the new file</DD>
+<DD><CODE>in</CODE> - The contents of the new file or null if the new file is empty</DD>
+<DD><CODE>overwrite</CODE> - If there is an existing file, it will be overwritten if this parameter is set to true</DD>
+<DT><B>Returns:</B><DD>The complete path of the file created or null if not created</DD>
+</DL>
+<HR>
+
+<H3>moveFolder</H3>
+<PRE>
+public String <B>moveFolder</B>(String&nbsp;domain,
+                         String&nbsp;src,
+                         String&nbsp;des,
+                         boolean&nbsp;overwrite)</PRE>
+<DL><DD>moves a folder from one location in a webdav server to another<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>domain</CODE> - The namespace used to identify the application domain (1st level directory) to use</DD>
+<DD><CODE>src</CODE> - The path relative to the domain for the source folder</DD>
+<DD><CODE>des</CODE> - The path relative to the domain for the destination folder</DD>
+<DD><CODE>overwrite</CODE> - If there is an existing folder, it will be overwritten if this parameter is set to true</DD>
+<DT><B>Returns:</B><DD>The complete path of the folder created or null if not created</DD>
+</DL>
+<HR>
+
+<H3>moveFile</H3>
+<PRE>
+public String <B>moveFile</B>(String&nbsp;domain,
+                       String&nbsp;src,
+                       String&nbsp;des,
+                       boolean&nbsp;overwrite)</PRE>
+<DL><DD>moves a file from one location in a webdav server to another<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>domain</CODE> - The namespace used to identify the application domain (1st level directory) to use</DD>
+<DD><CODE>src</CODE> - The path relative to the domain for the source file</DD>
+<DD><CODE>des</CODE> - The path relative to the domain for the destination file</DD>
+<DD><CODE>overwrite</CODE> - If there is an existing file, it will be overwritten if this parameter is set to true</DD>
+<DT><B>Returns:</B><DD>The complete path of the file created or null if not created</DD>
+</DL>
+<HR>
+
+<H3>copyFolder</H3>
+<PRE>
+public String <B>copyFolder</B>(String&nbsp;domain,
+                         String&nbsp;src,
+                         String&nbsp;des,
+                         boolean&nbsp;overwrite)</PRE>
+<DL><DD>copies a folder from one location in a webdav server to another<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>domain</CODE> - The namespace used to identify the application domain (1st level directory) to use</DD>
+<DD><CODE>src</CODE> - The path relative to the domain for the source folder</DD>
+<DD><CODE>des</CODE> - The path relative to the domain for the destination folder</DD>
+<DD><CODE>overwrite</CODE> - If there is an existing folder, it will be overwritten if this parameter is set to true</DD>
+<DT><B>Returns:</B><DD>The complete path of the folder created or null if not created</DD>
+</DL>
+<HR>
+
+<H3>copyFile</H3>
+<PRE>
+public String <B>copyFile</B>(String&nbsp;domain,
+                       String&nbsp;src,
+                       String&nbsp;des,
+                       boolean&nbsp;overwrite)</PRE>
+<DL><DD>copies a file from one location in a webdav server to another<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>domain</CODE> - The namespace used to identify the application domain (1st level directory) to use</DD>
+<DD><CODE>src</CODE> - The path relative to the domain for the source file</DD>
+<DD><CODE>des</CODE> - The path relative to the domain for the destination file</DD>
+<DD><CODE>overwrite</CODE> - If there is an existing file, it will be overwritten if this parameter is set to true</DD>
+<DT><B>Returns:</B><DD>The complete path of the file created or null if not created</DD>
+</DL>
+<HR>
+
+<H3>deleteFolder</H3>
+<PRE>
+public String <B>deleteFolder</B>(String&nbsp;domain,
+                           String&nbsp;delPath)</PRE>
+<DL><DD>creates a new folder in a webdav server<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>domain</CODE> - The namespace used to identify the application domain (1st level directory) to use</DD>
+<DD><CODE>delPath</CODE> - The path relative to the domain for the folder to be deleted</DD>
+<DT><B>Returns:</B><DD>The complete path of the folder deleted or null if not deleted</DD>
+</DL>
+<HR>
+
+<H3>deleteFile</H3>
+<PRE>
+public String <B>deleteFile</B>(String&nbsp;domain,
+                         String&nbsp;delPath)</PRE>
+<DL><DD>creates a new file in a webdav server<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>domain</CODE> - The namespace used to identify the application domain (1st level directory) to use</DD>
+<DD><CODE>delPath</CODE> - The path relative to the domain for the file to be deleted</DD>
+<DT><B>Returns:</B><DD>The complete path of the file deleted or null if not deleted</DD>
+</DL>
+<HR>
+
+<H3>getFile</H3>
+<PRE>
+public byte[] <B>getFile</B>(String&nbsp;domain,
+                      String&nbsp;path)</PRE>
+<DL><DD>retrieves the content of an existing file<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>domain</CODE> - The namespace used to identify the application domain (1st level directory) to use</DD>
+<DD><CODE>path</CODE> - The path relative to the domain for the file</DD>
+<DT><B>Returns:</B><DD>The contents of the file</DD>
+</DL>
+<HR>
+
+<H3>readFromFile</H3>
+<PRE>
+public byte[] <B>readFromFile</B>(String&nbsp;domain,
+                           String&nbsp;path,
+                           int&nbsp;block,
+                           int&nbsp;len)</PRE>
+<DL><DD>retrieves the content of an existing file<DL><DD></DD></DL></DD>
+</DL>
+<DL><DT><B>Parameters:</B><DD><CODE>domain</CODE> - The namespace used to identify the application domain (1st level directory) to use</DD>
+<DD><CODE>path</CODE> - The path relative to the domain for the file</DD>
+<DD><CODE>buffer</CODE> - One block of the contents of the file</DD>
+<DD><CODE>block</CODE> - The block of content to get</DD>
+<DT><B>Returns:</B></DL>
+<HR>
+
+<H3>readFromFileZipped</H3>
+<PRE>
+public byte[] <B>readFromFileZipped</B>(String&nbsp;domain,
+                                 String&nbsp;path,
+                                 long&nbsp;offset,
+                                 int&nbsp;len)</PRE>
+<DL><DD><DL><DD></DD></DL></DD>
+</DL>
+<DL></DL>
+<HR>
+
+<H3>readFromStreamZipped</H3>
+<PRE>
+public MultiFileBlock <B>readFromStreamZipped</B>(String&nbsp;domain,
+                                           String[]&nbsp;paths,
+                                           long&nbsp;offset,
+                                           int&nbsp;len)</PRE>
+<DL><DD><DL><DD></DD></DL></DD>
+</DL>
+<DL></DL>
+<HR>
+
+</BODY>
+</HTML>
