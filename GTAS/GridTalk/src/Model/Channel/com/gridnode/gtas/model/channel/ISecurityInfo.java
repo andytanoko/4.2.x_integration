@@ -43,6 +43,11 @@ public interface ISecurityInfo
 
   public static final String DIGEST_ALGORITHM_MD5 = "MD5";
   public static final String DIGEST_ALGORITHM_SHA1 = "SHA1";
+  //added by Nazir on 10/19/2015
+  public static final String DIGEST_ALGORITHM_SHA224 = "SHA224";
+  public static final String DIGEST_ALGORITHM_SHA256 = "SHA256";
+  public static final String DIGEST_ALGORITHM_SHA384 = "SHA384";
+  public static final String DIGEST_ALGORITHM_SHA512 = "SHA512";
 
   public static final String COMPRESSION_TYPE_NONE = ENCRYPTION_TYPE_NONE;
   public static final String COMPRESSION_TYPE_SMIME = ENCRYPTION_TYPE_SMIME;

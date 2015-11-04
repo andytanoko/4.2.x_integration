@@ -877,11 +877,11 @@ public class GridCertUtilities
   public static boolean isMatchingPair(PublicKey publicKey,
                                          PrivateKey privateKey)
   {
-    boolean CompareOkay = true, match = false;
+    boolean compareOkay = true, match = false;
     byte [] encryptMe = null;
     byte [] cipherOut = null;
     byte [] recoveredText = null;
-    int blockSize = 24;
+    int blockSize = 44;
     SecureRandom random = null;
     // We have an RSA key pair, and we have some data. Let's encrypt it!
     
@@ -893,38 +893,43 @@ public class GridCertUtilities
       random.nextBytes(encryptMe);
       
       //encryption process
-      Cipher cipher = Cipher.getInstance("RSA/NONE/OAEPWithMD5AndMGF1Padding", getSecurityProvider());
-      cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+      //Cipher cipher = Cipher.getInstance("RSA/NONE/OAEPWithMD5AndMGF1Padding", getSecurityProvider());
+	  Cipher cipher = Cipher.getInstance("RSA/NONE/OAEPWithSHA256AndMGF1Padding", getSecurityProvider());
+      cipher.init(Cipher.ENCRYPT_MODE, publicKey, random);
       cipherOut = cipher.doFinal(encryptMe);
       
     } 
     catch (Exception ex) 
     {
-      CertificateLogger.error(ILogErrorCodes.KEY_PAIR_MATCHING, "Error in performing encryption for matching key", ex);
+		ex.printStackTrace();
+      //CertificateLogger.error(ILogErrorCodes.KEY_PAIR_MATCHING, "Error in performing encryption for matching key", ex);
     }
 
     // Now that we have some encrypted data, let's decrypt it with the
     // private key and compare the recovered plaintext with the original.
     try
     {
-      Cipher cipher = Cipher.getInstance("RSA/NONE/OAEPWithMD5AndMGF1Padding", getSecurityProvider());
+      Cipher cipher = Cipher.getInstance("RSA/NONE/OAEPWithSHA256AndMGF1Padding", getSecurityProvider());
       cipher.init(Cipher.DECRYPT_MODE, privateKey);
+	  CertificateLogger.log("#############################[" + cipherOut.length() + "]#############################");
       recoveredText = cipher.doFinal(cipherOut);
-      
+      CertificateLogger.log("#############################[" + recoveredText + "]#############################");
       for( int i = 0 ; i < encryptMe.length ; i++ )
       {
+		  CertificateLogger.log("#############################(" + encryptMe[i] + " " + recoveredText[i] + ")#############################");
           if( encryptMe[i] != recoveredText[i] ) {
-            CompareOkay = false;
+            compareOkay = false;
             break;
           }
       }
-        match = CompareOkay;
+        match = compareOkay;
     }
     
       
     catch (Exception ex)
     {
-      CertificateLogger.error(ILogErrorCodes.KEY_PAIR_MATCHING, "Error in recovering plain text for matching key", ex);
+      //CertificateLogger.error(ILogErrorCodes.KEY_PAIR_MATCHING, "Error in recovering plain text for matching key", ex);
+	  ex.printStackTrace();
     }
     return match;
   }

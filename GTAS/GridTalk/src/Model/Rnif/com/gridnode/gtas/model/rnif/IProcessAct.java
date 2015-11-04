@@ -68,6 +68,11 @@ public interface IProcessAct
   
   public static final String SHA_ALG ="1.3.14.3.2.26";
   public static final String MD5_ALG = "1.2.840.113549.2.5";
+  public static final String SHA224_ALG = "2.16.840.1.101.3.4.2.4";
+  public static final String SHA256_ALG = "2.16.840.1.101.3.4.2.1";
+  public static final String SHA384_ALG = "2.16.840.1.101.3.4.2.2";
+  public static final String SHA512_ALG = "2.16.840.1.101.3.4.2.3";
+  
 
   public static final String RC5_ALG ="RC5-0x10-32-16/CBC/PKCS5Padding";
   public static final String TDES_ALG ="1.2.840.113549.3.7";

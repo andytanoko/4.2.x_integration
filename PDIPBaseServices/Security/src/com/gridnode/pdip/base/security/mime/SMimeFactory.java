@@ -1270,6 +1270,10 @@ public final class SMimeFactory
     {
       return ISecurityInfo.DIGEST_ALGORITHM_SHA1;
     }
+	else if(CMSSignedDataGenerator.DIGEST_SHA256.equalsIgnoreCase(digestAlgo))
+    {
+      return ISecurityInfo.DIGEST_ALGORITHM_SHA256;
+    }
     return digestAlgo;
   }
   

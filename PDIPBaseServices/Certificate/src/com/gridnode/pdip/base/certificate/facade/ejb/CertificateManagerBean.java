@@ -399,15 +399,20 @@ public class CertificateManagerBean implements SessionBean
       CertificateLogger.debug(
         LOG_MESSAGE_FORMAT + "CertFile Name: " + actualfileName);
       
-      
+      System.out.println("------------------------ passWord:(" + passWord + ") ------------------------");
       pkcsReader = getPKCS12Reader(actualfileName, passWord);
+	  System.out.println("------------------------ 1 ------------------------");
       X509Certificate cert = pkcsReader.getCertificate();
-
+	  System.out.println("------------------------ 2 ------------------------");
       boolean isCertExists = isCertExists(cert);
+	  System.out.println("------------------------ 3 ------------------------");
       if (isCertExists == false)
       {
+		System.out.println("------------------------ 4 ------------------------");
         PrivateKey privateKey = pkcsReader.getPrivateKey();
+		System.out.println("------------------------ 5 ------------------------");
         insertCertificate(cert, privateKey, name, false, false); //isCA will be false
+		System.out.println("------------------------ 6 ------------------------");
         CertificateLogger.log(
           LOG_MESSAGE_FORMAT + "After InsertCertificate Step 4");
         
@@ -422,14 +427,15 @@ public class CertificateManagerBean implements SessionBean
           GridCertUtilities.writeIssuerNameToString(cert.getIssuerX500Principal());
         String serialNum =
           GridCertUtilities.writeByteArrayToString(cert.getSerialNumber().toByteArray());
-
+		System.out.println("------------------------ 7 ------------------------");
         Certificate returnCert = findCertificateByIssureAndSerialNum(issuerName, serialNum);
+		System.out.println("------------------------ 8 ------------------------");
         getEntityHandler().updateCertificate((Long)returnCert.getKey(),
           returnCert.getCertName(), relatedCertUid);
-        
+        System.out.println("------------------------ 9 ------------------------");
         //08122006 TWX update the relatedCert's replacement cert uid
         updateCertReplacementCertUID(relatedCertUid, (Long)returnCert.getKey());
-        
+        System.out.println("------------------------ 10 ------------------------");
         return returnCert;
       }
       throw new DuplicateCertificateException("Unable to Import Certificate : Certificate Already Exists");
@@ -1940,7 +1946,7 @@ public class CertificateManagerBean implements SessionBean
     X509Certificate cert,
                                   PrivateKey privateKey,
                                   String certName,
-    boolean isPartner, Boolean isCA)
+    boolean isPartner, boolean isCA)
     throws CertificateException, SystemException
     {
       try
@@ -1957,6 +1963,7 @@ public class CertificateManagerBean implements SessionBean
 
       if (privateKey != null)
       {
+		System.out.println("=================== privateKey is Not Null ===================" + privateKey.toString() );
         getEntityHandler().createCertificate(
           GridCertUtilities.writeByteArrayToString(X509Cert.getSerialNumber().toByteArray()),
           GridCertUtilities.writeIssuerNameToString(X509Cert.getIssuerX500Principal()),
@@ -1971,6 +1978,7 @@ public class CertificateManagerBean implements SessionBean
       }
       else
       {
+		System.out.println("=================== privateKey is Null ===================");
         getEntityHandler().createCertificate(
           GridCertUtilities.writeByteArrayToString(X509Cert.getSerialNumber().toByteArray()),
           GridCertUtilities.writeIssuerNameToString(X509Cert.getIssuerX500Principal()),
@@ -1987,14 +1995,14 @@ public class CertificateManagerBean implements SessionBean
     }
     catch (Exception e)
     {
-      CertificateLogger.warn(
+      CertificateLogger.error(
         "[CertificateManager][insertCertificate][Cannot insert Certificate]",
         e);
       throw new CertificateException("Cannot Insert Certificate:", e);
     }
     catch (Throwable ex)
     {
-      CertificateLogger.warn(
+      CertificateLogger.error(
         "[CertificateManager][insertCertificate][Cannot insert Certificate]",
         ex);
       throw new SystemException("Cannot Insert Certificate: ", ex);

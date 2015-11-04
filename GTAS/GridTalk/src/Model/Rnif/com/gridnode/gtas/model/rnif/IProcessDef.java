@@ -39,6 +39,12 @@ public interface IProcessDef
 
 //  public static final String SHA_ALG = "SHA1";
 //  public static final String MD5_ALG = "MD5";
+//added by Nazir on 10/19/2015
+  public static final String SHA224_ALG = "SHA224";
+  public static final String SHA256_ALG = "SHA256";
+  public static final String SHA384_ALG = "SHA384";
+  public static final String SHA512_ALG = "SHA512";
+  
   public static final String SHA_ALG = "SHA1";
   public static final String MD5_ALG = "MD5";
 

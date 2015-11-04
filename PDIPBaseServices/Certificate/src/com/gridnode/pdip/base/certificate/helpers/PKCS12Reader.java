@@ -76,7 +76,9 @@ public class PKCS12Reader
       loadPteKeys(keyStore);
 
       findSubjectCert();
+	  CertificateLogger.log("read() before checkKeyMatch....");
       checkKeyMatch();
+	  CertificateLogger.log("read() after checkKeyMatch....");
     }
     catch (CertificateException seEx)
     {
@@ -119,11 +121,12 @@ public class PKCS12Reader
   
   private void checkKeyMatch() throws CertificateException
   {
+	CertificateLogger.log("------------------- checkKeyMatch _subjectCert(" + _subjectCert + ") _privateKey (" + _privateKey +")");
     if(_subjectCert == null || _privateKey == null)
     {
       return;
     }
-      
+    CertificateLogger.log("------------------- checkKeyMatch");  
     if(!GridCertUtilities.isMatchingPair(_subjectCert, _privateKey))
       throw new CertificateException("Certificate and private key is not a matching pair");
   }
@@ -154,7 +157,8 @@ public class PKCS12Reader
         }
         catch (Exception ex)
         {
-
+			//added by Nazir on 10/30/2015
+			ex.printStackTrace();
         }
       }// end of for j
 

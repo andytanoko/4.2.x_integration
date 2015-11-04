@@ -26,6 +26,11 @@ public interface IGTProcessActEntity extends IGTEntity
   // Digest algorithm code
   public static final String SHA_ALG                      = IProcessAct.SHA_ALG;
   public static final String MD5_ALG                      = IProcessAct.MD5_ALG;
+  //added by Nazir on 09282015
+  public static final String SHA224_ALG 				  = IProcessAct.SHA224_ALG;
+  public static final String SHA256_ALG   				  = IProcessAct.SHA256_ALG;
+  public static final String SHA384_ALG					  = IProcessAct.SHA384_ALG;
+  public static final String SHA512_ALG 				  = IProcessAct.SHA512_ALG;
 
   // Encryption algorithm
   public static final String RC2_ALG                      = IProcessAct.RC2_ALG;

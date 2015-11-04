@@ -39,6 +39,12 @@ public interface IAS2Headers
   public static final String PKCS7_SIGNATURE = "pkcs7-signature";
   public static final String SHA1 = "sha1";
   public static final String MD5 = "md5";
+  //added by Nazir on 10/19/2015
+  public static final String SHA224 = "sha224";
+  public static final String SHA256 = "sha256";
+  public static final String SHA384 = "sha384";
+  public static final String SHA512 = "sha512";
+  
   public static final String REQUIRED = "required";
   public static final String OPTIONAL = "optional";
   public static final String RECEIPT_DELIVERY_OPTION = "RECEIPT-DELIVERY-OPTION";

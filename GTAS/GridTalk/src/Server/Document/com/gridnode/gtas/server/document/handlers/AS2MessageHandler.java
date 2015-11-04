@@ -529,7 +529,8 @@ public class AS2MessageHandler implements IMessageHandler, IAS2Headers
               for (int i=0; i<micalg.size(); i++)
               {
                 String alg = (String)micalg.get(i);
-                if (alg.equalsIgnoreCase("sha1") || alg.equalsIgnoreCase("md5"))
+                if ( alg.equalsIgnoreCase("sha1") || alg.equalsIgnoreCase("md5") || alg.equalsIgnoreCase("sha224")
+						 || alg.equalsIgnoreCase("sha256")  || alg.equalsIgnoreCase("sha384")  || alg.equalsIgnoreCase("sha512") )
                 {
                   header.put(MICALG, alg.toUpperCase());
                   break;
@@ -635,13 +636,16 @@ public class AS2MessageHandler implements IMessageHandler, IAS2Headers
                       {
                         String alg = vst.nextToken().trim();
                         if (!alg.equalsIgnoreCase("sha1") &&
-                          !alg.equalsIgnoreCase("md5"))
+                          !alg.equalsIgnoreCase("md5") &&
+                          !alg.equalsIgnoreCase("sha256")) //added by Nazir on 10/20/2015
                         {
                           if (alg.equalsIgnoreCase("rsa-sha1")) //backward compatible
                             alg = "sha1";
                           else if (alg.equalsIgnoreCase("rsa-md5")) //backward compatible
                             alg = "md5";
-                          else
+                          else if (alg.equalsIgnoreCase("rsa-sha256")) //backward compatible //added by Nazir on 10192015
+                            alg = "sha256";
+						  else
                             invalidMICAlg++;
                         }
                         micalg.add(alg);

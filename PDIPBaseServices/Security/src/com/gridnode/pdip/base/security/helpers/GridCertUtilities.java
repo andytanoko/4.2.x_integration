@@ -737,7 +737,7 @@ public class GridCertUtilities
       Cipher cipher = Cipher.getInstance("RSA/NONE/OAEPWithMD5AndMGF1Padding", SEC_PROVIDER_BC);
       cipher.init(Cipher.DECRYPT_MODE, privateKey);
       recoveredText = cipher.doFinal(cipherOut);
-      
+      System.out.println("+++++++++++++++++++++++++++++++[" + recoveredText + "]+++++++++++++++++++++++++++++++");
       for( int i = 0 ; i < encryptMe.length ; i++ )
       {
           if( encryptMe[i] != recoveredText[i] ) {

@@ -39,6 +39,11 @@ public interface IGTSecurityInfoEntity extends IGTProfileEntity
   //Constants for DIGEST_ALGORITHM
   public static final String DIGEST_ALGORITHM_MD5   = ISecurityInfo.DIGEST_ALGORITHM_MD5;
   public static final String DIGEST_ALGORITHM_SHA1  = ISecurityInfo.DIGEST_ALGORITHM_SHA1;
+  public static final String DIGEST_ALGORITHM_SHA224  = ISecurityInfo.DIGEST_ALGORITHM_SHA224;
+  public static final String DIGEST_ALGORITHM_SHA256  = ISecurityInfo.DIGEST_ALGORITHM_SHA256;
+  public static final String DIGEST_ALGORITHM_SHA384  = ISecurityInfo.DIGEST_ALGORITHM_SHA384;
+  public static final String DIGEST_ALGORITHM_SHA512  = ISecurityInfo.DIGEST_ALGORITHM_SHA512;
+  
 
   // Constants for SEQUENCE
   public static final String SEQUENCE_S_C           = "S;C";//ISecurityInfo.;                       // 20031126 DDJ

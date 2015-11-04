@@ -59,7 +59,9 @@ public class PKCS12Reader
       loadPteKeys(keyStore);
 
       findSubjectCert();
+	  SecurityLogger.log("read() before checkKeyMatch!!!!");
       checkKeyMatch();
+	  SecurityLogger.log("read() after checkKeyMatch!!!");
     }
     catch (SecurityServiceException seEx)
     {
@@ -79,7 +81,7 @@ public class PKCS12Reader
     {
       return;
     }
-      
+    SecurityLogger.log("checkKeyMatch checking !!!");
     if(!GridCertUtilities.isMatchingPair(_subjectCert, _ptekey))
       throw new SecurityServiceException("Certificate and private key is not a matching pair");
   }

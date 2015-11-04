@@ -38,6 +38,11 @@ public interface ISecurityInfo extends Serializable
     public static final String DIGEST_ALGORITHM_MD5 = "MD5";
 
     public static final String DIGEST_ALGORITHM_SHA1 = "SHA1";
+	//added by Nazir on 10/20/2015
+	public static final String DIGEST_ALGORITHM_SHA224 = "SHA224";
+	public static final String DIGEST_ALGORITHM_SHA256 = "SHA256";
+	public static final String DIGEST_ALGORITHM_SHA384 = "SHA384";
+	public static final String DIGEST_ALGORITHM_SHA512 = "SHA512";
 
 
     public static final byte[] FILE_ID_SIGN = {'G','R','I','D','D','O','C','1','.','0'};

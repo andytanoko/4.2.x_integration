@@ -1880,6 +1880,26 @@ public class SecurityServiceBean implements SessionBean
               verifier =
                 Signature.getInstance("SHA1withRSA", GridCertUtilities.getSecurityProvider());
             }
+			else if (digetsAlgo.equals(ISecurityInfo.DIGEST_ALGORITHM_SHA224))
+            {
+              verifier =
+                Signature.getInstance("SHA224withRSA", GridCertUtilities.getSecurityProvider());
+            }
+			else if (digetsAlgo.equals(ISecurityInfo.DIGEST_ALGORITHM_SHA256))
+            {
+              verifier =
+                Signature.getInstance("SHA256withRSA", GridCertUtilities.getSecurityProvider());
+            }
+			else if (digetsAlgo.equals(ISecurityInfo.DIGEST_ALGORITHM_SHA384))
+            {
+              verifier =
+                Signature.getInstance("SHA384withRSA", GridCertUtilities.getSecurityProvider());
+            }
+			else if (digetsAlgo.equals(ISecurityInfo.DIGEST_ALGORITHM_SHA512))
+            {
+              verifier =
+                Signature.getInstance("SHA512withRSA", GridCertUtilities.getSecurityProvider());
+            }
           }
           else
           {

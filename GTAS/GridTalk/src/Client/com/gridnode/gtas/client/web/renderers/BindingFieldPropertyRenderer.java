@@ -1670,6 +1670,8 @@ public class BindingFieldPropertyRenderer extends AbstractRenderer implements IF
 
       Collection entities = _entity.getFieldEntities(_fieldId);
       if(entities == null) entities = Collections.EMPTY_LIST;
+	  
+	  System.out.println("============ value: " + values[0] + "============");
       if( values.length != entities.size() )
       { //Sanity check!
         throw new GTClientException("Expecting "
