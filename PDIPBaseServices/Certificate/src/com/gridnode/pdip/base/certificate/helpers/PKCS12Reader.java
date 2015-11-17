@@ -30,6 +30,17 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 import com.gridnode.pdip.base.certificate.exceptions.CertificateException;
+import com.rsa.certj.CertJ;
+import com.rsa.certj.CertJException;
+import com.rsa.certj.DatabaseService;
+import com.rsa.certj.InvalidParameterException;
+import com.rsa.certj.Provider;
+import com.rsa.certj.ProviderManagementException;
+import com.rsa.certj.cert.X509Certificate;
+import com.rsa.certj.pkcs12.PKCS12;
+import com.rsa.certj.pkcs12.PKCS12Exception;
+import com.rsa.certj.provider.db.MemoryDB;
+import com.rsa.jsafe.JSAFE_PrivateKey;
 
 /**
  * 
@@ -43,19 +54,15 @@ public class PKCS12Reader
 //  private String pw = "Gridnode1!";
   private String pkcs12Filename;
   private char[] password;
-//  private DatabaseService dbService;
-//  private CertJ certJ;
+  private DatabaseService dbService;
+  private CertJ certJ;
   //private JSAFE_PublicKey pubkey;
-//  private JSAFE_PrivateKey ptekey;
-  private PrivateKey _privateKey;
-  
-//  private X509Certificate subjectCert;
-  private java.security.cert.X509Certificate _subjectCert;
+  private JSAFE_PrivateKey ptekey;
+  private X509Certificate subjectCert;
 
   //private JSAFE_PrivateKey[] pteKeys;
-//  private X509Certificate[] certificates;
-  private java.security.cert.X509Certificate[] _certificates;
-  
+  private X509Certificate[] certificates;
+
   private String serviceName;
   private boolean isInitialized = false;
   
@@ -67,18 +74,23 @@ public class PKCS12Reader
     this.password = password;
   }
 
-  public void read() throws CertificateException
+
+  public void read() throws PKCS12Exception,CertificateException
   {
+    initService();
     try
     {
-      KeyStore keyStore = loadFile(pkcs12Filename);
-      loadCerts(keyStore);
-      loadPteKeys(keyStore);
+      PKCS12 p12 = loadFile(pkcs12Filename);
+      loadCerts(p12);
+      loadPteKeys(p12);
 
       findSubjectCert();
-	  CertificateLogger.log("read() before checkKeyMatch....");
       checkKeyMatch();
-	  CertificateLogger.log("read() after checkKeyMatch....");
+    }
+    catch(PKCS12Exception p12Ex)
+    {
+      CertificateLogger.warn("Exception in P12 read "+p12Ex.getMessage());
+      throw p12Ex;
     }
     catch (CertificateException seEx)
     {
@@ -91,166 +103,229 @@ public class PKCS12Reader
       throw new CertificateException("Exception in Read ",ex);
     }
   }
-  
-  public static void main(String[] args) throws Exception
-  {
-    File p12 = new File("c:/sample.p12");
-    FileInputStream input = new FileInputStream(p12);
-    
-    KeyStore key = KeyStore.getInstance("PKCS12", "BC");
-    key.load(input, "password".toCharArray());
-    
-    Enumeration en = key.aliases();
-    while(en.hasMoreElements())
-    {
-      String alieas = (String)en.nextElement();
-      java.security.cert.X509Certificate cert = (java.security.cert.X509Certificate)key.getCertificate(alieas);
-      System.out.println("Cert: "+ alieas);
-      //System.out.println("Cert info: "+cert.getIssuerX500Principal().getName());
-    }
-    
-    KeyStore.PrivateKeyEntry pkEntry = (KeyStore.PrivateKeyEntry)key.getEntry("privateKeyAlias", new KeyStore.PasswordProtection("password".toCharArray()));
-    //PrivateKey myPrivateKey = pkEntry.getPrivateKey();
-    //System.out.println("Private key:"+myPrivateKey);
-    
-    PKCS12Reader reader = new PKCS12Reader(p12.getAbsolutePath(), "password".toCharArray());
-    reader.read();
-    
-    //reader.read();
-  }
-  
+
   private void checkKeyMatch() throws CertificateException
   {
-	CertificateLogger.log("------------------- checkKeyMatch _subjectCert(" + _subjectCert + ") _privateKey (" + _privateKey +")");
-    if(_subjectCert == null || _privateKey == null)
-    {
+    if(subjectCert == null || ptekey == null)
       return;
-    }
-    CertificateLogger.log("------------------- checkKeyMatch");  
-    if(!GridCertUtilities.isMatchingPair(_subjectCert, _privateKey))
+
+    if(!TestGridCertUtilitiesJsafe.isMatchingPair(subjectCert, ptekey))
       throw new CertificateException("Certificate and private key is not a matching pair");
   }
-  
+
   private void findSubjectCert()
   {
     CertificateLogger.log("findSubjectCert Searching for subject key .....");
 
-    CertVerifier cv = new CertVerifier();
-    int count = _certificates.length;
+    //CertVerifier cv = new CertVerifier();
+    int count = certificates.length;
     boolean found = true;
-    
     for (int i = 0; i < count; i++)
     {
       found = true;
-      cv.setIssuerCert(_certificates[i]);
+      //cv.setIssuerCert(certificates[i]);
       for (int j = 0; j < count; j++)
       {
         if(i == j)
           continue;
-        cv.setSubjectCert(_certificates[j]);    
+        //cv.setSubjectCert(certificates[j]);
         try
         {
-          if(cv.isIssuedBy() == CertVerifier.ERR_NO_ERROR)
-          {
-            found = false;
-          }
+          //if(cv.isIssuedBy() == CertVerifier.ERR_NO_ERROR)
+          //  found = false;
         }
         catch (Exception ex)
         {
-			//added by Nazir on 10/30/2015
-			ex.printStackTrace();
+
         }
       }// end of for j
 
       if(found)
       {
-        _subjectCert = _certificates[i];
+        subjectCert = certificates[i];
         break;
       }
     }// end of for i
 
-    CertificateLogger.log("findSubjectCert End searching for subject key ....."+_subjectCert);
+    CertificateLogger.log("findSubjectCert End searching for subject key .....");
   }
-  
-  private KeyStore loadFile(String filename)
-    throws CertificateException
+
+  private PKCS12 loadFile(String filename)
+    throws PKCS12Exception,CertificateException
   {
-    KeyStore keystore = null;
-    FileInputStream in = null;
+    PKCS12 p12 = null;
     try
-    {   
-      CertificateLogger.log("Instantiating keystore. File: " +filename);
-      in = new FileInputStream(new File(filename));
-      keystore = KeyStore.getInstance("PKCS12", GridCertUtilities.getSecurityProvider());
-      keystore.load(in, password);
-      CertificateLogger.log("load PKCS12 file Done.");
-      return keystore;
+    {
+
+      /* With the Cert-J PKCS 12 class, there are two options for
+       * reading a PKCS 12 file.  If valid CertJ and DatabaseService
+       * objects are passed, then any certificate, private keys, and
+       * CRLs found in the PKCS 12 file will be inserted into the
+       * databases bound by the DatabaseService.  The following line
+       * of code, will read the specified PKCS 12 file, storing any
+       * information it finds in the database. */
+      CertificateLogger.log("Instantiating com.rsa.certj.pkcs12.PKCS12 object. File: " +
+        pkcs12Filename);
+      p12 = new PKCS12 (certJ, dbService, password, filename);
+      CertificateLogger.log("loadFile Done creating pkcs12 object");
+
+    }
+    catch(PKCS12Exception p12Ex)
+    {
+      throw p12Ex;
     }
     catch (Exception ex)
     {
       CertificateLogger.warn("Exception creating PKCS12 object");
       throw new CertificateException("Unable to load PKCS12 Object:  ",ex);
     }
-    finally
-    {
-      if(in != null)
-      {
-        try
-        {
-          in.close();
-        }
-        catch(IOException ioex)
-        {
-          ioex.printStackTrace();
-        }
-      }
-    }
+    return p12;
   }
-  
-  public PrivateKey getPrivateKey()
+  /*
+  private void go ()
+    throws CertificateException
   {
-    return _privateKey;
+    try {
+//
+//      //Now, view the CRLs that were inserted (if any). 
+//      debug("", "Viewing inserted CRLs:");
+//      CRL crl = dbService.firstCRL();
+//      while (crl != null) {
+//        // Print the issuer and time of the CRL. 
+//        debug("", "CRL:");
+//        debug("", "  Issuer Name:");
+//        NameUtilities.printNameInfo (((X509CRL)crl).getIssuerName(), this);
+//        debug("", "  This update:  " + ((X509CRL)crl).getThisUpdate());
+//        debug("", "");
+//        //pause();
+//        debug("", "");
+//
+//        crl = dbService.nextCRL ();
+//      }
+      CertificateLogger.log("End of operation.");
+
+    } catch (Exception anyException) {
+      CertificateLogger.err("Caught an exception.");
+      throw new CertificateException("Exception in go ",anyException);
+    }
+  }*/
+
+  private void initService() throws CertificateException
+  {
+    if(isInitialized)
+      return;
+
+    try {
+
+      CertificateLogger.log("initService Creating CertJ object and binding database services.");
+
+
+      String sName = (serviceName == null)? "In-Memory Provider" : serviceName;
+      /* Create the providers.  For simplicity, this sample will only
+       * use an in-memory provider.  */
+      Provider provider = new MemoryDB (sName);
+
+      /* Print a list of the instantiated providers. */
+//      System.out.println("Providers:");
+//      for (int i = 0 ; i < providers.length ; i++) {
+//        debug("", "  " + providers[i].getName ());
+//      }
+//      System.out.println();
+
+      CertificateLogger.log("initService Instantiating CertJ object.");
+      if(certJ == null)
+      {
+        certJ = new CertJ ();
+      }
+      certJ.addProvider(provider);
+
+      if(dbService == null)
+      {
+        CertificateLogger.log("initService Binding to database services.");
+        dbService =
+          (DatabaseService)certJ.bindService(CertJ.SPT_DATABASE, sName);
+      }
+      CertificateLogger.log("initService Done creating CertJ object and binding services.");
+    }
+    catch (CertJException ex)
+    {
+      CertificateLogger.warn("Exception caught while instantiating CertJ object.");
+      throw new CertificateException("Exception caught while instantiating CertJ object.", ex);
+    }
+    isInitialized = true;
   }
 
-  public java.security.cert.X509Certificate getCertificate()
+  public JSAFE_PrivateKey getPrivateKey()
   {
-    return _subjectCert;
+    return ptekey;
   }
-  
+
+//  public JSAFE_PublicKey getPublicKey()
+//  {
+//    return pubkey;
+//  }
+
+  public X509Certificate getCertificate()
+  {
+    return subjectCert;
+  }
+
   public void setServiceName(String serviceName)
   {
     this.serviceName = serviceName;
   }
 
-  private void loadCerts(KeyStore keyStore) throws CertificateException
+  public void setCertJ(CertJ certJ)
   {
+    this.certJ = certJ;
+  }
 
-    CertificateLogger.log("loadCerts Loading cert.....");
-    Vector<java.security.cert.X509Certificate> res = new Vector<java.security.cert.X509Certificate>();
+//  public void setDbService(DatabaseService dbService)
+//  {
+//    this.dbService = dbService;
+//  }
+
+  private void loadCerts(PKCS12 p12) throws CertificateException
+  {
+    /* Since the database started out empty, it is very easy to view
+     * the items that were added to the database.  First, view the
+     * certificates that were inserted.
+     */
+      CertificateLogger.log("loadCerts Loading cert.....");
+//      debug("", "");
+
+    Vector res = new Vector();
 
     try
     {
-      
-      Enumeration<String> aliases = keyStore.aliases();
-     
-      while (aliases.hasMoreElements())
+      X509Certificate cert = (X509Certificate)dbService.firstCertificate();
+//      this.certificate = cert;
+      while (cert != null)
       {
-        String certAlias = aliases.nextElement();
+        res.addElement(cert);
+//        /* Print the issuer and subject name of the certificate. */
+//        debug("", "$$$$$$$$$$$$$$$ Certificate #" + count + " :");
+//        debug("", "  Issuer Name:");
+//        NameUtilities.printNameInfo (((X509Certificate)cert).getIssuerName(),
+//                                     this);
+//        debug("", "  Subject Name:");
+//        NameUtilities.printNameInfo (((X509Certificate)cert).getSubjectName(),
+//                                     this);
+//        pubkey = cert.getSubjectPublicKey("Java");
+//        debug("", "-----BEGIN PUBLIC KEY DATA-----", false);
+//        printBase64 (pubkey.getKeyData ()[0]);
+//        debug("", "-----END PUBLIC KEY DATA-----", false);
+//        debug("", "");
+        //pause();
+//        debug("", "");
+//
+//        count++;
 
-        Certificate cert = keyStore.getCertificate(certAlias);
-        if(cert instanceof java.security.cert.X509Certificate)
-        {
-          res.add((java.security.cert.X509Certificate)cert);
-          CertificateLogger.debug("PKCS12Reader: Load Certificate:"+((java.security.cert.X509Certificate)cert));
-        }
-        else
-        {
-            CertificateLogger.debug("Non X509Certificate found: "+cert+". ignored");
-        }
+        cert = (X509Certificate)dbService.nextCertificate ();
       }
       CertificateLogger.log("loadCerts Done loading cert, count: " + res.size());
-      _certificates = new java.security.cert.X509Certificate[res.size()];
-      _certificates = (java.security.cert.X509Certificate[])res.toArray(_certificates);
+      certificates = new X509Certificate[res.size()];
+      certificates = (X509Certificate[])res.toArray(certificates);
 
     }
     catch (Exception ex)
@@ -261,28 +336,28 @@ public class PKCS12Reader
 
 
   }
-  
-  private void loadPteKeys(KeyStore keyStore) throws CertificateException
+
+  private void loadPteKeys(PKCS12 p12) throws CertificateException
   {
     CertificateLogger.log("loadPteKeys Loading private key .....");
     try
     {
-      Enumeration<String> aliases = keyStore.aliases();
-      while(aliases.hasMoreElements())
-      {
-        String alias = aliases.nextElement();
-        boolean isKeyEntry = keyStore.isKeyEntry(alias);
-        if(isKeyEntry)
-        {
-          Key key = keyStore.getKey(alias, password);
-          if(key instanceof PrivateKey)
-          {
-            _privateKey = (PrivateKey)key;
-            break;
-          }
-        }
-      }
-
+//      /* Now, view the private keys that were inserted (if any). */
+//      debug("", "Viewing inserted private keys:");
+      JSAFE_PrivateKey key = dbService.firstPrivateKey();
+      ptekey = key;
+//      while (key != null) {
+//        /* Print the Base64-encoded private key info. */
+//        debug("", "Private Key Data:");
+//        debug("", "-----BEGIN PRIVATE KEY DATA-----", false);
+//        printBase64 (key.getKeyData (key.getAlgorithm() + "PrivateKeyBER")[0]);
+//        debug("", "-----END PRIVATE KEY DATA-----", false);
+//        debug("", "");
+        //pause();
+//        debug("", "");
+//
+//        key = dbService.nextPrivateKey ();
+//      }
       CertificateLogger.log("loadPteKeys Done loading private key .....");
     }
     catch (Exception ex)
@@ -303,15 +378,15 @@ public class PKCS12Reader
   	return _secDB;
   }
   
-//  public void removeProvider(String serviceName)
-//  	throws ProviderManagementException, InvalidParameterException
-//  {
-//  	if(_secDB != null)
-//  	{
-//  		CertJ certJ = _secDB.getCertJ();
-//  		certJ.removeProvider(CertJ.SPT_DATABASE, serviceName);
-//  	}
-//  }
+  public void removeProvider(String serviceName)
+  	throws ProviderManagementException, InvalidParameterException
+  {
+  	if(_secDB != null)
+  	{
+  		CertJ certJ = _secDB.getCertJ();
+  		certJ.removeProvider(CertJ.SPT_DATABASE, serviceName);
+  	}
+  }
   //end
   
 // Logging methods ***********************************************************
