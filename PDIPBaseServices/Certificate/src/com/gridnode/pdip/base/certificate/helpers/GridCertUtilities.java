@@ -29,61 +29,21 @@
  * 17 Oct 2005      Neo Sok Lay       Remove additional ; in isMatchingPair() method. 
  * 07 Aug 2006      Tam Wei Xiang     Amend the way we access SecurityDB. 
  *                                    Modified method : getPrivatePassword()
- * 08 Jun 2009      Tam Wei Xiang     #560: Migrate from RSA J-SAFE/B-SAFE to BouncyCastle Lib
  */
 
 package com.gridnode.pdip.base.certificate.helpers;
 
-import com.gridnode.pdip.base.certificate.exceptions.ILogErrorCodes;
 import com.gridnode.pdip.base.certificate.model.IX500Name;
 import com.gridnode.pdip.base.transport.handler.HTTPTransportHandler;
 import com.gridnode.pdip.base.transport.helpers.JavaKeyStoreHandler;
-//import com.rsa.certj.cert.*;
-//import com.rsa.jsafe.*;
+import com.rsa.certj.cert.*;
+import com.rsa.jsafe.*;
 
-import javax.crypto.Cipher;
-import javax.crypto.EncryptedPrivateKeyInfo;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 import javax.mail.internet.MimeUtility;
-import javax.security.auth.x500.X500Principal;
-
-import org.bouncycastle.asn1.ASN1InputStream;
-import org.bouncycastle.asn1.DERObjectIdentifier;
-import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
-import org.bouncycastle.asn1.x509.X509Extension;
-import org.bouncycastle.asn1.x509.X509Extensions;
-import org.bouncycastle.asn1.x509.X509ExtensionsGenerator;
-import org.bouncycastle.asn1.x509.X509Name;
-import org.bouncycastle.jce.PKCS10CertificationRequest;
-import org.bouncycastle.jce.PrincipalUtil;
-import org.bouncycastle.jce.X509Principal;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import java.io.*;
-import java.security.AlgorithmParameters;
-import java.security.Key;
-import java.security.KeyFactory;
-import java.security.KeyStore;
-import java.security.MessageDigest;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.SecureRandom;
-import java.security.Security;
-import java.security.cert.CertificateEncodingException;
-import java.security.cert.CertificateExpiredException;
-import java.security.cert.CertificateFactory;
-import java.security.cert.CertificateNotYetValidException;
-import java.security.cert.PKIXCertPathBuilderResult;
-import java.security.cert.X509CertSelector;
-import java.security.cert.X509Certificate;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.X509EncodedKeySpec;
 import java.util.Date;
 import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.Vector;
 
 /**
  * Copyright (c) 1999, RSA Security Inc.
@@ -109,23 +69,6 @@ public class GridCertUtilities
 //  public static final ExceptionValue EX_DECODE = new ExceptionValue("Decode Exception ");
 //  public static final ExceptionValue EX_CERT = new ExceptionValue("Certificate Exception ");
 
-  private static final String SEC_PROVIDER_BC = "BC";
-  
-  static
-  {
-    setProvider();
-  }
-  
-  public static String getSecurityProvider()
-  {
-    return SEC_PROVIDER_BC;
-  }
-  
-  private static void setProvider()
-  {
-    Security.addProvider(new BouncyCastleProvider());
-  }
-  
   public static boolean writeByteTOFile (String fileName, byte[] byteArray,int arrayLen)
  {
     try {
@@ -206,55 +149,49 @@ public class GridCertUtilities
          return (null);
         }
   }
-  
+
   public static boolean writePKCS8PrivateKeyFile (String passwordStr, String fileName,
-                                                  PrivateKey privateKey )
+                                              JSAFE_PrivateKey privateKey )
   {
-        byte[] data = writePKCS8PrivateKeyData(passwordStr, privateKey);
-        return writeByteTOFile(fileName,data, data.length);
+    byte[] data = writePKCS8PrivateKeyData(passwordStr, privateKey);
+    return writeByteTOFile(fileName,data, data.length);
   }
 
-  public static byte[] writePKCS8PrivateKeyData (String passwordStr, PrivateKey privateKey )
+  public static byte[] writePKCS8PrivateKeyData (String passwordStr, JSAFE_PrivateKey privateKey )
   {
-    
-    try
-    {
-      byte[] salt = {
-        (byte)0x00, (byte)0x11, (byte)0x22, (byte)0x33,
-        (byte)0x44, (byte)0x55, (byte)0x66, (byte)0x77
-      };
-      
-      int iCount = 100;
-      
-      //PBEwithSHAand3-KeyTripleDES-CBC //from BC, pkcs#12 algo
-      //PBE/SHA1/DES/CBC/PKCS5PBE-5-56 //use in RSA Lib, pkcs#5 algo
-      
-      String             pbeAlgorithm = "PBEWithSHAAnd3-KeyTripleDES-CBC";
-      PBEKeySpec         pbeKeySpec = new PBEKeySpec(passwordStr.toCharArray(), salt, iCount);
-      SecretKeyFactory   secretKeyFact = SecretKeyFactory.getInstance(
-                                                       pbeAlgorithm, getSecurityProvider());
-      Cipher             cipher = Cipher.getInstance(pbeAlgorithm, getSecurityProvider());
-      cipher.init(Cipher.WRAP_MODE, secretKeyFact.generateSecret(pbeKeySpec));
-  
-      byte[]             wrappedKey = cipher.wrap(privateKey);
-  
-      // create carrier
-      EncryptedPrivateKeyInfo pInfo = new EncryptedPrivateKeyInfo(
-                                        cipher.getParameters(), wrappedKey);
-  
-      AlgorithmParameters params = pInfo.getAlgParameters();
-      
-      return pInfo.getEncoded();
-    }
-    catch(Exception ex)
-    {
-      CertificateLogger.error(ILogErrorCodes.PKCS8_PRIVATE_KEY, "Error writting PKCS8 Private Key", ex);
-      return null;
+    JSAFE_SymmetricCipher encrypter = null;
+    JSAFE_SecretKey key = null;
+    byte[] privateKeyData;
+    byte[] salt = {
+      (byte)0x00, (byte)0x11, (byte)0x22, (byte)0x33,
+      (byte)0x44, (byte)0x55, (byte)0x66, (byte)0x77
+    };
+
+    try {
+      encrypter = JSAFE_SymmetricCipher.getInstance
+        ("PBE/SHA1/DES/CBC/PKCS5PBE-5-56", "Java");
+      encrypter.setSalt (salt, 0, salt.length);
+
+      key = encrypter.getBlankKey ();
+      char[] password = new char[20];
+     // String response = caller.getResponse("Enter private key password");
+      passwordStr.getChars (0, (passwordStr.length() > 20 ? 20 : passwordStr.length ()), password, 0);
+     // key.setPassword (password, 0, password.length);
+      key.setPassword (password, 0, passwordStr.length());
+
+      encrypter.encryptInit (key, null);
+      privateKeyData =
+        encrypter.wrapPrivateKey (privateKey, true);
+      return (privateKeyData);
+    } catch (Exception anyException) {
+      anyException.printStackTrace();
+      CertificateLogger.log("Exception in writePKCS8PrivateKey "+anyException.getMessage());
+      return (null);
     }
   }
-  
+
   /**
-   * Read a PrivateKey object from a file.  The input data needs
+   * Read a JSAFE_PrivateKey object from a file.  The input data needs
    * to be stored in EncryptedPrivateKeyInfo format, as defined in
    * PKCS #8.  The private key data will be decrypted using PKCS #5
    * DES PBE.  This function will query the user for the decryption
@@ -264,13 +201,13 @@ public class GridCertUtilities
    * @param fileName The name of the file to load the encrypted key
    * from.
    * @return A JSAFE_PrivateKey object containing the key data, or null if failed. */
-  public static PrivateKey loadPKCS8PrivateKeyFile(String passwordStr, String fileName)
+  public static JSAFE_PrivateKey loadPKCS8PrivateKeyFile(String passwordStr, String fileName)
   {
     return loadPKCS8PrivateKeyData(passwordStr, loadFileToByte(fileName));
   }
-  
+
   /**
-   * Read a PrivateKey object from memory.  The input data needs
+   * Read a JSAFE_PrivateKey object from memory.  The input data needs
    * to be stored in EncryptedPrivateKeyInfo format, as defined in
    * PKCS #8.  The private key data will be decrypted using PKCS #5
    * DES PBE.
@@ -280,46 +217,46 @@ public class GridCertUtilities
    * from.
    * @return A JSAFE_PrivateKey object containing the key data, or null if failed. */
 
-  public static PrivateKey loadPKCS8PrivateKeyData(String passwordStr, byte[] keyData )
+  public static JSAFE_PrivateKey loadPKCS8PrivateKeyData(String passwordStr, byte[] keyData )
   {
     char[] password = new char[passwordStr.length()];
     passwordStr.getChars (0, passwordStr.length(), password, 0);
     return loadPKCS8PrivateKeyData(password, keyData );
   }
 
-  /**
-   * TWX 20090607 BC version of loading PKCS8 private key
-   * @param password the password to decrypt the encrypted private key
-   * @param keyData the encrypted private key
-   * @return
-   */
-  public static PrivateKey loadPKCS8PrivateKeyData(char[] password, byte[] keyData )
+  public static JSAFE_PrivateKey loadPKCS8PrivateKeyData(char[] password, byte[] keyData )
   {
-    
-    try
-    {
-      PBEKeySpec pbeKeySpec = new PBEKeySpec(password); 
-      EncryptedPrivateKeyInfo privateKeyInfo = new EncryptedPrivateKeyInfo(keyData);
-      AlgorithmParameters param = privateKeyInfo.getAlgParameters();
-      
-      SecretKeyFactory   secretKeyFact = SecretKeyFactory.getInstance(param.getAlgorithm(), getSecurityProvider());
-      Cipher cipher = Cipher.getInstance(param.getAlgorithm(), getSecurityProvider());
-      cipher.init(Cipher.DECRYPT_MODE, secretKeyFact.generateSecret(pbeKeySpec), privateKeyInfo.getAlgParameters());
-      
-      PKCS8EncodedKeySpec pkcs8Spec = privateKeyInfo.getKeySpec(cipher);
-      
-      KeyFactory          keyFact = KeyFactory.getInstance("RSA", getSecurityProvider());
-      PrivateKey          privKey = keyFact.generatePrivate(pkcs8Spec);
-      
-      return privKey;
-    }
-    catch(Exception ex)
-    {
-      CertificateLogger.error(ILogErrorCodes.PKCS_PRIVATE_KEY_LOAD, "Error in loading the PKCS8 Private Key", ex);
-      return null;
+    JSAFE_SymmetricCipher decrypter = null;
+    JSAFE_SecretKey key = null;
+    JSAFE_PrivateKey privateKey = null;
+
+    try {
+      decrypter = JSAFE_SymmetricCipher.getInstance (keyData, 0, "Java");
+
+      key = decrypter.getBlankKey ();
+     // String response = caller.getResponse("Enter private key password");
+//      char[] password = new char[passwordStr.length()];
+//      passwordStr.getChars (0, passwordStr.length(), password, 0);
+      key.setPassword (password, 0, password.length);
+
+      decrypter.decryptInit (key, null);
+
+      privateKey =
+        decrypter.unwrapPrivateKey (keyData, 0, keyData.length, true);
+      return (privateKey);
+    } catch (Exception anyException) {
+      anyException.printStackTrace ();
+      return (null);
     }
   }
-  
+
+  public static JSAFE_PrivateKey loadPKCS8PrivateKeyData(char[] password, String pkkeyData)
+  {
+    return loadPKCS8PrivateKeyData(password,decode(pkkeyData));
+  }
+
+
+
   /**
    * Load a public key from a file.  The file is expected to contain
    * BER encoded key data.  If the key is loaded, return the
@@ -328,11 +265,11 @@ public class GridCertUtilities
    * @param fileName The file name containing the public key data.
    * @return A JSAFE_PublicKey object or <code>null</code>.
    */
-  public static PublicKey loadPublicKeyJava (String fileName)
+  public static JSAFE_PublicKey loadPublicKey (String fileName)
   {
     return loadPublicKeyFromByte(loadFileToByte(fileName));
   }
-  
+
   /**
    * Simply write the DER encoding of a public key out to a file.  If
    * the data is successfully saved, return <code>true</code>,
@@ -344,97 +281,155 @@ public class GridCertUtilities
    * @return <code>true</code> if the key was saved successfully,
    * <code>false</code> otherwise.  */
   public static boolean writePublicKey (String fileName,
-                                        PublicKey publicKey)
+                                        JSAFE_PublicKey publicKey)
   {
     byte[] data = writePublicKeyToByte(publicKey);
     return writeByteTOFile(fileName,data, data.length);
   }
 
   /**
-   * Save an X509Certificate object to a byte array
+   * Save an X509Certificate object to the specified file.  If the
+   * operation is successful, return <code>true</code>, otherwise,
+   * return <code>false</code>.
    *
    * @param fileName The name of the file to store the certificate in.
    * @param certificate The <code>X509Certificate</code> object to store.
-   * @return X509Cert in byte form 
-   * 
-   */
-  public static byte[] writeX509Certificate(java.security.cert.X509Certificate certificate)
+   * @return <code>true</code> if the certificate was saved
+   * successfully, <code>false</code> otherwise.  */
+  static public byte[] writeX509Certificate(X509Certificate certificate)
     {
       try
       {
-        return certificate.getEncoded();
+        byte[] certificateData = new byte[certificate.getDERLen (0)];
+        certificate.getDEREncoding (certificateData, 0, 0);
+        return certificateData;
       }
       catch(Exception e)
       {
-        CertificateLogger.error(ILogErrorCodes.X509_CERT_WRITE, "Error writing X509 cert to byte array.", e);
         return null;
       }
   }
-  
-  private static Number getCorrespondIX500Name(DERObjectIdentifier oid, Hashtable<DERObjectIdentifier, Number> x500ConstantFields)
+
+  static public Hashtable getX500Constants(X500Name name)
   {
-    return x500ConstantFields.get(oid);
-  }
-  
-  private static Hashtable<DERObjectIdentifier, Number> getX500Fields()
-  {
-    Hashtable<DERObjectIdentifier, Number> derOIDs = new Hashtable<DERObjectIdentifier, Number>();
-    derOIDs.put(X509Name.C, IX500Name.COUNTRY);
-    derOIDs.put(X509Name.ST, IX500Name.STATE);
-    derOIDs.put(X509Name.O, IX500Name.ORGANIZATION);
-    derOIDs.put(X509Name.L, IX500Name.LOCALITY);
-    derOIDs.put(X509Name.OU, IX500Name.ORGANIZATIONAL_UNIT);
-    derOIDs.put(X509Name.STREET, IX500Name.STREET_ADDRESS);
-    derOIDs.put(X509Name.CN, IX500Name.COMMAN_NAME);
-    derOIDs.put(X509Name.T, IX500Name.TITLE);
-    derOIDs.put(X509Name.EmailAddress, IX500Name.EMAIL_ADDRESS);
-    derOIDs.put(X509Name.BUSINESS_CATEGORY, IX500Name.BUSINESS_CATEORY);
-    derOIDs.put(X509Name.TELEPHONE_NUMBER, IX500Name.TELEPHONE_NUMBER);
-    derOIDs.put(X509Name.POSTAL_CODE, IX500Name.POSTAL_CODE);
-    return derOIDs;
-  }
-  
-  public static X509Principal getX509IssuerPrincipal(X509Certificate cert) throws CertificateEncodingException
-  {
-    return PrincipalUtil.getIssuerX509Principal(cert);
-  }
-  
-  public static X509Principal getX509SubjectPrincipal(X509Certificate cert) throws CertificateEncodingException
-  {
-    return PrincipalUtil.getSubjectX509Principal(cert);
-  }
-  
-  public static Hashtable getX500Constants(X509Principal bcPrincipal) throws Exception
-  {
-    Vector oidList = bcPrincipal.getOIDs();
-    Hashtable<DERObjectIdentifier, Number> x500ConstantFields = getX500Fields();
-    Hashtable<Number, String> keyConstants = new Hashtable<Number, String>();
-    
-    for(Iterator i = oidList.iterator(); oidList != null && oidList.size() > 0 && i.hasNext() ;)
-    {
-      DERObjectIdentifier oid = (DERObjectIdentifier)i.next();
-      Number x500NameField = getCorrespondIX500Name(oid, x500ConstantFields);
-      
-      if(x500NameField != null)
-      {
-        Vector oidValues = bcPrincipal.getValues(oid);
-        if(oidValues != null && oidValues.size() > 0)
-        {
-          String oidValue = (String)oidValues.iterator().next();
-          keyConstants.put(x500NameField, oidValue);
+    Hashtable keyConstants = new Hashtable();
+    int count = name.getRDNCount();
+    AttributeValueAssertion ava = null;
+    RDN theRDN = null;
+
+    for (int i = 0 ; i < count ; i++) {
+      try {
+        theRDN = name.getRDN (i);
+        int attributeCount = theRDN.getAttributeCount();
+
+        for (int j = 0 ; j < attributeCount ; j++) {
+          try {
+            ava = theRDN.getAttributeByIndex (j);
+          } catch (NameException nameException) {
+            continue;
+          }
+
+          switch (ava.getAttributeType()) {
+          case AttributeValueAssertion.COUNTRY_NAME:
+            keyConstants.put(IX500Name.COUNTRY,
+                             ava.getStringAttribute());
+            //buf.append("   Country:              ");
+            break;
+          case AttributeValueAssertion.STATE_NAME:
+            keyConstants.put(IX500Name.STATE,
+                             ava.getStringAttribute());
+            //buf.append("   State:                ");
+            break;
+          case AttributeValueAssertion.ORGANIZATION_NAME:
+            keyConstants.put(IX500Name.ORGANIZATION,
+                             ava.getStringAttribute());
+            //buf.append("   Organization:         ");
+            break;
+          case AttributeValueAssertion.LOCALITY_NAME:
+            keyConstants.put(IX500Name.LOCALITY,
+                             ava.getStringAttribute());
+            //buf.append("   Locality:             ");
+            break;
+          case AttributeValueAssertion.ORGANIZATIONAL_UNIT_NAME:
+            keyConstants.put(IX500Name.ORGANIZATIONAL_UNIT,
+                             ava.getStringAttribute());
+            //buf.append("   Organizational Unit:  ");
+            break;
+          case AttributeValueAssertion.STREET_ADDRESS:
+            keyConstants.put(IX500Name.STREET_ADDRESS,
+                             ava.getStringAttribute());
+            //buf.append("   Street Address:       ");
+            break;
+          case AttributeValueAssertion.COMMON_NAME:
+            keyConstants.put(IX500Name.COMMAN_NAME,
+                             ava.getStringAttribute());
+            //buf.append("   Common name:          ");
+            break;
+          case AttributeValueAssertion.TITLE:
+            keyConstants.put(IX500Name.TITLE,
+                             ava.getStringAttribute());
+            //buf.append("   Title:                ");
+            break;
+          case AttributeValueAssertion.EMAIL_ADDRESS:
+            keyConstants.put(IX500Name.EMAIL_ADDRESS,
+                             ava.getStringAttribute());
+            //buf.append("   Email Address:        ");
+            break;
+          case AttributeValueAssertion.BUSINESS_CATEGORY:
+            keyConstants.put(IX500Name.BUSINESS_CATEORY,
+                             ava.getStringAttribute());
+            //buf.append("   Business Category:    ");
+            break;
+          case AttributeValueAssertion.TELEPHONE_NUMBER:
+            keyConstants.put(IX500Name.TELEPHONE_NUMBER,
+                             ava.getStringAttribute());
+            //buf.append("   Telephone Number:     ");
+            break;
+          case AttributeValueAssertion.POSTAL_CODE:
+            keyConstants.put(IX500Name.POSTAL_CODE,
+                             ava.getStringAttribute());
+            //buf.append("   Postal Code:          ");
+            break;
+          case AttributeValueAssertion.UNKNOWN_ATTRIBUTE_TYPE:
+            keyConstants.put(IX500Name.UNKOWN_ATTRIBUTE_TYPE,
+                             ava.getStringAttribute());
+            //buf.append("   Unknown:              ");
+            break;
+          }
+
         }
+
+      } catch (Exception nameException) {
+//        buf.append("Error retrieving RDN.");
+        continue;
       }
     }
+
     return keyConstants;
   }
-  
+
+
   public static boolean writeX509Certificate (String fileName,
-                                              java.security.cert.X509Certificate certificate)
+                                              X509Certificate certificate)
   {
     byte[] data = writeX509Certificate(certificate);
     return writeByteTOFile(fileName, data,data.length);
   }
 
+  /**
+   * Load an X509Certificate object from a specified file.  If this
+   * function is able to load the certificate from the file, return
+   * the object, otherwise, return <code>null</code>.
+   *
+   * @param fileName The name of the file containing the X.509 Certificate.
+   * @return An <code>X509Certificate</code> object containing the
+   * certificate, or <code>null</code>. */
+  public static X509Certificate loadX509Certificate (String fileName)
+    throws com.rsa.certj.cert.CertificateException,Exception
+  {
+    return loadX509Certificate(loadFileToByte(fileName));
+  }
+
 
   /**
    * Load an X509Certificate object from a specified file.  If this
@@ -444,39 +439,25 @@ public class GridCertUtilities
    * @param fileName The name of the file containing the X.509 Certificate.
    * @return An <code>X509Certificate</code> object containing the
    * certificate, or <code>null</code>. */
-  public static java.security.cert.X509Certificate loadX509Certificate (String fileName)
-    throws Exception
-  {
-    return loadX509Certificate(loadFileToByte(fileName));
-  }
-  
-  /**
-   * 
-   * Load an X509Certificate object from a specified file.  If this
-   * function is able to load the certificate from the file, return
-   * the object, otherwise, return <code>null</code>.
-   *
-   * @param fileName The name of the file containing the X.509 Certificate.
-   * @return An <code>X509Certificate</code> object containing the
-   * certificate, or <code>null</code>. */
-  public static java.security.cert.X509Certificate loadX509Certificate (File certFile)
+  public static X509Certificate loadX509Certificate (File certFile)
+    throws com.rsa.certj.cert.CertificateException,Exception
   {
     return loadX509Certificate(loadFileToByte(certFile));
   }
 
-  public static java.security.cert.X509Certificate loadX509CertificateByString(String certificateData)
+  public static X509Certificate loadX509CertificateByString(String certificateData)
   {
     return loadX509Certificate(decode(certificateData));
   }
-  
-  public static java.security.cert.X509Certificate loadX509Certificate (byte[] certificateData)
+
+  public static X509Certificate loadX509Certificate (byte[] certificateData)
   {
     try
     {
       /* 040526NSL this method only support DER-encoded format.
       X509Certificate cert = new X509Certificate (certificateData, 0, 0);
       return (cert); */
-    return JavaKeyStoreHandler.loadCertificate(certificateData);
+	  return JavaKeyStoreHelper.convertCertificate(JavaKeyStoreHandler.loadCertificate(certificateData));
     }
     catch (Exception ex)
     {
@@ -485,60 +466,60 @@ public class GridCertUtilities
     return null;
   }
 
-  //TWX bc edition
-  public static PKCS10CertificationRequest loadPKCS10CertificationRequest (String fileName) {
-    FileInputStream inputStream = null;
+  /**
+   * Load a PKCS #10 certificate request from the specified file.  If
+   * the data is able to be loaded and instantiated into an object,
+   * return that new object.  Otherwise, simply return
+   * <code>null</code>.
+   *
+   * @param fileName The name of the file containing the PKCS #10
+   * certificate request.
+   * @return A new <code>PKCS10CertRequest</code> object, or
+   * <code>null</code>.  */
+  public static PKCS10CertRequest loadPKCS10CertRequest (String fileName) {
     try {
-      inputStream = new FileInputStream (fileName);
+      FileInputStream inputStream = new FileInputStream (fileName);
 
-//      Create a byte array that is big enough to hold the contents
-//      of the file.
+      /* Create a byte array that is big enough to hold the contents
+       * of the file. */
       byte[] certificateRequest = new byte[inputStream.available()];
 
-//      Read the data from the file. 
+      /* Read the data from the file. */
       inputStream.read (certificateRequest);
+      inputStream.close ();
 
-//      Get an instance of a PKCS10CertRequest object using the data
-//      just loaded.
-      PKCS10CertificationRequest request =
-        new PKCS10CertificationRequest (certificateRequest);
+      /* Get an instance of a PKCS10CertRequest object using the data
+       * just loaded. */
+      PKCS10CertRequest request =
+        new PKCS10CertRequest (certificateRequest, 0, 0);
 
       return (request);
     } catch (Exception anyException) {
-      anyException.printStackTrace();
       return (null);
     }
-    finally
-    {
-      if(inputStream != null)
-      {
-        try
-        {
-          inputStream.close();
-        }
-        catch(Exception ex)
-        {
-          ex.printStackTrace();
-        }
-      }
-    }
   }
-  
+
+
   /**
-   * Save a <code>PKCS10CertificationRequest</code> object to a specified file.
+   * Save a <code>PKCS10CertRequest</code> object to a specified file.
    *
    * @param fileName The name of the file to store the encoded
    * certificate request in.
-   * @param request The <code>PKCS10CertificationRequest</code> object that
+   * @param request The <code>PCKS10CertRequest</code> object that
    * should be encoded and stored.  */
   public static boolean writePKCS10CertRequest (String fileName,
-                                                PKCS10CertificationRequest request) {
+                                                PKCS10CertRequest request) {
     try {
       FileOutputStream outputStream = new FileOutputStream (fileName);
-      byte[] certificateRequest = request.getDEREncoded();
+
+      /* Create a byte array big enough to hold the encoding of the
+       * certificate request object. */
+      byte[] certificateRequest = new byte[request.getDERLen(0)];
 
       /* DER encode the certificate request.  The encoding will be
        * stored in certificateRequest starting at offset 0. */
+      request.getDEREncoding (certificateRequest, 0, 0);
+
       outputStream.write (certificateRequest, 0, certificateRequest.length);
       outputStream.close ();
       return (true);
@@ -556,11 +537,15 @@ public class GridCertUtilities
    * @param crl An <code>X509CRL</code> object to store in the file.
    * @return <code>true</code> if the object is saved, otherwise
    * <code>false</code> is returned.  */
-  public static boolean writeX509CRL (String fileName, java.security.cert.X509CRL crl) {
+  public static boolean writeX509CRL (String fileName, X509CRL crl) {
     try {
       FileOutputStream outputStream = new FileOutputStream (fileName);
 
-      byte[] crlData = crl.getEncoded();
+      /* Get a byte array that is big enough to hold the CRL data. */
+      byte[] crlData = new byte[crl.getDERLen (0)];
+
+      /* Get the DER encoding of the CRL. */
+      crl.getDEREncoding (crlData, 0, 0);
 
       /* Write the data to the file. */
       outputStream.write (crlData, 0, crlData.length);
@@ -578,76 +563,135 @@ public class GridCertUtilities
    * @param fileName The name of the file to store the
    * <code>X509CRL</code> in.
    * @return An <code>X509CRL</code> object containing the data. */
-  public static java.security.cert.X509CRL loadX509CRL (String fileName)
+  public static X509CRL loadX509CRL (String fileName)
   {
     return loadX509CRL(loadFileToByte(fileName));
   }
 
-  //BC version
-  public static java.security.cert.X509CRL loadX509CRL (byte[] crlData)
+  public static X509CRL loadX509CRL (byte[] crlData)
   {
     try
     {
-      ByteArrayInputStream input = new ByteArrayInputStream(crlData);
-      CertificateFactory   fact = CertificateFactory.getInstance("X.509", getSecurityProvider());
-
-      return (java.security.cert.X509CRL)fact.generateCRL(input);
-
+        X509CRL theCRL = new X509CRL (crlData, 0, 0);
+        return (theCRL);
     }
-    catch (Exception ex)
+    catch (Exception anyException)
     {
-      CertificateLogger.error(ILogErrorCodes.X509CRL_INVOKE, "Error in loading X509CRL", ex);
       return (null);
     }
   }
 
-  public static byte[] getMessageDigest(String digestAlgorithm, byte[] data) //throws GNException
+  public static byte[] getMD5(File inputFile) //throws GNException
   {
-    MessageDigest digester = null;
-    try
-    {
-      digester = MessageDigest.getInstance(digestAlgorithm, getSecurityProvider());
-    }
-    catch(Exception ex)
-    {
-      ex.printStackTrace();
-    }
-    
-    byte[] digest = null;
-    
-    try
-    {
-      digester.update(data, 0, data.length);
-      digest = digester.digest();
-    }
-    catch(Exception ex)
-    {
-      ex.printStackTrace();
-    }
-    
-    return digest;
-  }
-  
-  public static byte[] getMD5(byte[] data) //throws GNException
-  {
-    //JSAFE_MessageDigest digester = null;
-    MessageDigest digester = null;
-    
+    JSAFE_MessageDigest digester = null;
+    int blockSize = 4096;
+    byte [] inputBlock = new byte[ blockSize ];
+    FileInputStream fis = null;
+
+
     //Initialize the MD5 digester
     try
     {
-      digester = MessageDigest.getInstance("MD5", getSecurityProvider());
+      digester = JSAFE_MessageDigest.getInstance( "MD5", "Java" );
     }
     catch (Exception ex)
     {
-      ex.printStackTrace();
+//      GNException.throwEx(EX_MD5, "Error in initializing MD5 digester", ex);
+    }
+
+    //Open the file
+    try
+    {
+      fis = new FileInputStream( inputFile );
+    }
+    catch (Exception ex)
+    {
+    //  GNException.throwEx(EX_MD5, "Error reading file", ex);
+    }
+
+    byte [] digest = null;
+    try
+    {
+      digester.digestInit( );
+      int bytesRead = 0;
+
+      while((bytesRead = fis.read( inputBlock )) != -1 )
+      {
+        digester.digestUpdate( inputBlock, 0, bytesRead );
+      }
+      digest = digester.digestFinal();
+
+    }
+    catch (Exception ex)
+    {
+      //GNException.throwEx(EX_MD5, "Error in digesting data", ex);
+    }
+    finally
+    {
+      if(digester != null)
+        digester.clearSensitiveData();
+    }
+
+    return digest;
+  }
+
+  public static byte[] getMessageDigest(String digestAlgorithm, byte[] data) //throws GNException
+  {
+    JSAFE_MessageDigest digester = null;
+    //Initialize digester
+    try
+    {
+      digester = JSAFE_MessageDigest.getInstance(digestAlgorithm, "Java");
+    }
+    catch (Exception ex)
+    {
     }
 
     byte[] digest = null;
     try
     {
-      digester.update(data, 0, data.length);
-      digest = digester.digest();
+      digester.digestInit();
+      digester.digestUpdate(data, 0, data.length);
+
+      digest = digester.digestFinal();
+
+    } catch (Exception ex) {
+    }
+    finally
+    {
+      if(digester != null)
+        digester.clearSensitiveData();
+    }
+
+    return digest;
+  }
+
+  public static byte[] getMD5(byte[] data) //throws GNException
+  {
+    JSAFE_MessageDigest digester = null;
+
+    //Initialize the MD5 digester
+    try
+    {
+      digester = JSAFE_MessageDigest.getInstance("MD5", "Java");
+    }
+    catch (Exception ex)
+    {
+//      println("[MD5]  Exception caught while " +
+//                         "initializing the digester object." );
+//      println("[MD5]  " + anyException.toString() );
+//      anyException.printStackTrace (new PrintStream (this.getOutputStream ()));
+//      System.exit(2);
+//      GNException.throwEx(EX_MD5, "Error in initializing MD5 digester", ex);
+    }
+
+    byte[] digest = null;
+    try
+    {
+      digester.digestInit();
+      digester.digestUpdate(data, 0, data.length);
+
+      digest = digester.digestFinal();
 
     } catch (Exception ex) {
 //      println("%MD5-F-NCRYPT; Exception caught while " +
@@ -656,8 +700,13 @@ public class GridCertUtilities
 //      anyException.printStackTrace (new PrintStream (this.getOutputStream ()));
 //      System.exit(4);
      // GNException.throwEx(EX_MD5, "Error in digesting data", ex);
-       ex.printStackTrace();
     }
+    finally
+    {
+      if(digester != null)
+        digester.clearSensitiveData();
+    }
+
     return digest;
   }
 
@@ -717,30 +766,43 @@ public class GridCertUtilities
       data[i] = (byte)0x00;
     }
   }
-  
-  public static java.security.cert.X509Certificate loadCertificateFromString(String certificateData)
+
+  public static X509Certificate loadCertificateFromString(String certificateData)
   {
     return loadX509Certificate(loadByteArrayFromString(certificateData));
   }
 
-  public static java.security.cert.X509Certificate loadCertificateFromByte (byte[] certificateData)
+  public static X509Certificate loadCertificateFromByte (byte[] certificateData)
   {
     return loadX509Certificate(certificateData);
   }
-  
-  public static PrivateKey loadPrivateKeyFromString(String keyData)
+
+  public static JSAFE_PrivateKey loadPrivateKeyFromString(String keyData)
   {
     return loadPrivateKeyFromByte(loadByteArrayFromString(keyData));
   }
-  
-  public static PrivateKey loadPrivateKeyFromByte(byte[] keyData)
-  {
+
+  public static JSAFE_PrivateKey loadPrivateKeyFromByte(byte[] keyData)
+   {
     return loadPKCS8PrivateKeyData(getPrivatePassword(), keyData);
   }
   
   private static String getPrivatePassword()
   {
-    return SecurityServices.getPrivatePassword();
+  	SecurityDB secDB = null;
+  	SecurityDBManager secDBManager = SecurityDBManager.getInstance(); //TWX 07082006
+  	try
+  	{
+  		secDB = secDBManager.getSecurityDB();
+  		return secDB.getPrivatePassword();
+  	}
+  	finally
+  	{
+  		if(secDB != null)
+  		{
+  			secDBManager.releaseSecurityDB(secDB);
+  		}
+  	}
   }
   
   public static String hexEncode (byte value)
@@ -761,91 +823,53 @@ public class GridCertUtilities
     return (new String (hex));
   }
 
-  public static String writePrivateKeyToString(PrivateKey privateKey)
+  static public String writePrivateKeyToString(JSAFE_PrivateKey privateKey)
   {
     return writeByteArrayToString(writePrivateKeyToByte(privateKey));
   }
-  
-  public static byte[] writePrivateKeyToByte(PrivateKey privateKey)
+
+  static public byte[] writePrivateKeyToByte(JSAFE_PrivateKey privateKey)
   {
     return writePKCS8PrivateKeyData(getPrivatePassword(), privateKey);
   }
-  
-  static public java.security.cert.X509CRL loadCRLFromString(String crlData)
+
+  static public X509CRL loadCRLFromString(String crlData)
   {
     return loadCRLFromByte(loadByteArrayFromString(crlData));
   }
 
-  static public java.security.cert.X509CRL loadCRLFromByte(byte[] crlData)
+  static public X509CRL loadCRLFromByte(byte[] crlData)
   {
       return loadX509CRL(crlData);
   }
 
-   public static byte[] writeX509CRLToByte (java.security.cert.X509CRL crl)
+   static public byte[] writeX509CRLToByte (X509CRL crl)
     {
       try
       {
-        byte[] crlData = crl.getEncoded();
+        byte[] crlData = new byte[crl.getDERLen (0)];
+        crl.getDEREncoding (crlData, 0, 0);
         return crlData;
       }
       catch(Exception e)
       {
-        CertificateLogger.error(ILogErrorCodes.X509CRL_INVOKE, "Error writing X509CRL to byte", e);
         return null;
       }
    }
 
-   
-   public static PublicKey loadPublicKeyFromString(String keyData)
+
+   static public JSAFE_PublicKey loadPublicKeyFromString(String keyData)
    {
     return loadPublicKeyFromByte(loadByteArrayFromString(keyData));
    }
-   
-   //TWX 20090607 BC version, no invoker for such method.
-   public static PublicKey loadPublicKeyFromByte(byte[] keyData)
-   {
-     
-     try
-     {
-       ASN1InputStream aIn = new ASN1InputStream(keyData);
-       SubjectPublicKeyInfo info = SubjectPublicKeyInfo.getInstance(aIn.readObject());
 
-       X509EncodedKeySpec x509Spec = new X509EncodedKeySpec(keyData);
-       KeyFactory keyFact = KeyFactory.getInstance(info.getAlgorithmId().getObjectId().getId(), 
-                                                   getSecurityProvider());
-       PublicKey pubKey = keyFact.generatePublic(x509Spec);
-       
-       return pubKey;
-     }
-     catch(Exception e)
-     {
-       CertificateLogger.error(ILogErrorCodes.PUBLIC_KEY_LOAD, "Error in loading public key", e);
-       return null;
-     }
-   }
-  
-  public static String writeCertificateToString(java.security.cert.X509Certificate certificate)
-  {
-    return writeByteArrayToString(writeCertificateToByte(certificate));
-  }
-
- 
-  static public byte[] writeCertificateToByte(java.security.cert.X509Certificate certificate)
-  {
-   return writeX509Certificate(certificate);
-  }
-  
-  public static String writePublicKeyToString(PublicKey publicKey)
-  {
-    return writeByteArrayToString(writePublicKeyToByte(publicKey));
-  }
-  
-  //BC version
-  public static byte[] writePublicKeyToByte(PublicKey publicKey)
-  {
+   static public JSAFE_PublicKey loadPublicKeyFromByte (byte[] keyData)
+    {
+      JSAFE_PublicKey publicKey = null;
       try
       {
-        return publicKey.getEncoded();
+        publicKey = JSAFE_PublicKey.getInstance (keyData, 0, "Java");
+        return publicKey;
       }
       catch(Exception e)
       {
@@ -853,12 +877,39 @@ public class GridCertUtilities
       }
   }
 
-  
-  static public String writeIssuerNameToString(X500Principal issuerName)
+  static public String writeCertificateToString(X509Certificate certificate)
+  {
+    return writeByteArrayToString(writeCertificateToByte(certificate));
+  }
+
+ static public byte[] writeCertificateToByte (X509Certificate certificate)
+  {
+    return writeX509Certificate(certificate);
+  }
+
+  static public String writePublicKeyToString(JSAFE_PublicKey publicKey)
+  {
+    return writeByteArrayToString(writePublicKeyToByte(publicKey));
+  }
+
+  static public byte[] writePublicKeyToByte (JSAFE_PublicKey publicKey)
+  {
+      try
+      {
+        byte[][] keyData = publicKey.getKeyData ("RSAPublicKeyBER");
+        return keyData[0];
+      }
+      catch(Exception e)
+      {
+        return null;
+      }
+  }
+
+  static public String writeIssuerNameToString(X500Name issuerName)
   {
     try
     {
-      return encode(issuerName.getEncoded());
+      return encode(issuerName.toString().getBytes());
     }
     catch(Exception e)
     {
@@ -873,74 +924,98 @@ public class GridCertUtilities
       data[i] = '0';
     }
   }
-  
-  public static boolean isMatchingPair(PublicKey publicKey,
-                                         PrivateKey privateKey)
+
+  public static boolean isMatchingPair(JSAFE_PublicKey publicKey,
+                                       JSAFE_PrivateKey privateKey)
   {
-    boolean compareOkay = true, match = false;
+    boolean CompareOkay = true, match = false;
     byte [] encryptMe = null;
-    byte [] cipherOut = null;
+    byte [] cipherText = null;
     byte [] recoveredText = null;
-    int blockSize = 44;
-    SecureRandom random = null;
+    int blockSize = 24;
+    JSAFE_SecureRandom random = null;
     // We have an RSA key pair, and we have some data. Let's encrypt it!
-    
-    
     try {
-      random = SecureRandom.getInstance("SHA1PRNG");
-      random.setSeed( new Date().toString().getBytes() );
-      encryptMe = new byte[blockSize];
-      random.nextBytes(encryptMe);
-      
-      //encryption process
-      //Cipher cipher = Cipher.getInstance("RSA/NONE/OAEPWithMD5AndMGF1Padding", getSecurityProvider());
-	  Cipher cipher = Cipher.getInstance("RSA/NONE/OAEPWithSHA256AndMGF1Padding", getSecurityProvider());
-      cipher.init(Cipher.ENCRYPT_MODE, publicKey, random);
-      cipherOut = cipher.doFinal(encryptMe);
-      
-    } 
-    catch (Exception ex) 
-    {
-		ex.printStackTrace();
-      //CertificateLogger.error(ILogErrorCodes.KEY_PAIR_MATCHING, "Error in performing encryption for matching key", ex);
+      random = (JSAFE_SecureRandom)
+        JSAFE_SecureRandom.getInstance ("MD5Random", "Java");
+      random.seed( new Date().toString().getBytes() );
+      encryptMe = random.generateRandomBytes( blockSize );
+      // Create the JSAFE_AsymmetricCipher instance that actually does
+      // the encryption.
+      JSAFE_AsymmetricCipher encryptor =
+       JSAFE_AsymmetricCipher.getInstance( "RSA/PKCS1Block02Pad", "Java" );
+
+      encryptor.encryptInit( publicKey, random );
+      cipherText = new byte[ encryptor.getOutputBlockSize() ];
+      int partOutLen = encryptor.encryptUpdate( encryptMe, 0,
+                                                encryptMe.length, cipherText,
+                                                0 );
+      //int finalOutLen = 
+      encryptor.encryptFinal( cipherText, partOutLen);
+      //int totalOutLen = partOutLen + finalOutLen;
+
+//      println("[RSAEncrypt]  The " + totalOutLen +
+//                         " bytes of the ciphertext are:");
+//      printBuffer( cipherText );
+
+      // There might be sensitive information still in the encryptor object,
+      // so we should call clearSensitiveData() before it goes out of scope.
+      encryptor.clearSensitiveData();
+    } catch (Exception ex) {
+//      println("[RSAEncrypt]  Exception anyExceptionncountered during" +
+//                         "Encryption." );
+//      println( "[RSAEncrypt]  " + anyException.toString() );
+//      anyException.printStackTrace (new PrintStream (this.getOutputStream ()));
+//    ex.printStackTrace();
+//      exit (anyException, 3);
     }
 
     // Now that we have some encrypted data, let's decrypt it with the
     // private key and compare the recovered plaintext with the original.
-    try
-    {
-      Cipher cipher = Cipher.getInstance("RSA/NONE/OAEPWithSHA256AndMGF1Padding", getSecurityProvider());
-      cipher.init(Cipher.DECRYPT_MODE, privateKey);
-	  CertificateLogger.log("#############################[" + cipherOut.length + "]#############################");
-      recoveredText = cipher.doFinal(cipherOut);
-      CertificateLogger.log("#############################[" + recoveredText + "]#############################");
+    try {
+      JSAFE_AsymmetricCipher decryptor =
+       JSAFE_AsymmetricCipher.getInstance( "RSA/PKCS1Block02Pad", "Java" );
+
+      decryptor.decryptInit( privateKey );
+      recoveredText = new byte[ cipherText.length ];
+      int partOutLen = decryptor.decryptUpdate( cipherText, 0,
+                                                cipherText.length,
+                                                recoveredText, 0 );
+      //int finalOutLen = 
+      decryptor.decryptFinal( recoveredText, partOutLen );
+      //int totalOutLen = partOutLen + finalOutLen;
+
+      // The decryptor may also contain sensitive information, so we should
+      // call clearSensitiveData() before it goes out of scope.
+      decryptor.clearSensitiveData();
+
       for( int i = 0 ; i < encryptMe.length ; i++ )
       {
-		  CertificateLogger.log("#############################(" + encryptMe[i] + " " + recoveredText[i] + ")#############################");
-          if( encryptMe[i] != recoveredText[i] ) {
-            compareOkay = false;
-            break;
-          }
+        if( encryptMe[i] != recoveredText[i] ) {
+          CompareOkay = false;
+          break;
+        }
       }
-        match = compareOkay;
+      match = CompareOkay;
     }
-    
-      
     catch (Exception ex)
     {
-      //CertificateLogger.error(ILogErrorCodes.KEY_PAIR_MATCHING, "Error in recovering plain text for matching key", ex);
-	  ex.printStackTrace();
+//      println("[RSAEncrypt]  Exception anyExceptionncountered " +
+//                         "during decryption." );
+//      println( "[RSAEncrypt]  " + anyException.toString() );
+//      anyException.printStackTrace (new PrintStream (this.getOutputStream ()));
+//      exit (anyException, 4);
+//      ex.printStackTrace();
     }
     return match;
   }
 
-  
-  public static boolean isMatchingPair(java.security.cert.X509Certificate cert,
-                                         PrivateKey privateKey)
+  public static boolean isMatchingPair(X509Certificate cert,
+                                       JSAFE_PrivateKey privateKey)
   {
     try
     {
-      PublicKey publicKey = cert.getPublicKey();
+      JSAFE_PublicKey publicKey = cert.getSubjectPublicKey("Java");
       return isMatchingPair(publicKey, privateKey);
     }
     catch (Exception ex)
@@ -949,14 +1024,13 @@ public class GridCertUtilities
     }
   }
 
-  //TWX BC version
-  static public boolean exportJavaKeyStore(String entryname, java.security.cert.X509Certificate[] cert, Key key)
+  static public boolean exportJavaKeyStore(String entryname, com.rsa.certj.cert.X509Certificate[] cert, JSAFE_PrivateKey jsafekey)
   {
     try
     {
       JavaKeyStoreHandler handler = new JavaKeyStoreHandler();
       handler.open();
-      handler.insert(entryname,key,cert);
+      handler.insert(entryname,JavaKeyStoreHelper.convertPrivateKey(jsafekey),JavaKeyStoreHelper.convertCertificateChain(cert));
       //HTTPTransportHandler http = new HTTPTransportHandler();
       HTTPTransportHandler.sendCMD_SetKeyStore(handler.writeToByteArray());
       return true;
@@ -968,14 +1042,13 @@ public class GridCertUtilities
 
   }
 
-//TWX BC version
-  public static boolean exportTrustedJavaKeyStore(String entryname, java.security.cert.X509Certificate cert)
+  static public boolean exportTrustedJavaKeyStore(String entryname, com.rsa.certj.cert.X509Certificate cert)
   {
     try
     {
       JavaKeyStoreHandler handler = new JavaKeyStoreHandler();
       handler.open();
-      handler.insert(entryname,cert);
+      handler.insert(entryname,JavaKeyStoreHelper.convertCertificate(cert));
       //HTTPTransportHandler http = new HTTPTransportHandler();
       HTTPTransportHandler.sendCMD_SetTrustStore(handler.writeToByteArray());
       return true;
@@ -985,7 +1058,7 @@ public class GridCertUtilities
       return false;
     }
   }
-  
+
   static public String getTructStoreName()
   {
     return JavaKeyStoreHandler.getTrustStoreName("");
@@ -996,145 +1069,38 @@ public class GridCertUtilities
     return JavaKeyStoreHandler.getTrustStorePassword("");
   }
 
-//  public static void main(String[] args)
-//  {
-////    com.gridnode.security.mime.PKCS7BodyPart.setDebug(true);
-//    byte[] salt = {
-//      (byte)0xFF, (byte)0x12, (byte)0x34, (byte)0x56,
-//      (byte)0xAF, (byte)0x4B, (byte)0x9A, (byte)0x77,
-//      (byte)0x78, (byte)0x9A, (byte)0xBC, (byte)0xDE,
-//      (byte)0xCD, (byte)0xAB, (byte)0x81
-//    };
-//
-//    System.out.println("Test byte[] : ");
-//    printBuffer(salt);
-//try
-//{
-//    String encodedStr = encode(salt);
-//    System.out.println("Encoded string: " + encodedStr);
-//
-//
-//    byte[] decodeData = decode(encodedStr);
-//    System.out.println("Decoded data");
-//    printBuffer(decodeData);
-//    
-//    
-//    //TWX test getMD5 31052009
-//    String digest = GridCertUtilities.encode((GridCertUtilities.getMD5("haha2".getBytes())));
-//    System.out.println("MD5 digest: "+digest);
-//    
-//    digest = GridCertUtilities.encode((GridCertUtilities.getMD5BC("haha2".getBytes())));
-//    System.out.println("BC MD5 digest: "+digest);
-//    
-//    //twx test load PKCS#8 encrypted private key
-//    FileInputStream in = new FileInputStream(new File("c:/encodedData.txt"));
-//    ByteArrayOutputStream out = new ByteArrayOutputStream();
-//    byte[] buffer = new byte[512];
-//    int readSoFar = 0;
-//    while( (readSoFar = in.read(buffer)) > -1)
-//    {
-//      out.write(buffer, 0, readSoFar);
-//    }
-//    //byte[] privateKeyBase64 = out.toByteArray();
-//    //byte[] privateKey = GridCertUtilities.decode(new String(privateKeyBase64));
-//    GridCertUtilities.loadPKCS8PrivateKeyDataBC("hello".toCharArray(), out.toByteArray());
-//    
-//    //TWX test load Public Key
-//    in = new FileInputStream(new File("c:/publicKey.txt"));
-//    out = new ByteArrayOutputStream();
-//    buffer = new byte[512];
-//    readSoFar = 0;
-//    while( (readSoFar = in.read(buffer)) > -1)
-//    {
-//      out.write(buffer, 0, readSoFar);
-//    }
-//    byte[] publicKeyBase64 = out.toByteArray();
-//    byte[] publicKey = GridCertUtilities.decode(new String(publicKeyBase64));
-//    GridCertUtilities.loadPublicKeyFromByteBC(publicKey);
-//    
-//}
-//catch (Exception ex)
-//{
-//  ex.printStackTrace();
-//}
-//
-//  }
+  public static void main(String[] args)
+  {
+//    com.gridnode.security.mime.PKCS7BodyPart.setDebug(true);
+    byte[] salt = {
+      (byte)0xFF, (byte)0x12, (byte)0x34, (byte)0x56,
+      (byte)0xAF, (byte)0x4B, (byte)0x9A, (byte)0x77,
+      (byte)0x78, (byte)0x9A, (byte)0xBC, (byte)0xDE,
+      (byte)0xCD, (byte)0xAB, (byte)0x81
+    };
+
+    System.out.println("Test byte[] : ");
+    printBuffer(salt);
+try
+{
+    String encodedStr = encode(salt);
+    System.out.println("Encoded string: " + encodedStr);
+
+
+    byte[] decodeData = decode(encodedStr);
+    System.out.println("Decoded data");
+    printBuffer(decodeData);
+}
+catch (Exception ex)
+{
+  ex.printStackTrace();
+}
+
+  }
 
   static protected void printBuffer( byte[] byteArray)
   {
 //    com.gridnode.security.mime.PKCS7BodyPart.printBuffer(byteArray);
   }
-  
-  public static X509Extensions getX509ExtensionsFromCert(java.security.cert.X509Certificate cert)
-  {
-    Set<String> nonCriticalExtensionsOID = cert.getNonCriticalExtensionOIDs();
-    Set<String> criticalExtensionsOID = cert.getCriticalExtensionOIDs();
-    X509ExtensionsGenerator gen = new X509ExtensionsGenerator();
-    
-    if(nonCriticalExtensionsOID != null && nonCriticalExtensionsOID.size() > 0)
-    {
-      for(String oid : nonCriticalExtensionsOID)
-      {
-        byte[] extensionValue = cert.getExtensionValue(oid);
-        gen.addExtension(new DERObjectIdentifier(oid), false, extensionValue);
-        System.out.println("Non-critical X509Extensions: OID"+oid+" value:"+new String(extensionValue));
-      }
-    }
-    
-    if(criticalExtensionsOID != null && criticalExtensionsOID.size() > 0)
-    {
-      for(String oid : criticalExtensionsOID)
-      {
-        byte[] extensionValue = cert.getExtensionValue(oid);
-        gen.addExtension(new DERObjectIdentifier(oid), true, extensionValue);
-        System.out.println("Critical X509Extensions: OID"+oid+" value:"+new String(extensionValue));
-      }
-    }
-    
-    return gen.generate();
-  }
 
-  //TWX move from CertificateEntityHandler
-  public static boolean isValid(java.security.cert.X509Certificate cert)
-  {
-    if (cert == null) return false;
-    
-    try
-    {
-      cert.checkValidity();
-      return true;
-    }
-    catch(CertificateExpiredException ex)
-    {
-      CertificateLogger.warn("Certificate is expired", ex);
-      return false;
-    }
-    catch(CertificateNotYetValidException ex)
-    {
-      CertificateLogger.warn("Certificate is not valid", ex);
-      return false;
-    }
-    
-     
-  }
-  
-  /**
-   * TWX 26 Nov 2008 get the cert path related to the target cert we passed in
-   * @param certSelector the criteria which we can get a list of cert 
-   * @param isEnableRevocationCheck the CRL checking
-   * @param targetCert the end cert entity in the cert path
-   * @param provider the JCA provider
-   * @return PKIXCertPathBuilderResult
-   * @throws Exception
-   */
-  public static PKIXCertPathBuilderResult getCertPathBuilderResult(X509CertSelector certSelector, boolean isEnableRevocationCheck,
-                                                                   java.security.cert.X509Certificate targetCert, String provider) 
-    throws Exception
-  {
-    JavaKeyStoreHandler handler = new JavaKeyStoreHandler();
-    handler.open(getTructStoreName(), getTructStorePassword());
-    KeyStore ks = handler.getKs();
-    return JavaKeyStoreHandler.getPKIXCertPathBuilder(ks, certSelector, isEnableRevocationCheck, targetCert, provider);
-  }
-  
 }

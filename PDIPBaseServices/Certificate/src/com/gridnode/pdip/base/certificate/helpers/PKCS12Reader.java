@@ -14,19 +14,10 @@
  *                                    and Log Error Messages.
  * 03 Aug 2006    Tam Wei Xiang       Amend the way we access SecurityDB. This class
  *                                    is responsible for removing the provider itself.
- * Feb 09 2007		Alain Ah Ming				Log error codes or log warning message. 
- * Jun 29 2009    Tam Wei Xiang       #560: Migrate from RSA J-SAFE/B-SAFE to BouncyCastle Lib                                                                         
+ * Feb 09 2007		Alain Ah Ming				Log error codes or log warning message.                                                                          
  */
 package com.gridnode.pdip.base.certificate.helpers;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.security.Key;
-import java.security.KeyStore;
-import java.security.PrivateKey;
-import java.security.cert.Certificate;
-import java.util.Enumeration;
 import java.util.Vector;
 
 import com.gridnode.pdip.base.certificate.exceptions.CertificateException;
@@ -109,7 +100,7 @@ public class PKCS12Reader
     if(subjectCert == null || ptekey == null)
       return;
 
-    if(!TestGridCertUtilitiesJsafe.isMatchingPair(subjectCert, ptekey))
+    if(!GridCertUtilities.isMatchingPair(subjectCert, ptekey))
       throw new CertificateException("Certificate and private key is not a matching pair");
   }
 
@@ -117,22 +108,22 @@ public class PKCS12Reader
   {
     CertificateLogger.log("findSubjectCert Searching for subject key .....");
 
-    //CertVerifier cv = new CertVerifier();
+    CertVerifier cv = new CertVerifier();
     int count = certificates.length;
     boolean found = true;
     for (int i = 0; i < count; i++)
     {
       found = true;
-      //cv.setIssuerCert(certificates[i]);
+      cv.setIssuerCert(certificates[i]);
       for (int j = 0; j < count; j++)
       {
         if(i == j)
           continue;
-        //cv.setSubjectCert(certificates[j]);
+        cv.setSubjectCert(certificates[j]);
         try
         {
-          //if(cv.isIssuedBy() == CertVerifier.ERR_NO_ERROR)
-          //  found = false;
+          if(cv.isIssuedBy() == CertVerifier.ERR_NO_ERROR)
+            found = false;
         }
         catch (Exception ex)
         {
