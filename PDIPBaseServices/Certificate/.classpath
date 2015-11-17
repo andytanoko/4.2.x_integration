@@ -3,12 +3,13 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" output="testclasses" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Base-Transport"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Framework"/>
 	<classpathentry kind="var" path="J2EE_HOME/lib/j2ee.jar"/>
 	<classpathentry kind="var" path="VIEW_HOME/PDIPFramework/reqlib/junit-3.7.jar"/>
-	<classpathentry kind="src" path="/Base-Time"/>
-	<classpathentry kind="var" path="VIEW_HOME/PDIPBaseServices/reqlib/bcprov-jdk15-143.jar"/>
-	<classpathentry kind="var" path="VIEW_HOME/PDIPBaseServices/reqlib/bcmail-jdk15-143.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/PDIPBaseServices/reqlib/bcprov-jdk15-1.46.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/PDIPBaseServices/reqlib/bcmail-jdk15-1.46.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/PDIPBaseServices/reqlib/jsafe2.1.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/PDIPBaseServices/reqlib/certj2.1.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/PDIPFramework/reqlib/mail-1.3.3.jar"/>
+	<classpathentry kind="var" path="VIEW_HOME/PDIPBaseServices/reqlib/asn1.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

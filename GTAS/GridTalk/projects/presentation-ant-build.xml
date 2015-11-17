@@ -79,7 +79,9 @@
       srcdir="${source.dir}/Client"
       includes="**"
       destdir="${class.dir}"
-      debug="on"/>
+      debug="on"
+	  includeAntRuntime="false"
+	  />	
   </target>
 
   <!-- =================================================================== -->

@@ -15,6 +15,9 @@ package com.gridnode.pdip.base.certificate.helpers;
 
 import java.io.File;
 import java.math.BigInteger;
+import java.security.Security;
+
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 /**
  * @author Tam Wei Xiang
@@ -25,6 +28,8 @@ public class TestPKCS12Reader
 {
   public static void main(String[] args) throws Exception
   {
+	  Security.addProvider(new BouncyCastleProvider());
+
     //read certificate, private key from .p12.
     //check whether the key match
     readPKCSFile();
@@ -34,9 +39,9 @@ public class TestPKCS12Reader
   
   private static void readPKCSFile() throws Exception
   {
-    File p12 = new File("data/pkcs12/sample.p12");
-    char[] password = "password".toCharArray();
-    PKCS12Reader reader = new PKCS12Reader(p12.getAbsolutePath(), password);
+    File p12 = new File("D:/temp/cl-etrade/privatekey/rosettanet-imp.inovis.com/rosettanet-imp.inovis.com.pfx");
+    char[] password = "RenewMe!".toCharArray();
+    TestPKCS12ReaderUtilJsafe reader = new TestPKCS12ReaderUtilJsafe(p12.getAbsolutePath(), password);
     reader.read();
     
     //reader.read();

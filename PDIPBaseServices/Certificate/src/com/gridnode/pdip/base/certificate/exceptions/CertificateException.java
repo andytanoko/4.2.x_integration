@@ -16,10 +16,10 @@
 
 package com.gridnode.pdip.base.certificate.exceptions;
 
-import com.gridnode.pdip.framework.exceptions.ApplicationException;
+//import com.gridnode.pdip.framework.exceptions.ApplicationException;
 
 
-public class CertificateException extends ApplicationException
+public class CertificateException extends Exception
 {
  
   /**

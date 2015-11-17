@@ -911,7 +911,7 @@ public class GridCertUtilities
     {
       Cipher cipher = Cipher.getInstance("RSA/NONE/OAEPWithSHA256AndMGF1Padding", getSecurityProvider());
       cipher.init(Cipher.DECRYPT_MODE, privateKey);
-	  CertificateLogger.log("#############################[" + cipherOut.length() + "]#############################");
+	  CertificateLogger.log("#############################[" + cipherOut.length + "]#############################");
       recoveredText = cipher.doFinal(cipherOut);
       CertificateLogger.log("#############################[" + recoveredText + "]#############################");
       for( int i = 0 ; i < encryptMe.length ; i++ )

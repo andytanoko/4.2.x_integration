@@ -1,0 +1,10 @@
+# class Files #
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+#ignore folder
+*/lost+found/*

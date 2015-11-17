@@ -16,7 +16,7 @@
  */
 package com.gridnode.pdip.base.certificate.helpers;
 
-import com.gridnode.pdip.framework.log.Log;
+//import com.gridnode.pdip.framework.log.Log;
 
 /**
  * Logger class for Certificate Module
@@ -32,17 +32,17 @@ public class CertificateLogger
   public static void log(Object msg)
   {
     System.out.println(msg);
-    Log.log(CATEGORY, msg);
+   // Log.log(CATEGORY, msg);
   }
 
   public static void debug(Object msg)
   {
-    Log.debug(CATEGORY, msg);
+    //Log.debug(CATEGORY, msg);
   }
 
   public static void debug(String msg, Throwable ex)
   {
-    Log.debug(CATEGORY, msg, ex);
+    //Log.debug(CATEGORY, msg, ex);
   }
 
   /**
@@ -51,7 +51,7 @@ public class CertificateLogger
    */
   public static void warn(Object msg)
   {
-    Log.warn(CATEGORY, msg);
+    //Log.warn(CATEGORY, msg);
   }
 
   /**
@@ -61,7 +61,7 @@ public class CertificateLogger
    */
   public static void warn(String msg, Throwable ex)
   {
-    Log.warn(CATEGORY, msg, ex);
+    //Log.warn(CATEGORY, msg, ex);
   }
 
   /**
@@ -71,7 +71,7 @@ public class CertificateLogger
    */
   public static void err(Object msg)
   {
-    Log.err(CATEGORY, msg);
+    //Log.err(CATEGORY, msg);
   }
 
   /**
@@ -83,7 +83,7 @@ public class CertificateLogger
   public static void err(String msg, Throwable ex)
   {
     ex.printStackTrace();
-    Log.err(CATEGORY, msg, ex);
+    //Log.err(CATEGORY, msg, ex);
   }
 
   /**
@@ -93,7 +93,7 @@ public class CertificateLogger
    */
   public static void error(String errorCode, Object msg)
   {
-    Log.error(errorCode, CATEGORY, msg);
+    //Log.error(errorCode, CATEGORY, msg);
   }
 
   /**
@@ -106,6 +106,6 @@ public class CertificateLogger
    */
   public static void error(String errorCode, String msg, Throwable ex)
   {
-    Log.error(errorCode, CATEGORY, msg, ex);
+    //Log.error(errorCode, CATEGORY, msg, ex);
   }
 }
